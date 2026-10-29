@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" class="light">
-<link rel="manifest" href="manifest.json">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>ठेकेDAAR - Construction Labour & Bill Manager</title>
-  <!-- PWA Meta Tags for Android & iOS Home Screen Install -->
+  <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
+  <link rel="manifest" href="manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#18181b">
@@ -19,185 +18,281 @@
 </head>
 <body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen transition-colors duration-200">
 
-  <!-- Top Navigation Bar -->
-  <header class="sticky top-0 z-30 bg-white/90 dark:bg-zinc-900/90 backdrop-blur border-b border-zinc-200 dark:border-zinc-800 px-4 py-3">
-    <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3">
+  <!-- Top Sticky Header -->
+  <header class="sticky top-0 z-30 bg-white/95 dark:bg-zinc-900/95 backdrop-blur border-b border-zinc-200 dark:border-zinc-800 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-2">
-        <div class="w-9 h-9 rounded-lg bg-amber-500 flex items-center justify-center text-zinc-950 font-black text-lg shadow-sm">ठे</div>
+        <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-zinc-950 font-black text-xl shadow">ठे</div>
         <div>
-          <h1 class="text-lg font-extrabold tracking-tight leading-none">ठेकेDAAR</h1>
-          <span id="syncStatus" class="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">● Ready (UTF-8 Hindi/EN)</span>
+          <h1 class="text-lg font-black tracking-tight leading-none">ठेकेDAAR</h1>
+          <span id="syncStatus" class="text-[11px] text-zinc-500 font-medium">● Local Mode (Login to Sync)</span>
         </div>
       </div>
 
-      <div class="flex items-center gap-2">
-        <!-- Language Toggle -->
-        <button id="langBtn" onclick="toggleLanguage()" class="px-2.5 py-1.5 text-xs font-semibold rounded-lg border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800">
-          हिंदी / EN
+      <div class="flex items-center gap-2 flex-wrap">
+        <!-- Indian Languages Selector -->
+        <select id="langSelect" onchange="changeLanguage(this.value)" class="text-xs font-semibold px-2 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent">
+          <option value="hi" class="dark:bg-zinc-800">हिंदी (Hindi)</option>
+          <option value="en" class="dark:bg-zinc-800">English</option>
+          <option value="mr" class="dark:bg-zinc-800">मराठी (Marathi)</option>
+          <option value="gu" class="dark:bg-zinc-800">ગુજરાતી (Gujarati)</option>
+        </select>
+
+        <!-- Share Button -->
+        <button onclick="shareApp()" class="px-2.5 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 flex items-center gap-1 shadow-sm">
+          <span>📲</span> <span data-i18n="share">Share</span>
         </button>
+
+        <!-- Voice Report Button -->
+        <button onclick="playVoiceSummary()" class="px-2.5 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 flex items-center gap-1 shadow-sm">
+          <span>🔊</span> <span data-i18n="voiceSummary">Audio Report</span>
+        </button>
+
         <!-- Theme Toggle -->
-        <button onclick="toggleTheme()" class="p-1.5 text-xs font-semibold rounded-lg border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800" title="Toggle Dark/Light Mode">
-          🌓
-        </button>
-        <!-- Cloud Account Button -->
-        <button onclick="openAuthModal()" id="authBtn" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900">
-          ☁️ Cloud Login
+        <button onclick="toggleTheme()" class="p-1.5 text-xs font-semibold rounded-lg border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800">🌓</button>
+
+        <!-- Login / Register Button -->
+        <button onclick="openAuthModal()" id="authBtn" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-amber-500 text-zinc-950 hover:bg-amber-400">
+          लॉग इन / Register
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Main Content Container -->
-  <main class="max-w-5xl mx-auto p-4 space-y-5">
+  <!-- Main Dashboard -->
+  <main class="max-w-6xl mx-auto p-4 space-y-4">
 
-    <!-- Site & Month Selector Bar -->
-    <section class="bg-white dark:bg-zinc-900 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm grid grid-cols-1 md:grid-cols-3 gap-3">
+    <!-- Top Site Filter & Financial Bar -->
+    <section class="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm grid grid-cols-1 md:grid-cols-4 gap-3">
       <div>
-        <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1" data-i18n="selectSite">Construction Site / निर्माण साइट</label>
+        <label class="block text-xs font-bold uppercase text-zinc-500 mb-1" data-i18n="selectSite">Construction Site</label>
         <div class="flex gap-2">
-          <select id="siteSelect" onchange="renderAll()" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"></select>
-          <button onclick="addNewSite()" class="px-3 py-2 bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold rounded-lg text-sm shrink-0">+ Site</button>
+          <select id="siteSelect" onchange="renderAll()" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm font-semibold"></select>
+          <button onclick="addNewSite()" class="px-3 py-2 bg-amber-500 hover:bg-amber-600 text-zinc-950 font-black rounded-lg text-sm shrink-0">+ Site</button>
         </div>
       </div>
 
       <div>
-        <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1" data-i18n="selectMonth">Select Month / महीना चुनें</label>
-        <input type="month" id="monthSelect" onchange="renderAll()" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500" />
+        <label class="block text-xs font-bold uppercase text-zinc-500 mb-1" data-i18n="selectMonth">Month</label>
+        <input type="month" id="monthSelect" onchange="renderAll()" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm font-semibold" />
       </div>
 
-      <!-- Quick Monthly Summary -->
-      <div class="grid grid-cols-2 gap-2 pt-1 md:pt-0">
-        <div class="p-2.5 rounded-lg bg-zinc-100 dark:bg-zinc-800/70">
-          <div class="text-[11px] text-zinc-500" data-i18n="netLabourDue">Net Labour Payable</div>
-          <div id="summaryLabourDue" class="text-base font-bold text-rose-600 dark:text-rose-400">₹0</div>
+      <div class="col-span-1 md:col-span-2 grid grid-cols-3 gap-2">
+        <div class="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800">
+          <div class="text-[11px] text-zinc-500" data-i18n="netLabourDue">Labour Due</div>
+          <div id="summaryLabourDue" class="text-base font-extrabold text-rose-600 dark:text-rose-400">₹0</div>
         </div>
-        <div class="p-2.5 rounded-lg bg-zinc-100 dark:bg-zinc-800/70">
+        <div class="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800">
+          <div class="text-[11px] text-zinc-500" data-i18n="totalExpenses">Site Expenses</div>
+          <div id="summaryExpensesTotal" class="text-base font-extrabold text-amber-600 dark:text-amber-400">₹0</div>
+        </div>
+        <div class="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800">
           <div class="text-[11px] text-zinc-500" data-i18n="totalBills">Company Bills</div>
-          <div id="summaryBillsTotal" class="text-base font-bold text-emerald-600 dark:text-emerald-400">₹0</div>
+          <div id="summaryBillsTotal" class="text-base font-extrabold text-emerald-600 dark:text-emerald-400">₹0</div>
         </div>
       </div>
     </section>
 
     <!-- Navigation Tabs -->
-    <div class="flex border-b border-zinc-200 dark:border-zinc-800 gap-6">
-      <button onclick="switchTab('labours')" id="tabLabours" class="pb-2.5 text-sm font-bold border-b-2 border-amber-500 text-amber-600 dark:text-amber-400" data-i18n="tabLabour">
-        👷‍♂️ Monthly Labours (मजदूर खाता)
+    <div class="flex border-b border-zinc-200 dark:border-zinc-800 gap-2 sm:gap-6 overflow-x-auto text-sm">
+      <button onclick="switchTab('labours')" id="tabLabours" class="pb-2.5 font-bold border-b-2 border-amber-500 text-amber-600 dark:text-amber-400 whitespace-nowrap" data-i18n="tabLabour">
+        👷‍♂️ Labours & Attendance (मजदूर व हाजिरी)
       </button>
-      <button onclick="switchTab('bills')" id="tabBills" class="pb-2.5 text-sm font-medium text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200" data-i18n="tabBills">
+      <button onclick="switchTab('expenses')" id="tabExpenses" class="pb-2.5 font-medium text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 whitespace-nowrap" data-i18n="tabExpenses">
+        🛺 Expenses & Rickshaw (खर्चे व किराया)
+      </button>
+      <button onclick="switchTab('bills')" id="tabBills" class="pb-2.5 font-medium text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 whitespace-nowrap" data-i18n="tabBills">
         🧾 Company Bills (कंपनी बिल)
       </button>
     </div>
 
-    <!-- SECTION 1: LABOURS -->
+    <!-- 1. LABOURS & ATTENDANCE SECTION -->
     <section id="sectionLabours" class="space-y-4">
-      <div class="bg-white dark:bg-zinc-900 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
-        <h2 class="text-sm font-bold mb-3" data-i18n="addLabourHeading">Add / Update Monthly Labour Record (मजदूर जोड़ें)</h2>
+      <div class="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
+        <h2 class="text-sm font-bold mb-3" data-i18n="addLabourHeading">Add Monthly Labour (नया मजदूर जोड़ें)</h2>
         <form id="labourForm" onsubmit="saveLabour(event)" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3">
-          <input type="text" id="lName" required placeholder="Name / नाम (e.g. राम कुमार)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+          <input type="text" id="lName" required placeholder="Labour Name (नाम)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
           <select id="lCategory" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm">
             <option value="Mason (मिस्त्री)">Mason (मिस्त्री)</option>
             <option value="Helper (हेल्पर)">Helper (हेल्पर)</option>
             <option value="Carpenter (बढ़ई)">Carpenter (बढ़ई)</option>
             <option value="Electrician (इलेक्ट्रीशियन)">Electrician (इलेक्ट्रीशियन)</option>
-            <option value="Supervisor (सुपरवाइजर)">Supervisor (सुपरवाइजर)</option>
+            <option value="Plumber (प्लम्बर)">Plumber (प्लम्बर)</option>
           </select>
-          <input type="number" id="lSalary" required min="0" placeholder="Monthly Salary (कुल वेतन ₹)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-          <input type="number" id="lAdvance" required min="0" placeholder="Advance (एडवांस ₹)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-          <label class="flex items-center justify-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800">
-            <span id="lPhotoLabel">📷 Labour Photo</span>
+          <input type="number" id="lSalary" required min="0" placeholder="Monthly Salary (वेतन ₹)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+          <input type="number" id="lAdvance" required min="0" placeholder="Advance Given (एडवांस ₹)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+          <label class="flex items-center justify-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-lg px-2 py-2 text-xs cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800">
+            <span id="lPhotoLabel">📷 Photo</span>
             <input type="file" id="lPhoto" accept="image/*" class="hidden" onchange="previewFileName('lPhoto','lPhotoLabel')" />
           </label>
-          <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold rounded-lg px-4 py-2 text-sm" data-i18n="saveBtn">
-            Save / सेव करें
-          </button>
+          <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold rounded-lg px-4 py-2 text-sm" data-i18n="saveBtn">Save / सुरक्षित करें</button>
         </form>
       </div>
 
-      <!-- Labour List -->
       <div id="labourList" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
     </section>
 
-    <!-- SECTION 2: COMPANY BILLS -->
-    <section id="sectionBills" class="space-y-4 hidden">
-      <div class="bg-white dark:bg-zinc-900 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
-        <h2 class="text-sm font-bold mb-3" data-i18n="addBillHeading">Add Company Work Bill (कंपनी का बिल जोड़ें)</h2>
-        <form id="billForm" onsubmit="saveBill(event)" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
-          <input type="text" id="bTitle" required placeholder="Work / Company Name (काम/कंपनी का नाम)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-          <input type="number" id="bAmount" required min="0" placeholder="Bill Amount (बिल राशि ₹)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-          <select id="bStatus" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm">
-            <option value="Received (प्राप्त)">Received (प्राप्त)</option>
-            <option value="Pending (बाकी)">Pending (बाकी)</option>
+    <!-- 2. EXPENSES & FARES SECTION -->
+    <section id="sectionExpenses" class="space-y-4 hidden">
+      <div class="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
+        <h2 class="text-sm font-bold mb-3" data-i18n="addExpenseHeading">Add Site Expense (किराया व अन्य खर्चे जोड़ें)</h2>
+        <form id="expenseForm" onsubmit="saveExpense(event)" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3">
+          <input type="text" id="eTitle" required placeholder="Expense Description (ऑटो / चाय / नाश्ता)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+          <select id="eCategory" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm">
+            <option value="Rickshaw / Rent (किराया)">Rickshaw / Transport (किराया)</option>
+            <option value="Tea / Food (नाश्ता/खाना)">Tea / Food (चाय/खाना)</option>
+            <option value="Material / Tools (सामान)">Material / Small Tools (सामान)</option>
+            <option value="Medical / Emergency (इलाज)">Medical (दवा)</option>
+            <option value="Other (अन्य)">Other (अन्य)</option>
           </select>
-          <label class="flex items-center justify-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-lg px-3 py-2 text-xs cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800">
-            <span id="bPhotoLabel">📄 Upload Bill Photo</span>
-            <input type="file" id="bPhoto" accept="image/*" class="hidden" onchange="previewFileName('bPhoto','bPhotoLabel')" />
+          <input type="number" id="eAmount" required min="0" placeholder="Amount (रुपये ₹)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+          <input type="text" id="eSpentFor" placeholder="Paid For / किसके लिए दिया" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+          <label class="flex items-center justify-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-lg px-2 py-2 text-xs cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800">
+            <span id="ePhotoLabel">🧾 Bill Slip</span>
+            <input type="file" id="ePhoto" accept="image/*" class="hidden" onchange="previewFileName('ePhoto','ePhotoLabel')" />
           </label>
-          <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-zinc-950 font-bold rounded-lg px-4 py-2 text-sm" data-i18n="saveBillBtn">
-            Save Bill / बिल सेव करें
-          </button>
+          <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold rounded-lg px-4 py-2 text-sm" data-i18n="saveBtn">Save Expense</button>
         </form>
       </div>
 
-      <!-- Bills List -->
+      <div id="expenseList" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+    </section>
+
+    <!-- 3. COMPANY BILLS SECTION -->
+    <section id="sectionBills" class="space-y-4 hidden">
+      <div class="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
+        <h2 class="text-sm font-bold mb-3" data-i18n="addBillHeading">Add Company Bill (कंपनी का बिल जोड़ें)</h2>
+        <form id="billForm" onsubmit="saveBill(event)" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
+          <input type="text" id="bTitle" required placeholder="Work Title / Company Name" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+          <input type="number" id="bAmount" required min="0" placeholder="Bill Amount (राशि ₹)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+          <select id="bStatus" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm">
+            <option value="Received (प्राप्त)">Received (प्राप्त हुआ)</option>
+            <option value="Pending (बाकी)">Pending (बाकी है)</option>
+          </select>
+          <label class="flex items-center justify-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-lg px-2 py-2 text-xs cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800">
+            <span id="bPhotoLabel">📄 Bill Photo</span>
+            <input type="file" id="bPhoto" accept="image/*" class="hidden" onchange="previewFileName('bPhoto','bPhotoLabel')" />
+          </label>
+          <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-zinc-950 font-bold rounded-lg px-4 py-2 text-sm" data-i18n="saveBillBtn">Save Bill</button>
+        </form>
+      </div>
+
       <div id="billList" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
     </section>
 
   </main>
 
-  <!-- Cloud Auth & Config Modal -->
+  <!-- Login, Register & Reset Password Modal (Zero Config Required) -->
   <div id="authModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-    <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl max-w-md w-full p-5 space-y-4">
+    <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center">
-        <h3 class="font-bold text-base">☁️ Multi-Device Cloud Sync (Firebase Free Tier)</h3>
-        <button onclick="closeAuthModal()" class="text-zinc-400 hover:text-zinc-600">✕</button>
+        <h3 class="font-extrabold text-lg" data-i18n="authModalTitle">लॉग इन / Register</h3>
+        <button onclick="closeAuthModal()" class="text-zinc-400 hover:text-zinc-600 text-lg">✕</button>
       </div>
-      <p class="text-xs text-zinc-500">
-        Paste your free Firebase project configuration once, then sign in with Email & Password to access your data across Android, iOS, and Web.
-      </p>
-      <textarea id="firebaseConfigInput" rows="3" placeholder='{"apiKey":"...","authDomain":"...","projectId":"..."}' class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent p-2 text-xs font-mono"></textarea>
-      <input type="email" id="authEmail" placeholder="Email Address" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-      <input type="password" id="authPass" placeholder="Password (min 6 chars)" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-      <div class="flex gap-2">
-        <button onclick="connectCloud(false)" class="flex-1 bg-amber-500 text-zinc-950 font-bold py-2 rounded-lg text-xs">Login & Sync</button>
-        <button onclick="connectCloud(true)" class="flex-1 bg-zinc-200 dark:bg-zinc-800 font-bold py-2 rounded-lg text-xs">Create Account</button>
+      <p class="text-xs text-zinc-500" data-i18n="authSubtitle">Access your construction records securely across any device.</p>
+      
+      <div class="space-y-3">
+        <input type="email" id="authEmail" placeholder="Email Address / ईमेल आईडी" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2.5 text-sm" />
+        <input type="password" id="authPass" placeholder="Password / पासवर्ड (कम से कम 6 अक्षर)" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2.5 text-sm" />
+      </div>
+
+      <div class="flex justify-end">
+        <button onclick="handleForgotPassword()" class="text-xs text-amber-600 dark:text-amber-400 font-semibold hover:underline" data-i18n="forgotPass">
+          पासवर्ड भूल गए? / Forgot Password?
+        </button>
+      </div>
+
+      <div class="flex gap-2 pt-2">
+        <button onclick="connectCloud(false)" class="flex-1 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm" data-i18n="loginBtn">Login / लॉग इन</button>
+        <button onclick="connectCloud(true)" class="flex-1 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 font-bold py-2.5 rounded-xl text-sm" data-i18n="registerBtn">Create Account</button>
       </div>
     </div>
   </div>
 
-  <!-- Firebase SDKs & App Logic -->
+  <!-- Realtime Database & Logic -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    // Application State
+    // Hardcoded Firebase Config — Users do NOT need to enter API keys
+    const firebaseConfig = {
+      apiKey: "AIzaSyCsabUW5vFiXGxsUu4FvdKkc5cxxsCt8jA",
+      authDomain: "thekedaar-62310.firebaseapp.com",
+      projectId: "thekedaar-62310",
+      storageBucket: "thekedaar-62310.firebasestorage.app",
+      messagingSenderId: "82301078747",
+      appId: "1:82301078747:web:fabfa5473a793061b1d0fe"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let currentUser = null;
     let state = JSON.parse(localStorage.getItem('thekedaar_state')) || {
-      sites: ['Site A - मेन प्रोजेक्ट', 'Site B - सेक्टर 45'],
+      sites: ['Site 1 - मुख्य साइट (Main Site)'],
       labours: [],
+      expenses: [],
       bills: []
     };
-    let currentLang = 'bilingual';
-    let db = null, auth = null, currentUser = null;
 
-    // Initialize default month to current YYYY-MM
+    // Dictionary for Indian Languages
+    const i18n = {
+      hi: {
+        selectSite: "निर्माण साइट चुनें", selectMonth: "महीना चुनें", netLabourDue: "कुल मजदूर बकाया",
+        totalExpenses: "किराया व खर्चे", totalBills: "कुल कंपनी बिल", tabLabour: "👷‍♂️ मजदूर व हाजिरी",
+        tabExpenses: "🛺 खर्चे व किराया", tabBills: "🧾 कंपनी बिल", addLabourHeading: "नया मजदूर जोड़ें",
+        addExpenseHeading: "किराया व अन्य खर्चे जोड़ें", addBillHeading: "कंपनी का नया बिल जोड़ें",
+        saveBtn: "सुरक्षित करें", saveBillBtn: "बिल सेव करें", share: "शेयर करें", voiceSummary: "ऑडियो रिपोर्ट",
+        authModalTitle: "लॉग इन / खाता बनाएं", authSubtitle: "कहीं से भी अपना डेटा सुरक्षित देखें",
+        forgotPass: "पासवर्ड भूल गए?", loginBtn: "लॉग इन", registerBtn: "नया खाता बनाएं"
+      },
+      en: {
+        selectSite: "Select Site", selectMonth: "Select Month", netLabourDue: "Labour Due",
+        totalExpenses: "Site Expenses", totalBills: "Company Bills", tabLabour: "👷‍♂️ Labours & Attendance",
+        tabExpenses: "🛺 Expenses & Rent", tabBills: "🧾 Company Bills", addLabourHeading: "Add Monthly Labour",
+        addExpenseHeading: "Add Site Expense", addBillHeading: "Add Company Bill", saveBtn: "Save",
+        saveBillBtn: "Save Bill", share: "Share App", voiceSummary: "Voice Report", authModalTitle: "Login / Register",
+        authSubtitle: "Access your construction records from any device", forgotPass: "Forgot Password?",
+        loginBtn: "Login", registerBtn: "Register"
+      },
+      mr: {
+        selectSite: "कामाची साईट निवडा", selectMonth: "महिना निवडा", netLabourDue: "एकूण मजुरी बाकी",
+        totalExpenses: "भाडे व खर्च", totalBills: "कंपनी बिल", tabLabour: "👷‍♂️ कामगार व हजेरी",
+        tabExpenses: "🛺 खर्च व रिक्षा भाडे", tabBills: "🧾 कंपनी बिल", addLabourHeading: "नवीन कामगार जोडा",
+        addExpenseHeading: "खर्च व भाडे नोंदवा", addBillHeading: "कंपनीचे बिल जोडा", saveBtn: "जतन करा",
+        saveBillBtn: "बिल जतन करा", share: "शेअर करा", voiceSummary: "ऑडिओ रिपोर्ट", authModalTitle: "लॉग इन / नोंदणी करा",
+        authSubtitle: "कुठूनही आपली माहिती पहा", forgotPass: "पासवर्ड विसरलात?", loginBtn: "लॉग इन", registerBtn: "नोंदणी करा"
+      },
+      gu: {
+        selectSite: "સાઇટ પસંદ કરો", selectMonth: "મહિનો પસંદ કરો", netLabourDue: "બાકી મજૂરી",
+        totalExpenses: "ભાડું અને ખર્ચ", totalBills: "કંપની બિલ", tabLabour: "👷‍♂️ મજૂર અને હાજરી",
+        tabExpenses: "🛺 ખર્ચ અને રિક્ષા ભાડું", tabBills: "🧾 કંપની બિલ", addLabourHeading: "નવો મજૂર ઉમેરો",
+        addExpenseHeading: "ખર્ચ અને ભાડું ઉમેરો", addBillHeading: "કંપની બિલ ઉમેરો", saveBtn: "સાચવો",
+        saveBillBtn: "બિલ સાચવો", share: "શેર કરો", voiceSummary: "ઓડિયો રિપોર્ટ", authModalTitle: "લૉગિન / નોંધણી",
+        authSubtitle: "ગમે ત્યાંથી ડેટા એક્સેસ કરો", forgotPass: "પાસવર્ડ ભૂલી ગયા?", loginBtn: "લૉગિન", registerBtn: "નવું ખાતું બનાવો"
+      }
+    };
+
+    window.currentLang = 'hi';
+
     const now = new Date();
     document.getElementById('monthSelect').value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
 
-    // Save locally + push to Cloud if logged in
     async function persistState() {
       localStorage.setItem('thekedaar_state', JSON.stringify(state));
       renderAll();
       if (db && currentUser) {
         try {
           await setDoc(doc(db, "users", currentUser.uid), state);
-          document.getElementById('syncStatus').innerText = `● Cloud Synced (${currentUser.email})`;
-        } catch (err) {
-          console.error("Cloud sync error:", err);
+          document.getElementById('syncStatus').innerText = `● Cloud Synced (${currentUser.email.split('@')[0]})`;
+        } catch (e) {
+          console.error("Cloud push failed:", e);
         }
       }
     }
 
-    // Compress uploaded photo into lightweight Base64 string (fits free database limits)
     function compressImage(file) {
       return new Promise((resolve) => {
         if (!file) return resolve(null);
@@ -220,9 +315,9 @@
       });
     }
 
-    // Add New Construction Site
+    // Site Management
     window.addNewSite = () => {
-      const name = prompt("Enter New Site Name / नई साइट का नाम लिखें:");
+      const name = prompt("नई निर्माण साइट का नाम लिखें / Enter Site Name:");
       if (name && name.trim()) {
         state.sites.push(name.trim());
         persistState();
@@ -231,7 +326,7 @@
       }
     };
 
-    // Save Monthly Labour Entry
+    // Labour Operations + Attendance Tracker
     window.saveLabour = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -241,20 +336,54 @@
       const salary = Number(document.getElementById('lSalary').value) || 0;
       const advance = Number(document.getElementById('lAdvance').value) || 0;
       const photoFile = document.getElementById('lPhoto').files[0];
-      const photoData = await compressImage(photoFile);
+      const photo = await compressImage(photoFile);
 
       state.labours.unshift({
         id: Date.now().toString(),
         site, month, name, category, salary, advance,
-        netPayable: salary - advance,
-        photo: photoData
+        presentDays: 26, // Default full month
+        halfDays: 0,
+        photo
       });
       e.target.reset();
-      document.getElementById('lPhotoLabel').innerText = '📷 Labour Photo';
+      document.getElementById('lPhotoLabel').innerText = '📷 Photo';
       persistState();
     };
 
-    // Save Company Bill Entry
+    window.updateAttendance = (id, type) => {
+      const labour = state.labours.find(l => l.id === id);
+      if (!labour) return;
+      if (type === 'incPresent') labour.presentDays = (labour.presentDays || 0) + 1;
+      if (type === 'decPresent' && labour.presentDays > 0) labour.presentDays -= 1;
+      if (type === 'incHalf') labour.halfDays = (labour.halfDays || 0) + 1;
+      if (type === 'decHalf' && labour.halfDays > 0) labour.halfDays -= 1;
+      persistState();
+    };
+
+    // Site Expense & Transport
+    window.saveExpense = async (e) => {
+      e.preventDefault();
+      const site = document.getElementById('siteSelect').value;
+      const month = document.getElementById('monthSelect').value;
+      const title = document.getElementById('eTitle').value.trim();
+      const category = document.getElementById('eCategory').value;
+      const amount = Number(document.getElementById('eAmount').value) || 0;
+      const spentFor = document.getElementById('eSpentFor').value.trim();
+      const photoFile = document.getElementById('ePhoto').files[0];
+      const photo = await compressImage(photoFile);
+
+      if (!state.expenses) state.expenses = [];
+      state.expenses.unshift({
+        id: Date.now().toString(),
+        site, month, title, category, amount, spentFor, photo,
+        date: new Date().toLocaleDateString('hi-IN')
+      });
+      e.target.reset();
+      document.getElementById('ePhotoLabel').innerText = '🧾 Bill Slip';
+      persistState();
+    };
+
+    // Company Work Bills
     window.saveBill = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -263,25 +392,25 @@
       const amount = Number(document.getElementById('bAmount').value) || 0;
       const status = document.getElementById('bStatus').value;
       const photoFile = document.getElementById('bPhoto').files[0];
-      const photoData = await compressImage(photoFile);
+      const photo = await compressImage(photoFile);
 
       state.bills.unshift({
         id: Date.now().toString(),
-        site, month, title, amount, status,
-        photo: photoData,
+        site, month, title, amount, status, photo,
         createdAt: new Date().toLocaleDateString('hi-IN')
       });
       e.target.reset();
-      document.getElementById('bPhotoLabel').innerText = '📄 Upload Bill Photo';
+      document.getElementById('bPhotoLabel').innerText = '📄 Bill Photo';
       persistState();
     };
 
     window.deleteRecord = (type, id) => {
+      if (!confirm("Are you sure you want to delete this record? / क्या आप इसे हटाना चाहते हैं?")) return;
       state[type] = state[type].filter(item => item.id !== id);
       persistState();
     };
 
-    // Render UI
+    // Render Dashboard
     window.renderAll = () => {
       const siteSelect = document.getElementById('siteSelect');
       const currentSite = siteSelect.value || state.sites[0];
@@ -290,159 +419,249 @@
       const activeSite = siteSelect.value;
       const activeMonth = document.getElementById('monthSelect').value;
 
-      // Filter Labours by Site and Month
+      // 1. Labours Rendering with Attendance Calculation
       const filteredLabours = state.labours.filter(l => l.site === activeSite && l.month === activeMonth);
-      const totalNetLabour = filteredLabours.reduce((acc, l) => acc + (l.salary - l.advance), 0);
-      document.getElementById('summaryLabourDue').innerText = `₹${totalNetLabour.toLocaleString('en-IN')}`;
+      let totalLabourDue = 0;
 
       document.getElementById('labourList').innerHTML = filteredLabours.length === 0
-        ? `<div class="col-span-full text-center py-8 text-xs text-zinc-400">No labour records for ${activeSite} in ${activeMonth}. / इस महीने का कोई डेटा नहीं है।</div>`
-        : filteredLabours.map(l => `
-          <div class="bg-white dark:bg-zinc-900 p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
-              ${l.photo
-                ? `<img src="${l.photo}" class="w-12 h-12 rounded-full object-cover border border-amber-500 shrink-0" />`
-                : `<div class="w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center font-bold text-sm shrink-0">👷</div>`}
-              <div>
-                <h4 class="font-bold text-sm">${l.name}</h4>
-                <span class="text-[11px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">${l.category}</span>
-                <div class="text-xs text-zinc-500 mt-1">
-                  Salary: <b>₹${l.salary}</b> | Advance: <b class="text-amber-600">₹${l.advance}</b>
+        ? `<div class="col-span-full text-center py-8 text-xs text-zinc-400">इस महीने कोई मजदूर दर्ज नहीं है / No labour records for ${activeMonth}.</div>`
+        : filteredLabours.map(l => {
+          const effectiveDays = (l.presentDays || 0) + ((l.halfDays || 0) * 0.5);
+          // Assuming 26 standard working days per month
+          const earned = Math.round((l.salary / 26) * effectiveDays);
+          const net = earned - (l.advance || 0);
+          totalLabourDue += net;
+
+          return `
+            <div class="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  ${l.photo
+                    ? `<img src="${l.photo}" class="w-12 h-12 rounded-full object-cover border-2 border-amber-500 shrink-0" />`
+                    : `<div class="w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center font-bold text-base shrink-0">👷</div>`}
+                  <div>
+                    <h4 class="font-bold text-sm leading-tight">${l.name}</h4>
+                    <span class="text-[11px] px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 font-medium">${l.category}</span>
+                    <div class="text-xs text-zinc-500 mt-1">वेतन: <b>₹${l.salary}</b> | एडवांस: <b class="text-rose-500">₹${l.advance}</b></div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div class="text-[10px] uppercase text-zinc-400 font-bold">देय राशि / Net</div>
+                  <div class="text-base font-black ${net >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-500'}">₹${net.toLocaleString('en-IN')}</div>
+                  <button onclick="deleteRecord('labours','${l.id}')" class="text-[11px] text-zinc-400 hover:text-rose-500">हटाएं (Del)</button>
+                </div>
+              </div>
+
+              <!-- Attendance Bar -->
+              <div class="bg-zinc-50 dark:bg-zinc-800/60 p-2 rounded-xl flex items-center justify-between text-xs">
+                <div>
+                  <span class="font-semibold">हाजिरी (P):</span> <b class="text-emerald-600">${l.presentDays || 0} दिन</b>
+                  <span class="mx-1 text-zinc-300">|</span>
+                  <span class="font-semibold">हाफ-डे:</span> <b class="text-amber-500">${l.halfDays || 0}</b>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <button onclick="updateAttendance('${l.id}','decPresent')" class="w-6 h-6 rounded bg-zinc-200 dark:bg-zinc-700 font-bold">-</button>
+                  <button onclick="updateAttendance('${l.id}','incPresent')" class="w-6 h-6 rounded bg-emerald-500 text-white font-bold" title="Add Present Day">+P</button>
+                  <button onclick="updateAttendance('${l.id}','incHalf')" class="px-1.5 h-6 rounded bg-amber-500 text-zinc-950 font-bold" title="Add Half Day">+Half</button>
                 </div>
               </div>
             </div>
-            <div class="text-right">
-              <div class="text-[10px] uppercase text-zinc-400">Net Balance / बाकी</div>
-              <div class="text-sm font-extrabold ${l.salary - l.advance >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-500'}">
-                ₹${(l.salary - l.advance).toLocaleString('en-IN')}
+          `;
+        }).join('');
+
+      document.getElementById('summaryLabourDue').innerText = `₹${totalLabourDue.toLocaleString('en-IN')}`;
+
+      // 2. Expenses Rendering
+      if (!state.expenses) state.expenses = [];
+      const filteredExpenses = state.expenses.filter(e => e.site === activeSite && e.month === activeMonth);
+      const totalExpenses = filteredExpenses.reduce((acc, e) => acc + e.amount, 0);
+      document.getElementById('summaryExpensesTotal').innerText = `₹${totalExpenses.toLocaleString('en-IN')}`;
+
+      document.getElementById('expenseList').innerHTML = filteredExpenses.length === 0
+        ? `<div class="col-span-full text-center py-8 text-xs text-zinc-400">कोई खर्च दर्ज नहीं है / No expenses logged.</div>`
+        : filteredExpenses.map(e => `
+          <div class="bg-white dark:bg-zinc-900 p-3.5 rounded-2xl border border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-3 shadow-sm">
+            <div class="flex items-center gap-3">
+              ${e.photo
+                ? `<a href="${e.photo}" target="_blank"><img src="${e.photo}" class="w-12 h-12 rounded-xl object-cover border border-amber-500 shrink-0" /></a>`
+                : `<div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center font-bold text-lg shrink-0">🛺</div>`}
+              <div>
+                <h4 class="font-bold text-sm">${e.title}</h4>
+                <div class="text-[11px] text-zinc-500">${e.category} ${e.spentFor ? `• For: <b>${e.spentFor}</b>` : ''}</div>
+                <div class="text-[10px] text-zinc-400 mt-0.5">${e.date}</div>
               </div>
-              <button onclick="deleteRecord('labours','${l.id}')" class="text-[11px] text-rose-500 hover:underline mt-1">Delete</button>
+            </div>
+            <div class="text-right">
+              <div class="text-sm font-black text-amber-600 dark:text-amber-400">₹${e.amount.toLocaleString('en-IN')}</div>
+              <button onclick="deleteRecord('expenses','${e.id}')" class="text-[11px] text-zinc-400 hover:text-rose-500">हटाएं</button>
             </div>
           </div>
         `).join('');
 
-      // Filter Bills by Site and Month
+      // 3. Bills Rendering
       const filteredBills = state.bills.filter(b => b.site === activeSite && b.month === activeMonth);
-      const totalBillsAmt = filteredBills.reduce((acc, b) => acc + b.amount, 0);
-      document.getElementById('summaryBillsTotal').innerText = `₹${totalBillsAmt.toLocaleString('en-IN')}`;
+      const totalBills = filteredBills.reduce((acc, b) => acc + b.amount, 0);
+      document.getElementById('summaryBillsTotal').innerText = `₹${totalBills.toLocaleString('en-IN')}`;
 
       document.getElementById('billList').innerHTML = filteredBills.length === 0
-        ? `<div class="col-span-full text-center py-8 text-xs text-zinc-400">No company bills for ${activeSite} in ${activeMonth}. / कोई कंपनी बिल नहीं है।</div>`
+        ? `<div class="col-span-full text-center py-8 text-xs text-zinc-400">कोई बिल दर्ज नहीं है / No company bills found.</div>`
         : filteredBills.map(b => `
-          <div class="bg-white dark:bg-zinc-900 p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-3">
+          <div class="bg-white dark:bg-zinc-900 p-3.5 rounded-2xl border border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-3 shadow-sm">
             <div class="flex items-center gap-3">
               ${b.photo
-                ? `<a href="${b.photo}" target="_blank"><img src="${b.photo}" class="w-12 h-12 rounded-lg object-cover border border-emerald-500 shrink-0" title="Click to view full bill" /></a>`
-                : `<div class="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center font-bold text-sm shrink-0">🧾</div>`}
+                ? `<a href="${b.photo}" target="_blank"><img src="${b.photo}" class="w-12 h-12 rounded-xl object-cover border border-emerald-500 shrink-0" /></a>`
+                : `<div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold text-lg shrink-0">🧾</div>`}
               <div>
                 <h4 class="font-bold text-sm">${b.title}</h4>
-                <span class="text-[11px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-medium">${b.status}</span>
-                <div class="text-[11px] text-zinc-400 mt-0.5">${b.createdAt}</div>
+                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold">${b.status}</span>
+                <div class="text-[10px] text-zinc-400 mt-0.5">${b.createdAt}</div>
               </div>
             </div>
             <div class="text-right">
-              <div class="text-sm font-extrabold text-emerald-600 dark:text-emerald-400">₹${b.amount.toLocaleString('en-IN')}</div>
-              <button onclick="deleteRecord('bills','${b.id}')" class="text-[11px] text-rose-500 hover:underline mt-1">Delete</button>
+              <div class="text-sm font-black text-emerald-600 dark:text-emerald-400">₹${b.amount.toLocaleString('en-IN')}</div>
+              <button onclick="deleteRecord('bills','${b.id}')" class="text-[11px] text-zinc-400 hover:text-rose-500">हटाएं</button>
             </div>
           </div>
         `).join('');
     };
 
-    // UI Helpers
+    // UI Navigation Tabs
     window.switchTab = (tab) => {
-      const isLab = tab === 'labours';
-      document.getElementById('sectionLabours').classList.toggle('hidden', !isLab);
-      document.getElementById('sectionBills').classList.toggle('hidden', isLab);
-      document.getElementById('tabLabours').className = isLab
-        ? "pb-2.5 text-sm font-bold border-b-2 border-amber-500 text-amber-600 dark:text-amber-400"
-        : "pb-2.5 text-sm font-medium text-zinc-500";
-      document.getElementById('tabBills').className = !isLab
-        ? "pb-2.5 text-sm font-bold border-b-2 border-emerald-500 text-emerald-600 dark:text-emerald-400"
-        : "pb-2.5 text-sm font-medium text-zinc-500";
-    };
+      document.getElementById('sectionLabours').classList.toggle('hidden', tab !== 'labours');
+      document.getElementById('sectionExpenses').classList.toggle('hidden', tab !== 'expenses');
+      document.getElementById('sectionBills').classList.toggle('hidden', tab !== 'bills');
 
-    window.toggleTheme = () => {
-      document.documentElement.classList.toggle('dark');
-    };
-
-    window.previewFileName = (inputId, labelId) => {
-      const file = document.getElementById(inputId).files[0];
-      if (file) document.getElementById(labelId).innerText = `✅ ${file.name.slice(0, 12)}...`;
-    };
-
-    window.toggleLanguage = () => {
-      const dict = {
-        hi: {
-          selectSite: "निर्माण साइट चुनें", selectMonth: "महीना चुनें",
-          netLabourDue: "कुल मजदूर बकाया", totalBills: "कुल कंपनी बिल",
-          tabLabour: "👷‍♂️ मजदूर खाता (मासिक)", tabBills: "🧾 कंपनी बिल खाता",
-          addLabourHeading: "नया मजदूर डेटा जोड़ें", addBillHeading: "कंपनी का नया बिल जोड़ें",
-          saveBtn: "सेव करें", saveBillBtn: "बिल सेव करें"
-        },
-        en: {
-          selectSite: "Construction Site", selectMonth: "Select Month",
-          netLabourDue: "Net Labour Payable", totalBills: "Company Bills",
-          tabLabour: "👷‍♂️ Monthly Labours", tabBills: "🧾 Company Bills",
-          addLabourHeading: "Add Monthly Labour Record", addBillHeading: "Add Company Work Bill",
-          saveBtn: "Save Record", saveBillBtn: "Save Bill"
+      ['Labours', 'Expenses', 'Bills'].forEach(t => {
+        const btn = document.getElementById(`tab${t}`);
+        if (t.toLowerCase() === tab) {
+          btn.className = "pb-2.5 font-bold border-b-2 border-amber-500 text-amber-600 dark:text-amber-400 whitespace-nowrap";
+        } else {
+          btn.className = "pb-2.5 font-medium text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 whitespace-nowrap";
         }
-      };
-      currentLang = currentLang === 'hi' ? 'en' : 'hi';
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (dict[currentLang][key]) el.innerText = dict[currentLang][key];
       });
     };
 
-    // Cloud Authentication & Real-time Multi-Device Sync
+    window.toggleTheme = () => document.documentElement.classList.toggle('dark');
+
+    window.previewFileName = (inpId, lblId) => {
+      const file = document.getElementById(inpId).files[0];
+      if (file) document.getElementById(lblId).innerText = `✅ ${file.name.slice(0, 8)}...`;
+    };
+
+    // Indian Language Switcher
+    window.changeLanguage = (lang) => {
+      window.currentLang = lang;
+      const dict = i18n[lang] || i18n.hi;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.innerText = dict[key];
+      });
+    };
+
+    // Voice Summary (Text to Speech)
+    window.playVoiceSummary = () => {
+      const activeSite = document.getElementById('siteSelect').value;
+      const activeMonth = document.getElementById('monthSelect').value;
+      const labourDue = document.getElementById('summaryLabourDue').innerText;
+      const expenses = document.getElementById('summaryExpensesTotal').innerText;
+      const bills = document.getElementById('summaryBillsTotal').innerText;
+      const workerCount = state.labours.filter(l => l.site === activeSite && l.month === activeMonth).length;
+
+      let msg = "";
+      if (window.currentLang === 'hi' || window.currentLang === 'mr' || window.currentLang === 'gu') {
+        msg = `नमस्ते ठेकेदार जी। साइट ${activeSite} का महीना ${activeMonth} का हिसाब इस प्रकार है: कुल ${workerCount} मजदूर काम कर रहे हैं। मजदूरों की बाकी मजदूरी ${labourDue} है। रिक्शा व अन्य कुल खर्चे ${expenses} हुए हैं। और कंपनी से कुल बिल ${bills} का है।`;
+      } else {
+        msg = `Hello Contractor. Here is the report for site ${activeSite} for month ${activeMonth}. You have ${workerCount} active workers. Net labour payable is ${labourDue}. Total transport and site expenses are ${expenses}. Total company bills are ${bills}.`;
+      }
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(msg);
+        utterance.lang = window.currentLang === 'en' ? 'en-IN' : 'hi-IN';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert("Voice speech is not supported in this browser.");
+      }
+    };
+
+    // App Sharing
+    window.shareApp = async () => {
+      const shareData = {
+        title: 'ठेकेDAAR - निर्माण व मजदूर प्रबंधन',
+        text: 'ठेकेDAAR ऐप का इस्तेमाल करके अपने साइट के मजदूर, हाजिरी, रिक्शा किराया और कंपनी बिल को मैनेज करें।',
+        url: window.location.href
+      };
+      if (navigator.share) {
+        try { await navigator.share(shareData); } catch (e) {}
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        alert("App link copied to clipboard! Share it on WhatsApp. / ऐप का लिंक कॉपी हो गया है!");
+      }
+    };
+
+    // Authentication & Password Reset
     window.openAuthModal = () => document.getElementById('authModal').classList.replace('hidden', 'flex');
     window.closeAuthModal = () => document.getElementById('authModal').classList.replace('flex', 'hidden');
 
     window.connectCloud = async (isSignUp) => {
+      const email = document.getElementById('authEmail').value.trim();
+      const pass = document.getElementById('authPass').value.trim();
+      if (!email || !pass) return alert("Please enter both email and password / कृपया ईमेल और पासवर्ड भरें।");
+
       try {
-        const rawCfg = document.getElementById('firebaseConfigInput').value.trim();
-        const email = document.getElementById('authEmail').value.trim();
-        const pass = document.getElementById('authPass').value.trim();
-        if (!rawCfg || !email || !pass) return alert("Please enter Firebase Config, Email, and Password.");
-
-        const cfg = JSON.parse(rawCfg);
-        const app = initializeApp(cfg);
-        auth = getAuth(app);
-        db = getFirestore(app);
-
         if (isSignUp) {
           await createUserWithEmailAndPassword(auth, email, pass);
+          alert("Account created successfully! / खाता सफलतापूर्वक बन गया है!");
         } else {
           await signInWithEmailAndPassword(auth, email, pass);
         }
-
-        onAuthStateChanged(auth, (user) => {
-          if (user) {
-            currentUser = user;
-            document.getElementById('authBtn').innerText = `☁️ ${user.email.split('@')[0]}`;
-            closeAuthModal();
-            onSnapshot(doc(db, "users", user.uid), (docSnap) => {
-              if (docSnap.exists()) {
-                state = docSnap.data();
-                localStorage.setItem('thekedaar_state', JSON.stringify(state));
-                renderAll();
-              } else {
-                persistState();
-              }
-            });
-          }
-        });
-      } catch (e) {
-        alert("Cloud Auth Error: " + e.message);
+        closeAuthModal();
+      } catch (err) {
+        alert("Error: " + err.message);
       }
     };
 
+    window.handleForgotPassword = async () => {
+      const email = document.getElementById('authEmail').value.trim();
+      if (!email) {
+        alert("Please enter your email in the box first to receive reset link / कृपया पहले अपना ईमेल बॉक्स में लिखें।");
+        return;
+      }
+      try {
+        await sendPasswordResetEmail(auth, email);
+        alert("Password reset email sent! Check your inbox or spam folder. / पासवर्ड रीसेट करने का लिंक आपके ईमेल पर भेज दिया गया है!");
+      } catch (err) {
+        alert("Error: " + err.message);
+      }
+    };
+
+    // Auto-listen to Authentication State
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        currentUser = user;
+        document.getElementById('authBtn').innerText = `👤 ${user.email.split('@')[0]}`;
+        document.getElementById('authBtn').onclick = () => {
+          if (confirm("Do you want to log out? / क्या आप लॉग आउट करना चाहते हैं?")) {
+            signOut(auth);
+            location.reload();
+          }
+        };
+
+        // Realtime Firestore Sync
+        onSnapshot(doc(db, "users", user.uid), (docSnap) => {
+          if (docSnap.exists()) {
+            state = docSnap.data();
+            localStorage.setItem('thekedaar_state', JSON.stringify(state));
+            renderAll();
+          } else {
+            persistState();
+          }
+        });
+      }
+    });
+
     renderAll();
   </script>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-  }
-</script>
 </body>
 </html>
