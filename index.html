@@ -3,11 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
+  <title>ठेकेDAAR - Construction & Labour Manager</title>
+  
+  <!-- Logo & App Icons -->
+  <link rel="icon" type="image/png" href="./logo.png">
+  <link rel="apple-touch-icon" href="./logo.png">
   <link rel="manifest" href="manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#18181b">
+  <meta name="theme-color" content="#f59e0b">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -15,207 +20,347 @@
       theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } }
     };
   </script>
-</head>
-<body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen transition-colors duration-200">
 
-  <!-- Top Sticky Header -->
-  <header class="sticky top-0 z-30 bg-white/95 dark:bg-zinc-900/95 backdrop-blur border-b border-zinc-200 dark:border-zinc-800 px-4 py-3">
-    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
-      <div class="flex items-center gap-2">
-        <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-zinc-950 font-black text-xl shadow">ठे</div>
+  <style>
+    /* Splash Screen & Construction Background Animations */
+    #splashScreen {
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.7s;
+    }
+    
+    .letter-anim {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(28px) scale(0.65);
+      animation: popIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes popIn {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Construction Crane & Hook Motion */
+    @keyframes craneSway {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(4deg); }
+    }
+    @keyframes cableDrop {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(18px); }
+    }
+    @keyframes sparkFlicker {
+      0%, 100% { opacity: 0.15; transform: scale(0.8); }
+      50% { opacity: 0.95; transform: scale(1.2); }
+    }
+
+    .crane-arm { transform-origin: 20px 20px; animation: craneSway 6s ease-in-out infinite; }
+    .crane-cable { animation: cableDrop 4s ease-in-out infinite; }
+    .welding-spark { animation: sparkFlicker 0.2s ease-in-out infinite alternate; }
+
+    /* Hide scrollbars for clean minimal app UI */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen pb-24 transition-colors duration-200 select-none">
+
+  <!-- 1. SPLASH SCREEN (ANIMATED ON OPEN) -->
+  <div id="splashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-zinc-950 overflow-hidden">
+    
+    <!-- Animated Construction Background Vector -->
+    <div class="absolute inset-0 pointer-events-none opacity-30 flex items-center justify-center">
+      <svg class="w-full h-full max-w-2xl text-amber-500/40" viewBox="0 0 600 400" fill="none" stroke="currentColor">
+        <!-- Building Scaffolding Grid -->
+        <path d="M 80 380 L 80 120 L 220 120 L 220 380 M 80 180 L 220 180 M 80 240 L 220 240 M 80 300 L 220 300" stroke-width="2.5" stroke-dasharray="4 4" />
+        <path d="M 80 120 L 220 180 M 80 180 L 220 240 M 80 240 L 220 300 M 80 300 L 220 380" stroke-width="1.5" opacity="0.6" />
+        
+        <!-- Animated Construction Crane -->
+        <g class="crane-arm">
+          <path d="M 380 380 L 380 80 L 560 50 M 320 95 L 380 80" stroke-width="3.5" stroke-linecap="round" />
+          <path d="M 380 120 L 440 65 M 440 65 L 500 58 M 500 58 L 560 50" stroke-width="1.5" />
+          <g class="crane-cable">
+            <line x1="520" y1="55" x2="520" y2="170" stroke-width="1.8" />
+            <path d="M 515 170 C 515 185 525 185 525 170" stroke-width="3" stroke-linecap="round" />
+          </g>
+        </g>
+        <!-- Ground Line -->
+        <line x1="20" y1="380" x2="580" y2="380" stroke-width="4" stroke-linecap="round" />
+      </svg>
+    </div>
+
+    <!-- Welding Spark Effect -->
+    <div class="absolute w-28 h-28 bg-amber-400 rounded-full blur-2xl welding-spark"></div>
+
+    <!-- Center Logo & Kinetic Animated Letters -->
+    <div class="relative z-10 flex flex-col items-center">
+      <img src="./logo.png" alt="Logo" class="w-24 h-24 rounded-3xl shadow-2xl border-2 border-amber-500/40 object-cover mb-5 animate-pulse" />
+      
+      <!-- Letter-by-Letter Animated Brand Name -->
+      <div id="thekedaarLetters" class="text-4xl md:text-5xl font-black text-white tracking-widest flex items-center">
+        <!-- Injected via JS for precise step delays -->
+      </div>
+      <p class="text-amber-500 text-xs font-bold uppercase tracking-widest mt-2 opacity-90">Construction & Workforce System</p>
+    </div>
+  </div>
+
+  <!-- 2. TOP HEADER -->
+  <header class="sticky top-0 z-30 bg-white/90 dark:bg-zinc-900/90 backdrop-blur border-b border-zinc-200 dark:border-zinc-800 px-4 py-2.5">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <img src="./logo.png" alt="Logo" class="w-9 h-9 rounded-xl object-cover border border-amber-500/30 shadow-sm" />
         <div>
-          <h1 class="text-lg font-black tracking-tight leading-none">ठेकेDAAR</h1>
-          <span id="syncStatus" class="text-[11px] text-zinc-500 font-medium">● Local Mode (Login to Sync)</span>
+          <h1 class="text-base font-black tracking-tight leading-none text-zinc-900 dark:text-zinc-50">ठेकेDAAR</h1>
+          <span id="syncStatus" class="text-[10px] text-zinc-500 font-medium">● Local Mode</span>
         </div>
       </div>
 
-      <div class="flex items-center gap-2 flex-wrap">
-        <!-- Indian Languages Selector -->
-        <select id="langSelect" onchange="changeLanguage(this.value)" class="text-xs font-semibold px-2 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent">
-          <option value="hi" class="dark:bg-zinc-800">हिंदी (Hindi)</option>
-          <option value="en" class="dark:bg-zinc-800">English</option>
-          <option value="mr" class="dark:bg-zinc-800">मराठी (Marathi)</option>
-          <option value="gu" class="dark:bg-zinc-800">ગુજરાતી (Gujarati)</option>
+      <div class="flex items-center gap-1.5">
+        <select id="langSelect" onchange="changeLanguage(this.value)" class="text-xs font-semibold px-2 py-1 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-transparent">
+          <option value="hi" class="dark:bg-zinc-900">हिंदी</option>
+          <option value="en" class="dark:bg-zinc-900">English</option>
+          <option value="mr" class="dark:bg-zinc-900">मराठी</option>
+          <option value="gu" class="dark:bg-zinc-900">ગુજરાતી</option>
         </select>
 
-        <!-- Share Button -->
-        <button onclick="shareApp()" class="px-2.5 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 flex items-center gap-1 shadow-sm">
-          <span>📲</span> <span data-i18n="share">Share</span>
+        <button onclick="playVoiceSummary()" class="p-2 text-xs rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800" title="Audio Report">
+          🔊
         </button>
 
-        <!-- Voice Report Button -->
-        <button onclick="playVoiceSummary()" class="px-2.5 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 flex items-center gap-1 shadow-sm">
-          <span>🔊</span> <span data-i18n="voiceSummary">Audio Report</span>
+        <button onclick="shareApp()" class="p-2 text-xs rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800" title="Share App">
+          📲
         </button>
 
-        <!-- Theme Toggle -->
-        <button onclick="toggleTheme()" class="p-1.5 text-xs font-semibold rounded-lg border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800">🌓</button>
+        <button onclick="toggleTheme()" class="p-2 text-xs rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800" title="Toggle Light/Dark">
+          🌓
+        </button>
 
-        <!-- Login / Register Button -->
-        <button onclick="openAuthModal()" id="authBtn" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-amber-500 text-zinc-950 hover:bg-amber-400">
+        <button onclick="openAuthModal()" id="authBtn" class="px-2.5 py-1 text-xs font-bold rounded-lg bg-amber-500 text-zinc-950 hover:bg-amber-400">
           लॉग इन / Register
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Main Dashboard -->
-  <main class="max-w-6xl mx-auto p-4 space-y-4">
-
-    <!-- Top Site Filter & Financial Bar -->
-    <section class="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm grid grid-cols-1 md:grid-cols-4 gap-3">
-      <div>
-        <label class="block text-xs font-bold uppercase text-zinc-500 mb-1" data-i18n="selectSite">Construction Site</label>
-        <div class="flex gap-2">
-          <select id="siteSelect" onchange="renderAll()" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm font-semibold"></select>
-          <button onclick="addNewSite()" class="px-3 py-2 bg-amber-500 hover:bg-amber-600 text-zinc-950 font-black rounded-lg text-sm shrink-0">+ Site</button>
-        </div>
+  <!-- Global Site & Month Selection Bar -->
+  <div class="max-w-4xl mx-auto px-4 pt-3">
+    <div class="bg-white dark:bg-zinc-900 p-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm flex items-center justify-between gap-2">
+      <div class="flex items-center gap-1.5 flex-1">
+        <span class="text-xs">🏗️</span>
+        <select id="siteSelect" onchange="renderAll()" class="w-full bg-transparent text-xs font-bold focus:outline-none"></select>
       </div>
-
-      <div>
-        <label class="block text-xs font-bold uppercase text-zinc-500 mb-1" data-i18n="selectMonth">Month</label>
-        <input type="month" id="monthSelect" onchange="renderAll()" class="w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm font-semibold" />
-      </div>
-
-      <div class="col-span-1 md:col-span-2 grid grid-cols-3 gap-2">
-        <div class="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800">
-          <div class="text-[11px] text-zinc-500" data-i18n="netLabourDue">Labour Due</div>
-          <div id="summaryLabourDue" class="text-base font-extrabold text-rose-600 dark:text-rose-400">₹0</div>
-        </div>
-        <div class="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800">
-          <div class="text-[11px] text-zinc-500" data-i18n="totalExpenses">Site Expenses</div>
-          <div id="summaryExpensesTotal" class="text-base font-extrabold text-amber-600 dark:text-amber-400">₹0</div>
-        </div>
-        <div class="p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800">
-          <div class="text-[11px] text-zinc-500" data-i18n="totalBills">Company Bills</div>
-          <div id="summaryBillsTotal" class="text-base font-extrabold text-emerald-600 dark:text-emerald-400">₹0</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Navigation Tabs -->
-    <div class="flex border-b border-zinc-200 dark:border-zinc-800 gap-2 sm:gap-6 overflow-x-auto text-sm">
-      <button onclick="switchTab('labours')" id="tabLabours" class="pb-2.5 font-bold border-b-2 border-amber-500 text-amber-600 dark:text-amber-400 whitespace-nowrap" data-i18n="tabLabour">
-        👷‍♂️ Labours & Attendance (मजदूर व हाजिरी)
-      </button>
-      <button onclick="switchTab('expenses')" id="tabExpenses" class="pb-2.5 font-medium text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 whitespace-nowrap" data-i18n="tabExpenses">
-        🛺 Expenses & Rickshaw (खर्चे व किराया)
-      </button>
-      <button onclick="switchTab('bills')" id="tabBills" class="pb-2.5 font-medium text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 whitespace-nowrap" data-i18n="tabBills">
-        🧾 Company Bills (कंपनी बिल)
-      </button>
+      <button onclick="addNewSite()" class="px-2 py-1 bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold text-xs rounded-lg">+ Site</button>
+      <div class="h-4 w-px bg-zinc-200 dark:bg-zinc-800"></div>
+      <input type="month" id="monthSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold focus:outline-none" />
     </div>
+  </div>
 
-    <!-- 1. LABOURS & ATTENDANCE SECTION -->
-    <section id="sectionLabours" class="space-y-4">
-      <div class="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
-        <h2 class="text-sm font-bold mb-3" data-i18n="addLabourHeading">Add Monthly Labour (नया मजदूर जोड़ें)</h2>
-        <form id="labourForm" onsubmit="saveLabour(event)" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3">
-          <input type="text" id="lName" required placeholder="Labour Name (नाम)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-          <select id="lCategory" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm">
-            <option value="Mason (मिस्त्री)">Mason (मिस्त्री)</option>
-            <option value="Helper (हेल्पर)">Helper (हेल्पर)</option>
-            <option value="Carpenter (बढ़ई)">Carpenter (बढ़ई)</option>
-            <option value="Electrician (इलेक्ट्रीशियन)">Electrician (इलेक्ट्रीशियन)</option>
-            <option value="Plumber (प्लम्बर)">Plumber (प्लम्बर)</option>
-          </select>
-          <input type="number" id="lSalary" required min="0" placeholder="Monthly Salary (वेतन ₹)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-          <input type="number" id="lAdvance" required min="0" placeholder="Advance Given (एडवांस ₹)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-          <label class="flex items-center justify-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-lg px-2 py-2 text-xs cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800">
-            <span id="lPhotoLabel">📷 Photo</span>
-            <input type="file" id="lPhoto" accept="image/*" class="hidden" onchange="previewFileName('lPhoto','lPhotoLabel')" />
-          </label>
-          <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold rounded-lg px-4 py-2 text-sm" data-i18n="saveBtn">Save / सुरक्षित करें</button>
-        </form>
+  <!-- 3. VIEWS CONTAINER (CONTROLLED BY INSTAGRAM BOTTOM BAR) -->
+  <main class="max-w-4xl mx-auto p-4">
+
+    <!-- VIEW 1: HOME OVERVIEW (FEED / SUMMARY) -->
+    <section id="viewHome" class="space-y-4">
+      <div class="grid grid-cols-3 gap-2">
+        <div class="p-3 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center shadow-sm">
+          <div class="text-[10px] font-bold uppercase text-zinc-400" data-i18n="netLabourDue">Labour Due</div>
+          <div id="summaryLabourDue" class="text-base font-black text-rose-500 mt-0.5">₹0</div>
+        </div>
+        <div class="p-3 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center shadow-sm">
+          <div class="text-[10px] font-bold uppercase text-zinc-400" data-i18n="totalExpenses">Expenses</div>
+          <div id="summaryExpensesTotal" class="text-base font-black text-amber-500 mt-0.5">₹0</div>
+        </div>
+        <div class="p-3 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center shadow-sm">
+          <div class="text-[10px] font-bold uppercase text-zinc-400" data-i18n="totalBills">Bills</div>
+          <div id="summaryBillsTotal" class="text-base font-black text-emerald-500 mt-0.5">₹0</div>
+        </div>
       </div>
 
-      <div id="labourList" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+      <!-- Quick Action Cards -->
+      <div class="bg-amber-500/10 border border-amber-500/20 p-4 rounded-2xl flex items-center justify-between">
+        <div>
+          <h3 class="font-extrabold text-sm text-amber-600 dark:text-amber-400">Site Audio Status / बोलकर हिसाब सुनें</h3>
+          <p class="text-xs text-zinc-500">Listen to whole site summary in one tap</p>
+        </div>
+        <button onclick="playVoiceSummary()" class="px-3 py-1.5 bg-amber-500 text-zinc-950 font-bold rounded-xl text-xs shadow">🔊 Listen</button>
+      </div>
+
+      <!-- Recent Site Activity -->
+      <div>
+        <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Live Workforce Snapshot</h3>
+        <div id="homeRecentLabour" class="space-y-2"></div>
+      </div>
     </section>
 
-    <!-- 2. EXPENSES & FARES SECTION -->
-    <section id="sectionExpenses" class="space-y-4 hidden">
-      <div class="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
-        <h2 class="text-sm font-bold mb-3" data-i18n="addExpenseHeading">Add Site Expense (किराया व अन्य खर्चे जोड़ें)</h2>
-        <form id="expenseForm" onsubmit="saveExpense(event)" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3">
-          <input type="text" id="eTitle" required placeholder="Expense Description (ऑटो / चाय / नाश्ता)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-          <select id="eCategory" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm">
-            <option value="Rickshaw / Rent (किराया)">Rickshaw / Transport (किराया)</option>
-            <option value="Tea / Food (नाश्ता/खाना)">Tea / Food (चाय/खाना)</option>
-            <option value="Material / Tools (सामान)">Material / Small Tools (सामान)</option>
-            <option value="Medical / Emergency (इलाज)">Medical (दवा)</option>
-            <option value="Other (अन्य)">Other (अन्य)</option>
-          </select>
-          <input type="number" id="eAmount" required min="0" placeholder="Amount (रुपये ₹)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-          <input type="text" id="eSpentFor" placeholder="Paid For / किसके लिए दिया" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-          <label class="flex items-center justify-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-lg px-2 py-2 text-xs cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800">
-            <span id="ePhotoLabel">🧾 Bill Slip</span>
-            <input type="file" id="ePhoto" accept="image/*" class="hidden" onchange="previewFileName('ePhoto','ePhotoLabel')" />
-          </label>
-          <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold rounded-lg px-4 py-2 text-sm" data-i18n="saveBtn">Save Expense</button>
-        </form>
+    <!-- VIEW 2: LABOURS & ATTENDANCE -->
+    <section id="viewLabours" class="space-y-3 hidden">
+      <div class="flex items-center justify-between">
+        <h2 class="text-sm font-black" data-i18n="tabLabour">👷‍♂️ Labour & Attendance Register</h2>
+        <button onclick="openFormModal('labour')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Worker</button>
       </div>
-
-      <div id="expenseList" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+      <div id="labourList" class="space-y-2.5"></div>
     </section>
 
-    <!-- 3. COMPANY BILLS SECTION -->
-    <section id="sectionBills" class="space-y-4 hidden">
-      <div class="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
-        <h2 class="text-sm font-bold mb-3" data-i18n="addBillHeading">Add Company Bill (कंपनी का बिल जोड़ें)</h2>
-        <form id="billForm" onsubmit="saveBill(event)" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
-          <input type="text" id="bTitle" required placeholder="Work Title / Company Name" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-          <input type="number" id="bAmount" required min="0" placeholder="Bill Amount (राशि ₹)" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-          <select id="bStatus" class="rounded-lg border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm">
-            <option value="Received (प्राप्त)">Received (प्राप्त हुआ)</option>
-            <option value="Pending (बाकी)">Pending (बाकी है)</option>
-          </select>
-          <label class="flex items-center justify-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-lg px-2 py-2 text-xs cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800">
-            <span id="bPhotoLabel">📄 Bill Photo</span>
-            <input type="file" id="bPhoto" accept="image/*" class="hidden" onchange="previewFileName('bPhoto','bPhotoLabel')" />
-          </label>
-          <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-zinc-950 font-bold rounded-lg px-4 py-2 text-sm" data-i18n="saveBillBtn">Save Bill</button>
-        </form>
+    <!-- VIEW 3: SITE EXPENSES & RICKSHAW RENT -->
+    <section id="viewExpenses" class="space-y-3 hidden">
+      <div class="flex items-center justify-between">
+        <h2 class="text-sm font-black" data-i18n="tabExpenses">🛺 Site Expenses & Transport</h2>
+        <button onclick="openFormModal('expense')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Expense</button>
       </div>
+      <div id="expenseList" class="space-y-2.5"></div>
+    </section>
 
-      <div id="billList" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+    <!-- VIEW 4: COMPANY BILLS -->
+    <section id="viewBills" class="space-y-3 hidden">
+      <div class="flex items-center justify-between">
+        <h2 class="text-sm font-black" data-i18n="tabBills">🧾 Company Work Bills</h2>
+        <button onclick="openFormModal('bill')" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Bill</button>
+      </div>
+      <div id="billList" class="space-y-2.5"></div>
     </section>
 
   </main>
 
-  <!-- Login, Register & Reset Password Modal (Zero Config Required) -->
+  <!-- 4. INSTAGRAM-STYLE BOTTOM ICON NAVIGATION BAR -->
+  <nav class="fixed bottom-0 inset-x-0 z-40 bg-white/95 dark:bg-zinc-900/95 backdrop-blur border-t border-zinc-200 dark:border-zinc-800 px-4 py-2">
+    <div class="max-w-md mx-auto flex items-center justify-around">
+      
+      <!-- Home Icon -->
+      <button onclick="navigateTo('viewHome')" id="nav-viewHome" class="flex flex-col items-center text-amber-500 transition-transform active:scale-90">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span class="text-[10px] font-semibold mt-0.5">Home</span>
+      </button>
+
+      <!-- Labour Icon -->
+      <button onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="flex flex-col items-center text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-transform active:scale-90">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 3s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        <span class="text-[10px] font-semibold mt-0.5">Labours</span>
+      </button>
+
+      <!-- Floating Plus (+) Action Button -->
+      <button onclick="openFormModal('labour')" class="w-12 h-12 -mt-5 rounded-full bg-amber-500 text-zinc-950 flex items-center justify-center font-black text-2xl shadow-lg border-4 border-zinc-50 dark:border-zinc-950 transition-transform active:scale-90">
+        +
+      </button>
+
+      <!-- Expenses / Rickshaw Icon -->
+      <button onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="flex flex-col items-center text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-transform active:scale-90">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.77l.11.34V17z"/></svg>
+        <span class="text-[10px] font-semibold mt-0.5">Expenses</span>
+      </button>
+
+      <!-- Bills Icon -->
+      <button onclick="navigateTo('viewBills')" id="nav-viewBills" class="flex flex-col items-center text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-transform active:scale-90">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        <span class="text-[10px] font-semibold mt-0.5">Bills</span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- 5. UNIVERSAL ACTION MODALS (FOR ADDING LABOUR, EXPENSE, BILL) -->
+  <div id="formModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
+    <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-2">
+        <h3 id="formModalTitle" class="font-black text-base">Add Entry</h3>
+        <button onclick="closeFormModal()" class="text-zinc-400 hover:text-zinc-600 text-lg">✕</button>
+      </div>
+
+      <!-- Labour Form -->
+      <form id="labourForm" onsubmit="saveLabour(event)" class="space-y-3 hidden">
+        <input type="text" id="lName" required placeholder="Labour Name / नाम (e.g. Ramesh)" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+        <select id="lCategory" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm">
+          <option value="Mason (मिस्त्री)">Mason (मिस्त्री)</option>
+          <option value="Helper (हेल्पर)">Helper (हेल्पर)</option>
+          <option value="Carpenter (बढ़ई)">Carpenter (बढ़ई)</option>
+          <option value="Electrician (इलेक्ट्रीशियन)">Electrician (इलेक्ट्रीशियन)</option>
+          <option value="Plumber (प्लम्बर)">Plumber (प्लम्बर)</option>
+        </select>
+        <div class="grid grid-cols-2 gap-2">
+          <input type="number" id="lSalary" required min="0" placeholder="Monthly Salary ₹" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+          <input type="number" id="lAdvance" required min="0" placeholder="Advance ₹" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+        </div>
+        <label class="flex items-center justify-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800">
+          <span id="lPhotoLabel">📷 Upload Worker Photo</span>
+          <input type="file" id="lPhoto" accept="image/*" class="hidden" onchange="previewFileName('lPhoto','lPhotoLabel')" />
+        </label>
+        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm">Save Labour / सेव करें</button>
+      </form>
+
+      <!-- Expense Form -->
+      <form id="expenseForm" onsubmit="saveExpense(event)" class="space-y-3 hidden">
+        <input type="text" id="eTitle" required placeholder="Description (ऑटो किराया / चाय / नाश्ता)" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+        <select id="eCategory" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm">
+          <option value="Rickshaw / Rent (किराया)">Rickshaw / Transport (किराया)</option>
+          <option value="Tea / Food (नाश्ता)">Tea & Food (चाय नाश्ता)</option>
+          <option value="Material (सामान)">Material / Tools (सामान)</option>
+          <option value="Medical (दवा)">Medical / Emergency</option>
+          <option value="Other (अन्य)">Other</option>
+        </select>
+        <div class="grid grid-cols-2 gap-2">
+          <input type="number" id="eAmount" required min="0" placeholder="Amount ₹" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+          <input type="text" id="eSpentFor" placeholder="Paid For (किसके लिए)" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+        </div>
+        <label class="flex items-center justify-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800">
+          <span id="ePhotoLabel">🧾 Upload Bill / Receipt Slip</span>
+          <input type="file" id="ePhoto" accept="image/*" class="hidden" onchange="previewFileName('ePhoto','ePhotoLabel')" />
+        </label>
+        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm">Save Expense / सुरक्षित करें</button>
+      </form>
+
+      <!-- Bill Form -->
+      <form id="billForm" onsubmit="saveBill(event)" class="space-y-3 hidden">
+        <input type="text" id="bTitle" required placeholder="Work / Company Name" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+        <div class="grid grid-cols-2 gap-2">
+          <input type="number" id="bAmount" required min="0" placeholder="Bill Amount ₹" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+          <select id="bStatus" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm">
+            <option value="Received (प्राप्त)">Received</option>
+            <option value="Pending (बाकी)">Pending</option>
+          </select>
+        </div>
+        <label class="flex items-center justify-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800">
+          <span id="bPhotoLabel">📄 Upload Company Bill Photo</span>
+          <input type="file" id="bPhoto" accept="image/*" class="hidden" onchange="previewFileName('bPhoto','bPhotoLabel')" />
+        </label>
+        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm">Save Company Bill</button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- 6. CLOUD AUTH & PASSWORD RESET MODAL -->
   <div id="authModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
     <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center">
-        <h3 class="font-extrabold text-lg" data-i18n="authModalTitle">लॉग इन / Register</h3>
+        <h3 class="font-extrabold text-base">लॉग इन / Register</h3>
         <button onclick="closeAuthModal()" class="text-zinc-400 hover:text-zinc-600 text-lg">✕</button>
       </div>
-      <p class="text-xs text-zinc-500" data-i18n="authSubtitle">Access your construction records securely across any device.</p>
+      <p class="text-xs text-zinc-500">Access your construction records from any device.</p>
       
       <div class="space-y-3">
-        <input type="email" id="authEmail" placeholder="Email Address / ईमेल आईडी" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2.5 text-sm" />
-        <input type="password" id="authPass" placeholder="Password / पासवर्ड (कम से कम 6 अक्षर)" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2.5 text-sm" />
+        <input type="email" id="authEmail" placeholder="Email Address / ईमेल" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2.5 text-sm" />
+        <input type="password" id="authPass" placeholder="Password / पासवर्ड (6+ chars)" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2.5 text-sm" />
       </div>
 
       <div class="flex justify-end">
-        <button onclick="handleForgotPassword()" class="text-xs text-amber-600 dark:text-amber-400 font-semibold hover:underline" data-i18n="forgotPass">
+        <button onclick="handleForgotPassword()" class="text-xs text-amber-600 dark:text-amber-400 font-semibold hover:underline">
           पासवर्ड भूल गए? / Forgot Password?
         </button>
       </div>
 
       <div class="flex gap-2 pt-2">
-        <button onclick="connectCloud(false)" class="flex-1 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm" data-i18n="loginBtn">Login / लॉग इन</button>
-        <button onclick="connectCloud(true)" class="flex-1 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 font-bold py-2.5 rounded-xl text-sm" data-i18n="registerBtn">Create Account</button>
+        <button onclick="connectCloud(false)" class="flex-1 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm">Login</button>
+        <button onclick="connectCloud(true)" class="flex-1 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 font-bold py-2.5 rounded-xl text-sm">Register</button>
       </div>
     </div>
   </div>
 
-  <!-- Realtime Database & Logic -->
+  <!-- APPLICATION LOGIC & REALTIME FIREBASE SYNC -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    // Hardcoded Firebase Config — Users do NOT need to enter API keys
+    // Your Direct Firebase Configuration
     const firebaseConfig = {
       apiKey: "AIzaSyCsabUW5vFiXGxsUu4FvdKkc5cxxsCt8jA",
       authDomain: "thekedaar-62310.firebaseapp.com",
@@ -231,52 +376,45 @@
 
     let currentUser = null;
     let state = JSON.parse(localStorage.getItem('thekedaar_state')) || {
-      sites: ['Site 1 - मुख्य साइट (Main Site)'],
+      sites: ['Main Site A - मुख्य साइट'],
       labours: [],
       expenses: [],
       bills: []
     };
 
-    // Dictionary for Indian Languages
+    // Indian Language Dictionary
     const i18n = {
-      hi: {
-        selectSite: "निर्माण साइट चुनें", selectMonth: "महीना चुनें", netLabourDue: "कुल मजदूर बकाया",
-        totalExpenses: "किराया व खर्चे", totalBills: "कुल कंपनी बिल", tabLabour: "👷‍♂️ मजदूर व हाजिरी",
-        tabExpenses: "🛺 खर्चे व किराया", tabBills: "🧾 कंपनी बिल", addLabourHeading: "नया मजदूर जोड़ें",
-        addExpenseHeading: "किराया व अन्य खर्चे जोड़ें", addBillHeading: "कंपनी का नया बिल जोड़ें",
-        saveBtn: "सुरक्षित करें", saveBillBtn: "बिल सेव करें", share: "शेयर करें", voiceSummary: "ऑडियो रिपोर्ट",
-        authModalTitle: "लॉग इन / खाता बनाएं", authSubtitle: "कहीं से भी अपना डेटा सुरक्षित देखें",
-        forgotPass: "पासवर्ड भूल गए?", loginBtn: "लॉग इन", registerBtn: "नया खाता बनाएं"
-      },
-      en: {
-        selectSite: "Select Site", selectMonth: "Select Month", netLabourDue: "Labour Due",
-        totalExpenses: "Site Expenses", totalBills: "Company Bills", tabLabour: "👷‍♂️ Labours & Attendance",
-        tabExpenses: "🛺 Expenses & Rent", tabBills: "🧾 Company Bills", addLabourHeading: "Add Monthly Labour",
-        addExpenseHeading: "Add Site Expense", addBillHeading: "Add Company Bill", saveBtn: "Save",
-        saveBillBtn: "Save Bill", share: "Share App", voiceSummary: "Voice Report", authModalTitle: "Login / Register",
-        authSubtitle: "Access your construction records from any device", forgotPass: "Forgot Password?",
-        loginBtn: "Login", registerBtn: "Register"
-      },
-      mr: {
-        selectSite: "कामाची साईट निवडा", selectMonth: "महिना निवडा", netLabourDue: "एकूण मजुरी बाकी",
-        totalExpenses: "भाडे व खर्च", totalBills: "कंपनी बिल", tabLabour: "👷‍♂️ कामगार व हजेरी",
-        tabExpenses: "🛺 खर्च व रिक्षा भाडे", tabBills: "🧾 कंपनी बिल", addLabourHeading: "नवीन कामगार जोडा",
-        addExpenseHeading: "खर्च व भाडे नोंदवा", addBillHeading: "कंपनीचे बिल जोडा", saveBtn: "जतन करा",
-        saveBillBtn: "बिल जतन करा", share: "शेअर करा", voiceSummary: "ऑडिओ रिपोर्ट", authModalTitle: "लॉग इन / नोंदणी करा",
-        authSubtitle: "कुठूनही आपली माहिती पहा", forgotPass: "पासवर्ड विसरलात?", loginBtn: "लॉग इन", registerBtn: "नोंदणी करा"
-      },
-      gu: {
-        selectSite: "સાઇટ પસંદ કરો", selectMonth: "મહિનો પસંદ કરો", netLabourDue: "બાકી મજૂરી",
-        totalExpenses: "ભાડું અને ખર્ચ", totalBills: "કંપની બિલ", tabLabour: "👷‍♂️ મજૂર અને હાજરી",
-        tabExpenses: "🛺 ખર્ચ અને રિક્ષા ભાડું", tabBills: "🧾 કંપની બિલ", addLabourHeading: "નવો મજૂર ઉમેરો",
-        addExpenseHeading: "ખર્ચ અને ભાડું ઉમેરો", addBillHeading: "કંપની બિલ ઉમેરો", saveBtn: "સાચવો",
-        saveBillBtn: "બિલ સાચવો", share: "શેર કરો", voiceSummary: "ઓડિયો રિપોર્ટ", authModalTitle: "લૉગિન / નોંધણી",
-        authSubtitle: "ગમે ત્યાંથી ડેટા એક્સેસ કરો", forgotPass: "પાસવર્ડ ભૂલી ગયા?", loginBtn: "લૉગિન", registerBtn: "નવું ખાતું બનાવો"
-      }
+      hi: { netLabourDue: "कुल मजदूर बकाया", totalExpenses: "किराया व खर्चे", totalBills: "कुल कंपनी बिल", tabLabour: "👷‍♂️ मजदूर व हाजिरी", tabExpenses: "🛺 खर्चे व किराया", tabBills: "🧾 कंपनी बिल" },
+      en: { netLabourDue: "Labour Due", totalExpenses: "Site Expenses", totalBills: "Company Bills", tabLabour: "👷‍♂️ Labours & Attendance", tabExpenses: "🛺 Expenses & Rent", tabBills: "🧾 Company Bills" },
+      mr: { netLabourDue: "एकूण मजुरी बाकी", totalExpenses: "भाडे व खर्च", totalBills: "कंपनी बिल", tabLabour: "👷‍♂️ कामगार व हजेरी", tabExpenses: "🛺 खर्च व रिक्षा भाडे", tabBills: "🧾 कंपनी बिल" },
+      gu: { netLabourDue: "બાકી મજૂરી", totalExpenses: "ભાડું અને ખર્ચ", totalBills: "કંપની બિલ", tabLabour: "👷‍♂️ મજૂર અને હાજરી", tabExpenses: "🛺 ખર્ચ અને રિક્ષા ભાડું", tabBills: "🧾 કંપની બિલ" }
     };
-
     window.currentLang = 'hi';
 
+    // 1. KINETIC TEXT ANIMATION ENGINE FOR SPLASH SCREEN
+    function runSplashAnimation() {
+      const brandWord = "THEKEDAAR";
+      const container = document.getElementById('thekedaarLetters');
+      container.innerHTML = "";
+      
+      brandWord.split('').forEach((letter, index) => {
+        const span = document.createElement('span');
+        span.innerText = letter;
+        span.className = "letter-anim";
+        span.style.animationDelay = `${index * 0.12}s`;
+        if (letter === 'K' || letter === 'D') span.style.color = "#f59e0b"; // Golden accent
+        container.appendChild(span);
+      });
+
+      // Smooth fade out after letter sequence finishes
+      setTimeout(() => {
+        const splash = document.getElementById('splashScreen');
+        splash.style.opacity = '0';
+        setTimeout(() => splash.style.display = 'none', 700);
+      }, 2300);
+    }
+
+    // Set Default Month
     const now = new Date();
     document.getElementById('monthSelect').value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
 
@@ -315,7 +453,39 @@
       });
     }
 
-    // Site Management
+    // Navigation Switcher (Instagram Style)
+    window.navigateTo = (viewId) => {
+      ['viewHome', 'viewLabours', 'viewExpenses', 'viewBills'].forEach(v => {
+        document.getElementById(v).classList.toggle('hidden', v !== viewId);
+        const navBtn = document.getElementById(`nav-${v}`);
+        if (v === viewId) {
+          navBtn.className = "flex flex-col items-center text-amber-500 transition-transform active:scale-90";
+        } else {
+          navBtn.className = "flex flex-col items-center text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-transform active:scale-90";
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Universal Modal Opener
+    window.openFormModal = (type) => {
+      document.getElementById('formModal').classList.replace('hidden', 'flex');
+      ['labourForm', 'expenseForm', 'billForm'].forEach(f => document.getElementById(f).classList.add('hidden'));
+      
+      if (type === 'labour') {
+        document.getElementById('labourForm').classList.remove('hidden');
+        document.getElementById('formModalTitle').innerText = "Add New Labour / नया मजदूर जोड़ें";
+      } else if (type === 'expense') {
+        document.getElementById('expenseForm').classList.remove('hidden');
+        document.getElementById('formModalTitle').innerText = "Add Site Expense / खर्च दर्ज करें";
+      } else {
+        document.getElementById('billForm').classList.remove('hidden');
+        document.getElementById('formModalTitle').innerText = "Add Company Bill / कंपनी बिल जोड़ें";
+      }
+    };
+    window.closeFormModal = () => document.getElementById('formModal').classList.replace('flex', 'hidden');
+
+    // Site Creation
     window.addNewSite = () => {
       const name = prompt("नई निर्माण साइट का नाम लिखें / Enter Site Name:");
       if (name && name.trim()) {
@@ -326,7 +496,7 @@
       }
     };
 
-    // Labour Operations + Attendance Tracker
+    // Labour Operations
     window.saveLabour = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -341,26 +511,26 @@
       state.labours.unshift({
         id: Date.now().toString(),
         site, month, name, category, salary, advance,
-        presentDays: 26, // Default full month
-        halfDays: 0,
-        photo
+        presentDays: 26, halfDays: 0, photo
       });
       e.target.reset();
-      document.getElementById('lPhotoLabel').innerText = '📷 Photo';
+      document.getElementById('lPhotoLabel').innerText = '📷 Upload Worker Photo';
+      closeFormModal();
       persistState();
+      navigateTo('viewLabours');
     };
 
     window.updateAttendance = (id, type) => {
-      const labour = state.labours.find(l => l.id === id);
-      if (!labour) return;
-      if (type === 'incPresent') labour.presentDays = (labour.presentDays || 0) + 1;
-      if (type === 'decPresent' && labour.presentDays > 0) labour.presentDays -= 1;
-      if (type === 'incHalf') labour.halfDays = (labour.halfDays || 0) + 1;
-      if (type === 'decHalf' && labour.halfDays > 0) labour.halfDays -= 1;
+      const l = state.labours.find(x => x.id === id);
+      if (!l) return;
+      if (type === 'incPresent') l.presentDays = (l.presentDays || 0) + 1;
+      if (type === 'decPresent' && l.presentDays > 0) l.presentDays -= 1;
+      if (type === 'incHalf') l.halfDays = (l.halfDays || 0) + 1;
+      if (type === 'decHalf' && l.halfDays > 0) l.halfDays -= 1;
       persistState();
     };
 
-    // Site Expense & Transport
+    // Expenses Operations
     window.saveExpense = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -379,11 +549,13 @@
         date: new Date().toLocaleDateString('hi-IN')
       });
       e.target.reset();
-      document.getElementById('ePhotoLabel').innerText = '🧾 Bill Slip';
+      document.getElementById('ePhotoLabel').innerText = '🧾 Upload Bill / Receipt Slip';
+      closeFormModal();
       persistState();
+      navigateTo('viewExpenses');
     };
 
-    // Company Work Bills
+    // Bill Operations
     window.saveBill = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -400,17 +572,19 @@
         createdAt: new Date().toLocaleDateString('hi-IN')
       });
       e.target.reset();
-      document.getElementById('bPhotoLabel').innerText = '📄 Bill Photo';
+      document.getElementById('bPhotoLabel').innerText = '📄 Upload Company Bill Photo';
+      closeFormModal();
       persistState();
+      navigateTo('viewBills');
     };
 
     window.deleteRecord = (type, id) => {
-      if (!confirm("Are you sure you want to delete this record? / क्या आप इसे हटाना चाहते हैं?")) return;
+      if (!confirm("Are you sure? / क्या आप इसे हटाना चाहते हैं?")) return;
       state[type] = state[type].filter(item => item.id !== id);
       persistState();
     };
 
-    // Render Dashboard
+    // Master Render Method
     window.renderAll = () => {
       const siteSelect = document.getElementById('siteSelect');
       const currentSite = siteSelect.value || state.sites[0];
@@ -419,50 +593,48 @@
       const activeSite = siteSelect.value;
       const activeMonth = document.getElementById('monthSelect').value;
 
-      // 1. Labours Rendering with Attendance Calculation
+      // Filter Data
       const filteredLabours = state.labours.filter(l => l.site === activeSite && l.month === activeMonth);
       let totalLabourDue = 0;
 
+      // Render Labour Register
       document.getElementById('labourList').innerHTML = filteredLabours.length === 0
-        ? `<div class="col-span-full text-center py-8 text-xs text-zinc-400">इस महीने कोई मजदूर दर्ज नहीं है / No labour records for ${activeMonth}.</div>`
+        ? `<div class="text-center py-8 text-xs text-zinc-400">No labour records found for ${activeMonth}.</div>`
         : filteredLabours.map(l => {
           const effectiveDays = (l.presentDays || 0) + ((l.halfDays || 0) * 0.5);
-          // Assuming 26 standard working days per month
           const earned = Math.round((l.salary / 26) * effectiveDays);
           const net = earned - (l.advance || 0);
           totalLabourDue += net;
 
           return `
-            <div class="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-3">
+            <div class="bg-white dark:bg-zinc-900 p-3.5 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-2.5">
               <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2.5">
                   ${l.photo
-                    ? `<img src="${l.photo}" class="w-12 h-12 rounded-full object-cover border-2 border-amber-500 shrink-0" />`
-                    : `<div class="w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center font-bold text-base shrink-0">👷</div>`}
+                    ? `<img src="${l.photo}" class="w-11 h-11 rounded-full object-cover border-2 border-amber-500 shrink-0" />`
+                    : `<div class="w-11 h-11 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center font-bold text-sm shrink-0">👷</div>`}
                   <div>
                     <h4 class="font-bold text-sm leading-tight">${l.name}</h4>
-                    <span class="text-[11px] px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 font-medium">${l.category}</span>
-                    <div class="text-xs text-zinc-500 mt-1">वेतन: <b>₹${l.salary}</b> | एडवांस: <b class="text-rose-500">₹${l.advance}</b></div>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 font-medium">${l.category}</span>
+                    <div class="text-[11px] text-zinc-500 mt-0.5">वेतन: <b>₹${l.salary}</b> | एडवांस: <b class="text-rose-500">₹${l.advance}</b></div>
                   </div>
                 </div>
                 <div class="text-right">
                   <div class="text-[10px] uppercase text-zinc-400 font-bold">देय राशि / Net</div>
-                  <div class="text-base font-black ${net >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-500'}">₹${net.toLocaleString('en-IN')}</div>
-                  <button onclick="deleteRecord('labours','${l.id}')" class="text-[11px] text-zinc-400 hover:text-rose-500">हटाएं (Del)</button>
+                  <div class="text-sm font-black ${net >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-500'}">₹${net.toLocaleString('en-IN')}</div>
+                  <button onclick="deleteRecord('labours','${l.id}')" class="text-[10px] text-zinc-400 hover:text-rose-500">Del</button>
                 </div>
               </div>
-
-              <!-- Attendance Bar -->
               <div class="bg-zinc-50 dark:bg-zinc-800/60 p-2 rounded-xl flex items-center justify-between text-xs">
                 <div>
-                  <span class="font-semibold">हाजिरी (P):</span> <b class="text-emerald-600">${l.presentDays || 0} दिन</b>
+                  <span class="font-semibold text-zinc-500">हाजिरी:</span> <b class="text-emerald-600">${l.presentDays || 0}P</b>
                   <span class="mx-1 text-zinc-300">|</span>
-                  <span class="font-semibold">हाफ-डे:</span> <b class="text-amber-500">${l.halfDays || 0}</b>
+                  <span class="font-semibold text-zinc-500">हाफ:</span> <b class="text-amber-500">${l.halfDays || 0}</b>
                 </div>
-                <div class="flex items-center gap-1.5">
+                <div class="flex items-center gap-1">
                   <button onclick="updateAttendance('${l.id}','decPresent')" class="w-6 h-6 rounded bg-zinc-200 dark:bg-zinc-700 font-bold">-</button>
-                  <button onclick="updateAttendance('${l.id}','incPresent')" class="w-6 h-6 rounded bg-emerald-500 text-white font-bold" title="Add Present Day">+P</button>
-                  <button onclick="updateAttendance('${l.id}','incHalf')" class="px-1.5 h-6 rounded bg-amber-500 text-zinc-950 font-bold" title="Add Half Day">+Half</button>
+                  <button onclick="updateAttendance('${l.id}','incPresent')" class="w-6 h-6 rounded bg-emerald-500 text-white font-bold">+P</button>
+                  <button onclick="updateAttendance('${l.id}','incHalf')" class="px-1.5 h-6 rounded bg-amber-500 text-zinc-950 font-bold">+Half</button>
                 </div>
               </div>
             </div>
@@ -471,84 +643,80 @@
 
       document.getElementById('summaryLabourDue').innerText = `₹${totalLabourDue.toLocaleString('en-IN')}`;
 
-      // 2. Expenses Rendering
+      // Render Home Summary Workers
+      document.getElementById('homeRecentLabour').innerHTML = filteredLabours.slice(0, 4).map(l => `
+        <div class="bg-white dark:bg-zinc-900 p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-full bg-amber-500/20 text-amber-600 flex items-center justify-center font-bold text-xs">👷</div>
+            <div>
+              <div class="font-bold">${l.name}</div>
+              <div class="text-[10px] text-zinc-400">${l.category}</div>
+            </div>
+          </div>
+          <div class="font-extrabold text-emerald-600 dark:text-emerald-400">₹${l.salary - l.advance}</div>
+        </div>
+      `).join('') || `<div class="text-xs text-zinc-400 text-center py-2">No workers added yet.</div>`;
+
+      // Render Expenses
       if (!state.expenses) state.expenses = [];
       const filteredExpenses = state.expenses.filter(e => e.site === activeSite && e.month === activeMonth);
       const totalExpenses = filteredExpenses.reduce((acc, e) => acc + e.amount, 0);
       document.getElementById('summaryExpensesTotal').innerText = `₹${totalExpenses.toLocaleString('en-IN')}`;
 
       document.getElementById('expenseList').innerHTML = filteredExpenses.length === 0
-        ? `<div class="col-span-full text-center py-8 text-xs text-zinc-400">कोई खर्च दर्ज नहीं है / No expenses logged.</div>`
+        ? `<div class="text-center py-8 text-xs text-zinc-400">No expenses recorded for ${activeMonth}.</div>`
         : filteredExpenses.map(e => `
-          <div class="bg-white dark:bg-zinc-900 p-3.5 rounded-2xl border border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-3 shadow-sm">
-            <div class="flex items-center gap-3">
+          <div class="bg-white dark:bg-zinc-900 p-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 flex items-center justify-between shadow-sm">
+            <div class="flex items-center gap-2.5">
               ${e.photo
-                ? `<a href="${e.photo}" target="_blank"><img src="${e.photo}" class="w-12 h-12 rounded-xl object-cover border border-amber-500 shrink-0" /></a>`
-                : `<div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center font-bold text-lg shrink-0">🛺</div>`}
+                ? `<a href="${e.photo}" target="_blank"><img src="${e.photo}" class="w-10 h-10 rounded-xl object-cover border border-amber-500 shrink-0" /></a>`
+                : `<div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center font-bold shrink-0">🛺</div>`}
               <div>
-                <h4 class="font-bold text-sm">${e.title}</h4>
-                <div class="text-[11px] text-zinc-500">${e.category} ${e.spentFor ? `• For: <b>${e.spentFor}</b>` : ''}</div>
-                <div class="text-[10px] text-zinc-400 mt-0.5">${e.date}</div>
+                <h4 class="font-bold text-xs">${e.title}</h4>
+                <div class="text-[10px] text-zinc-500">${e.category} ${e.spentFor ? `• <b>${e.spentFor}</b>` : ''}</div>
               </div>
             </div>
             <div class="text-right">
-              <div class="text-sm font-black text-amber-600 dark:text-amber-400">₹${e.amount.toLocaleString('en-IN')}</div>
-              <button onclick="deleteRecord('expenses','${e.id}')" class="text-[11px] text-zinc-400 hover:text-rose-500">हटाएं</button>
+              <div class="text-xs font-black text-amber-600">₹${e.amount.toLocaleString('en-IN')}</div>
+              <button onclick="deleteRecord('expenses','${e.id}')" class="text-[10px] text-zinc-400 hover:text-rose-500">Del</button>
             </div>
           </div>
         `).join('');
 
-      // 3. Bills Rendering
+      // Render Bills
       const filteredBills = state.bills.filter(b => b.site === activeSite && b.month === activeMonth);
       const totalBills = filteredBills.reduce((acc, b) => acc + b.amount, 0);
       document.getElementById('summaryBillsTotal').innerText = `₹${totalBills.toLocaleString('en-IN')}`;
 
       document.getElementById('billList').innerHTML = filteredBills.length === 0
-        ? `<div class="col-span-full text-center py-8 text-xs text-zinc-400">कोई बिल दर्ज नहीं है / No company bills found.</div>`
+        ? `<div class="text-center py-8 text-xs text-zinc-400">No company bills recorded for ${activeMonth}.</div>`
         : filteredBills.map(b => `
-          <div class="bg-white dark:bg-zinc-900 p-3.5 rounded-2xl border border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-3 shadow-sm">
-            <div class="flex items-center gap-3">
+          <div class="bg-white dark:bg-zinc-900 p-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 flex items-center justify-between shadow-sm">
+            <div class="flex items-center gap-2.5">
               ${b.photo
-                ? `<a href="${b.photo}" target="_blank"><img src="${b.photo}" class="w-12 h-12 rounded-xl object-cover border border-emerald-500 shrink-0" /></a>`
-                : `<div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold text-lg shrink-0">🧾</div>`}
+                ? `<a href="${b.photo}" target="_blank"><img src="${b.photo}" class="w-10 h-10 rounded-xl object-cover border border-emerald-500 shrink-0" /></a>`
+                : `<div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold shrink-0">🧾</div>`}
               <div>
-                <h4 class="font-bold text-sm">${b.title}</h4>
-                <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold">${b.status}</span>
-                <div class="text-[10px] text-zinc-400 mt-0.5">${b.createdAt}</div>
+                <h4 class="font-bold text-xs">${b.title}</h4>
+                <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 font-bold">${b.status}</span>
               </div>
             </div>
             <div class="text-right">
-              <div class="text-sm font-black text-emerald-600 dark:text-emerald-400">₹${b.amount.toLocaleString('en-IN')}</div>
-              <button onclick="deleteRecord('bills','${b.id}')" class="text-[11px] text-zinc-400 hover:text-rose-500">हटाएं</button>
+              <div class="text-xs font-black text-emerald-600">₹${b.amount.toLocaleString('en-IN')}</div>
+              <button onclick="deleteRecord('bills','${b.id}')" class="text-[10px] text-zinc-400 hover:text-rose-500">Del</button>
             </div>
           </div>
         `).join('');
-    };
-
-    // UI Navigation Tabs
-    window.switchTab = (tab) => {
-      document.getElementById('sectionLabours').classList.toggle('hidden', tab !== 'labours');
-      document.getElementById('sectionExpenses').classList.toggle('hidden', tab !== 'expenses');
-      document.getElementById('sectionBills').classList.toggle('hidden', tab !== 'bills');
-
-      ['Labours', 'Expenses', 'Bills'].forEach(t => {
-        const btn = document.getElementById(`tab${t}`);
-        if (t.toLowerCase() === tab) {
-          btn.className = "pb-2.5 font-bold border-b-2 border-amber-500 text-amber-600 dark:text-amber-400 whitespace-nowrap";
-        } else {
-          btn.className = "pb-2.5 font-medium text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 whitespace-nowrap";
-        }
-      });
     };
 
     window.toggleTheme = () => document.documentElement.classList.toggle('dark');
 
     window.previewFileName = (inpId, lblId) => {
       const file = document.getElementById(inpId).files[0];
-      if (file) document.getElementById(lblId).innerText = `✅ ${file.name.slice(0, 8)}...`;
+      if (file) document.getElementById(lblId).innerText = `✅ ${file.name.slice(0, 10)}...`;
     };
 
-    // Indian Language Switcher
+    // Indian Language Selector
     window.changeLanguage = (lang) => {
       window.currentLang = lang;
       const dict = i18n[lang] || i18n.hi;
@@ -558,7 +726,7 @@
       });
     };
 
-    // Voice Summary (Text to Speech)
+    // Voice Summary Speech Engine
     window.playVoiceSummary = () => {
       const activeSite = document.getElementById('siteSelect').value;
       const activeMonth = document.getElementById('monthSelect').value;
@@ -569,50 +737,48 @@
 
       let msg = "";
       if (window.currentLang === 'hi' || window.currentLang === 'mr' || window.currentLang === 'gu') {
-        msg = `नमस्ते ठेकेदार जी। साइट ${activeSite} का महीना ${activeMonth} का हिसाब इस प्रकार है: कुल ${workerCount} मजदूर काम कर रहे हैं। मजदूरों की बाकी मजदूरी ${labourDue} है। रिक्शा व अन्य कुल खर्चे ${expenses} हुए हैं। और कंपनी से कुल बिल ${bills} का है।`;
+        msg = `नमस्ते ठेकेदार जी। साइट ${activeSite} का हिसाब: कुल ${workerCount} मजदूर हैं। कुल मजदूरी बाकी ${labourDue} है। रिक्शा व अन्य खर्चे ${expenses} रुपये हैं। और कंपनी से बिल ${bills} का है।`;
       } else {
-        msg = `Hello Contractor. Here is the report for site ${activeSite} for month ${activeMonth}. You have ${workerCount} active workers. Net labour payable is ${labourDue}. Total transport and site expenses are ${expenses}. Total company bills are ${bills}.`;
+        msg = `Hello Contractor. Site report for ${activeSite}. You have ${workerCount} workers. Net labour payable is ${labourDue}. Total transport and site expenses are ${expenses}. Total bills are ${bills}.`;
       }
 
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(msg);
-        utterance.lang = window.currentLang === 'en' ? 'en-IN' : 'hi-IN';
-        utterance.rate = 0.95;
-        window.speechSynthesis.speak(utterance);
-      } else {
-        alert("Voice speech is not supported in this browser.");
+        const utter = new SpeechSynthesisUtterance(msg);
+        utter.lang = window.currentLang === 'en' ? 'en-IN' : 'hi-IN';
+        utter.rate = 0.95;
+        window.speechSynthesis.speak(utter);
       }
     };
 
-    // App Sharing
+    // Native App Sharing
     window.shareApp = async () => {
       const shareData = {
-        title: 'ठेकेDAAR - निर्माण व मजदूर प्रबंधन',
-        text: 'ठेकेDAAR ऐप का इस्तेमाल करके अपने साइट के मजदूर, हाजिरी, रिक्शा किराया और कंपनी बिल को मैनेज करें।',
+        title: 'ठेकेDAAR - Construction & Labour Manager',
+        text: 'Manage labour salaries, attendance, auto fare, and company bills online!',
         url: window.location.href
       };
       if (navigator.share) {
         try { await navigator.share(shareData); } catch (e) {}
       } else {
         await navigator.clipboard.writeText(window.location.href);
-        alert("App link copied to clipboard! Share it on WhatsApp. / ऐप का लिंक कॉपी हो गया है!");
+        alert("App link copied to clipboard! Share on WhatsApp.");
       }
     };
 
-    // Authentication & Password Reset
+    // Authentication Modals & Logic
     window.openAuthModal = () => document.getElementById('authModal').classList.replace('hidden', 'flex');
     window.closeAuthModal = () => document.getElementById('authModal').classList.replace('flex', 'hidden');
 
     window.connectCloud = async (isSignUp) => {
       const email = document.getElementById('authEmail').value.trim();
       const pass = document.getElementById('authPass').value.trim();
-      if (!email || !pass) return alert("Please enter both email and password / कृपया ईमेल और पासवर्ड भरें।");
+      if (!email || !pass) return alert("Please enter both email and password.");
 
       try {
         if (isSignUp) {
           await createUserWithEmailAndPassword(auth, email, pass);
-          alert("Account created successfully! / खाता सफलतापूर्वक बन गया है!");
+          alert("Account registered successfully!");
         } else {
           await signInWithEmailAndPassword(auth, email, pass);
         }
@@ -624,31 +790,26 @@
 
     window.handleForgotPassword = async () => {
       const email = document.getElementById('authEmail').value.trim();
-      if (!email) {
-        alert("Please enter your email in the box first to receive reset link / कृपया पहले अपना ईमेल बॉक्स में लिखें।");
-        return;
-      }
+      if (!email) return alert("Please enter your email address first.");
       try {
         await sendPasswordResetEmail(auth, email);
-        alert("Password reset email sent! Check your inbox or spam folder. / पासवर्ड रीसेट करने का लिंक आपके ईमेल पर भेज दिया गया है!");
+        alert("Password reset email sent! Check your inbox.");
       } catch (err) {
         alert("Error: " + err.message);
       }
     };
 
-    // Auto-listen to Authentication State
     onAuthStateChanged(auth, (user) => {
       if (user) {
         currentUser = user;
         document.getElementById('authBtn').innerText = `👤 ${user.email.split('@')[0]}`;
         document.getElementById('authBtn').onclick = () => {
-          if (confirm("Do you want to log out? / क्या आप लॉग आउट करना चाहते हैं?")) {
+          if (confirm("Log out of your account?")) {
             signOut(auth);
             location.reload();
           }
         };
 
-        // Realtime Firestore Sync
         onSnapshot(doc(db, "users", user.uid), (docSnap) => {
           if (docSnap.exists()) {
             state = docSnap.data();
@@ -661,6 +822,8 @@
       }
     });
 
+    // Run Splash Intro & Initial Render
+    runSplashAnimation();
     renderAll();
   </script>
 </body>
