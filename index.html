@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>ठेकेDAAR - Construction & Labour Manager</title>
+  <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
   
   <link rel="icon" type="image/png" href="./logo.png">
   <link rel="apple-touch-icon" href="./logo.png">
@@ -25,59 +25,74 @@
   </script>
 
   <style>
-    /* 3 Themes: AMOLED (Pure Black), Dark (Slate), Light */
+    /* iOS Frosted Glass Design System */
     html.theme-amoled {
       --bg-main: #000000;
-      --card-bg: rgba(18, 18, 18, 0.75);
-      --card-border: rgba(255, 255, 255, 0.08);
+      --card-bg: rgba(18, 20, 24, 0.55);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --card-specular: rgba(255, 255, 255, 0.05);
       --text-main: #f8fafc;
       --text-sub: #94a3b8;
-      --nav-bg: rgba(10, 10, 10, 0.85);
+      --nav-bg: rgba(10, 12, 16, 0.65);
       --input-bg: rgba(255, 255, 255, 0.06);
     }
     html.theme-dark {
-      --bg-main: #0f172a;
-      --card-bg: rgba(30, 41, 59, 0.7);
-      --card-border: rgba(255, 255, 255, 0.1);
+      --bg-main: #0b111e;
+      --card-bg: rgba(22, 32, 50, 0.55);
+      --card-border: rgba(255, 255, 255, 0.14);
+      --card-specular: rgba(255, 255, 255, 0.06);
       --text-main: #f1f5f9;
       --text-sub: #94a3b8;
-      --nav-bg: rgba(15, 23, 42, 0.88);
+      --nav-bg: rgba(15, 23, 42, 0.72);
       --input-bg: rgba(255, 255, 255, 0.08);
     }
     html.theme-light {
-      --bg-main: #f8fafc;
-      --card-bg: rgba(255, 255, 255, 0.8);
+      --bg-main: #f1f5f9;
+      --card-bg: rgba(255, 255, 255, 0.65);
       --card-border: rgba(0, 0, 0, 0.08);
+      --card-specular: rgba(255, 255, 255, 0.8);
       --text-main: #0f172a;
       --text-sub: #64748b;
-      --nav-bg: rgba(255, 255, 255, 0.9);
+      --nav-bg: rgba(255, 255, 255, 0.78);
       --input-bg: rgba(0, 0, 0, 0.04);
     }
 
     body {
       background-color: var(--bg-main);
       color: var(--text-main);
-      transition: background-color 0.25s ease, color 0.25s ease;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      -webkit-font-smoothing: antialiased;
     }
 
+    /* Core Glass Effect */
     .ios-glass {
       background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
       border: 1px solid var(--card-border);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 var(--card-specular);
     }
 
     .ios-nav {
       background: var(--nav-bg);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(32px) saturate(200%);
+      -webkit-backdrop-filter: blur(32px) saturate(200%);
       border-top: 1px solid var(--card-border);
+      box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 0 var(--card-specular);
+    }
+
+    .ios-header {
+      background: var(--nav-bg);
+      backdrop-filter: blur(32px) saturate(200%);
+      -webkit-backdrop-filter: blur(32px) saturate(200%);
+      border-bottom: 1px solid var(--card-border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     }
 
     .waveform-bar {
       display: inline-block;
       width: 3px;
-      background: rgba(245, 158, 11, 0.45);
+      background: rgba(245, 158, 11, 0.55);
       border-radius: 9999px;
       margin: 0 1.5px;
     }
@@ -109,15 +124,15 @@
     </div>
   </div>
 
-  <!-- 2. TOP HEADER (BASED ON YOUR SKETCH) -->
-  <header class="sticky top-0 z-30 px-4 pt-4 pb-2 ios-nav border-b border-white/5">
+  <!-- 2. TOP HEADER -->
+  <header class="sticky top-0 z-30 px-4 pt-4 pb-2.5 ios-header">
     <div class="max-w-md mx-auto flex items-center justify-between">
       
-      <!-- Left: User Profile Avatar Badge (Initial or Photo) -->
+      <!-- Left: User Profile Avatar Badge (Initial or Photo) -> Opens Settings -->
       <div class="flex items-center gap-3">
-        <button onclick="openSettingsModal()" class="relative group">
-          <div id="userAvatarBadge" class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 font-black text-base flex items-center justify-center shadow-md border-2 border-white/10 overflow-hidden">
-            <span>R</span>
+        <button onclick="openSettingsModal()" class="relative group active:scale-95 transition-transform" title="Account & Settings">
+          <div id="userAvatarBadge" class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 font-black text-base flex items-center justify-center shadow-lg border-2 border-white/20 overflow-hidden">
+            <span>ठे</span>
           </div>
           <span id="syncDot" class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-black"></span>
         </button>
@@ -128,9 +143,9 @@
         </div>
       </div>
 
-      <!-- Right: Settings Icon (Language, Theme, Switch Account) -->
-      <button onclick="openSettingsModal()" class="w-10 h-10 rounded-full ios-glass flex items-center justify-center text-lg active:scale-90 transition-transform shadow-sm" title="Settings">
-        ⚙️
+      <!-- Right: Bills Icon (Replaces Settings Icon) -->
+      <button onclick="navigateTo('viewBills')" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center text-lg active:scale-90 transition-transform shadow-sm" title="Company Bills">
+        🧾
       </button>
 
     </div>
@@ -147,37 +162,37 @@
         + SITE
       </button>
       <div class="h-4 w-px bg-white/10"></div>
-      <input type="month" id="monthSelect" onchange="handleMonthChange()" class="bg-transparent text-xs font-bold focus:outline-none cursor-pointer" />
+      <input type="month" id="monthSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold focus:outline-none cursor-pointer" />
     </div>
   </div>
 
   <!-- 4. MAIN APP BODY -->
   <main class="max-w-md mx-auto p-4 space-y-4">
 
-    <!-- SUMMARY CHIPS -->
+    <!-- SUMMARY CHIPS WITH SPECULAR GLASS -->
     <div class="grid grid-cols-3 gap-2.5">
-      <div class="rounded-2xl p-3 border border-rose-500/20 bg-rose-500/5 text-center flex flex-col justify-center">
+      <div class="rounded-2xl p-3 border border-rose-500/20 bg-rose-500/5 ios-glass text-center flex flex-col justify-center">
         <span class="text-[9px] font-bold tracking-wider uppercase text-rose-400/80">LABOUR DUE</span>
         <span id="summaryLabourDue" class="text-base font-black text-rose-400 mt-0.5">₹0</span>
       </div>
-      <div class="rounded-2xl p-3 border border-amber-500/20 bg-amber-500/5 text-center flex flex-col justify-center">
+      <div class="rounded-2xl p-3 border border-amber-500/20 bg-amber-500/5 ios-glass text-center flex flex-col justify-center">
         <span class="text-[9px] font-bold tracking-wider uppercase text-amber-400/80">EXPENSES</span>
         <span id="summaryExpensesTotal" class="text-base font-black text-amber-400 mt-0.5">₹0</span>
       </div>
-      <div class="rounded-2xl p-3 border border-emerald-500/20 bg-emerald-500/5 text-center flex flex-col justify-center">
+      <div class="rounded-2xl p-3 border border-emerald-500/20 bg-emerald-500/5 ios-glass text-center flex flex-col justify-center">
         <span class="text-[9px] font-bold tracking-wider uppercase text-emerald-400/80">BILLS</span>
         <span id="summaryBillsTotal" class="text-base font-black text-emerald-400 mt-0.5">₹0</span>
       </div>
     </div>
 
-    <!-- AUDIO SUMMARY CARD WITH WAVEFORM -->
+    <!-- AUDIO SUMMARY CARD WITH FROSTED WAVEFORM -->
     <div class="ios-glass rounded-3xl p-4 text-center shadow-lg relative overflow-hidden">
       <h3 class="text-xs font-extrabold flex items-center justify-center gap-1.5">
         Site Audio Summary / बोलकर हिसाब सुनें
       </h3>
       <p class="text-[10px] text-zinc-400 mt-0.5">Listen to whole site summary in one tap</p>
 
-      <div class="flex items-center justify-center my-2.5 h-6 opacity-75">
+      <div class="flex items-center justify-center my-2.5 h-6 opacity-80">
         <span class="waveform-bar h-2"></span>
         <span class="waveform-bar h-4"></span>
         <span class="waveform-bar h-6"></span>
@@ -217,7 +232,7 @@
       <div id="labourList" class="space-y-2.5"></div>
     </section>
 
-    <!-- VIEW 3: MONTHLY DATA TAB (FROM SKETCH) -->
+    <!-- VIEW 3: MONTHLY DATA TAB -->
     <section id="viewMonthly" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black">📅 Monthly Ledger & Archive</h2>
@@ -246,8 +261,8 @@
 
   </main>
 
-  <!-- 5. BOTTOM NAVIGATION BAR (BASED ON YOUR SKETCH) -->
-  <nav class="fixed bottom-0 inset-x-0 z-40 ios-nav px-5 py-2">
+  <!-- 5. BOTTOM NAVIGATION BAR -->
+  <nav class="fixed bottom-0 inset-x-0 z-40 ios-nav px-5 py-2.5">
     <div class="max-w-md mx-auto flex items-center justify-between">
       
       <!-- Home Tab -->
@@ -263,11 +278,11 @@
       </button>
 
       <!-- Center Plus (+) Button -->
-      <button onclick="openFormModal('labour')" class="w-12 h-12 -mt-5 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 flex items-center justify-center font-black text-2xl shadow-xl border-4 border-[var(--bg-main)] active:scale-90 transition-all">
+      <button onclick="openFormModal('labour')" class="w-12 h-12 -mt-6 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 flex items-center justify-center font-black text-2xl shadow-xl border-4 border-[var(--bg-main)] active:scale-90 transition-all">
         +
       </button>
 
-      <!-- Monthly Data Tab (From Hand Sketch) -->
+      <!-- Monthly Data Tab -->
       <button onclick="navigateTo('viewMonthly')" id="nav-viewMonthly" class="flex flex-col items-center text-zinc-400 active:scale-95 transition-transform">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
         <span class="text-[9px] font-medium mt-0.5">Monthly</span>
@@ -288,15 +303,15 @@
     </div>
   </nav>
 
-  <!-- 6. SETTINGS MODAL (THEME, LANGUAGE, ACCOUNT SWITCH) -->
+  <!-- 6. SETTINGS MODAL (ACCESSIBLE VIA USER PROFILE AVATAR) -->
   <div id="settingsModal" class="fixed inset-0 bg-black/60 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-5 shadow-2xl">
       <div class="flex justify-between items-center border-b border-white/10 pb-3">
-        <h3 class="font-black text-base flex items-center gap-2">⚙️ Settings / सेटिंग्स</h3>
+        <h3 class="font-black text-base flex items-center gap-2">⚙️ Account & Settings</h3>
         <button onclick="closeSettingsModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
       </div>
 
-      <!-- Theme Switcher (Amoled, Dark, Light) -->
+      <!-- Theme Switcher -->
       <div class="space-y-1.5">
         <label class="text-xs font-bold text-zinc-400 uppercase">App Theme / थीम</label>
         <div class="grid grid-cols-3 gap-2">
@@ -330,7 +345,7 @@
     </div>
   </div>
 
-  <!-- 7. UNIVERSAL INPUT MODAL -->
+  <!-- 7. INPUT FORMS MODAL -->
   <div id="formModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-white/10 pb-2">
@@ -338,7 +353,7 @@
         <button onclick="closeFormModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
       </div>
 
-      <!-- Add Labour Form with Name Directory Autocomplete -->
+      <!-- Add Labour Form -->
       <form id="labourForm" onsubmit="saveLabour(event)" class="space-y-3 hidden">
         <div>
           <input type="text" id="lName" list="knownLaboursList" onchange="autoFillKnownLabour(this.value)" required placeholder="Labour Name / नाम (e.g. Ramesh)" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none" />
@@ -393,7 +408,7 @@
         <input type="text" id="bTitle" required placeholder="Company / Work Name" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none" />
         <div class="grid grid-cols-2 gap-2">
           <input type="number" id="bAmount" required min="0" placeholder="Bill Amount ₹" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2 text-sm focus:outline-none" />
-          <select id="bStatus" class="w-full rounded-xl bg-[var(--card-bg)] border border-white/10 px-3 py-2 text-sm focus:outline-none">
+          <select id="bStatus" class="w-full rounded-xl bg-[var(--card-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none">
             <option value="Received (प्राप्त)">Received</option>
             <option value="Pending (बाकी)">Pending</option>
           </select>
@@ -434,7 +449,7 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT ENGINE & FIREBASE REALTIME CLOUD -->
+  <!-- FIREBASE & CORE ENGINE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -459,7 +474,7 @@
       labours: [],
       expenses: [],
       bills: [],
-      masterLabourDirectory: [] // Stores workers across all months for auto-fill
+      masterLabourDirectory: []
     };
 
     function getStorageKey() {
@@ -482,11 +497,9 @@
       }
     }
 
-    // Set Default Month
     const now = new Date();
     document.getElementById('monthSelect').value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
 
-    // App Themes (Amoled, Dark, Light)
     window.setAppTheme = (themeName) => {
       document.documentElement.className = themeName;
       localStorage.setItem('thekedaar_theme', themeName);
@@ -494,7 +507,6 @@
     const savedTheme = localStorage.getItem('thekedaar_theme') || 'theme-amoled';
     window.setAppTheme(savedTheme);
 
-    // Kinetic Animation for Splash
     function runSplashAnimation() {
       const brandWord = "THEKEDAAR";
       const container = document.getElementById('thekedaarLetters');
@@ -551,7 +563,6 @@
       });
     }
 
-    // View Navigation
     window.navigateTo = (viewId) => {
       ['viewHome', 'viewLabours', 'viewMonthly', 'viewExpenses', 'viewBills'].forEach(v => {
         const el = document.getElementById(v);
@@ -589,14 +600,12 @@
     };
     window.closeFormModal = () => document.getElementById('formModal').classList.replace('flex', 'hidden');
 
-    // Populates datalist with previously added workers
     function populateLabourAutocomplete() {
       const datalist = document.getElementById('knownLaboursList');
       const directory = state.masterLabourDirectory || [];
       datalist.innerHTML = directory.map(w => `<option value="${w.name}">`).join('');
     }
 
-    // Auto-fill Labour info when selecting known worker
     window.autoFillKnownLabour = (name) => {
       const found = (state.masterLabourDirectory || []).find(w => w.name.toLowerCase() === name.trim().toLowerCase());
       if (found) {
@@ -609,12 +618,10 @@
       }
     };
 
-    // Carry forward last month's workers into this month
     window.carryForwardLastMonthWorkers = () => {
       const currentSite = document.getElementById('siteSelect').value;
       const currentMonth = document.getElementById('monthSelect').value;
 
-      // Calculate previous month
       const parts = currentMonth.split('-');
       let year = parseInt(parts[0]);
       let month = parseInt(parts[1]) - 1;
@@ -660,7 +667,6 @@
       }
     };
 
-    // Save Labour
     window.saveLabour = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -677,7 +683,6 @@
         if (existing) photo = existing.photo;
       }
 
-      // Add to current register
       state.labours.unshift({
         id: Date.now().toString(),
         site, month, name, category, salary, advance,
@@ -686,7 +691,6 @@
         photo
       });
 
-      // Update Master Directory for quick reuse
       if (!state.masterLabourDirectory) state.masterLabourDirectory = [];
       const dirIndex = state.masterLabourDirectory.findIndex(w => w.name.toLowerCase() === name.toLowerCase());
       if (dirIndex >= 0) {
@@ -764,9 +768,22 @@
       persistState();
     };
 
-    window.handleMonthChange = () => {
-      renderAll();
-    };
+    // Helper: Translate Month String to Full Native Name
+    function getSpokenMonthName(monthStr, lang) {
+      const parts = monthStr.split('-');
+      const year = parts[0];
+      const mIdx = parseInt(parts[1]) - 1;
+
+      const months = {
+        hi: ['जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर'],
+        mr: ['जानेवारी', 'फेब्रुवारी', 'मार्च', 'एप्रिल', 'मे', 'जून', 'जुलै', 'ऑगस्ट', 'सप्टेंबर', 'ऑक्टोबर', 'नोव्हेंबर', 'डिसेंबर'],
+        gu: ['જાન્યુઆરી', 'ફેબ્રુઆરી', 'માર્ચ', 'એપ્રિલ', 'મે', 'જૂન', 'જુલાઈ', 'ઓગસ્ટ', 'સપ્ટેમ્બર', 'ઓક્ટોબર', 'નવેમ્બર', 'ડિસેમ્બર'],
+        en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+      };
+
+      const langMap = months[lang] || months.hi;
+      return `${langMap[mIdx]} ${year}`;
+    }
 
     // Master Render Method
     window.renderAll = () => {
@@ -778,7 +795,7 @@
       const activeMonth = document.getElementById('monthSelect').value;
       document.getElementById('monthlyBadge').innerText = activeMonth;
 
-      // Update User Badge Avatar
+      // Update User Avatar Badge on the Top Left
       const userBadge = document.getElementById('userAvatarBadge');
       if (currentUser) {
         if (currentUser.photoURL) {
@@ -787,11 +804,11 @@
           const letter = (currentUser.displayName || currentUser.email || 'U')[0].toUpperCase();
           userBadge.innerHTML = `<span>${letter}</span>`;
         }
-        document.getElementById('accountStatusText').innerText = `Logged in as: ${currentUser.email}`;
+        document.getElementById('accountStatusText').innerText = `Logged in: ${currentUser.email}`;
         document.getElementById('logoutBtn').classList.remove('hidden');
       } else {
         userBadge.innerHTML = `<span>ठे</span>`;
-        document.getElementById('accountStatusText').innerText = `Local Mode (Not Logged In)`;
+        document.getElementById('accountStatusText').innerText = `Local Mode (Click to Sign In)`;
         document.getElementById('logoutBtn').classList.add('hidden');
       }
 
@@ -967,7 +984,7 @@
       closeSettingsModal();
     };
 
-    // Voice Summary Engine
+    // Voice Summary: Speaks Full Month Name
     window.playVoiceSummary = () => {
       const activeSite = document.getElementById('siteSelect').value;
       const activeMonth = document.getElementById('monthSelect').value;
@@ -976,21 +993,22 @@
       const bills = document.getElementById('summaryBillsTotal').innerText;
       const workerCount = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth).length;
 
+      const spokenMonth = getSpokenMonthName(activeMonth, window.currentLang || 'hi');
       let msg = "";
       let langCode = "hi-IN";
 
       if (window.currentLang === 'mr') {
         langCode = "mr-IN";
-        msg = `नमस्कार ठेकेदारजी. साईट ${activeSite} साठी महिना ${activeMonth} चा हिशोब: एकूण ${workerCount} कामगार आहेत. बाकी मजुरी ${labourDue} आहे. रिक्षा व इतर खर्च ${expenses} रुपये आहेत. आणि कंपनीचे एकूण बिल ${bills} आहे.`;
+        msg = `नमस्कार ठेकेदारजी. साईट ${activeSite} साठी ${spokenMonth} चा हिशोब: एकूण ${workerCount} कामगार आहेत. बाकी मजुरी ${labourDue} आहे. रिक्षा व इतर खर्च ${expenses} रुपये आहेत. आणि कंपनीचे एकूण बिल ${bills} आहे.`;
       } else if (window.currentLang === 'gu') {
         langCode = "gu-IN";
-        msg = `નમસ્તે કોન્ટ્રાક્ટર. સાઇટ ${activeSite} માટે મહિનો ${activeMonth} નો હિસાબ: કુલ ${workerCount} મજૂરો છે. બાકી મજૂરી ${labourDue} છે. રિક્ષા અને અન્ય ખર્ચ ${expenses} છે. અને કંપનીનું બિલ ${bills} છે.`;
+        msg = `નમસ્તે કોન્ટ્રાક્ટર. સાઇટ ${activeSite} માટે ${spokenMonth} નો હિસાબ: કુલ ${workerCount} મજૂરો છે. બાકી મજૂરી ${labourDue} છે. રિક્ષા અને અન્ય ખર્ચ ${expenses} છે. અને કંપનીનું બિલ ${bills} છે.`;
       } else if (window.currentLang === 'en') {
         langCode = "en-IN";
-        msg = `Hello Contractor. Report for site ${activeSite} in ${activeMonth}: There are ${workerCount} active workers. Net labour payable is ${labourDue}. Total transport and site expenses are ${expenses}. Total company bills are ${bills}.`;
+        msg = `Hello Contractor. Report for site ${activeSite} for ${spokenMonth}: There are ${workerCount} active workers. Net labour payable is ${labourDue}. Total transport and site expenses are ${expenses}. Total company bills are ${bills}.`;
       } else {
         langCode = "hi-IN";
-        msg = `नमस्ते ठेकेदार जी। साइट ${activeSite} का महीना ${activeMonth} का हिसाब: कुल ${workerCount} मजदूर हैं। कुल बाकी मजदूरी ${labourDue} है। रिक्शा व अन्य खर्चे ${expenses} रुपये हैं। और कंपनी से बिल ${bills} का है।`;
+        msg = `नमस्ते ठेकेदार जी। साइट ${activeSite} का ${spokenMonth} का हिसाब: कुल ${workerCount} मजदूर काम कर रहे हैं। कुल बाकी मजदूरी ${labourDue} है। रिक्शा व अन्य खर्चे ${expenses} रुपये हैं। और कंपनी से कुल बिल ${bills} का है।`;
       }
 
       if ('speechSynthesis' in window) {
@@ -1002,7 +1020,6 @@
       }
     };
 
-    // Authentication Handlers
     window.openAuthModal = () => document.getElementById('authModal').classList.replace('hidden', 'flex');
     window.closeAuthModal = () => document.getElementById('authModal').classList.replace('flex', 'hidden');
 
@@ -1046,7 +1063,6 @@
       }
     };
 
-    // Firebase Auth State Observer
     onAuthStateChanged(auth, (user) => {
       if (user) {
         currentUser = user;
