@@ -18,42 +18,42 @@
       darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: { sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'Inter', 'sans-serif'] }
+          fontFamily: { sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'SF Pro Display', 'Inter', 'sans-serif'] }
         }
       }
     };
   </script>
 
   <style>
-    /* iOS Frosted Glass Design System */
+    /* iOS Frosted Glass Themes */
     html.theme-amoled {
       --bg-main: #000000;
-      --card-bg: rgba(18, 20, 24, 0.55);
-      --card-border: rgba(255, 255, 255, 0.12);
+      --card-bg: rgba(18, 20, 24, 0.6);
+      --card-border: rgba(255, 255, 255, 0.1);
       --card-specular: rgba(255, 255, 255, 0.05);
       --text-main: #f8fafc;
       --text-sub: #94a3b8;
-      --nav-bg: rgba(10, 12, 16, 0.65);
+      --nav-bg: rgba(10, 10, 10, 0.78);
       --input-bg: rgba(255, 255, 255, 0.06);
     }
     html.theme-dark {
       --bg-main: #0b111e;
-      --card-bg: rgba(22, 32, 50, 0.55);
-      --card-border: rgba(255, 255, 255, 0.14);
+      --card-bg: rgba(22, 32, 50, 0.6);
+      --card-border: rgba(255, 255, 255, 0.12);
       --card-specular: rgba(255, 255, 255, 0.06);
       --text-main: #f1f5f9;
       --text-sub: #94a3b8;
-      --nav-bg: rgba(15, 23, 42, 0.72);
+      --nav-bg: rgba(15, 23, 42, 0.82);
       --input-bg: rgba(255, 255, 255, 0.08);
     }
     html.theme-light {
-      --bg-main: #f1f5f9;
-      --card-bg: rgba(255, 255, 255, 0.65);
-      --card-border: rgba(0, 0, 0, 0.08);
-      --card-specular: rgba(255, 255, 255, 0.8);
+      --bg-main: #f8fafc;
+      --card-bg: rgba(255, 255, 255, 0.7);
+      --card-border: rgba(0, 0, 0, 0.07);
+      --card-specular: rgba(255, 255, 255, 0.85);
       --text-main: #0f172a;
       --text-sub: #64748b;
-      --nav-bg: rgba(255, 255, 255, 0.78);
+      --nav-bg: rgba(255, 255, 255, 0.85);
       --input-bg: rgba(0, 0, 0, 0.04);
     }
 
@@ -64,21 +64,12 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Core Glass Effect */
     .ios-glass {
       background: var(--card-bg);
       backdrop-filter: blur(28px) saturate(190%);
       -webkit-backdrop-filter: blur(28px) saturate(190%);
       border: 1px solid var(--card-border);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 var(--card-specular);
-    }
-
-    .ios-nav {
-      background: var(--nav-bg);
-      backdrop-filter: blur(32px) saturate(200%);
-      -webkit-backdrop-filter: blur(32px) saturate(200%);
-      border-top: 1px solid var(--card-border);
-      box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 0 var(--card-specular);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35), inset 0 1px 1px 0 var(--card-specular);
     }
 
     .ios-header {
@@ -86,7 +77,15 @@
       backdrop-filter: blur(32px) saturate(200%);
       -webkit-backdrop-filter: blur(32px) saturate(200%);
       border-bottom: 1px solid var(--card-border);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    /* iOS Instagram Tab Bar */
+    .ios-instagram-nav {
+      background: var(--nav-bg);
+      backdrop-filter: blur(36px) saturate(210%);
+      -webkit-backdrop-filter: blur(36px) saturate(210%);
+      border-top: 0.5px solid var(--card-border);
+      box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.28);
     }
 
     .waveform-bar {
@@ -128,10 +127,10 @@
   <header class="sticky top-0 z-30 px-4 pt-4 pb-2.5 ios-header">
     <div class="max-w-md mx-auto flex items-center justify-between">
       
-      <!-- Left: User Profile Avatar Badge (Initial or Photo) -> Opens Settings -->
+      <!-- User Profile Avatar Badge (Opens Settings) -->
       <div class="flex items-center gap-3">
         <button onclick="openSettingsModal()" class="relative group active:scale-95 transition-transform" title="Account & Settings">
-          <div id="userAvatarBadge" class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 font-black text-base flex items-center justify-center shadow-lg border-2 border-white/20 overflow-hidden">
+          <div id="userAvatarBadge" class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 font-black text-base flex items-center justify-center shadow-lg border border-white/20 overflow-hidden">
             <span>ठे</span>
           </div>
           <span id="syncDot" class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-black"></span>
@@ -143,7 +142,7 @@
         </div>
       </div>
 
-      <!-- Right: Bills Icon (Replaces Settings Icon) -->
+      <!-- Top Right: Bills Icon -->
       <button onclick="navigateTo('viewBills')" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center text-lg active:scale-90 transition-transform shadow-sm" title="Company Bills">
         🧾
       </button>
@@ -169,7 +168,7 @@
   <!-- 4. MAIN APP BODY -->
   <main class="max-w-md mx-auto p-4 space-y-4">
 
-    <!-- SUMMARY CHIPS WITH SPECULAR GLASS -->
+    <!-- SUMMARY CHIPS -->
     <div class="grid grid-cols-3 gap-2.5">
       <div class="rounded-2xl p-3 border border-rose-500/20 bg-rose-500/5 ios-glass text-center flex flex-col justify-center">
         <span class="text-[9px] font-bold tracking-wider uppercase text-rose-400/80">LABOUR DUE</span>
@@ -185,7 +184,7 @@
       </div>
     </div>
 
-    <!-- AUDIO SUMMARY CARD WITH FROSTED WAVEFORM -->
+    <!-- AUDIO SUMMARY CARD -->
     <div class="ios-glass rounded-3xl p-4 text-center shadow-lg relative overflow-hidden">
       <h3 class="text-xs font-extrabold flex items-center justify-center gap-1.5">
         Site Audio Summary / बोलकर हिसाब सुनें
@@ -216,7 +215,7 @@
       <div id="homeRecentLabour"></div>
     </section>
 
-    <!-- VIEW 2: LABOUR REGISTER & ATTENDANCE -->
+    <!-- VIEW 2: LABOUR REGISTER -->
     <section id="viewLabours" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black">👷‍♂️ Labour Register</h2>
@@ -232,7 +231,7 @@
       <div id="labourList" class="space-y-2.5"></div>
     </section>
 
-    <!-- VIEW 3: MONTHLY DATA TAB -->
+    <!-- VIEW 3: MONTHLY ARCHIVE / LEDGER -->
     <section id="viewMonthly" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black">📅 Monthly Ledger & Archive</h2>
@@ -241,7 +240,7 @@
       <div id="monthlyLedgerContent" class="space-y-3"></div>
     </section>
 
-    <!-- VIEW 4: EXPENSES & TRANSPORT -->
+    <!-- VIEW 4: SITE EXPENSES -->
     <section id="viewExpenses" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black">🛺 Site Expenses & Rent</h2>
@@ -250,7 +249,7 @@
       <div id="expenseList" class="space-y-2.5"></div>
     </section>
 
-    <!-- VIEW 5: COMPANY BILLS -->
+    <!-- VIEW 5: COMPANY BILLS (ACCESSIBLE VIA TOP BAR) -->
     <section id="viewBills" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black">🧾 Company Work Bills</h2>
@@ -261,49 +260,56 @@
 
   </main>
 
-  <!-- 5. BOTTOM NAVIGATION BAR -->
-  <nav class="fixed bottom-0 inset-x-0 z-40 ios-nav px-5 py-2.5">
-    <div class="max-w-md mx-auto flex items-center justify-between">
+  <!-- 5. iOS INSTAGRAM-STYLE BOTTOM NAVIGATION BAR (NO BILLS ICON) -->
+  <nav class="fixed bottom-0 inset-x-0 z-40 ios-instagram-nav pb-safe pt-2">
+    <div class="max-w-md mx-auto px-6 pb-2 flex items-center justify-between">
       
-      <!-- Home Tab -->
-      <button onclick="navigateTo('viewHome')" id="nav-viewHome" class="flex flex-col items-center text-amber-500 active:scale-95 transition-transform">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-        <span class="text-[9px] font-medium mt-0.5">Home</span>
+      <!-- Instagram Tab 1: Home -->
+      <button onclick="navigateTo('viewHome')" id="nav-viewHome" class="flex flex-col items-center justify-center w-12 py-1 text-amber-500 active:scale-90 transition-transform">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2.1l9 8.1c.4.3.6.8.6 1.3v8.5c0 1.1-.9 2-2 2h-4.5c-.8 0-1.5-.7-1.5-1.5V15c0-.6-.4-1-1-1s-1 .4-1 1v5.5c0 .8-.7 1.5-1.5 1.5H5.4c-1.1 0-2-.9-2-2v-8.5c0-.5.2-1 .6-1.3l9-8.1c.6-.6 1.6-.6 2.2 0z"/>
+        </svg>
       </button>
 
-      <!-- Labour Tab -->
-      <button onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="flex flex-col items-center text-zinc-400 active:scale-95 transition-transform">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 3s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-        <span class="text-[9px] font-medium mt-0.5">Labours</span>
+      <!-- Instagram Tab 2: Labours (People / Direct style) -->
+      <button onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="flex flex-col items-center justify-center w-12 py-1 text-zinc-400 active:scale-90 transition-transform">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
       </button>
 
-      <!-- Center Plus (+) Button -->
-      <button onclick="openFormModal('labour')" class="w-12 h-12 -mt-6 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 flex items-center justify-center font-black text-2xl shadow-xl border-4 border-[var(--bg-main)] active:scale-90 transition-all">
-        +
+      <!-- Instagram Tab 3: Create / Plus (+) (Clean iOS square border style) -->
+      <button onclick="openFormModal('labour')" class="flex items-center justify-center w-12 py-1 active:scale-90 transition-transform" title="New Entry">
+        <div class="w-7 h-7 rounded-lg border-2 border-amber-500 flex items-center justify-center text-amber-500 font-bold text-lg leading-none">
+          +
+        </div>
       </button>
 
-      <!-- Monthly Data Tab -->
-      <button onclick="navigateTo('viewMonthly')" id="nav-viewMonthly" class="flex flex-col items-center text-zinc-400 active:scale-95 transition-transform">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
-        <span class="text-[9px] font-medium mt-0.5">Monthly</span>
+      <!-- Instagram Tab 4: Expenses (Reels / Activity style) -->
+      <button onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="flex flex-col items-center justify-center w-12 py-1 text-zinc-400 active:scale-90 transition-transform">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
       </button>
 
-      <!-- Expenses Tab -->
-      <button onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="flex flex-col items-center text-zinc-400 active:scale-95 transition-transform">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.77l.11.34V17z"/></svg>
-        <span class="text-[9px] font-medium mt-0.5">Expenses</span>
-      </button>
-
-      <!-- Bills Tab -->
-      <button onclick="navigateTo('viewBills')" id="nav-viewBills" class="flex flex-col items-center text-zinc-400 active:scale-95 transition-transform">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-        <span class="text-[9px] font-medium mt-0.5">Bills</span>
+      <!-- Instagram Tab 5: Monthly Calendar / Archive -->
+      <button onclick="navigateTo('viewMonthly')" id="nav-viewMonthly" class="flex flex-col items-center justify-center w-12 py-1 text-zinc-400 active:scale-90 transition-transform">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
       </button>
 
     </div>
   </nav>
 
-  <!-- 6. SETTINGS MODAL (ACCESSIBLE VIA USER PROFILE AVATAR) -->
+  <!-- 6. SETTINGS MODAL -->
   <div id="settingsModal" class="fixed inset-0 bg-black/60 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-5 shadow-2xl">
       <div class="flex justify-between items-center border-b border-white/10 pb-3">
@@ -563,6 +569,7 @@
       });
     }
 
+    // Instagram View Switcher Logic
     window.navigateTo = (viewId) => {
       ['viewHome', 'viewLabours', 'viewMonthly', 'viewExpenses', 'viewBills'].forEach(v => {
         const el = document.getElementById(v);
@@ -570,9 +577,11 @@
         const navBtn = document.getElementById(`nav-${v}`);
         if (navBtn) {
           if (v === viewId) {
-            navBtn.className = "flex flex-col items-center text-amber-500 active:scale-95 transition-transform";
+            navBtn.classList.remove('text-zinc-400');
+            navBtn.classList.add('text-amber-500');
           } else {
-            navBtn.className = "flex flex-col items-center text-zinc-400 active:scale-95 transition-transform";
+            navBtn.classList.remove('text-amber-500');
+            navBtn.classList.add('text-zinc-400');
           }
         }
       });
@@ -768,7 +777,6 @@
       persistState();
     };
 
-    // Helper: Translate Month String to Full Native Name
     function getSpokenMonthName(monthStr, lang) {
       const parts = monthStr.split('-');
       const year = parts[0];
@@ -795,7 +803,7 @@
       const activeMonth = document.getElementById('monthSelect').value;
       document.getElementById('monthlyBadge').innerText = activeMonth;
 
-      // Update User Avatar Badge on the Top Left
+      // Update User Avatar Badge
       const userBadge = document.getElementById('userAvatarBadge');
       if (currentUser) {
         if (currentUser.photoURL) {
@@ -984,7 +992,7 @@
       closeSettingsModal();
     };
 
-    // Voice Summary: Speaks Full Month Name
+    // Voice Summary: Speaks Full Native Month Name
     window.playVoiceSummary = () => {
       const activeSite = document.getElementById('siteSelect').value;
       const activeMonth = document.getElementById('monthSelect').value;
