@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="theme-amoled">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
+  <title>ठेकेDAAR - Construction & Labour Manager</title>
   
   <link rel="icon" type="image/png" href="./logo.png">
   <link rel="apple-touch-icon" href="./logo.png">
   <link rel="manifest" href="manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="#121822">
+  <meta name="theme-color" content="#000000">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -19,179 +18,218 @@
       darkMode: 'class',
       theme: {
         extend: {
-          colors: {
-            appbg: '#141a22',
-            cardbg: '#1c2430',
-            bordercol: '#2b3748',
-            accent: '#f59e0b'
-          }
+          fontFamily: { sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'Inter', 'sans-serif'] }
         }
       }
     };
   </script>
 
   <style>
+    /* 3 Themes: AMOLED (Pure Black), Dark (Slate), Light */
+    html.theme-amoled {
+      --bg-main: #000000;
+      --card-bg: rgba(18, 18, 18, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --nav-bg: rgba(10, 10, 10, 0.85);
+      --input-bg: rgba(255, 255, 255, 0.06);
+    }
+    html.theme-dark {
+      --bg-main: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-main: #f1f5f9;
+      --text-sub: #94a3b8;
+      --nav-bg: rgba(15, 23, 42, 0.88);
+      --input-bg: rgba(255, 255, 255, 0.08);
+    }
+    html.theme-light {
+      --bg-main: #f8fafc;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --card-border: rgba(0, 0, 0, 0.08);
+      --text-main: #0f172a;
+      --text-sub: #64748b;
+      --nav-bg: rgba(255, 255, 255, 0.9);
+      --input-bg: rgba(0, 0, 0, 0.04);
+    }
+
     body {
-      background-color: #121822;
-      color: #e2e8f0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
-    .glass-card {
-      background: linear-gradient(145deg, rgba(28, 36, 48, 0.85), rgba(20, 27, 36, 0.95));
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
+
+    .ios-glass {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
     }
+
+    .ios-nav {
+      background: var(--nav-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-top: 1px solid var(--card-border);
+    }
+
     .waveform-bar {
       display: inline-block;
       width: 3px;
-      background: rgba(245, 158, 11, 0.4);
+      background: rgba(245, 158, 11, 0.45);
       border-radius: 9999px;
       margin: 0 1.5px;
     }
+
     .letter-anim {
       display: inline-block;
       opacity: 0;
-      transform: translateY(24px) scale(0.7);
-      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      transform: translateY(20px) scale(0.8);
+      animation: popIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     @keyframes popIn {
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
+
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
 <body class="min-h-screen pb-28 select-none no-scrollbar">
 
-  <!-- 1. SPLASH SCREEN ANIMATION -->
-  <div id="splashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-zinc-950 transition-opacity duration-500">
+  <!-- 1. SPLASH SCREEN -->
+  <div id="splashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black transition-opacity duration-500">
     <div class="relative z-10 flex flex-col items-center">
-      <img src="./logo.png" alt="Logo" class="w-24 h-24 rounded-3xl shadow-2xl border border-amber-500/40 object-cover mb-5 animate-pulse" />
-      <div id="thekedaarLetters" class="text-4xl font-black text-white tracking-widest flex items-center"></div>
-      <p class="text-amber-500 text-xs font-bold uppercase tracking-widest mt-2 opacity-80">Workforce & Site Manager</p>
+      <div id="splashAvatar" class="w-20 h-20 rounded-3xl bg-amber-500 flex items-center justify-center text-zinc-950 font-black text-3xl shadow-2xl mb-4 border border-amber-400/30">
+        ठे
+      </div>
+      <div id="thekedaarLetters" class="text-3xl font-black text-white tracking-widest flex items-center"></div>
+      <p class="text-amber-500 text-[10px] font-bold uppercase tracking-widest mt-2 opacity-80">Workforce & Site System</p>
     </div>
   </div>
 
-  <!-- 2. TOP HEADER -->
-  <header class="sticky top-0 z-30 px-4 pt-4 pb-2 bg-[#121822]/90 backdrop-blur-md border-b border-white/5">
+  <!-- 2. TOP HEADER (BASED ON YOUR SKETCH) -->
+  <header class="sticky top-0 z-30 px-4 pt-4 pb-2 ios-nav border-b border-white/5">
     <div class="max-w-md mx-auto flex items-center justify-between">
+      
+      <!-- Left: User Profile Avatar Badge (Initial or Photo) -->
       <div class="flex items-center gap-3">
-        <img src="./logo.png" alt="Logo" class="w-11 h-11 rounded-2xl object-cover border border-amber-500/40 shadow" />
-        <div>
-          <h1 class="text-lg font-black tracking-tight leading-none text-white">ठेकेDAAR</h1>
-          <div class="flex items-center gap-2 mt-1">
-            <span id="syncStatus" class="text-[11px] text-zinc-400 flex items-center gap-1 font-medium">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span> Local Mode
-            </span>
-            <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-[#1c2430] border border-white/10 text-[11px] font-semibold text-zinc-200 rounded-md px-1.5 py-0.5 focus:outline-none">
-              <option value="hi">हिंदी</option>
-              <option value="en">English</option>
-              <option value="mr">मराठी</option>
-              <option value="gu">ગુજરાતી</option>
-            </select>
+        <button onclick="openSettingsModal()" class="relative group">
+          <div id="userAvatarBadge" class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 font-black text-base flex items-center justify-center shadow-md border-2 border-white/10 overflow-hidden">
+            <span>R</span>
           </div>
+          <span id="syncDot" class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-black"></span>
+        </button>
+
+        <div>
+          <h1 class="text-base font-black tracking-tight leading-none">ठेकेDAAR</h1>
+          <span id="syncStatus" class="text-[10px] text-zinc-400 font-medium">● Local Mode</span>
         </div>
       </div>
 
-      <button onclick="openAuthModal()" id="authBtn" class="px-3.5 py-1.5 text-xs font-bold rounded-full bg-slate-700/80 hover:bg-slate-600 text-white border border-white/10 shadow-sm transition-all">
-        Login / Register
+      <!-- Right: Settings Icon (Language, Theme, Switch Account) -->
+      <button onclick="openSettingsModal()" class="w-10 h-10 rounded-full ios-glass flex items-center justify-center text-lg active:scale-90 transition-transform shadow-sm" title="Settings">
+        ⚙️
       </button>
+
     </div>
   </header>
 
-  <!-- 3. GLOBAL SITE & MONTH SELECTOR BAR -->
+  <!-- 3. MAIN SITE & DATE CONTROLLER -->
   <div class="max-w-md mx-auto px-4 pt-3">
-    <div class="glass-card rounded-2xl p-2.5 flex items-center justify-between gap-2 border border-white/5 shadow-md">
+    <div class="ios-glass rounded-2xl p-2.5 flex items-center justify-between gap-2 shadow-sm">
       <div class="flex items-center gap-1.5 flex-1 min-w-0">
-        <span class="text-zinc-400 text-sm">📍</span>
-        <select id="siteSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold text-white focus:outline-none w-full truncate"></select>
+        <span class="text-sm">📍</span>
+        <select id="siteSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold focus:outline-none w-full truncate"></select>
       </div>
-      <button onclick="addNewSite()" class="px-2.5 py-1 bg-white/10 hover:bg-white/20 text-zinc-200 font-bold text-xs rounded-xl transition-all shrink-0">
+      <button onclick="addNewSite()" class="px-2.5 py-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-500 font-bold text-xs rounded-xl transition-all shrink-0">
         + SITE
       </button>
       <div class="h-4 w-px bg-white/10"></div>
-      <div class="flex items-center gap-1 text-xs font-semibold text-zinc-300 shrink-0">
-        <input type="month" id="monthSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold text-zinc-200 focus:outline-none cursor-pointer" />
-      </div>
+      <input type="month" id="monthSelect" onchange="handleMonthChange()" class="bg-transparent text-xs font-bold focus:outline-none cursor-pointer" />
     </div>
   </div>
 
-  <!-- 4. MAIN CONTENT CONTAINER -->
+  <!-- 4. MAIN APP BODY -->
   <main class="max-w-md mx-auto p-4 space-y-4">
 
     <!-- SUMMARY CHIPS -->
     <div class="grid grid-cols-3 gap-2.5">
-      <div class="rounded-2xl p-3 border border-rose-500/20 bg-rose-500/5 text-center flex flex-col justify-center shadow-sm">
-        <span class="text-[10px] font-bold tracking-wider uppercase text-rose-300/80">LABOUR DUE</span>
-        <span id="summaryLabourDue" class="text-lg font-black text-rose-400 mt-0.5">₹0</span>
+      <div class="rounded-2xl p-3 border border-rose-500/20 bg-rose-500/5 text-center flex flex-col justify-center">
+        <span class="text-[9px] font-bold tracking-wider uppercase text-rose-400/80">LABOUR DUE</span>
+        <span id="summaryLabourDue" class="text-base font-black text-rose-400 mt-0.5">₹0</span>
       </div>
-      <div class="rounded-2xl p-3 border border-amber-500/20 bg-amber-500/5 text-center flex flex-col justify-center shadow-sm">
-        <span class="text-[10px] font-bold tracking-wider uppercase text-amber-300/80">EXPENSES</span>
-        <span id="summaryExpensesTotal" class="text-lg font-black text-amber-400 mt-0.5">₹0</span>
+      <div class="rounded-2xl p-3 border border-amber-500/20 bg-amber-500/5 text-center flex flex-col justify-center">
+        <span class="text-[9px] font-bold tracking-wider uppercase text-amber-400/80">EXPENSES</span>
+        <span id="summaryExpensesTotal" class="text-base font-black text-amber-400 mt-0.5">₹0</span>
       </div>
-      <div class="rounded-2xl p-3 border border-emerald-500/20 bg-emerald-500/5 text-center flex flex-col justify-center shadow-sm">
-        <span class="text-[10px] font-bold tracking-wider uppercase text-emerald-300/80">BILLS</span>
-        <span id="summaryBillsTotal" class="text-lg font-black text-emerald-400 mt-0.5">₹0</span>
+      <div class="rounded-2xl p-3 border border-emerald-500/20 bg-emerald-500/5 text-center flex flex-col justify-center">
+        <span class="text-[9px] font-bold tracking-wider uppercase text-emerald-400/80">BILLS</span>
+        <span id="summaryBillsTotal" class="text-base font-black text-emerald-400 mt-0.5">₹0</span>
       </div>
     </div>
 
-    <!-- SITE AUDIO SUMMARY CARD -->
-    <div class="glass-card rounded-3xl p-4 relative overflow-hidden border border-white/10 shadow-lg">
-      <div class="relative z-10 flex flex-col items-center text-center">
-        <h3 class="text-sm font-extrabold text-white flex items-center gap-1.5">
-          Site Audio Summary / बोलकर हिसाब सुनें
-        </h3>
-        <p class="text-[11px] text-zinc-400 mt-0.5">Listen to whole site summary in one tap</p>
+    <!-- AUDIO SUMMARY CARD WITH WAVEFORM -->
+    <div class="ios-glass rounded-3xl p-4 text-center shadow-lg relative overflow-hidden">
+      <h3 class="text-xs font-extrabold flex items-center justify-center gap-1.5">
+        Site Audio Summary / बोलकर हिसाब सुनें
+      </h3>
+      <p class="text-[10px] text-zinc-400 mt-0.5">Listen to whole site summary in one tap</p>
 
-        <div class="flex items-center justify-center my-3 h-8 w-full max-w-[240px] opacity-75">
-          <span class="waveform-bar h-2"></span>
-          <span class="waveform-bar h-4"></span>
-          <span class="waveform-bar h-6"></span>
-          <span class="waveform-bar h-3"></span>
-          <span class="waveform-bar h-7"></span>
-          <span class="waveform-bar h-5"></span>
-          <span class="waveform-bar h-8"></span>
-          <span class="waveform-bar h-4"></span>
-          <span class="waveform-bar h-6"></span>
-          <span class="waveform-bar h-2"></span>
-        </div>
-
-        <button onclick="playVoiceSummary()" id="voicePlayBtn" class="px-6 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-zinc-950 font-black text-xs tracking-wider flex items-center gap-2 shadow-lg active:scale-95 transition-all">
-          <span>🔊</span> LISTEN / सुनें
-        </button>
+      <div class="flex items-center justify-center my-2.5 h-6 opacity-75">
+        <span class="waveform-bar h-2"></span>
+        <span class="waveform-bar h-4"></span>
+        <span class="waveform-bar h-6"></span>
+        <span class="waveform-bar h-3"></span>
+        <span class="waveform-bar h-5"></span>
+        <span class="waveform-bar h-7"></span>
+        <span class="waveform-bar h-4"></span>
+        <span class="waveform-bar h-2"></span>
       </div>
+
+      <button onclick="playVoiceSummary()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-zinc-950 font-black text-xs flex items-center gap-2 mx-auto active:scale-95 transition-all shadow-md">
+        <span>🔊</span> LISTEN / सुनें
+      </button>
     </div>
 
     <!-- VIEW 1: HOME SNAPSHOT -->
     <section id="viewHome" class="space-y-3">
       <div class="flex items-center justify-between pt-1">
-        <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-400">LIVE WORKFORCE SNAPSHOT</h2>
+        <h2 class="text-[11px] font-bold uppercase tracking-wider text-zinc-400">LIVE WORKFORCE SNAPSHOT</h2>
       </div>
       <div id="homeRecentLabour"></div>
     </section>
 
-    <!-- VIEW 2: LABOURS & ATTENDANCE -->
+    <!-- VIEW 2: LABOUR REGISTER & ATTENDANCE -->
     <section id="viewLabours" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
-        <h2 class="text-sm font-black text-white">👷‍♂️ Labour & Attendance Register</h2>
-        <button onclick="openFormModal('labour')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Worker</button>
+        <h2 class="text-sm font-black">👷‍♂️ Labour Register</h2>
+        <div class="flex items-center gap-2">
+          <button onclick="carryForwardLastMonthWorkers()" class="px-2.5 py-1.5 ios-glass hover:bg-white/10 text-amber-400 font-bold text-xs rounded-xl" title="Copy previous month workers">
+            ⚡ Carry Last Month
+          </button>
+          <button onclick="openFormModal('labour')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs rounded-xl shadow">
+            + Worker
+          </button>
+        </div>
       </div>
       <div id="labourList" class="space-y-2.5"></div>
     </section>
 
-    <!-- VIEW 3: MONTHWISE MASTER LEDGER -->
-    <section id="viewLedger" class="space-y-3 hidden">
+    <!-- VIEW 3: MONTHLY DATA TAB (FROM SKETCH) -->
+    <section id="viewMonthly" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
-        <h2 class="text-sm font-black text-white">📅 Month-Wise Stored Data</h2>
-        <span id="ledgerMonthBadge" class="text-xs px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-400 font-bold border border-amber-500/20"></span>
+        <h2 class="text-sm font-black">📅 Monthly Ledger & Archive</h2>
+        <span id="monthlyBadge" class="text-xs px-2.5 py-1 rounded-xl bg-amber-500/10 text-amber-500 font-bold"></span>
       </div>
-      <div id="ledgerContent" class="space-y-3"></div>
+      <div id="monthlyLedgerContent" class="space-y-3"></div>
     </section>
 
-    <!-- VIEW 4: SITE EXPENSES -->
+    <!-- VIEW 4: EXPENSES & TRANSPORT -->
     <section id="viewExpenses" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
-        <h2 class="text-sm font-black text-white">🛺 Site Expenses & Rent</h2>
+        <h2 class="text-sm font-black">🛺 Site Expenses & Rent</h2>
         <button onclick="openFormModal('expense')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Expense</button>
       </div>
       <div id="expenseList" class="space-y-2.5"></div>
@@ -200,7 +238,7 @@
     <!-- VIEW 5: COMPANY BILLS -->
     <section id="viewBills" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
-        <h2 class="text-sm font-black text-white">🧾 Company Work Bills</h2>
+        <h2 class="text-sm font-black">🧾 Company Work Bills</h2>
         <button onclick="openFormModal('bill')" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Bill</button>
       </div>
       <div id="billList" class="space-y-2.5"></div>
@@ -208,37 +246,41 @@
 
   </main>
 
-  <!-- 5. BOTTOM NAVIGATION BAR -->
-  <nav class="fixed bottom-0 inset-x-0 z-40 bg-[#141c26]/95 backdrop-blur-lg border-t border-white/5 px-4 py-2">
+  <!-- 5. BOTTOM NAVIGATION BAR (BASED ON YOUR SKETCH) -->
+  <nav class="fixed bottom-0 inset-x-0 z-40 ios-nav px-5 py-2">
     <div class="max-w-md mx-auto flex items-center justify-between">
       
-      <button onclick="navigateTo('viewHome')" id="nav-viewHome" class="flex flex-col items-center text-amber-500 transition-transform active:scale-95">
+      <!-- Home Tab -->
+      <button onclick="navigateTo('viewHome')" id="nav-viewHome" class="flex flex-col items-center text-amber-500 active:scale-95 transition-transform">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
         <span class="text-[9px] font-medium mt-0.5">Home</span>
       </button>
 
-      <button onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="flex flex-col items-center text-zinc-400 hover:text-zinc-200 transition-transform active:scale-95">
+      <!-- Labour Tab -->
+      <button onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="flex flex-col items-center text-zinc-400 active:scale-95 transition-transform">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 3s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
         <span class="text-[9px] font-medium mt-0.5">Labours</span>
       </button>
 
-      <!-- Center Add (+) Button -->
-      <button onclick="openFormModal('labour')" class="w-12 h-12 -mt-5 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 flex items-center justify-center font-black text-2xl shadow-xl border-4 border-[#121822] active:scale-90 transition-all">
+      <!-- Center Plus (+) Button -->
+      <button onclick="openFormModal('labour')" class="w-12 h-12 -mt-5 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 flex items-center justify-center font-black text-2xl shadow-xl border-4 border-[var(--bg-main)] active:scale-90 transition-all">
         +
       </button>
 
-      <!-- Monthwise Ledger Tab -->
-      <button onclick="navigateTo('viewLedger')" id="nav-viewLedger" class="flex flex-col items-center text-zinc-400 hover:text-zinc-200 transition-transform active:scale-95">
+      <!-- Monthly Data Tab (From Hand Sketch) -->
+      <button onclick="navigateTo('viewMonthly')" id="nav-viewMonthly" class="flex flex-col items-center text-zinc-400 active:scale-95 transition-transform">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
         <span class="text-[9px] font-medium mt-0.5">Monthly</span>
       </button>
 
-      <button onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="flex flex-col items-center text-zinc-400 hover:text-zinc-200 transition-transform active:scale-95">
+      <!-- Expenses Tab -->
+      <button onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="flex flex-col items-center text-zinc-400 active:scale-95 transition-transform">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.77l.11.34V17z"/></svg>
         <span class="text-[9px] font-medium mt-0.5">Expenses</span>
       </button>
 
-      <button onclick="navigateTo('viewBills')" id="nav-viewBills" class="flex flex-col items-center text-zinc-400 hover:text-zinc-200 transition-transform active:scale-95">
+      <!-- Bills Tab -->
+      <button onclick="navigateTo('viewBills')" id="nav-viewBills" class="flex flex-col items-center text-zinc-400 active:scale-95 transition-transform">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
         <span class="text-[9px] font-medium mt-0.5">Bills</span>
       </button>
@@ -246,40 +288,89 @@
     </div>
   </nav>
 
-  <!-- 6. INPUT FORMS MODAL -->
-  <div id="formModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
-    <div class="glass-card rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-4 border border-white/10 shadow-2xl max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center border-b border-white/10 pb-2">
-        <h3 id="formModalTitle" class="font-bold text-white text-base">Add Entry</h3>
-        <button onclick="closeFormModal()" class="text-zinc-400 hover:text-zinc-200 text-lg">✕</button>
+  <!-- 6. SETTINGS MODAL (THEME, LANGUAGE, ACCOUNT SWITCH) -->
+  <div id="settingsModal" class="fixed inset-0 bg-black/60 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
+    <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-5 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-white/10 pb-3">
+        <h3 class="font-black text-base flex items-center gap-2">⚙️ Settings / सेटिंग्स</h3>
+        <button onclick="closeSettingsModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
       </div>
 
-      <!-- Form: Add Labour -->
+      <!-- Theme Switcher (Amoled, Dark, Light) -->
+      <div class="space-y-1.5">
+        <label class="text-xs font-bold text-zinc-400 uppercase">App Theme / थीम</label>
+        <div class="grid grid-cols-3 gap-2">
+          <button onclick="setAppTheme('theme-amoled')" class="py-2 rounded-xl text-xs font-bold border border-white/20 bg-black text-white hover:border-amber-500">AMOLED</button>
+          <button onclick="setAppTheme('theme-dark')" class="py-2 rounded-xl text-xs font-bold border border-white/20 bg-slate-800 text-white hover:border-amber-500">Dark</button>
+          <button onclick="setAppTheme('theme-light')" class="py-2 rounded-xl text-xs font-bold border border-zinc-300 bg-white text-zinc-900 hover:border-amber-500">Light</button>
+        </div>
+      </div>
+
+      <!-- Language Selector -->
+      <div class="space-y-1.5">
+        <label class="text-xs font-bold text-zinc-400 uppercase">Language / भाषा</label>
+        <select id="settingsLang" onchange="changeLanguage(this.value)" class="w-full rounded-xl p-2.5 text-xs font-bold bg-[var(--input-bg)] border border-white/10 focus:outline-none">
+          <option value="hi" class="text-zinc-950">हिंदी (Hindi)</option>
+          <option value="en" class="text-zinc-950">English</option>
+          <option value="mr" class="text-zinc-950">मराठी (Marathi)</option>
+          <option value="gu" class="text-zinc-950">ગુજરાતી (Gujarati)</option>
+        </select>
+      </div>
+
+      <!-- Account Management -->
+      <div class="space-y-2 pt-2 border-t border-white/10">
+        <div id="accountStatusText" class="text-xs text-zinc-400">Currently in Local Mode</div>
+        <button onclick="closeSettingsModal(); openAuthModal();" class="w-full py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-bold text-xs flex items-center justify-center gap-1.5">
+          <span>👤</span> Switch / Add Account
+        </button>
+        <button onclick="logoutAccount()" id="logoutBtn" class="w-full py-2 rounded-xl bg-rose-500/10 text-rose-400 font-bold text-xs hidden">
+          Log Out
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. UNIVERSAL INPUT MODAL -->
+  <div id="formModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
+    <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center border-b border-white/10 pb-2">
+        <h3 id="formModalTitle" class="font-bold text-base">Add Entry</h3>
+        <button onclick="closeFormModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
+      </div>
+
+      <!-- Add Labour Form with Name Directory Autocomplete -->
       <form id="labourForm" onsubmit="saveLabour(event)" class="space-y-3 hidden">
-        <input type="text" id="lName" required placeholder="Labour Name / नाम (e.g. Ramesh)" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2.5 text-sm" />
-        <select id="lCategory" class="w-full rounded-xl bg-[#1c2430] border border-white/10 text-white px-3 py-2.5 text-sm">
+        <div>
+          <input type="text" id="lName" list="knownLaboursList" onchange="autoFillKnownLabour(this.value)" required placeholder="Labour Name / नाम (e.g. Ramesh)" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none" />
+          <datalist id="knownLaboursList"></datalist>
+          <span class="text-[10px] text-zinc-400">Type or pick from previous months to auto-fill details.</span>
+        </div>
+
+        <select id="lCategory" class="w-full rounded-xl bg-[var(--card-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none">
           <option value="Mason (मिस्त्री)">Mason (मिस्त्री)</option>
           <option value="Helper (हेल्पर)">Helper (हेल्पर)</option>
           <option value="Carpenter (बढ़ई)">Carpenter (बढ़ई)</option>
           <option value="Electrician (इलेक्ट्रीशियन)">Electrician (इलेक्ट्रीशियन)</option>
           <option value="Plumber (प्लम्बर)">Plumber (प्लम्बर)</option>
         </select>
+        
         <div class="grid grid-cols-2 gap-2">
-          <input type="number" id="lSalary" required min="0" placeholder="Monthly Salary ₹" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2 text-sm" />
-          <input type="number" id="lAdvance" required min="0" placeholder="Advance ₹" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2 text-sm" />
+          <input type="number" id="lSalary" required min="0" placeholder="Monthly Salary ₹" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2 text-sm focus:outline-none" />
+          <input type="number" id="lAdvance" required min="0" placeholder="Advance ₹" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2 text-sm focus:outline-none" />
         </div>
-        <p class="text-[11px] text-zinc-400 italic">Worker attendance starts strictly at 0 days.</p>
-        <label class="flex items-center justify-center border border-dashed border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-white/5 text-zinc-300">
+        
+        <label class="flex items-center justify-center border border-dashed border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-white/5">
           <span id="lPhotoLabel">📷 Upload Worker Photo</span>
           <input type="file" id="lPhoto" accept="image/*" class="hidden" onchange="previewFileName('lPhoto','lPhotoLabel')" />
         </label>
+        
         <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm">Save Labour / सेव करें</button>
       </form>
 
-      <!-- Form: Add Expense -->
+      <!-- Add Expense Form -->
       <form id="expenseForm" onsubmit="saveExpense(event)" class="space-y-3 hidden">
-        <input type="text" id="eTitle" required placeholder="Description (ऑटो किराया / चाय / नाश्ता)" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2.5 text-sm" />
-        <select id="eCategory" class="w-full rounded-xl bg-[#1c2430] border border-white/10 text-white px-3 py-2.5 text-sm">
+        <input type="text" id="eTitle" required placeholder="Description (ऑटो किराया / चाय / नाश्ता)" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none" />
+        <select id="eCategory" class="w-full rounded-xl bg-[var(--card-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none">
           <option value="Rickshaw / Rent (किराया)">Rickshaw / Transport (किराया)</option>
           <option value="Tea / Food (नाश्ता)">Tea & Food (चाय नाश्ता)</option>
           <option value="Material (सामान)">Material / Tools (सामान)</option>
@@ -287,48 +378,47 @@
           <option value="Other (अन्य)">Other</option>
         </select>
         <div class="grid grid-cols-2 gap-2">
-          <input type="number" id="eAmount" required min="0" placeholder="Amount ₹" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2 text-sm" />
-          <input type="text" id="eSpentFor" placeholder="Paid For (किसके लिए)" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2 text-sm" />
+          <input type="number" id="eAmount" required min="0" placeholder="Amount ₹" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2 text-sm focus:outline-none" />
+          <input type="text" id="eSpentFor" placeholder="Paid For (किसके लिए)" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2 text-sm focus:outline-none" />
         </div>
-        <label class="flex items-center justify-center border border-dashed border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-white/5 text-zinc-300">
+        <label class="flex items-center justify-center border border-dashed border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-white/5">
           <span id="ePhotoLabel">🧾 Upload Bill / Receipt Slip</span>
           <input type="file" id="ePhoto" accept="image/*" class="hidden" onchange="previewFileName('ePhoto','ePhotoLabel')" />
         </label>
-        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm">Save Expense / सुरक्षित करें</button>
+        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm">Save Expense</button>
       </form>
 
-      <!-- Form: Add Bill -->
+      <!-- Add Bill Form -->
       <form id="billForm" onsubmit="saveBill(event)" class="space-y-3 hidden">
-        <input type="text" id="bTitle" required placeholder="Work / Company Name" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2.5 text-sm" />
+        <input type="text" id="bTitle" required placeholder="Company / Work Name" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none" />
         <div class="grid grid-cols-2 gap-2">
-          <input type="number" id="bAmount" required min="0" placeholder="Bill Amount ₹" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2 text-sm" />
-          <select id="bStatus" class="w-full rounded-xl bg-[#1c2430] border border-white/10 text-white px-3 py-2 text-sm">
+          <input type="number" id="bAmount" required min="0" placeholder="Bill Amount ₹" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2 text-sm focus:outline-none" />
+          <select id="bStatus" class="w-full rounded-xl bg-[var(--card-bg)] border border-white/10 px-3 py-2 text-sm focus:outline-none">
             <option value="Received (प्राप्त)">Received</option>
             <option value="Pending (बाकी)">Pending</option>
           </select>
         </div>
-        <label class="flex items-center justify-center border border-dashed border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-white/5 text-zinc-300">
+        <label class="flex items-center justify-center border border-dashed border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-white/5">
           <span id="bPhotoLabel">📄 Upload Company Bill Photo</span>
           <input type="file" id="bPhoto" accept="image/*" class="hidden" onchange="previewFileName('bPhoto','bPhotoLabel')" />
         </label>
         <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm">Save Company Bill</button>
       </form>
-
     </div>
   </div>
 
-  <!-- 7. AUTH & FORGOT PASSWORD MODAL -->
+  <!-- 8. AUTH & PASSWORD RESET MODAL -->
   <div id="authModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
-    <div class="glass-card rounded-3xl max-w-sm w-full p-6 space-y-4 border border-white/10 shadow-2xl">
+    <div class="ios-glass rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center">
-        <h3 class="font-extrabold text-white text-base">लॉग इन / Register</h3>
-        <button onclick="closeAuthModal()" class="text-zinc-400 hover:text-zinc-200 text-lg">✕</button>
+        <h3 class="font-extrabold text-base">लॉग इन / Register</h3>
+        <button onclick="closeAuthModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
       </div>
       <p class="text-xs text-zinc-400">Access your construction records securely across any device.</p>
       
       <div class="space-y-3">
-        <input type="email" id="authEmail" placeholder="Email Address / ईमेल" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2.5 text-sm" />
-        <input type="password" id="authPass" placeholder="Password / पासवर्ड (6+ chars)" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2.5 text-sm" />
+        <input type="email" id="authEmail" placeholder="Email Address / ईमेल" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none" />
+        <input type="password" id="authPass" placeholder="Password / पासवर्ड (6+ chars)" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none" />
       </div>
 
       <div class="flex justify-end">
@@ -339,12 +429,12 @@
 
       <div class="flex gap-2 pt-2">
         <button onclick="connectCloud(false)" class="flex-1 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm">Login</button>
-        <button onclick="connectCloud(true)" class="flex-1 bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 rounded-xl text-sm">Register</button>
+        <button onclick="connectCloud(true)" class="flex-1 bg-white/10 hover:bg-white/20 font-bold py-2.5 rounded-xl text-sm">Register</button>
       </div>
     </div>
   </div>
 
-  <!-- FIREBASE ENGINE & APPLICATION LOGIC -->
+  <!-- JAVASCRIPT ENGINE & FIREBASE REALTIME CLOUD -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -368,7 +458,8 @@
       sites: ['Main Site A - मुख्य साइट'],
       labours: [],
       expenses: [],
-      bills: []
+      bills: [],
+      masterLabourDirectory: [] // Stores workers across all months for auto-fill
     };
 
     function getStorageKey() {
@@ -379,19 +470,31 @@
       const saved = localStorage.getItem(getStorageKey());
       if (saved) {
         state = JSON.parse(saved);
+        if (!state.masterLabourDirectory) state.masterLabourDirectory = [];
       } else {
         state = {
           sites: ['Main Site A - मुख्य साइट'],
           labours: [],
           expenses: [],
-          bills: []
+          bills: [],
+          masterLabourDirectory: []
         };
       }
     }
 
-    window.currentLang = 'hi';
+    // Set Default Month
+    const now = new Date();
+    document.getElementById('monthSelect').value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
 
-    // Kinetic Animation for Splash Screen
+    // App Themes (Amoled, Dark, Light)
+    window.setAppTheme = (themeName) => {
+      document.documentElement.className = themeName;
+      localStorage.setItem('thekedaar_theme', themeName);
+    };
+    const savedTheme = localStorage.getItem('thekedaar_theme') || 'theme-amoled';
+    window.setAppTheme(savedTheme);
+
+    // Kinetic Animation for Splash
     function runSplashAnimation() {
       const brandWord = "THEKEDAAR";
       const container = document.getElementById('thekedaarLetters');
@@ -413,18 +516,15 @@
       }, 2100);
     }
 
-    const now = new Date();
-    document.getElementById('monthSelect').value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
-
     async function persistState() {
       localStorage.setItem(getStorageKey(), JSON.stringify(state));
       renderAll();
       if (db && currentUser) {
         try {
           await setDoc(doc(db, "users", currentUser.uid), state);
-          document.getElementById('syncStatus').innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span> Synced (${currentUser.email.split('@')[0]})`;
+          document.getElementById('syncStatus').innerText = `● Synced (${currentUser.email.split('@')[0]})`;
         } catch (e) {
-          console.error("Cloud push failed:", e);
+          console.error("Cloud push error:", e);
         }
       }
     }
@@ -451,21 +551,25 @@
       });
     }
 
-    // Instagram-style View Switcher
+    // View Navigation
     window.navigateTo = (viewId) => {
-      ['viewHome', 'viewLabours', 'viewLedger', 'viewExpenses', 'viewBills'].forEach(v => {
-        document.getElementById(v).classList.toggle('hidden', v !== viewId);
+      ['viewHome', 'viewLabours', 'viewMonthly', 'viewExpenses', 'viewBills'].forEach(v => {
+        const el = document.getElementById(v);
+        if (el) el.classList.toggle('hidden', v !== viewId);
         const navBtn = document.getElementById(`nav-${v}`);
         if (navBtn) {
           if (v === viewId) {
-            navBtn.className = "flex flex-col items-center text-amber-500 transition-transform active:scale-95";
+            navBtn.className = "flex flex-col items-center text-amber-500 active:scale-95 transition-transform";
           } else {
-            navBtn.className = "flex flex-col items-center text-zinc-400 hover:text-zinc-200 transition-transform active:scale-95";
+            navBtn.className = "flex flex-col items-center text-zinc-400 active:scale-95 transition-transform";
           }
         }
       });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
+
+    window.openSettingsModal = () => document.getElementById('settingsModal').classList.replace('hidden', 'flex');
+    window.closeSettingsModal = () => document.getElementById('settingsModal').classList.replace('flex', 'hidden');
 
     window.openFormModal = (type) => {
       document.getElementById('formModal').classList.replace('hidden', 'flex');
@@ -474,6 +578,7 @@
       if (type === 'labour') {
         document.getElementById('labourForm').classList.remove('hidden');
         document.getElementById('formModalTitle').innerText = "Add New Labour / नया मजदूर जोड़ें";
+        populateLabourAutocomplete();
       } else if (type === 'expense') {
         document.getElementById('expenseForm').classList.remove('hidden');
         document.getElementById('formModalTitle').innerText = "Add Site Expense / खर्च दर्ज करें";
@@ -483,6 +588,67 @@
       }
     };
     window.closeFormModal = () => document.getElementById('formModal').classList.replace('flex', 'hidden');
+
+    // Populates datalist with previously added workers
+    function populateLabourAutocomplete() {
+      const datalist = document.getElementById('knownLaboursList');
+      const directory = state.masterLabourDirectory || [];
+      datalist.innerHTML = directory.map(w => `<option value="${w.name}">`).join('');
+    }
+
+    // Auto-fill Labour info when selecting known worker
+    window.autoFillKnownLabour = (name) => {
+      const found = (state.masterLabourDirectory || []).find(w => w.name.toLowerCase() === name.trim().toLowerCase());
+      if (found) {
+        document.getElementById('lCategory').value = found.category || 'Mason (मिस्त्री)';
+        document.getElementById('lSalary').value = found.salary || '';
+        document.getElementById('lAdvance').value = 0;
+        if (found.photo) {
+          document.getElementById('lPhotoLabel').innerText = '✅ Saved Photo Ready';
+        }
+      }
+    };
+
+    // Carry forward last month's workers into this month
+    window.carryForwardLastMonthWorkers = () => {
+      const currentSite = document.getElementById('siteSelect').value;
+      const currentMonth = document.getElementById('monthSelect').value;
+
+      // Calculate previous month
+      const parts = currentMonth.split('-');
+      let year = parseInt(parts[0]);
+      let month = parseInt(parts[1]) - 1;
+      if (month === 0) { month = 12; year -= 1; }
+      const prevMonth = `${year}-${String(month).padStart(2, '0')}`;
+
+      const prevLabours = (state.labours || []).filter(l => l.site === currentSite && l.month === prevMonth);
+      if (prevLabours.length === 0) {
+        return alert(`No workers found in previous month (${prevMonth}) for ${currentSite}.`);
+      }
+
+      let count = 0;
+      prevLabours.forEach(oldL => {
+        const alreadyExists = (state.labours || []).some(l => l.site === currentSite && l.month === currentMonth && l.name.toLowerCase() === oldL.name.toLowerCase());
+        if (!alreadyExists) {
+          state.labours.unshift({
+            id: Date.now().toString() + Math.random().toString().slice(2, 6),
+            site: currentSite,
+            month: currentMonth,
+            name: oldL.name,
+            category: oldL.category,
+            salary: oldL.salary,
+            advance: 0,
+            presentDays: 0,
+            halfDays: 0,
+            photo: oldL.photo || null
+          });
+          count++;
+        }
+      });
+
+      persistState();
+      alert(`Success! Carried forward ${count} workers to ${currentMonth} with 0 attendance.`);
+    };
 
     window.addNewSite = () => {
       const name = prompt("नई निर्माण साइट का नाम लिखें / Enter Site Name:");
@@ -494,7 +660,7 @@
       }
     };
 
-    // Save Labour: Strictly sets initial attendance to 0
+    // Save Labour
     window.saveLabour = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -504,20 +670,30 @@
       const salary = Number(document.getElementById('lSalary').value) || 0;
       const advance = Number(document.getElementById('lAdvance').value) || 0;
       const photoFile = document.getElementById('lPhoto').files[0];
-      const photo = await compressImage(photoFile);
+      
+      let photo = await compressImage(photoFile);
+      if (!photo) {
+        const existing = (state.masterLabourDirectory || []).find(w => w.name.toLowerCase() === name.toLowerCase());
+        if (existing) photo = existing.photo;
+      }
 
+      // Add to current register
       state.labours.unshift({
         id: Date.now().toString(),
-        site,
-        month,
-        name,
-        category,
-        salary,
-        advance,
-        presentDays: 0, // Zero attendance by default
-        halfDays: 0,    // Zero half-days by default
+        site, month, name, category, salary, advance,
+        presentDays: 0,
+        halfDays: 0,
         photo
       });
+
+      // Update Master Directory for quick reuse
+      if (!state.masterLabourDirectory) state.masterLabourDirectory = [];
+      const dirIndex = state.masterLabourDirectory.findIndex(w => w.name.toLowerCase() === name.toLowerCase());
+      if (dirIndex >= 0) {
+        state.masterLabourDirectory[dirIndex] = { name, category, salary, photo };
+      } else {
+        state.masterLabourDirectory.push({ name, category, salary, photo });
+      }
 
       e.target.reset();
       document.getElementById('lPhotoLabel').innerText = '📷 Upload Worker Photo';
@@ -588,7 +764,11 @@
       persistState();
     };
 
-    // Master Render Function
+    window.handleMonthChange = () => {
+      renderAll();
+    };
+
+    // Master Render Method
     window.renderAll = () => {
       const siteSelect = document.getElementById('siteSelect');
       const currentSite = siteSelect.value || state.sites[0];
@@ -596,15 +776,32 @@
 
       const activeSite = siteSelect.value;
       const activeMonth = document.getElementById('monthSelect').value;
-      document.getElementById('ledgerMonthBadge').innerText = activeMonth;
+      document.getElementById('monthlyBadge').innerText = activeMonth;
 
-      // Filter Data by Active Site & Selected Month
+      // Update User Badge Avatar
+      const userBadge = document.getElementById('userAvatarBadge');
+      if (currentUser) {
+        if (currentUser.photoURL) {
+          userBadge.innerHTML = `<img src="${currentUser.photoURL}" class="w-full h-full object-cover" />`;
+        } else {
+          const letter = (currentUser.displayName || currentUser.email || 'U')[0].toUpperCase();
+          userBadge.innerHTML = `<span>${letter}</span>`;
+        }
+        document.getElementById('accountStatusText').innerText = `Logged in as: ${currentUser.email}`;
+        document.getElementById('logoutBtn').classList.remove('hidden');
+      } else {
+        userBadge.innerHTML = `<span>ठे</span>`;
+        document.getElementById('accountStatusText').innerText = `Local Mode (Not Logged In)`;
+        document.getElementById('logoutBtn').classList.add('hidden');
+      }
+
+      // Filter Data
       const filteredLabours = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth);
       let totalLabourDue = 0;
 
-      // Render Labour List
+      // Render Labour Register
       document.getElementById('labourList').innerHTML = filteredLabours.length === 0
-        ? `<div class="text-center py-8 text-xs text-zinc-400">No labour records found for ${activeMonth}.</div>`
+        ? `<div class="text-center py-8 text-xs text-zinc-400">No labour records found for ${activeMonth}. Tap "Carry Last Month" or "+ Worker".</div>`
         : filteredLabours.map(l => {
           const effectiveDays = (l.presentDays || 0) + ((l.halfDays || 0) * 0.5);
           const earned = Math.round((l.salary / 26) * effectiveDays);
@@ -612,14 +809,14 @@
           totalLabourDue += net;
 
           return `
-            <div class="glass-card p-3.5 rounded-2xl border border-white/5 space-y-2.5">
+            <div class="ios-glass p-3.5 rounded-2xl space-y-2.5">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2.5">
                   ${l.photo
                     ? `<img src="${l.photo}" class="w-11 h-11 rounded-full object-cover border-2 border-amber-500 shrink-0" />`
                     : `<div class="w-11 h-11 rounded-full bg-white/5 flex items-center justify-center font-bold text-sm shrink-0">👷</div>`}
                   <div>
-                    <h4 class="font-bold text-sm leading-tight text-white">${l.name}</h4>
+                    <h4 class="font-bold text-sm leading-tight">${l.name}</h4>
                     <span class="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-zinc-300 font-medium">${l.category}</span>
                     <div class="text-[11px] text-zinc-400 mt-0.5">वेतन: <b>₹${l.salary}</b> | एडवांस: <b class="text-rose-400">₹${l.advance}</b></div>
                   </div>
@@ -637,7 +834,7 @@
                   <span class="font-semibold text-zinc-400">हाफ:</span> <b class="text-amber-400">${l.halfDays || 0}</b>
                 </div>
                 <div class="flex items-center gap-1">
-                  <button onclick="updateAttendance('${l.id}','decPresent')" class="w-6 h-6 rounded bg-white/10 hover:bg-white/20 font-bold text-white">-</button>
+                  <button onclick="updateAttendance('${l.id}','decPresent')" class="w-6 h-6 rounded bg-white/10 hover:bg-white/20 font-bold">-</button>
                   <button onclick="updateAttendance('${l.id}','incPresent')" class="w-6 h-6 rounded bg-emerald-500 text-zinc-950 font-bold">+P</button>
                   <button onclick="updateAttendance('${l.id}','incHalf')" class="px-1.5 h-6 rounded bg-amber-500 text-zinc-950 font-bold">+Half</button>
                 </div>
@@ -648,16 +845,13 @@
 
       document.getElementById('summaryLabourDue').innerText = `₹${totalLabourDue.toLocaleString('en-IN')}`;
 
-      // Render Home Live Snapshot
+      // Render Home Recent Workforce
       if (filteredLabours.length === 0) {
         document.getElementById('homeRecentLabour').innerHTML = `
-          <div class="glass-card rounded-2xl p-4 text-center border border-white/5">
-            <div class="w-full h-36 rounded-xl bg-gradient-to-tr from-slate-900 to-slate-800 border border-white/10 flex flex-col items-center justify-center mb-3">
-              <span class="text-3xl mb-1">🏗️</span>
-              <span class="text-xs text-zinc-400">Site: ${activeSite}</span>
-            </div>
-            <p class="text-xs text-zinc-400 mb-3">No workers added yet for this month.</p>
-            <button onclick="openFormModal('labour')" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white font-bold text-xs rounded-xl border border-white/10">
+          <div class="ios-glass rounded-2xl p-5 text-center">
+            <div class="w-16 h-16 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-3xl mx-auto mb-2">🏗️</div>
+            <p class="text-xs text-zinc-400 mb-3">No workers added yet for ${activeMonth}.</p>
+            <button onclick="openFormModal('labour')" class="px-4 py-2 bg-amber-500 text-zinc-950 font-bold text-xs rounded-xl shadow">
               + ADD FIRST WORKER
             </button>
           </div>
@@ -668,12 +862,12 @@
           const earned = Math.round((l.salary / 26) * effectiveDays);
           const net = earned - (l.advance || 0);
           return `
-            <div class="glass-card p-3 rounded-xl border border-white/5 flex items-center justify-between text-xs">
+            <div class="ios-glass p-3 rounded-xl flex items-center justify-between text-xs">
               <div class="flex items-center gap-2">
                 <div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs">👷</div>
                 <div>
-                  <div class="font-bold text-white">${l.name}</div>
-                  <div class="text-[10px] text-zinc-400">${l.category} • ${l.presentDays || 0} Days Present</div>
+                  <div class="font-bold">${l.name}</div>
+                  <div class="text-[10px] text-zinc-400">${l.category} • ${l.presentDays || 0}P</div>
                 </div>
               </div>
               <div class="font-extrabold ${net >= 0 ? 'text-emerald-400' : 'text-rose-400'}">₹${net}</div>
@@ -691,13 +885,13 @@
       document.getElementById('expenseList').innerHTML = filteredExpenses.length === 0
         ? `<div class="text-center py-8 text-xs text-zinc-400">No expenses recorded for ${activeMonth}.</div>`
         : filteredExpenses.map(e => `
-          <div class="glass-card p-3 rounded-2xl border border-white/5 flex items-center justify-between">
+          <div class="ios-glass p-3 rounded-2xl flex items-center justify-between">
             <div class="flex items-center gap-2.5">
               ${e.photo
                 ? `<a href="${e.photo}" target="_blank"><img src="${e.photo}" class="w-10 h-10 rounded-xl object-cover border border-amber-500 shrink-0" /></a>`
                 : `<div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold shrink-0">🛺</div>`}
               <div>
-                <h4 class="font-bold text-xs text-white">${e.title}</h4>
+                <h4 class="font-bold text-xs">${e.title}</h4>
                 <div class="text-[10px] text-zinc-400">${e.category} ${e.spentFor ? `• <b>${e.spentFor}</b>` : ''}</div>
               </div>
             </div>
@@ -716,13 +910,13 @@
       document.getElementById('billList').innerHTML = filteredBills.length === 0
         ? `<div class="text-center py-8 text-xs text-zinc-400">No company bills recorded for ${activeMonth}.</div>`
         : filteredBills.map(b => `
-          <div class="glass-card p-3 rounded-2xl border border-white/5 flex items-center justify-between">
+          <div class="ios-glass p-3 rounded-2xl flex items-center justify-between">
             <div class="flex items-center gap-2.5">
               ${b.photo
                 ? `<a href="${b.photo}" target="_blank"><img src="${b.photo}" class="w-10 h-10 rounded-xl object-cover border border-emerald-500 shrink-0" /></a>`
                 : `<div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold shrink-0">🧾</div>`}
               <div>
-                <h4 class="font-bold text-xs text-white">${b.title}</h4>
+                <h4 class="font-bold text-xs">${b.title}</h4>
                 <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-bold">${b.status}</span>
               </div>
             </div>
@@ -733,12 +927,12 @@
           </div>
         `).join('');
 
-      // Render Monthwise Master Ledger View
-      document.getElementById('ledgerContent').innerHTML = `
-        <div class="glass-card p-4 rounded-2xl border border-white/5 space-y-3">
+      // Render Monthly Ledger Tab Content
+      document.getElementById('monthlyLedgerContent').innerHTML = `
+        <div class="ios-glass p-4 rounded-2xl space-y-3">
           <div class="flex justify-between items-center text-xs pb-2 border-b border-white/5">
-            <span class="text-zinc-400">Month / Site:</span>
-            <span class="font-bold text-white">${activeMonth} (${activeSite})</span>
+            <span class="text-zinc-400">Active Site / Month:</span>
+            <span class="font-bold">${activeSite} (${activeMonth})</span>
           </div>
           <div class="grid grid-cols-3 gap-2 text-center text-xs">
             <div class="bg-black/20 p-2 rounded-xl">
@@ -754,10 +948,10 @@
               <div class="font-bold text-emerald-400 mt-0.5">₹${totalBills}</div>
             </div>
           </div>
-          <div class="pt-2 text-xs text-zinc-400">
-            <div>• Labours Registered: <b class="text-white">${filteredLabours.length}</b></div>
-            <div>• Expense Entries: <b class="text-white">${filteredExpenses.length}</b></div>
-            <div>• Company Bills: <b class="text-white">${filteredBills.length}</b></div>
+          <div class="pt-2 text-xs text-zinc-400 space-y-1">
+            <div>• Registered Labours: <b>${filteredLabours.length}</b></div>
+            <div>• Site Expense Slips: <b>${filteredExpenses.length}</b></div>
+            <div>• Work Bills: <b>${filteredBills.length}</b></div>
           </div>
         </div>
       `;
@@ -770,9 +964,10 @@
 
     window.changeLanguage = (lang) => {
       window.currentLang = lang;
+      closeSettingsModal();
     };
 
-    // Voice Summary Engine: Language-specific TTS
+    // Voice Summary Engine
     window.playVoiceSummary = () => {
       const activeSite = document.getElementById('siteSelect').value;
       const activeMonth = document.getElementById('monthSelect').value;
@@ -803,15 +998,7 @@
         const utter = new SpeechSynthesisUtterance(msg);
         utter.lang = langCode;
         utter.rate = 0.95;
-
-        // Try to bind specifically to regional voice if available
-        const voices = window.speechSynthesis.getVoices();
-        const matchedVoice = voices.find(v => v.lang.startsWith(langCode.slice(0, 2)));
-        if (matchedVoice) utter.voice = matchedVoice;
-
         window.speechSynthesis.speak(utter);
-      } else {
-        alert("Audio voice synthesis is not supported in this browser.");
       }
     };
 
@@ -848,23 +1035,24 @@
       }
     };
 
-    // Firebase Auth State Listener
+    window.logoutAccount = () => {
+      if (confirm("Log out of your account?")) {
+        signOut(auth).then(() => {
+          currentUser = null;
+          loadLocalState();
+          closeSettingsModal();
+          location.reload();
+        });
+      }
+    };
+
+    // Firebase Auth State Observer
     onAuthStateChanged(auth, (user) => {
       if (user) {
         currentUser = user;
         loadLocalState();
-        document.getElementById('authBtn').innerText = `👤 ${user.email.split('@')[0]}`;
-        document.getElementById('authBtn').onclick = () => {
-          if (confirm("Log out of your account?")) {
-            signOut(auth).then(() => {
-              currentUser = null;
-              loadLocalState();
-              location.reload();
-            });
-          }
-        };
+        document.getElementById('syncStatus').innerText = `● Synced (${user.email.split('@')[0]})`;
 
-        // Realtime sync from Cloud
         onSnapshot(doc(db, "users", user.uid), (docSnap) => {
           if (docSnap.exists()) {
             state = docSnap.data();
@@ -877,13 +1065,11 @@
       } else {
         currentUser = null;
         loadLocalState();
-        document.getElementById('authBtn').innerText = "Login / Register";
-        document.getElementById('syncStatus').innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span> Local Mode`;
+        document.getElementById('syncStatus').innerText = `● Local Mode`;
         renderAll();
       }
     });
 
-    // Run Initial Load & Animations
     loadLocalState();
     runSplashAnimation();
     renderAll();
