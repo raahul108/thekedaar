@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
   
-  <link rel="icon" type="image/png" href="./logo.png">
-  <link rel="apple-touch-icon" href="./logo.png">
-  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="./logo.png?v=2">
+  <link rel="apple-touch-icon" href="./logo.png?v=2">
+  <link rel="manifest" href="manifest.json?v=2">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#000000">
@@ -18,43 +18,52 @@
       darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: { sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'SF Pro Display', 'Inter', 'sans-serif'] }
+          fontFamily: { sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'Inter', 'sans-serif'] }
         }
       }
     };
   </script>
 
   <style>
-    /* iOS Frosted Glass Themes */
+    /* 3 Clean iOS Themes with Perfect Light Mode Contrast */
     html.theme-amoled {
       --bg-main: #000000;
-      --card-bg: rgba(18, 20, 24, 0.6);
-      --card-border: rgba(255, 255, 255, 0.1);
+      --card-bg: rgba(18, 20, 24, 0.65);
+      --card-border: rgba(255, 255, 255, 0.12);
       --card-specular: rgba(255, 255, 255, 0.05);
       --text-main: #f8fafc;
       --text-sub: #94a3b8;
-      --nav-bg: rgba(10, 10, 10, 0.78);
-      --input-bg: rgba(255, 255, 255, 0.06);
+      --nav-bg: rgba(10, 10, 10, 0.82);
+      --input-bg: rgba(255, 255, 255, 0.08);
+      --input-border: rgba(255, 255, 255, 0.16);
+      --input-text: #ffffff;
+      --placeholder-color: #64748b;
     }
     html.theme-dark {
       --bg-main: #0b111e;
-      --card-bg: rgba(22, 32, 50, 0.6);
-      --card-border: rgba(255, 255, 255, 0.12);
+      --card-bg: rgba(22, 32, 50, 0.65);
+      --card-border: rgba(255, 255, 255, 0.14);
       --card-specular: rgba(255, 255, 255, 0.06);
       --text-main: #f1f5f9;
       --text-sub: #94a3b8;
-      --nav-bg: rgba(15, 23, 42, 0.82);
+      --nav-bg: rgba(15, 23, 42, 0.85);
       --input-bg: rgba(255, 255, 255, 0.08);
+      --input-border: rgba(255, 255, 255, 0.18);
+      --input-text: #ffffff;
+      --placeholder-color: #94a3b8;
     }
     html.theme-light {
-      --bg-main: #f8fafc;
-      --card-bg: rgba(255, 255, 255, 0.7);
-      --card-border: rgba(0, 0, 0, 0.07);
-      --card-specular: rgba(255, 255, 255, 0.85);
+      --bg-main: #f4f6f9;
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --card-border: rgba(0, 0, 0, 0.12);
+      --card-specular: rgba(255, 255, 255, 1);
       --text-main: #0f172a;
-      --text-sub: #64748b;
-      --nav-bg: rgba(255, 255, 255, 0.85);
-      --input-bg: rgba(0, 0, 0, 0.04);
+      --text-sub: #475569;
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      --input-bg: #e2e8f0;
+      --input-border: #94a3b8;
+      --input-text: #0f172a;
+      --placeholder-color: #475569;
     }
 
     body {
@@ -79,13 +88,22 @@
       border-bottom: 1px solid var(--card-border);
     }
 
-    /* iOS Instagram Tab Bar */
     .ios-instagram-nav {
       background: var(--nav-bg);
       backdrop-filter: blur(36px) saturate(210%);
       -webkit-backdrop-filter: blur(36px) saturate(210%);
-      border-top: 0.5px solid var(--card-border);
-      box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.28);
+      border-top: 1px solid var(--card-border);
+    }
+
+    /* High Contrast Input System */
+    .app-input {
+      background-color: var(--input-bg) !important;
+      color: var(--input-text) !important;
+      border: 1.5px solid var(--input-border) !important;
+    }
+    .app-input::placeholder {
+      color: var(--placeholder-color) !important;
+      opacity: 1 !important;
     }
 
     .waveform-bar {
@@ -112,12 +130,10 @@
 </head>
 <body class="min-h-screen pb-28 select-none no-scrollbar">
 
-  <!-- 1. SPLASH SCREEN -->
+  <!-- 1. SPLASH SCREEN (WITH NEW LOGO) -->
   <div id="splashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black transition-opacity duration-500">
     <div class="relative z-10 flex flex-col items-center">
-      <div id="splashAvatar" class="w-20 h-20 rounded-3xl bg-amber-500 flex items-center justify-center text-zinc-950 font-black text-3xl shadow-2xl mb-4 border border-amber-400/30">
-        ठे
-      </div>
+      <img src="./logo.png" alt="ठेकेDAAR" class="w-24 h-24 rounded-full border-2 border-amber-500 shadow-2xl object-cover mb-4 animate-pulse" />
       <div id="thekedaarLetters" class="text-3xl font-black text-white tracking-widest flex items-center"></div>
       <p class="text-amber-500 text-[10px] font-bold uppercase tracking-widest mt-2 opacity-80">Workforce & Site System</p>
     </div>
@@ -160,7 +176,7 @@
       <button onclick="addNewSite()" class="px-2.5 py-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-500 font-bold text-xs rounded-xl transition-all shrink-0">
         + SITE
       </button>
-      <div class="h-4 w-px bg-white/10"></div>
+      <div class="h-4 w-px bg-zinc-300 dark:bg-white/10"></div>
       <input type="month" id="monthSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold focus:outline-none cursor-pointer" />
     </div>
   </div>
@@ -170,17 +186,17 @@
 
     <!-- SUMMARY CHIPS -->
     <div class="grid grid-cols-3 gap-2.5">
-      <div class="rounded-2xl p-3 border border-rose-500/20 bg-rose-500/5 ios-glass text-center flex flex-col justify-center">
-        <span class="text-[9px] font-bold tracking-wider uppercase text-rose-400/80">LABOUR DUE</span>
-        <span id="summaryLabourDue" class="text-base font-black text-rose-400 mt-0.5">₹0</span>
+      <div class="rounded-2xl p-3 border border-rose-500/30 bg-rose-500/10 ios-glass text-center flex flex-col justify-center">
+        <span class="text-[9px] font-bold tracking-wider uppercase text-rose-500">LABOUR DUE</span>
+        <span id="summaryLabourDue" class="text-base font-black text-rose-500 mt-0.5">₹0</span>
       </div>
-      <div class="rounded-2xl p-3 border border-amber-500/20 bg-amber-500/5 ios-glass text-center flex flex-col justify-center">
-        <span class="text-[9px] font-bold tracking-wider uppercase text-amber-400/80">EXPENSES</span>
-        <span id="summaryExpensesTotal" class="text-base font-black text-amber-400 mt-0.5">₹0</span>
+      <div class="rounded-2xl p-3 border border-amber-500/30 bg-amber-500/10 ios-glass text-center flex flex-col justify-center">
+        <span class="text-[9px] font-bold tracking-wider uppercase text-amber-500">EXPENSES</span>
+        <span id="summaryExpensesTotal" class="text-base font-black text-amber-500 mt-0.5">₹0</span>
       </div>
-      <div class="rounded-2xl p-3 border border-emerald-500/20 bg-emerald-500/5 ios-glass text-center flex flex-col justify-center">
-        <span class="text-[9px] font-bold tracking-wider uppercase text-emerald-400/80">BILLS</span>
-        <span id="summaryBillsTotal" class="text-base font-black text-emerald-400 mt-0.5">₹0</span>
+      <div class="rounded-2xl p-3 border border-emerald-500/30 bg-emerald-500/10 ios-glass text-center flex flex-col justify-center">
+        <span class="text-[9px] font-bold tracking-wider uppercase text-emerald-500">BILLS</span>
+        <span id="summaryBillsTotal" class="text-base font-black text-emerald-500 mt-0.5">₹0</span>
       </div>
     </div>
 
@@ -220,7 +236,7 @@
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black">👷‍♂️ Labour Register</h2>
         <div class="flex items-center gap-2">
-          <button onclick="carryForwardLastMonthWorkers()" class="px-2.5 py-1.5 ios-glass hover:bg-white/10 text-amber-400 font-bold text-xs rounded-xl" title="Copy previous month workers">
+          <button onclick="carryForwardLastMonthWorkers()" class="px-2.5 py-1.5 ios-glass hover:bg-black/5 dark:hover:bg-white/10 text-amber-500 font-bold text-xs rounded-xl" title="Copy previous month workers">
             ⚡ Carry Last Month
           </button>
           <button onclick="openFormModal('labour')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs rounded-xl shadow">
@@ -249,7 +265,7 @@
       <div id="expenseList" class="space-y-2.5"></div>
     </section>
 
-    <!-- VIEW 5: COMPANY BILLS (ACCESSIBLE VIA TOP BAR) -->
+    <!-- VIEW 5: COMPANY BILLS -->
     <section id="viewBills" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black">🧾 Company Work Bills</h2>
@@ -260,18 +276,18 @@
 
   </main>
 
-  <!-- 5. iOS INSTAGRAM-STYLE BOTTOM NAVIGATION BAR (NO BILLS ICON) -->
+  <!-- 5. iOS INSTAGRAM BOTTOM NAVIGATION BAR -->
   <nav class="fixed bottom-0 inset-x-0 z-40 ios-instagram-nav pb-safe pt-2">
     <div class="max-w-md mx-auto px-6 pb-2 flex items-center justify-between">
       
-      <!-- Instagram Tab 1: Home -->
+      <!-- Home -->
       <button onclick="navigateTo('viewHome')" id="nav-viewHome" class="flex flex-col items-center justify-center w-12 py-1 text-amber-500 active:scale-90 transition-transform">
         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 2.1l9 8.1c.4.3.6.8.6 1.3v8.5c0 1.1-.9 2-2 2h-4.5c-.8 0-1.5-.7-1.5-1.5V15c0-.6-.4-1-1-1s-1 .4-1 1v5.5c0 .8-.7 1.5-1.5 1.5H5.4c-1.1 0-2-.9-2-2v-8.5c0-.5.2-1 .6-1.3l9-8.1c.6-.6 1.6-.6 2.2 0z"/>
         </svg>
       </button>
 
-      <!-- Instagram Tab 2: Labours (People / Direct style) -->
+      <!-- Labours -->
       <button onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="flex flex-col items-center justify-center w-12 py-1 text-zinc-400 active:scale-90 transition-transform">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -281,14 +297,14 @@
         </svg>
       </button>
 
-      <!-- Instagram Tab 3: Create / Plus (+) (Clean iOS square border style) -->
+      <!-- Add (+) Button -->
       <button onclick="openFormModal('labour')" class="flex items-center justify-center w-12 py-1 active:scale-90 transition-transform" title="New Entry">
         <div class="w-7 h-7 rounded-lg border-2 border-amber-500 flex items-center justify-center text-amber-500 font-bold text-lg leading-none">
           +
         </div>
       </button>
 
-      <!-- Instagram Tab 4: Expenses (Reels / Activity style) -->
+      <!-- Expenses -->
       <button onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="flex flex-col items-center justify-center w-12 py-1 text-zinc-400 active:scale-90 transition-transform">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
@@ -296,7 +312,7 @@
         </svg>
       </button>
 
-      <!-- Instagram Tab 5: Monthly Calendar / Archive -->
+      <!-- Monthly Calendar -->
       <button onclick="navigateTo('viewMonthly')" id="nav-viewMonthly" class="flex flex-col items-center justify-center w-12 py-1 text-zinc-400 active:scale-90 transition-transform">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -312,62 +328,62 @@
   <!-- 6. SETTINGS MODAL -->
   <div id="settingsModal" class="fixed inset-0 bg-black/60 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-5 shadow-2xl">
-      <div class="flex justify-between items-center border-b border-white/10 pb-3">
+      <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-3">
         <h3 class="font-black text-base flex items-center gap-2">⚙️ Account & Settings</h3>
-        <button onclick="closeSettingsModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
+        <button onclick="closeSettingsModal()" class="text-zinc-400 hover:text-zinc-600 dark:hover:text-white text-lg">✕</button>
       </div>
 
       <!-- Theme Switcher -->
       <div class="space-y-1.5">
-        <label class="text-xs font-bold text-zinc-400 uppercase">App Theme / थीम</label>
+        <label class="text-xs font-bold text-zinc-500 uppercase">App Theme / थीम</label>
         <div class="grid grid-cols-3 gap-2">
           <button onclick="setAppTheme('theme-amoled')" class="py-2 rounded-xl text-xs font-bold border border-white/20 bg-black text-white hover:border-amber-500">AMOLED</button>
           <button onclick="setAppTheme('theme-dark')" class="py-2 rounded-xl text-xs font-bold border border-white/20 bg-slate-800 text-white hover:border-amber-500">Dark</button>
-          <button onclick="setAppTheme('theme-light')" class="py-2 rounded-xl text-xs font-bold border border-zinc-300 bg-white text-zinc-900 hover:border-amber-500">Light</button>
+          <button onclick="setAppTheme('theme-light')" class="py-2 rounded-xl text-xs font-bold border border-zinc-300 bg-white text-zinc-900 hover:border-amber-500 shadow-sm">Light</button>
         </div>
       </div>
 
       <!-- Language Selector -->
       <div class="space-y-1.5">
-        <label class="text-xs font-bold text-zinc-400 uppercase">Language / भाषा</label>
-        <select id="settingsLang" onchange="changeLanguage(this.value)" class="w-full rounded-xl p-2.5 text-xs font-bold bg-[var(--input-bg)] border border-white/10 focus:outline-none">
-          <option value="hi" class="text-zinc-950">हिंदी (Hindi)</option>
-          <option value="en" class="text-zinc-950">English</option>
-          <option value="mr" class="text-zinc-950">मराठी (Marathi)</option>
-          <option value="gu" class="text-zinc-950">ગુજરાતી (Gujarati)</option>
+        <label class="text-xs font-bold text-zinc-500 uppercase">Language / भाषा</label>
+        <select id="settingsLang" onchange="changeLanguage(this.value)" class="app-input w-full rounded-xl p-2.5 text-xs font-bold focus:outline-none">
+          <option value="hi">हिंदी (Hindi)</option>
+          <option value="en">English</option>
+          <option value="mr">मराठी (Marathi)</option>
+          <option value="gu">ગુજરાતી (Gujarati)</option>
         </select>
       </div>
 
       <!-- Account Management -->
-      <div class="space-y-2 pt-2 border-t border-white/10">
-        <div id="accountStatusText" class="text-xs text-zinc-400">Currently in Local Mode</div>
-        <button onclick="closeSettingsModal(); openAuthModal();" class="w-full py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-bold text-xs flex items-center justify-center gap-1.5">
+      <div class="space-y-2 pt-2 border-t border-zinc-200 dark:border-white/10">
+        <div id="accountStatusText" class="text-xs text-zinc-500">Currently in Local Mode</div>
+        <button onclick="closeSettingsModal(); openAuthModal();" class="w-full py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-bold text-xs flex items-center justify-center gap-1.5 shadow">
           <span>👤</span> Switch / Add Account
         </button>
-        <button onclick="logoutAccount()" id="logoutBtn" class="w-full py-2 rounded-xl bg-rose-500/10 text-rose-400 font-bold text-xs hidden">
+        <button onclick="logoutAccount()" id="logoutBtn" class="w-full py-2 rounded-xl bg-rose-500/10 text-rose-500 font-bold text-xs hidden">
           Log Out
         </button>
       </div>
     </div>
   </div>
 
-  <!-- 7. INPUT FORMS MODAL -->
+  <!-- 7. UNIVERSAL INPUT MODAL (WITH EXCEL/WORD/PDF/IMAGE UPLOADS) -->
   <div id="formModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center border-b border-white/10 pb-2">
+      <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2">
         <h3 id="formModalTitle" class="font-bold text-base">Add Entry</h3>
-        <button onclick="closeFormModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
+        <button onclick="closeFormModal()" class="text-zinc-400 hover:text-zinc-600 dark:hover:text-white text-lg">✕</button>
       </div>
 
       <!-- Add Labour Form -->
       <form id="labourForm" onsubmit="saveLabour(event)" class="space-y-3 hidden">
         <div>
-          <input type="text" id="lName" list="knownLaboursList" onchange="autoFillKnownLabour(this.value)" required placeholder="Labour Name / नाम (e.g. Ramesh)" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none" />
+          <input type="text" id="lName" list="knownLaboursList" onchange="autoFillKnownLabour(this.value)" required placeholder="Labour Name / नाम (e.g. Ramesh)" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
           <datalist id="knownLaboursList"></datalist>
-          <span class="text-[10px] text-zinc-400">Type or pick from previous months to auto-fill details.</span>
+          <span class="text-[10px] text-zinc-500">Type or pick from previous workers to auto-fill.</span>
         </div>
 
-        <select id="lCategory" class="w-full rounded-xl bg-[var(--card-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none">
+        <select id="lCategory" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none">
           <option value="Mason (मिस्त्री)">Mason (मिस्त्री)</option>
           <option value="Helper (हेल्पर)">Helper (हेल्पर)</option>
           <option value="Carpenter (बढ़ई)">Carpenter (बढ़ई)</option>
@@ -376,22 +392,22 @@
         </select>
         
         <div class="grid grid-cols-2 gap-2">
-          <input type="number" id="lSalary" required min="0" placeholder="Monthly Salary ₹" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2 text-sm focus:outline-none" />
-          <input type="number" id="lAdvance" required min="0" placeholder="Advance ₹" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2 text-sm focus:outline-none" />
+          <input type="number" id="lSalary" required min="0" placeholder="Monthly Salary ₹" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none" />
+          <input type="number" id="lAdvance" required min="0" placeholder="Initial Advance ₹" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none" />
         </div>
         
-        <label class="flex items-center justify-center border border-dashed border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-white/5">
+        <label class="flex items-center justify-center border-2 border-dashed border-zinc-300 dark:border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-black/5 dark:hover:bg-white/5">
           <span id="lPhotoLabel">📷 Upload Worker Photo</span>
           <input type="file" id="lPhoto" accept="image/*" class="hidden" onchange="previewFileName('lPhoto','lPhotoLabel')" />
         </label>
         
-        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm">Save Labour / सेव करें</button>
+        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm shadow">Save Labour / सेव करें</button>
       </form>
 
-      <!-- Add Expense Form -->
+      <!-- Add Expense Form (Word, Excel, PDF, Image Uploads) -->
       <form id="expenseForm" onsubmit="saveExpense(event)" class="space-y-3 hidden">
-        <input type="text" id="eTitle" required placeholder="Description (ऑटो किराया / चाय / नाश्ता)" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none" />
-        <select id="eCategory" class="w-full rounded-xl bg-[var(--card-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none">
+        <input type="text" id="eTitle" required placeholder="Description (ऑटो किराया / चाय / नाश्ता)" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
+        <select id="eCategory" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none">
           <option value="Rickshaw / Rent (किराया)">Rickshaw / Transport (किराया)</option>
           <option value="Tea / Food (नाश्ता)">Tea & Food (चाय नाश्ता)</option>
           <option value="Material (सामान)">Material / Tools (सामान)</option>
@@ -399,58 +415,96 @@
           <option value="Other (अन्य)">Other</option>
         </select>
         <div class="grid grid-cols-2 gap-2">
-          <input type="number" id="eAmount" required min="0" placeholder="Amount ₹" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2 text-sm focus:outline-none" />
-          <input type="text" id="eSpentFor" placeholder="Paid For (किसके लिए)" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2 text-sm focus:outline-none" />
+          <input type="number" id="eAmount" required min="0" placeholder="Amount ₹" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none" />
+          <input type="text" id="eSpentFor" placeholder="Paid For (किसके लिए)" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none" />
         </div>
-        <label class="flex items-center justify-center border border-dashed border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-white/5">
-          <span id="ePhotoLabel">🧾 Upload Bill / Receipt Slip</span>
-          <input type="file" id="ePhoto" accept="image/*" class="hidden" onchange="previewFileName('ePhoto','ePhotoLabel')" />
+        <label class="flex items-center justify-center border-2 border-dashed border-zinc-300 dark:border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-black/5 dark:hover:bg-white/5">
+          <span id="eFileLabel">📎 Upload Slip / Bill (PDF, Word, Excel, Image)</span>
+          <input type="file" id="eFile" accept=".pdf,.doc,.docx,.xls,.xlsx,image/*" class="hidden" onchange="previewUniversalFile('eFile','eFileLabel')" />
         </label>
-        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm">Save Expense</button>
+        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm shadow">Save Expense</button>
       </form>
 
-      <!-- Add Bill Form -->
+      <!-- Add Bill Form (Word, Excel, PDF, Image Uploads) -->
       <form id="billForm" onsubmit="saveBill(event)" class="space-y-3 hidden">
-        <input type="text" id="bTitle" required placeholder="Company / Work Name" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none" />
+        <input type="text" id="bTitle" required placeholder="Company / Work Name" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
         <div class="grid grid-cols-2 gap-2">
-          <input type="number" id="bAmount" required min="0" placeholder="Bill Amount ₹" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2 text-sm focus:outline-none" />
-          <select id="bStatus" class="w-full rounded-xl bg-[var(--card-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none">
+          <input type="number" id="bAmount" required min="0" placeholder="Bill Amount ₹" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none" />
+          <select id="bStatus" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none">
             <option value="Received (प्राप्त)">Received</option>
             <option value="Pending (बाकी)">Pending</option>
           </select>
         </div>
-        <label class="flex items-center justify-center border border-dashed border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-white/5">
-          <span id="bPhotoLabel">📄 Upload Company Bill Photo</span>
-          <input type="file" id="bPhoto" accept="image/*" class="hidden" onchange="previewFileName('bPhoto','bPhotoLabel')" />
+        <label class="flex items-center justify-center border-2 border-dashed border-zinc-300 dark:border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-black/5 dark:hover:bg-white/5">
+          <span id="bFileLabel">📄 Upload Company Bill (Word, Excel, PDF, Image)</span>
+          <input type="file" id="bFile" accept=".pdf,.doc,.docx,.xls,.xlsx,image/*" class="hidden" onchange="previewUniversalFile('bFile','bFileLabel')" />
         </label>
-        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm">Save Company Bill</button>
+        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm shadow">Save Company Bill</button>
       </form>
     </div>
   </div>
 
-  <!-- 8. AUTH & PASSWORD RESET MODAL -->
+  <!-- 8. MODAL: ADD EXTRA ADVANCE WITH DATE & HISTORY -->
+  <div id="advanceModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2">
+        <div>
+          <h3 class="font-black text-sm" id="advWorkerName">Add Worker Advance</h3>
+          <span class="text-[10px] text-zinc-500">नया एडवांस व तारीख दर्ज करें</span>
+        </div>
+        <button onclick="closeAdvanceModal()" class="text-zinc-400 hover:text-zinc-600 dark:hover:text-white text-lg">✕</button>
+      </div>
+
+      <form onsubmit="submitExtraAdvance(event)" class="space-y-3">
+        <input type="hidden" id="advLabourId" />
+        <div>
+          <label class="text-[10px] uppercase font-bold text-zinc-500">Amount / राशि ₹</label>
+          <input type="number" id="advAmount" required min="1" placeholder="₹ Amount given" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-1" />
+        </div>
+        <div>
+          <label class="text-[10px] uppercase font-bold text-zinc-500">Date / तारीख</label>
+          <input type="date" id="advDate" required class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-1" />
+        </div>
+        <div>
+          <label class="text-[10px] uppercase font-bold text-zinc-500">Note / विवरण (Optional)</label>
+          <input type="text" id="advNote" placeholder="e.g. त्यौहार खर्चा / बीमारी" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-1" />
+        </div>
+        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-xs shadow">
+          + Add to Advance / एडवांस में जोड़ें
+        </button>
+      </form>
+
+      <!-- Advance History Log -->
+      <div class="pt-2 border-t border-zinc-200 dark:border-white/10">
+        <span class="text-[10px] font-bold text-zinc-500 uppercase">Payment History / पिछले भुगतान:</span>
+        <div id="advHistoryList" class="mt-1.5 max-h-36 overflow-y-auto space-y-1.5 text-xs"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. AUTH MODAL -->
   <div id="authModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center">
         <h3 class="font-extrabold text-base">लॉग इन / Register</h3>
         <button onclick="closeAuthModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
       </div>
-      <p class="text-xs text-zinc-400">Access your construction records securely across any device.</p>
+      <p class="text-xs text-zinc-500">Access your construction records securely across any device.</p>
       
       <div class="space-y-3">
-        <input type="email" id="authEmail" placeholder="Email Address / ईमेल" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none" />
-        <input type="password" id="authPass" placeholder="Password / पासवर्ड (6+ chars)" class="w-full rounded-xl bg-[var(--input-bg)] border border-white/10 px-3 py-2.5 text-sm focus:outline-none" />
+        <input type="email" id="authEmail" placeholder="Email Address / ईमेल" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
+        <input type="password" id="authPass" placeholder="Password / पासवर्ड (6+ chars)" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
       </div>
 
       <div class="flex justify-end">
-        <button onclick="handleForgotPassword()" class="text-xs text-amber-400 font-semibold hover:underline">
+        <button onclick="handleForgotPassword()" class="text-xs text-amber-500 font-semibold hover:underline">
           पासवर्ड भूल गए? / Forgot Password?
         </button>
       </div>
 
       <div class="flex gap-2 pt-2">
-        <button onclick="connectCloud(false)" class="flex-1 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm">Login</button>
-        <button onclick="connectCloud(true)" class="flex-1 bg-white/10 hover:bg-white/20 font-bold py-2.5 rounded-xl text-sm">Register</button>
+        <button onclick="connectCloud(false)" class="flex-1 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm shadow">Login</button>
+        <button onclick="connectCloud(true)" class="flex-1 bg-black/10 dark:bg-white/10 hover:bg-black/20 font-bold py-2.5 rounded-xl text-sm">Register</button>
       </div>
     </div>
   </div>
@@ -505,6 +559,7 @@
 
     const now = new Date();
     document.getElementById('monthSelect').value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+    document.getElementById('advDate').value = now.toISOString().split('T')[0];
 
     window.setAppTheme = (themeName) => {
       document.documentElement.className = themeName;
@@ -547,6 +602,24 @@
       }
     }
 
+    // Universal File Converter (Word, Excel, PDF, Images)
+    function processUniversalFile(file) {
+      return new Promise((resolve) => {
+        if (!file) return resolve(null);
+        const reader = new FileReader();
+        const fileType = file.name.split('.').pop().toLowerCase();
+        
+        reader.onload = (e) => {
+          resolve({
+            name: file.name,
+            ext: fileType,
+            dataUrl: e.target.result
+          });
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
     function compressImage(file) {
       return new Promise((resolve) => {
         if (!file) return resolve(null);
@@ -569,7 +642,6 @@
       });
     }
 
-    // Instagram View Switcher Logic
     window.navigateTo = (viewId) => {
       ['viewHome', 'viewLabours', 'viewMonthly', 'viewExpenses', 'viewBills'].forEach(v => {
         const el = document.getElementById(v);
@@ -627,45 +699,6 @@
       }
     };
 
-    window.carryForwardLastMonthWorkers = () => {
-      const currentSite = document.getElementById('siteSelect').value;
-      const currentMonth = document.getElementById('monthSelect').value;
-
-      const parts = currentMonth.split('-');
-      let year = parseInt(parts[0]);
-      let month = parseInt(parts[1]) - 1;
-      if (month === 0) { month = 12; year -= 1; }
-      const prevMonth = `${year}-${String(month).padStart(2, '0')}`;
-
-      const prevLabours = (state.labours || []).filter(l => l.site === currentSite && l.month === prevMonth);
-      if (prevLabours.length === 0) {
-        return alert(`No workers found in previous month (${prevMonth}) for ${currentSite}.`);
-      }
-
-      let count = 0;
-      prevLabours.forEach(oldL => {
-        const alreadyExists = (state.labours || []).some(l => l.site === currentSite && l.month === currentMonth && l.name.toLowerCase() === oldL.name.toLowerCase());
-        if (!alreadyExists) {
-          state.labours.unshift({
-            id: Date.now().toString() + Math.random().toString().slice(2, 6),
-            site: currentSite,
-            month: currentMonth,
-            name: oldL.name,
-            category: oldL.category,
-            salary: oldL.salary,
-            advance: 0,
-            presentDays: 0,
-            halfDays: 0,
-            photo: oldL.photo || null
-          });
-          count++;
-        }
-      });
-
-      persistState();
-      alert(`Success! Carried forward ${count} workers to ${currentMonth} with 0 attendance.`);
-    };
-
     window.addNewSite = () => {
       const name = prompt("नई निर्माण साइट का नाम लिखें / Enter Site Name:");
       if (name && name.trim()) {
@@ -676,6 +709,7 @@
       }
     };
 
+    // Save New Labour
     window.saveLabour = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -683,7 +717,7 @@
       const name = document.getElementById('lName').value.trim();
       const category = document.getElementById('lCategory').value;
       const salary = Number(document.getElementById('lSalary').value) || 0;
-      const advance = Number(document.getElementById('lAdvance').value) || 0;
+      const initialAdvance = Number(document.getElementById('lAdvance').value) || 0;
       const photoFile = document.getElementById('lPhoto').files[0];
       
       let photo = await compressImage(photoFile);
@@ -692,9 +726,20 @@
         if (existing) photo = existing.photo;
       }
 
+      const advanceLog = [];
+      if (initialAdvance > 0) {
+        advanceLog.push({
+          date: new Date().toLocaleDateString('hi-IN'),
+          amount: initialAdvance,
+          note: 'Initial advance'
+        });
+      }
+
       state.labours.unshift({
         id: Date.now().toString(),
-        site, month, name, category, salary, advance,
+        site, month, name, category, salary,
+        advance: initialAdvance,
+        advanceLog,
         presentDays: 0,
         halfDays: 0,
         photo
@@ -715,6 +760,68 @@
       navigateTo('viewLabours');
     };
 
+    // Update Base Salary Anytime
+    window.editLabourSalary = (id) => {
+      const l = state.labours.find(x => x.id === id);
+      if (!l) return;
+      const newSalary = prompt(`Update monthly salary for ${l.name}:`, l.salary);
+      if (newSalary !== null && !isNaN(newSalary) && Number(newSalary) >= 0) {
+        l.salary = Number(newSalary);
+        persistState();
+      }
+    };
+
+    // Add Extra Advance with Date
+    window.openAdvanceModal = (id) => {
+      const l = state.labours.find(x => x.id === id);
+      if (!l) return;
+      document.getElementById('advLabourId').value = id;
+      document.getElementById('advWorkerName').innerText = `Advance: ${l.name} (Total: ₹${l.advance || 0})`;
+      document.getElementById('advAmount').value = '';
+      document.getElementById('advNote').value = '';
+      
+      // Render History Log
+      const list = document.getElementById('advHistoryList');
+      const history = l.advanceLog || [];
+      if (history.length === 0) {
+        list.innerHTML = `<div class="text-zinc-500 italic">No installment records yet.</div>`;
+      } else {
+        list.innerHTML = history.map(h => `
+          <div class="flex justify-between items-center py-1 border-b border-zinc-200 dark:border-white/5">
+            <div>
+              <span class="font-bold text-amber-500">₹${h.amount}</span>
+              <span class="text-[10px] text-zinc-500 ml-1">(${h.note || 'Advance'})</span>
+            </div>
+            <span class="text-[10px] text-zinc-400">${h.date}</span>
+          </div>
+        `).join('');
+      }
+      document.getElementById('advanceModal').classList.replace('hidden', 'flex');
+    };
+    window.closeAdvanceModal = () => document.getElementById('advanceModal').classList.replace('flex', 'hidden');
+
+    window.submitExtraAdvance = (e) => {
+      e.preventDefault();
+      const id = document.getElementById('advLabourId').value;
+      const amt = Number(document.getElementById('advAmount').value) || 0;
+      const dateVal = document.getElementById('advDate').value;
+      const note = document.getElementById('advNote').value.trim();
+
+      const l = state.labours.find(x => x.id === id);
+      if (!l) return;
+      if (!l.advanceLog) l.advanceLog = [];
+
+      l.advance = (l.advance || 0) + amt;
+      l.advanceLog.unshift({
+        date: dateVal ? new Date(dateVal).toLocaleDateString('hi-IN') : new Date().toLocaleDateString('hi-IN'),
+        amount: amt,
+        note: note || 'Cash Advance'
+      });
+
+      closeAdvanceModal();
+      persistState();
+    };
+
     window.updateAttendance = (id, type) => {
       const l = state.labours.find(x => x.id === id);
       if (!l) return;
@@ -725,6 +832,7 @@
       persistState();
     };
 
+    // Save Expense with PDF/Word/Excel/Image Attachment
     window.saveExpense = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -733,22 +841,23 @@
       const category = document.getElementById('eCategory').value;
       const amount = Number(document.getElementById('eAmount').value) || 0;
       const spentFor = document.getElementById('eSpentFor').value.trim();
-      const photoFile = document.getElementById('ePhoto').files[0];
-      const photo = await compressImage(photoFile);
+      const file = document.getElementById('eFile').files[0];
+      const attachment = await processUniversalFile(file);
 
       if (!state.expenses) state.expenses = [];
       state.expenses.unshift({
         id: Date.now().toString(),
-        site, month, title, category, amount, spentFor, photo,
+        site, month, title, category, amount, spentFor, attachment,
         date: new Date().toLocaleDateString('hi-IN')
       });
       e.target.reset();
-      document.getElementById('ePhotoLabel').innerText = '🧾 Upload Bill / Receipt Slip';
+      document.getElementById('eFileLabel').innerText = '📎 Upload Slip / Bill (PDF, Word, Excel, Image)';
       closeFormModal();
       persistState();
       navigateTo('viewExpenses');
     };
 
+    // Save Bill with PDF/Word/Excel/Image Attachment
     window.saveBill = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -756,16 +865,16 @@
       const title = document.getElementById('bTitle').value.trim();
       const amount = Number(document.getElementById('bAmount').value) || 0;
       const status = document.getElementById('bStatus').value;
-      const photoFile = document.getElementById('bPhoto').files[0];
-      const photo = await compressImage(photoFile);
+      const file = document.getElementById('bFile').files[0];
+      const attachment = await processUniversalFile(file);
 
       state.bills.unshift({
         id: Date.now().toString(),
-        site, month, title, amount, status, photo,
+        site, month, title, amount, status, attachment,
         createdAt: new Date().toLocaleDateString('hi-IN')
       });
       e.target.reset();
-      document.getElementById('bPhotoLabel').innerText = '📄 Upload Company Bill Photo';
+      document.getElementById('bFileLabel').innerText = '📄 Upload Company Bill (Word, Excel, PDF, Image)';
       closeFormModal();
       persistState();
       navigateTo('viewBills');
@@ -776,6 +885,19 @@
       state[type] = state[type].filter(item => item.id !== id);
       persistState();
     };
+
+    function getFileBadgeHTML(att) {
+      if (!att) return `<div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold text-sm shrink-0">📄</div>`;
+      if (['jpg','jpeg','png','webp','gif'].includes(att.ext)) {
+        return `<a href="${att.dataUrl}" target="_blank" download="${att.name}"><img src="${att.dataUrl}" class="w-10 h-10 rounded-xl object-cover border border-amber-500 shrink-0" /></a>`;
+      }
+      let icon = '📎';
+      if (att.ext === 'pdf') icon = '📕 PDF';
+      else if (['xls','xlsx','csv'].includes(att.ext)) icon = '📊 XLS';
+      else if (['doc','docx'].includes(att.ext)) icon = '📝 DOC';
+
+      return `<a href="${att.dataUrl}" download="${att.name}" target="_blank" class="px-2 py-1.5 rounded-xl bg-amber-500/20 text-amber-600 dark:text-amber-400 text-[10px] font-black border border-amber-500/40 shrink-0">${icon}</a>`;
+    }
 
     function getSpokenMonthName(monthStr, lang) {
       const parts = monthStr.split('-');
@@ -826,7 +948,7 @@
 
       // Render Labour Register
       document.getElementById('labourList').innerHTML = filteredLabours.length === 0
-        ? `<div class="text-center py-8 text-xs text-zinc-400">No labour records found for ${activeMonth}. Tap "Carry Last Month" or "+ Worker".</div>`
+        ? `<div class="text-center py-8 text-xs text-zinc-500">No labour records found for ${activeMonth}. Tap "Carry Last Month" or "+ Worker".</div>`
         : filteredLabours.map(l => {
           const effectiveDays = (l.presentDays || 0) + ((l.halfDays || 0) * 0.5);
           const earned = Math.round((l.salary / 26) * effectiveDays);
@@ -834,32 +956,37 @@
           totalLabourDue += net;
 
           return `
-            <div class="ios-glass p-3.5 rounded-2xl space-y-2.5">
+            <div class="ios-glass p-3.5 rounded-2xl space-y-2.5 shadow-sm">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2.5">
                   ${l.photo
                     ? `<img src="${l.photo}" class="w-11 h-11 rounded-full object-cover border-2 border-amber-500 shrink-0" />`
-                    : `<div class="w-11 h-11 rounded-full bg-white/5 flex items-center justify-center font-bold text-sm shrink-0">👷</div>`}
+                    : `<div class="w-11 h-11 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center font-bold text-sm shrink-0">👷</div>`}
                   <div>
                     <h4 class="font-bold text-sm leading-tight">${l.name}</h4>
-                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-zinc-300 font-medium">${l.category}</span>
-                    <div class="text-[11px] text-zinc-400 mt-0.5">वेतन: <b>₹${l.salary}</b> | एडवांस: <b class="text-rose-400">₹${l.advance}</b></div>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-black/5 dark:bg-white/10 text-zinc-500 font-medium">${l.category}</span>
+                    <div class="text-[11px] text-zinc-500 mt-1 flex items-center gap-1.5 flex-wrap">
+                      <span>वेतन: <b>₹${l.salary}</b></span>
+                      <button onclick="editLabourSalary('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 font-bold">Edit</button>
+                      <span>| एडवांस: <b class="text-rose-500">₹${l.advance || 0}</b></span>
+                      <button onclick="openAdvanceModal('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-600 font-bold">+ Adv</button>
+                    </div>
                   </div>
                 </div>
                 <div class="text-right">
                   <div class="text-[10px] uppercase text-zinc-400 font-bold">देय राशि / Net</div>
-                  <div class="text-sm font-black ${net >= 0 ? 'text-emerald-400' : 'text-rose-400'}">₹${net.toLocaleString('en-IN')}</div>
-                  <button onclick="deleteRecord('labours','${l.id}')" class="text-[10px] text-zinc-400 hover:text-rose-400">Del</button>
+                  <div class="text-sm font-black ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net.toLocaleString('en-IN')}</div>
+                  <button onclick="deleteRecord('labours','${l.id}')" class="text-[10px] text-zinc-400 hover:text-rose-500 mt-1">Del</button>
                 </div>
               </div>
-              <div class="bg-black/20 p-2 rounded-xl flex items-center justify-between text-xs border border-white/5">
+              <div class="bg-black/5 dark:bg-black/20 p-2 rounded-xl flex items-center justify-between text-xs border border-zinc-200 dark:border-white/5">
                 <div>
-                  <span class="font-semibold text-zinc-400">हाजिरी:</span> <b class="text-emerald-400">${l.presentDays || 0}P</b>
-                  <span class="mx-1 text-zinc-600">|</span>
-                  <span class="font-semibold text-zinc-400">हाफ:</span> <b class="text-amber-400">${l.halfDays || 0}</b>
+                  <span class="font-semibold text-zinc-500">हाजिरी:</span> <b class="text-emerald-500">${l.presentDays || 0}P</b>
+                  <span class="mx-1 text-zinc-400">|</span>
+                  <span class="font-semibold text-zinc-500">हाफ:</span> <b class="text-amber-500">${l.halfDays || 0}</b>
                 </div>
                 <div class="flex items-center gap-1">
-                  <button onclick="updateAttendance('${l.id}','decPresent')" class="w-6 h-6 rounded bg-white/10 hover:bg-white/20 font-bold">-</button>
+                  <button onclick="updateAttendance('${l.id}','decPresent')" class="w-6 h-6 rounded bg-black/10 dark:bg-white/10 font-bold">-</button>
                   <button onclick="updateAttendance('${l.id}','incPresent')" class="w-6 h-6 rounded bg-emerald-500 text-zinc-950 font-bold">+P</button>
                   <button onclick="updateAttendance('${l.id}','incHalf')" class="px-1.5 h-6 rounded bg-amber-500 text-zinc-950 font-bold">+Half</button>
                 </div>
@@ -870,12 +997,12 @@
 
       document.getElementById('summaryLabourDue').innerText = `₹${totalLabourDue.toLocaleString('en-IN')}`;
 
-      // Render Home Recent Workforce
+      // Render Home Snapshot
       if (filteredLabours.length === 0) {
         document.getElementById('homeRecentLabour').innerHTML = `
           <div class="ios-glass rounded-2xl p-5 text-center">
             <div class="w-16 h-16 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-3xl mx-auto mb-2">🏗️</div>
-            <p class="text-xs text-zinc-400 mb-3">No workers added yet for ${activeMonth}.</p>
+            <p class="text-xs text-zinc-500 mb-3">No workers added yet for ${activeMonth}.</p>
             <button onclick="openFormModal('labour')" class="px-4 py-2 bg-amber-500 text-zinc-950 font-bold text-xs rounded-xl shadow">
               + ADD FIRST WORKER
             </button>
@@ -889,13 +1016,13 @@
           return `
             <div class="ios-glass p-3 rounded-xl flex items-center justify-between text-xs">
               <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs">👷</div>
+                <div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs">👷</div>
                 <div>
                   <div class="font-bold">${l.name}</div>
-                  <div class="text-[10px] text-zinc-400">${l.category} • ${l.presentDays || 0}P</div>
+                  <div class="text-[10px] text-zinc-500">${l.category} • ${l.presentDays || 0}P</div>
                 </div>
               </div>
-              <div class="font-extrabold ${net >= 0 ? 'text-emerald-400' : 'text-rose-400'}">₹${net}</div>
+              <div class="font-extrabold ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net}</div>
             </div>
           `;
         }).join('');
@@ -908,21 +1035,19 @@
       document.getElementById('summaryExpensesTotal').innerText = `₹${totalExpenses.toLocaleString('en-IN')}`;
 
       document.getElementById('expenseList').innerHTML = filteredExpenses.length === 0
-        ? `<div class="text-center py-8 text-xs text-zinc-400">No expenses recorded for ${activeMonth}.</div>`
+        ? `<div class="text-center py-8 text-xs text-zinc-500">No expenses recorded for ${activeMonth}.</div>`
         : filteredExpenses.map(e => `
-          <div class="ios-glass p-3 rounded-2xl flex items-center justify-between">
+          <div class="ios-glass p-3 rounded-2xl flex items-center justify-between shadow-sm">
             <div class="flex items-center gap-2.5">
-              ${e.photo
-                ? `<a href="${e.photo}" target="_blank"><img src="${e.photo}" class="w-10 h-10 rounded-xl object-cover border border-amber-500 shrink-0" /></a>`
-                : `<div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold shrink-0">🛺</div>`}
+              ${getFileBadgeHTML(e.attachment)}
               <div>
                 <h4 class="font-bold text-xs">${e.title}</h4>
-                <div class="text-[10px] text-zinc-400">${e.category} ${e.spentFor ? `• <b>${e.spentFor}</b>` : ''}</div>
+                <div class="text-[10px] text-zinc-500">${e.category} ${e.spentFor ? `• <b>${e.spentFor}</b>` : ''}</div>
               </div>
             </div>
             <div class="text-right">
-              <div class="text-xs font-black text-amber-400">₹${e.amount.toLocaleString('en-IN')}</div>
-              <button onclick="deleteRecord('expenses','${e.id}')" class="text-[10px] text-zinc-400 hover:text-rose-400">Del</button>
+              <div class="text-xs font-black text-amber-500">₹${e.amount.toLocaleString('en-IN')}</div>
+              <button onclick="deleteRecord('expenses','${e.id}')" class="text-[10px] text-zinc-400 hover:text-rose-500">Del</button>
             </div>
           </div>
         `).join('');
@@ -933,50 +1058,48 @@
       document.getElementById('summaryBillsTotal').innerText = `₹${totalBills.toLocaleString('en-IN')}`;
 
       document.getElementById('billList').innerHTML = filteredBills.length === 0
-        ? `<div class="text-center py-8 text-xs text-zinc-400">No company bills recorded for ${activeMonth}.</div>`
+        ? `<div class="text-center py-8 text-xs text-zinc-500">No company bills recorded for ${activeMonth}.</div>`
         : filteredBills.map(b => `
-          <div class="ios-glass p-3 rounded-2xl flex items-center justify-between">
+          <div class="ios-glass p-3 rounded-2xl flex items-center justify-between shadow-sm">
             <div class="flex items-center gap-2.5">
-              ${b.photo
-                ? `<a href="${b.photo}" target="_blank"><img src="${b.photo}" class="w-10 h-10 rounded-xl object-cover border border-emerald-500 shrink-0" /></a>`
-                : `<div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold shrink-0">🧾</div>`}
+              ${getFileBadgeHTML(b.attachment)}
               <div>
                 <h4 class="font-bold text-xs">${b.title}</h4>
-                <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-bold">${b.status}</span>
+                <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 font-bold">${b.status}</span>
               </div>
             </div>
             <div class="text-right">
-              <div class="text-xs font-black text-emerald-400">₹${b.amount.toLocaleString('en-IN')}</div>
-              <button onclick="deleteRecord('bills','${b.id}')" class="text-[10px] text-zinc-400 hover:text-rose-400">Del</button>
+              <div class="text-xs font-black text-emerald-500">₹${b.amount.toLocaleString('en-IN')}</div>
+              <button onclick="deleteRecord('bills','${b.id}')" class="text-[10px] text-zinc-400 hover:text-rose-500">Del</button>
             </div>
           </div>
         `).join('');
 
       // Render Monthly Ledger Tab Content
       document.getElementById('monthlyLedgerContent').innerHTML = `
-        <div class="ios-glass p-4 rounded-2xl space-y-3">
-          <div class="flex justify-between items-center text-xs pb-2 border-b border-white/5">
-            <span class="text-zinc-400">Active Site / Month:</span>
+        <div class="ios-glass p-4 rounded-2xl space-y-3 shadow-sm">
+          <div class="flex justify-between items-center text-xs pb-2 border-b border-zinc-200 dark:border-white/10">
+            <span class="text-zinc-500">Active Site / Month:</span>
             <span class="font-bold">${activeSite} (${activeMonth})</span>
           </div>
           <div class="grid grid-cols-3 gap-2 text-center text-xs">
-            <div class="bg-black/20 p-2 rounded-xl">
-              <div class="text-zinc-400 text-[10px]">Labour Net</div>
-              <div class="font-bold text-rose-400 mt-0.5">₹${totalLabourDue}</div>
+            <div class="bg-black/5 dark:bg-black/20 p-2 rounded-xl">
+              <div class="text-zinc-500 text-[10px]">Labour Net</div>
+              <div class="font-bold text-rose-500 mt-0.5">₹${totalLabourDue}</div>
             </div>
-            <div class="bg-black/20 p-2 rounded-xl">
-              <div class="text-zinc-400 text-[10px]">Expenses</div>
-              <div class="font-bold text-amber-400 mt-0.5">₹${totalExpenses}</div>
+            <div class="bg-black/5 dark:bg-black/20 p-2 rounded-xl">
+              <div class="text-zinc-500 text-[10px]">Expenses</div>
+              <div class="font-bold text-amber-500 mt-0.5">₹${totalExpenses}</div>
             </div>
-            <div class="bg-black/20 p-2 rounded-xl">
-              <div class="text-zinc-400 text-[10px]">Bills</div>
-              <div class="font-bold text-emerald-400 mt-0.5">₹${totalBills}</div>
+            <div class="bg-black/5 dark:bg-black/20 p-2 rounded-xl">
+              <div class="text-zinc-500 text-[10px]">Bills</div>
+              <div class="font-bold text-emerald-500 mt-0.5">₹${totalBills}</div>
             </div>
           </div>
-          <div class="pt-2 text-xs text-zinc-400 space-y-1">
+          <div class="pt-2 text-xs text-zinc-500 space-y-1">
             <div>• Registered Labours: <b>${filteredLabours.length}</b></div>
-            <div>• Site Expense Slips: <b>${filteredExpenses.length}</b></div>
-            <div>• Work Bills: <b>${filteredBills.length}</b></div>
+            <div>• Site Expense Records: <b>${filteredExpenses.length}</b></div>
+            <div>• Company Bills: <b>${filteredBills.length}</b></div>
           </div>
         </div>
       `;
@@ -984,7 +1107,12 @@
 
     window.previewFileName = (inpId, lblId) => {
       const file = document.getElementById(inpId).files[0];
-      if (file) document.getElementById(lblId).innerText = `✅ ${file.name.slice(0, 10)}...`;
+      if (file) document.getElementById(lblId).innerText = `✅ ${file.name.slice(0, 14)}...`;
+    };
+
+    window.previewUniversalFile = (inpId, lblId) => {
+      const file = document.getElementById(inpId).files[0];
+      if (file) document.getElementById(lblId).innerText = `📄 ${file.name}`;
     };
 
     window.changeLanguage = (lang) => {
