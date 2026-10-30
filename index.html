@@ -1,274 +1,263 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>ठेकेDAAR - Construction & Labour Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
   
-  <!-- Logo & App Icons -->
   <link rel="icon" type="image/png" href="./logo.png">
   <link rel="apple-touch-icon" href="./logo.png">
   <link rel="manifest" href="manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#f59e0b">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#121822">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
-      theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] } } }
+      theme: {
+        extend: {
+          colors: {
+            appbg: '#141a22',
+            cardbg: '#1c2430',
+            bordercol: '#2b3748',
+            accent: '#f59e0b'
+          }
+        }
+      }
     };
   </script>
 
   <style>
-    /* Splash Screen & Construction Background Animations */
-    #splashScreen {
-      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.7s;
+    body {
+      background-color: #121822;
+      color: #e2e8f0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
-    
+    .glass-card {
+      background: linear-gradient(145deg, rgba(28, 36, 48, 0.85), rgba(20, 27, 36, 0.95));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+    }
+    .waveform-bar {
+      display: inline-block;
+      width: 3px;
+      background: rgba(245, 158, 11, 0.4);
+      border-radius: 9999px;
+      margin: 0 1.5px;
+    }
     .letter-anim {
       display: inline-block;
       opacity: 0;
-      transform: translateY(28px) scale(0.65);
-      animation: popIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      transform: translateY(24px) scale(0.7);
+      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
-
     @keyframes popIn {
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
-
-    /* Construction Crane & Hook Motion */
-    @keyframes craneSway {
-      0%, 100% { transform: rotate(0deg); }
-      50% { transform: rotate(4deg); }
-    }
-    @keyframes cableDrop {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(18px); }
-    }
-    @keyframes sparkFlicker {
-      0%, 100% { opacity: 0.15; transform: scale(0.8); }
-      50% { opacity: 0.95; transform: scale(1.2); }
-    }
-
-    .crane-arm { transform-origin: 20px 20px; animation: craneSway 6s ease-in-out infinite; }
-    .crane-cable { animation: cableDrop 4s ease-in-out infinite; }
-    .welding-spark { animation: sparkFlicker 0.2s ease-in-out infinite alternate; }
-
-    /* Hide scrollbars for clean minimal app UI */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
-<body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen pb-24 transition-colors duration-200 select-none">
+<body class="min-h-screen pb-28 select-none no-scrollbar">
 
-  <!-- 1. SPLASH SCREEN (ANIMATED ON OPEN) -->
-  <div id="splashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-zinc-950 overflow-hidden">
-    
-    <!-- Animated Construction Background Vector -->
-    <div class="absolute inset-0 pointer-events-none opacity-30 flex items-center justify-center">
-      <svg class="w-full h-full max-w-2xl text-amber-500/40" viewBox="0 0 600 400" fill="none" stroke="currentColor">
-        <!-- Building Scaffolding Grid -->
-        <path d="M 80 380 L 80 120 L 220 120 L 220 380 M 80 180 L 220 180 M 80 240 L 220 240 M 80 300 L 220 300" stroke-width="2.5" stroke-dasharray="4 4" />
-        <path d="M 80 120 L 220 180 M 80 180 L 220 240 M 80 240 L 220 300 M 80 300 L 220 380" stroke-width="1.5" opacity="0.6" />
-        
-        <!-- Animated Construction Crane -->
-        <g class="crane-arm">
-          <path d="M 380 380 L 380 80 L 560 50 M 320 95 L 380 80" stroke-width="3.5" stroke-linecap="round" />
-          <path d="M 380 120 L 440 65 M 440 65 L 500 58 M 500 58 L 560 50" stroke-width="1.5" />
-          <g class="crane-cable">
-            <line x1="520" y1="55" x2="520" y2="170" stroke-width="1.8" />
-            <path d="M 515 170 C 515 185 525 185 525 170" stroke-width="3" stroke-linecap="round" />
-          </g>
-        </g>
-        <!-- Ground Line -->
-        <line x1="20" y1="380" x2="580" y2="380" stroke-width="4" stroke-linecap="round" />
-      </svg>
-    </div>
-
-    <!-- Welding Spark Effect -->
-    <div class="absolute w-28 h-28 bg-amber-400 rounded-full blur-2xl welding-spark"></div>
-
-    <!-- Center Logo & Kinetic Animated Letters -->
+  <!-- 1. SPLASH SCREEN ANIMATION -->
+  <div id="splashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-zinc-950 transition-opacity duration-500">
     <div class="relative z-10 flex flex-col items-center">
-      <img src="./logo.png" alt="Logo" class="w-24 h-24 rounded-3xl shadow-2xl border-2 border-amber-500/40 object-cover mb-5 animate-pulse" />
-      
-      <!-- Letter-by-Letter Animated Brand Name -->
-      <div id="thekedaarLetters" class="text-4xl md:text-5xl font-black text-white tracking-widest flex items-center">
-        <!-- Injected via JS for precise step delays -->
-      </div>
-      <p class="text-amber-500 text-xs font-bold uppercase tracking-widest mt-2 opacity-90">Construction & Workforce System</p>
+      <img src="./logo.png" alt="Logo" class="w-24 h-24 rounded-3xl shadow-2xl border border-amber-500/40 object-cover mb-5 animate-pulse" />
+      <div id="thekedaarLetters" class="text-4xl font-black text-white tracking-widest flex items-center"></div>
+      <p class="text-amber-500 text-xs font-bold uppercase tracking-widest mt-2 opacity-80">Workforce & Site Manager</p>
     </div>
   </div>
 
   <!-- 2. TOP HEADER -->
-  <header class="sticky top-0 z-30 bg-white/90 dark:bg-zinc-900/90 backdrop-blur border-b border-zinc-200 dark:border-zinc-800 px-4 py-2.5">
-    <div class="max-w-4xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-2.5">
-        <img src="./logo.png" alt="Logo" class="w-9 h-9 rounded-xl object-cover border border-amber-500/30 shadow-sm" />
+  <header class="sticky top-0 z-30 px-4 pt-4 pb-2 bg-[#121822]/90 backdrop-blur-md border-b border-white/5">
+    <div class="max-w-md mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="./logo.png" alt="Logo" class="w-11 h-11 rounded-2xl object-cover border border-amber-500/40 shadow" />
         <div>
-          <h1 class="text-base font-black tracking-tight leading-none text-zinc-900 dark:text-zinc-50">ठेकेDAAR</h1>
-          <span id="syncStatus" class="text-[10px] text-zinc-500 font-medium">● Local Mode</span>
+          <h1 class="text-lg font-black tracking-tight leading-none text-white">ठेकेDAAR</h1>
+          <div class="flex items-center gap-2 mt-1">
+            <span id="syncStatus" class="text-[11px] text-zinc-400 flex items-center gap-1 font-medium">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span> Local Mode
+            </span>
+            <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-[#1c2430] border border-white/10 text-[11px] font-semibold text-zinc-200 rounded-md px-1.5 py-0.5 focus:outline-none">
+              <option value="hi">हिंदी</option>
+              <option value="en">English</option>
+              <option value="mr">मराठी</option>
+              <option value="gu">ગુજરાતી</option>
+            </select>
+          </div>
         </div>
       </div>
 
-      <div class="flex items-center gap-1.5">
-        <select id="langSelect" onchange="changeLanguage(this.value)" class="text-xs font-semibold px-2 py-1 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-transparent">
-          <option value="hi" class="dark:bg-zinc-900">हिंदी</option>
-          <option value="en" class="dark:bg-zinc-900">English</option>
-          <option value="mr" class="dark:bg-zinc-900">मराठी</option>
-          <option value="gu" class="dark:bg-zinc-900">ગુજરાતી</option>
-        </select>
-
-        <button onclick="playVoiceSummary()" class="p-2 text-xs rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800" title="Audio Report">
-          🔊
-        </button>
-
-        <button onclick="shareApp()" class="p-2 text-xs rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800" title="Share App">
-          📲
-        </button>
-
-        <button onclick="toggleTheme()" class="p-2 text-xs rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800" title="Toggle Light/Dark">
-          🌓
-        </button>
-
-        <button onclick="openAuthModal()" id="authBtn" class="px-2.5 py-1 text-xs font-bold rounded-lg bg-amber-500 text-zinc-950 hover:bg-amber-400">
-          लॉग इन / Register
-        </button>
-      </div>
+      <button onclick="openAuthModal()" id="authBtn" class="px-3.5 py-1.5 text-xs font-bold rounded-full bg-slate-700/80 hover:bg-slate-600 text-white border border-white/10 shadow-sm transition-all">
+        Login / Register
+      </button>
     </div>
   </header>
 
-  <!-- Global Site & Month Selection Bar -->
-  <div class="max-w-4xl mx-auto px-4 pt-3">
-    <div class="bg-white dark:bg-zinc-900 p-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm flex items-center justify-between gap-2">
-      <div class="flex items-center gap-1.5 flex-1">
-        <span class="text-xs">🏗️</span>
-        <select id="siteSelect" onchange="renderAll()" class="w-full bg-transparent text-xs font-bold focus:outline-none"></select>
+  <!-- 3. GLOBAL SITE & MONTH SELECTOR BAR -->
+  <div class="max-w-md mx-auto px-4 pt-3">
+    <div class="glass-card rounded-2xl p-2.5 flex items-center justify-between gap-2 border border-white/5 shadow-md">
+      <div class="flex items-center gap-1.5 flex-1 min-w-0">
+        <span class="text-zinc-400 text-sm">📍</span>
+        <select id="siteSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold text-white focus:outline-none w-full truncate"></select>
       </div>
-      <button onclick="addNewSite()" class="px-2 py-1 bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold text-xs rounded-lg">+ Site</button>
-      <div class="h-4 w-px bg-zinc-200 dark:bg-zinc-800"></div>
-      <input type="month" id="monthSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold focus:outline-none" />
+      <button onclick="addNewSite()" class="px-2.5 py-1 bg-white/10 hover:bg-white/20 text-zinc-200 font-bold text-xs rounded-xl transition-all shrink-0">
+        + SITE
+      </button>
+      <div class="h-4 w-px bg-white/10"></div>
+      <div class="flex items-center gap-1 text-xs font-semibold text-zinc-300 shrink-0">
+        <input type="month" id="monthSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold text-zinc-200 focus:outline-none cursor-pointer" />
+      </div>
     </div>
   </div>
 
-  <!-- 3. VIEWS CONTAINER (CONTROLLED BY INSTAGRAM BOTTOM BAR) -->
-  <main class="max-w-4xl mx-auto p-4">
+  <!-- 4. MAIN CONTENT CONTAINER -->
+  <main class="max-w-md mx-auto p-4 space-y-4">
 
-    <!-- VIEW 1: HOME OVERVIEW (FEED / SUMMARY) -->
-    <section id="viewHome" class="space-y-4">
-      <div class="grid grid-cols-3 gap-2">
-        <div class="p-3 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center shadow-sm">
-          <div class="text-[10px] font-bold uppercase text-zinc-400" data-i18n="netLabourDue">Labour Due</div>
-          <div id="summaryLabourDue" class="text-base font-black text-rose-500 mt-0.5">₹0</div>
-        </div>
-        <div class="p-3 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center shadow-sm">
-          <div class="text-[10px] font-bold uppercase text-zinc-400" data-i18n="totalExpenses">Expenses</div>
-          <div id="summaryExpensesTotal" class="text-base font-black text-amber-500 mt-0.5">₹0</div>
-        </div>
-        <div class="p-3 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-center shadow-sm">
-          <div class="text-[10px] font-bold uppercase text-zinc-400" data-i18n="totalBills">Bills</div>
-          <div id="summaryBillsTotal" class="text-base font-black text-emerald-500 mt-0.5">₹0</div>
-        </div>
+    <!-- SUMMARY CHIPS -->
+    <div class="grid grid-cols-3 gap-2.5">
+      <div class="rounded-2xl p-3 border border-rose-500/20 bg-rose-500/5 text-center flex flex-col justify-center shadow-sm">
+        <span class="text-[10px] font-bold tracking-wider uppercase text-rose-300/80">LABOUR DUE</span>
+        <span id="summaryLabourDue" class="text-lg font-black text-rose-400 mt-0.5">₹0</span>
       </div>
+      <div class="rounded-2xl p-3 border border-amber-500/20 bg-amber-500/5 text-center flex flex-col justify-center shadow-sm">
+        <span class="text-[10px] font-bold tracking-wider uppercase text-amber-300/80">EXPENSES</span>
+        <span id="summaryExpensesTotal" class="text-lg font-black text-amber-400 mt-0.5">₹0</span>
+      </div>
+      <div class="rounded-2xl p-3 border border-emerald-500/20 bg-emerald-500/5 text-center flex flex-col justify-center shadow-sm">
+        <span class="text-[10px] font-bold tracking-wider uppercase text-emerald-300/80">BILLS</span>
+        <span id="summaryBillsTotal" class="text-lg font-black text-emerald-400 mt-0.5">₹0</span>
+      </div>
+    </div>
 
-      <!-- Quick Action Cards -->
-      <div class="bg-amber-500/10 border border-amber-500/20 p-4 rounded-2xl flex items-center justify-between">
-        <div>
-          <h3 class="font-extrabold text-sm text-amber-600 dark:text-amber-400">Site Audio Status / बोलकर हिसाब सुनें</h3>
-          <p class="text-xs text-zinc-500">Listen to whole site summary in one tap</p>
-        </div>
-        <button onclick="playVoiceSummary()" class="px-3 py-1.5 bg-amber-500 text-zinc-950 font-bold rounded-xl text-xs shadow">🔊 Listen</button>
-      </div>
+    <!-- SITE AUDIO SUMMARY CARD -->
+    <div class="glass-card rounded-3xl p-4 relative overflow-hidden border border-white/10 shadow-lg">
+      <div class="relative z-10 flex flex-col items-center text-center">
+        <h3 class="text-sm font-extrabold text-white flex items-center gap-1.5">
+          Site Audio Summary / बोलकर हिसाब सुनें
+        </h3>
+        <p class="text-[11px] text-zinc-400 mt-0.5">Listen to whole site summary in one tap</p>
 
-      <!-- Recent Site Activity -->
-      <div>
-        <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Live Workforce Snapshot</h3>
-        <div id="homeRecentLabour" class="space-y-2"></div>
+        <div class="flex items-center justify-center my-3 h-8 w-full max-w-[240px] opacity-75">
+          <span class="waveform-bar h-2"></span>
+          <span class="waveform-bar h-4"></span>
+          <span class="waveform-bar h-6"></span>
+          <span class="waveform-bar h-3"></span>
+          <span class="waveform-bar h-7"></span>
+          <span class="waveform-bar h-5"></span>
+          <span class="waveform-bar h-8"></span>
+          <span class="waveform-bar h-4"></span>
+          <span class="waveform-bar h-6"></span>
+          <span class="waveform-bar h-2"></span>
+        </div>
+
+        <button onclick="playVoiceSummary()" id="voicePlayBtn" class="px-6 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-zinc-950 font-black text-xs tracking-wider flex items-center gap-2 shadow-lg active:scale-95 transition-all">
+          <span>🔊</span> LISTEN / सुनें
+        </button>
       </div>
+    </div>
+
+    <!-- VIEW 1: HOME SNAPSHOT -->
+    <section id="viewHome" class="space-y-3">
+      <div class="flex items-center justify-between pt-1">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-400">LIVE WORKFORCE SNAPSHOT</h2>
+      </div>
+      <div id="homeRecentLabour"></div>
     </section>
 
     <!-- VIEW 2: LABOURS & ATTENDANCE -->
     <section id="viewLabours" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
-        <h2 class="text-sm font-black" data-i18n="tabLabour">👷‍♂️ Labour & Attendance Register</h2>
-        <button onclick="openFormModal('labour')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Worker</button>
+        <h2 class="text-sm font-black text-white">👷‍♂️ Labour & Attendance Register</h2>
+        <button onclick="openFormModal('labour')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Worker</button>
       </div>
       <div id="labourList" class="space-y-2.5"></div>
     </section>
 
-    <!-- VIEW 3: SITE EXPENSES & RICKSHAW RENT -->
+    <!-- VIEW 3: MONTHWISE MASTER LEDGER -->
+    <section id="viewLedger" class="space-y-3 hidden">
+      <div class="flex items-center justify-between">
+        <h2 class="text-sm font-black text-white">📅 Month-Wise Stored Data</h2>
+        <span id="ledgerMonthBadge" class="text-xs px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-400 font-bold border border-amber-500/20"></span>
+      </div>
+      <div id="ledgerContent" class="space-y-3"></div>
+    </section>
+
+    <!-- VIEW 4: SITE EXPENSES -->
     <section id="viewExpenses" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
-        <h2 class="text-sm font-black" data-i18n="tabExpenses">🛺 Site Expenses & Transport</h2>
-        <button onclick="openFormModal('expense')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Expense</button>
+        <h2 class="text-sm font-black text-white">🛺 Site Expenses & Rent</h2>
+        <button onclick="openFormModal('expense')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Expense</button>
       </div>
       <div id="expenseList" class="space-y-2.5"></div>
     </section>
 
-    <!-- VIEW 4: COMPANY BILLS -->
+    <!-- VIEW 5: COMPANY BILLS -->
     <section id="viewBills" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
-        <h2 class="text-sm font-black" data-i18n="tabBills">🧾 Company Work Bills</h2>
-        <button onclick="openFormModal('bill')" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Bill</button>
+        <h2 class="text-sm font-black text-white">🧾 Company Work Bills</h2>
+        <button onclick="openFormModal('bill')" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Bill</button>
       </div>
       <div id="billList" class="space-y-2.5"></div>
     </section>
 
   </main>
 
-  <!-- 4. INSTAGRAM-STYLE BOTTOM ICON NAVIGATION BAR -->
-  <nav class="fixed bottom-0 inset-x-0 z-40 bg-white/95 dark:bg-zinc-900/95 backdrop-blur border-t border-zinc-200 dark:border-zinc-800 px-4 py-2">
-    <div class="max-w-md mx-auto flex items-center justify-around">
+  <!-- 5. BOTTOM NAVIGATION BAR -->
+  <nav class="fixed bottom-0 inset-x-0 z-40 bg-[#141c26]/95 backdrop-blur-lg border-t border-white/5 px-4 py-2">
+    <div class="max-w-md mx-auto flex items-center justify-between">
       
-      <!-- Home Icon -->
-      <button onclick="navigateTo('viewHome')" id="nav-viewHome" class="flex flex-col items-center text-amber-500 transition-transform active:scale-90">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-        <span class="text-[10px] font-semibold mt-0.5">Home</span>
+      <button onclick="navigateTo('viewHome')" id="nav-viewHome" class="flex flex-col items-center text-amber-500 transition-transform active:scale-95">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span class="text-[9px] font-medium mt-0.5">Home</span>
       </button>
 
-      <!-- Labour Icon -->
-      <button onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="flex flex-col items-center text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-transform active:scale-90">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 3s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-        <span class="text-[10px] font-semibold mt-0.5">Labours</span>
+      <button onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="flex flex-col items-center text-zinc-400 hover:text-zinc-200 transition-transform active:scale-95">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 3s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        <span class="text-[9px] font-medium mt-0.5">Labours</span>
       </button>
 
-      <!-- Floating Plus (+) Action Button -->
-      <button onclick="openFormModal('labour')" class="w-12 h-12 -mt-5 rounded-full bg-amber-500 text-zinc-950 flex items-center justify-center font-black text-2xl shadow-lg border-4 border-zinc-50 dark:border-zinc-950 transition-transform active:scale-90">
+      <!-- Center Add (+) Button -->
+      <button onclick="openFormModal('labour')" class="w-12 h-12 -mt-5 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 flex items-center justify-center font-black text-2xl shadow-xl border-4 border-[#121822] active:scale-90 transition-all">
         +
       </button>
 
-      <!-- Expenses / Rickshaw Icon -->
-      <button onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="flex flex-col items-center text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-transform active:scale-90">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.77l.11.34V17z"/></svg>
-        <span class="text-[10px] font-semibold mt-0.5">Expenses</span>
+      <!-- Monthwise Ledger Tab -->
+      <button onclick="navigateTo('viewLedger')" id="nav-viewLedger" class="flex flex-col items-center text-zinc-400 hover:text-zinc-200 transition-transform active:scale-95">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+        <span class="text-[9px] font-medium mt-0.5">Monthly</span>
       </button>
 
-      <!-- Bills Icon -->
-      <button onclick="navigateTo('viewBills')" id="nav-viewBills" class="flex flex-col items-center text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-transform active:scale-90">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-        <span class="text-[10px] font-semibold mt-0.5">Bills</span>
+      <button onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="flex flex-col items-center text-zinc-400 hover:text-zinc-200 transition-transform active:scale-95">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.77l.11.34V17z"/></svg>
+        <span class="text-[9px] font-medium mt-0.5">Expenses</span>
+      </button>
+
+      <button onclick="navigateTo('viewBills')" id="nav-viewBills" class="flex flex-col items-center text-zinc-400 hover:text-zinc-200 transition-transform active:scale-95">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        <span class="text-[9px] font-medium mt-0.5">Bills</span>
       </button>
 
     </div>
   </nav>
 
-  <!-- 5. UNIVERSAL ACTION MODALS (FOR ADDING LABOUR, EXPENSE, BILL) -->
-  <div id="formModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
-    <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800 pb-2">
-        <h3 id="formModalTitle" class="font-black text-base">Add Entry</h3>
-        <button onclick="closeFormModal()" class="text-zinc-400 hover:text-zinc-600 text-lg">✕</button>
+  <!-- 6. INPUT FORMS MODAL -->
+  <div id="formModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
+    <div class="glass-card rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-4 border border-white/10 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center border-b border-white/10 pb-2">
+        <h3 id="formModalTitle" class="font-bold text-white text-base">Add Entry</h3>
+        <button onclick="closeFormModal()" class="text-zinc-400 hover:text-zinc-200 text-lg">✕</button>
       </div>
 
-      <!-- Labour Form -->
+      <!-- Form: Add Labour -->
       <form id="labourForm" onsubmit="saveLabour(event)" class="space-y-3 hidden">
-        <input type="text" id="lName" required placeholder="Labour Name / नाम (e.g. Ramesh)" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-        <select id="lCategory" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm">
+        <input type="text" id="lName" required placeholder="Labour Name / नाम (e.g. Ramesh)" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2.5 text-sm" />
+        <select id="lCategory" class="w-full rounded-xl bg-[#1c2430] border border-white/10 text-white px-3 py-2.5 text-sm">
           <option value="Mason (मिस्त्री)">Mason (मिस्त्री)</option>
           <option value="Helper (हेल्पर)">Helper (हेल्पर)</option>
           <option value="Carpenter (बढ़ई)">Carpenter (बढ़ई)</option>
@@ -276,20 +265,21 @@
           <option value="Plumber (प्लम्बर)">Plumber (प्लम्बर)</option>
         </select>
         <div class="grid grid-cols-2 gap-2">
-          <input type="number" id="lSalary" required min="0" placeholder="Monthly Salary ₹" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-          <input type="number" id="lAdvance" required min="0" placeholder="Advance ₹" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+          <input type="number" id="lSalary" required min="0" placeholder="Monthly Salary ₹" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2 text-sm" />
+          <input type="number" id="lAdvance" required min="0" placeholder="Advance ₹" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2 text-sm" />
         </div>
-        <label class="flex items-center justify-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800">
+        <p class="text-[11px] text-zinc-400 italic">Worker attendance starts strictly at 0 days.</p>
+        <label class="flex items-center justify-center border border-dashed border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-white/5 text-zinc-300">
           <span id="lPhotoLabel">📷 Upload Worker Photo</span>
           <input type="file" id="lPhoto" accept="image/*" class="hidden" onchange="previewFileName('lPhoto','lPhotoLabel')" />
         </label>
         <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm">Save Labour / सेव करें</button>
       </form>
 
-      <!-- Expense Form -->
+      <!-- Form: Add Expense -->
       <form id="expenseForm" onsubmit="saveExpense(event)" class="space-y-3 hidden">
-        <input type="text" id="eTitle" required placeholder="Description (ऑटो किराया / चाय / नाश्ता)" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-        <select id="eCategory" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm">
+        <input type="text" id="eTitle" required placeholder="Description (ऑटो किराया / चाय / नाश्ता)" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2.5 text-sm" />
+        <select id="eCategory" class="w-full rounded-xl bg-[#1c2430] border border-white/10 text-white px-3 py-2.5 text-sm">
           <option value="Rickshaw / Rent (किराया)">Rickshaw / Transport (किराया)</option>
           <option value="Tea / Food (नाश्ता)">Tea & Food (चाय नाश्ता)</option>
           <option value="Material (सामान)">Material / Tools (सामान)</option>
@@ -297,27 +287,27 @@
           <option value="Other (अन्य)">Other</option>
         </select>
         <div class="grid grid-cols-2 gap-2">
-          <input type="number" id="eAmount" required min="0" placeholder="Amount ₹" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-          <input type="text" id="eSpentFor" placeholder="Paid For (किसके लिए)" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+          <input type="number" id="eAmount" required min="0" placeholder="Amount ₹" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2 text-sm" />
+          <input type="text" id="eSpentFor" placeholder="Paid For (किसके लिए)" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2 text-sm" />
         </div>
-        <label class="flex items-center justify-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800">
+        <label class="flex items-center justify-center border border-dashed border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-white/5 text-zinc-300">
           <span id="ePhotoLabel">🧾 Upload Bill / Receipt Slip</span>
           <input type="file" id="ePhoto" accept="image/*" class="hidden" onchange="previewFileName('ePhoto','ePhotoLabel')" />
         </label>
         <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm">Save Expense / सुरक्षित करें</button>
       </form>
 
-      <!-- Bill Form -->
+      <!-- Form: Add Bill -->
       <form id="billForm" onsubmit="saveBill(event)" class="space-y-3 hidden">
-        <input type="text" id="bTitle" required placeholder="Work / Company Name" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
+        <input type="text" id="bTitle" required placeholder="Work / Company Name" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2.5 text-sm" />
         <div class="grid grid-cols-2 gap-2">
-          <input type="number" id="bAmount" required min="0" placeholder="Bill Amount ₹" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm" />
-          <select id="bStatus" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-3 py-2 text-sm">
+          <input type="number" id="bAmount" required min="0" placeholder="Bill Amount ₹" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2 text-sm" />
+          <select id="bStatus" class="w-full rounded-xl bg-[#1c2430] border border-white/10 text-white px-3 py-2 text-sm">
             <option value="Received (प्राप्त)">Received</option>
             <option value="Pending (बाकी)">Pending</option>
           </select>
         </div>
-        <label class="flex items-center justify-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800">
+        <label class="flex items-center justify-center border border-dashed border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-white/5 text-zinc-300">
           <span id="bPhotoLabel">📄 Upload Company Bill Photo</span>
           <input type="file" id="bPhoto" accept="image/*" class="hidden" onchange="previewFileName('bPhoto','bPhotoLabel')" />
         </label>
@@ -327,40 +317,39 @@
     </div>
   </div>
 
-  <!-- 6. CLOUD AUTH & PASSWORD RESET MODAL -->
-  <div id="authModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-    <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl">
+  <!-- 7. AUTH & FORGOT PASSWORD MODAL -->
+  <div id="authModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+    <div class="glass-card rounded-3xl max-w-sm w-full p-6 space-y-4 border border-white/10 shadow-2xl">
       <div class="flex justify-between items-center">
-        <h3 class="font-extrabold text-base">लॉग इन / Register</h3>
-        <button onclick="closeAuthModal()" class="text-zinc-400 hover:text-zinc-600 text-lg">✕</button>
+        <h3 class="font-extrabold text-white text-base">लॉग इन / Register</h3>
+        <button onclick="closeAuthModal()" class="text-zinc-400 hover:text-zinc-200 text-lg">✕</button>
       </div>
-      <p class="text-xs text-zinc-500">Access your construction records from any device.</p>
+      <p class="text-xs text-zinc-400">Access your construction records securely across any device.</p>
       
       <div class="space-y-3">
-        <input type="email" id="authEmail" placeholder="Email Address / ईमेल" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2.5 text-sm" />
-        <input type="password" id="authPass" placeholder="Password / पासवर्ड (6+ chars)" class="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2.5 text-sm" />
+        <input type="email" id="authEmail" placeholder="Email Address / ईमेल" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2.5 text-sm" />
+        <input type="password" id="authPass" placeholder="Password / पासवर्ड (6+ chars)" class="w-full rounded-xl bg-white/5 border border-white/10 text-white px-3 py-2.5 text-sm" />
       </div>
 
       <div class="flex justify-end">
-        <button onclick="handleForgotPassword()" class="text-xs text-amber-600 dark:text-amber-400 font-semibold hover:underline">
+        <button onclick="handleForgotPassword()" class="text-xs text-amber-400 font-semibold hover:underline">
           पासवर्ड भूल गए? / Forgot Password?
         </button>
       </div>
 
       <div class="flex gap-2 pt-2">
         <button onclick="connectCloud(false)" class="flex-1 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm">Login</button>
-        <button onclick="connectCloud(true)" class="flex-1 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 font-bold py-2.5 rounded-xl text-sm">Register</button>
+        <button onclick="connectCloud(true)" class="flex-1 bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 rounded-xl text-sm">Register</button>
       </div>
     </div>
   </div>
 
-  <!-- APPLICATION LOGIC & REALTIME FIREBASE SYNC -->
+  <!-- FIREBASE ENGINE & APPLICATION LOGIC -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    // Your Direct Firebase Configuration
     const firebaseConfig = {
       apiKey: "AIzaSyCsabUW5vFiXGxsUu4FvdKkc5cxxsCt8jA",
       authDomain: "thekedaar-62310.firebaseapp.com",
@@ -375,23 +364,34 @@
     const db = getFirestore(app);
 
     let currentUser = null;
-    let state = JSON.parse(localStorage.getItem('thekedaar_state')) || {
+    let state = {
       sites: ['Main Site A - मुख्य साइट'],
       labours: [],
       expenses: [],
       bills: []
     };
 
-    // Indian Language Dictionary
-    const i18n = {
-      hi: { netLabourDue: "कुल मजदूर बकाया", totalExpenses: "किराया व खर्चे", totalBills: "कुल कंपनी बिल", tabLabour: "👷‍♂️ मजदूर व हाजिरी", tabExpenses: "🛺 खर्चे व किराया", tabBills: "🧾 कंपनी बिल" },
-      en: { netLabourDue: "Labour Due", totalExpenses: "Site Expenses", totalBills: "Company Bills", tabLabour: "👷‍♂️ Labours & Attendance", tabExpenses: "🛺 Expenses & Rent", tabBills: "🧾 Company Bills" },
-      mr: { netLabourDue: "एकूण मजुरी बाकी", totalExpenses: "भाडे व खर्च", totalBills: "कंपनी बिल", tabLabour: "👷‍♂️ कामगार व हजेरी", tabExpenses: "🛺 खर्च व रिक्षा भाडे", tabBills: "🧾 कंपनी बिल" },
-      gu: { netLabourDue: "બાકી મજૂરી", totalExpenses: "ભાડું અને ખર્ચ", totalBills: "કંપની બિલ", tabLabour: "👷‍♂️ મજૂર અને હાજરી", tabExpenses: "🛺 ખર્ચ અને રિક્ષા ભાડું", tabBills: "🧾 કંપની બિલ" }
-    };
+    function getStorageKey() {
+      return currentUser ? `thekedaar_state_${currentUser.uid}` : 'thekedaar_state_guest';
+    }
+
+    function loadLocalState() {
+      const saved = localStorage.getItem(getStorageKey());
+      if (saved) {
+        state = JSON.parse(saved);
+      } else {
+        state = {
+          sites: ['Main Site A - मुख्य साइट'],
+          labours: [],
+          expenses: [],
+          bills: []
+        };
+      }
+    }
+
     window.currentLang = 'hi';
 
-    // 1. KINETIC TEXT ANIMATION ENGINE FOR SPLASH SCREEN
+    // Kinetic Animation for Splash Screen
     function runSplashAnimation() {
       const brandWord = "THEKEDAAR";
       const container = document.getElementById('thekedaarLetters');
@@ -402,29 +402,27 @@
         span.innerText = letter;
         span.className = "letter-anim";
         span.style.animationDelay = `${index * 0.12}s`;
-        if (letter === 'K' || letter === 'D') span.style.color = "#f59e0b"; // Golden accent
+        if (letter === 'K' || letter === 'D') span.style.color = "#f59e0b";
         container.appendChild(span);
       });
 
-      // Smooth fade out after letter sequence finishes
       setTimeout(() => {
         const splash = document.getElementById('splashScreen');
         splash.style.opacity = '0';
-        setTimeout(() => splash.style.display = 'none', 700);
-      }, 2300);
+        setTimeout(() => splash.style.display = 'none', 500);
+      }, 2100);
     }
 
-    // Set Default Month
     const now = new Date();
     document.getElementById('monthSelect').value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
 
     async function persistState() {
-      localStorage.setItem('thekedaar_state', JSON.stringify(state));
+      localStorage.setItem(getStorageKey(), JSON.stringify(state));
       renderAll();
       if (db && currentUser) {
         try {
           await setDoc(doc(db, "users", currentUser.uid), state);
-          document.getElementById('syncStatus').innerText = `● Cloud Synced (${currentUser.email.split('@')[0]})`;
+          document.getElementById('syncStatus').innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span> Synced (${currentUser.email.split('@')[0]})`;
         } catch (e) {
           console.error("Cloud push failed:", e);
         }
@@ -453,21 +451,22 @@
       });
     }
 
-    // Navigation Switcher (Instagram Style)
+    // Instagram-style View Switcher
     window.navigateTo = (viewId) => {
-      ['viewHome', 'viewLabours', 'viewExpenses', 'viewBills'].forEach(v => {
+      ['viewHome', 'viewLabours', 'viewLedger', 'viewExpenses', 'viewBills'].forEach(v => {
         document.getElementById(v).classList.toggle('hidden', v !== viewId);
         const navBtn = document.getElementById(`nav-${v}`);
-        if (v === viewId) {
-          navBtn.className = "flex flex-col items-center text-amber-500 transition-transform active:scale-90";
-        } else {
-          navBtn.className = "flex flex-col items-center text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-transform active:scale-90";
+        if (navBtn) {
+          if (v === viewId) {
+            navBtn.className = "flex flex-col items-center text-amber-500 transition-transform active:scale-95";
+          } else {
+            navBtn.className = "flex flex-col items-center text-zinc-400 hover:text-zinc-200 transition-transform active:scale-95";
+          }
         }
       });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // Universal Modal Opener
     window.openFormModal = (type) => {
       document.getElementById('formModal').classList.replace('hidden', 'flex');
       ['labourForm', 'expenseForm', 'billForm'].forEach(f => document.getElementById(f).classList.add('hidden'));
@@ -485,7 +484,6 @@
     };
     window.closeFormModal = () => document.getElementById('formModal').classList.replace('flex', 'hidden');
 
-    // Site Creation
     window.addNewSite = () => {
       const name = prompt("नई निर्माण साइट का नाम लिखें / Enter Site Name:");
       if (name && name.trim()) {
@@ -496,7 +494,7 @@
       }
     };
 
-    // Labour Operations
+    // Save Labour: Strictly sets initial attendance to 0
     window.saveLabour = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -510,9 +508,17 @@
 
       state.labours.unshift({
         id: Date.now().toString(),
-        site, month, name, category, salary, advance,
-        presentDays: 26, halfDays: 0, photo
+        site,
+        month,
+        name,
+        category,
+        salary,
+        advance,
+        presentDays: 0, // Zero attendance by default
+        halfDays: 0,    // Zero half-days by default
+        photo
       });
+
       e.target.reset();
       document.getElementById('lPhotoLabel').innerText = '📷 Upload Worker Photo';
       closeFormModal();
@@ -530,7 +536,6 @@
       persistState();
     };
 
-    // Expenses Operations
     window.saveExpense = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -555,7 +560,6 @@
       navigateTo('viewExpenses');
     };
 
-    // Bill Operations
     window.saveBill = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -584,7 +588,7 @@
       persistState();
     };
 
-    // Master Render Method
+    // Master Render Function
     window.renderAll = () => {
       const siteSelect = document.getElementById('siteSelect');
       const currentSite = siteSelect.value || state.sites[0];
@@ -592,12 +596,13 @@
 
       const activeSite = siteSelect.value;
       const activeMonth = document.getElementById('monthSelect').value;
+      document.getElementById('ledgerMonthBadge').innerText = activeMonth;
 
-      // Filter Data
-      const filteredLabours = state.labours.filter(l => l.site === activeSite && l.month === activeMonth);
+      // Filter Data by Active Site & Selected Month
+      const filteredLabours = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth);
       let totalLabourDue = 0;
 
-      // Render Labour Register
+      // Render Labour List
       document.getElementById('labourList').innerHTML = filteredLabours.length === 0
         ? `<div class="text-center py-8 text-xs text-zinc-400">No labour records found for ${activeMonth}.</div>`
         : filteredLabours.map(l => {
@@ -607,33 +612,33 @@
           totalLabourDue += net;
 
           return `
-            <div class="bg-white dark:bg-zinc-900 p-3.5 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-2.5">
+            <div class="glass-card p-3.5 rounded-2xl border border-white/5 space-y-2.5">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2.5">
                   ${l.photo
                     ? `<img src="${l.photo}" class="w-11 h-11 rounded-full object-cover border-2 border-amber-500 shrink-0" />`
-                    : `<div class="w-11 h-11 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center font-bold text-sm shrink-0">👷</div>`}
+                    : `<div class="w-11 h-11 rounded-full bg-white/5 flex items-center justify-center font-bold text-sm shrink-0">👷</div>`}
                   <div>
-                    <h4 class="font-bold text-sm leading-tight">${l.name}</h4>
-                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 font-medium">${l.category}</span>
-                    <div class="text-[11px] text-zinc-500 mt-0.5">वेतन: <b>₹${l.salary}</b> | एडवांस: <b class="text-rose-500">₹${l.advance}</b></div>
+                    <h4 class="font-bold text-sm leading-tight text-white">${l.name}</h4>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-zinc-300 font-medium">${l.category}</span>
+                    <div class="text-[11px] text-zinc-400 mt-0.5">वेतन: <b>₹${l.salary}</b> | एडवांस: <b class="text-rose-400">₹${l.advance}</b></div>
                   </div>
                 </div>
                 <div class="text-right">
                   <div class="text-[10px] uppercase text-zinc-400 font-bold">देय राशि / Net</div>
-                  <div class="text-sm font-black ${net >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-500'}">₹${net.toLocaleString('en-IN')}</div>
-                  <button onclick="deleteRecord('labours','${l.id}')" class="text-[10px] text-zinc-400 hover:text-rose-500">Del</button>
+                  <div class="text-sm font-black ${net >= 0 ? 'text-emerald-400' : 'text-rose-400'}">₹${net.toLocaleString('en-IN')}</div>
+                  <button onclick="deleteRecord('labours','${l.id}')" class="text-[10px] text-zinc-400 hover:text-rose-400">Del</button>
                 </div>
               </div>
-              <div class="bg-zinc-50 dark:bg-zinc-800/60 p-2 rounded-xl flex items-center justify-between text-xs">
+              <div class="bg-black/20 p-2 rounded-xl flex items-center justify-between text-xs border border-white/5">
                 <div>
-                  <span class="font-semibold text-zinc-500">हाजिरी:</span> <b class="text-emerald-600">${l.presentDays || 0}P</b>
-                  <span class="mx-1 text-zinc-300">|</span>
-                  <span class="font-semibold text-zinc-500">हाफ:</span> <b class="text-amber-500">${l.halfDays || 0}</b>
+                  <span class="font-semibold text-zinc-400">हाजिरी:</span> <b class="text-emerald-400">${l.presentDays || 0}P</b>
+                  <span class="mx-1 text-zinc-600">|</span>
+                  <span class="font-semibold text-zinc-400">हाफ:</span> <b class="text-amber-400">${l.halfDays || 0}</b>
                 </div>
                 <div class="flex items-center gap-1">
-                  <button onclick="updateAttendance('${l.id}','decPresent')" class="w-6 h-6 rounded bg-zinc-200 dark:bg-zinc-700 font-bold">-</button>
-                  <button onclick="updateAttendance('${l.id}','incPresent')" class="w-6 h-6 rounded bg-emerald-500 text-white font-bold">+P</button>
+                  <button onclick="updateAttendance('${l.id}','decPresent')" class="w-6 h-6 rounded bg-white/10 hover:bg-white/20 font-bold text-white">-</button>
+                  <button onclick="updateAttendance('${l.id}','incPresent')" class="w-6 h-6 rounded bg-emerald-500 text-zinc-950 font-bold">+P</button>
                   <button onclick="updateAttendance('${l.id}','incHalf')" class="px-1.5 h-6 rounded bg-amber-500 text-zinc-950 font-bold">+Half</button>
                 </div>
               </div>
@@ -643,19 +648,39 @@
 
       document.getElementById('summaryLabourDue').innerText = `₹${totalLabourDue.toLocaleString('en-IN')}`;
 
-      // Render Home Summary Workers
-      document.getElementById('homeRecentLabour').innerHTML = filteredLabours.slice(0, 4).map(l => `
-        <div class="bg-white dark:bg-zinc-900 p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs">
-          <div class="flex items-center gap-2">
-            <div class="w-7 h-7 rounded-full bg-amber-500/20 text-amber-600 flex items-center justify-center font-bold text-xs">👷</div>
-            <div>
-              <div class="font-bold">${l.name}</div>
-              <div class="text-[10px] text-zinc-400">${l.category}</div>
+      // Render Home Live Snapshot
+      if (filteredLabours.length === 0) {
+        document.getElementById('homeRecentLabour').innerHTML = `
+          <div class="glass-card rounded-2xl p-4 text-center border border-white/5">
+            <div class="w-full h-36 rounded-xl bg-gradient-to-tr from-slate-900 to-slate-800 border border-white/10 flex flex-col items-center justify-center mb-3">
+              <span class="text-3xl mb-1">🏗️</span>
+              <span class="text-xs text-zinc-400">Site: ${activeSite}</span>
             </div>
+            <p class="text-xs text-zinc-400 mb-3">No workers added yet for this month.</p>
+            <button onclick="openFormModal('labour')" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white font-bold text-xs rounded-xl border border-white/10">
+              + ADD FIRST WORKER
+            </button>
           </div>
-          <div class="font-extrabold text-emerald-600 dark:text-emerald-400">₹${l.salary - l.advance}</div>
-        </div>
-      `).join('') || `<div class="text-xs text-zinc-400 text-center py-2">No workers added yet.</div>`;
+        `;
+      } else {
+        document.getElementById('homeRecentLabour').innerHTML = filteredLabours.slice(0, 4).map(l => {
+          const effectiveDays = (l.presentDays || 0) + ((l.halfDays || 0) * 0.5);
+          const earned = Math.round((l.salary / 26) * effectiveDays);
+          const net = earned - (l.advance || 0);
+          return `
+            <div class="glass-card p-3 rounded-xl border border-white/5 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs">👷</div>
+                <div>
+                  <div class="font-bold text-white">${l.name}</div>
+                  <div class="text-[10px] text-zinc-400">${l.category} • ${l.presentDays || 0} Days Present</div>
+                </div>
+              </div>
+              <div class="font-extrabold ${net >= 0 ? 'text-emerald-400' : 'text-rose-400'}">₹${net}</div>
+            </div>
+          `;
+        }).join('');
+      }
 
       // Render Expenses
       if (!state.expenses) state.expenses = [];
@@ -666,107 +691,131 @@
       document.getElementById('expenseList').innerHTML = filteredExpenses.length === 0
         ? `<div class="text-center py-8 text-xs text-zinc-400">No expenses recorded for ${activeMonth}.</div>`
         : filteredExpenses.map(e => `
-          <div class="bg-white dark:bg-zinc-900 p-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 flex items-center justify-between shadow-sm">
+          <div class="glass-card p-3 rounded-2xl border border-white/5 flex items-center justify-between">
             <div class="flex items-center gap-2.5">
               ${e.photo
                 ? `<a href="${e.photo}" target="_blank"><img src="${e.photo}" class="w-10 h-10 rounded-xl object-cover border border-amber-500 shrink-0" /></a>`
-                : `<div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center font-bold shrink-0">🛺</div>`}
+                : `<div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold shrink-0">🛺</div>`}
               <div>
-                <h4 class="font-bold text-xs">${e.title}</h4>
-                <div class="text-[10px] text-zinc-500">${e.category} ${e.spentFor ? `• <b>${e.spentFor}</b>` : ''}</div>
+                <h4 class="font-bold text-xs text-white">${e.title}</h4>
+                <div class="text-[10px] text-zinc-400">${e.category} ${e.spentFor ? `• <b>${e.spentFor}</b>` : ''}</div>
               </div>
             </div>
             <div class="text-right">
-              <div class="text-xs font-black text-amber-600">₹${e.amount.toLocaleString('en-IN')}</div>
-              <button onclick="deleteRecord('expenses','${e.id}')" class="text-[10px] text-zinc-400 hover:text-rose-500">Del</button>
+              <div class="text-xs font-black text-amber-400">₹${e.amount.toLocaleString('en-IN')}</div>
+              <button onclick="deleteRecord('expenses','${e.id}')" class="text-[10px] text-zinc-400 hover:text-rose-400">Del</button>
             </div>
           </div>
         `).join('');
 
       // Render Bills
-      const filteredBills = state.bills.filter(b => b.site === activeSite && b.month === activeMonth);
+      const filteredBills = (state.bills || []).filter(b => b.site === activeSite && b.month === activeMonth);
       const totalBills = filteredBills.reduce((acc, b) => acc + b.amount, 0);
       document.getElementById('summaryBillsTotal').innerText = `₹${totalBills.toLocaleString('en-IN')}`;
 
       document.getElementById('billList').innerHTML = filteredBills.length === 0
         ? `<div class="text-center py-8 text-xs text-zinc-400">No company bills recorded for ${activeMonth}.</div>`
         : filteredBills.map(b => `
-          <div class="bg-white dark:bg-zinc-900 p-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 flex items-center justify-between shadow-sm">
+          <div class="glass-card p-3 rounded-2xl border border-white/5 flex items-center justify-between">
             <div class="flex items-center gap-2.5">
               ${b.photo
                 ? `<a href="${b.photo}" target="_blank"><img src="${b.photo}" class="w-10 h-10 rounded-xl object-cover border border-emerald-500 shrink-0" /></a>`
-                : `<div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold shrink-0">🧾</div>`}
+                : `<div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold shrink-0">🧾</div>`}
               <div>
-                <h4 class="font-bold text-xs">${b.title}</h4>
-                <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 font-bold">${b.status}</span>
+                <h4 class="font-bold text-xs text-white">${b.title}</h4>
+                <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-bold">${b.status}</span>
               </div>
             </div>
             <div class="text-right">
-              <div class="text-xs font-black text-emerald-600">₹${b.amount.toLocaleString('en-IN')}</div>
-              <button onclick="deleteRecord('bills','${b.id}')" class="text-[10px] text-zinc-400 hover:text-rose-500">Del</button>
+              <div class="text-xs font-black text-emerald-400">₹${b.amount.toLocaleString('en-IN')}</div>
+              <button onclick="deleteRecord('bills','${b.id}')" class="text-[10px] text-zinc-400 hover:text-rose-400">Del</button>
             </div>
           </div>
         `).join('');
-    };
 
-    window.toggleTheme = () => document.documentElement.classList.toggle('dark');
+      // Render Monthwise Master Ledger View
+      document.getElementById('ledgerContent').innerHTML = `
+        <div class="glass-card p-4 rounded-2xl border border-white/5 space-y-3">
+          <div class="flex justify-between items-center text-xs pb-2 border-b border-white/5">
+            <span class="text-zinc-400">Month / Site:</span>
+            <span class="font-bold text-white">${activeMonth} (${activeSite})</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-center text-xs">
+            <div class="bg-black/20 p-2 rounded-xl">
+              <div class="text-zinc-400 text-[10px]">Labour Net</div>
+              <div class="font-bold text-rose-400 mt-0.5">₹${totalLabourDue}</div>
+            </div>
+            <div class="bg-black/20 p-2 rounded-xl">
+              <div class="text-zinc-400 text-[10px]">Expenses</div>
+              <div class="font-bold text-amber-400 mt-0.5">₹${totalExpenses}</div>
+            </div>
+            <div class="bg-black/20 p-2 rounded-xl">
+              <div class="text-zinc-400 text-[10px]">Bills</div>
+              <div class="font-bold text-emerald-400 mt-0.5">₹${totalBills}</div>
+            </div>
+          </div>
+          <div class="pt-2 text-xs text-zinc-400">
+            <div>• Labours Registered: <b class="text-white">${filteredLabours.length}</b></div>
+            <div>• Expense Entries: <b class="text-white">${filteredExpenses.length}</b></div>
+            <div>• Company Bills: <b class="text-white">${filteredBills.length}</b></div>
+          </div>
+        </div>
+      `;
+    };
 
     window.previewFileName = (inpId, lblId) => {
       const file = document.getElementById(inpId).files[0];
       if (file) document.getElementById(lblId).innerText = `✅ ${file.name.slice(0, 10)}...`;
     };
 
-    // Indian Language Selector
     window.changeLanguage = (lang) => {
       window.currentLang = lang;
-      const dict = i18n[lang] || i18n.hi;
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (dict[key]) el.innerText = dict[key];
-      });
     };
 
-    // Voice Summary Speech Engine
+    // Voice Summary Engine: Language-specific TTS
     window.playVoiceSummary = () => {
       const activeSite = document.getElementById('siteSelect').value;
       const activeMonth = document.getElementById('monthSelect').value;
       const labourDue = document.getElementById('summaryLabourDue').innerText;
       const expenses = document.getElementById('summaryExpensesTotal').innerText;
       const bills = document.getElementById('summaryBillsTotal').innerText;
-      const workerCount = state.labours.filter(l => l.site === activeSite && l.month === activeMonth).length;
+      const workerCount = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth).length;
 
       let msg = "";
-      if (window.currentLang === 'hi' || window.currentLang === 'mr' || window.currentLang === 'gu') {
-        msg = `नमस्ते ठेकेदार जी। साइट ${activeSite} का हिसाब: कुल ${workerCount} मजदूर हैं। कुल मजदूरी बाकी ${labourDue} है। रिक्शा व अन्य खर्चे ${expenses} रुपये हैं। और कंपनी से बिल ${bills} का है।`;
+      let langCode = "hi-IN";
+
+      if (window.currentLang === 'mr') {
+        langCode = "mr-IN";
+        msg = `नमस्कार ठेकेदारजी. साईट ${activeSite} साठी महिना ${activeMonth} चा हिशोब: एकूण ${workerCount} कामगार आहेत. बाकी मजुरी ${labourDue} आहे. रिक्षा व इतर खर्च ${expenses} रुपये आहेत. आणि कंपनीचे एकूण बिल ${bills} आहे.`;
+      } else if (window.currentLang === 'gu') {
+        langCode = "gu-IN";
+        msg = `નમસ્તે કોન્ટ્રાક્ટર. સાઇટ ${activeSite} માટે મહિનો ${activeMonth} નો હિસાબ: કુલ ${workerCount} મજૂરો છે. બાકી મજૂરી ${labourDue} છે. રિક્ષા અને અન્ય ખર્ચ ${expenses} છે. અને કંપનીનું બિલ ${bills} છે.`;
+      } else if (window.currentLang === 'en') {
+        langCode = "en-IN";
+        msg = `Hello Contractor. Report for site ${activeSite} in ${activeMonth}: There are ${workerCount} active workers. Net labour payable is ${labourDue}. Total transport and site expenses are ${expenses}. Total company bills are ${bills}.`;
       } else {
-        msg = `Hello Contractor. Site report for ${activeSite}. You have ${workerCount} workers. Net labour payable is ${labourDue}. Total transport and site expenses are ${expenses}. Total bills are ${bills}.`;
+        langCode = "hi-IN";
+        msg = `नमस्ते ठेकेदार जी। साइट ${activeSite} का महीना ${activeMonth} का हिसाब: कुल ${workerCount} मजदूर हैं। कुल बाकी मजदूरी ${labourDue} है। रिक्शा व अन्य खर्चे ${expenses} रुपये हैं। और कंपनी से बिल ${bills} का है।`;
       }
 
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(msg);
-        utter.lang = window.currentLang === 'en' ? 'en-IN' : 'hi-IN';
+        utter.lang = langCode;
         utter.rate = 0.95;
+
+        // Try to bind specifically to regional voice if available
+        const voices = window.speechSynthesis.getVoices();
+        const matchedVoice = voices.find(v => v.lang.startsWith(langCode.slice(0, 2)));
+        if (matchedVoice) utter.voice = matchedVoice;
+
         window.speechSynthesis.speak(utter);
-      }
-    };
-
-    // Native App Sharing
-    window.shareApp = async () => {
-      const shareData = {
-        title: 'ठेकेDAAR - Construction & Labour Manager',
-        text: 'Manage labour salaries, attendance, auto fare, and company bills online!',
-        url: window.location.href
-      };
-      if (navigator.share) {
-        try { await navigator.share(shareData); } catch (e) {}
       } else {
-        await navigator.clipboard.writeText(window.location.href);
-        alert("App link copied to clipboard! Share on WhatsApp.");
+        alert("Audio voice synthesis is not supported in this browser.");
       }
     };
 
-    // Authentication Modals & Logic
+    // Authentication Handlers
     window.openAuthModal = () => document.getElementById('authModal').classList.replace('hidden', 'flex');
     window.closeAuthModal = () => document.getElementById('authModal').classList.replace('flex', 'hidden');
 
@@ -799,30 +848,43 @@
       }
     };
 
+    // Firebase Auth State Listener
     onAuthStateChanged(auth, (user) => {
       if (user) {
         currentUser = user;
+        loadLocalState();
         document.getElementById('authBtn').innerText = `👤 ${user.email.split('@')[0]}`;
         document.getElementById('authBtn').onclick = () => {
           if (confirm("Log out of your account?")) {
-            signOut(auth);
-            location.reload();
+            signOut(auth).then(() => {
+              currentUser = null;
+              loadLocalState();
+              location.reload();
+            });
           }
         };
 
+        // Realtime sync from Cloud
         onSnapshot(doc(db, "users", user.uid), (docSnap) => {
           if (docSnap.exists()) {
             state = docSnap.data();
-            localStorage.setItem('thekedaar_state', JSON.stringify(state));
+            localStorage.setItem(getStorageKey(), JSON.stringify(state));
             renderAll();
           } else {
             persistState();
           }
         });
+      } else {
+        currentUser = null;
+        loadLocalState();
+        document.getElementById('authBtn').innerText = "Login / Register";
+        document.getElementById('syncStatus').innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span> Local Mode`;
+        renderAll();
       }
     });
 
-    // Run Splash Intro & Initial Render
+    // Run Initial Load & Animations
+    loadLocalState();
     runSplashAnimation();
     renderAll();
   </script>
