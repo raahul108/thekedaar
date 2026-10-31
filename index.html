@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
   
-  <link rel="icon" type="image/png" href="./logo.png?v=13">
-  <link rel="apple-touch-icon" href="./logo.png?v=13">
-  <link rel="manifest" href="manifest.json?v=13">
+  <link rel="icon" type="image/png" href="./logo.png?v=14">
+  <link rel="apple-touch-icon" href="./logo.png?v=14">
+  <link rel="manifest" href="manifest.json?v=14">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#000000">
@@ -172,8 +172,15 @@
         </div>
       </div>
 
-      <!-- Top Right Corner: Monthly Ledger SVG Icon & Settings SVG Icon -->
+      <!-- Top Right Corner: Force Cloud Sync, Monthly Ledger & Settings SVG Icons -->
       <div class="flex items-center gap-2">
+        <button onclick="forceCloudPull()" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center active:scale-90 transition-transform shadow-sm text-emerald-500" title="Refresh Cloud Data">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+        </button>
         <button onclick="openMonthlyLedgerModal()" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center active:scale-90 transition-transform shadow-sm text-amber-500" title="Monthly Ledger">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
             <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -389,13 +396,13 @@
       <div id="masterPasswordSettingBox" class="bg-amber-500/10 border border-amber-500/30 p-3 rounded-2xl space-y-2">
         <label class="text-[10px] font-bold text-amber-500 uppercase flex items-center gap-1">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-          <span>Set Main Contractor Password</span>
+          <span>Set Main Contractor Password (Synced)</span>
         </label>
         <div class="flex gap-1.5">
           <input type="password" id="newMasterPinInput" placeholder="New password/PIN" class="app-input flex-1 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none" />
           <button type="button" onclick="saveNewMasterPin()" class="px-3 py-1.5 bg-amber-500 text-zinc-950 font-black text-xs rounded-xl shadow">Save</button>
         </div>
-        <p class="text-[9px] opacity-70">Required when switching from a Supervisor account back to Main Contractor.</p>
+        <p class="text-[9px] opacity-70">Synced across PC & Mobile. Required to switch from Supervisor back to Main Contractor.</p>
       </div>
 
       <!-- Multiple Account IDs List (Main Contractor can delete Supervisor accounts) -->
@@ -810,13 +817,13 @@
         <h3 class="font-extrabold text-base">Online Cloud Login</h3>
         <button onclick="closeAuthModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
-      <p class="text-xs opacity-75">Sign in to sync your construction data online.</p>
+      <p class="text-xs opacity-75">Sign in with the same email on PC and Mobile to sync all data in real time.</p>
       <div class="space-y-3">
         <input type="email" id="authEmail" placeholder="Email Address" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
         <input type="password" id="authPass" placeholder="Password (6+ chars)" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
       </div>
       <div class="flex justify-end">
-        <button onclick="handleForgotPassword()" class="text-xs text-amber-500 font-semibold hover:underline">Forgot Password?</button>
+        <button onclick="handleForgotPassword()" class="text-xs text-amber-500 font-semibold hover:underline">Forgot Cloud Password?</button>
       </div>
       <div class="flex gap-2 pt-2">
         <button onclick="connectCloud(false)" class="flex-1 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm shadow">Login</button>
@@ -840,7 +847,6 @@
         <p id="voiceModalSub" class="text-xs opacity-75">Speak clearly in your chosen language</p>
       </div>
 
-      <!-- Multi-Language Voice Selector inside Voice Modal -->
       <div>
         <select id="voiceLangSelector" onchange="changeVoiceRecognitionLanguage(this.value)" class="app-input w-full rounded-xl px-2.5 py-1.5 text-xs font-bold text-center focus:outline-none">
           <option value="hi-IN">हिंदी (Hindi)</option>
@@ -886,20 +892,62 @@
     </div>
   </div>
 
-  <!-- 19. PIN LOCK MODAL FOR MAIN CONTRACTOR ACCOUNT -->
+  <!-- 19. PIN LOCK & RESET VIA ACCOUNT PASSWORD MODAL -->
   <div id="pinLockModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-xs w-full p-6 text-center space-y-4 shadow-2xl border border-amber-500/40">
       <div class="w-14 h-14 rounded-2xl bg-amber-500/20 text-amber-500 flex items-center justify-center mx-auto">
         <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
       </div>
-      <div>
-        <h3 class="font-black text-base">Main Contractor Password</h3>
-        <p class="text-[11px] opacity-70">Enter Main Contractor password to unlock master account</p>
+
+      <!-- Standard PIN Entry View -->
+      <div id="pinEntryView" class="space-y-4">
+        <div>
+          <h3 class="font-black text-base">Main Contractor Password</h3>
+          <p class="text-[11px] opacity-70">Enter Main Contractor password to unlock master account</p>
+        </div>
+        <input type="password" id="masterPinInput" placeholder="Enter Password / PIN" class="app-input w-full rounded-xl px-3 py-3 text-center text-base font-black tracking-widest focus:outline-none" />
+        <div class="flex gap-2">
+          <button type="button" onclick="closePinLockModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Cancel</button>
+          <button type="button" onclick="verifyMasterPin()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 text-xs font-black shadow">Unlock</button>
+        </div>
+        <button type="button" onclick="showResetPinView()" class="text-[11px] text-amber-500 font-bold hover:underline block w-full pt-1">
+          Forgot PIN? Reset using Cloud Account Password
+        </button>
       </div>
-      <input type="password" id="masterPinInput" placeholder="Enter Password / PIN" class="app-input w-full rounded-xl px-3 py-3 text-center text-base font-black tracking-widest focus:outline-none" />
-      <div class="flex gap-2 pt-2">
-        <button type="button" onclick="closePinLockModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Cancel</button>
-        <button type="button" onclick="verifyMasterPin()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 text-xs font-black shadow">Unlock</button>
+
+      <!-- Reset PIN using Cloud Account Password View -->
+      <div id="pinResetView" class="space-y-3 hidden text-left">
+        <div class="text-center">
+          <h3 class="font-black text-sm text-amber-500">Reset Main Contractor PIN</h3>
+          <p class="text-[10px] opacity-75">Verify your Cloud Account login password to set a new Main Contractor PIN</p>
+        </div>
+        <div>
+          <label class="text-[10px] font-bold opacity-75 uppercase">Cloud Account Password</label>
+          <input type="password" id="resetCloudAccountPass" placeholder="Your Cloud login password" class="app-input w-full rounded-xl px-3 py-2 text-xs font-bold focus:outline-none mt-0.5" />
+        </div>
+        <div>
+          <label class="text-[10px] font-bold opacity-75 uppercase">New Main Contractor PIN</label>
+          <input type="password" id="resetNewMasterPin" placeholder="Enter new PIN (e.g. 5678)" class="app-input w-full rounded-xl px-3 py-2 text-xs font-bold focus:outline-none mt-0.5" />
+        </div>
+        <div class="flex gap-2 pt-1">
+          <button type="button" onclick="hideResetPinView()" class="flex-1 py-2 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Back</button>
+          <button type="button" id="confirmPinResetBtn" onclick="executeMasterPinResetWithAccountPassword()" class="flex-1 py-2 rounded-xl bg-emerald-500 text-zinc-950 text-xs font-black shadow">Verify & Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 20. TOUCH-SAFE CONFIRM DELETE MODAL (FIXES MOBILE CONFIRM BLOCKING) -->
+  <div id="confirmDeleteModal" class="fixed inset-0 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-xs w-full p-5 text-center space-y-4 shadow-2xl border border-rose-500/40">
+      <div class="w-12 h-12 rounded-2xl bg-rose-500/20 text-rose-500 flex items-center justify-center mx-auto">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+      </div>
+      <h3 id="confirmDeleteTitle" class="font-black text-sm">Confirm Delete</h3>
+      <p id="confirmDeleteSub" class="text-xs opacity-75">Are you sure you want to permanently delete this item?</p>
+      <div class="flex gap-2">
+        <button type="button" onclick="closeConfirmDeleteModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Cancel</button>
+        <button type="button" id="confirmDeleteActionBtn" class="flex-1 py-2.5 rounded-xl bg-rose-500 text-white text-xs font-black shadow">Delete</button>
       </div>
     </div>
   </div>
@@ -908,7 +956,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCsabUW5vFiXGxsUu4FvdKkc5cxxsCt8jA",
@@ -924,19 +972,23 @@
     const db = getFirestore(app);
 
     let currentUser = null;
+    let unsubscribeSnapshot = null;
+
+    // Unified Master State (Synced across PC & Mobile under a single Firestore Document per User UID)
     let state = {
       userProfilePhoto: null,
       masterPin: '1234',
       accounts: [
-        { id: 'acc_main', nickname: 'Main Contractor', email: 'contractor@thekedaar', active: true, isMaster: true },
-        { id: 'acc_sup', nickname: 'Site Supervisor', email: 'supervisor@thekedaar', active: false, isMaster: false }
+        { id: 'acc_main', nickname: 'Main Contractor', email: 'contractor@thekedaar', isMaster: true },
+        { id: 'acc_sup', nickname: 'Site Supervisor', email: 'supervisor@thekedaar', isMaster: false }
       ],
       sites: ['Main Site A - मुख्य साइट'],
       labours: [],
       expenses: [],
       bills: [],
       dailyHajriRecords: {},
-      masterLabourDirectory: []
+      masterLabourDirectory: [],
+      updatedAt: 0
     };
 
     let activeRecognition = null;
@@ -947,18 +999,9 @@
     let cropImg = new Image();
     let cropState = { scale: 1, x: 0, y: 0 };
 
-    // Map 10 App Languages to BCP-47 Speech Recognition Locale Codes
     const speechLocaleMap = {
-      hi: 'hi-IN',
-      en: 'en-IN',
-      kn: 'kn-IN',
-      mr: 'mr-IN',
-      gu: 'gu-IN',
-      ta: 'ta-IN',
-      te: 'te-IN',
-      bn: 'bn-IN',
-      ml: 'ml-IN',
-      pa: 'pa-IN'
+      hi: 'hi-IN', en: 'en-IN', kn: 'kn-IN', mr: 'mr-IN', gu: 'gu-IN',
+      ta: 'ta-IN', te: 'te-IN', bn: 'bn-IN', ml: 'ml-IN', pa: 'pa-IN'
     };
 
     const i18n = {
@@ -977,36 +1020,31 @@
 
     function enforceOnlineOnlyMode() {
       const blocker = document.getElementById('offlineBlockerModal');
-      if (!navigator.onLine) {
-        blocker.classList.replace('hidden', 'flex');
-      } else {
-        blocker.classList.replace('flex', 'hidden');
-      }
+      if (!navigator.onLine) blocker.classList.replace('hidden', 'flex');
+      else blocker.classList.replace('flex', 'hidden');
     }
     window.addEventListener('online', enforceOnlineOnlyMode);
     window.addEventListener('offline', enforceOnlineOnlyMode);
 
-    // Reliable Active Account & Master Role Check (Fixes Mobile Password Bug)
-    function getGlobalAccountsList() {
-      try {
-        const raw = localStorage.getItem('thekedaar_global_accounts');
-        if (raw) {
-          const parsed = JSON.parse(raw);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            return parsed.map(a => ({ ...a, isMaster: a.id === 'acc_main' || a.isMaster === true }));
-          }
-        }
-      } catch (e) {}
-      return [
-        { id: 'acc_main', nickname: 'Main Contractor', email: 'contractor@thekedaar', active: true, isMaster: true },
-        { id: 'acc_sup', nickname: 'Site Supervisor', email: 'supervisor@thekedaar', active: false, isMaster: false }
-      ];
+    // Unified Account Helpers (Fixes Mobile & PC Sync + Sub-User Deletion)
+    function normalizeAccounts(accArray) {
+      if (!Array.isArray(accArray) || accArray.length === 0) {
+        return [
+          { id: 'acc_main', nickname: 'Main Contractor', email: 'contractor@thekedaar', isMaster: true },
+          { id: 'acc_sup', nickname: 'Site Supervisor', email: 'supervisor@thekedaar', isMaster: false }
+        ];
+      }
+      const hasMain = accArray.some(a => a.id === 'acc_main' || a.isMaster === true);
+      if (!hasMain) {
+        accArray.unshift({ id: 'acc_main', nickname: 'Main Contractor', email: 'contractor@thekedaar', isMaster: true });
+      }
+      return accArray.map(a => ({ ...a, isMaster: a.id === 'acc_main' || a.isMaster === true }));
     }
 
     function getActiveAccount() {
-      const accs = getGlobalAccountsList();
+      state.accounts = normalizeAccounts(state.accounts);
       const activeId = localStorage.getItem('thekedaar_active_acc_id') || 'acc_main';
-      const found = accs.find(a => a.id === activeId) || accs[0];
+      const found = state.accounts.find(a => a.id === activeId) || state.accounts[0];
       return { ...found, isMaster: found.id === 'acc_main' || found.isMaster === true };
     }
 
@@ -1015,32 +1053,43 @@
       return active.id === 'acc_main' || active.isMaster === true;
     }
 
-    function getActiveAccountId() {
-      return getActiveAccount().id;
+    function getStorageKey() {
+      return currentUser ? `thekedaar_unified_${currentUser.uid}` : 'thekedaar_unified_guest';
     }
 
-    function getStorageKey() {
-      const base = currentUser ? `thekedaar_uid_${currentUser.uid}` : 'thekedaar_online';
-      const activeId = getActiveAccountId();
-      return `${base}_${activeId}`;
+    function sanitizeStateData(raw) {
+      if (!raw || typeof raw !== 'object') return;
+      state.userProfilePhoto = raw.userProfilePhoto || state.userProfilePhoto || null;
+      state.masterPin = String(raw.masterPin || state.masterPin || '1234').trim();
+      state.accounts = normalizeAccounts(raw.accounts || state.accounts);
+      state.sites = Array.isArray(raw.sites) && raw.sites.length > 0 ? raw.sites : ['Main Site A - मुख्य साइट'];
+      state.labours = Array.isArray(raw.labours) ? raw.labours : [];
+      state.expenses = Array.isArray(raw.expenses) ? raw.expenses : [];
+      state.bills = Array.isArray(raw.bills) ? raw.bills : [];
+      state.dailyHajriRecords = raw.dailyHajriRecords || {};
+      state.masterLabourDirectory = Array.isArray(raw.masterLabourDirectory) ? raw.masterLabourDirectory : [];
+      state.updatedAt = raw.updatedAt || Date.now();
     }
 
     function loadLocalState() {
       try {
-        const globalAccs = getGlobalAccountsList();
-        const activeId = localStorage.getItem('thekedaar_active_acc_id') || 'acc_main';
-        globalAccs.forEach(a => a.active = (a.id === activeId));
-
         const saved = localStorage.getItem(getStorageKey());
-        if (saved) {
-          state = JSON.parse(saved);
-          if (!state.masterLabourDirectory) state.masterLabourDirectory = [];
-          if (!state.dailyHajriRecords) state.dailyHajriRecords = {};
-        }
-        state.accounts = globalAccs;
-        state.masterPin = localStorage.getItem('thekedaar_master_pin') || state.masterPin || '1234';
+        if (saved) sanitizeStateData(JSON.parse(saved));
       } catch (e) { console.error(e); }
     }
+
+    // Touch-safe Custom Delete Confirmation Modal (Replaces blocked mobile confirm())
+    window.openConfirmDelete = ({ title, subtitle, onConfirm }) => {
+      document.getElementById('confirmDeleteTitle').innerText = title || 'Confirm Delete';
+      document.getElementById('confirmDeleteSub').innerText = subtitle || 'Are you sure you want to permanently delete this item?';
+      const modal = document.getElementById('confirmDeleteModal');
+      modal.classList.replace('hidden', 'flex');
+      document.getElementById('confirmDeleteActionBtn').onclick = () => {
+        modal.classList.replace('flex', 'hidden');
+        if (onConfirm) onConfirm();
+      };
+    };
+    window.closeConfirmDeleteModal = () => document.getElementById('confirmDeleteModal').classList.replace('flex', 'hidden');
 
     const now = new Date();
     document.getElementById('monthSelect').value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
@@ -1071,7 +1120,7 @@
       setTimeout(() => {
         const splash = document.getElementById('splashScreen');
         if (splash) { splash.style.opacity = '0'; setTimeout(() => splash.style.display = 'none', 650); }
-      }, 1900);
+      }, 1800);
     }
 
     function updateSyncStatusUI() {
@@ -1080,31 +1129,53 @@
       const emailDisplayEl = document.getElementById('loggedInEmailDisplay');
 
       if (currentUser && currentUser.email) {
-        statusEl.innerText = `Cloud Sync (${currentUser.email.split('@')[0]})`;
+        statusEl.innerText = `Cloud Synced (${currentUser.email.split('@')[0]})`;
         dotEl.className = "absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-black";
         if (emailDisplayEl) emailDisplayEl.innerText = currentUser.email;
       } else {
-        statusEl.innerText = `Online Active`;
+        statusEl.innerText = `Online (Tap Profile to Login Cloud)`;
         dotEl.className = "absolute bottom-0 right-0 w-3 h-3 rounded-full bg-amber-500 border-2 border-black";
-        if (emailDisplayEl) emailDisplayEl.innerText = "Not logged in (Tap Cloud Login below)";
+        if (emailDisplayEl) emailDisplayEl.innerText = "Not signed in (Tap Cloud Login below)";
       }
     }
 
+    // Unified Cloud Push (Pushes PC & Mobile Data + Master PIN + Accounts to single User UID doc)
     async function persistState() {
       if (!navigator.onLine) {
         enforceOnlineOnlyMode();
         return;
       }
+      state.updatedAt = Date.now();
       localStorage.setItem(getStorageKey(), JSON.stringify(state));
-      localStorage.setItem('thekedaar_global_accounts', JSON.stringify(state.accounts));
       renderAll();
 
       if (db && currentUser) {
         try {
-          await setDoc(doc(db, "users", `${currentUser.uid}_${getActiveAccountId()}`), state);
-        } catch (e) { console.error(e); }
+          const statusEl = document.getElementById('syncStatus');
+          if (statusEl) statusEl.innerText = "Syncing to Cloud...";
+          await setDoc(doc(db, "users", currentUser.uid), JSON.parse(JSON.stringify(state)), { merge: true });
+          updateSyncStatusUI();
+        } catch (e) {
+          console.error("Cloud Sync Error:", e);
+        }
       }
     }
+
+    // Manual Cloud Pull Button (Top Right Refresh Icon)
+    window.forceCloudPull = async () => {
+      if (!currentUser) return openAuthModal();
+      try {
+        const statusEl = document.getElementById('syncStatus');
+        statusEl.innerText = "Refreshing Cloud Data...";
+        const mainSnap = await getDoc(doc(db, "users", currentUser.uid));
+        if (mainSnap.exists()) {
+          sanitizeStateData(mainSnap.data());
+          localStorage.setItem(getStorageKey(), JSON.stringify(state));
+          renderAll();
+        }
+        updateSyncStatusUI();
+      } catch (e) { console.error(e); }
+    };
 
     function processUniversalFile(file) {
       return new Promise((resolve) => {
@@ -1119,8 +1190,7 @@
     function syncVoiceSelectorWithAppLang() {
       const sel = document.getElementById('voiceLangSelector');
       if (sel) {
-        const targetLocale = localStorage.getItem('thekedaar_voice_locale') || speechLocaleMap[window.currentLang] || 'hi-IN';
-        sel.value = targetLocale;
+        sel.value = localStorage.getItem('thekedaar_voice_locale') || speechLocaleMap[window.currentLang] || 'hi-IN';
       }
     }
 
@@ -1160,9 +1230,7 @@
         closeVoiceModal();
         return alert("Voice typing is supported in Chrome & Safari.");
       }
-      if (activeRecognition) {
-        try { activeRecognition.stop(); } catch (e) {}
-      }
+      if (activeRecognition) { try { activeRecognition.stop(); } catch (e) {} }
 
       const selectedLocale = document.getElementById('voiceLangSelector').value || speechLocaleMap[window.currentLang] || 'hi-IN';
       activeRecognition = new SpeechRecognition();
@@ -1227,16 +1295,15 @@
     };
     window.closeCustomDialog = () => document.getElementById('customDialogModal').classList.replace('flex', 'hidden');
 
-    // Save Main Contractor Password
-    window.saveNewMasterPin = () => {
+    // Save Main Contractor Password (Synced to Cloud so Mobile & PC match immediately)
+    window.saveNewMasterPin = async () => {
       if (!isMainContractorActive()) return alert("Only Main Contractor can change the password.");
       const pin = document.getElementById('newMasterPinInput').value.trim();
       if (!pin) return alert("Please enter a password or PIN.");
       state.masterPin = pin;
-      localStorage.setItem('thekedaar_master_pin', pin);
-      persistState();
       document.getElementById('newMasterPinInput').value = '';
-      alert("Main Contractor password updated!");
+      await persistState();
+      alert("Main Contractor password saved and synced to Cloud!");
     };
 
     // Modal Visibility
@@ -1289,7 +1356,6 @@
             <div class="bg-black/5 dark:bg-black/25 p-2.5 rounded-xl"><div class="opacity-70 text-[9px]">Bills</div><div class="font-black text-emerald-500">₹${totalBills}</div></div>
           </div>
 
-          <!-- 1. Workers Attendance Section -->
           <div class="space-y-2">
             <h4 class="font-black text-xs text-amber-500 uppercase tracking-wider">1. Labour Attendance (${workers.length})</h4>
             ${workers.length === 0 ? '<p class="text-xs opacity-60">No workers recorded.</p>' : workers.map(w => {
@@ -1306,7 +1372,6 @@
             }).join('')}
           </div>
 
-          <!-- 2. Site Expenses Section -->
           <div class="space-y-2">
             <h4 class="font-black text-xs text-amber-500 uppercase tracking-wider">2. Site Expenses (${expenses.length})</h4>
             ${expenses.length === 0 ? '<p class="text-xs opacity-60">No expenses recorded.</p>' : expenses.map(e => `
@@ -1323,7 +1388,6 @@
             `).join('')}
           </div>
 
-          <!-- 3. Company Bills & Bill Photos Section -->
           <div class="space-y-2">
             <h4 class="font-black text-xs text-emerald-500 uppercase tracking-wider">3. Company Bills & Photos (${bills.length})</h4>
             ${bills.length === 0 ? '<p class="text-xs opacity-60">No bills recorded.</p>' : bills.map(b => `
@@ -1381,24 +1445,23 @@
     };
     window.closeLabourHistoryModal = () => document.getElementById('labourHistoryModal').classList.replace('flex', 'hidden');
 
-    // --- MULTI-ACCOUNT SWITCHING, PIN LOCK & SUPERVISOR DELETION ---
+    // --- MULTI-ACCOUNT SWITCHING, PIN RESET VIA CLOUD PASSWORD & MOBILE SUB-USER DELETION ---
     window.openAddAccountPrompt = () => {
       openCustomDialog({
         title: "Add Supervisor Nickname",
         placeholder: "e.g. Supervisor 1",
-        onConfirm: (nickname) => {
+        onConfirm: async (nickname) => {
           if (!nickname) return;
-          const accs = getGlobalAccountsList();
           const newId = 'acc_' + Date.now();
-          accs.push({ id: newId, nickname, email: `${nickname.toLowerCase().replace(/\s+/g,'')}@thekedaar`, active: false, isMaster: false });
-          state.accounts = accs;
-          localStorage.setItem('thekedaar_global_accounts', JSON.stringify(accs));
-          persistState();
+          state.accounts = normalizeAccounts(state.accounts);
+          state.accounts.push({ id: newId, nickname, email: `${nickname.toLowerCase().replace(/\s+/g,'')}@thekedaar`, isMaster: false });
+          await persistState();
           renderAccountIdsList();
         }
       });
     };
 
+    // Touch-safe Delete Supervisor Account (Works reliably on Mobile & PC)
     window.deleteSupervisorAccount = (accId) => {
       if (!isMainContractorActive()) {
         return alert("Access Denied! Only Main Contractor can delete supervisor accounts.");
@@ -1406,27 +1469,32 @@
       if (accId === 'acc_main') {
         return alert("Cannot delete the Main Contractor account.");
       }
-      if (!confirm("Delete this Supervisor account permanently?")) return;
-
-      let accs = getGlobalAccountsList().filter(a => a.id !== accId);
-      state.accounts = accs;
-      localStorage.setItem('thekedaar_global_accounts', JSON.stringify(accs));
-      persistState();
-      renderAccountIdsList();
+      const target = (state.accounts || []).find(a => a.id === accId);
+      openConfirmDelete({
+        title: "Delete Supervisor Account?",
+        subtitle: `Permanently remove "${target ? target.nickname : 'Supervisor'}"?`,
+        onConfirm: async () => {
+          state.accounts = normalizeAccounts(state.accounts).filter(a => a.id !== accId);
+          if (localStorage.getItem('thekedaar_active_acc_id') === accId) {
+            localStorage.setItem('thekedaar_active_acc_id', 'acc_main');
+          }
+          await persistState();
+          renderAccountIdsList();
+        }
+      });
     };
 
     window.switchActiveAccount = (accId) => {
       const currentActive = getActiveAccount();
-      const accs = getGlobalAccountsList();
-      const targetAcc = accs.find(a => a.id === accId);
+      const targetAcc = normalizeAccounts(state.accounts).find(a => a.id === accId);
       if (!targetAcc) return;
 
       const isTargetMaster = targetAcc.id === 'acc_main' || targetAcc.isMaster === true;
       const isCurrentMaster = currentActive.id === 'acc_main' || currentActive.isMaster === true;
 
-      // Always require Master Password when switching from a Supervisor into Main Contractor on Mobile & Desktop
       if (isTargetMaster && !isCurrentMaster) {
         pendingSwitchAccId = accId;
+        hideResetPinView();
         document.getElementById('masterPinInput').value = '';
         document.getElementById('pinLockModal').classList.replace('hidden', 'flex');
         setTimeout(() => document.getElementById('masterPinInput').focus(), 100);
@@ -1441,31 +1509,70 @@
       pendingSwitchAccId = null;
     };
 
+    window.showResetPinView = () => {
+      document.getElementById('pinEntryView').classList.add('hidden');
+      document.getElementById('pinResetView').classList.remove('hidden');
+      document.getElementById('resetCloudAccountPass').value = '';
+      document.getElementById('resetNewMasterPin').value = '';
+    };
+
+    window.hideResetPinView = () => {
+      document.getElementById('pinResetView').classList.add('hidden');
+      document.getElementById('pinEntryView').classList.remove('hidden');
+    };
+
+    // Verify Master PIN (Checks unified cloud-synced state.masterPin)
     window.verifyMasterPin = () => {
-      const pin = document.getElementById('masterPinInput').value.trim();
-      const savedPin = localStorage.getItem('thekedaar_master_pin') || state.masterPin || '1234';
-      if (pin === savedPin) {
-        const idToSwitch = pendingSwitchAccId;
+      const enteredPin = String(document.getElementById('masterPinInput').value || '').trim();
+      const currentMasterPin = String(state.masterPin || '1234').trim();
+
+      if (enteredPin === currentMasterPin) {
+        const idToSwitch = pendingSwitchAccId || 'acc_main';
         closePinLockModal();
-        if (idToSwitch) executeAccountSwitch(idToSwitch);
+        executeAccountSwitch(idToSwitch);
       } else {
-        alert("Incorrect Main Contractor Password!");
+        alert("Incorrect Main Contractor Password! If you forgot it, tap 'Forgot PIN? Reset using Cloud Account Password' below.");
+      }
+    };
+
+    // Reset Main Contractor Password using Firebase Cloud Account Password
+    window.executeMasterPinResetWithAccountPassword = async () => {
+      if (!currentUser || !currentUser.email) {
+        return alert("Please sign in to your Cloud Email account first to verify your account password.");
+      }
+      const cloudPass = document.getElementById('resetCloudAccountPass').value.trim();
+      const newPin = document.getElementById('resetNewMasterPin').value.trim();
+
+      if (!cloudPass || !newPin) {
+        return alert("Please enter both your Cloud Account Password and your new Main Contractor PIN.");
+      }
+
+      const btn = document.getElementById('confirmPinResetBtn');
+      btn.innerText = "Verifying...";
+      try {
+        await signInWithEmailAndPassword(auth, currentUser.email, cloudPass);
+        state.masterPin = newPin;
+        await persistState();
+        btn.innerText = "Verify & Reset";
+        const idToSwitch = pendingSwitchAccId || 'acc_main';
+        closePinLockModal();
+        executeAccountSwitch(idToSwitch);
+        alert("Main Contractor PIN reset and synced across all devices!");
+      } catch (err) {
+        btn.innerText = "Verify & Reset";
+        alert("Invalid Cloud Account Password! Please enter the correct password for " + currentUser.email);
       }
     };
 
     function executeAccountSwitch(accId) {
-      const accs = getGlobalAccountsList();
-      accs.forEach(a => a.active = (a.id === accId));
       localStorage.setItem('thekedaar_active_acc_id', accId);
-      localStorage.setItem('thekedaar_global_accounts', JSON.stringify(accs));
-      loadLocalState();
       renderAll();
       renderAccountIdsList();
     }
 
     function renderAccountIdsList() {
       const container = document.getElementById('accountIdsList');
-      const accs = getGlobalAccountsList();
+      const accs = normalizeAccounts(state.accounts);
       const activeAcc = getActiveAccount();
       const masterActive = isMainContractorActive();
       
@@ -1484,10 +1591,10 @@
             <div class="flex items-center gap-1.5 shrink-0">
               ${isCurrent 
                 ? `<span class="text-[10px] text-emerald-500 font-bold px-2 py-0.5 rounded-full bg-emerald-500/15">Active</span>` 
-                : `<button onclick="switchActiveAccount('${acc.id}')" class="text-[10px] px-2.5 py-1 rounded-lg bg-amber-500 text-zinc-950 font-black shadow">Switch</button>`}
+                : `<button type="button" onclick="switchActiveAccount('${acc.id}')" class="text-[10px] px-2.5 py-1 rounded-lg bg-amber-500 text-zinc-950 font-black shadow">Switch</button>`}
               ${masterActive && !isMasterAcc ? `
-                <button onclick="deleteSupervisorAccount('${acc.id}')" class="p-1.5 rounded-lg bg-rose-500/15 text-rose-500 hover:bg-rose-500/25" title="Delete Supervisor Account">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                <button type="button" onclick="deleteSupervisorAccount('${acc.id}')" class="p-1.5 rounded-lg bg-rose-500/15 text-rose-500 hover:bg-rose-500/25 active:scale-90" title="Delete Supervisor Account">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                 </button>
               ` : ''}
             </div>
@@ -1810,15 +1917,18 @@
         return alert("Cannot delete! You must keep at least one active site.");
       }
       const siteToDelete = document.getElementById('siteSelect').value;
-      if (!confirm(`Delete site "${siteToDelete}" and all its records permanently?`)) return;
-
-      state.sites = state.sites.filter(s => s !== siteToDelete);
-      state.labours = (state.labours || []).filter(l => l.site !== siteToDelete);
-      state.expenses = (state.expenses || []).filter(e => e.site !== siteToDelete);
-      state.bills = (state.bills || []).filter(b => b.site !== siteToDelete);
-
-      document.getElementById('siteSelect').value = state.sites[0];
-      persistState();
+      openConfirmDelete({
+        title: "Delete Construction Site?",
+        subtitle: `Permanently delete "${siteToDelete}" and all its records?`,
+        onConfirm: () => {
+          state.sites = state.sites.filter(s => s !== siteToDelete);
+          state.labours = (state.labours || []).filter(l => l.site !== siteToDelete);
+          state.expenses = (state.expenses || []).filter(e => e.site !== siteToDelete);
+          state.bills = (state.bills || []).filter(b => b.site !== siteToDelete);
+          document.getElementById('siteSelect').value = state.sites[0];
+          persistState();
+        }
+      });
     };
 
     window.saveLabour = async (e) => {
@@ -1928,14 +2038,19 @@
       e.target.reset(); closeFormModal(); persistState(); navigateTo('viewBills');
     };
 
-    // Delete Record (STRICTLY MAIN CONTRACTOR ONLY - SUPERVISORS CANNOT DELETE ANYTHING)
+    // Delete Record (STRICTLY MAIN CONTRACTOR ONLY - Touch-safe Modal)
     window.deleteRecord = (type, id) => {
       if (!isMainContractorActive()) {
         return alert("Access Denied! Only the Main Contractor can delete records.");
       }
-      if (!confirm("Are you sure you want to delete this record?")) return;
-      state[type] = state[type].filter(item => item.id !== id);
-      persistState();
+      openConfirmDelete({
+        title: "Delete Record?",
+        subtitle: "Are you sure you want to permanently delete this entry?",
+        onConfirm: () => {
+          state[type] = (state[type] || []).filter(item => item.id !== id);
+          persistState();
+        }
+      });
     };
 
     function getFileBadgeHTML(att) {
@@ -1947,9 +2062,10 @@
       return `<a href="${att.dataUrl}" download="${att.name}" target="_blank" class="px-2.5 py-1.5 rounded-xl bg-amber-500/20 text-amber-500 text-[10px] font-black border border-amber-500/40 shrink-0 flex items-center gap-1">${docSvg}<span>DOC</span></a>`;
     }
 
-    // Master Render Engine (Enforces Role-Based Button Visibility)
+    // Master Render Engine
     window.renderAll = () => {
       const siteSelect = document.getElementById('siteSelect');
+      if (!state.sites || state.sites.length === 0) state.sites = ['Main Site A - मुख्य साइट'];
       const currentSite = siteSelect.value && state.sites.includes(siteSelect.value) ? siteSelect.value : state.sites[0];
       siteSelect.innerHTML = state.sites.map(s => `<option value="${s}" ${s === currentSite ? 'selected' : ''}>${s}</option>`).join('');
 
@@ -1972,11 +2088,8 @@
       document.getElementById('activeNicknameBadge').innerText = activeAcc.nickname || 'Main';
       document.getElementById('profileLogoutBtn').classList.toggle('hidden', !currentUser);
 
-      // Hide Delete Site Button for Supervisors
       const delSiteBtn = document.getElementById('deleteSiteBtn');
-      if (delSiteBtn) {
-        delSiteBtn.classList.toggle('hidden', !masterActive);
-      }
+      if (delSiteBtn) delSiteBtn.classList.toggle('hidden', !masterActive);
 
       updateSyncStatusUI();
 
@@ -1984,9 +2097,8 @@
       let totalLabourDue = 0;
 
       const workerSvg = `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`;
-      const trashSvg = `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>`;
+      const trashSvg = `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>`;
 
-      // Render Spaced Labour Cards (Delete & Rate Edit hidden for Supervisors)
       document.getElementById('labourList').innerHTML = filteredLabours.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No labour records found for ${activeMonth}.</div>` : filteredLabours.map(l => {
         const rate = l.dailyRate || 500;
         const earned = Math.round(rate * ((l.presentDays || 0) + ((l.halfDays || 0) * 0.5)));
@@ -2019,7 +2131,7 @@
               <div class="text-right flex flex-col items-end">
                 <div class="text-[10px] uppercase opacity-65 font-bold">Net Due</div>
                 <div class="text-base font-black ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net.toLocaleString('en-IN')}</div>
-                ${masterActive ? `<button onclick="deleteRecord('labours','${l.id}')" class="p-1 text-rose-500 opacity-75 hover:opacity-100 mt-1" title="Delete Labour">${trashSvg}</button>` : ''}
+                ${masterActive ? `<button type="button" onclick="deleteRecord('labours','${l.id}')" class="p-1.5 text-rose-500 opacity-80 hover:opacity-100 mt-1" title="Delete Labour">${trashSvg}</button>` : ''}
               </div>
             </div>
 
@@ -2049,7 +2161,6 @@
 
       document.getElementById('summaryLabourDue').innerText = `₹${totalLabourDue.toLocaleString('en-IN')}`;
 
-      // Home Snapshot Spacing
       document.getElementById('homeRecentLabour').innerHTML = filteredLabours.length === 0 ? `
         <div class="ios-glass rounded-2xl p-6 text-center">
           <p class="text-xs opacity-70 mb-3">No workers added yet.</p>
@@ -2071,7 +2182,7 @@
         `;
       }).join('');
 
-      // Expenses (Delete button hidden for Supervisors)
+      // Expenses
       const filteredExpenses = (state.expenses || []).filter(e => e.site === activeSite && e.month === activeMonth);
       document.getElementById('summaryExpensesTotal').innerText = `₹${filteredExpenses.reduce((a, b) => a + b.amount, 0).toLocaleString('en-IN')}`;
       document.getElementById('expenseList').innerHTML = filteredExpenses.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No expenses recorded.</div>` : filteredExpenses.map(e => `
@@ -2079,12 +2190,12 @@
           <div class="flex items-center gap-2.5">${getFileBadgeHTML(e.attachment)}<div><h4 class="font-bold text-xs">${e.title}</h4><div class="text-[10px] opacity-75">${e.category}</div></div></div>
           <div class="text-right flex flex-col items-end">
             <div class="text-xs font-black text-amber-500">₹${e.amount.toLocaleString('en-IN')}</div>
-            ${masterActive ? `<button onclick="deleteRecord('expenses','${e.id}')" class="p-1 text-rose-500 opacity-75 hover:opacity-100 mt-0.5">${trashSvg}</button>` : ''}
+            ${masterActive ? `<button type="button" onclick="deleteRecord('expenses','${e.id}')" class="p-1.5 text-rose-500 opacity-80 hover:opacity-100 mt-0.5">${trashSvg}</button>` : ''}
           </div>
         </div>
       `).join('');
 
-      // Bills (Delete and Status Toggle hidden for Supervisors)
+      // Bills
       const filteredBills = (state.bills || []).filter(b => b.site === activeSite && b.month === activeMonth);
       document.getElementById('summaryBillsTotal').innerText = `₹${filteredBills.reduce((a, b) => a + b.amount, 0).toLocaleString('en-IN')}`;
       document.getElementById('billList').innerHTML = filteredBills.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No bills recorded.</div>` : filteredBills.map(b => {
@@ -2104,7 +2215,7 @@
             </div>
             <div class="text-right flex flex-col items-end">
               <div class="text-sm font-black ${isPending ? 'text-amber-500' : 'text-emerald-500'}">₹${b.amount.toLocaleString('en-IN')}</div>
-              ${masterActive ? `<button onclick="deleteRecord('bills','${b.id}')" class="p-1 text-rose-500 opacity-75 hover:opacity-100 mt-1">${trashSvg}</button>` : ''}
+              ${masterActive ? `<button type="button" onclick="deleteRecord('bills','${b.id}')" class="p-1.5 text-rose-500 opacity-80 hover:opacity-100 mt-1">${trashSvg}</button>` : ''}
             </div>
           </div>
         `;
@@ -2163,23 +2274,79 @@
     };
 
     window.logoutAccount = () => {
-      if (confirm("Log out of Cloud Email?")) {
-        signOut(auth).then(() => { currentUser = null; loadLocalState(); closeProfileModal(); location.reload(); });
-      }
+      openConfirmDelete({
+        title: "Log Out of Cloud?",
+        subtitle: "You can sign back in anytime to sync your data.",
+        onConfirm: () => {
+          signOut(auth).then(() => { currentUser = null; closeProfileModal(); location.reload(); });
+        }
+      });
     };
 
-    onAuthStateChanged(auth, (user) => {
+    // Real-Time Unified Cloud Sync + Automatic Migration of Legacy PC/Mobile Documents
+    onAuthStateChanged(auth, async (user) => {
+      if (unsubscribeSnapshot) { unsubscribeSnapshot(); unsubscribeSnapshot = null; }
       if (user) {
-        currentUser = user; loadLocalState(); updateSyncStatusUI();
-        onSnapshot(doc(db, "users", `${user.uid}_${getActiveAccountId()}`), (snap) => {
+        currentUser = user;
+        loadLocalState();
+        updateSyncStatusUI();
+
+        const masterDocRef = doc(db, "users", user.uid);
+        const legacyMainDocRef = doc(db, "users", `${user.uid}_acc_main`);
+
+        try {
+          const [masterSnap, legacySnap] = await Promise.all([getDoc(masterDocRef), getDoc(legacyMainDocRef)]);
+          let mergedSites = new Set(state.sites || []);
+          let mergedLabours = [...(state.labours || [])];
+          let mergedExpenses = [...(state.expenses || [])];
+          let mergedBills = [...(state.bills || [])];
+          let mergedHajri = { ...(state.dailyHajriRecords || {}) };
+          let mergedPin = state.masterPin || '1234';
+          let mergedAccounts = normalizeAccounts(state.accounts);
+
+          const mergeFromDoc = (docData) => {
+            if (!docData) return;
+            if (docData.masterPin && docData.masterPin !== '1234') mergedPin = String(docData.masterPin).trim();
+            if (Array.isArray(docData.accounts)) mergedAccounts = normalizeAccounts(docData.accounts);
+            (docData.sites || []).forEach(s => mergedSites.add(s));
+            const existingLIds = new Set(mergedLabours.map(x => x.id));
+            (docData.labours || []).forEach(l => { if (!existingLIds.has(l.id)) mergedLabours.push(l); });
+            const existingEIds = new Set(mergedExpenses.map(x => x.id));
+            (docData.expenses || []).forEach(e => { if (!existingEIds.has(e.id)) mergedExpenses.push(e); });
+            const existingBIds = new Set(mergedBills.map(x => x.id));
+            (docData.bills || []).forEach(b => { if (!existingBIds.has(b.id)) mergedBills.push(b); });
+            Object.assign(mergedHajri, docData.dailyHajriRecords || {});
+          };
+
+          if (legacySnap.exists()) mergeFromDoc(legacySnap.data());
+          if (masterSnap.exists()) mergeFromDoc(masterSnap.data());
+
+          state.sites = Array.from(mergedSites);
+          state.labours = mergedLabours;
+          state.expenses = mergedExpenses;
+          state.bills = mergedBills;
+          state.dailyHajriRecords = mergedHajri;
+          state.masterPin = mergedPin;
+          state.accounts = mergedAccounts;
+
+          await persistState();
+        } catch (err) { console.error("Initial Merge Error:", err); }
+
+        // Live Real-time Listener on unified document (PC <-> Mobile instant sync)
+        unsubscribeSnapshot = onSnapshot(masterDocRef, (snap) => {
           if (snap.exists()) {
-            const cloudData = snap.data();
-            state = { ...cloudData, accounts: getGlobalAccountsList() };
+            sanitizeStateData(snap.data());
             localStorage.setItem(getStorageKey(), JSON.stringify(state));
             renderAll();
-          } else { persistState(); }
+            renderAccountIdsList();
+          }
         });
-      } else { currentUser = null; loadLocalState(); updateSyncStatusUI(); renderAll(); }
+      } else {
+        currentUser = null;
+        loadLocalState();
+        updateSyncStatusUI();
+        renderAll();
+      }
     });
 
     enforceOnlineOnlyMode();
