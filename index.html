@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
   
-  <link rel="icon" type="image/png" href="./logo.png?v=3">
-  <link rel="apple-touch-icon" href="./logo.png?v=3">
-  <link rel="manifest" href="manifest.json?v=3">
+  <link rel="icon" type="image/png" href="./logo.png?v=4">
+  <link rel="apple-touch-icon" href="./logo.png?v=4">
+  <link rel="manifest" href="manifest.json?v=4">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#000000">
@@ -140,8 +140,6 @@
   <!-- 2. TOP HEADER -->
   <header class="sticky top-0 z-30 px-4 pt-4 pb-2.5 ios-header">
     <div class="max-w-md mx-auto flex items-center justify-between">
-      
-      <!-- User Profile Avatar Badge (Opens Settings & Photo Upload) -->
       <div class="flex items-center gap-3">
         <button onclick="openSettingsModal()" class="relative group active:scale-95 transition-transform" title="Account & Settings">
           <div id="userAvatarBadge" class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 font-black text-base flex items-center justify-center shadow-lg border border-white/20 overflow-hidden">
@@ -156,11 +154,9 @@
         </div>
       </div>
 
-      <!-- Top Right: Bills Icon -->
       <button onclick="navigateTo('viewBills')" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center text-lg active:scale-90 transition-transform shadow-sm" title="Company Bills">
         🧾
       </button>
-
     </div>
   </header>
 
@@ -229,15 +225,15 @@
       <div id="homeRecentLabour"></div>
     </section>
 
-    <!-- VIEW 2: LABOUR REGISTER & DATE-WISE HAJRI BOOK -->
+    <!-- VIEW 2: LABOUR REGISTER & ACTIONS -->
     <section id="viewLabours" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black" data-i18n="tabLabour">👷‍♂️ Labour Register</h2>
         <div class="flex items-center gap-2">
           <button onclick="openHajriBookModal()" class="px-2.5 py-1.5 bg-amber-500/20 border border-amber-500/40 text-amber-500 font-bold text-xs rounded-xl active:scale-95 transition-transform" title="Daily Muster Roll">
-            📖 Hajri Book / हाजिरी बही
+            📖 Hajri Book
           </button>
-          <button onclick="carryForwardLastMonthWorkers()" class="px-2.5 py-1.5 ios-glass hover:bg-black/5 dark:hover:bg-white/10 text-amber-500 font-bold text-xs rounded-xl" title="Copy previous month workers">
+          <button onclick="openCarrySelectModal()" class="px-2.5 py-1.5 ios-glass hover:bg-black/5 dark:hover:bg-white/10 text-amber-500 font-bold text-xs rounded-xl active:scale-95 transition-transform" title="Select previous workers to carry">
             ⚡ Carry
           </button>
           <button onclick="openFormModal('labour')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs rounded-xl shadow">
@@ -266,7 +262,7 @@
       <div id="expenseList" class="space-y-2.5"></div>
     </section>
 
-    <!-- VIEW 5: COMPANY BILLS (WITH TOGGLE TO RECEIVED) -->
+    <!-- VIEW 5: COMPANY BILLS -->
     <section id="viewBills" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black" data-i18n="tabBills">🧾 Company Work Bills</h2>
@@ -280,15 +276,12 @@
   <!-- 5. iOS INSTAGRAM BOTTOM NAVIGATION BAR -->
   <nav class="fixed bottom-0 inset-x-0 z-40 ios-instagram-nav pb-safe pt-2">
     <div class="max-w-md mx-auto px-6 pb-2 flex items-center justify-between">
-      
-      <!-- Home -->
       <button onclick="navigateTo('viewHome')" id="nav-viewHome" class="flex flex-col items-center justify-center w-12 py-1 text-amber-500 active:scale-90 transition-transform">
         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 2.1l9 8.1c.4.3.6.8.6 1.3v8.5c0 1.1-.9 2-2 2h-4.5c-.8 0-1.5-.7-1.5-1.5V15c0-.6-.4-1-1-1s-1 .4-1 1v5.5c0 .8-.7 1.5-1.5 1.5H5.4c-1.1 0-2-.9-2-2v-8.5c0-.5.2-1 .6-1.3l9-8.1c.6-.6 1.6-.6 2.2 0z"/>
         </svg>
       </button>
 
-      <!-- Labours -->
       <button onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="flex flex-col items-center justify-center w-12 py-1 text-zinc-400 active:scale-90 transition-transform">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -298,14 +291,12 @@
         </svg>
       </button>
 
-      <!-- Add (+) Button -->
       <button onclick="openFormModal('labour')" class="flex items-center justify-center w-12 py-1 active:scale-90 transition-transform" title="New Entry">
         <div class="w-7 h-7 rounded-lg border-2 border-amber-500 flex items-center justify-center text-amber-500 font-bold text-lg leading-none">
           +
         </div>
       </button>
 
-      <!-- Expenses -->
       <button onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="flex flex-col items-center justify-center w-12 py-1 text-zinc-400 active:scale-90 transition-transform">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
@@ -313,7 +304,6 @@
         </svg>
       </button>
 
-      <!-- Monthly Calendar -->
       <button onclick="navigateTo('viewMonthly')" id="nav-viewMonthly" class="flex flex-col items-center justify-center w-12 py-1 text-zinc-400 active:scale-90 transition-transform">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -322,11 +312,45 @@
           <line x1="3" y1="10" x2="21" y2="10"></line>
         </svg>
       </button>
-
     </div>
   </nav>
 
-  <!-- 6. DATE-WISE HAJRI BOOK MODAL (हाजिरी बही-खाता) -->
+  <!-- 6. MODAL: MULTI-SELECT CARRY FORWARD LABOURS -->
+  <div id="carryModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90vh] flex flex-col">
+      <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2 shrink-0">
+        <div>
+          <h3 class="font-black text-sm flex items-center gap-1.5">
+            <span>⚡</span> Carry Workers to Current Month
+          </h3>
+          <p class="text-[10px] text-zinc-400">Select workers you want to continue with</p>
+        </div>
+        <button onclick="closeCarrySelectModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
+      </div>
+
+      <div class="flex justify-between items-center text-xs shrink-0 pt-1">
+        <span class="text-zinc-400" id="carrySelectCount">Selected: 0</span>
+        <button onclick="toggleSelectAllCarry(this)" class="text-amber-500 font-bold text-xs hover:underline">
+          Select All / सभी चुनें
+        </button>
+      </div>
+
+      <!-- Scrollable Checkbox List -->
+      <div id="carryWorkersList" class="flex-1 overflow-y-auto space-y-2 pr-1"></div>
+
+      <!-- Action Buttons -->
+      <div class="pt-2 border-t border-zinc-200 dark:border-white/10 shrink-0 flex gap-2">
+        <button onclick="closeCarrySelectModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">
+          Cancel
+        </button>
+        <button onclick="executeCarryForwardSelected()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 text-xs font-black shadow active:scale-95 transition-transform">
+          Add Selected Workers
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. DATE-WISE HAJRI BOOK MODAL -->
   <div id="hajriBookModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-lg w-full p-5 space-y-4 shadow-2xl max-h-[92vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2 shrink-0">
@@ -339,16 +363,13 @@
         <button onclick="closeHajriBookModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
       </div>
 
-      <!-- Hajri Date Selector -->
       <div class="flex items-center gap-2 bg-black/5 dark:bg-black/30 p-2 rounded-2xl border border-zinc-200 dark:border-white/10 shrink-0">
         <span class="text-xs font-bold text-zinc-400">Date / तारीख:</span>
         <input type="date" id="hajriDateInput" onchange="renderDailyHajriSheet()" class="app-input flex-1 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none" />
       </div>
 
-      <!-- Workers List for the Day -->
       <div id="hajriWorkersContainer" class="flex-1 overflow-y-auto space-y-2 pr-1"></div>
 
-      <!-- Footer Action -->
       <div class="pt-2 border-t border-zinc-200 dark:border-white/10 shrink-0 flex justify-between items-center">
         <span class="text-[11px] text-zinc-400" id="hajriDaySummary">P: 0 | H: 0 | A: 0</span>
         <button onclick="closeHajriBookModal()" class="px-4 py-2 bg-amber-500 text-zinc-950 font-bold text-xs rounded-xl shadow">
@@ -358,7 +379,7 @@
     </div>
   </div>
 
-  <!-- 7. SETTINGS MODAL (LANGUAGES, PROFILE PHOTO & THEMES) -->
+  <!-- 8. SETTINGS MODAL -->
   <div id="settingsModal" class="fixed inset-0 bg-black/60 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-3">
@@ -366,7 +387,6 @@
         <button onclick="closeSettingsModal()" class="text-zinc-400 hover:text-zinc-600 dark:hover:text-white text-lg">✕</button>
       </div>
 
-      <!-- User Profile Photo Upload -->
       <div class="space-y-2">
         <label class="text-xs font-bold text-zinc-500 uppercase">Your Profile Photo / प्रोफाइल फोटो</label>
         <div class="flex items-center gap-3">
@@ -383,7 +403,6 @@
         </div>
       </div>
 
-      <!-- Theme Switcher -->
       <div class="space-y-1.5">
         <label class="text-xs font-bold text-zinc-500 uppercase">App Theme / थीम</label>
         <div class="grid grid-cols-3 gap-2">
@@ -393,7 +412,6 @@
         </div>
       </div>
 
-      <!-- 10 Indian Regional Languages Selector -->
       <div class="space-y-1.5">
         <label class="text-xs font-bold text-zinc-500 uppercase">Language / भाषा (10 Languages)</label>
         <select id="settingsLang" onchange="changeLanguage(this.value)" class="app-input w-full rounded-xl p-2.5 text-xs font-bold focus:outline-none">
@@ -410,7 +428,6 @@
         </select>
       </div>
 
-      <!-- Account Management -->
       <div class="space-y-2 pt-2 border-t border-zinc-200 dark:border-white/10">
         <div id="accountStatusText" class="text-xs text-zinc-500">Currently in Local Mode</div>
         <button onclick="closeSettingsModal(); openAuthModal();" class="w-full py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-bold text-xs flex items-center justify-center gap-1.5 shadow">
@@ -423,7 +440,7 @@
     </div>
   </div>
 
-  <!-- 8. INPUT FORMS MODAL -->
+  <!-- 9. INPUT FORMS MODAL -->
   <div id="formModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2">
@@ -431,7 +448,7 @@
         <button onclick="closeFormModal()" class="text-zinc-400 hover:text-zinc-600 dark:hover:text-white text-lg">✕</button>
       </div>
 
-      <!-- Add Labour Form -->
+      <!-- Add Labour Form (Daily Wage Rate instead of Monthly Salary) -->
       <form id="labourForm" onsubmit="saveLabour(event)" class="space-y-3 hidden">
         <div>
           <input type="text" id="lName" list="knownLaboursList" onchange="autoFillKnownLabour(this.value)" required placeholder="Labour Name / नाम (e.g. Ramesh)" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
@@ -448,8 +465,14 @@
         </select>
         
         <div class="grid grid-cols-2 gap-2">
-          <input type="number" id="lSalary" required min="0" placeholder="Monthly Salary ₹" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none" />
-          <input type="number" id="lAdvance" required min="0" placeholder="Initial Advance ₹" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none" />
+          <div>
+            <label class="text-[10px] font-bold text-zinc-500 uppercase">Daily Rate / दिहाड़ी (₹)</label>
+            <input type="number" id="lDailyRate" required min="1" placeholder="₹ per attendance" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-0.5" />
+          </div>
+          <div>
+            <label class="text-[10px] font-bold text-zinc-500 uppercase">Advance / एडवांस (₹)</label>
+            <input type="number" id="lAdvance" required min="0" placeholder="Initial Advance ₹" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-0.5" />
+          </div>
         </div>
         
         <label class="flex items-center justify-center border-2 border-dashed border-zinc-300 dark:border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-black/5 dark:hover:bg-white/5">
@@ -500,7 +523,7 @@
     </div>
   </div>
 
-  <!-- 9. ADVANCE MODAL -->
+  <!-- 10. ADVANCE MODAL -->
   <div id="advanceModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2">
@@ -537,7 +560,7 @@
     </div>
   </div>
 
-  <!-- 10. AUTH MODAL -->
+  <!-- 11. AUTH MODAL -->
   <div id="authModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center">
@@ -590,11 +613,10 @@
       labours: [],
       expenses: [],
       bills: [],
-      dailyHajriRecords: {}, // Structure: { "YYYY-MM-DD": { [workerId]: "P" | "H" | "A" } }
+      dailyHajriRecords: {},
       masterLabourDirectory: []
     };
 
-    // 10 Indian Regional Languages Localization Dictionary
     const i18n = {
       hi: { labourDue: "कुल मजदूर बकाया", expenses: "खर्चे व किराया", bills: "कंपनी बिल", tabLabour: "👷‍♂️ मजदूर व हाजिरी", tabMonthly: "📅 मासिक बही-खाता", tabExpenses: "🛺 खर्चे व किराया", tabBills: "🧾 कंपनी बिल", audioSummaryTitle: "Site Audio Summary / बोलकर हिसाब सुनें", audioSummarySub: "एक टैप में पूरे साइट का हिसाब सुनें", listenBtn: "LISTEN / सुनें", liveSnapshot: "LIVE WORKFORCE SNAPSHOT" },
       en: { labourDue: "Labour Due", expenses: "Expenses", bills: "Bills", tabLabour: "👷‍♂️ Labours & Attendance", tabMonthly: "📅 Monthly Ledger", tabExpenses: "🛺 Expenses & Rent", tabBills: "🧾 Company Bills", audioSummaryTitle: "Site Audio Summary", audioSummarySub: "Listen to whole site summary in one tap", listenBtn: "LISTEN", liveSnapshot: "LIVE WORKFORCE SNAPSHOT" },
@@ -756,7 +778,6 @@
     };
     window.closeFormModal = () => document.getElementById('formModal').classList.replace('flex', 'hidden');
 
-    // Profile Photo Upload Handlers
     window.updateUserProfilePhoto = async (input) => {
       const file = input.files[0];
       if (!file) return;
@@ -766,19 +787,112 @@
       alert("Profile photo updated successfully!");
     };
 
-    // Toggle Company Bill Status: Pending -> Received
     window.toggleBillStatus = (billId) => {
       const bill = (state.bills || []).find(b => b.id === billId);
       if (!bill) return;
-      if (bill.status === 'Pending') {
-        bill.status = 'Received';
-      } else {
-        bill.status = 'Pending';
-      }
+      bill.status = bill.status === 'Pending' ? 'Received' : 'Pending';
       persistState();
     };
 
-    // Date-Wise Hajri Book (Muster Roll) Handlers
+    // --- INTERACTIVE CARRY FORWARD WORKERS MODAL ---
+    window.openCarrySelectModal = () => {
+      const currentSite = document.getElementById('siteSelect').value;
+      const currentMonth = document.getElementById('monthSelect').value;
+      const container = document.getElementById('carryWorkersList');
+
+      // Find all unique workers on this site who are NOT already in the active month
+      const currentMonthWorkers = (state.labours || []).filter(l => l.site === currentSite && l.month === currentMonth);
+      const currentMonthNames = new Set(currentMonthWorkers.map(w => w.name.trim().toLowerCase()));
+
+      const availableWorkersMap = new Map();
+      (state.labours || []).forEach(l => {
+        if (l.site === currentSite && !currentMonthNames.has(l.name.trim().toLowerCase())) {
+          if (!availableWorkersMap.has(l.name.trim().toLowerCase())) {
+            availableWorkersMap.set(l.name.trim().toLowerCase(), l);
+          }
+        }
+      });
+
+      const candidates = Array.from(availableWorkersMap.values());
+
+      if (candidates.length === 0) {
+        container.innerHTML = `<div class="text-center py-8 text-xs text-zinc-400">No other previous workers found for site ${currentSite} to carry forward.</div>`;
+        document.getElementById('carrySelectCount').innerText = `Selected: 0`;
+        document.getElementById('carryModal').classList.replace('hidden', 'flex');
+        return;
+      }
+
+      container.innerHTML = candidates.map(w => `
+        <label class="flex items-center justify-between p-2.5 rounded-2xl bg-black/5 dark:bg-black/30 border border-zinc-200 dark:border-white/5 cursor-pointer active:scale-98 transition-transform">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <input type="checkbox" value="${w.id}" class="carry-worker-cb w-4 h-4 accent-amber-500 rounded" onchange="updateCarryCount()" checked />
+            ${w.photo 
+              ? `<img src="${w.photo}" class="w-9 h-9 rounded-full object-cover border border-amber-500 shrink-0" />` 
+              : `<div class="w-9 h-9 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0">👷</div>`}
+            <div class="truncate">
+              <div class="font-bold text-xs truncate">${w.name}</div>
+              <div class="text-[10px] text-zinc-400">${w.category} • ₹${w.dailyRate || w.salary || 500}/day</div>
+            </div>
+          </div>
+        </label>
+      `).join('');
+
+      updateCarryCount();
+      document.getElementById('carryModal').classList.replace('hidden', 'flex');
+    };
+
+    window.closeCarrySelectModal = () => document.getElementById('carryModal').classList.replace('flex', 'hidden');
+
+    window.updateCarryCount = () => {
+      const selected = document.querySelectorAll('.carry-worker-cb:checked').length;
+      document.getElementById('carrySelectCount').innerText = `Selected: ${selected}`;
+    };
+
+    window.toggleSelectAllCarry = (btn) => {
+      const checkboxes = document.querySelectorAll('.carry-worker-cb');
+      const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+      checkboxes.forEach(cb => cb.checked = !allChecked);
+      updateCarryCount();
+    };
+
+    window.executeCarryForwardSelected = () => {
+      const currentSite = document.getElementById('siteSelect').value;
+      const currentMonth = document.getElementById('monthSelect').value;
+      const checkedBoxes = document.querySelectorAll('.carry-worker-cb:checked');
+
+      if (checkedBoxes.length === 0) {
+        return alert("Please select at least one worker to carry forward.");
+      }
+
+      let count = 0;
+      checkedBoxes.forEach(cb => {
+        const workerId = cb.value;
+        const sourceWorker = (state.labours || []).find(w => w.id === workerId);
+        if (sourceWorker) {
+          state.labours.unshift({
+            id: Date.now().toString() + Math.random().toString().slice(2, 6),
+            site: currentSite,
+            month: currentMonth,
+            name: sourceWorker.name,
+            category: sourceWorker.category,
+            dailyRate: sourceWorker.dailyRate || sourceWorker.salary || 500,
+            advance: 0,
+            advanceLog: [],
+            presentDays: 0,
+            halfDays: 0,
+            photo: sourceWorker.photo || null
+          });
+          count++;
+        }
+      });
+
+      closeCarrySelectModal();
+      persistState();
+      alert(`Success! Added ${count} workers to ${currentMonth} with 0 attendance.`);
+      navigateTo('viewLabours');
+    };
+
+    // --- DAILY HAJRI BOOK ---
     window.openHajriBookModal = () => {
       document.getElementById('hajriBookModal').classList.replace('hidden', 'flex');
       renderDailyHajriSheet();
@@ -788,7 +902,7 @@
     window.renderDailyHajriSheet = () => {
       const selectedDate = document.getElementById('hajriDateInput').value;
       const activeSite = document.getElementById('siteSelect').value;
-      const monthPrefix = selectedDate.slice(0, 7); // e.g. "2026-10"
+      const monthPrefix = selectedDate.slice(0, 7);
 
       const siteWorkers = (state.labours || []).filter(l => l.site === activeSite && l.month === monthPrefix);
       const container = document.getElementById('hajriWorkersContainer');
@@ -799,7 +913,7 @@
       const dayRecord = state.dailyHajriRecords[selectedDate];
 
       if (siteWorkers.length === 0) {
-        container.innerHTML = `<div class="text-center py-8 text-xs text-zinc-400">No active workers found in ${activeSite} for ${monthPrefix}. Add workers first.</div>`;
+        container.innerHTML = `<div class="text-center py-8 text-xs text-zinc-400">No active workers found in ${activeSite} for ${monthPrefix}. Add or carry workers first.</div>`;
         document.getElementById('hajriDaySummary').innerText = `P: 0 | H: 0 | A: 0`;
         return;
       }
@@ -807,7 +921,7 @@
       let pCount = 0, hCount = 0, aCount = 0;
 
       container.innerHTML = siteWorkers.map(w => {
-        const status = dayRecord[w.id] || 'P'; // Default is Present
+        const status = dayRecord[w.id] || 'P';
         if (status === 'P') pCount++;
         else if (status === 'H') hCount++;
         else aCount++;
@@ -820,11 +934,10 @@
                 : `<div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0">👷</div>`}
               <div class="truncate">
                 <div class="font-bold text-xs truncate">${w.name}</div>
-                <div class="text-[10px] text-zinc-400">${w.category}</div>
+                <div class="text-[10px] text-zinc-400">${w.category} • ₹${w.dailyRate || 500}/day</div>
               </div>
             </div>
 
-            <!-- Attendance Toggle Buttons -->
             <div class="flex items-center gap-1 shrink-0">
               <button onclick="setDailyWorkerStatus('${selectedDate}', '${w.id}', 'P')" class="px-2.5 py-1.5 rounded-xl text-xs font-black transition-all ${status === 'P' ? 'bg-emerald-500 text-zinc-950 shadow' : 'bg-black/10 dark:bg-white/5 text-zinc-400'}">P</button>
               <button onclick="setDailyWorkerStatus('${selectedDate}', '${w.id}', 'H')" class="px-2.5 py-1.5 rounded-xl text-xs font-black transition-all ${status === 'H' ? 'bg-amber-500 text-zinc-950 shadow' : 'bg-black/10 dark:bg-white/5 text-zinc-400'}">H</button>
@@ -843,7 +956,6 @@
 
       state.dailyHajriRecords[dateStr][workerId] = status;
 
-      // Automatically recalculate worker's total present & half days for the month
       const monthPrefix = dateStr.slice(0, 7);
       recalculateMonthlyAttendanceFromHajri(workerId, monthPrefix);
 
@@ -880,7 +992,7 @@
       const found = (state.masterLabourDirectory || []).find(w => w.name.toLowerCase() === name.trim().toLowerCase());
       if (found) {
         document.getElementById('lCategory').value = found.category || 'Mason (मिस्त्री)';
-        document.getElementById('lSalary').value = found.salary || '';
+        document.getElementById('lDailyRate').value = found.dailyRate || found.salary || '';
         document.getElementById('lAdvance').value = 0;
         if (found.photo) {
           document.getElementById('lPhotoLabel').innerText = '✅ Saved Photo Ready';
@@ -898,13 +1010,14 @@
       }
     };
 
+    // Save Labour with Daily Wage Rate
     window.saveLabour = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
       const month = document.getElementById('monthSelect').value;
       const name = document.getElementById('lName').value.trim();
       const category = document.getElementById('lCategory').value;
-      const salary = Number(document.getElementById('lSalary').value) || 0;
+      const dailyRate = Number(document.getElementById('lDailyRate').value) || 0;
       const initialAdvance = Number(document.getElementById('lAdvance').value) || 0;
       const photoFile = document.getElementById('lPhoto').files[0];
       
@@ -925,7 +1038,8 @@
 
       state.labours.unshift({
         id: Date.now().toString(),
-        site, month, name, category, salary,
+        site, month, name, category,
+        dailyRate: dailyRate,
         advance: initialAdvance,
         advanceLog,
         presentDays: 0,
@@ -936,9 +1050,9 @@
       if (!state.masterLabourDirectory) state.masterLabourDirectory = [];
       const dirIndex = state.masterLabourDirectory.findIndex(w => w.name.toLowerCase() === name.toLowerCase());
       if (dirIndex >= 0) {
-        state.masterLabourDirectory[dirIndex] = { name, category, salary, photo };
+        state.masterLabourDirectory[dirIndex] = { name, category, dailyRate, photo };
       } else {
-        state.masterLabourDirectory.push({ name, category, salary, photo });
+        state.masterLabourDirectory.push({ name, category, dailyRate, photo });
       }
 
       e.target.reset();
@@ -948,12 +1062,14 @@
       navigateTo('viewLabours');
     };
 
+    // Update Worker Daily Rate Anytime
     window.editLabourSalary = (id) => {
       const l = state.labours.find(x => x.id === id);
       if (!l) return;
-      const newSalary = prompt(`Update monthly salary for ${l.name}:`, l.salary);
-      if (newSalary !== null && !isNaN(newSalary) && Number(newSalary) >= 0) {
-        l.salary = Number(newSalary);
+      const currentRate = l.dailyRate || l.salary || 500;
+      const newRate = prompt(`Update daily attendance rate (₹/day) for ${l.name}:`, currentRate);
+      if (newRate !== null && !isNaN(newRate) && Number(newRate) > 0) {
+        l.dailyRate = Number(newRate);
         persistState();
       }
     };
@@ -1104,7 +1220,7 @@
       return `${langMap[mIdx]} ${year}`;
     }
 
-    // Master Render Method
+    // Master Render Method: Uses Daily Wage Rate
     window.renderAll = () => {
       const siteSelect = document.getElementById('siteSelect');
       const currentSite = siteSelect.value || state.sites[0];
@@ -1114,7 +1230,6 @@
       const activeMonth = document.getElementById('monthSelect').value;
       document.getElementById('monthlyBadge').innerText = activeMonth;
 
-      // Update User Avatar Badge
       const userBadge = document.getElementById('userAvatarBadge');
       const settingsAvatar = document.getElementById('settingsAvatarPreview');
 
@@ -1138,16 +1253,16 @@
         document.getElementById('logoutBtn').classList.add('hidden');
       }
 
-      // Filter Data
       const filteredLabours = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth);
       let totalLabourDue = 0;
 
-      // Render Labour Register
+      // Render Labour Register (Attendance × Daily Rate)
       document.getElementById('labourList').innerHTML = filteredLabours.length === 0
-        ? `<div class="text-center py-8 text-xs text-zinc-500">No labour records found for ${activeMonth}. Tap "Hajri Book" or "+ Worker".</div>`
+        ? `<div class="text-center py-8 text-xs text-zinc-500">No labour records found for ${activeMonth}. Tap "Carry" or "+ Worker".</div>`
         : filteredLabours.map(l => {
           const effectiveDays = (l.presentDays || 0) + ((l.halfDays || 0) * 0.5);
-          const earned = Math.round((l.salary / 26) * effectiveDays);
+          const rate = l.dailyRate || l.salary || 500;
+          const earned = Math.round(rate * effectiveDays);
           const net = earned - (l.advance || 0);
           totalLabourDue += net;
 
@@ -1162,8 +1277,8 @@
                     <h4 class="font-bold text-sm leading-tight">${l.name}</h4>
                     <span class="text-[10px] px-2 py-0.5 rounded-full bg-black/5 dark:bg-white/10 text-zinc-500 font-medium">${l.category}</span>
                     <div class="text-[11px] text-zinc-500 mt-1 flex items-center gap-1.5 flex-wrap">
-                      <span>वेतन: <b>₹${l.salary}</b></span>
-                      <button onclick="editLabourSalary('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 font-bold">Edit</button>
+                      <span>दर: <b>₹${rate}/दिन</b></span>
+                      <button onclick="editLabourSalary('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 font-bold">Edit Rate</button>
                       <span>| एडवांस: <b class="text-rose-500">₹${l.advance || 0}</b></span>
                       <button onclick="openAdvanceModal('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-600 font-bold">+ Adv</button>
                     </div>
@@ -1180,6 +1295,8 @@
                   <span class="font-semibold text-zinc-500">हाजिरी:</span> <b class="text-emerald-500">${l.presentDays || 0}P</b>
                   <span class="mx-1 text-zinc-400">|</span>
                   <span class="font-semibold text-zinc-500">हाफ:</span> <b class="text-amber-500">${l.halfDays || 0}</b>
+                  <span class="mx-1 text-zinc-400">|</span>
+                  <span class="text-zinc-500">कमाई:</span> <b class="text-emerald-500">₹${earned}</b>
                 </div>
                 <div class="flex items-center gap-1">
                   <button onclick="updateAttendance('${l.id}','decPresent')" class="w-6 h-6 rounded bg-black/10 dark:bg-white/10 font-bold">-</button>
@@ -1207,7 +1324,8 @@
       } else {
         document.getElementById('homeRecentLabour').innerHTML = filteredLabours.slice(0, 4).map(l => {
           const effectiveDays = (l.presentDays || 0) + ((l.halfDays || 0) * 0.5);
-          const earned = Math.round((l.salary / 26) * effectiveDays);
+          const rate = l.dailyRate || l.salary || 500;
+          const earned = Math.round(rate * effectiveDays);
           const net = earned - (l.advance || 0);
           return `
             <div class="ios-glass p-3 rounded-xl flex items-center justify-between text-xs">
@@ -1215,7 +1333,7 @@
                 <div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs">👷</div>
                 <div>
                   <div class="font-bold">${l.name}</div>
-                  <div class="text-[10px] text-zinc-500">${l.category} • ${l.presentDays || 0}P</div>
+                  <div class="text-[10px] text-zinc-500">${l.category} • ₹${rate}/day (${l.presentDays || 0}P)</div>
                 </div>
               </div>
               <div class="font-extrabold ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net}</div>
@@ -1248,7 +1366,7 @@
           </div>
         `).join('');
 
-      // Render Bills (With Toggle Status Button)
+      // Render Bills
       const filteredBills = (state.bills || []).filter(b => b.site === activeSite && b.month === activeMonth);
       const totalBills = filteredBills.reduce((acc, b) => acc + b.amount, 0);
       document.getElementById('summaryBillsTotal').innerText = `₹${totalBills.toLocaleString('en-IN')}`;
@@ -1281,7 +1399,7 @@
           `;
         }).join('');
 
-      // Render Monthly Ledger Tab Content
+      // Render Monthly Ledger Content
       document.getElementById('monthlyLedgerContent').innerHTML = `
         <div class="ios-glass p-4 rounded-2xl space-y-3 shadow-sm">
           <div class="flex justify-between items-center text-xs pb-2 border-b border-zinc-200 dark:border-white/10">
@@ -1321,7 +1439,6 @@
       if (file) document.getElementById(lblId).innerText = `📄 ${file.name}`;
     };
 
-    // Indian Regional Language Switcher
     window.changeLanguage = (lang) => {
       window.currentLang = lang;
       localStorage.setItem('thekedaar_lang', lang);
@@ -1333,7 +1450,6 @@
       closeSettingsModal();
     };
 
-    // Audio Report Engine (Native Local Voice Synthesis)
     window.playVoiceSummary = () => {
       const activeSite = document.getElementById('siteSelect').value;
       const activeMonth = document.getElementById('monthSelect').value;
