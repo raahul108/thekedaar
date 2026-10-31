@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
   
-  <link rel="icon" type="image/png" href="./logo.png?v=9">
-  <link rel="apple-touch-icon" href="./logo.png?v=9">
-  <link rel="manifest" href="manifest.json?v=9">
+  <link rel="icon" type="image/png" href="./logo.png?v=10">
+  <link rel="apple-touch-icon" href="./logo.png?v=10">
+  <link rel="manifest" href="manifest.json?v=10">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#000000">
@@ -108,7 +108,7 @@
 </head>
 <body class="min-h-screen pb-32 select-none no-scrollbar">
 
-  <!-- TOP HEADER (WITH MONTHLY LEDGER BUTTON & SETTINGS AT TOP RIGHT) -->
+  <!-- TOP HEADER -->
   <header class="sticky top-0 z-30 px-4 pt-4 pb-2.5 ios-header">
     <div class="max-w-md mx-auto flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -128,7 +128,6 @@
         </div>
       </div>
 
-      <!-- Top Right Actions: Monthly Ledger Icon & Settings Gear -->
       <div class="flex items-center gap-2">
         <button onclick="openMonthlyLedgerModal()" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center text-lg active:scale-90 transition-transform shadow-sm" title="Monthly Ledger & Bill Photos">
           📅
@@ -222,7 +221,7 @@
 
   </main>
 
-  <!-- FLOATING NAVIGATION BAR (NO MONTHLY TAB, MOVED TO TOP RIGHT) -->
+  <!-- FLOATING NAVIGATION BAR -->
   <div class="fixed bottom-4 inset-x-0 z-40 flex justify-center pointer-events-none px-3">
     <nav class="ios-instagram-floating-pill pointer-events-auto rounded-full py-1.5 px-3 flex items-center justify-around gap-2 w-full max-w-[350px]">
       <button onclick="navigateTo('viewHome')" id="nav-viewHome" class="nav-tab-item active flex items-center justify-center w-14 h-11 rounded-full active:scale-90" title="Home">
@@ -262,30 +261,20 @@
     </nav>
   </div>
 
-  <!-- MULTI-ACCOUNT & PIN LOCK MODAL FOR MAIN CONTRACTOR -->
+  <!-- MULTI-ACCOUNT & MASTER PASSWORD SETTINGS MODAL -->
   <div id="profileModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-3">
-        <h3 class="font-black text-base flex items-center gap-2">👤 Profile & Account IDs</h3>
+        <h3 class="font-black text-base flex items-center gap-2">👤 Profile & Master Security</h3>
         <button onclick="closeProfileModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
 
-      <div class="flex items-center gap-3 bg-black/5 dark:bg-black/25 p-3 rounded-2xl border border-zinc-300 dark:border-white/10">
-        <div id="profileAvatarPreview" class="w-14 h-14 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 font-black text-xl flex items-center justify-center shadow border-2 border-white/20 overflow-hidden shrink-0">
-          <span>ठे</span>
-        </div>
-        <div class="flex-1 space-y-1.5">
-          <span class="text-xs font-bold block" id="currentProfileNameText">Main Contractor</span>
-          <div class="flex gap-1.5">
-            <label class="px-2.5 py-1 bg-amber-500/15 hover:bg-amber-500/25 text-amber-500 border border-amber-500/30 text-[10px] font-bold rounded-lg cursor-pointer">
-              <span>📸 Camera</span>
-              <input type="file" accept="image/*" capture="user" class="hidden" onchange="initiateCropFromFile(this, 'userProfile')" />
-            </label>
-            <label class="px-2.5 py-1 bg-black/10 dark:bg-white/10 text-[10px] font-bold rounded-lg cursor-pointer">
-              <span>📁 Gallery</span>
-              <input type="file" accept="image/*" class="hidden" onchange="initiateCropFromFile(this, 'userProfile')" />
-            </label>
-          </div>
+      <!-- Set Master Password Section -->
+      <div class="bg-amber-500/10 border border-amber-500/30 p-3 rounded-2xl space-y-2">
+        <label class="text-[10px] font-bold text-amber-500 uppercase block">Set Main Contractor Password</label>
+        <div class="flex gap-2">
+          <input type="password" id="newMasterPinInput" maxlength="6" placeholder="New 4-digit PIN" class="app-input flex-1 rounded-xl px-3 py-2 text-xs font-bold focus:outline-none" />
+          <button onclick="saveNewMasterPin()" class="px-3 py-2 bg-amber-500 text-zinc-950 font-bold text-xs rounded-xl shadow">Update PIN</button>
         </div>
       </div>
 
@@ -339,7 +328,7 @@
           <h3 class="font-black text-base flex items-center gap-1.5">
             <span>📅</span> Detailed Monthly Statement & Bill Photos
           </h3>
-          <p class="text-[10px] opacity-70">Complete attendance, expenses, and attached bill documents</p>
+          <p class="text-[10px] opacity-70">Complete attendance breakdown, expenses, and bill documents</p>
         </div>
         <button onclick="closeMonthlyLedgerModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
@@ -353,31 +342,14 @@
     </div>
   </div>
 
-  <!-- LIVE IMAGE CROPPER MODAL -->
-  <div id="cropperModal" class="fixed inset-0 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 z-50">
-    <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl flex flex-col items-center">
-      <div class="w-full flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2">
-        <h3 class="font-black text-sm">Crop Photo / फोटो क्रॉप करें</h3>
-        <button onclick="closeCropperModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
+  <!-- LABOUR ATTENDANCE HISTORY POPUP MODAL -->
+  <div id="labourHistoryModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl max-h-[85vh] flex flex-col">
+      <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2 shrink-0">
+        <h3 id="labourHistoryTitle" class="font-black text-sm">Labour Attendance History</h3>
+        <button onclick="closeLabourHistoryModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
-
-      <div class="relative w-64 h-64 rounded-2xl overflow-hidden bg-black border border-white/20 touch-none flex items-center justify-center">
-        <canvas id="cropCanvas" width="256" height="256" class="cursor-grab active:cursor-grabbing"></canvas>
-        <div class="absolute inset-0 pointer-events-none rounded-full border-2 border-amber-500/80 shadow-[0_0_0_9999px_rgba(0,0,0,0.55)]"></div>
-      </div>
-
-      <div class="w-full space-y-1">
-        <div class="flex justify-between text-[10px] opacity-75 font-bold uppercase">
-          <span>Zoom / ज़ूम</span>
-          <span id="zoomValueText">1.0x</span>
-        </div>
-        <input type="range" id="cropZoomSlider" min="0.5" max="3" step="0.05" value="1" oninput="handleZoomChange(this.value)" class="w-full accent-amber-500 cursor-pointer" />
-      </div>
-
-      <div class="w-full flex gap-2 pt-1">
-        <button type="button" onclick="closeCropperModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Cancel</button>
-        <button type="button" onclick="saveCroppedImageResult()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-black text-xs shadow active:scale-95 transition-transform">Crop & Set Photo</button>
-      </div>
+      <div id="labourHistoryContent" class="flex-1 overflow-y-auto space-y-2 pr-1 text-xs"></div>
     </div>
   </div>
 
@@ -398,7 +370,7 @@
       <div id="carryWorkersList" class="flex-1 overflow-y-auto space-y-2 pr-1"></div>
       <div class="pt-2 border-t border-zinc-300 dark:border-white/10 shrink-0 flex gap-2">
         <button onclick="closeCarrySelectModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Cancel</button>
-        <button onclick="executeCarryForwardSelected()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 text-xs font-black shadow">Carry Workers</button>
+        <button onclick="executeCarryForwardSelected()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-black shadow">Carry Workers</button>
       </div>
     </div>
   </div>
@@ -441,12 +413,14 @@
         <button onclick="closeFormModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
 
-      <!-- Add Labour Form (Fixed Photo Cropping & Upload) -->
+      <!-- Add Labour Form (WITH CONTACT NUMBER, NO PHOTO UPLOAD) -->
       <form id="labourForm" onsubmit="saveLabour(event)" class="space-y-3 hidden">
         <div>
-          <input type="text" id="lName" list="knownLaboursList" onchange="autoFillKnownLabour(this.value)" required placeholder="Labour Name / नाम (e.g. Ramesh)" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
+          <div class="flex items-center gap-1.5">
+            <input type="text" id="lName" list="knownLaboursList" onchange="autoFillKnownLabour(this.value)" required placeholder="Labour Name / नाम (e.g. Ramesh)" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
+            <button type="button" onclick="startVoiceInputForField('lName')" class="px-3 py-2 bg-amber-500/15 text-amber-500 rounded-xl font-bold text-xs" title="Voice Type">🎤</button>
+          </div>
           <datalist id="knownLaboursList"></datalist>
-          <span class="text-[10px] opacity-70">Type or pick from previous workers.</span>
         </div>
 
         <select id="lCategory" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none">
@@ -467,31 +441,16 @@
             <input type="number" id="lAdvance" required min="0" value="0" placeholder="Initial Advance" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-0.5" />
           </div>
         </div>
-        
-        <div class="space-y-2 bg-black/5 dark:bg-black/20 p-3 rounded-2xl border border-zinc-300 dark:border-white/10">
-          <div class="flex items-center gap-3">
-            <div id="lPhotoPreviewBox" class="w-11 h-11 rounded-full bg-amber-500/15 border border-amber-500/40 flex items-center justify-center overflow-hidden text-sm shrink-0">👷</div>
-            <div>
-              <span class="text-xs font-bold block">Worker Photo / मजदूर फोटो</span>
-              <span id="lPhotoStatus" class="text-[10px] text-amber-500 font-bold">No photo selected</span>
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-2 pt-1">
-            <label class="flex items-center justify-center gap-1.5 border border-amber-500/40 rounded-xl p-2 text-xs font-bold text-amber-500 cursor-pointer bg-amber-500/10 hover:bg-amber-500/20 active:scale-95">
-              <span>📸 Camera</span>
-              <input type="file" accept="image/*" capture="environment" class="hidden" onchange="initiateCropFromFile(this, 'labourPhoto')" />
-            </label>
-            <label class="flex items-center justify-center gap-1.5 border border-zinc-400 dark:border-white/20 rounded-xl p-2 text-xs font-bold cursor-pointer bg-black/5 dark:bg-white/5 hover:bg-white/10 active:scale-95">
-              <span>📁 Gallery</span>
-              <input type="file" accept="image/*" class="hidden" onchange="initiateCropFromFile(this, 'labourPhoto')" />
-            </label>
-          </div>
+
+        <div>
+          <label class="text-[10px] font-bold opacity-75 uppercase">Contact Number / मोबाइल नंबर</label>
+          <input type="tel" id="lPhone" placeholder="e.g. 9876543210" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-0.5" />
         </div>
         
         <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black py-3 rounded-xl text-sm shadow">Save Labour / सेव करें</button>
       </form>
 
-      <!-- Add Expense Form with Voice Assistant -->
+      <!-- Add Expense Form -->
       <form id="expenseForm" onsubmit="saveExpense(event)" class="space-y-3 hidden">
         <div class="relative">
           <input type="text" id="eTitle" required placeholder="Tap 🎤 or type (e.g. ऑटो किराया 200)" class="app-input w-full rounded-xl pl-3 pr-10 py-2.5 text-sm focus:outline-none" />
@@ -613,7 +572,7 @@
       </div>
       <div class="flex gap-2 pt-2">
         <button onclick="connectCloud(false)" class="flex-1 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm shadow">Login</button>
-        <button onclick="connectCloud(true)" class="flex-1 bg-black/10 dark:bg-white/10 font-bold py-2.5 rounded-xl text-sm">Register</button>
+        <button onclick="connectCloud(true)" class="flex-1 bg-black/10 dark:bg-white/10 hover:bg-black/20 font-bold py-2.5 rounded-xl text-sm">Register</button>
       </div>
     </div>
   </div>
@@ -643,7 +602,7 @@
     </div>
   </div>
 
-  <!-- UNIVERSAL MODERN INPUT DIALOG (REPLACES PROMPT) -->
+  <!-- UNIVERSAL MODERN INPUT DIALOG -->
   <div id="customDialogModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-xs w-full p-5 space-y-4 shadow-2xl border border-white/15">
       <h3 id="customDialogTitle" class="font-black text-sm">Enter Details</h3>
@@ -663,7 +622,7 @@
         <h3 class="font-black text-base">Main Contractor PIN</h3>
         <p class="text-[11px] opacity-70">Enter master password to access Main Contractor account</p>
       </div>
-      <input type="password" id="masterPinInput" maxlength="6" placeholder="Enter PIN (default 1234)" class="app-input w-full rounded-xl px-3 py-3 text-center text-lg font-black tracking-widest focus:outline-none" />
+      <input type="password" id="masterPinInput" maxlength="6" placeholder="Enter PIN" class="app-input w-full rounded-xl px-3 py-3 text-center text-lg font-black tracking-widest focus:outline-none" />
       <div class="flex gap-2 pt-2">
         <button type="button" onclick="closePinLockModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Cancel</button>
         <button type="button" onclick="verifyMasterPin()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 text-xs font-black shadow">Unlock</button>
@@ -691,10 +650,8 @@
     const db = getFirestore(app);
 
     let currentUser = null;
-    let isSyncing = false;
     let state = {
       userProfilePhoto: null,
-      pendingSync: false,
       masterPin: '1234',
       accounts: [
         { id: 'acc_main', nickname: 'Main Contractor', email: 'contractor@thekedaar', active: true, isMaster: true },
@@ -708,11 +665,9 @@
       masterLabourDirectory: []
     };
 
-    let tempPendingLabourPhoto = null;
-    let currentCropperTarget = null;
-    let cropImg = new Image();
-    let cropState = { scale: 1, x: 0, y: 0 };
+    let activeRecognition = null;
     let pendingSwitchAccId = null;
+    let activeVoiceTargetFieldId = null;
 
     function getActiveAccountId() {
       const activeAcc = (state.accounts || []).find(a => a.active);
@@ -755,18 +710,19 @@
     function runSplashAnimation() {
       const brandWord = "THEKEDAAR";
       const container = document.getElementById('thekedaarLetters');
-      container.innerHTML = "";
-      brandWord.split('').forEach((letter, index) => {
-        const span = document.createElement('span');
-        span.innerText = letter; span.className = "letter-anim";
-        span.style.animationDelay = `${index * 0.12}s`;
-        if (letter === 'K' || letter === 'D') span.style.color = "#f59e0b";
-        container.appendChild(span);
-      });
+      if (container) {
+        container.innerHTML = "";
+        brandWord.split('').forEach((letter, index) => {
+          const span = document.createElement('span');
+          span.innerText = letter; span.className = "letter-anim";
+          span.style.animationDelay = `${index * 0.12}s`;
+          if (letter === 'K' || letter === 'D') span.style.color = "#f59e0b";
+          container.appendChild(span);
+        });
+      }
       setTimeout(() => {
         const splash = document.getElementById('splashScreen');
-        splash.style.opacity = '0';
-        setTimeout(() => splash.style.display = 'none', 700);
+        if (splash) { splash.style.opacity = '0'; setTimeout(() => splash.style.display = 'none', 700); }
       }, 2200);
     }
 
@@ -777,13 +733,12 @@
         statusEl.innerText = `🟢 Online Cloud Sync Active`;
         dotEl.className = "absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-black";
       } else {
-        statusEl.innerText = `🟡 Online Mode (Login to Sync Cloud)`;
+        statusEl.innerText = `🟡 Online Mode (Login to Sync)`;
         dotEl.className = "absolute bottom-0 right-0 w-3 h-3 rounded-full bg-amber-500 border-2 border-black";
       }
     }
 
     async function persistState() {
-      state.pendingSync = true;
       localStorage.setItem(getStorageKey(), JSON.stringify(state));
       localStorage.setItem('thekedaar_global_accounts', JSON.stringify(state.accounts));
       renderAll();
@@ -791,8 +746,6 @@
       if (navigator.onLine && db && currentUser) {
         try {
           await setDoc(doc(db, "users", `${currentUser.uid}_${getActiveAccountId()}`), state);
-          state.pendingSync = false;
-          localStorage.setItem(getStorageKey(), JSON.stringify(state));
         } catch (e) { console.error(e); }
       }
     }
@@ -806,7 +759,39 @@
       });
     }
 
-    // Modern Dialog & Voice Helpers
+    // Universal Voice Typing for any Input Field
+    window.startVoiceInputForField = (fieldId) => {
+      activeVoiceTargetFieldId = fieldId;
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) return alert("Voice typing is supported in Chrome & Safari.");
+      
+      const modal = document.getElementById('voiceAssistantModal');
+      document.getElementById('voiceModalTitle').innerText = "Voice Typing";
+      document.getElementById('voiceModalSub').innerText = "Speak clearly into your microphone...";
+      document.getElementById('voiceTranscriptBox').classList.add('hidden');
+      modal.classList.replace('hidden', 'flex');
+
+      activeRecognition = new SpeechRecognition();
+      activeRecognition.lang = 'hi-IN';
+      activeRecognition.interimResults = true;
+      activeRecognition.onstart = () => {
+        document.getElementById('voiceLiveWave').classList.replace('hidden', 'flex');
+        document.getElementById('voiceStartBtn').classList.add('hidden');
+      };
+      activeRecognition.onresult = (event) => {
+        const t = Array.from(event.results).map(r => r[0].transcript).join('');
+        const box = document.getElementById('voiceTranscriptBox');
+        box.innerText = `"${t}"`; box.classList.remove('hidden');
+        if (event.results[0].isFinal && activeVoiceTargetFieldId) {
+          const el = document.getElementById(activeVoiceTargetFieldId);
+          if (el) el.value = t;
+          setTimeout(() => closeVoiceModal(), 600);
+        }
+      };
+      activeRecognition.onerror = () => closeVoiceModal();
+      activeRecognition.start();
+    };
+
     window.openCustomDialog = ({ title, defaultValue = '', inputType = 'text', placeholder = '', onConfirm }) => {
       const modal = document.getElementById('customDialogModal');
       document.getElementById('customDialogTitle').innerText = title;
@@ -822,11 +807,13 @@
     };
     window.closeCustomDialog = () => document.getElementById('customDialogModal').classList.replace('flex', 'hidden');
 
-    let activeRecognition = null;
     window.startVoiceExpenseInput = () => {
+      activeVoiceTargetFieldId = null;
+      document.getElementById('voiceModalTitle').innerText = "Voice Smart Entry";
+      document.getElementById('voiceModalSub').innerText = "Speak expense & amount clearly (e.g. \"ऑटो किराया 200\")";
       document.getElementById('voiceAssistantModal').classList.replace('hidden', 'flex');
       document.getElementById('voiceTranscriptBox').classList.add('hidden');
-      if (localStorage.getItem('thekedaar_mic_granted') === 'true') triggerNativeSpeechEngine();
+      triggerNativeSpeechEngine();
     };
 
     window.triggerNativeSpeechEngine = () => {
@@ -836,8 +823,6 @@
       activeRecognition.lang = 'hi-IN';
       activeRecognition.interimResults = true;
       activeRecognition.onstart = () => {
-        localStorage.setItem('thekedaar_mic_granted', 'true');
-        document.getElementById('voiceModalTitle').innerText = "Listening... बोलिए...";
         document.getElementById('voiceLiveWave').classList.replace('hidden', 'flex');
         document.getElementById('voiceStartBtn').classList.add('hidden');
       };
@@ -846,18 +831,37 @@
         const box = document.getElementById('voiceTranscriptBox');
         box.innerText = `"${t}"`; box.classList.remove('hidden');
         if (event.results[0].isFinal) {
-          document.getElementById('eTitle').value = t;
-          const nums = t.match(/\d+/);
-          if (nums) document.getElementById('eAmount').value = nums[0];
+          if (activeVoiceTargetFieldId) {
+            const el = document.getElementById(activeVoiceTargetFieldId);
+            if (el) el.value = t;
+          } else {
+            document.getElementById('eTitle').value = t;
+            const nums = t.match(/\d+/);
+            if (nums) document.getElementById('eAmount').value = nums[0];
+          }
           setTimeout(() => closeVoiceModal(), 600);
         }
       };
       activeRecognition.onerror = () => closeVoiceModal();
       activeRecognition.start();
     };
+
     window.closeVoiceModal = () => {
       if (activeRecognition) { try { activeRecognition.stop(); } catch (e) {} }
       document.getElementById('voiceAssistantModal').classList.replace('flex', 'hidden');
+    };
+
+    // Save Master Password Setting
+    window.saveNewMasterPin = () => {
+      const pin = document.getElementById('newMasterPinInput').value.trim();
+      if (pin && pin.length >= 4) {
+        state.masterPin = pin;
+        persistState();
+        alert("Main Contractor master PIN updated successfully!");
+        document.getElementById('newMasterPinInput').value = '';
+      } else {
+        alert("Please enter at least 4 digits for the PIN.");
+      }
     };
 
     // Modal Visibility
@@ -866,7 +870,7 @@
     window.openSettingsModal = () => document.getElementById('settingsModal').classList.replace('hidden', 'flex');
     window.closeSettingsModal = () => document.getElementById('settingsModal').classList.replace('flex', 'hidden');
 
-    // Monthly Ledger Modal (With Bill Photos & Individual Worker Attendance)
+    // Monthly Ledger Modal (With Bill Photos & Attendance Breakdown)
     window.openMonthlyLedgerModal = () => {
       renderMonthlyLedgerModalBody();
       document.getElementById('monthlyLedgerModal').classList.replace('hidden', 'flex');
@@ -888,46 +892,34 @@
       const totalExp = expenses.reduce((a, b) => a + b.amount, 0);
       const totalBills = bills.reduce((a, b) => a + b.amount, 0);
 
-      const container = document.getElementById('monthlyLedgerModalBody');
-      container.innerHTML = `
+      document.getElementById('monthlyLedgerModalBody').innerHTML = `
         <div class="space-y-4">
           <div class="ios-glass p-3.5 rounded-2xl flex justify-between items-center text-xs">
-            <span>Site: <b>${activeSite}</b></span>
-            <span>Month: <b>${activeMonth}</b></span>
+            <span>Site: <b>${activeSite}</b></span><span>Month: <b>${activeMonth}</b></span>
           </div>
-
-          <!-- Summary Grid -->
           <div class="grid grid-cols-3 gap-2 text-center text-xs">
             <div class="bg-black/5 dark:bg-black/25 p-2.5 rounded-xl"><div class="opacity-70 text-[9px]">Labour Due</div><div class="font-black text-rose-500">₹${totalLabourNet}</div></div>
             <div class="bg-black/5 dark:bg-black/25 p-2.5 rounded-xl"><div class="opacity-70 text-[9px]">Expenses</div><div class="font-black text-amber-500">₹${totalExp}</div></div>
             <div class="bg-black/5 dark:bg-black/25 p-2.5 rounded-xl"><div class="opacity-70 text-[9px]">Bills</div><div class="font-black text-emerald-500">₹${totalBills}</div></div>
           </div>
-
-          <!-- Workers Breakdown -->
           <div class="space-y-2">
-            <h4 class="font-black text-xs opacity-80 uppercase tracking-wider">👷 Worker Attendance & Pay Breakdown</h4>
+            <h4 class="font-black text-xs opacity-80 uppercase tracking-wider">👷 Worker Attendance Breakdown</h4>
             ${workers.length === 0 ? '<p class="text-xs opacity-60">No workers recorded.</p>' : workers.map(w => {
-              const eff = (w.presentDays || 0) + ((w.halfDays || 0) * 0.5);
-              const net = Math.round((w.dailyRate || 500) * eff) - (w.advance || 0);
+              const net = Math.round((w.dailyRate || 500) * ((w.presentDays || 0) + ((w.halfDays || 0) * 0.5))) - (w.advance || 0);
               return `
                 <div class="bg-black/5 dark:bg-black/20 p-2.5 rounded-2xl flex items-center justify-between text-xs border border-zinc-300 dark:border-white/5">
-                  <div class="flex items-center gap-2">
-                    ${w.photo ? `<img src="${w.photo}" class="w-8 h-8 rounded-full object-cover" />` : '👷'}
-                    <div>
-                      <div class="font-bold">${w.name} (${w.category})</div>
-                      <div class="text-[10px] opacity-70">Rate: ₹${w.dailyRate || 500} | Present: ${w.presentDays || 0}P, Half: ${w.halfDays || 0}H | Adv: ₹${w.advance || 0}</div>
-                    </div>
+                  <div>
+                    <div class="font-bold">${w.name} (${w.category})</div>
+                    <div class="text-[10px] opacity-70">Rate: ₹${w.dailyRate || 500} | Present: ${w.presentDays || 0}P, Half: ${w.halfDays || 0}H</div>
                   </div>
                   <div class="font-black ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net}</div>
                 </div>
               `;
             }).join('')}
           </div>
-
-          <!-- Bill Photos & Documents -->
           <div class="space-y-2">
-            <h4 class="font-black text-xs opacity-80 uppercase tracking-wider">🧾 Company Bills & Attached Photos</h4>
-            ${bills.length === 0 ? '<p class="text-xs opacity-60">No bills or attached photos recorded.</p>' : bills.map(b => `
+            <h4 class="font-black text-xs opacity-80 uppercase tracking-wider">🧾 Company Bills & Attached Documents</h4>
+            ${bills.length === 0 ? '<p class="text-xs opacity-60">No bills recorded.</p>' : bills.map(b => `
               <div class="bg-black/5 dark:bg-black/20 p-3 rounded-2xl flex items-center justify-between text-xs border border-zinc-300 dark:border-white/5">
                 <div class="flex items-center gap-2.5">
                   ${getFileBadgeHTML(b.attachment)}
@@ -944,11 +936,39 @@
       `;
     }
 
+    // Labour Attendance History Popup (Tapping Labour Name Box)
+    window.openLabourAttendanceHistory = (workerId) => {
+      const l = (state.labours || []).find(x => x.id === workerId);
+      if (!l) return;
+      document.getElementById('labourHistoryTitle').innerText = `${l.name} - Attendance Log`;
+      
+      const records = state.dailyHajriRecords || {};
+      let logsHtml = '';
+      Object.keys(records).sort().forEach(dateKey => {
+        if (dateKey.startsWith(l.month)) {
+          const st = records[dateKey][workerId];
+          if (st) {
+            const badgeColor = st === 'P' ? 'bg-emerald-500/20 text-emerald-500' : st === 'H' ? 'bg-amber-500/20 text-amber-500' : 'bg-rose-500/20 text-rose-500';
+            logsHtml += `
+              <div class="flex justify-between items-center p-2 rounded-xl bg-black/5 dark:bg-black/20 border border-zinc-300 dark:border-white/10">
+                <span>📅 ${dateKey}</span>
+                <span class="px-2 py-0.5 rounded-lg font-black ${badgeColor}">${st === 'P' ? 'Present (P)' : st === 'H' ? 'Half Day (H)' : 'Absent (A)'}</span>
+              </div>
+            `;
+          }
+        }
+      });
+
+      document.getElementById('labourHistoryContent').innerHTML = logsHtml || `<div class="text-center py-6 opacity-60">No day-wise attendance marked yet for this month. Use Hajri Book to mark daily presence.</div>`;
+      document.getElementById('labourHistoryModal').classList.replace('hidden', 'flex');
+    };
+    window.closeLabourHistoryModal = () => document.getElementById('labourHistoryModal').classList.replace('flex', 'hidden');
+
     // PIN Protection for Main Contractor Account
     window.openAddAccountPrompt = () => {
       openCustomDialog({
         title: "🏷️ New Supervisor ID Nickname",
-        placeholder: "e.g. Site Supervisor 2",
+        placeholder: "e.g. Site Supervisor",
         onConfirm: (nickname) => {
           if (!nickname) return;
           const newId = 'acc_' + Date.now();
@@ -982,7 +1002,7 @@
         closePinLockModal();
         if (idToSwitch) executeAccountSwitch(idToSwitch);
       } else {
-        alert("Incorrect PIN! (Default is 1234)");
+        alert("Incorrect PIN! (Default master PIN is 1234)");
       }
     };
 
@@ -1079,10 +1099,6 @@
       const cropped = document.getElementById('cropCanvas').toDataURL('image/jpeg', 0.85);
       if (currentCropperTarget === 'userProfile') {
         state.userProfilePhoto = cropped; persistState();
-      } else if (currentCropperTarget === 'labourPhoto') {
-        tempPendingLabourPhoto = cropped;
-        document.getElementById('lPhotoStatus').innerText = '✅ Cropped & Ready';
-        document.getElementById('lPhotoPreviewBox').innerHTML = `<img src="${cropped}" class="w-full h-full object-cover" />`;
       }
       closeCropperModal();
     };
@@ -1101,10 +1117,7 @@
       ['labourForm', 'expenseForm', 'billForm'].forEach(f => document.getElementById(f).classList.add('hidden'));
       if (type === 'labour') {
         document.getElementById('labourForm').classList.remove('hidden');
-        document.getElementById('formModalTitle').innerText = "Add New Labour / नया मजदूर";
-        tempPendingLabourPhoto = null;
-        document.getElementById('lPhotoStatus').innerText = 'No photo selected';
-        document.getElementById('lPhotoPreviewBox').innerHTML = '👷';
+        document.getElementById('formModalTitle').innerText = "Add New Labour / नया मजदूर जोड़ें";
         populateLabourAutocomplete();
       } else if (type === 'expense') {
         document.getElementById('expenseForm').classList.remove('hidden');
@@ -1155,7 +1168,7 @@
         <label class="flex items-center justify-between p-2.5 rounded-2xl bg-black/5 dark:bg-black/30 border border-zinc-300 dark:border-white/10 cursor-pointer">
           <div class="flex items-center gap-2.5 min-w-0">
             <input type="checkbox" value="${idx}" class="carry-worker-cb w-4 h-4 accent-amber-500 rounded" onchange="updateCarryCount()" checked />
-            ${w.photo ? `<img src="${w.photo}" class="w-10 h-10 rounded-full object-cover border border-amber-500 shrink-0" />` : `<div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0">👷</div>`}
+            <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0">👷</div>
             <div class="truncate"><div class="font-bold text-xs truncate">${w.name}</div><div class="text-[10px] opacity-70">${w.category} • ₹${w.dailyRate || 500}/day</div></div>
           </div>
         </label>
@@ -1183,7 +1196,7 @@
           state.labours.unshift({
             id: Date.now().toString() + Math.random().toString().slice(2, 6),
             site: currentSite, month: currentMonth, name: src.name, category: src.category,
-            dailyRate: src.dailyRate || 500, advance: 0, advanceLog: [], presentDays: 0, halfDays: 0, otHours: 0, photo: src.photo || null
+            dailyRate: src.dailyRate || 500, phone: src.phone || '', advance: 0, advanceLog: [], presentDays: 0, halfDays: 0
           });
         }
       });
@@ -1247,7 +1260,7 @@
         return `
           <div class="bg-black/5 dark:bg-black/30 p-3 rounded-2xl border border-zinc-300 dark:border-white/10 flex items-center justify-between">
             <div class="flex items-center gap-3 min-w-0">
-              ${w.photo ? `<img src="${w.photo}" class="w-11 h-11 rounded-full object-cover border-2 border-amber-500 shrink-0" />` : `<div class="w-11 h-11 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-sm shrink-0">👷</div>`}
+              <div class="w-11 h-11 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-sm shrink-0">👷</div>
               <div class="truncate">
                 <div class="font-bold text-xs truncate">${w.name}</div>
                 <div class="text-[10px] opacity-70">${w.category} • ₹${w.dailyRate || 500}/day</div>
@@ -1294,12 +1307,8 @@
       if (found) {
         document.getElementById('lCategory').value = found.category || 'Mason (मिस्त्री)';
         document.getElementById('lDailyRate').value = found.dailyRate || '';
+        document.getElementById('lPhone').value = found.phone || '';
         document.getElementById('lAdvance').value = 0;
-        if (found.photo) {
-          tempPendingLabourPhoto = found.photo;
-          document.getElementById('lPhotoStatus').innerText = '✅ Saved Photo Ready';
-          document.getElementById('lPhotoPreviewBox').innerHTML = `<img src="${found.photo}" class="w-full h-full object-cover" />`;
-        }
       }
     };
 
@@ -1319,25 +1328,20 @@
       const category = document.getElementById('lCategory').value;
       const dailyRate = Number(document.getElementById('lDailyRate').value) || 0;
       const initialAdvance = Number(document.getElementById('lAdvance').value) || 0;
-      
-      let finalPhoto = tempPendingLabourPhoto;
-      if (!finalPhoto) {
-        const ex = (state.masterLabourDirectory || []).find(w => w.name.toLowerCase() === name.toLowerCase());
-        if (ex && ex.photo) finalPhoto = ex.photo;
-      }
+      const phone = document.getElementById('lPhone').value.trim();
 
       state.labours.unshift({
-        id: Date.now().toString(), site, month, name, category, dailyRate, advance: initialAdvance,
+        id: Date.now().toString(), site, month, name, category, dailyRate, phone, advance: initialAdvance,
         advanceLog: initialAdvance > 0 ? [{ date: new Date().toLocaleDateString('hi-IN'), amount: initialAdvance, mode: '💵 Cash', note: 'Initial' }] : [],
-        presentDays: 0, halfDays: 0, otHours: 0, photo: finalPhoto || null
+        presentDays: 0, halfDays: 0
       });
 
       if (!state.masterLabourDirectory) state.masterLabourDirectory = [];
       const idx = state.masterLabourDirectory.findIndex(w => w.name.toLowerCase() === name.toLowerCase());
-      if (idx >= 0) state.masterLabourDirectory[idx] = { name, category, dailyRate, photo: finalPhoto };
-      else state.masterLabourDirectory.push({ name, category, dailyRate, photo: finalPhoto });
+      if (idx >= 0) state.masterLabourDirectory[idx] = { name, category, dailyRate, phone };
+      else state.masterLabourDirectory.push({ name, category, dailyRate, phone });
 
-      tempPendingLabourPhoto = null; e.target.reset(); closeFormModal(); persistState(); navigateTo('viewLabours');
+      e.target.reset(); closeFormModal(); persistState(); navigateTo('viewLabours');
     };
 
     window.editLabourSalary = (id) => {
@@ -1460,7 +1464,7 @@
       const filteredLabours = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth);
       let totalLabourDue = 0;
 
-      // Render Labour Cards with Spacing[cite: 7]
+      // Render Labour Cards with Spacing and Clickable Name Box for Attendance History[cite: 7]
       document.getElementById('labourList').innerHTML = filteredLabours.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No labour records found for ${activeMonth}.</div>` : filteredLabours.map(l => {
         const rate = l.dailyRate || 500;
         const earned = Math.round(rate * ((l.presentDays || 0) + ((l.halfDays || 0) * 0.5)));
@@ -1471,14 +1475,17 @@
           <div class="ios-glass p-4 rounded-3xl space-y-3 shadow-md">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-3">
-                ${l.photo ? `<img src="${l.photo}" class="w-12 h-12 rounded-full object-cover border-2 border-amber-500 shrink-0 shadow" />` : `<div class="w-12 h-12 rounded-full bg-amber-500/15 text-amber-500 flex items-center justify-center font-bold text-base shrink-0">👷</div>`}
+                <div class="w-12 h-12 rounded-full bg-amber-500/15 text-amber-500 flex items-center justify-center font-bold text-base shrink-0">👷</div>
                 <div>
-                  <h4 class="font-bold text-sm leading-tight">${l.name}</h4>
-                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-black/10 dark:bg-white/10 opacity-75">${l.category}</span>
+                  <button onclick="openLabourAttendanceHistory('${l.id}')" class="font-bold text-sm leading-tight text-left hover:text-amber-500 underline decoration-amber-500/40" title="Tap to view attendance history">
+                    ${l.name} 📅
+                  </button>
+                  <span class="block text-[10px] px-2 py-0.5 rounded-full bg-black/10 dark:bg-white/10 opacity-75 w-max mt-0.5">${l.category}</span>
                   <div class="text-[11px] opacity-80 mt-1 flex items-center gap-1.5 flex-wrap">
-                    <span>दिहाड़ी: <b>₹${rate}</b></span>
+                    <span>Rate: <b>₹${rate}</b></span>
                     <button onclick="editLabourSalary('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-500 font-bold">Edit</button>
-                    <span>| एडवांस: <b class="text-rose-500">₹${l.advance || 0}</b></span>
+                    ${l.phone ? `<a href="tel:${l.phone}" class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-500 font-bold">📞 Call</a>` : ''}
+                    <span>| Adv: <b class="text-rose-500">₹${l.advance || 0}</b></span>
                     <button onclick="openAdvanceModal('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-500 font-bold">+ Adv</button>
                   </div>
                 </div>
@@ -1502,12 +1509,6 @@
                 <button onclick="updateAttendance('${l.id}','incHalf')" class="px-2 h-7 rounded-lg bg-amber-500 text-zinc-950 font-black">+H</button>
               </div>
             </div>
-
-            <div class="flex items-center justify-end pt-0.5 text-xs">
-              <button onclick="shareWorkerSlipWhatsApp('${l.id}')" class="px-3 py-1 rounded-xl bg-emerald-500/15 text-emerald-500 font-bold text-[10px] flex items-center gap-1 border border-emerald-500/30">
-                <span>💬</span> WhatsApp Slip
-              </button>
-            </div>
           </div>
         `;
       }).join('');
@@ -1525,7 +1526,7 @@
         return `
           <div class="ios-glass p-4 rounded-2xl flex items-center justify-between text-xs shadow-md">
             <div class="flex items-center gap-3">
-              ${l.photo ? `<img src="${l.photo}" class="w-11 h-11 rounded-full object-cover border-2 border-amber-500" />` : `<div class="w-11 h-11 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold">👷</div>`}
+              <div class="w-11 h-11 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold">👷</div>
               <div><div class="font-bold text-sm">${l.name}</div><div class="text-[11px] opacity-75">${l.category} • ₹${l.dailyRate || 500}/day</div></div>
             </div>
             <div class="font-black text-sm ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net}</div>
