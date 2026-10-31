@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
   
-  <link rel="icon" type="image/png" href="./logo.png?v=2">
-  <link rel="apple-touch-icon" href="./logo.png?v=2">
-  <link rel="manifest" href="manifest.json?v=2">
+  <link rel="icon" type="image/png" href="./logo.png?v=3">
+  <link rel="apple-touch-icon" href="./logo.png?v=3">
+  <link rel="manifest" href="manifest.json?v=3">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#000000">
@@ -25,7 +25,6 @@
   </script>
 
   <style>
-    /* 3 Clean iOS Themes with Perfect Light Mode Contrast */
     html.theme-amoled {
       --bg-main: #000000;
       --card-bg: rgba(18, 20, 24, 0.65);
@@ -33,7 +32,7 @@
       --card-specular: rgba(255, 255, 255, 0.05);
       --text-main: #f8fafc;
       --text-sub: #94a3b8;
-      --nav-bg: rgba(10, 10, 10, 0.82);
+      --nav-bg: rgba(10, 10, 10, 0.85);
       --input-bg: rgba(255, 255, 255, 0.08);
       --input-border: rgba(255, 255, 255, 0.16);
       --input-text: #ffffff;
@@ -46,7 +45,7 @@
       --card-specular: rgba(255, 255, 255, 0.06);
       --text-main: #f1f5f9;
       --text-sub: #94a3b8;
-      --nav-bg: rgba(15, 23, 42, 0.85);
+      --nav-bg: rgba(15, 23, 42, 0.88);
       --input-bg: rgba(255, 255, 255, 0.08);
       --input-border: rgba(255, 255, 255, 0.18);
       --input-text: #ffffff;
@@ -95,7 +94,6 @@
       border-top: 1px solid var(--card-border);
     }
 
-    /* High Contrast Input System */
     .app-input {
       background-color: var(--input-bg) !important;
       color: var(--input-text) !important;
@@ -130,7 +128,7 @@
 </head>
 <body class="min-h-screen pb-28 select-none no-scrollbar">
 
-  <!-- 1. SPLASH SCREEN (WITH NEW LOGO) -->
+  <!-- 1. SPLASH SCREEN -->
   <div id="splashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black transition-opacity duration-500">
     <div class="relative z-10 flex flex-col items-center">
       <img src="./logo.png" alt="ठेकेDAAR" class="w-24 h-24 rounded-full border-2 border-amber-500 shadow-2xl object-cover mb-4 animate-pulse" />
@@ -143,7 +141,7 @@
   <header class="sticky top-0 z-30 px-4 pt-4 pb-2.5 ios-header">
     <div class="max-w-md mx-auto flex items-center justify-between">
       
-      <!-- User Profile Avatar Badge (Opens Settings) -->
+      <!-- User Profile Avatar Badge (Opens Settings & Photo Upload) -->
       <div class="flex items-center gap-3">
         <button onclick="openSettingsModal()" class="relative group active:scale-95 transition-transform" title="Account & Settings">
           <div id="userAvatarBadge" class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 font-black text-base flex items-center justify-center shadow-lg border border-white/20 overflow-hidden">
@@ -187,25 +185,25 @@
     <!-- SUMMARY CHIPS -->
     <div class="grid grid-cols-3 gap-2.5">
       <div class="rounded-2xl p-3 border border-rose-500/30 bg-rose-500/10 ios-glass text-center flex flex-col justify-center">
-        <span class="text-[9px] font-bold tracking-wider uppercase text-rose-500">LABOUR DUE</span>
+        <span class="text-[9px] font-bold tracking-wider uppercase text-rose-500" data-i18n="labourDue">LABOUR DUE</span>
         <span id="summaryLabourDue" class="text-base font-black text-rose-500 mt-0.5">₹0</span>
       </div>
       <div class="rounded-2xl p-3 border border-amber-500/30 bg-amber-500/10 ios-glass text-center flex flex-col justify-center">
-        <span class="text-[9px] font-bold tracking-wider uppercase text-amber-500">EXPENSES</span>
+        <span class="text-[9px] font-bold tracking-wider uppercase text-amber-500" data-i18n="expenses">EXPENSES</span>
         <span id="summaryExpensesTotal" class="text-base font-black text-amber-500 mt-0.5">₹0</span>
       </div>
       <div class="rounded-2xl p-3 border border-emerald-500/30 bg-emerald-500/10 ios-glass text-center flex flex-col justify-center">
-        <span class="text-[9px] font-bold tracking-wider uppercase text-emerald-500">BILLS</span>
+        <span class="text-[9px] font-bold tracking-wider uppercase text-emerald-500" data-i18n="bills">BILLS</span>
         <span id="summaryBillsTotal" class="text-base font-black text-emerald-500 mt-0.5">₹0</span>
       </div>
     </div>
 
     <!-- AUDIO SUMMARY CARD -->
     <div class="ios-glass rounded-3xl p-4 text-center shadow-lg relative overflow-hidden">
-      <h3 class="text-xs font-extrabold flex items-center justify-center gap-1.5">
+      <h3 class="text-xs font-extrabold flex items-center justify-center gap-1.5" data-i18n="audioSummaryTitle">
         Site Audio Summary / बोलकर हिसाब सुनें
       </h3>
-      <p class="text-[10px] text-zinc-400 mt-0.5">Listen to whole site summary in one tap</p>
+      <p class="text-[10px] text-zinc-400 mt-0.5" data-i18n="audioSummarySub">Listen to whole site summary in one tap</p>
 
       <div class="flex items-center justify-center my-2.5 h-6 opacity-80">
         <span class="waveform-bar h-2"></span>
@@ -219,25 +217,28 @@
       </div>
 
       <button onclick="playVoiceSummary()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-zinc-950 font-black text-xs flex items-center gap-2 mx-auto active:scale-95 transition-all shadow-md">
-        <span>🔊</span> LISTEN / सुनें
+        <span>🔊</span> <span data-i18n="listenBtn">LISTEN / सुनें</span>
       </button>
     </div>
 
     <!-- VIEW 1: HOME SNAPSHOT -->
     <section id="viewHome" class="space-y-3">
       <div class="flex items-center justify-between pt-1">
-        <h2 class="text-[11px] font-bold uppercase tracking-wider text-zinc-400">LIVE WORKFORCE SNAPSHOT</h2>
+        <h2 class="text-[11px] font-bold uppercase tracking-wider text-zinc-400" data-i18n="liveSnapshot">LIVE WORKFORCE SNAPSHOT</h2>
       </div>
       <div id="homeRecentLabour"></div>
     </section>
 
-    <!-- VIEW 2: LABOUR REGISTER -->
+    <!-- VIEW 2: LABOUR REGISTER & DATE-WISE HAJRI BOOK -->
     <section id="viewLabours" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
-        <h2 class="text-sm font-black">👷‍♂️ Labour Register</h2>
+        <h2 class="text-sm font-black" data-i18n="tabLabour">👷‍♂️ Labour Register</h2>
         <div class="flex items-center gap-2">
+          <button onclick="openHajriBookModal()" class="px-2.5 py-1.5 bg-amber-500/20 border border-amber-500/40 text-amber-500 font-bold text-xs rounded-xl active:scale-95 transition-transform" title="Daily Muster Roll">
+            📖 Hajri Book / हाजिरी बही
+          </button>
           <button onclick="carryForwardLastMonthWorkers()" class="px-2.5 py-1.5 ios-glass hover:bg-black/5 dark:hover:bg-white/10 text-amber-500 font-bold text-xs rounded-xl" title="Copy previous month workers">
-            ⚡ Carry Last Month
+            ⚡ Carry
           </button>
           <button onclick="openFormModal('labour')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs rounded-xl shadow">
             + Worker
@@ -250,7 +251,7 @@
     <!-- VIEW 3: MONTHLY ARCHIVE / LEDGER -->
     <section id="viewMonthly" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
-        <h2 class="text-sm font-black">📅 Monthly Ledger & Archive</h2>
+        <h2 class="text-sm font-black" data-i18n="tabMonthly">📅 Monthly Ledger & Archive</h2>
         <span id="monthlyBadge" class="text-xs px-2.5 py-1 rounded-xl bg-amber-500/10 text-amber-500 font-bold"></span>
       </div>
       <div id="monthlyLedgerContent" class="space-y-3"></div>
@@ -259,16 +260,16 @@
     <!-- VIEW 4: SITE EXPENSES -->
     <section id="viewExpenses" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
-        <h2 class="text-sm font-black">🛺 Site Expenses & Rent</h2>
+        <h2 class="text-sm font-black" data-i18n="tabExpenses">🛺 Site Expenses & Rent</h2>
         <button onclick="openFormModal('expense')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Expense</button>
       </div>
       <div id="expenseList" class="space-y-2.5"></div>
     </section>
 
-    <!-- VIEW 5: COMPANY BILLS -->
+    <!-- VIEW 5: COMPANY BILLS (WITH TOGGLE TO RECEIVED) -->
     <section id="viewBills" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
-        <h2 class="text-sm font-black">🧾 Company Work Bills</h2>
+        <h2 class="text-sm font-black" data-i18n="tabBills">🧾 Company Work Bills</h2>
         <button onclick="openFormModal('bill')" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Bill</button>
       </div>
       <div id="billList" class="space-y-2.5"></div>
@@ -325,12 +326,61 @@
     </div>
   </nav>
 
-  <!-- 6. SETTINGS MODAL -->
+  <!-- 6. DATE-WISE HAJRI BOOK MODAL (हाजिरी बही-खाता) -->
+  <div id="hajriBookModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-lg w-full p-5 space-y-4 shadow-2xl max-h-[92vh] flex flex-col">
+      <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2 shrink-0">
+        <div>
+          <h3 class="font-black text-sm flex items-center gap-1.5">
+            <span>📖</span> Daily Hajri Book / दैनिक हाजिरी बही
+          </h3>
+          <p class="text-[10px] text-zinc-400">Date-wise attendance recording for all workers</p>
+        </div>
+        <button onclick="closeHajriBookModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
+      </div>
+
+      <!-- Hajri Date Selector -->
+      <div class="flex items-center gap-2 bg-black/5 dark:bg-black/30 p-2 rounded-2xl border border-zinc-200 dark:border-white/10 shrink-0">
+        <span class="text-xs font-bold text-zinc-400">Date / तारीख:</span>
+        <input type="date" id="hajriDateInput" onchange="renderDailyHajriSheet()" class="app-input flex-1 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none" />
+      </div>
+
+      <!-- Workers List for the Day -->
+      <div id="hajriWorkersContainer" class="flex-1 overflow-y-auto space-y-2 pr-1"></div>
+
+      <!-- Footer Action -->
+      <div class="pt-2 border-t border-zinc-200 dark:border-white/10 shrink-0 flex justify-between items-center">
+        <span class="text-[11px] text-zinc-400" id="hajriDaySummary">P: 0 | H: 0 | A: 0</span>
+        <button onclick="closeHajriBookModal()" class="px-4 py-2 bg-amber-500 text-zinc-950 font-bold text-xs rounded-xl shadow">
+          Done / सुरक्षित हुआ
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. SETTINGS MODAL (LANGUAGES, PROFILE PHOTO & THEMES) -->
   <div id="settingsModal" class="fixed inset-0 bg-black/60 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
-    <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-5 shadow-2xl">
+    <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-3">
         <h3 class="font-black text-base flex items-center gap-2">⚙️ Account & Settings</h3>
         <button onclick="closeSettingsModal()" class="text-zinc-400 hover:text-zinc-600 dark:hover:text-white text-lg">✕</button>
+      </div>
+
+      <!-- User Profile Photo Upload -->
+      <div class="space-y-2">
+        <label class="text-xs font-bold text-zinc-500 uppercase">Your Profile Photo / प्रोफाइल फोटो</label>
+        <div class="flex items-center gap-3">
+          <div id="settingsAvatarPreview" class="w-14 h-14 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 font-black text-xl flex items-center justify-center shadow border-2 border-white/20 overflow-hidden shrink-0">
+            <span>ठे</span>
+          </div>
+          <div class="flex-1 space-y-1">
+            <label class="px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-500 border border-amber-500/30 text-xs font-bold rounded-xl cursor-pointer block text-center">
+              <span>📷 Change Photo</span>
+              <input type="file" id="userProfileInput" accept="image/*" class="hidden" onchange="updateUserProfilePhoto(this)" />
+            </label>
+            <p class="text-[10px] text-zinc-500">Appears on your home dashboard</p>
+          </div>
+        </div>
       </div>
 
       <!-- Theme Switcher -->
@@ -343,14 +393,20 @@
         </div>
       </div>
 
-      <!-- Language Selector -->
+      <!-- 10 Indian Regional Languages Selector -->
       <div class="space-y-1.5">
-        <label class="text-xs font-bold text-zinc-500 uppercase">Language / भाषा</label>
+        <label class="text-xs font-bold text-zinc-500 uppercase">Language / भाषा (10 Languages)</label>
         <select id="settingsLang" onchange="changeLanguage(this.value)" class="app-input w-full rounded-xl p-2.5 text-xs font-bold focus:outline-none">
           <option value="hi">हिंदी (Hindi)</option>
           <option value="en">English</option>
+          <option value="kn">ಕನ್ನಡ (Kannada)</option>
           <option value="mr">मराठी (Marathi)</option>
           <option value="gu">ગુજરાતી (Gujarati)</option>
+          <option value="ta">தமிழ் (Tamil)</option>
+          <option value="te">తెలుగు (Telugu)</option>
+          <option value="bn">বাংলা (Bengali)</option>
+          <option value="ml">മലയാളം (Malayalam)</option>
+          <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
         </select>
       </div>
 
@@ -367,7 +423,7 @@
     </div>
   </div>
 
-  <!-- 7. UNIVERSAL INPUT MODAL (WITH EXCEL/WORD/PDF/IMAGE UPLOADS) -->
+  <!-- 8. INPUT FORMS MODAL -->
   <div id="formModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2">
@@ -404,7 +460,7 @@
         <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm shadow">Save Labour / सेव करें</button>
       </form>
 
-      <!-- Add Expense Form (Word, Excel, PDF, Image Uploads) -->
+      <!-- Add Expense Form -->
       <form id="expenseForm" onsubmit="saveExpense(event)" class="space-y-3 hidden">
         <input type="text" id="eTitle" required placeholder="Description (ऑटो किराया / चाय / नाश्ता)" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
         <select id="eCategory" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none">
@@ -425,14 +481,14 @@
         <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm shadow">Save Expense</button>
       </form>
 
-      <!-- Add Bill Form (Word, Excel, PDF, Image Uploads) -->
+      <!-- Add Bill Form -->
       <form id="billForm" onsubmit="saveBill(event)" class="space-y-3 hidden">
         <input type="text" id="bTitle" required placeholder="Company / Work Name" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
         <div class="grid grid-cols-2 gap-2">
           <input type="number" id="bAmount" required min="0" placeholder="Bill Amount ₹" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none" />
           <select id="bStatus" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none">
-            <option value="Received (प्राप्त)">Received</option>
-            <option value="Pending (बाकी)">Pending</option>
+            <option value="Received">Received (प्राप्त)</option>
+            <option value="Pending">Pending (बाकी)</option>
           </select>
         </div>
         <label class="flex items-center justify-center border-2 border-dashed border-zinc-300 dark:border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-black/5 dark:hover:bg-white/5">
@@ -444,7 +500,7 @@
     </div>
   </div>
 
-  <!-- 8. MODAL: ADD EXTRA ADVANCE WITH DATE & HISTORY -->
+  <!-- 9. ADVANCE MODAL -->
   <div id="advanceModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2">
@@ -474,7 +530,6 @@
         </button>
       </form>
 
-      <!-- Advance History Log -->
       <div class="pt-2 border-t border-zinc-200 dark:border-white/10">
         <span class="text-[10px] font-bold text-zinc-500 uppercase">Payment History / पिछले भुगतान:</span>
         <div id="advHistoryList" class="mt-1.5 max-h-36 overflow-y-auto space-y-1.5 text-xs"></div>
@@ -482,7 +537,7 @@
     </div>
   </div>
 
-  <!-- 9. AUTH MODAL -->
+  <!-- 10. AUTH MODAL -->
   <div id="authModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center">
@@ -530,12 +585,29 @@
 
     let currentUser = null;
     let state = {
+      userProfilePhoto: null,
       sites: ['Main Site A - मुख्य साइट'],
       labours: [],
       expenses: [],
       bills: [],
+      dailyHajriRecords: {}, // Structure: { "YYYY-MM-DD": { [workerId]: "P" | "H" | "A" } }
       masterLabourDirectory: []
     };
+
+    // 10 Indian Regional Languages Localization Dictionary
+    const i18n = {
+      hi: { labourDue: "कुल मजदूर बकाया", expenses: "खर्चे व किराया", bills: "कंपनी बिल", tabLabour: "👷‍♂️ मजदूर व हाजिरी", tabMonthly: "📅 मासिक बही-खाता", tabExpenses: "🛺 खर्चे व किराया", tabBills: "🧾 कंपनी बिल", audioSummaryTitle: "Site Audio Summary / बोलकर हिसाब सुनें", audioSummarySub: "एक टैप में पूरे साइट का हिसाब सुनें", listenBtn: "LISTEN / सुनें", liveSnapshot: "LIVE WORKFORCE SNAPSHOT" },
+      en: { labourDue: "Labour Due", expenses: "Expenses", bills: "Bills", tabLabour: "👷‍♂️ Labours & Attendance", tabMonthly: "📅 Monthly Ledger", tabExpenses: "🛺 Expenses & Rent", tabBills: "🧾 Company Bills", audioSummaryTitle: "Site Audio Summary", audioSummarySub: "Listen to whole site summary in one tap", listenBtn: "LISTEN", liveSnapshot: "LIVE WORKFORCE SNAPSHOT" },
+      kn: { labourDue: "ಕಾರ್ಮಿಕರ ಬಾಕಿ ಹಣ", expenses: "ಸೈಟ್ ಖರ್ಚುಗಳು", bills: "ಕಂಪನಿ ಬಿಲ್‌ಗಳು", tabLabour: "👷‍♂️ ಕಾರ್ಮಿಕರು & ಹಾಜರಾತಿ", tabMonthly: "📅 ಮಾಸಿಕ ಲೆಕ್ಕಪತ್ರ", tabExpenses: "🛺 ಖರ್ಚು & ಬಾಡಿಗೆ", tabBills: "🧾 ಕಂಪನಿ ಬಿಲ್", audioSummaryTitle: "ಸೈಟ್ ಆಡಿಯೋ ಸಾರಾಂಶ", audioSummarySub: "ಒಂದೇ ಕ್ಲಿಕ್‌ನಲ್ಲಿ ಲೆಕ್ಕ ಕೇಳಿ", listenBtn: "ಕೇಳಿ (LISTEN)", liveSnapshot: "ಕಾರ್ಮಿಕರ ಸ್ಥಿತಿ" },
+      mr: { labourDue: "एकूण मजुरी बाकी", expenses: "भाडे व खर्च", bills: "कंपनी बिल", tabLabour: "👷‍♂️ कामगार व हजेरी", tabMonthly: "📅 मासिक हिशोब", tabExpenses: "🛺 खर्च व रिक्षा भाडे", tabBills: "🧾 कंपनी बिल", audioSummaryTitle: "साइट ऑडिओ हिशोब", audioSummarySub: "एका टॅपमध्ये संपूर्ण हिशोब ऐका", listenBtn: "ऐका (LISTEN)", liveSnapshot: "कामगार सद्यस्थिती" },
+      gu: { labourDue: "બાકી મજૂરી", expenses: "ભાડું અને ખર્ચ", bills: "કંપની બિલ", tabLabour: "👷‍♂️ મજૂર અને હાજરી", tabMonthly: "📅 માસિક ખાતાવહી", tabExpenses: "🛺 ખર્ચ અને રિક્ષા ભાડું", tabBills: "🧾 કંપની બિલ", audioSummaryTitle: "સાઇટ ઓડિયો હિસાબ", audioSummarySub: "એક ટૅપમાં સમગ્ર સાઇટનો હિસાબ સાંભળો", listenBtn: "સાંભળો", liveSnapshot: "લાઇવ વર્કફોર્સ સ્નેપશોટ" },
+      ta: { labourDue: "கூலி பாக்கி", expenses: "செலவுகள்", bills: "பில்கள்", tabLabour: "👷‍♂️ தொழிலாளர்கள் & வருகை", tabMonthly: "📅 மாதாந்திர லெட்ஜர்", tabExpenses: "🛺 செலவுகள் & வாடகை", tabBills: "🧾 நிறுவன பில்கள்", audioSummaryTitle: "தள ஆடியோ சுருக்கம்", audioSummarySub: "ஒரே தட்டலில் கணக்கைக் கேளுங்கள்", listenBtn: "கேளுங்கள்", liveSnapshot: "தொழிலாளர் நிலவரம்" },
+      te: { labourDue: "కూలీ బకాయి", expenses: "ఖర్చులు", bills: "బిల్లులు", tabLabour: "👷‍♂️ కార్మికులు & హాజరు", tabMonthly: "📅 నెలవారీ లెక్కలు", tabExpenses: "🛺 ఖర్చులు & రవాణా", tabBills: "🧾 కంపెనీ బిల్లులు", audioSummaryTitle: "సైట్ ఆడియో సారాంశం", audioSummarySub: "ఒకే ట్యాప్‌లో సైట్ లెక్క వినండి", listenBtn: "వినండి", liveSnapshot: "కార్మికుల సమాచారం" },
+      bn: { labourDue: "বকেয়া মজুরি", expenses: "সাইটের খরচ", bills: "কোম্পানির বিল", tabLabour: "👷‍♂️ শ্রমিক ও হাজিরা", tabMonthly: "📅 মাসিক খাতা", tabExpenses: "🛺 খরচ ও ভাড়া", tabBills: "🧾 কোম্পানির বিল", audioSummaryTitle: "সাইট অডিও হিসাব", audioSummarySub: "এক ক্লিকেই সব হিসাব শুনুন", listenBtn: "শুনুন", liveSnapshot: "শ্রমিক স্ন্যাপশট" },
+      ml: { labourDue: "കൂലി ബാക്കി", expenses: "ചെലവുകൾ", bills: "ബില്ലുകൾ", tabLabour: "👷‍♂️ തൊഴിലാളികളും ഹാജരും", tabMonthly: "📅 പ്രതിമാസ കണക്ക്", tabExpenses: "🛺 ചെലവുകളും വാടകയും", tabBills: "🧾 കമ്പനി ബില്ലുകൾ", audioSummaryTitle: "സൈറ്റ് ഓഡിയോ വിവരണം", audioSummarySub: "ഒറ്റ ടാപ്പിൽ കണക്ക് കേൾക്കുക", listenBtn: "കേൾക്കുക", liveSnapshot: "തൊഴിലാളി നിലവാരം" },
+      pa: { labourDue: "ਬਕਾਇਆ ਮਜ਼ਦੂਰੀ", expenses: "ਖਰਚੇ ਅਤੇ ਕਿਰਾਇਆ", bills: "ਕੰਪਨੀ ਦੇ ਬਿੱਲ", tabLabour: "👷‍♂️ ਮਜ਼ਦੂਰ ਅਤੇ ਹਾਜ਼ਰੀ", tabMonthly: "📅 ਮਹੀਨਾਵਾਰ ਖਾਤਾ", tabExpenses: "🛺 ਖਰਚਾ ਅਤੇ ਕਿਰਾਇਆ", tabBills: "🧾 ਕੰਪਨੀ ਬਿੱਲ", audioSummaryTitle: "ਸਾਈਟ ਆਡੀਓ ਰਿਪੋਰਟ", audioSummarySub: "ਇੱਕ ਟੈਪ ਵਿੱਚ ਪੂਰਾ ਹਿਸਾਬ ਸੁਣੋ", listenBtn: "ਸੁਣੋ", liveSnapshot: "ਲਾਈਵ ਕਾਰਜਬਲ" }
+    };
+    window.currentLang = localStorage.getItem('thekedaar_lang') || 'hi';
 
     function getStorageKey() {
       return currentUser ? `thekedaar_state_${currentUser.uid}` : 'thekedaar_state_guest';
@@ -546,12 +618,15 @@
       if (saved) {
         state = JSON.parse(saved);
         if (!state.masterLabourDirectory) state.masterLabourDirectory = [];
+        if (!state.dailyHajriRecords) state.dailyHajriRecords = {};
       } else {
         state = {
+          userProfilePhoto: null,
           sites: ['Main Site A - मुख्य साइट'],
           labours: [],
           expenses: [],
           bills: [],
+          dailyHajriRecords: {},
           masterLabourDirectory: []
         };
       }
@@ -560,6 +635,8 @@
     const now = new Date();
     document.getElementById('monthSelect').value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
     document.getElementById('advDate').value = now.toISOString().split('T')[0];
+    document.getElementById('hajriDateInput').value = now.toISOString().split('T')[0];
+    document.getElementById('settingsLang').value = window.currentLang;
 
     window.setAppTheme = (themeName) => {
       document.documentElement.className = themeName;
@@ -602,13 +679,11 @@
       }
     }
 
-    // Universal File Converter (Word, Excel, PDF, Images)
     function processUniversalFile(file) {
       return new Promise((resolve) => {
         if (!file) return resolve(null);
         const reader = new FileReader();
         const fileType = file.name.split('.').pop().toLowerCase();
-        
         reader.onload = (e) => {
           resolve({
             name: file.name,
@@ -681,6 +756,120 @@
     };
     window.closeFormModal = () => document.getElementById('formModal').classList.replace('flex', 'hidden');
 
+    // Profile Photo Upload Handlers
+    window.updateUserProfilePhoto = async (input) => {
+      const file = input.files[0];
+      if (!file) return;
+      const photoData = await compressImage(file);
+      state.userProfilePhoto = photoData;
+      persistState();
+      alert("Profile photo updated successfully!");
+    };
+
+    // Toggle Company Bill Status: Pending -> Received
+    window.toggleBillStatus = (billId) => {
+      const bill = (state.bills || []).find(b => b.id === billId);
+      if (!bill) return;
+      if (bill.status === 'Pending') {
+        bill.status = 'Received';
+      } else {
+        bill.status = 'Pending';
+      }
+      persistState();
+    };
+
+    // Date-Wise Hajri Book (Muster Roll) Handlers
+    window.openHajriBookModal = () => {
+      document.getElementById('hajriBookModal').classList.replace('hidden', 'flex');
+      renderDailyHajriSheet();
+    };
+    window.closeHajriBookModal = () => document.getElementById('hajriBookModal').classList.replace('flex', 'hidden');
+
+    window.renderDailyHajriSheet = () => {
+      const selectedDate = document.getElementById('hajriDateInput').value;
+      const activeSite = document.getElementById('siteSelect').value;
+      const monthPrefix = selectedDate.slice(0, 7); // e.g. "2026-10"
+
+      const siteWorkers = (state.labours || []).filter(l => l.site === activeSite && l.month === monthPrefix);
+      const container = document.getElementById('hajriWorkersContainer');
+
+      if (!state.dailyHajriRecords) state.dailyHajriRecords = {};
+      if (!state.dailyHajriRecords[selectedDate]) state.dailyHajriRecords[selectedDate] = {};
+
+      const dayRecord = state.dailyHajriRecords[selectedDate];
+
+      if (siteWorkers.length === 0) {
+        container.innerHTML = `<div class="text-center py-8 text-xs text-zinc-400">No active workers found in ${activeSite} for ${monthPrefix}. Add workers first.</div>`;
+        document.getElementById('hajriDaySummary').innerText = `P: 0 | H: 0 | A: 0`;
+        return;
+      }
+
+      let pCount = 0, hCount = 0, aCount = 0;
+
+      container.innerHTML = siteWorkers.map(w => {
+        const status = dayRecord[w.id] || 'P'; // Default is Present
+        if (status === 'P') pCount++;
+        else if (status === 'H') hCount++;
+        else aCount++;
+
+        return `
+          <div class="bg-black/5 dark:bg-black/30 p-2.5 rounded-2xl border border-zinc-200 dark:border-white/5 flex items-center justify-between">
+            <div class="flex items-center gap-2.5 min-w-0">
+              ${w.photo 
+                ? `<img src="${w.photo}" class="w-10 h-10 rounded-full object-cover border border-amber-500 shrink-0" />` 
+                : `<div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0">👷</div>`}
+              <div class="truncate">
+                <div class="font-bold text-xs truncate">${w.name}</div>
+                <div class="text-[10px] text-zinc-400">${w.category}</div>
+              </div>
+            </div>
+
+            <!-- Attendance Toggle Buttons -->
+            <div class="flex items-center gap-1 shrink-0">
+              <button onclick="setDailyWorkerStatus('${selectedDate}', '${w.id}', 'P')" class="px-2.5 py-1.5 rounded-xl text-xs font-black transition-all ${status === 'P' ? 'bg-emerald-500 text-zinc-950 shadow' : 'bg-black/10 dark:bg-white/5 text-zinc-400'}">P</button>
+              <button onclick="setDailyWorkerStatus('${selectedDate}', '${w.id}', 'H')" class="px-2.5 py-1.5 rounded-xl text-xs font-black transition-all ${status === 'H' ? 'bg-amber-500 text-zinc-950 shadow' : 'bg-black/10 dark:bg-white/5 text-zinc-400'}">H</button>
+              <button onclick="setDailyWorkerStatus('${selectedDate}', '${w.id}', 'A')" class="px-2.5 py-1.5 rounded-xl text-xs font-black transition-all ${status === 'A' ? 'bg-rose-500 text-white shadow' : 'bg-black/10 dark:bg-white/5 text-zinc-400'}">A</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('hajriDaySummary').innerText = `Present: ${pCount} | Half: ${hCount} | Absent: ${aCount}`;
+    };
+
+    window.setDailyWorkerStatus = (dateStr, workerId, status) => {
+      if (!state.dailyHajriRecords) state.dailyHajriRecords = {};
+      if (!state.dailyHajriRecords[dateStr]) state.dailyHajriRecords[dateStr] = {};
+
+      state.dailyHajriRecords[dateStr][workerId] = status;
+
+      // Automatically recalculate worker's total present & half days for the month
+      const monthPrefix = dateStr.slice(0, 7);
+      recalculateMonthlyAttendanceFromHajri(workerId, monthPrefix);
+
+      persistState();
+      renderDailyHajriSheet();
+    };
+
+    function recalculateMonthlyAttendanceFromHajri(workerId, monthPrefix) {
+      const worker = (state.labours || []).find(l => l.id === workerId && l.month === monthPrefix);
+      if (!worker) return;
+
+      let totalP = 0;
+      let totalH = 0;
+
+      Object.keys(state.dailyHajriRecords || {}).forEach(dateKey => {
+        if (dateKey.startsWith(monthPrefix)) {
+          const st = state.dailyHajriRecords[dateKey][workerId];
+          if (st === 'P') totalP++;
+          else if (st === 'H') totalH++;
+        }
+      });
+
+      worker.presentDays = totalP;
+      worker.halfDays = totalH;
+    }
+
     function populateLabourAutocomplete() {
       const datalist = document.getElementById('knownLaboursList');
       const directory = state.masterLabourDirectory || [];
@@ -709,7 +898,6 @@
       }
     };
 
-    // Save New Labour
     window.saveLabour = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -760,7 +948,6 @@
       navigateTo('viewLabours');
     };
 
-    // Update Base Salary Anytime
     window.editLabourSalary = (id) => {
       const l = state.labours.find(x => x.id === id);
       if (!l) return;
@@ -771,7 +958,6 @@
       }
     };
 
-    // Add Extra Advance with Date
     window.openAdvanceModal = (id) => {
       const l = state.labours.find(x => x.id === id);
       if (!l) return;
@@ -780,7 +966,6 @@
       document.getElementById('advAmount').value = '';
       document.getElementById('advNote').value = '';
       
-      // Render History Log
       const list = document.getElementById('advHistoryList');
       const history = l.advanceLog || [];
       if (history.length === 0) {
@@ -832,7 +1017,6 @@
       persistState();
     };
 
-    // Save Expense with PDF/Word/Excel/Image Attachment
     window.saveExpense = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -857,7 +1041,6 @@
       navigateTo('viewExpenses');
     };
 
-    // Save Bill with PDF/Word/Excel/Image Attachment
     window.saveBill = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -906,9 +1089,15 @@
 
       const months = {
         hi: ['जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर'],
+        en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        kn: ['ಜನವರಿ', 'ಫೆಬ್ರವರಿ', 'ಮಾರ್ಚ್', 'ಏಪ್ರಿಲ್', 'ಮೇ', 'ಜೂನ್', 'ಜುಲೈ', 'ಆಗಸ್ಟ್', 'ಸೆಪ್ಟೆಂಬರ್', 'ಅಕ್ಟೋಬರ್', 'ನವೆಂಬರ್', 'ಡಿಸೆಂಬರ್'],
         mr: ['जानेवारी', 'फेब्रुवारी', 'मार्च', 'एप्रिल', 'मे', 'जून', 'जुलै', 'ऑगस्ट', 'सप्टेंबर', 'ऑक्टोबर', 'नोव्हेंबर', 'डिसेंबर'],
         gu: ['જાન્યુઆરી', 'ફેબ્રુઆરી', 'માર્ચ', 'એપ્રિલ', 'મે', 'જૂન', 'જુલાઈ', 'ઓગસ્ટ', 'સપ્ટેમ્બર', 'ઓક્ટોબર', 'નવેમ્બર', 'ડિસેમ્બર'],
-        en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        ta: ['ஜனவரி', 'பிப்ரவரி', 'மார்ச்', 'ஏப்ரல்', 'மே', 'ஜூன்', 'ஜூலை', 'ஆகஸ்ட்', 'செப்டம்பர்', 'அக்டோபர்', 'நவம்பர்', 'டிசம்பர்'],
+        te: ['జనవరి', 'ఫిబ్రవరి', 'మార్చి', 'ఏప్రిల్', 'మే', 'జూన్', 'జూలై', 'ఆగస్టు', 'సెప్టెంబర్', 'అక్టోబర్', 'నవంబర్', 'డిసెంబర్'],
+        bn: ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'],
+        ml: ['ജനുവരി', 'ഫെബ്രുവരി', 'മാർച്ച്', 'ഏപ്രിൽ', 'മേയ്', 'ജൂൺ', 'ജൂലൈ', 'ഓഗസ്റ്റ്', 'സെപ്റ്റംബർ', 'ഒക്ടോബർ', 'നവംബർ', 'ഡിസംബർ'],
+        pa: ['ਜਨਵਰੀ', 'ਫ਼ਰਵਰੀ', 'ਮਾਰਚ', 'ਅਪ੍ਰੈਲ', 'ਮਈ', 'ਜੂਨ', 'ਜੁਲਾਈ', 'ਅਗਸਤ', 'ਸਤੰਬਰ', 'ਅਕਤੂਬਰ', 'ਨਵੰਬਰ', 'ਦਸੰਬਰ']
       };
 
       const langMap = months[lang] || months.hi;
@@ -927,17 +1116,24 @@
 
       // Update User Avatar Badge
       const userBadge = document.getElementById('userAvatarBadge');
+      const settingsAvatar = document.getElementById('settingsAvatarPreview');
+
+      if (state.userProfilePhoto) {
+        userBadge.innerHTML = `<img src="${state.userProfilePhoto}" class="w-full h-full object-cover" />`;
+        settingsAvatar.innerHTML = `<img src="${state.userProfilePhoto}" class="w-full h-full object-cover" />`;
+      } else if (currentUser && currentUser.photoURL) {
+        userBadge.innerHTML = `<img src="${currentUser.photoURL}" class="w-full h-full object-cover" />`;
+        settingsAvatar.innerHTML = `<img src="${currentUser.photoURL}" class="w-full h-full object-cover" />`;
+      } else {
+        const letter = currentUser ? (currentUser.displayName || currentUser.email || 'U')[0].toUpperCase() : 'ठे';
+        userBadge.innerHTML = `<span>${letter}</span>`;
+        settingsAvatar.innerHTML = `<span>${letter}</span>`;
+      }
+
       if (currentUser) {
-        if (currentUser.photoURL) {
-          userBadge.innerHTML = `<img src="${currentUser.photoURL}" class="w-full h-full object-cover" />`;
-        } else {
-          const letter = (currentUser.displayName || currentUser.email || 'U')[0].toUpperCase();
-          userBadge.innerHTML = `<span>${letter}</span>`;
-        }
         document.getElementById('accountStatusText').innerText = `Logged in: ${currentUser.email}`;
         document.getElementById('logoutBtn').classList.remove('hidden');
       } else {
-        userBadge.innerHTML = `<span>ठे</span>`;
         document.getElementById('accountStatusText').innerText = `Local Mode (Click to Sign In)`;
         document.getElementById('logoutBtn').classList.add('hidden');
       }
@@ -948,7 +1144,7 @@
 
       // Render Labour Register
       document.getElementById('labourList').innerHTML = filteredLabours.length === 0
-        ? `<div class="text-center py-8 text-xs text-zinc-500">No labour records found for ${activeMonth}. Tap "Carry Last Month" or "+ Worker".</div>`
+        ? `<div class="text-center py-8 text-xs text-zinc-500">No labour records found for ${activeMonth}. Tap "Hajri Book" or "+ Worker".</div>`
         : filteredLabours.map(l => {
           const effectiveDays = (l.presentDays || 0) + ((l.halfDays || 0) * 0.5);
           const earned = Math.round((l.salary / 26) * effectiveDays);
@@ -1052,28 +1248,38 @@
           </div>
         `).join('');
 
-      // Render Bills
+      // Render Bills (With Toggle Status Button)
       const filteredBills = (state.bills || []).filter(b => b.site === activeSite && b.month === activeMonth);
       const totalBills = filteredBills.reduce((acc, b) => acc + b.amount, 0);
       document.getElementById('summaryBillsTotal').innerText = `₹${totalBills.toLocaleString('en-IN')}`;
 
       document.getElementById('billList').innerHTML = filteredBills.length === 0
         ? `<div class="text-center py-8 text-xs text-zinc-500">No company bills recorded for ${activeMonth}.</div>`
-        : filteredBills.map(b => `
-          <div class="ios-glass p-3 rounded-2xl flex items-center justify-between shadow-sm">
-            <div class="flex items-center gap-2.5">
-              ${getFileBadgeHTML(b.attachment)}
-              <div>
-                <h4 class="font-bold text-xs">${b.title}</h4>
-                <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 font-bold">${b.status}</span>
+        : filteredBills.map(b => {
+          const isPending = (b.status || '').toLowerCase().includes('pending');
+          return `
+            <div class="ios-glass p-3 rounded-2xl flex items-center justify-between shadow-sm">
+              <div class="flex items-center gap-2.5">
+                ${getFileBadgeHTML(b.attachment)}
+                <div>
+                  <h4 class="font-bold text-xs">${b.title}</h4>
+                  <div class="flex items-center gap-1.5 mt-0.5">
+                    <span class="text-[9px] px-2 py-0.5 rounded-full font-bold ${isPending ? 'bg-amber-500/10 text-amber-500 border border-amber-500/30' : 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/30'}">
+                      ${isPending ? 'Pending (बाकी)' : 'Received (प्राप्त)'}
+                    </span>
+                    <button onclick="toggleBillStatus('${b.id}')" class="text-[9px] px-2 py-0.5 rounded-lg bg-black/10 dark:bg-white/10 hover:bg-amber-500 hover:text-zinc-950 font-bold transition-all">
+                      ${isPending ? 'Mark Received / मिला' : 'Mark Pending'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="text-xs font-black ${isPending ? 'text-amber-500' : 'text-emerald-500'}">₹${b.amount.toLocaleString('en-IN')}</div>
+                <button onclick="deleteRecord('bills','${b.id}')" class="text-[10px] text-zinc-400 hover:text-rose-500">Del</button>
               </div>
             </div>
-            <div class="text-right">
-              <div class="text-xs font-black text-emerald-500">₹${b.amount.toLocaleString('en-IN')}</div>
-              <button onclick="deleteRecord('bills','${b.id}')" class="text-[10px] text-zinc-400 hover:text-rose-500">Del</button>
-            </div>
-          </div>
-        `).join('');
+          `;
+        }).join('');
 
       // Render Monthly Ledger Tab Content
       document.getElementById('monthlyLedgerContent').innerHTML = `
@@ -1115,12 +1321,19 @@
       if (file) document.getElementById(lblId).innerText = `📄 ${file.name}`;
     };
 
+    // Indian Regional Language Switcher
     window.changeLanguage = (lang) => {
       window.currentLang = lang;
+      localStorage.setItem('thekedaar_lang', lang);
+      const dict = i18n[lang] || i18n.hi;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.innerText = dict[key];
+      });
       closeSettingsModal();
     };
 
-    // Voice Summary: Speaks Full Native Month Name
+    // Audio Report Engine (Native Local Voice Synthesis)
     window.playVoiceSummary = () => {
       const activeSite = document.getElementById('siteSelect').value;
       const activeMonth = document.getElementById('monthSelect').value;
@@ -1131,19 +1344,27 @@
 
       const spokenMonth = getSpokenMonthName(activeMonth, window.currentLang || 'hi');
       let msg = "";
-      let langCode = "hi-IN";
+      let langCode = `${window.currentLang || 'hi'}-IN`;
 
-      if (window.currentLang === 'mr') {
-        langCode = "mr-IN";
+      if (window.currentLang === 'kn') {
+        msg = `ನಮಸ್ಕಾರ ಗುತ್ತಿಗೆದಾರರೇ. ${activeSite} ಸೈಟ್‌ಗೆ ${spokenMonth} ತಿಂಗಳ ಲೆಕ್ಕ: ಒಟ್ಟು ${workerCount} ಕಾರ್ಮಿಕರು ಕೆಲಸ ಮಾಡುತ್ತಿದ್ದಾರೆ. ಒಟ್ಟು ಬಾಕಿ ಕೂಲಿ ${labourDue} ರೂಪಾಯಿ. ಸೈಟ್ ಖರ್ಚುಗಳು ${expenses} ರೂಪಾಯಿ. ಮತ್ತು ಕಂಪನಿ ಬಿಲ್ ಮೊತ್ತ ${bills} ರೂಪಾಯಿ.`;
+      } else if (window.currentLang === 'mr') {
         msg = `नमस्कार ठेकेदारजी. साईट ${activeSite} साठी ${spokenMonth} चा हिशोब: एकूण ${workerCount} कामगार आहेत. बाकी मजुरी ${labourDue} आहे. रिक्षा व इतर खर्च ${expenses} रुपये आहेत. आणि कंपनीचे एकूण बिल ${bills} आहे.`;
       } else if (window.currentLang === 'gu') {
-        langCode = "gu-IN";
         msg = `નમસ્તે કોન્ટ્રાક્ટર. સાઇટ ${activeSite} માટે ${spokenMonth} નો હિસાબ: કુલ ${workerCount} મજૂરો છે. બાકી મજૂરી ${labourDue} છે. રિક્ષા અને અન્ય ખર્ચ ${expenses} છે. અને કંપનીનું બિલ ${bills} છે.`;
+      } else if (window.currentLang === 'ta') {
+        msg = `வணக்கம் ஒப்பந்ததாரரே. தளம் ${activeSite} க்கான ${spokenMonth} மாத கணக்கு: மொத்தம் ${workerCount} தொழிலாளர்கள் உள்ளனர். மொத்த பாக்கி கூலி ${labourDue}. தள செலவுகள் ${expenses}. மற்றும் நிறுவன பில் ${bills}.`;
+      } else if (window.currentLang === 'te') {
+        msg = `నమస్కారం కాంట్రాక్టర్ గారు. ${activeSite} సైట్‌కు ${spokenMonth} లెక్కలు: మొత్తం ${workerCount} మంది కార్మికులు ఉన్నారు. నికర కూలీ బకాయి ${labourDue}. సైట్ ఖర్చులు ${expenses}. మరియు కంపెనీ బిల్లు ${bills}.`;
+      } else if (window.currentLang === 'bn') {
+        msg = `নমস্কার ঠিকাদার মহাশয়। সাইট ${activeSite} এর ${spokenMonth} মাসের হিসাব: মোট ${workerCount} জন শ্রমিক আছেন। মোট মজুরি বকেয়া ${labourDue} টাকা। অন্যান্য খরচ ${expenses} টাকা। এবং কোম্পানির বিল ${bills} টাকা।`;
+      } else if (window.currentLang === 'ml') {
+        msg = `നമസ്കാരം കരാറുകാരേ. ${activeSite} സൈറ്റിന്റെ ${spokenMonth} കണക്ക്: ആകെ ${workerCount} തൊഴിലാളികളുണ്ട്. കൂലി ബാക്കി ${labourDue} രൂപ. സൈറ്റ് ചെലവ് ${expenses} രൂപ. കമ്പനി ബിൽ ${bills} രൂപ.`;
+      } else if (window.currentLang === 'pa') {
+        msg = `ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਠੇਕੇਦਾਰ ਜੀ। ਸਾਈਟ ${activeSite} ਦਾ ${spokenMonth} ਦਾ ਹਿਸਾਬ: ਕੁੱਲ ${workerCount} ਮਜ਼ਦੂਰ ਹਨ। ਕੁੱਲ ਬਕਾਇਆ ਮਜ਼ਦੂਰੀ ${labourDue} ਹੈ। ਖਰਚੇ ${expenses} ਰੁਪਏ ਹਨ ਅਤੇ ਕੰਪਨੀ ਦਾ ਬਿੱਲ ${bills} ਹੈ।`;
       } else if (window.currentLang === 'en') {
-        langCode = "en-IN";
         msg = `Hello Contractor. Report for site ${activeSite} for ${spokenMonth}: There are ${workerCount} active workers. Net labour payable is ${labourDue}. Total transport and site expenses are ${expenses}. Total company bills are ${bills}.`;
       } else {
-        langCode = "hi-IN";
         msg = `नमस्ते ठेकेदार जी। साइट ${activeSite} का ${spokenMonth} का हिसाब: कुल ${workerCount} मजदूर काम कर रहे हैं। कुल बाकी मजदूरी ${labourDue} है। रिक्शा व अन्य खर्चे ${expenses} रुपये हैं। और कंपनी से कुल बिल ${bills} का है।`;
       }
 
@@ -1225,6 +1446,7 @@
     loadLocalState();
     runSplashAnimation();
     renderAll();
+    changeLanguage(window.currentLang);
   </script>
 </body>
 </html>
