@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
   
-  <link rel="icon" type="image/png" href="./logo.png?v=6">
-  <link rel="apple-touch-icon" href="./logo.png?v=6">
-  <link rel="manifest" href="manifest.json?v=6">
+  <link rel="icon" type="image/png" href="./logo.png?v=8">
+  <link rel="apple-touch-icon" href="./logo.png?v=8">
+  <link rel="manifest" href="manifest.json?v=8">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#000000">
@@ -25,10 +25,10 @@
   </script>
 
   <style>
-    /* High-Contrast iOS Themes with Crisp Visibility */
+    /* High-Contrast Adaptive iOS Themes */
     html.theme-amoled {
       --bg-main: #000000;
-      --card-bg: rgba(18, 20, 24, 0.75);
+      --card-bg: rgba(18, 20, 24, 0.78);
       --card-border: rgba(255, 255, 255, 0.16);
       --card-specular: rgba(255, 255, 255, 0.08);
       --text-main: #ffffff;
@@ -45,7 +45,7 @@
     }
     html.theme-dark {
       --bg-main: #0b111e;
-      --card-bg: rgba(22, 32, 50, 0.78);
+      --card-bg: rgba(22, 32, 50, 0.82);
       --card-border: rgba(255, 255, 255, 0.18);
       --card-specular: rgba(255, 255, 255, 0.08);
       --text-main: #f8fafc;
@@ -61,21 +61,21 @@
       --placeholder-color: #94a3b8;
     }
     html.theme-light {
-      --bg-main: #f8fafc;
+      --bg-main: #f1f5f9;
       --card-bg: #ffffff;
       --card-border: #cbd5e1;
       --card-specular: #ffffff;
       --text-main: #09090b;
       --text-sub: #3f3f46;
-      --nav-pill-bg: rgba(255, 255, 255, 0.95);
-      --nav-pill-border: #cbd5e1;
+      --nav-pill-bg: rgba(255, 255, 255, 0.94);
+      --nav-pill-border: #94a3b8;
       --nav-active-bubble: #e2e8f0;
       --nav-icon-inactive: #64748b;
       --nav-icon-active: #09090b;
-      --input-bg: #f1f5f9;
-      --input-border: #94a3b8;
+      --input-bg: #f8fafc;
+      --input-border: #64748b;
       --input-text: #09090b;
-      --placeholder-color: #64748b;
+      --placeholder-color: #475569;
     }
 
     body {
@@ -90,7 +90,7 @@
       backdrop-filter: blur(28px) saturate(190%);
       -webkit-backdrop-filter: blur(28px) saturate(190%);
       border: 1px solid var(--card-border);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25), inset 0 1px 1px 0 var(--card-specular);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.22), inset 0 1px 1px 0 var(--card-specular);
     }
 
     .ios-header {
@@ -166,7 +166,7 @@
 </head>
 <body class="min-h-screen pb-32 select-none no-scrollbar">
 
-  <!-- 1. GRAPHICAL SPLASH SCREEN -->
+  <!-- 1. SPLASH SCREEN -->
   <div id="splashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black transition-opacity duration-700">
     <div class="relative z-10 flex flex-col items-center">
       <div class="relative flex items-center justify-center mb-6">
@@ -188,31 +188,30 @@
   <!-- 2. TOP HEADER -->
   <header class="sticky top-0 z-30 px-4 pt-4 pb-2.5 ios-header">
     <div class="max-w-md mx-auto flex items-center justify-between">
-      
-      <!-- User Profile Avatar Badge (Opens Profile & Accounts Modal) -->
       <div class="flex items-center gap-3">
-        <button onclick="openProfileModal()" class="relative group active:scale-95 transition-transform" title="Profile & Multi-Accounts">
+        <button onclick="openProfileModal()" class="relative group active:scale-95 transition-transform" title="Profile & Accounts">
           <div id="userAvatarBadge" class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 font-black text-base flex items-center justify-center shadow-lg border border-white/20 overflow-hidden">
             <span>ठे</span>
           </div>
-          <span id="syncDot" class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-black"></span>
+          <span id="syncDot" class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-black"></span>
         </button>
 
         <div>
           <div class="flex items-center gap-1.5">
             <h1 class="text-base font-black tracking-tight leading-none">ठेकेDAAR</h1>
-            <span id="activeNicknameBadge" class="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-500/10 text-amber-500 font-bold border border-amber-500/30">Main</span>
+            <span id="activeNicknameBadge" class="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-500/15 text-amber-500 font-bold border border-amber-500/30">Main</span>
           </div>
-          <!-- Offline-First PWA Sync Indicator -->
-          <span id="syncStatus" class="text-[10px] text-zinc-400 font-medium">● Checking Connection...</span>
+          <div class="flex items-center gap-1 mt-1">
+            <span id="syncStatus" class="text-[10px] px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-500 font-bold border border-emerald-500/20">
+              ● Checking Status...
+            </span>
+          </div>
         </div>
       </div>
 
-      <!-- Top Right: Dedicated Settings Gear Button -->
-      <button onclick="openSettingsModal()" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center text-lg active:scale-90 transition-transform shadow-sm" title="Settings & Language">
+      <button onclick="openSettingsModal()" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center text-lg active:scale-90 transition-transform shadow-sm" title="Settings">
         ⚙️
       </button>
-
     </div>
   </header>
 
@@ -223,7 +222,7 @@
         <span class="text-sm">📍</span>
         <select id="siteSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold focus:outline-none w-full truncate"></select>
       </div>
-      <button onclick="addNewSite()" class="px-2.5 py-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-500 font-bold text-xs rounded-xl transition-all shrink-0">
+      <button onclick="addNewSite()" class="px-2.5 py-1 bg-amber-500/15 hover:bg-amber-500/25 text-amber-500 font-bold text-xs rounded-xl transition-all shrink-0">
         + SITE
       </button>
       <div class="h-4 w-px bg-zinc-300 dark:bg-white/10"></div>
@@ -244,8 +243,8 @@
         <span class="text-[9px] font-bold tracking-wider uppercase text-amber-500" data-i18n="expenses">EXPENSES</span>
         <span id="summaryExpensesTotal" class="text-base font-black text-amber-500 mt-0.5">₹0</span>
       </div>
-      <div class="rounded-2xl p-3 border border-emerald-500/30 bg-emerald-500/10 ios-glass text-center flex flex-col justify-center">
-        <span class="text-[9px] font-bold tracking-wider uppercase text-emerald-500" data-i18n="bills">BILLS</span>
+      <div onclick="navigateTo('viewBills')" class="rounded-2xl p-3 border border-emerald-500/30 bg-emerald-500/10 ios-glass text-center flex flex-col justify-center cursor-pointer active:scale-95 transition-transform">
+        <span class="text-[9px] font-bold tracking-wider uppercase text-emerald-500" data-i18n="bills">BILLS ↗</span>
         <span id="summaryBillsTotal" class="text-base font-black text-emerald-500 mt-0.5">₹0</span>
       </div>
     </div>
@@ -255,7 +254,7 @@
       <h3 class="text-xs font-extrabold flex items-center justify-center gap-1.5" data-i18n="audioSummaryTitle">
         Site Audio Summary / बोलकर हिसाब सुनें
       </h3>
-      <p class="text-[10px] text-zinc-400 mt-0.5" data-i18n="audioSummarySub">Listen to whole site summary in one tap</p>
+      <p class="text-[10px] opacity-75 mt-0.5" data-i18n="audioSummarySub">Listen to whole site summary in one tap</p>
 
       <div class="flex items-center justify-center my-2.5 h-6 opacity-80">
         <span class="waveform-bar h-2"></span>
@@ -276,9 +275,9 @@
     <!-- VIEW 1: HOME SNAPSHOT -->
     <section id="viewHome" class="space-y-3">
       <div class="flex items-center justify-between pt-1">
-        <h2 class="text-[11px] font-bold uppercase tracking-wider text-zinc-400" data-i18n="liveSnapshot">LIVE WORKFORCE SNAPSHOT</h2>
+        <h2 class="text-[11px] font-bold uppercase tracking-wider opacity-70" data-i18n="liveSnapshot">LIVE WORKFORCE SNAPSHOT</h2>
+        <button onclick="navigateTo('viewLabours')" class="text-[11px] font-bold text-amber-500 hover:underline">View All →</button>
       </div>
-      <!-- Spacing between labour cards fixed -->
       <div id="homeRecentLabour" class="space-y-3.5"></div>
     </section>
 
@@ -286,11 +285,11 @@
     <section id="viewLabours" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black" data-i18n="tabLabour">👷‍♂️ Labour Register</h2>
-        <div class="flex items-center gap-2">
-          <button onclick="openHajriBookModal()" class="px-2.5 py-1.5 bg-amber-500/20 border border-amber-500/40 text-amber-500 font-bold text-xs rounded-xl active:scale-95 transition-transform" title="Daily Muster Roll">
+        <div class="flex items-center gap-1.5">
+          <button onclick="openHajriBookModal()" class="px-2.5 py-1.5 bg-amber-500/20 border border-amber-500/40 text-amber-500 font-bold text-xs rounded-xl active:scale-95 transition-transform">
             📖 Hajri Book
           </button>
-          <button onclick="openCarrySelectModal()" class="px-2.5 py-1.5 ios-glass hover:bg-black/5 dark:hover:bg-white/10 text-amber-500 font-bold text-xs rounded-xl active:scale-95 transition-transform" title="Select previous workers to carry">
+          <button onclick="openCarrySelectModal()" class="px-2.5 py-1.5 ios-glass text-amber-500 font-bold text-xs rounded-xl active:scale-95 transition-transform">
             ⚡ Carry
           </button>
           <button onclick="openFormModal('labour')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs rounded-xl shadow">
@@ -298,17 +297,16 @@
           </button>
         </div>
       </div>
-      <!-- Spacing between labour cards fixed -->
       <div id="labourList" class="space-y-3.5"></div>
     </section>
 
     <!-- VIEW 3: MONTHLY ARCHIVE -->
     <section id="viewMonthly" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
-        <h2 class="text-sm font-black" data-i18n="tabMonthly">📅 Monthly Ledger & Archive</h2>
-        <span id="monthlyBadge" class="text-xs px-2.5 py-1 rounded-xl bg-amber-500/10 text-amber-500 font-bold"></span>
+        <h2 class="text-sm font-black" data-i18n="tabMonthly">📅 Monthly Ledger & Export</h2>
+        <span id="monthlyBadge" class="text-xs px-2.5 py-1 rounded-xl bg-amber-500/15 text-amber-500 font-bold"></span>
       </div>
-      <div id="monthlyLedgerContent" class="space-y-3"></div>
+      <div id="monthlyLedgerContent" class="space-y-3.5"></div>
     </section>
 
     <!-- VIEW 4: SITE EXPENSES -->
@@ -317,7 +315,7 @@
         <h2 class="text-sm font-black" data-i18n="tabExpenses">🛺 Site Expenses & Rent</h2>
         <button onclick="openFormModal('expense')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Expense</button>
       </div>
-      <div id="expenseList" class="space-y-3"></div>
+      <div id="expenseList" class="space-y-3.5"></div>
     </section>
 
     <!-- VIEW 5: COMPANY BILLS -->
@@ -326,25 +324,22 @@
         <h2 class="text-sm font-black" data-i18n="tabBills">🧾 Company Work Bills</h2>
         <button onclick="openFormModal('bill')" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Bill</button>
       </div>
-      <div id="billList" class="space-y-3"></div>
+      <div id="billList" class="space-y-3.5"></div>
     </section>
 
   </main>
 
-  <!-- 5. FLOATING iOS INSTAGRAM PILL NAVIGATION BAR -->
-  <div class="fixed bottom-4 inset-x-0 z-40 flex justify-center pointer-events-none px-4">
-    <nav class="ios-instagram-floating-pill pointer-events-auto rounded-full py-1.5 px-2 flex items-center justify-between gap-1 w-full max-w-[370px]">
-      
-      <!-- Home -->
-      <button onclick="navigateTo('viewHome')" id="nav-viewHome" class="nav-tab-item active flex items-center justify-center w-14 h-11 rounded-full active:scale-90" title="Home">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+  <!-- 5. FLOATING NAVIGATION BAR -->
+  <div class="fixed bottom-4 inset-x-0 z-40 flex justify-center pointer-events-none px-3">
+    <nav class="ios-instagram-floating-pill pointer-events-auto rounded-full py-1.5 px-2 flex items-center justify-between gap-1 w-full max-w-[390px]">
+      <button onclick="navigateTo('viewHome')" id="nav-viewHome" class="nav-tab-item active flex items-center justify-center w-12 h-11 rounded-full active:scale-90" title="Home">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 2.1l9 8.1c.4.3.6.8.6 1.3v8.5c0 1.1-.9 2-2 2h-4.5c-.8 0-1.5-.7-1.5-1.5V15c0-.6-.4-1-1-1s-1 .4-1 1v5.5c0 .8-.7 1.5-1.5 1.5H5.4c-1.1 0-2-.9-2-2v-8.5c0-.5.2-1 .6-1.3l9-8.1c.6-.6 1.6-.6 2.2 0z"/>
         </svg>
       </button>
 
-      <!-- Labours -->
-      <button onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="nav-tab-item flex items-center justify-center w-14 h-11 rounded-full active:scale-90" title="Labours">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+      <button onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="nav-tab-item flex items-center justify-center w-12 h-11 rounded-full active:scale-90" title="Labours">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
           <circle cx="9" cy="7" r="4"></circle>
           <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
@@ -352,52 +347,55 @@
         </svg>
       </button>
 
-      <!-- Create / Post (+) -->
-      <button onclick="openFormModal('labour')" class="flex items-center justify-center w-12 h-11 active:scale-90 transition-transform" title="New Entry">
+      <button onclick="openFormModal('labour')" class="flex items-center justify-center w-11 h-11 active:scale-90 transition-transform" title="Add Worker">
         <div class="w-7 h-7 rounded-lg border-2 border-amber-500 flex items-center justify-center text-amber-500 font-bold text-lg leading-none">
           +
         </div>
       </button>
 
-      <!-- Expenses -->
-      <button onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="nav-tab-item flex items-center justify-center w-14 h-11 rounded-full active:scale-90" title="Expenses">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+      <button onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="nav-tab-item flex items-center justify-center w-12 h-11 rounded-full active:scale-90" title="Expenses">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
           <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
         </svg>
       </button>
 
-      <!-- Bills Tab inside Bottom Nav -->
-      <button onclick="navigateTo('viewBills')" id="nav-viewBills" class="nav-tab-item flex items-center justify-center w-14 h-11 rounded-full active:scale-90" title="Company Bills">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+      <button onclick="navigateTo('viewBills')" id="nav-viewBills" class="nav-tab-item flex items-center justify-center w-12 h-11 rounded-full active:scale-90" title="Company Bills">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
           <polyline points="14 2 14 8 20 8"></polyline>
           <line x1="16" y1="13" x2="8" y2="13"></line>
           <line x1="16" y1="17" x2="8" y2="17"></line>
-          <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
       </button>
 
+      <button onclick="navigateTo('viewMonthly')" id="nav-viewMonthly" class="nav-tab-item flex items-center justify-center w-12 h-11 rounded-full active:scale-90" title="Monthly Reports">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+      </button>
     </nav>
   </div>
 
   <!-- 6. MULTI-ACCOUNT & PROFILE SHEET MODAL -->
   <div id="profileModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-3">
+      <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-3">
         <h3 class="font-black text-base flex items-center gap-2">👤 Profile & Account IDs</h3>
-        <button onclick="closeProfileModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
+        <button onclick="closeProfileModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
 
-      <!-- Profile Photo Upload -->
-      <div class="flex items-center gap-3 bg-black/5 dark:bg-black/20 p-3 rounded-2xl border border-zinc-200 dark:border-white/10">
+      <div class="flex items-center gap-3 bg-black/5 dark:bg-black/25 p-3 rounded-2xl border border-zinc-300 dark:border-white/10">
         <div id="profileAvatarPreview" class="w-14 h-14 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 font-black text-xl flex items-center justify-center shadow border-2 border-white/20 overflow-hidden shrink-0">
           <span>ठे</span>
         </div>
-        <div class="flex-1 space-y-1">
-          <span class="text-xs font-bold block" id="currentProfileNameText">Contractor ID</span>
+        <div class="flex-1 space-y-1.5">
+          <span class="text-xs font-bold block" id="currentProfileNameText">Main Contractor</span>
           <div class="flex gap-1.5">
-            <label class="px-2.5 py-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-500 border border-amber-500/30 text-[10px] font-bold rounded-lg cursor-pointer">
+            <label class="px-2.5 py-1 bg-amber-500/15 hover:bg-amber-500/25 text-amber-500 border border-amber-500/30 text-[10px] font-bold rounded-lg cursor-pointer">
               <span>📸 Camera</span>
               <input type="file" accept="image/*" capture="user" class="hidden" onchange="initiateCropFromFile(this, 'userProfile')" />
             </label>
@@ -409,116 +407,110 @@
         </div>
       </div>
 
-      <!-- Multiple IDs with Nicknames -->
       <div class="space-y-2">
         <div class="flex justify-between items-center">
-          <label class="text-[10px] font-bold text-zinc-400 uppercase">Registered Account IDs</label>
-          <button onclick="openAddAccountPrompt()" class="text-amber-500 text-xs font-bold hover:underline">+ Add ID</button>
+          <label class="text-[10px] font-bold opacity-70 uppercase">Your Account IDs & Nicknames</label>
+          <button onclick="openAddAccountPrompt()" class="text-amber-500 text-xs font-bold hover:underline">+ Add New ID</button>
         </div>
-        <div id="accountIdsList" class="space-y-1.5 max-h-40 overflow-y-auto"></div>
+        <div id="accountIdsList" class="space-y-1.5 max-h-44 overflow-y-auto"></div>
       </div>
 
-      <div class="pt-2 border-t border-zinc-200 dark:border-white/10 space-y-2">
+      <div class="pt-2 border-t border-zinc-300 dark:border-white/10 space-y-2">
         <button onclick="closeProfileModal(); openAuthModal();" class="w-full py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-bold text-xs flex items-center justify-center gap-1.5 shadow">
-          <span>☁️</span> Connect Firebase Account
+          <span>☁️</span> Sync Account with Firebase Cloud
         </button>
-        <button onclick="logoutAccount()" id="profileLogoutBtn" class="w-full py-2 rounded-xl bg-rose-500/10 text-rose-500 font-bold text-xs hidden">
-          Log Out
+        <button onclick="logoutAccount()" id="profileLogoutBtn" class="w-full py-2 rounded-xl bg-rose-500/15 text-rose-500 font-bold text-xs hidden">
+          Log Out of Cloud
         </button>
       </div>
     </div>
   </div>
 
-  <!-- 7. SETTINGS MODAL (LANGUAGES, THEMES, INSTAGRAM, SHARE APP) -->
+  <!-- 7. SETTINGS MODAL -->
   <div id="settingsModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-3">
-        <h3 class="font-black text-base flex items-center gap-2">⚙️ App Settings</h3>
-        <button onclick="closeSettingsModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
+      <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-3">
+        <h3 class="font-black text-base flex items-center gap-2" data-i18n="settingsHeader">⚙️ App Settings</h3>
+        <button onclick="closeSettingsModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
 
-      <!-- Expandable Language Accordion (10 Regional Indian Languages) -->
-      <div class="rounded-2xl border border-zinc-200 dark:border-white/10 overflow-hidden bg-black/5 dark:bg-black/20">
-        <button onclick="toggleLanguageAccordion()" class="w-full p-3 flex justify-between items-center text-xs font-bold">
-          <span class="flex items-center gap-2">🌐 Change Language / भाषा बदलें</span>
-          <span id="langChevron" class="text-zinc-400">▼</span>
+      <div class="rounded-2xl border border-zinc-300 dark:border-white/10 overflow-hidden bg-black/5 dark:bg-black/20">
+        <button onclick="toggleLanguageAccordion()" class="w-full p-3.5 flex justify-between items-center text-xs font-bold">
+          <span class="flex items-center gap-2">🌐 <span data-i18n="changeLangLabel">Change Language / भाषा बदलें</span></span>
+          <span id="langChevron" class="text-amber-500 font-black">▼</span>
         </button>
-        <div id="langAccordionBody" class="hidden p-2 pt-0 grid grid-cols-2 gap-1.5 border-t border-zinc-200 dark:border-white/10">
-          <button onclick="changeLanguage('hi')" class="p-2 text-left text-xs font-bold rounded-lg hover:bg-amber-500/20">हिंदी (Hindi)</button>
-          <button onclick="changeLanguage('en')" class="p-2 text-left text-xs font-bold rounded-lg hover:bg-amber-500/20">English</button>
-          <button onclick="changeLanguage('kn')" class="p-2 text-left text-xs font-bold rounded-lg hover:bg-amber-500/20">ಕನ್ನಡ (Kannada)</button>
-          <button onclick="changeLanguage('mr')" class="p-2 text-left text-xs font-bold rounded-lg hover:bg-amber-500/20">मराठी (Marathi)</button>
-          <button onclick="changeLanguage('gu')" class="p-2 text-left text-xs font-bold rounded-lg hover:bg-amber-500/20">ગુજરાતી (Gujarati)</button>
-          <button onclick="changeLanguage('ta')" class="p-2 text-left text-xs font-bold rounded-lg hover:bg-amber-500/20">தமிழ் (Tamil)</button>
-          <button onclick="changeLanguage('te')" class="p-2 text-left text-xs font-bold rounded-lg hover:bg-amber-500/20">తెలుగు (Telugu)</button>
-          <button onclick="changeLanguage('bn')" class="p-2 text-left text-xs font-bold rounded-lg hover:bg-amber-500/20">বাংলা (Bengali)</button>
-          <button onclick="changeLanguage('ml')" class="p-2 text-left text-xs font-bold rounded-lg hover:bg-amber-500/20">മലയാളം (Malayalam)</button>
-          <button onclick="changeLanguage('pa')" class="p-2 text-left text-xs font-bold rounded-lg hover:bg-amber-500/20">ਪੰਜਾਬੀ (Punjabi)</button>
+        <div id="langAccordionBody" class="hidden p-2.5 pt-1 grid grid-cols-2 gap-1.5 border-t border-zinc-300 dark:border-white/10">
+          <button onclick="changeLanguage('hi')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 हिंदी (Hindi)</button>
+          <button onclick="changeLanguage('en')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇬🇧 English</button>
+          <button onclick="changeLanguage('kn')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 ಕನ್ನಡ (Kannada)</button>
+          <button onclick="changeLanguage('mr')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 मराठी (Marathi)</button>
+          <button onclick="changeLanguage('gu')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 ગુજરાતી (Gujarati)</button>
+          <button onclick="changeLanguage('ta')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 தமிழ் (Tamil)</button>
+          <button onclick="changeLanguage('te')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 తెలుగు (Telugu)</button>
+          <button onclick="changeLanguage('bn')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 বাংলা (Bengali)</button>
+          <button onclick="changeLanguage('ml')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 മലയാളം (Malayalam)</button>
+          <button onclick="changeLanguage('pa')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 ਪੰਜਾਬੀ (Punjabi)</button>
         </div>
       </div>
 
-      <!-- Theme Switcher -->
       <div class="space-y-1.5">
-        <label class="text-[10px] font-bold text-zinc-400 uppercase">App Theme / थीम</label>
+        <label class="text-[10px] font-bold opacity-70 uppercase" data-i18n="themeLabel">App Theme / थीम</label>
         <div class="grid grid-cols-3 gap-2">
-          <button onclick="setAppTheme('theme-amoled')" class="py-2 rounded-xl text-xs font-bold border border-white/20 bg-black text-white hover:border-amber-500">AMOLED</button>
-          <button onclick="setAppTheme('theme-dark')" class="py-2 rounded-xl text-xs font-bold border border-white/20 bg-slate-800 text-white hover:border-amber-500">Dark</button>
-          <button onclick="setAppTheme('theme-light')" class="py-2 rounded-xl text-xs font-bold border border-zinc-300 bg-white text-zinc-900 hover:border-amber-500 shadow-sm">Light</button>
+          <button onclick="setAppTheme('theme-amoled')" class="py-2.5 rounded-xl text-xs font-bold border border-white/20 bg-black text-white hover:border-amber-500">AMOLED</button>
+          <button onclick="setAppTheme('theme-dark')" class="py-2.5 rounded-xl text-xs font-bold border border-white/20 bg-slate-800 text-white hover:border-amber-500">Dark</button>
+          <button onclick="setAppTheme('theme-light')" class="py-2.5 rounded-xl text-xs font-bold border border-zinc-400 bg-white text-zinc-900 hover:border-amber-500 shadow-sm">Light</button>
         </div>
       </div>
 
-      <!-- Developer Instagram Profile -->
       <div class="space-y-1.5">
-        <label class="text-[10px] font-bold text-zinc-400 uppercase">Developer / डेवलपर</label>
-        <a href="https://www.instagram.com/raahul.108?dlrf=dzg5ODNueHcwbmxh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-2.5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-rose-500/10 to-purple-500/10 border border-amber-500/30 hover:border-amber-500 transition-all">
-          <div class="flex items-center gap-2.5">
-            <span class="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 flex items-center justify-center text-white text-sm shadow">
+        <label class="text-[10px] font-bold opacity-70 uppercase">Developer Social Media</label>
+        <a href="https://www.instagram.com/raahul.108?dlrf=dzg5ODNueHcwbmxh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-amber-500/15 via-rose-500/15 to-purple-500/15 border border-amber-500/40 hover:border-amber-500 transition-all shadow-sm">
+          <div class="flex items-center gap-3">
+            <span class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 flex items-center justify-center text-white text-base shadow">
               📸
             </span>
             <div>
-              <div class="text-xs font-extrabold leading-tight">Rahul (@raahul.108)</div>
-              <div class="text-[10px] text-zinc-400">Connect on Instagram</div>
+              <div class="text-xs font-black leading-tight">@raahul.108</div>
+              <div class="text-[10px] opacity-75">Official Developer Instagram</div>
             </div>
           </div>
-          <span class="text-xs text-amber-500 font-bold">Follow ↗</span>
+          <span class="text-xs text-amber-500 font-black">Open ↗</span>
         </a>
       </div>
 
-      <!-- Share App Option -->
-      <button onclick="shareApplication()" class="w-full py-2.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-500 border border-amber-500/30 font-bold text-xs flex items-center justify-center gap-2 transition-all">
-        <span>📲</span> Share App with Other Contractors
+      <button onclick="shareApplication()" class="w-full py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-xs flex items-center justify-center gap-2 shadow-md active:scale-95 transition-transform">
+        <span>📲</span> <span data-i18n="shareAppBtn">Share App / ऐप शेयर करें</span>
       </button>
-
     </div>
   </div>
 
   <!-- 8. LIVE IMAGE CROPPER MODAL -->
   <div id="cropperModal" class="fixed inset-0 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl flex flex-col items-center">
-      <div class="w-full flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2">
-        <h3 class="font-black text-sm">Crop Image / फोटो सेट करें</h3>
-        <button onclick="closeCropperModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
+      <div class="w-full flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2">
+        <h3 class="font-black text-sm">Crop Photo / फोटो क्रॉप करें</h3>
+        <button onclick="closeCropperModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
 
-      <div class="relative w-64 h-64 rounded-2xl overflow-hidden bg-black/60 border border-white/20 touch-none flex items-center justify-center">
+      <div class="relative w-64 h-64 rounded-2xl overflow-hidden bg-black border border-white/20 touch-none flex items-center justify-center">
         <canvas id="cropCanvas" width="256" height="256" class="cursor-grab active:cursor-grabbing"></canvas>
         <div class="absolute inset-0 pointer-events-none rounded-full border-2 border-amber-500/80 shadow-[0_0_0_9999px_rgba(0,0,0,0.55)]"></div>
       </div>
 
       <div class="w-full space-y-1">
-        <div class="flex justify-between text-[10px] text-zinc-400 font-bold uppercase">
-          <span>Zoom</span>
+        <div class="flex justify-between text-[10px] opacity-75 font-bold uppercase">
+          <span>Zoom / ज़ूम</span>
           <span id="zoomValueText">1.0x</span>
         </div>
         <input type="range" id="cropZoomSlider" min="0.5" max="3" step="0.05" value="1" oninput="handleZoomChange(this.value)" class="w-full accent-amber-500 cursor-pointer" />
       </div>
 
       <div class="w-full flex gap-2 pt-1">
-        <button onclick="closeCropperModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">
+        <button type="button" onclick="closeCropperModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">
           Cancel
         </button>
-        <button onclick="saveCroppedImageResult()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-black text-xs shadow active:scale-95 transition-transform">
-          Apply & Save
+        <button type="button" onclick="saveCroppedImageResult()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-black text-xs shadow active:scale-95 transition-transform">
+          Crop & Set Photo
         </button>
       </div>
     </div>
@@ -527,18 +519,18 @@
   <!-- 9. MULTI-SELECT CARRY FORWARD LABOURS MODAL -->
   <div id="carryModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90vh] flex flex-col">
-      <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2 shrink-0">
+      <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2 shrink-0">
         <div>
           <h3 class="font-black text-sm flex items-center gap-1.5">
-            <span>⚡</span> Carry Workers to Current Month
+            <span>⚡</span> Select Workers for Next Month
           </h3>
-          <p class="text-[10px] text-zinc-400">Select workers you want to continue with</p>
+          <p class="text-[10px] opacity-70">Choose which workers continue on this site</p>
         </div>
-        <button onclick="closeCarrySelectModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
+        <button onclick="closeCarrySelectModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
 
       <div class="flex justify-between items-center text-xs shrink-0 pt-1">
-        <span class="text-zinc-400" id="carrySelectCount">Selected: 0</span>
+        <span class="opacity-75 font-bold" id="carrySelectCount">Selected: 0</span>
         <button onclick="toggleSelectAllCarry()" class="text-amber-500 font-bold text-xs hover:underline">
           Select All / सभी चुनें
         </button>
@@ -546,12 +538,12 @@
 
       <div id="carryWorkersList" class="flex-1 overflow-y-auto space-y-2 pr-1"></div>
 
-      <div class="pt-2 border-t border-zinc-200 dark:border-white/10 shrink-0 flex gap-2">
+      <div class="pt-2 border-t border-zinc-300 dark:border-white/10 shrink-0 flex gap-2">
         <button onclick="closeCarrySelectModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">
           Cancel
         </button>
         <button onclick="executeCarryForwardSelected()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 text-xs font-black shadow active:scale-95 transition-transform">
-          Add Selected Workers
+          Carry Selected Workers
         </button>
       </div>
     </div>
@@ -560,27 +552,32 @@
   <!-- 10. DATE-WISE HAJRI BOOK MODAL -->
   <div id="hajriBookModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-lg w-full p-5 space-y-4 shadow-2xl max-h-[92vh] flex flex-col">
-      <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2 shrink-0">
+      <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2 shrink-0">
         <div>
           <h3 class="font-black text-sm flex items-center gap-1.5">
-            <span>📖</span> Daily Hajri Book / दैनिक हाजिरी बही
+            <span>📖</span> Daily Hajri Book / दैनिक हाजिरी रजिस्टर
           </h3>
-          <p class="text-[10px] text-zinc-400">Date-wise attendance recording for all workers</p>
+          <p class="text-[10px] opacity-70">Tap P (Present), H (Half), or A (Absent) date-wise</p>
         </div>
-        <button onclick="closeHajriBookModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
+        <button onclick="closeHajriBookModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
 
-      <div class="flex items-center gap-2 bg-black/5 dark:bg-black/30 p-2 rounded-2xl border border-zinc-200 dark:border-white/10 shrink-0">
-        <span class="text-xs font-bold text-zinc-400">Date / तारीख:</span>
-        <input type="date" id="hajriDateInput" onchange="renderDailyHajriSheet()" class="app-input flex-1 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none" />
+      <div class="flex items-center justify-between gap-2 bg-black/5 dark:bg-black/30 p-2 rounded-2xl border border-zinc-300 dark:border-white/10 shrink-0">
+        <button onclick="shiftHajriDate(-1)" class="px-3 py-1.5 rounded-xl ios-glass text-xs font-bold active:scale-90">◀ Prev</button>
+        <input type="date" id="hajriDateInput" onchange="renderDailyHajriSheet()" class="app-input flex-1 rounded-xl px-2.5 py-1.5 text-xs font-bold text-center focus:outline-none" />
+        <button onclick="shiftHajriDate(1)" class="px-3 py-1.5 rounded-xl ios-glass text-xs font-bold active:scale-90">Next ▶</button>
       </div>
 
-      <div id="hajriWorkersContainer" class="flex-1 overflow-y-auto space-y-2 pr-1"></div>
+      <div class="flex items-center justify-between text-xs px-1 shrink-0">
+        <span class="text-[11px] opacity-75 font-bold" id="hajriDaySummary">Present: 0 | Half: 0 | Absent: 0</span>
+        <button onclick="markAllWorkersToday('P')" class="text-[11px] text-emerald-500 font-bold hover:underline">✓ Mark All Present</button>
+      </div>
 
-      <div class="pt-2 border-t border-zinc-200 dark:border-white/10 shrink-0 flex justify-between items-center">
-        <span class="text-[11px] text-zinc-400" id="hajriDaySummary">P: 0 | H: 0 | A: 0</span>
-        <button onclick="closeHajriBookModal()" class="px-4 py-2 bg-amber-500 text-zinc-950 font-bold text-xs rounded-xl shadow">
-          Done / सुरक्षित हुआ
+      <div id="hajriWorkersContainer" class="flex-1 overflow-y-auto space-y-2.5 pr-1"></div>
+
+      <div class="pt-2 border-t border-zinc-300 dark:border-white/10 shrink-0 flex justify-end">
+        <button onclick="closeHajriBookModal()" class="w-full py-2.5 bg-amber-500 text-zinc-950 font-black text-xs rounded-xl shadow">
+          Save & Close Hajri Book / सेव करें
         </button>
       </div>
     </div>
@@ -589,17 +586,17 @@
   <!-- 11. INPUT FORMS MODAL -->
   <div id="formModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2">
+      <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2">
         <h3 id="formModalTitle" class="font-bold text-base">Add Entry</h3>
-        <button onclick="closeFormModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
+        <button onclick="closeFormModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
 
-      <!-- Add Labour Form (Direct Image Persistence Fix) -->
+      <!-- Add Labour Form -->
       <form id="labourForm" onsubmit="saveLabour(event)" class="space-y-3 hidden">
         <div>
           <input type="text" id="lName" list="knownLaboursList" onchange="autoFillKnownLabour(this.value)" required placeholder="Labour Name / नाम (e.g. Ramesh)" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
           <datalist id="knownLaboursList"></datalist>
-          <span class="text-[10px] text-zinc-500">Type or pick from previous workers to auto-fill.</span>
+          <span class="text-[10px] opacity-70">Type name or pick from previous workers.</span>
         </div>
 
         <select id="lCategory" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none">
@@ -612,41 +609,47 @@
         
         <div class="grid grid-cols-2 gap-2">
           <div>
-            <label class="text-[10px] font-bold text-zinc-500 uppercase">Daily Rate / दिहाड़ी (₹)</label>
+            <label class="text-[10px] font-bold opacity-75 uppercase">Daily Wage / दिहाड़ी (₹)</label>
             <input type="number" id="lDailyRate" required min="1" placeholder="₹ per attendance" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-0.5" />
           </div>
           <div>
-            <label class="text-[10px] font-bold text-zinc-500 uppercase">Advance / एडवांस (₹)</label>
-            <input type="number" id="lAdvance" required min="0" placeholder="Initial Advance ₹" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-0.5" />
+            <label class="text-[10px] font-bold opacity-75 uppercase">Advance / एडवांस (₹)</label>
+            <input type="number" id="lAdvance" required min="0" value="0" placeholder="Initial Advance ₹" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-0.5" />
           </div>
         </div>
         
-        <!-- Dual Camera / Gallery Capture with Image Bind -->
-        <div class="space-y-1.5">
-          <div class="flex items-center justify-between text-[10px] text-zinc-500 font-bold uppercase">
-            <span>Worker Photo / मजदूर फोटो:</span>
-            <span id="lPhotoStatus" class="text-amber-500 font-bold">None</span>
+        <div class="space-y-2 bg-black/5 dark:bg-black/20 p-3 rounded-2xl border border-zinc-300 dark:border-white/10">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <div id="lPhotoPreviewBox" class="w-11 h-11 rounded-full bg-amber-500/15 border border-amber-500/40 flex items-center justify-center overflow-hidden text-sm shrink-0">
+                👷
+              </div>
+              <div>
+                <span class="text-xs font-bold block">Worker Photo / मजदूर फोटो</span>
+                <span id="lPhotoStatus" class="text-[10px] text-amber-500 font-bold">No photo selected</span>
+              </div>
+            </div>
           </div>
-          <div class="grid grid-cols-2 gap-2">
-            <label class="flex items-center justify-center gap-1.5 border border-dashed border-amber-500/40 rounded-xl p-2.5 text-xs font-bold text-amber-500 cursor-pointer bg-amber-500/5 hover:bg-amber-500/10 active:scale-95">
-              <span>📸 Camera</span>
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <label class="flex items-center justify-center gap-1.5 border border-amber-500/40 rounded-xl p-2 text-xs font-bold text-amber-500 cursor-pointer bg-amber-500/10 hover:bg-amber-500/20 active:scale-95">
+              <span>📸 Take Photo</span>
               <input type="file" accept="image/*" capture="environment" class="hidden" onchange="initiateCropFromFile(this, 'labourPhoto')" />
             </label>
-            <label class="flex items-center justify-center gap-1.5 border border-dashed border-zinc-300 dark:border-white/20 rounded-xl p-2.5 text-xs font-bold text-zinc-400 cursor-pointer bg-black/5 dark:bg-white/5 hover:bg-white/10 active:scale-95">
-              <span>📁 Gallery</span>
+            <label class="flex items-center justify-center gap-1.5 border border-zinc-400 dark:border-white/20 rounded-xl p-2 text-xs font-bold cursor-pointer bg-black/5 dark:bg-white/5 hover:bg-white/10 active:scale-95">
+              <span>📁 Choose File</span>
               <input type="file" accept="image/*" class="hidden" onchange="initiateCropFromFile(this, 'labourPhoto')" />
             </label>
           </div>
         </div>
         
-        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm shadow">Save Labour / सेव करें</button>
+        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black py-3 rounded-xl text-sm shadow">Save Labour / सेव करें</button>
       </form>
 
-      <!-- Add Expense Form with Voice Dictation Feature -->
+      <!-- Add Expense Form with Upgraded Voice Mic UI -->
       <form id="expenseForm" onsubmit="saveExpense(event)" class="space-y-3 hidden">
         <div class="relative">
-          <input type="text" id="eTitle" required placeholder="Description (ऑटो किराया / चाय / नाश्ता)" class="app-input w-full rounded-xl pl-3 pr-10 py-2.5 text-sm focus:outline-none" />
-          <button type="button" onclick="startVoiceExpenseInput()" class="absolute right-2.5 top-2.5 text-amber-500 hover:scale-110 active:scale-95 transition-transform" title="Speak Expense">
+          <input type="text" id="eTitle" required placeholder="Tap 🎤 or type (e.g. ऑटो किराया 200)" class="app-input w-full rounded-xl pl-3 pr-10 py-2.5 text-sm focus:outline-none" />
+          <button type="button" onclick="startVoiceExpenseInput()" class="absolute right-2.5 top-2 text-lg hover:scale-110 active:scale-95 transition-transform" title="Speak Expense">
             🎤
           </button>
         </div>
@@ -661,41 +664,47 @@
           <input type="number" id="eAmount" required min="0" placeholder="Amount ₹" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none" />
           <input type="text" id="eSpentFor" placeholder="Paid For (किसके लिए)" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none" />
         </div>
-        <label class="flex items-center justify-center border-2 border-dashed border-zinc-300 dark:border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-black/5 dark:hover:bg-white/5">
+        <label class="flex items-center justify-center border-2 border-dashed border-zinc-400 dark:border-white/20 rounded-xl px-3 py-3 text-xs font-bold cursor-pointer hover:bg-black/5 dark:hover:bg-white/5">
           <span id="eFileLabel">📎 Upload Slip / Bill (PDF, Word, Excel, Image)</span>
           <input type="file" id="eFile" accept=".pdf,.doc,.docx,.xls,.xlsx,image/*" class="hidden" onchange="previewUniversalFile('eFile','eFileLabel')" />
         </label>
-        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm shadow">Save Expense</button>
+        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black py-3 rounded-xl text-sm shadow">Save Expense</button>
       </form>
 
-      <!-- Add Bill Form with Creation Date -->
+      <!-- Add Bill Form -->
       <form id="billForm" onsubmit="saveBill(event)" class="space-y-3 hidden">
         <input type="text" id="bTitle" required placeholder="Company / Work Name" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
         
         <div class="grid grid-cols-2 gap-2">
           <div>
-            <label class="text-[10px] uppercase font-bold text-zinc-500">Bill Date / बिल तारीख</label>
+            <label class="text-[10px] uppercase font-bold opacity-75">Bill Adding Date / बिल तारीख</label>
             <input type="date" id="bDate" required class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-0.5" />
           </div>
           <div>
-            <label class="text-[10px] uppercase font-bold text-zinc-500">Amount / राशि ₹</label>
+            <label class="text-[10px] uppercase font-bold opacity-75">Amount / राशि ₹</label>
             <input type="number" id="bAmount" required min="0" placeholder="Amount ₹" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-0.5" />
           </div>
         </div>
 
-        <div>
-          <label class="text-[10px] uppercase font-bold text-zinc-500">Initial Status / स्थिति</label>
-          <select id="bStatus" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-0.5">
-            <option value="Pending">Pending (बाकी)</option>
-            <option value="Received">Received (प्राप्त)</option>
-          </select>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-[10px] uppercase font-bold opacity-75">Bill Status / स्थिति</label>
+            <select id="bStatus" onchange="toggleBillReceivedDateField(this.value)" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-0.5">
+              <option value="Pending">Pending (बाकी)</option>
+              <option value="Received">Received (प्राप्त)</option>
+            </select>
+          </div>
+          <div id="bReceivedDateWrapper" class="hidden">
+            <label class="text-[10px] uppercase font-bold text-emerald-500">Received Date / प्राप्त तारीख</label>
+            <input type="date" id="bReceivedDateInput" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-0.5" />
+          </div>
         </div>
 
-        <label class="flex items-center justify-center border-2 border-dashed border-zinc-300 dark:border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-black/5 dark:hover:bg-white/5">
+        <label class="flex items-center justify-center border-2 border-dashed border-zinc-400 dark:border-white/20 rounded-xl px-3 py-3 text-xs font-bold cursor-pointer hover:bg-black/5 dark:hover:bg-white/5">
           <span id="bFileLabel">📄 Upload Company Bill (Word, Excel, PDF, Image)</span>
           <input type="file" id="bFile" accept=".pdf,.doc,.docx,.xls,.xlsx,image/*" class="hidden" onchange="previewUniversalFile('bFile','bFileLabel')" />
         </label>
-        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm shadow">Save Company Bill</button>
+        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-black py-3 rounded-xl text-sm shadow">Save Company Bill</button>
       </form>
     </div>
   </div>
@@ -703,35 +712,47 @@
   <!-- 12. ADVANCE MODAL -->
   <div id="advanceModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl">
-      <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2">
+      <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2">
         <div>
           <h3 class="font-black text-sm" id="advWorkerName">Add Worker Advance</h3>
-          <span class="text-[10px] text-zinc-500">नया एडवांस व तारीख दर्ज करें</span>
+          <span class="text-[10px] opacity-75">नया एडवांस, तारीख व माध्यम दर्ज करें</span>
         </div>
-        <button onclick="closeAdvanceModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
+        <button onclick="closeAdvanceModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
 
       <form onsubmit="submitExtraAdvance(event)" class="space-y-3">
         <input type="hidden" id="advLabourId" />
-        <div>
-          <label class="text-[10px] uppercase font-bold text-zinc-500">Amount / राशि ₹</label>
-          <input type="number" id="advAmount" required min="1" placeholder="₹ Amount given" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-1" />
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-[10px] uppercase font-bold opacity-75">Amount / राशि ₹</label>
+            <input type="number" id="advAmount" required min="1" placeholder="₹ Amount" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-1" />
+          </div>
+          <div>
+            <label class="text-[10px] uppercase font-bold opacity-75">Date / तारीख</label>
+            <input type="date" id="advDate" required class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-1" />
+          </div>
         </div>
-        <div>
-          <label class="text-[10px] uppercase font-bold text-zinc-500">Date / तारीख</label>
-          <input type="date" id="advDate" required class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-1" />
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-[10px] uppercase font-bold opacity-75">Mode / माध्यम</label>
+            <select id="advMode" class="app-input w-full rounded-xl px-2.5 py-2 text-xs font-bold focus:outline-none mt-1">
+              <option value="💵 Cash">💵 Cash (नकद)</option>
+              <option value="📱 UPI/GPay">📱 UPI / GPay</option>
+              <option value="🏦 Bank">🏦 Bank Transfer</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[10px] uppercase font-bold opacity-75">Note / विवरण</label>
+            <input type="text" id="advNote" placeholder="e.g. राशन / घर खर्च" class="app-input w-full rounded-xl px-3 py-2 text-xs focus:outline-none mt-1" />
+          </div>
         </div>
-        <div>
-          <label class="text-[10px] uppercase font-bold text-zinc-500">Note / विवरण (Optional)</label>
-          <input type="text" id="advNote" placeholder="e.g. Cash / GPay UPI" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-1" />
-        </div>
-        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-xs shadow">
+        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black py-2.5 rounded-xl text-xs shadow">
           + Add to Advance / एडवांस में जोड़ें
         </button>
       </form>
 
-      <div class="pt-2 border-t border-zinc-200 dark:border-white/10">
-        <span class="text-[10px] font-bold text-zinc-500 uppercase">Payment History / पिछले भुगतान:</span>
+      <div class="pt-2 border-t border-zinc-300 dark:border-white/10">
+        <span class="text-[10px] font-bold opacity-75 uppercase">Payment History / पिछले भुगतान:</span>
         <div id="advHistoryList" class="mt-1.5 max-h-36 overflow-y-auto space-y-1.5 text-xs"></div>
       </div>
     </div>
@@ -741,10 +762,10 @@
   <div id="authModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center">
-        <h3 class="font-extrabold text-base">लॉग इन / Register</h3>
-        <button onclick="closeAuthModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
+        <h3 class="font-extrabold text-base">लॉग इन / Cloud Sync</h3>
+        <button onclick="closeAuthModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
-      <p class="text-xs text-zinc-500">Sync all your construction accounts across devices.</p>
+      <p class="text-xs opacity-75">Backup and sync your construction data across devices.</p>
       
       <div class="space-y-3">
         <input type="email" id="authEmail" placeholder="Email Address / ईमेल" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
@@ -760,6 +781,60 @@
       <div class="flex gap-2 pt-2">
         <button onclick="connectCloud(false)" class="flex-1 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm shadow">Login</button>
         <button onclick="connectCloud(true)" class="flex-1 bg-black/10 dark:bg-white/10 hover:bg-black/20 font-bold py-2.5 rounded-xl text-sm">Register</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14. MODERN iOS VOICE ASSISTANT & PERMISSION MODAL -->
+  <div id="voiceAssistantModal" class="fixed inset-0 bg-black/80 backdrop-blur-xl hidden items-center justify-center p-4 z-50 transition-opacity">
+    <div class="ios-glass rounded-3xl max-w-xs w-full p-6 text-center space-y-4 shadow-2xl border border-amber-500/30 relative overflow-hidden">
+      <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-32 h-32 bg-amber-500/20 rounded-full blur-2xl pointer-events-none"></div>
+
+      <div class="relative w-20 h-20 mx-auto flex items-center justify-center">
+        <div id="voicePulseRing" class="absolute inset-0 rounded-full bg-amber-500/25 animate-ping hidden"></div>
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 flex items-center justify-center text-3xl shadow-lg relative z-10">
+          🎙️
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <h3 id="voiceModalTitle" class="font-black text-base tracking-tight">Voice Smart Entry</h3>
+        <p id="voiceModalSub" class="text-xs opacity-75 leading-relaxed">
+          Speak the expense name & amount clearly<br/>
+          <span class="text-amber-500 font-bold">(e.g. "ऑटो किराया 250" or "चाय नाश्ता 120")</span>
+        </p>
+      </div>
+
+      <div id="voiceLiveWave" class="hidden items-center justify-center gap-1 h-8 py-1">
+        <span class="w-1.5 h-3 bg-amber-500 rounded-full animate-bounce"></span>
+        <span class="w-1.5 h-6 bg-amber-400 rounded-full animate-bounce" style="animation-delay:0.1s"></span>
+        <span class="w-1.5 h-8 bg-amber-500 rounded-full animate-bounce" style="animation-delay:0.2s"></span>
+        <span class="w-1.5 h-5 bg-amber-400 rounded-full animate-bounce" style="animation-delay:0.3s"></span>
+        <span class="w-1.5 h-7 bg-amber-500 rounded-full animate-bounce" style="animation-delay:0.15s"></span>
+        <span class="w-1.5 h-3 bg-amber-400 rounded-full animate-bounce" style="animation-delay:0.25s"></span>
+      </div>
+
+      <div id="voiceTranscriptBox" class="hidden p-2.5 rounded-xl bg-black/20 border border-white/10 text-xs font-bold text-emerald-400"></div>
+
+      <div class="flex gap-2 pt-2">
+        <button type="button" onclick="closeVoiceModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">
+          Cancel
+        </button>
+        <button type="button" id="voiceStartBtn" onclick="triggerNativeSpeechEngine()" class="flex-1 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 text-xs font-black shadow-lg active:scale-95 transition-transform">
+          Tap to Speak
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 15. UNIVERSAL MODERN INPUT DIALOG (REPLACES RAW BROWSER PROMPTS) -->
+  <div id="customDialogModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-xs w-full p-5 space-y-4 shadow-2xl border border-white/15">
+      <h3 id="customDialogTitle" class="font-black text-sm">Enter Details</h3>
+      <input id="customDialogInput" type="text" class="app-input w-full rounded-xl px-3 py-2.5 text-sm font-bold focus:outline-none" />
+      <div class="flex gap-2">
+        <button type="button" onclick="closeCustomDialog()" class="flex-1 py-2 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Cancel</button>
+        <button type="button" id="customDialogConfirmBtn" class="flex-1 py-2 rounded-xl bg-amber-500 text-zinc-950 text-xs font-black shadow">Save</button>
       </div>
     </div>
   </div>
@@ -784,8 +859,11 @@
     const db = getFirestore(app);
 
     let currentUser = null;
+    let isSyncing = false;
     let state = {
       userProfilePhoto: null,
+      pendingSync: false,
+      lastSyncedAt: null,
       accounts: [
         { id: 'acc_main', nickname: 'Main Contractor', email: 'local@contractor', active: true }
       ],
@@ -803,21 +881,28 @@
     let cropState = { scale: 1, x: 0, y: 0, isDragging: false, startX: 0, startY: 0 };
 
     const i18n = {
-      hi: { labourDue: "कुल मजदूर बकाया", expenses: "खर्चे व किराया", bills: "कंपनी बिल", tabLabour: "👷‍♂️ मजदूर व हाजिरी", tabMonthly: "📅 मासिक बही-खाता", tabExpenses: "🛺 खर्चे व किराया", tabBills: "🧾 कंपनी बिल", audioSummaryTitle: "Site Audio Summary / बोलकर हिसाब सुनें", audioSummarySub: "एक टैप में पूरे साइट का हिसाब सुनें", listenBtn: "LISTEN / सुनें", liveSnapshot: "LIVE WORKFORCE SNAPSHOT" },
-      en: { labourDue: "Labour Due", expenses: "Expenses", bills: "Bills", tabLabour: "👷‍♂️ Labours & Attendance", tabMonthly: "📅 Monthly Ledger", tabExpenses: "🛺 Expenses & Rent", tabBills: "🧾 Company Bills", audioSummaryTitle: "Site Audio Summary", audioSummarySub: "Listen to whole site summary in one tap", listenBtn: "LISTEN", liveSnapshot: "LIVE WORKFORCE SNAPSHOT" },
-      kn: { labourDue: "ಕಾರ್ಮಿಕರ ಬಾಕಿ ಹಣ", expenses: "ಸೈಟ್ ಖರ್ಚುಗಳು", bills: "ಕಂಪನಿ ಬಿಲ್‌ಗಳು", tabLabour: "👷‍♂️ ಕಾರ್ಮಿಕರು & ಹಾಜರಾತಿ", tabMonthly: "📅 ಮಾಸಿಕ ಲೆಕ್ಕಪತ್ರ", tabExpenses: "🛺 ಖರ್ಚು & ಬಾಡಿಗೆ", tabBills: "🧾 ಕಂಪನಿ ಬಿಲ್", audioSummaryTitle: "ಸೈಟ್ ಆಡಿಯೋ ಸಾರಾಂಶ", audioSummarySub: "ಒಂದೇ ಕ್ಲಿಕ್‌ನಲ್ಲಿ ಲೆಕ್ಕ ಕೇಳಿ", listenBtn: "ಕೇಳಿ (LISTEN)", liveSnapshot: "ಕಾರ್ಮಿಕರ ಸ್ಥಿತಿ" },
-      mr: { labourDue: "एकूण मजुरी बाकी", expenses: "भाडे व खर्च", bills: "कंपनी बिल", tabLabour: "👷‍♂️ कामगार व हजेरी", tabMonthly: "📅 मासिक हिशोब", tabExpenses: "🛺 खर्च व रिक्षा भाडे", tabBills: "🧾 कंपनी बिल", audioSummaryTitle: "साइट ऑडिओ हिशोब", audioSummarySub: "एका टॅपमध्ये संपूर्ण हिशोब ऐका", listenBtn: "ऐका (LISTEN)", liveSnapshot: "कामगार सद्यस्थिती" },
-      gu: { labourDue: "બાકી મજૂરી", expenses: "ભાડું અને ખર્ચ", bills: "કંપની બિલ", tabLabour: "👷‍♂️ મજૂર અને હાજરી", tabMonthly: "📅 માસિક ખાતાવહી", tabExpenses: "🛺 ખર્ચ અને રિક્ષા ભાડું", tabBills: "🧾 કંપની બિલ", audioSummaryTitle: "સાઇટ ઓડિયો હિસાબ", audioSummarySub: "એક ટૅપમાં સમગ્ર સાઇટનો હિસાબ સાંભળો", listenBtn: "સાંભળો", liveSnapshot: "લાઇવ વર્કફોર્સ સ્નેપશોટ" },
-      ta: { labourDue: "கூலி பாக்கி", expenses: "செலவுகள்", bills: "பில்கள்", tabLabour: "👷‍♂️ தொழிலாளர்கள் & வருகை", tabMonthly: "📅 மாதாந்திர லெட்ஜர்", tabExpenses: "🛺 செலவுகள் & வாடகை", tabBills: "🧾 நிறுவன பில்கள்", audioSummaryTitle: "தள ஆடியோ சுருக்கம்", audioSummarySub: "ஒரே தட்டலில் கணக்கைக் கேளுங்கள்", listenBtn: "கேளுங்கள்", liveSnapshot: "தொழிலாளர் நிலவரம்" },
-      te: { labourDue: "కూలీ బకాయి", expenses: "ఖర్చులు", bills: "బిల్లులు", tabLabour: "👷‍♂️ కార్మికులు & హాజరు", tabMonthly: "📅 నెలవారీ లెక్కలు", tabExpenses: "🛺 ఖర్చులు & రవాణా", tabBills: "🧾 కంపెనీ బిల్లులు", audioSummaryTitle: "సైట్ ఆడియో సారాంశం", audioSummarySub: "ఒకే ట్యాప్‌లో సైట్ లెక్క వినండి", listenBtn: "వినండి", liveSnapshot: "కార్మికుల సమాచారం" },
-      bn: { labourDue: "বকেয়া মজুরি", expenses: "সাইটের খরচ", bills: "কোম্পানির বিল", tabLabour: "👷‍♂️ শ্রমিক ও হাজিরা", tabMonthly: "📅 মাসিক খাতা", tabExpenses: "🛺 খরচ ও ভাড়া", tabBills: "🧾 কোম্পানির বিল", audioSummaryTitle: "সাইট অডিও হিসাব", audioSummarySub: "এক ক্লিকেই সব হিসাব শুনুন", listenBtn: "শুনুন", liveSnapshot: "শ্রমিক স্ন্যাপশট" },
-      ml: { labourDue: "കൂലി ബാക്കി", expenses: "ചെലവുകൾ", bills: "ബില്ലുകൾ", tabLabour: "👷‍♂️ തൊഴിലാളികളും ഹാജരും", tabMonthly: "📅 പ്രതിമാസ കണക്ക്", tabExpenses: "🛺 ചെലവുകളും വാടകയും", tabBills: "🧾 കമ്പനി ബില്ലുകൾ", audioSummaryTitle: "സൈറ്റ് ഓഡിയോ വിവരണം", audioSummarySub: "ഒറ്റ ടാപ്പിൽ കണക്ക് കേൾക്കുക", listenBtn: "കേൾക്കുക", liveSnapshot: "തൊഴിലാളി നിലവാരം" },
-      pa: { labourDue: "ਬਕਾਇਆ ਮਜ਼ਦੂਰੀ", expenses: "ਖਰਚੇ ਅਤੇ ਕਿਰਾਇਆ", bills: "ਕੰਪਨੀ ਦੇ ਬਿੱਲ", tabLabour: "👷‍♂️ ਮਜ਼ਦੂਰ ਅਤੇ ਹਾਜ਼ਰੀ", tabMonthly: "📅 ਮਹੀਨਾਵਾਰ ਖਾਤਾ", tabExpenses: "🛺 ਖਰਚਾ ਅਤੇ ਕਿਰਾਇਆ", tabBills: "🧾 ਕੰਪਨੀ ਬਿੱਲ", audioSummaryTitle: "ਸਾਈਟ ਆਡੀਓ ਰਿਪੋਰਟ", audioSummarySub: "ਇੱਕ ਟੈਪ ਵਿੱਚ ਪੂਰਾ ਹਿਸਾਬ ਸੁਣੋ", listenBtn: "ਸੁਣੋ", liveSnapshot: "ਲਾਈਵ ਕਾਰਜਬਲ" }
+      hi: { labourDue: "कुल मजदूर बकाया", expenses: "खर्चे व किराया", bills: "कंपनी बिल ↗", tabLabour: "👷‍♂️ मजदूर व हाजिरी", tabMonthly: "📅 मासिक रिपोर्ट व एक्सपोर्ट", tabExpenses: "🛺 खर्चे व किराया", tabBills: "🧾 कंपनी बिल", audioSummaryTitle: "बोलकर हिसाब सुनें (Audio Summary)", audioSummarySub: "एक टैप में पूरे साइट का हिसाब सुनें", listenBtn: "LISTEN / सुनें", liveSnapshot: "LIVE WORKFORCE SNAPSHOT", settingsHeader: "⚙️ ऐप सेटिंग्स", changeLangLabel: "भाषा बदलें (Change Language)", themeLabel: "ऐप थीम चुनें", shareAppBtn: "ऐप शेयर करें (Share App)" },
+      en: { labourDue: "Labour Due", expenses: "Expenses", bills: "Bills ↗", tabLabour: "👷‍♂️ Labours & Attendance", tabMonthly: "📅 Monthly Ledger & Export", tabExpenses: "🛺 Expenses & Rent", tabBills: "🧾 Company Bills", audioSummaryTitle: "Site Audio Summary", audioSummarySub: "Listen to whole site summary in one tap", listenBtn: "LISTEN", liveSnapshot: "LIVE WORKFORCE SNAPSHOT", settingsHeader: "⚙️ App Settings", changeLangLabel: "Change Language", themeLabel: "Select App Theme", shareAppBtn: "Share App with Contractors" },
+      kn: { labourDue: "ಕಾರ್ಮಿಕರ ಬಾಕಿ ಹಣ", expenses: "ಸೈಟ್ ಖರ್ಚುಗಳು", bills: "ಕಂಪನಿ ಬಿಲ್‌ಗಳು ↗", tabLabour: "👷‍♂️ ಕಾರ್ಮಿಕರು & ಹಾಜರಾತಿ", tabMonthly: "📅 ಮಾಸಿಕ ಲೆಕ್ಕಪತ್ರ & ವರದಿ", tabExpenses: "🛺 ಖರ್ಚು & ಬಾಡಿಗೆ", tabBills: "🧾 ಕಂಪನಿ ಬಿಲ್", audioSummaryTitle: "ಸೈಟ್ ಆಡಿಯೋ ಸಾರಾಂಶ", audioSummarySub: "ಒಂದೇ ಕ್ಲಿಕ್‌ನಲ್ಲಿ ಲೆಕ್ಕ ಕೇಳಿ", listenBtn: "ಕೇಳಿ (LISTEN)", liveSnapshot: "ಕಾರ್ಮಿಕರ ಸ್ಥಿತಿ", settingsHeader: "⚙️ ಸೆಟ್ಟಿಂಗ್‌ಗಳು", changeLangLabel: "ಭಾಷೆ ಬದಲಿಸಿ", themeLabel: "ಥೀಮ್ ಆಯ್ಕೆಮಾಡಿ", shareAppBtn: "ಆಪ್ ಹಂಚಿಕೊಳ್ಳಿ" },
+      mr: { labourDue: "एकूण मजुरी बाकी", expenses: "भाडे व खर्च", bills: "कंपनी बिल ↗", tabLabour: "👷‍♂️ कामगार व हजेरी", tabMonthly: "📅 मासिक हिशोब व रिपोर्ट", tabExpenses: "🛺 खर्च व रिक्षा भाडे", tabBills: "🧾 कंपनी बिल", audioSummaryTitle: "साइट ऑडिओ हिशोब", audioSummarySub: "एका टॅपमध्ये संपूर्ण हिशोब ऐका", listenBtn: "ऐका (LISTEN)", liveSnapshot: "कामगार सद्यस्थिती", settingsHeader: "⚙️ सेटिंग्ज", changeLangLabel: "भाषा बदला", themeLabel: "थीम निवडा", shareAppBtn: "ॲप शेअर करा" },
+      gu: { labourDue: "બાકી મજૂરી", expenses: "ભાડું અને ખર્ચ", bills: "કંપની બિલ ↗", tabLabour: "👷‍♂️ મજૂર અને હાજરી", tabMonthly: "📅 માસિક ખાતાવહી", tabExpenses: "🛺 ખર્ચ અને રિક્ષા ભાડું", tabBills: "🧾 કંપની બિલ", audioSummaryTitle: "સાઇટ ઓડિયો હિસાબ", audioSummarySub: "એક ટૅપમાં સમગ્ર સાઇટનો હિસાબ સાંભળો", listenBtn: "સાંભળો", liveSnapshot: "લાઇવ વર્કફોર્સ સ્નેપશોટ", settingsHeader: "⚙️ સેટિંગ્સ", changeLangLabel: "ભાષા બદલો", themeLabel: "થીમ પસંદ કરો", shareAppBtn: "એપ શેર કરો" },
+      ta: { labourDue: "கூலி பாக்கி", expenses: "செலவுகள்", bills: "பில்கள் ↗", tabLabour: "👷‍♂️ தொழிலாளர்கள் & வருகை", tabMonthly: "📅 மாதாந்திர கணக்கு", tabExpenses: "🛺 செலவுகள் & வாடகை", tabBills: "🧾 நிறுவன பில்கள்", audioSummaryTitle: "தள ஆடியோ சுருக்கம்", audioSummarySub: "ஒரே தட்டலில் கணக்கைக் கேளுங்கள்", listenBtn: "கேளுங்கள்", liveSnapshot: "தொழிலாளர் நிலவரம்", settingsHeader: "⚙️ அமைப்புகள்", changeLangLabel: "மொழியை மாற்றவும்", themeLabel: "தீம் தேர்வு", shareAppBtn: "செயலியை பகிரவும்" },
+      te: { labourDue: "కూలీ బకాయి", expenses: "ఖర్చులు", bills: "బిల్లులు ↗", tabLabour: "👷‍♂️ కార్మికులు & హాజరు", tabMonthly: "📅 నెలవారీ లెక్కలు", tabExpenses: "🛺 ఖర్చులు & రవాణా", tabBills: "🧾 కంపెనీ బిల్లులు", audioSummaryTitle: "సైట్ ఆడియో సారాంశం", audioSummarySub: "ఒకే ట్యాప్‌లో సైట్ లెక్క వినండి", listenBtn: "వినండి", liveSnapshot: "కార్మికుల సమాచారం", settingsHeader: "⚙️ సెట్టింగులు", changeLangLabel: "భాషను మార్చండి", themeLabel: "థీమ్ ఎంచుకోండి", shareAppBtn: "యాప్ షేర్ చేయండి" },
+      bn: { labourDue: "বকেয়া মজুরি", expenses: "সাইটের খরচ", bills: "কোম্পানির বিল ↗", tabLabour: "👷‍♂️ শ্রমিক ও হাজিরা", tabMonthly: "📅 মাসিক খাতা", tabExpenses: "🛺 খরচ ও ভাড়া", tabBills: "🧾 কোম্পানির বিল", audioSummaryTitle: "সাইট অডিও হিসাব", audioSummarySub: "এক ক্লিকেই সব হিসাব শুনুন", listenBtn: "শুনুন", liveSnapshot: "শ্রমিক স্ন্যাপশট", settingsHeader: "⚙️ সেটিংস", changeLangLabel: "ভাষা পরিবর্তন করুন", themeLabel: "থিম নির্বাচন করুন", shareAppBtn: "অ্যাপ শেয়ার করুন" },
+      ml: { labourDue: "കൂലി ബാക്കി", expenses: "ചെലവുകൾ", bills: "ബില്ലുകൾ ↗", tabLabour: "👷‍♂️ തൊഴിലാളികളും ഹാജരും", tabMonthly: "📅 പ്രതിമാസ കണക്ക്", tabExpenses: "🛺 ചെലവുകളും വാടകയും", tabBills: "🧾 കമ്പനി ബില്ലുകൾ", audioSummaryTitle: "സൈറ്റ് ഓഡിയോ വിവരണം", audioSummarySub: "ഒറ്റ ടാപ്പിൽ കണക്ക് കേൾക്കുക", listenBtn: "കേൾക്കുക", liveSnapshot: "തൊഴിലാളി നിലവാരം", settingsHeader: "⚙️ ക്രമീകരണങ്ങൾ", changeLangLabel: "ഭാഷ മാറ്റുക", themeLabel: "തീം തിരഞ്ഞെടുക്കുക", shareAppBtn: "ആപ്പ് ഷെയർ ചെയ്യുക" },
+      pa: { labourDue: "ਬਕਾਇਆ ਮਜ਼ਦੂਰੀ", expenses: "ਖਰਚੇ ਅਤੇ ਕਿਰਾਇਆ", bills: "ਕੰਪਨੀ ਦੇ ਬਿੱਲ ↗", tabLabour: "👷‍♂️ ਮਜ਼ਦੂਰ ਅਤੇ ਹਾਜ਼ਰੀ", tabMonthly: "📅 ਮਹੀਨਾਵਾਰ ਖਾਤਾ", tabExpenses: "🛺 ਖਰਚਾ ਅਤੇ ਕਿਰਾਇਆ", tabBills: "🧾 ਕੰਪਨੀ ਬਿੱਲ", audioSummaryTitle: "ਸਾਈਟ ਆਡੀਓ ਰਿਪੋਰਟ", audioSummarySub: "ਇੱਕ ਟੈਪ ਵਿੱਚ ਪੂਰਾ ਹਿਸਾਬ ਸੁਣੋ", listenBtn: "ਸੁਣੋ", liveSnapshot: "ਲਾਈਵ ਕਾਰਜਬਲ", settingsHeader: "⚙️ ਸੈਟਿੰਗਾਂ", changeLangLabel: "ਭਾਸ਼ਾ ਬਦਲੋ", themeLabel: "ਥੀਮ ਚੁਣੋ", shareAppBtn: "ਐਪ ਸ਼ੇਅਰ ਕਰੋ" }
     };
     window.currentLang = localStorage.getItem('thekedaar_lang') || 'hi';
 
+    function getActiveAccountId() {
+      const activeAcc = (state.accounts || []).find(a => a.active);
+      return activeAcc ? activeAcc.id : 'acc_main';
+    }
+
     function getStorageKey() {
-      return currentUser ? `thekedaar_state_${currentUser.uid}` : 'thekedaar_state_guest';
+      const base = currentUser ? `thekedaar_uid_${currentUser.uid}` : 'thekedaar_local';
+      const activeId = localStorage.getItem('thekedaar_active_acc_id') || 'acc_main';
+      return `${base}_${activeId}`;
     }
 
     function loadLocalState() {
@@ -828,9 +913,12 @@
         if (!state.dailyHajriRecords) state.dailyHajriRecords = {};
         if (!state.accounts) state.accounts = [{ id: 'acc_main', nickname: 'Main Contractor', email: 'local@contractor', active: true }];
       } else {
+        const savedAccounts = JSON.parse(localStorage.getItem('thekedaar_global_accounts') || '[{"id":"acc_main","nickname":"Main Contractor","email":"local@contractor","active":true}]');
         state = {
           userProfilePhoto: null,
-          accounts: [{ id: 'acc_main', nickname: 'Main Contractor', email: 'local@contractor', active: true }],
+          pendingSync: false,
+          lastSyncedAt: null,
+          accounts: savedAccounts,
           sites: ['Main Site A - मुख्य साइट'],
           labours: [],
           expenses: [],
@@ -845,6 +933,7 @@
     document.getElementById('monthSelect').value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
     document.getElementById('advDate').value = now.toISOString().split('T')[0];
     document.getElementById('bDate').value = now.toISOString().split('T')[0];
+    document.getElementById('bReceivedDateInput').value = now.toISOString().split('T')[0];
     document.getElementById('hajriDateInput').value = now.toISOString().split('T')[0];
 
     window.setAppTheme = (themeName) => {
@@ -872,45 +961,59 @@
         const splash = document.getElementById('splashScreen');
         splash.style.opacity = '0';
         setTimeout(() => splash.style.display = 'none', 700);
-      }, 2300);
+      }, 2200);
     }
 
-    // Real-Time Offline-First PWA Sync Indicator
     function updateSyncStatusUI() {
       const statusEl = document.getElementById('syncStatus');
       const dotEl = document.getElementById('syncDot');
 
       if (!navigator.onLine) {
-        statusEl.innerText = "🔴 Offline (Auto-saving locally)";
-        statusEl.className = "text-[10px] text-rose-500 font-semibold";
-        dotEl.className = "absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-rose-500 border-2 border-black";
+        statusEl.innerText = state.pendingSync ? "🟠 Offline (Changes Queued)" : "🔴 Offline (Saved Locally)";
+        statusEl.className = "text-[10px] px-2 py-0.5 rounded-md bg-rose-500/15 text-rose-500 font-bold border border-rose-500/30";
+        dotEl.className = "absolute bottom-0 right-0 w-3 h-3 rounded-full bg-rose-500 border-2 border-black animate-pulse";
+      } else if (isSyncing) {
+        statusEl.innerText = "🔵 Syncing to Cloud...";
+        statusEl.className = "text-[10px] px-2 py-0.5 rounded-md bg-sky-500/15 text-sky-400 font-bold border border-sky-500/30";
+        dotEl.className = "absolute bottom-0 right-0 w-3 h-3 rounded-full bg-sky-400 border-2 border-black animate-spin";
       } else if (currentUser) {
         statusEl.innerText = `🟢 Cloud Synced (${currentUser.email.split('@')[0]})`;
-        statusEl.className = "text-[10px] text-emerald-500 font-semibold";
-        dotEl.className = "absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-black";
+        statusEl.className = "text-[10px] px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-500 font-bold border border-emerald-500/20";
+        dotEl.className = "absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-black";
       } else {
-        statusEl.innerText = "🟡 Local Mode (Ready to Sync)";
-        statusEl.className = "text-[10px] text-amber-500 font-semibold";
-        dotEl.className = "absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-amber-500 border-2 border-black";
+        statusEl.innerText = "🟡 Local Storage";
+        statusEl.className = "text-[10px] px-2 py-0.5 rounded-md bg-amber-500/15 text-amber-500 font-bold border border-amber-500/20";
+        dotEl.className = "absolute bottom-0 right-0 w-3 h-3 rounded-full bg-amber-500 border-2 border-black";
       }
     }
 
-    window.addEventListener('online', () => {
+    window.addEventListener('online', async () => {
       updateSyncStatusUI();
-      persistState();
+      if (state.pendingSync && currentUser) await persistState();
     });
     window.addEventListener('offline', updateSyncStatusUI);
 
     async function persistState() {
+      state.pendingSync = true;
       localStorage.setItem(getStorageKey(), JSON.stringify(state));
+      localStorage.setItem('thekedaar_global_accounts', JSON.stringify(state.accounts));
       renderAll();
+
       if (navigator.onLine && db && currentUser) {
         try {
-          await setDoc(doc(db, "users", currentUser.uid), state);
+          isSyncing = true;
+          updateSyncStatusUI();
+          await setDoc(doc(db, "users", `${currentUser.uid}_${getActiveAccountId()}`), state);
+          state.pendingSync = false;
+          localStorage.setItem(getStorageKey(), JSON.stringify(state));
+          isSyncing = false;
           updateSyncStatusUI();
         } catch (e) {
-          console.error("Cloud push error:", e);
+          isSyncing = false;
+          updateSyncStatusUI();
         }
+      } else {
+        updateSyncStatusUI();
       }
     }
 
@@ -918,28 +1021,128 @@
       return new Promise((resolve) => {
         if (!file) return resolve(null);
         const reader = new FileReader();
-        const fileType = file.name.split('.').pop().toLowerCase();
         reader.onload = (e) => {
-          resolve({
-            name: file.name,
-            ext: fileType,
-            dataUrl: e.target.result
-          });
+          resolve({ name: file.name, ext: file.name.split('.').pop().toLowerCase(), dataUrl: e.target.result });
         };
         reader.readAsDataURL(file);
       });
     }
 
-    // Modal Visibility Controllers
-    window.openProfileModal = () => {
-      renderAccountIdsList();
-      document.getElementById('profileModal').classList.replace('hidden', 'flex');
-    };
-    window.closeProfileModal = () => document.getElementById('profileModal').classList.replace('flex', 'hidden');
+    // Modern Custom Dialog Engine (No Raw Browser Prompts)
+    window.openCustomDialog = ({ title, defaultValue = '', inputType = 'text', placeholder = '', onConfirm }) => {
+      const modal = document.getElementById('customDialogModal');
+      const titleEl = document.getElementById('customDialogTitle');
+      const inp = document.getElementById('customDialogInput');
+      const btn = document.getElementById('customDialogConfirmBtn');
 
+      titleEl.innerText = title;
+      inp.type = inputType;
+      inp.value = defaultValue;
+      inp.placeholder = placeholder;
+      modal.classList.replace('hidden', 'flex');
+      setTimeout(() => inp.focus(), 80);
+
+      btn.onclick = () => {
+        const val = inp.value.trim();
+        modal.classList.replace('flex', 'hidden');
+        if (onConfirm) onConfirm(val);
+      };
+    };
+
+    window.closeCustomDialog = () => {
+      document.getElementById('customDialogModal').classList.replace('flex', 'hidden');
+    };
+
+    // Modern iOS Voice Assistant Card & Mic Permission UI
+    let activeRecognition = null;
+
+    window.startVoiceExpenseInput = () => {
+      const modal = document.getElementById('voiceAssistantModal');
+      const pulse = document.getElementById('voicePulseRing');
+      const wave = document.getElementById('voiceLiveWave');
+      const transcriptBox = document.getElementById('voiceTranscriptBox');
+      const startBtn = document.getElementById('voiceStartBtn');
+      const titleEl = document.getElementById('voiceModalTitle');
+      const subEl = document.getElementById('voiceModalSub');
+
+      modal.classList.replace('hidden', 'flex');
+      transcriptBox.classList.add('hidden');
+
+      const alreadyGranted = localStorage.getItem('thekedaar_mic_granted') === 'true';
+      if (alreadyGranted) {
+        triggerNativeSpeechEngine();
+      } else {
+        titleEl.innerText = "Enable Voice Assistant / माइक अनुमति";
+        subEl.innerHTML = "Allow microphone access once so you can speak site expenses hands-free.<br/><span class='text-amber-500 font-bold text-[10px]'>Select 'Allow while visiting the site' on next prompt</span>";
+        pulse.classList.add('hidden');
+        wave.classList.replace('flex', 'hidden');
+        startBtn.classList.remove('hidden');
+        startBtn.innerText = "Allow & Speak 🎙️";
+      }
+    };
+
+    window.triggerNativeSpeechEngine = () => {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        closeVoiceModal();
+        return alert("Voice recognition is supported in Chrome & Safari.");
+      }
+
+      const pulse = document.getElementById('voicePulseRing');
+      const wave = document.getElementById('voiceLiveWave');
+      const transcriptBox = document.getElementById('voiceTranscriptBox');
+      const startBtn = document.getElementById('voiceStartBtn');
+      const titleEl = document.getElementById('voiceModalTitle');
+      const subEl = document.getElementById('voiceModalSub');
+
+      activeRecognition = new SpeechRecognition();
+      activeRecognition.lang = window.currentLang === 'en' ? 'en-IN' : 'hi-IN';
+      activeRecognition.interimResults = true;
+
+      activeRecognition.onstart = () => {
+        localStorage.setItem('thekedaar_mic_granted', 'true');
+        titleEl.innerText = "Listening... बोलिए...";
+        subEl.innerHTML = "Example: <b class='text-amber-500'>'ऑटो किराया 200'</b> या <b class='text-amber-500'>'चाय नाश्ता 150'</b>";
+        pulse.classList.remove('hidden');
+        wave.classList.replace('hidden', 'flex');
+        startBtn.classList.add('hidden');
+      };
+
+      activeRecognition.onresult = (event) => {
+        const transcript = Array.from(event.results).map(result => result[0].transcript).join('');
+        transcriptBox.innerText = `"${transcript}"`;
+        transcriptBox.classList.remove('hidden');
+
+        if (event.results[0].isFinal) {
+          document.getElementById('eTitle').value = transcript;
+          const numbers = transcript.match(/\d+/);
+          if (numbers) document.getElementById('eAmount').value = numbers[0];
+          setTimeout(() => closeVoiceModal(), 650);
+        }
+      };
+
+      activeRecognition.onerror = () => {
+        titleEl.innerText = "Microphone Paused";
+        subEl.innerText = "Tap below to try speaking again.";
+        pulse.classList.add('hidden');
+        wave.classList.replace('flex', 'hidden');
+        startBtn.classList.remove('hidden');
+        startBtn.innerText = "Retry 🎙️";
+      };
+
+      activeRecognition.start();
+    };
+
+    window.closeVoiceModal = () => {
+      if (activeRecognition) { try { activeRecognition.stop(); } catch (e) {} }
+      document.getElementById('voiceAssistantModal').classList.replace('flex', 'hidden');
+    };
+
+    // Modal Visibility Controllers
+    window.openProfileModal = () => { renderAccountIdsList(); document.getElementById('profileModal').classList.replace('hidden', 'flex'); };
+    window.closeProfileModal = () => document.getElementById('profileModal').classList.replace('flex', 'hidden');
     window.openSettingsModal = () => document.getElementById('settingsModal').classList.replace('hidden', 'flex');
     window.closeSettingsModal = () => document.getElementById('settingsModal').classList.replace('flex', 'hidden');
-
     window.toggleLanguageAccordion = () => {
       const body = document.getElementById('langAccordionBody');
       const chev = document.getElementById('langChevron');
@@ -947,27 +1150,33 @@
       chev.innerText = body.classList.contains('hidden') ? '▼' : '▲';
     };
 
-    // Multi-Account Management with Nicknames
     window.openAddAccountPrompt = () => {
-      const nickname = prompt("Enter Nickname for this Account / आईडी का उपनाम दर्ज करें (e.g. Site Supervisor, North Wing):");
-      if (!nickname || !nickname.trim()) return;
-
-      const newId = 'acc_' + Date.now();
-      state.accounts.push({
-        id: newId,
-        nickname: nickname.trim(),
-        email: `${nickname.trim().toLowerCase().replace(/\s+/g, '')}@thekedaar.app`,
-        active: false
+      openCustomDialog({
+        title: "🏷️ New Account ID Nickname",
+        placeholder: "e.g. Site Supervisor",
+        onConfirm: (nickname) => {
+          if (!nickname) return;
+          const newId = 'acc_' + Date.now();
+          state.accounts.forEach(a => a.active = false);
+          state.accounts.push({ id: newId, nickname, email: `${nickname.toLowerCase().replace(/\s+/g,'')||'user'}@thekedaar`, active: true });
+          localStorage.setItem('thekedaar_active_acc_id', newId);
+          localStorage.setItem('thekedaar_global_accounts', JSON.stringify(state.accounts));
+          loadLocalState();
+          state.accounts = JSON.parse(localStorage.getItem('thekedaar_global_accounts'));
+          persistState();
+          renderAccountIdsList();
+        }
       });
-      persistState();
-      renderAccountIdsList();
     };
 
     window.switchActiveAccount = (accId) => {
       state.accounts.forEach(a => a.active = (a.id === accId));
-      persistState();
+      localStorage.setItem('thekedaar_active_acc_id', accId);
+      localStorage.setItem('thekedaar_global_accounts', JSON.stringify(state.accounts));
+      loadLocalState();
+      state.accounts = JSON.parse(localStorage.getItem('thekedaar_global_accounts'));
+      renderAll();
       renderAccountIdsList();
-      alert("Switched account successfully!");
     };
 
     function renderAccountIdsList() {
@@ -975,127 +1184,80 @@
       if (!state.accounts || state.accounts.length === 0) {
         state.accounts = [{ id: 'acc_main', nickname: 'Main Contractor', email: 'local@contractor', active: true }];
       }
-
       container.innerHTML = state.accounts.map(acc => `
-        <div class="flex items-center justify-between p-2 rounded-xl ${acc.active ? 'bg-amber-500/10 border border-amber-500/40' : 'bg-black/5 dark:bg-black/20'}">
+        <div class="flex items-center justify-between p-2.5 rounded-xl ${acc.active ? 'bg-amber-500/15 border border-amber-500/40' : 'bg-black/5 dark:bg-black/20'}">
           <div class="truncate">
-            <span class="text-xs font-bold block ${acc.active ? 'text-amber-500' : ''}">${acc.nickname}</span>
-            <span class="text-[9px] text-zinc-400">${acc.email}</span>
+            <span class="text-xs font-bold block ${acc.active ? 'text-amber-500' : ''}">🏷️ ${acc.nickname}</span>
+            <span class="text-[10px] opacity-65">${acc.email}</span>
           </div>
-          ${acc.active 
-            ? `<span class="text-[10px] text-emerald-500 font-bold px-2 py-0.5 rounded-full bg-emerald-500/10">Active</span>`
-            : `<button onclick="switchActiveAccount('${acc.id}')" class="text-[10px] px-2 py-1 rounded-lg bg-black/10 dark:bg-white/10 font-bold hover:bg-amber-500 hover:text-zinc-950 transition-all">Switch</button>`}
+          ${acc.active ? `<span class="text-[10px] text-emerald-500 font-bold px-2 py-0.5 rounded-full bg-emerald-500/15">Active</span>` : `<button onclick="switchActiveAccount('${acc.id}')" class="text-[10px] px-2.5 py-1 rounded-lg bg-amber-500 text-zinc-950 font-black shadow">Switch</button>`}
         </div>
       `).join('');
-
-      const activeAcc = state.accounts.find(a => a.active) || state.accounts[0];
-      document.getElementById('activeNicknameBadge').innerText = activeAcc.nickname;
-      document.getElementById('currentProfileNameText').innerText = activeAcc.nickname;
+      document.getElementById('activeNicknameBadge').innerText = (state.accounts.find(a => a.active) || {}).nickname || 'Main';
+      document.getElementById('currentProfileNameText').innerText = (state.accounts.find(a => a.active) || {}).nickname || 'Main';
     }
 
-    // Native App Share API
     window.shareApplication = async () => {
-      const shareData = {
-        title: 'ठेकेDAAR - निर्माण व मजदूर प्रबंधन',
-        text: 'Manage construction site workforce, attendance, advances, bills, and voice records with ठेकेDAAR PWA:',
-        url: window.location.href
-      };
-
       if (navigator.share) {
-        try {
-          await navigator.share(shareData);
-        } catch (err) {
-          console.log('Share canceled or dismissed');
-        }
+        try { await navigator.share({ title: 'ठेकेDAAR', text: 'Manage site workforce & attendance:', url: window.location.href }); } catch (e) {}
       } else {
         navigator.clipboard.writeText(window.location.href);
-        alert('App link copied to clipboard! Share it anywhere.');
+        alert('App link copied to clipboard!');
       }
     };
 
-    // Voice Input for Expense Form
-    window.startVoiceExpenseInput = () => {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        return alert("Speech Recognition is not supported on this browser. Use Chrome/Safari.");
-      }
-
-      const recognition = new SpeechRecognition();
-      recognition.lang = window.currentLang === 'en' ? 'en-IN' : 'hi-IN';
-      recognition.start();
-
-      const titleInput = document.getElementById('eTitle');
-      titleInput.placeholder = "Listening... बोलिए...";
-
-      recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        titleInput.value = transcript;
-        titleInput.placeholder = "Description (ऑटो किराया / चाय / नाश्ता)";
-      };
-
-      recognition.onerror = () => {
-        titleInput.placeholder = "Description (ऑटो किराया / चाय / नाश्ता)";
-      };
-    };
-
-    // One-Tap WhatsApp Wage Slip Generator
     window.shareWorkerSlipWhatsApp = (workerId) => {
       const l = state.labours.find(x => x.id === workerId);
       if (!l) return;
-
       const rate = l.dailyRate || 500;
-      const effectiveDays = (l.presentDays || 0) + ((l.halfDays || 0) * 0.5);
-      const earned = Math.round(rate * effectiveDays);
-      const otHours = l.otHours || 0;
-      const otPay = Math.round((rate / 8) * otHours);
-      const totalEarned = earned + otPay;
-      const net = totalEarned - (l.advance || 0);
-
-      const activeSite = document.getElementById('siteSelect').value;
-      const activeMonth = document.getElementById('monthSelect').value;
-
-      const message = `*ठेकेDAAR - मजदूर सैलरी पर्ची*\n` +
-        `📅 माह: ${activeMonth} | साइट: ${activeSite}\n` +
-        `👷 नाम: ${l.name} (${l.category})\n` +
-        `--------------------------\n` +
-        `• दैनिक दर: ₹${rate}/दिन\n` +
-        `• कुल हाजिरी: ${l.presentDays || 0} दिन (हाफ: ${l.halfDays || 0})\n` +
-        (otHours > 0 ? `• ओवर-टाइम (OT): ${otHours} घंटे (+₹${otPay})\n` : ``) +
-        `• कुल कमाई: ₹${totalEarned}\n` +
-        `• काटा गया एडवांस: ₹${l.advance || 0}\n` +
-        `--------------------------\n` +
-        `*💰 कुल बाकी भुगतान (Net Pay): ₹${net}*`;
-
-      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
-      window.open(whatsappUrl, '_blank');
+      const eff = (l.presentDays || 0) + ((l.halfDays || 0) * 0.5);
+      const earned = Math.round(rate * eff) + Math.round((rate / 8) * (l.otHours || 0));
+      const net = earned - (l.advance || 0);
+      const msg = `*ठेकेDAAR - मजदूर हिसाब*\n👷 नाम: *${l.name}*\n• हाजिरी: ${l.presentDays || 0}P, ${l.halfDays || 0}H\n• शुद्ध बाकी: ₹${net}`;
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
     };
 
-    // Overtime (OT) Controller
+    window.exportMonthlyExcelCSV = () => {
+      const activeSite = document.getElementById('siteSelect').value;
+      const activeMonth = document.getElementById('monthSelect').value;
+      const workers = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth);
+      let csv = "\uFEFFName,Category,Rate,Present,Half,OT,Net\n";
+      workers.forEach(l => {
+        const rate = l.dailyRate || 500;
+        const net = Math.round(rate * ((l.presentDays || 0) + ((l.halfDays || 0) * 0.5))) - (l.advance || 0);
+        csv += `"${l.name}","${l.category}",${rate},${l.presentDays || 0},${l.halfDays || 0},${l.otHours || 0},${net}\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+      a.download = `Thekedaar_${activeSite}_${activeMonth}.csv`; a.click();
+    };
+
+    window.printMonthlyPDFReport = () => window.print();
+
     window.addWorkerOvertime = (workerId) => {
       const l = state.labours.find(x => x.id === workerId);
       if (!l) return;
-      const currentOT = l.otHours || 0;
-      const extra = prompt(`Add extra Overtime (OT) hours for ${l.name} (Current: ${currentOT} hrs):`, "2");
-      if (extra !== null && !isNaN(extra) && Number(extra) >= 0) {
-        l.otHours = currentOT + Number(extra);
-        persistState();
-      }
+      openCustomDialog({
+        title: `⏰ Overtime Hours - ${l.name}`,
+        inputType: "number",
+        defaultValue: l.otHours || 0,
+        onConfirm: (val) => {
+          if (val !== '' && !isNaN(val)) { l.otHours = Number(val); persistState(); }
+        }
+      });
     };
 
     // Cropper Engine
     window.initiateCropFromFile = (input, targetType) => {
-      const file = input.files[0];
+      const file = input.files && input.files[0];
       if (!file) return;
-
       currentCropperTarget = targetType;
       const reader = new FileReader();
       reader.onload = (e) => {
+        cropImg = new Image();
         cropImg.onload = () => {
-          cropState.scale = 1;
-          cropState.x = 0;
-          cropState.y = 0;
+          cropState.scale = 1; cropState.x = 0; cropState.y = 0;
           document.getElementById('cropZoomSlider').value = 1;
-          document.getElementById('zoomValueText').innerText = '1.0x';
           document.getElementById('cropperModal').classList.replace('hidden', 'flex');
           drawCropCanvas();
         };
@@ -1106,85 +1268,41 @@
     };
 
     window.closeCropperModal = () => document.getElementById('cropperModal').classList.replace('flex', 'hidden');
-
-    window.handleZoomChange = (val) => {
-      cropState.scale = parseFloat(val);
-      document.getElementById('zoomValueText').innerText = `${cropState.scale.toFixed(1)}x`;
-      drawCropCanvas();
-    };
+    window.handleZoomChange = (val) => { cropState.scale = parseFloat(val); drawCropCanvas(); };
 
     function drawCropCanvas() {
       const canvas = document.getElementById('cropCanvas');
       const ctx = canvas.getContext('2d');
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
       if (!cropImg.src) return;
-
       const baseScale = Math.max(canvas.width / cropImg.width, canvas.height / cropImg.height);
       const curScale = baseScale * cropState.scale;
-      const drawW = cropImg.width * curScale;
-      const drawH = cropImg.height * curScale;
-
-      const drawX = (canvas.width - drawW) / 2 + cropState.x;
-      const drawY = (canvas.height - drawH) / 2 + cropState.y;
-
-      ctx.drawImage(cropImg, drawX, drawY, drawW, drawH);
+      ctx.drawImage(cropImg, (canvas.width - cropImg.width * curScale) / 2 + cropState.x, (canvas.height - cropImg.height * curScale) / 2 + cropState.y, cropImg.width * curScale, cropImg.height * curScale);
     }
 
     const canvas = document.getElementById('cropCanvas');
-    const startDrag = (clientX, clientY) => {
-      cropState.isDragging = true;
-      cropState.startX = clientX - cropState.x;
-      cropState.startY = clientY - cropState.y;
-    };
-    const moveDrag = (clientX, clientY) => {
-      if (!cropState.isDragging) return;
-      cropState.x = clientX - cropState.startX;
-      cropState.y = clientY - cropState.startY;
-      drawCropCanvas();
-    };
-    const endDrag = () => { cropState.isDragging = false; };
-
-    canvas.addEventListener('mousedown', e => startDrag(e.clientX, e.clientY));
-    window.addEventListener('mousemove', e => moveDrag(e.clientX, e.clientY));
-    window.addEventListener('mouseup', endDrag);
-
-    canvas.addEventListener('touchstart', e => {
-      if (e.touches.length === 1) startDrag(e.touches[0].clientX, e.touches[0].clientY);
-    });
-    canvas.addEventListener('touchmove', e => {
-      if (e.touches.length === 1) {
-        moveDrag(e.touches[0].clientX, e.touches[0].clientY);
-        e.preventDefault();
-      }
-    }, { passive: false });
-    canvas.addEventListener('touchend', endDrag);
+    let isDragging = false, startX = 0, startY = 0;
+    canvas.addEventListener('mousedown', e => { isDragging = true; startX = e.clientX - cropState.x; startY = e.clientY - cropState.y; });
+    window.addEventListener('mousemove', e => { if (isDragging) { cropState.x = e.clientX - startX; cropState.y = e.clientY - startY; drawCropCanvas(); } });
+    window.addEventListener('mouseup', () => { isDragging = false; });
 
     window.saveCroppedImageResult = () => {
-      const canvas = document.getElementById('cropCanvas');
-      const croppedDataUrl = canvas.toDataURL('image/jpeg', 0.85);
-
+      const cropped = document.getElementById('cropCanvas').toDataURL('image/jpeg', 0.82);
       if (currentCropperTarget === 'userProfile') {
-        state.userProfilePhoto = croppedDataUrl;
-        persistState();
-        alert("Profile photo updated successfully!");
+        state.userProfilePhoto = cropped; persistState();
       } else if (currentCropperTarget === 'labourPhoto') {
-        tempPendingLabourPhoto = croppedDataUrl;
-        document.getElementById('lPhotoStatus').innerText = '✅ Cropped Ready';
+        tempPendingLabourPhoto = cropped;
+        document.getElementById('lPhotoStatus').innerText = '✅ Cropped & Ready';
+        document.getElementById('lPhotoPreviewBox').innerHTML = `<img src="${cropped}" class="w-full h-full object-cover" />`;
       }
       closeCropperModal();
     };
 
-    // Navigation Switcher
     window.navigateTo = (viewId) => {
       ['viewHome', 'viewLabours', 'viewMonthly', 'viewExpenses', 'viewBills'].forEach(v => {
-        const el = document.getElementById(v);
-        if (el) el.classList.toggle('hidden', v !== viewId);
-        const navBtn = document.getElementById(`nav-${v}`);
-        if (navBtn) {
-          if (v === viewId) navBtn.classList.add('active');
-          else navBtn.classList.remove('active');
-        }
+        document.getElementById(v).classList.toggle('hidden', v !== viewId);
+        const btn = document.getElementById(`nav-${v}`);
+        if (btn) btn.classList.toggle('active', v === viewId);
       });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -1192,12 +1310,12 @@
     window.openFormModal = (type) => {
       document.getElementById('formModal').classList.replace('hidden', 'flex');
       ['labourForm', 'expenseForm', 'billForm'].forEach(f => document.getElementById(f).classList.add('hidden'));
-      
       if (type === 'labour') {
         document.getElementById('labourForm').classList.remove('hidden');
         document.getElementById('formModalTitle').innerText = "Add New Labour / नया मजदूर जोड़ें";
         tempPendingLabourPhoto = null;
-        document.getElementById('lPhotoStatus').innerText = 'None';
+        document.getElementById('lPhotoStatus').innerText = 'No photo selected';
+        document.getElementById('lPhotoPreviewBox').innerHTML = '👷';
         populateLabourAutocomplete();
       } else if (type === 'expense') {
         document.getElementById('expenseForm').classList.remove('hidden');
@@ -1209,220 +1327,181 @@
     };
     window.closeFormModal = () => document.getElementById('formModal').classList.replace('flex', 'hidden');
 
-    // Toggle Company Bill Status with Date of Receipt Prompt
+    window.toggleBillReceivedDateField = (val) => {
+      document.getElementById('bReceivedDateWrapper').classList.toggle('hidden', val !== 'Received');
+    };
+
     window.toggleBillStatus = (billId) => {
       const bill = (state.bills || []).find(b => b.id === billId);
       if (!bill) return;
-
       if (bill.status === 'Pending') {
-        const todayStr = new Date().toISOString().split('T')[0];
-        const receivedDate = prompt("भुगतान प्राप्त होने की तारीख दर्ज करें / Enter Payment Received Date (YYYY-MM-DD):", todayStr);
-        if (receivedDate && receivedDate.trim()) {
-          bill.status = 'Received';
-          bill.receivedDate = receivedDate.trim();
-        } else {
-          bill.status = 'Received';
-          bill.receivedDate = todayStr;
-        }
+        openCustomDialog({
+          title: "✅ Payment Received Date / प्राप्त तारीख",
+          inputType: "date",
+          defaultValue: new Date().toISOString().split('T')[0],
+          onConfirm: (dt) => { bill.status = 'Received'; bill.receivedDate = dt || new Date().toISOString().split('T')[0]; persistState(); }
+        });
       } else {
-        bill.status = 'Pending';
-        bill.receivedDate = null;
+        bill.status = 'Pending'; bill.receivedDate = null; persistState();
       }
-      persistState();
     };
 
-    // Carry Forward Multi-select Modal
     window.openCarrySelectModal = () => {
       const currentSite = document.getElementById('siteSelect').value;
       const currentMonth = document.getElementById('monthSelect').value;
       const container = document.getElementById('carryWorkersList');
-
-      const currentMonthWorkers = (state.labours || []).filter(l => l.site === currentSite && l.month === currentMonth);
-      const currentMonthNames = new Set(currentMonthWorkers.map(w => w.name.trim().toLowerCase()));
-
-      const availableWorkersMap = new Map();
-      (state.labours || []).forEach(l => {
-        if (l.site === currentSite && !currentMonthNames.has(l.name.trim().toLowerCase())) {
-          if (!availableWorkersMap.has(l.name.trim().toLowerCase())) {
-            availableWorkersMap.set(l.name.trim().toLowerCase(), l);
-          }
-        }
-      });
-
-      const candidates = Array.from(availableWorkersMap.values());
+      const curNames = new Set((state.labours || []).filter(l => l.site === currentSite && l.month === currentMonth).map(w => w.name.trim().toLowerCase()));
+      const map = new Map();
+      (state.labours || []).forEach(l => { if (!curNames.has(l.name.trim().toLowerCase())) map.set(l.name.trim().toLowerCase(), l); });
+      (state.masterLabourDirectory || []).forEach(w => { if (!curNames.has(w.name.trim().toLowerCase()) && !map.has(w.name.trim().toLowerCase())) map.set(w.name.trim().toLowerCase(), w); });
+      const candidates = Array.from(map.values());
 
       if (candidates.length === 0) {
-        container.innerHTML = `<div class="text-center py-8 text-xs text-zinc-400">No other previous workers found for site ${currentSite} to carry forward.</div>`;
+        container.innerHTML = `<div class="text-center py-8 text-xs opacity-70">All registered workers are already active in ${currentMonth}.</div>`;
         document.getElementById('carrySelectCount').innerText = `Selected: 0`;
         document.getElementById('carryModal').classList.replace('hidden', 'flex');
         return;
       }
-
-      container.innerHTML = candidates.map(w => `
-        <label class="flex items-center justify-between p-2.5 rounded-2xl bg-black/5 dark:bg-black/30 border border-zinc-200 dark:border-white/5 cursor-pointer active:scale-98 transition-transform">
+      container.innerHTML = candidates.map((w, idx) => `
+        <label class="flex items-center justify-between p-2.5 rounded-2xl bg-black/5 dark:bg-black/30 border border-zinc-300 dark:border-white/10 cursor-pointer">
           <div class="flex items-center gap-2.5 min-w-0">
-            <input type="checkbox" value="${w.id}" class="carry-worker-cb w-4 h-4 accent-amber-500 rounded" onchange="updateCarryCount()" checked />
-            ${w.photo 
-              ? `<img src="${w.photo}" class="w-9 h-9 rounded-full object-cover border border-amber-500 shrink-0" />` 
-              : `<div class="w-9 h-9 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0">👷</div>`}
+            <input type="checkbox" value="${idx}" class="carry-worker-cb w-4 h-4 accent-amber-500 rounded" onchange="updateCarryCount()" checked />
+            ${w.photo ? `<img src="${w.photo}" class="w-10 h-10 rounded-full object-cover border border-amber-500 shrink-0" />` : `<div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0">👷</div>`}
             <div class="truncate">
               <div class="font-bold text-xs truncate">${w.name}</div>
-              <div class="text-[10px] text-zinc-400">${w.category} • ₹${w.dailyRate || 500}/day</div>
+              <div class="text-[10px] opacity-70">${w.category} • ₹${w.dailyRate || 500}/day</div>
             </div>
           </div>
         </label>
       `).join('');
-
+      window._carryCandidates = candidates;
       updateCarryCount();
       document.getElementById('carryModal').classList.replace('hidden', 'flex');
     };
 
     window.closeCarrySelectModal = () => document.getElementById('carryModal').classList.replace('flex', 'hidden');
-
-    window.updateCarryCount = () => {
-      const selected = document.querySelectorAll('.carry-worker-cb:checked').length;
-      document.getElementById('carrySelectCount').innerText = `Selected: ${selected}`;
-    };
-
+    window.updateCarryCount = () => { document.getElementById('carrySelectCount').innerText = `Selected: ${document.querySelectorAll('.carry-worker-cb:checked').length}`; };
     window.toggleSelectAllCarry = () => {
-      const checkboxes = document.querySelectorAll('.carry-worker-cb');
-      const allChecked = Array.from(checkboxes).every(cb => cb.checked);
-      checkboxes.forEach(cb => cb.checked = !allChecked);
+      const cbs = document.querySelectorAll('.carry-worker-cb');
+      const all = Array.from(cbs).every(c => c.checked);
+      cbs.forEach(c => c.checked = !all);
       updateCarryCount();
     };
 
     window.executeCarryForwardSelected = () => {
       const currentSite = document.getElementById('siteSelect').value;
       const currentMonth = document.getElementById('monthSelect').value;
-      const checkedBoxes = document.querySelectorAll('.carry-worker-cb:checked');
-
-      if (checkedBoxes.length === 0) {
-        return alert("Please select at least one worker to carry forward.");
-      }
-
-      let count = 0;
-      checkedBoxes.forEach(cb => {
-        const workerId = cb.value;
-        const sourceWorker = (state.labours || []).find(w => w.id === workerId);
-        if (sourceWorker) {
+      document.querySelectorAll('.carry-worker-cb:checked').forEach(cb => {
+        const src = (window._carryCandidates || [])[Number(cb.value)];
+        if (src) {
           state.labours.unshift({
             id: Date.now().toString() + Math.random().toString().slice(2, 6),
-            site: currentSite,
-            month: currentMonth,
-            name: sourceWorker.name,
-            category: sourceWorker.category,
-            dailyRate: sourceWorker.dailyRate || 500,
-            advance: 0,
-            advanceLog: [],
-            presentDays: 0,
-            halfDays: 0,
-            otHours: 0,
-            photo: sourceWorker.photo || null
+            site: currentSite, month: currentMonth, name: src.name, category: src.category,
+            dailyRate: src.dailyRate || 500, advance: 0, advanceLog: [], presentDays: 0, halfDays: 0, otHours: 0, photo: src.photo || null
           });
-          count++;
         }
       });
-
-      closeCarrySelectModal();
-      persistState();
-      alert(`Success! Added ${count} workers to ${currentMonth} with 0 attendance.`);
-      navigateTo('viewLabours');
+      closeCarrySelectModal(); persistState(); navigateTo('viewLabours');
     };
 
-    // Daily Hajri Book
+    // Hajri Book Engine
     window.openHajriBookModal = () => {
+      const activeMonth = document.getElementById('monthSelect').value;
+      if (!document.getElementById('hajriDateInput').value.startsWith(activeMonth)) {
+        document.getElementById('hajriDateInput').value = `${activeMonth}-01`;
+      }
       document.getElementById('hajriBookModal').classList.replace('hidden', 'flex');
       renderDailyHajriSheet();
     };
     window.closeHajriBookModal = () => document.getElementById('hajriBookModal').classList.replace('flex', 'hidden');
 
-    window.renderDailyHajriSheet = () => {
-      const selectedDate = document.getElementById('hajriDateInput').value;
-      const activeSite = document.getElementById('siteSelect').value;
-      const monthPrefix = selectedDate.slice(0, 7);
+    window.shiftHajriDate = (days) => {
+      const inp = document.getElementById('hajriDateInput');
+      const d = new Date(inp.value || new Date());
+      d.setDate(d.getDate() + days);
+      inp.value = d.toISOString().split('T')[0];
+      document.getElementById('monthSelect').value = inp.value.slice(0, 7);
+      renderAll(); renderDailyHajriSheet();
+    };
 
+    window.markAllWorkersToday = (status) => {
+      const selDate = document.getElementById('hajriDateInput').value;
+      const activeSite = document.getElementById('siteSelect').value;
+      const monthPrefix = selDate.slice(0, 7);
+      if (!state.dailyHajriRecords) state.dailyHajriRecords = {};
+      if (!state.dailyHajriRecords[selDate]) state.dailyHajriRecords[selDate] = {};
+      (state.labours || []).filter(l => l.site === activeSite && l.month === monthPrefix).forEach(w => {
+        state.dailyHajriRecords[selDate][w.id] = status;
+        recalculateMonthlyAttendanceFromHajri(w.id, monthPrefix);
+      });
+      persistState(); renderDailyHajriSheet();
+    };
+
+    window.renderDailyHajriSheet = () => {
+      const selDate = document.getElementById('hajriDateInput').value;
+      const activeSite = document.getElementById('siteSelect').value;
+      const monthPrefix = selDate.slice(0, 7);
       const siteWorkers = (state.labours || []).filter(l => l.site === activeSite && l.month === monthPrefix);
       const container = document.getElementById('hajriWorkersContainer');
 
       if (!state.dailyHajriRecords) state.dailyHajriRecords = {};
-      if (!state.dailyHajriRecords[selectedDate]) state.dailyHajriRecords[selectedDate] = {};
-
-      const dayRecord = state.dailyHajriRecords[selectedDate];
+      if (!state.dailyHajriRecords[selDate]) state.dailyHajriRecords[selDate] = {};
+      const dayRec = state.dailyHajriRecords[selDate];
 
       if (siteWorkers.length === 0) {
-        container.innerHTML = `<div class="text-center py-8 text-xs text-zinc-400">No active workers found in ${activeSite} for ${monthPrefix}. Add or carry workers first.</div>`;
-        document.getElementById('hajriDaySummary').innerText = `P: 0 | H: 0 | A: 0`;
+        container.innerHTML = `<div class="text-center py-8 text-xs opacity-70">No workers found in ${activeSite} for ${monthPrefix}.</div>`;
+        document.getElementById('hajriDaySummary').innerText = `Present: 0 | Half: 0 | Absent: 0`;
         return;
       }
 
-      let pCount = 0, hCount = 0, aCount = 0;
-
+      let p = 0, h = 0, a = 0;
       container.innerHTML = siteWorkers.map(w => {
-        const status = dayRecord[w.id] || 'P';
-        if (status === 'P') pCount++;
-        else if (status === 'H') hCount++;
-        else aCount++;
-
+        const st = dayRec[w.id] || 'NONE';
+        if (st === 'P') p++; else if (st === 'H') h++; else if (st === 'A') a++;
         return `
-          <div class="bg-black/5 dark:bg-black/30 p-2.5 rounded-2xl border border-zinc-200 dark:border-white/5 flex items-center justify-between">
-            <div class="flex items-center gap-2.5 min-w-0">
-              ${w.photo 
-                ? `<img src="${w.photo}" class="w-10 h-10 rounded-full object-cover border border-amber-500 shrink-0" />` 
-                : `<div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0">👷</div>`}
+          <div class="bg-black/5 dark:bg-black/30 p-3 rounded-2xl border border-zinc-300 dark:border-white/10 flex items-center justify-between">
+            <div class="flex items-center gap-3 min-w-0">
+              ${w.photo ? `<img src="${w.photo}" class="w-11 h-11 rounded-full object-cover border-2 border-amber-500 shrink-0" />` : `<div class="w-11 h-11 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-sm shrink-0">👷</div>`}
               <div class="truncate">
                 <div class="font-bold text-xs truncate">${w.name}</div>
-                <div class="text-[10px] text-zinc-400">${w.category} • ₹${w.dailyRate || 500}/day</div>
+                <div class="text-[10px] opacity-70">${w.category} • ₹${w.dailyRate || 500}/day</div>
+                <div class="text-[10px] text-emerald-500 font-bold">Total: ${w.presentDays || 0}P | ${w.halfDays || 0}H</div>
               </div>
             </div>
-
-            <div class="flex items-center gap-1 shrink-0">
-              <button onclick="setDailyWorkerStatus('${selectedDate}', '${w.id}', 'P')" class="px-2.5 py-1.5 rounded-xl text-xs font-black transition-all ${status === 'P' ? 'bg-emerald-500 text-zinc-950 shadow' : 'bg-black/10 dark:bg-white/5 text-zinc-400'}">P</button>
-              <button onclick="setDailyWorkerStatus('${selectedDate}', '${w.id}', 'H')" class="px-2.5 py-1.5 rounded-xl text-xs font-black transition-all ${status === 'H' ? 'bg-amber-500 text-zinc-950 shadow' : 'bg-black/10 dark:bg-white/5 text-zinc-400'}">H</button>
-              <button onclick="setDailyWorkerStatus('${selectedDate}', '${w.id}', 'A')" class="px-2.5 py-1.5 rounded-xl text-xs font-black transition-all ${status === 'A' ? 'bg-rose-500 text-white shadow' : 'bg-black/10 dark:bg-white/5 text-zinc-400'}">A</button>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button onclick="setDailyWorkerStatus('${selDate}', '${w.id}', 'P')" class="w-9 h-9 rounded-xl text-xs font-black transition-all ${st === 'P' ? 'bg-emerald-500 text-zinc-950 shadow-md scale-105' : 'bg-black/10 dark:bg-white/10 opacity-70'}">P</button>
+              <button onclick="setDailyWorkerStatus('${selDate}', '${w.id}', 'H')" class="w-9 h-9 rounded-xl text-xs font-black transition-all ${st === 'H' ? 'bg-amber-500 text-zinc-950 shadow-md scale-105' : 'bg-black/10 dark:bg-white/10 opacity-70'}">H</button>
+              <button onclick="setDailyWorkerStatus('${selDate}', '${w.id}', 'A')" class="w-9 h-9 rounded-xl text-xs font-black transition-all ${st === 'A' ? 'bg-rose-500 text-white shadow-md scale-105' : 'bg-black/10 dark:bg-white/10 opacity-70'}">A</button>
             </div>
           </div>
         `;
       }).join('');
-
-      document.getElementById('hajriDaySummary').innerText = `Present: ${pCount} | Half: ${hCount} | Absent: ${aCount}`;
+      document.getElementById('hajriDaySummary').innerText = `Present: ${p} | Half: ${h} | Absent: ${a}`;
     };
 
     window.setDailyWorkerStatus = (dateStr, workerId, status) => {
       if (!state.dailyHajriRecords) state.dailyHajriRecords = {};
       if (!state.dailyHajriRecords[dateStr]) state.dailyHajriRecords[dateStr] = {};
-
       state.dailyHajriRecords[dateStr][workerId] = status;
-
-      const monthPrefix = dateStr.slice(0, 7);
-      recalculateMonthlyAttendanceFromHajri(workerId, monthPrefix);
-
-      persistState();
-      renderDailyHajriSheet();
+      recalculateMonthlyAttendanceFromHajri(workerId, dateStr.slice(0, 7));
+      persistState(); renderDailyHajriSheet();
     };
 
     function recalculateMonthlyAttendanceFromHajri(workerId, monthPrefix) {
       const worker = (state.labours || []).find(l => l.id === workerId && l.month === monthPrefix);
       if (!worker) return;
-
-      let totalP = 0;
-      let totalH = 0;
-
-      Object.keys(state.dailyHajriRecords || {}).forEach(dateKey => {
-        if (dateKey.startsWith(monthPrefix)) {
-          const st = state.dailyHajriRecords[dateKey][workerId];
-          if (st === 'P') totalP++;
-          else if (st === 'H') totalH++;
+      let tp = 0, th = 0;
+      Object.keys(state.dailyHajriRecords || {}).forEach(k => {
+        if (k.startsWith(monthPrefix)) {
+          const s = state.dailyHajriRecords[k][workerId];
+          if (s === 'P') tp++; else if (s === 'H') th++;
         }
       });
-
-      worker.presentDays = totalP;
-      worker.halfDays = totalH;
+      worker.presentDays = tp; worker.halfDays = th;
     }
 
     function populateLabourAutocomplete() {
-      const datalist = document.getElementById('knownLaboursList');
-      const directory = state.masterLabourDirectory || [];
-      datalist.innerHTML = directory.map(w => `<option value="${w.name}">`).join('');
+      document.getElementById('knownLaboursList').innerHTML = (state.masterLabourDirectory || []).map(w => `<option value="${w.name}">`).join('');
     }
 
     window.autoFillKnownLabour = (name) => {
@@ -1434,21 +1513,21 @@
         if (found.photo) {
           tempPendingLabourPhoto = found.photo;
           document.getElementById('lPhotoStatus').innerText = '✅ Saved Photo Ready';
+          document.getElementById('lPhotoPreviewBox').innerHTML = `<img src="${found.photo}" class="w-full h-full object-cover" />`;
         }
       }
     };
 
     window.addNewSite = () => {
-      const name = prompt("नई निर्माण साइट का नाम लिखें / Enter Site Name:");
-      if (name && name.trim()) {
-        state.sites.push(name.trim());
-        persistState();
-        document.getElementById('siteSelect').value = name.trim();
-        renderAll();
-      }
+      openCustomDialog({
+        title: "🏗️ Add New Site / नई साइट",
+        placeholder: "e.g. Skyline Apartments",
+        onConfirm: (name) => {
+          if (name) { state.sites.push(name); persistState(); document.getElementById('siteSelect').value = name; renderAll(); }
+        }
+      });
     };
 
-    // Labour Save Function with Reliable Photo Persistence
     window.saveLabour = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -1458,58 +1537,35 @@
       const dailyRate = Number(document.getElementById('lDailyRate').value) || 0;
       const initialAdvance = Number(document.getElementById('lAdvance').value) || 0;
       
-      let photo = tempPendingLabourPhoto;
-      if (!photo) {
-        const existing = (state.masterLabourDirectory || []).find(w => w.name.toLowerCase() === name.toLowerCase());
-        if (existing) photo = existing.photo;
+      let finalPhoto = tempPendingLabourPhoto;
+      if (!finalPhoto) {
+        const ex = (state.masterLabourDirectory || []).find(w => w.name.toLowerCase() === name.toLowerCase());
+        if (ex && ex.photo) finalPhoto = ex.photo;
       }
 
-      const advanceLog = [];
-      if (initialAdvance > 0) {
-        advanceLog.push({
-          date: new Date().toLocaleDateString('hi-IN'),
-          amount: initialAdvance,
-          note: 'Initial advance'
-        });
-      }
+      const advanceLog = initialAdvance > 0 ? [{ date: new Date().toLocaleDateString('hi-IN'), amount: initialAdvance, mode: '💵 Cash', note: 'Initial advance' }] : [];
 
       state.labours.unshift({
-        id: Date.now().toString(),
-        site, month, name, category,
-        dailyRate,
-        advance: initialAdvance,
-        advanceLog,
-        presentDays: 0,
-        halfDays: 0,
-        otHours: 0,
-        photo: photo || null
+        id: Date.now().toString(), site, month, name, category, dailyRate, advance: initialAdvance, advanceLog, presentDays: 0, halfDays: 0, otHours: 0, photo: finalPhoto || null
       });
 
       if (!state.masterLabourDirectory) state.masterLabourDirectory = [];
-      const dirIndex = state.masterLabourDirectory.findIndex(w => w.name.toLowerCase() === name.toLowerCase());
-      if (dirIndex >= 0) {
-        state.masterLabourDirectory[dirIndex] = { name, category, dailyRate, photo };
-      } else {
-        state.masterLabourDirectory.push({ name, category, dailyRate, photo });
-      }
+      const idx = state.masterLabourDirectory.findIndex(w => w.name.toLowerCase() === name.toLowerCase());
+      if (idx >= 0) state.masterLabourDirectory[idx] = { name, category, dailyRate, photo: finalPhoto };
+      else state.masterLabourDirectory.push({ name, category, dailyRate, photo: finalPhoto });
 
-      tempPendingLabourPhoto = null;
-      e.target.reset();
-      document.getElementById('lPhotoStatus').innerText = 'None';
-      closeFormModal();
-      persistState();
-      navigateTo('viewLabours');
+      tempPendingLabourPhoto = null; e.target.reset(); closeFormModal(); persistState(); navigateTo('viewLabours');
     };
 
     window.editLabourSalary = (id) => {
       const l = state.labours.find(x => x.id === id);
       if (!l) return;
-      const currentRate = l.dailyRate || 500;
-      const newRate = prompt(`Update daily attendance rate (₹/day) for ${l.name}:`, currentRate);
-      if (newRate !== null && !isNaN(newRate) && Number(newRate) > 0) {
-        l.dailyRate = Number(newRate);
-        persistState();
-      }
+      openCustomDialog({
+        title: `💰 Daily Rate (₹/day) - ${l.name}`,
+        inputType: "number",
+        defaultValue: l.dailyRate || 500,
+        onConfirm: (val) => { if (val && !isNaN(val) && Number(val) > 0) { l.dailyRate = Number(val); persistState(); } }
+      });
     };
 
     window.openAdvanceModal = (id) => {
@@ -1521,20 +1577,13 @@
       document.getElementById('advNote').value = '';
       
       const list = document.getElementById('advHistoryList');
-      const history = l.advanceLog || [];
-      if (history.length === 0) {
-        list.innerHTML = `<div class="text-zinc-500 italic">No installment records yet.</div>`;
-      } else {
-        list.innerHTML = history.map(h => `
-          <div class="flex justify-between items-center py-1 border-b border-zinc-200 dark:border-white/5">
-            <div>
-              <span class="font-bold text-amber-500">₹${h.amount}</span>
-              <span class="text-[10px] text-zinc-500 ml-1">(${h.note || 'Advance'})</span>
-            </div>
-            <span class="text-[10px] text-zinc-400">${h.date}</span>
-          </div>
-        `).join('');
-      }
+      const hist = l.advanceLog || [];
+      list.innerHTML = hist.length === 0 ? `<div class="opacity-60 italic">No installments yet.</div>` : hist.map(h => `
+        <div class="flex justify-between items-center py-1.5 border-b border-zinc-300 dark:border-white/10">
+          <div><span class="font-bold text-amber-500">₹${h.amount}</span><span class="text-[10px] opacity-75 ml-1">${h.mode || ''} (${h.note || ''})</span></div>
+          <span class="text-[10px] opacity-70">${h.date}</span>
+        </div>
+      `).join('');
       document.getElementById('advanceModal').classList.replace('hidden', 'flex');
     };
     window.closeAdvanceModal = () => document.getElementById('advanceModal').classList.replace('flex', 'hidden');
@@ -1544,30 +1593,24 @@
       const id = document.getElementById('advLabourId').value;
       const amt = Number(document.getElementById('advAmount').value) || 0;
       const dateVal = document.getElementById('advDate').value;
+      const modeVal = document.getElementById('advMode').value;
       const note = document.getElementById('advNote').value.trim();
 
       const l = state.labours.find(x => x.id === id);
       if (!l) return;
       if (!l.advanceLog) l.advanceLog = [];
-
       l.advance = (l.advance || 0) + amt;
-      l.advanceLog.unshift({
-        date: dateVal ? new Date(dateVal).toLocaleDateString('hi-IN') : new Date().toLocaleDateString('hi-IN'),
-        amount: amt,
-        note: note || 'Cash Advance'
-      });
-
-      closeAdvanceModal();
-      persistState();
+      l.advanceLog.unshift({ date: dateVal ? new Date(dateVal).toLocaleDateString('hi-IN') : new Date().toLocaleDateString('hi-IN'), amount: amt, mode: modeVal, note: note || 'Advance' });
+      closeAdvanceModal(); persistState();
     };
 
     window.updateAttendance = (id, type) => {
       const l = state.labours.find(x => x.id === id);
       if (!l) return;
       if (type === 'incPresent') l.presentDays = (l.presentDays || 0) + 1;
-      if (type === 'decPresent' && l.presentDays > 0) l.presentDays -= 1;
+      if (type === 'decPresent' && (l.presentDays || 0) > 0) l.presentDays -= 1;
       if (type === 'incHalf') l.halfDays = (l.halfDays || 0) + 1;
-      if (type === 'decHalf' && l.halfDays > 0) l.halfDays -= 1;
+      if (type === 'decHalf' && (l.halfDays || 0) > 0) l.halfDays -= 1;
       persistState();
     };
 
@@ -1583,19 +1626,10 @@
       const attachment = await processUniversalFile(file);
 
       if (!state.expenses) state.expenses = [];
-      state.expenses.unshift({
-        id: Date.now().toString(),
-        site, month, title, category, amount, spentFor, attachment,
-        date: new Date().toLocaleDateString('hi-IN')
-      });
-      e.target.reset();
-      document.getElementById('eFileLabel').innerText = '📎 Upload Slip / Bill (PDF, Word, Excel, Image)';
-      closeFormModal();
-      persistState();
-      navigateTo('viewExpenses');
+      state.expenses.unshift({ id: Date.now().toString(), site, month, title, category, amount, spentFor, attachment, date: new Date().toLocaleDateString('hi-IN') });
+      e.target.reset(); closeFormModal(); persistState(); navigateTo('viewExpenses');
     };
 
-    // Save Bill with Added Date & Received Date
     window.saveBill = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -1604,22 +1638,15 @@
       const amount = Number(document.getElementById('bAmount').value) || 0;
       const status = document.getElementById('bStatus').value;
       const billDate = document.getElementById('bDate').value || new Date().toISOString().split('T')[0];
+      const recDateInput = document.getElementById('bReceivedDateInput').value;
       const file = document.getElementById('bFile').files[0];
       const attachment = await processUniversalFile(file);
 
       state.bills.unshift({
-        id: Date.now().toString(),
-        site, month, title, amount, status,
-        billDate,
-        receivedDate: status === 'Received' ? billDate : null,
-        attachment,
-        createdAt: new Date().toLocaleDateString('hi-IN')
+        id: Date.now().toString(), site, month, title, amount, status, billDate,
+        receivedDate: status === 'Received' ? (recDateInput || billDate) : null, attachment, createdAt: new Date().toLocaleDateString('hi-IN')
       });
-      e.target.reset();
-      document.getElementById('bFileLabel').innerText = '📄 Upload Company Bill (Word, Excel, PDF, Image)';
-      closeFormModal();
-      persistState();
-      navigateTo('viewBills');
+      e.target.reset(); closeFormModal(); persistState(); navigateTo('viewBills');
     };
 
     window.deleteRecord = (type, id) => {
@@ -1629,41 +1656,24 @@
     };
 
     function getFileBadgeHTML(att) {
-      if (!att) return `<div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold text-sm shrink-0">📄</div>`;
+      if (!att) return `<div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-500 flex items-center justify-center font-bold text-sm shrink-0">📄</div>`;
       if (['jpg','jpeg','png','webp','gif'].includes(att.ext)) {
         return `<a href="${att.dataUrl}" target="_blank" download="${att.name}"><img src="${att.dataUrl}" class="w-10 h-10 rounded-xl object-cover border border-amber-500 shrink-0" /></a>`;
       }
-      let icon = '📎';
-      if (att.ext === 'pdf') icon = '📕 PDF';
-      else if (['xls','xlsx','csv'].includes(att.ext)) icon = '📊 XLS';
-      else if (['doc','docx'].includes(att.ext)) icon = '📝 DOC';
-
-      return `<a href="${att.dataUrl}" download="${att.name}" target="_blank" class="px-2 py-1.5 rounded-xl bg-amber-500/20 text-amber-600 dark:text-amber-400 text-[10px] font-black border border-amber-500/40 shrink-0">${icon}</a>`;
+      return `<a href="${att.dataUrl}" download="${att.name}" target="_blank" class="px-2 py-1.5 rounded-xl bg-amber-500/20 text-amber-500 text-[10px] font-black border border-amber-500/40 shrink-0">📎 FILE</a>`;
     }
 
     function getSpokenMonthName(monthStr, lang) {
       const parts = monthStr.split('-');
-      const year = parts[0];
       const mIdx = parseInt(parts[1]) - 1;
-
       const months = {
         hi: ['जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर'],
-        en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        kn: ['ಜನವರಿ', 'ಫೆಬ್ರವರಿ', 'ಮಾರ್ಚ್', 'ಏಪ್ರಿಲ್', 'ಮೇ', 'ಜೂನ್', 'ಜುಲೈ', 'ಆಗಸ್ಟ್', 'ಸೆಪ್ಟೆಂಬರ್', 'ಅಕ್ಟೋಬರ್', 'ನವೆಂಬರ್', 'ಡಿಸೆಂಬರ್'],
-        mr: ['जानेवारी', 'फेब्रुवारी', 'मार्च', 'एप्रिल', 'मे', 'जून', 'जुलै', 'ऑगस्ट', 'सप्टेंबर', 'ऑक्टोबर', 'नोव्हेंबर', 'डिसेंबर'],
-        gu: ['જાન્યુઆરી', 'ફેબ્રુઆરી', 'માર્ચ', 'એપ્રિલ', 'મે', 'જૂન', 'જુલાઈ', 'ઓગસ્ટ', 'સપ્ટેમ્બર', 'ઓક્ટોબર', 'નવેમ્બર', 'ડિસેમ્બર'],
-        ta: ['ஜனவரி', 'பிப்ரவரி', 'மார்ச்', 'ஏப்ரல்', 'மே', 'ஜூன்', 'ஜூலை', 'ஆகஸ்ட்', 'செப்டம்பர்', 'அக்டோபர்', 'நவம்பர்', 'டிசம்பர்'],
-        te: ['జనవరి', 'ఫిబ్రవరి', 'మార్చి', 'ఏప్రిల్', 'మే', 'జూన్', 'జూలై', 'ఆగస్టు', 'సెప్టెంబర్', 'అక్టోబర్', 'నవంబర్', 'డిసెంబర్'],
-        bn: ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'],
-        ml: ['ജനുവരി', 'ഫെബ്രുവരി', 'മാർച്ച്', 'ഏപ്രിൽ', 'മേയ്', 'ജൂൺ', 'ജൂലൈ', 'ഓഗസ്റ്റ്', 'സെപ്റ്റംബർ', 'ഒക്ടോബർ', 'നവംബർ', 'ഡിസംബർ'],
-        pa: ['ਜਨਵਰੀ', 'ਫ਼ਰਵਰੀ', 'ਮਾਰਚ', 'ਅਪ੍ਰੈਲ', 'ਮਈ', 'ਜੂਨ', 'ਜੁਲਾਈ', 'ਅਗਸਤ', 'ਸਤੰਬਰ', 'ਅਕਤੂਬਰ', 'ਨਵੰਬਰ', 'ਦਸੰਬਰ']
+        en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
       };
-
-      const langMap = months[lang] || months.hi;
-      return `${langMap[mIdx]} ${year}`;
+      return `${(months[lang] || months.hi)[mIdx]} ${parts[0]}`;
     }
 
-    // Master Render Method
+    // Master Render Engine
     window.renderAll = () => {
       const siteSelect = document.getElementById('siteSelect');
       const currentSite = siteSelect.value || state.sites[0];
@@ -1679,85 +1689,73 @@
       if (state.userProfilePhoto) {
         userBadge.innerHTML = `<img src="${state.userProfilePhoto}" class="w-full h-full object-cover" />`;
         profileAvatar.innerHTML = `<img src="${state.userProfilePhoto}" class="w-full h-full object-cover" />`;
-      } else if (currentUser && currentUser.photoURL) {
-        userBadge.innerHTML = `<img src="${currentUser.photoURL}" class="w-full h-full object-cover" />`;
-        profileAvatar.innerHTML = `<img src="${currentUser.photoURL}" class="w-full h-full object-cover" />`;
       } else {
-        const letter = currentUser ? (currentUser.displayName || currentUser.email || 'U')[0].toUpperCase() : 'ठे';
+        const letter = currentUser ? (currentUser.email || 'U')[0].toUpperCase() : 'ठे';
         userBadge.innerHTML = `<span>${letter}</span>`;
         profileAvatar.innerHTML = `<span>${letter}</span>`;
       }
 
-      if (currentUser) {
-        document.getElementById('profileLogoutBtn').classList.remove('hidden');
-      } else {
-        document.getElementById('profileLogoutBtn').classList.add('hidden');
-      }
-
+      document.getElementById('activeNicknameBadge').innerText = (state.accounts.find(a => a.active) || {}).nickname || 'Main';
+      document.getElementById('profileLogoutBtn').classList.toggle('hidden', !currentUser);
       updateSyncStatusUI();
 
       const filteredLabours = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth);
       let totalLabourDue = 0;
 
-      // Render Labour Cards with Fixed Vertical Spacing & WhatsApp/OT Features
+      // Render Labour Cards with Spacing[cite: 7]
       document.getElementById('labourList').innerHTML = filteredLabours.length === 0
-        ? `<div class="text-center py-8 text-xs text-zinc-500">No labour records found for ${activeMonth}. Tap "Carry" or "+ Worker".</div>`
+        ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No labour records found for ${activeMonth}. Tap "Carry" or "+ Worker".</div>`
         : filteredLabours.map(l => {
           const effectiveDays = (l.presentDays || 0) + ((l.halfDays || 0) * 0.5);
           const rate = l.dailyRate || 500;
           const earned = Math.round(rate * effectiveDays);
-          const otHours = l.otHours || 0;
-          const otPay = Math.round((rate / 8) * otHours);
-          const totalEarned = earned + otPay;
-          const net = totalEarned - (l.advance || 0);
+          const otPay = Math.round((rate / 8) * (l.otHours || 0));
+          const net = (earned + otPay) - (l.advance || 0);
           totalLabourDue += net;
 
           return `
-            <div class="ios-glass p-3.5 rounded-3xl space-y-3 shadow-md border border-zinc-200 dark:border-white/10">
+            <div class="ios-glass p-4 rounded-3xl space-y-3 shadow-md">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                  ${l.photo
-                    ? `<img src="${l.photo}" class="w-12 h-12 rounded-full object-cover border-2 border-amber-500 shrink-0 shadow" />`
-                    : `<div class="w-12 h-12 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center font-bold text-sm shrink-0">👷</div>`}
+                  ${l.photo ? `<img src="${l.photo}" class="w-12 h-12 rounded-full object-cover border-2 border-amber-500 shrink-0 shadow" />` : `<div class="w-12 h-12 rounded-full bg-amber-500/15 text-amber-500 flex items-center justify-center font-bold text-base shrink-0">👷</div>`}
                   <div>
                     <h4 class="font-bold text-sm leading-tight">${l.name}</h4>
-                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-black/5 dark:bg-white/10 text-zinc-500 font-medium">${l.category}</span>
-                    <div class="text-[11px] text-zinc-500 mt-1 flex items-center gap-1.5 flex-wrap">
-                      <span>दर: <b>₹${rate}/दिन</b></span>
-                      <button onclick="editLabourSalary('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 font-bold">Edit</button>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-black/10 dark:bg-white/10 opacity-75 font-medium">${l.category}</span>
+                    <div class="text-[11px] opacity-80 mt-1 flex items-center gap-1.5 flex-wrap">
+                      <span>दिहाड़ी: <b>₹${rate}/दिन</b></span>
+                      <button onclick="editLabourSalary('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-500 font-bold">Edit</button>
                       <span>| एडवांस: <b class="text-rose-500">₹${l.advance || 0}</b></span>
-                      <button onclick="openAdvanceModal('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-600 font-bold">+ Adv</button>
+                      <button onclick="openAdvanceModal('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-500 font-bold">+ Adv</button>
                     </div>
                   </div>
                 </div>
                 <div class="text-right">
-                  <div class="text-[10px] uppercase text-zinc-400 font-bold">देय राशि / Net</div>
+                  <div class="text-[10px] uppercase opacity-65 font-bold">देय राशि / Net</div>
                   <div class="text-base font-black ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net.toLocaleString('en-IN')}</div>
-                  <button onclick="deleteRecord('labours','${l.id}')" class="text-[10px] text-zinc-400 hover:text-rose-500 mt-1">Del</button>
+                  <button onclick="deleteRecord('labours','${l.id}')" class="text-[10px] opacity-60 hover:text-rose-500 mt-1">Del</button>
                 </div>
               </div>
 
-              <!-- Attendance & Overtime Row -->
-              <div class="bg-black/5 dark:bg-black/20 p-2.5 rounded-2xl flex items-center justify-between text-xs border border-zinc-200 dark:border-white/5">
+              <div class="bg-black/5 dark:bg-black/25 p-2.5 rounded-2xl flex items-center justify-between text-xs border border-zinc-300 dark:border-white/10">
                 <div>
-                  <span class="font-semibold text-zinc-500">हाजिरी:</span> <b class="text-emerald-500">${l.presentDays || 0}P</b>
-                  <span class="mx-1 text-zinc-400">|</span>
-                  <span class="font-semibold text-zinc-500">हाफ:</span> <b class="text-amber-500">${l.halfDays || 0}</b>
-                  ${otHours > 0 ? `<span class="mx-1 text-zinc-400">|</span><span class="text-purple-400 font-bold">${otHours}h OT</span>` : ''}
+                  <span class="font-semibold opacity-75">हाजिरी:</span> <b class="text-emerald-500">${l.presentDays || 0}P</b>
+                  <span class="mx-1 opacity-40">|</span>
+                  <span class="font-semibold opacity-75">हाफ:</span> <b class="text-amber-500">${l.halfDays || 0}H</b>
+                  <span class="mx-1 opacity-40">|</span>
+                  <span class="opacity-75">कुल:</span> <b>₹${earned + otPay}</b>
                 </div>
                 <div class="flex items-center gap-1">
-                  <button onclick="updateAttendance('${l.id}','decPresent')" class="w-6 h-6 rounded bg-black/10 dark:bg-white/10 font-bold">-</button>
-                  <button onclick="updateAttendance('${l.id}','incPresent')" class="w-6 h-6 rounded bg-emerald-500 text-zinc-950 font-bold">+P</button>
-                  <button onclick="updateAttendance('${l.id}','incHalf')" class="px-1.5 h-6 rounded bg-amber-500 text-zinc-950 font-bold">+Half</button>
+                  <button onclick="updateAttendance('${l.id}','decPresent')" class="w-7 h-7 rounded-lg bg-black/10 dark:bg-white/10 font-black">-P</button>
+                  <button onclick="updateAttendance('${l.id}','incPresent')" class="w-7 h-7 rounded-lg bg-emerald-500 text-zinc-950 font-black">+P</button>
+                  <button onclick="updateAttendance('${l.id}','incHalf')" class="px-2 h-7 rounded-lg bg-amber-500 text-zinc-950 font-black">+H</button>
                 </div>
               </div>
 
-              <!-- Quick Action Bar: Overtime + WhatsApp Slip -->
               <div class="flex items-center justify-between pt-0.5 text-xs">
-                <button onclick="addWorkerOvertime('${l.id}')" class="px-2.5 py-1 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 font-bold text-[10px] border border-purple-500/30">
-                  + Add OT Hours (${otHours}h)
+                <button onclick="addWorkerOvertime('${l.id}')" class="px-2.5 py-1 rounded-xl bg-purple-500/15 text-purple-400 font-bold text-[10px] border border-purple-500/30">
+                  ⏰ OT Hours: ${l.otHours || 0}h (+₹${otPay})
                 </button>
-                <button onclick="shareWorkerSlipWhatsApp('${l.id}')" class="px-3 py-1 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-500 font-bold text-[10px] flex items-center gap-1 border border-emerald-500/30">
+                <button onclick="shareWorkerSlipWhatsApp('${l.id}')" class="px-3 py-1 rounded-xl bg-emerald-500/15 text-emerald-500 font-bold text-[10px] flex items-center gap-1 border border-emerald-500/30">
                   <span>💬</span> WhatsApp Slip
                 </button>
               </div>
@@ -1767,135 +1765,102 @@
 
       document.getElementById('summaryLabourDue').innerText = `₹${totalLabourDue.toLocaleString('en-IN')}`;
 
-      // Render Home Recent Workforce with Spacing
-      if (filteredLabours.length === 0) {
-        document.getElementById('homeRecentLabour').innerHTML = `
-          <div class="ios-glass rounded-2xl p-5 text-center">
-            <div class="w-16 h-16 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-3xl mx-auto mb-2">🏗️</div>
-            <p class="text-xs text-zinc-500 mb-3">No workers added yet for ${activeMonth}.</p>
-            <button onclick="openFormModal('labour')" class="px-4 py-2 bg-amber-500 text-zinc-950 font-bold text-xs rounded-xl shadow">
-              + ADD FIRST WORKER
-            </button>
-          </div>
-        `;
-      } else {
-        document.getElementById('homeRecentLabour').innerHTML = filteredLabours.slice(0, 4).map(l => {
-          const effectiveDays = (l.presentDays || 0) + ((l.halfDays || 0) * 0.5);
-          const rate = l.dailyRate || 500;
-          const earned = Math.round(rate * effectiveDays);
-          const otPay = Math.round((rate / 8) * (l.otHours || 0));
-          const net = (earned + otPay) - (l.advance || 0);
-          return `
-            <div class="ios-glass p-3.5 rounded-2xl flex items-center justify-between text-xs shadow-sm border border-zinc-200 dark:border-white/5">
-              <div class="flex items-center gap-2.5">
-                ${l.photo 
-                  ? `<img src="${l.photo}" class="w-9 h-9 rounded-full object-cover border border-amber-500 shrink-0" />` 
-                  : `<div class="w-9 h-9 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs">👷</div>`}
-                <div>
-                  <div class="font-bold">${l.name}</div>
-                  <div class="text-[10px] text-zinc-500">${l.category} • ₹${rate}/day (${l.presentDays || 0}P)</div>
-                </div>
-              </div>
-              <div class="font-black text-sm ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net}</div>
-            </div>
-          `;
-        }).join('');
-      }
-
-      // Render Expenses
-      if (!state.expenses) state.expenses = [];
-      const filteredExpenses = state.expenses.filter(e => e.site === activeSite && e.month === activeMonth);
-      const totalExpenses = filteredExpenses.reduce((acc, e) => acc + e.amount, 0);
-      document.getElementById('summaryExpensesTotal').innerText = `₹${totalExpenses.toLocaleString('en-IN')}`;
-
-      document.getElementById('expenseList').innerHTML = filteredExpenses.length === 0
-        ? `<div class="text-center py-8 text-xs text-zinc-500">No expenses recorded for ${activeMonth}.</div>`
-        : filteredExpenses.map(e => `
-          <div class="ios-glass p-3.5 rounded-2xl flex items-center justify-between shadow-sm">
-            <div class="flex items-center gap-2.5">
-              ${getFileBadgeHTML(e.attachment)}
+      // Home Snapshot with Spacing[cite: 7]
+      document.getElementById('homeRecentLabour').innerHTML = filteredLabours.length === 0 ? `
+        <div class="ios-glass rounded-2xl p-6 text-center">
+          <div class="w-14 h-14 rounded-2xl bg-amber-500/15 text-amber-500 flex items-center justify-center text-2xl mx-auto mb-2">🏗️</div>
+          <p class="text-xs opacity-70 mb-3">No workers added yet for ${activeMonth}.</p>
+          <button onclick="openFormModal('labour')" class="px-4 py-2 bg-amber-500 text-zinc-950 font-black text-xs rounded-xl shadow">+ ADD FIRST WORKER</button>
+        </div>
+      ` : filteredLabours.slice(0, 5).map(l => {
+        const net = Math.round((l.dailyRate || 500) * ((l.presentDays || 0) + ((l.halfDays || 0) * 0.5))) - (l.advance || 0);
+        return `
+          <div class="ios-glass p-4 rounded-2xl flex items-center justify-between text-xs shadow-md">
+            <div class="flex items-center gap-3">
+              ${l.photo ? `<img src="${l.photo}" class="w-11 h-11 rounded-full object-cover border-2 border-amber-500 shrink-0" />` : `<div class="w-11 h-11 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-sm">👷</div>`}
               <div>
-                <h4 class="font-bold text-xs">${e.title}</h4>
-                <div class="text-[10px] text-zinc-500">${e.category} ${e.spentFor ? `• <b>${e.spentFor}</b>` : ''}</div>
+                <div class="font-bold text-sm">${l.name}</div>
+                <div class="text-[11px] opacity-75 mt-0.5">${l.category} • ₹${l.dailyRate || 500}/day (${l.presentDays || 0}P, ${l.halfDays || 0}H)</div>
               </div>
             </div>
             <div class="text-right">
-              <div class="text-xs font-black text-amber-500">₹${e.amount.toLocaleString('en-IN')}</div>
-              <button onclick="deleteRecord('expenses','${e.id}')" class="text-[10px] text-zinc-400 hover:text-rose-500">Del</button>
+              <div class="font-black text-sm ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net.toLocaleString('en-IN')}</div>
+              <span class="text-[9px] opacity-60">Adv: ₹${l.advance || 0}</span>
             </div>
           </div>
-        `).join('');
+        `;
+      }).join('');
 
-      // Render Bills with Issue Date & Received Date Display
+      // Expenses
+      const filteredExpenses = (state.expenses || []).filter(e => e.site === activeSite && e.month === activeMonth);
+      const totalExpenses = filteredExpenses.reduce((acc, e) => acc + e.amount, 0);
+      document.getElementById('summaryExpensesTotal').innerText = `₹${totalExpenses.toLocaleString('en-IN')}`;
+      document.getElementById('expenseList').innerHTML = filteredExpenses.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No expenses recorded for ${activeMonth}.</div>` : filteredExpenses.map(e => `
+        <div class="ios-glass p-3.5 rounded-2xl flex items-center justify-between shadow-sm">
+          <div class="flex items-center gap-2.5">
+            ${getFileBadgeHTML(e.attachment)}
+            <div><h4 class="font-bold text-xs">${e.title}</h4><div class="text-[10px] opacity-75">${e.category} ${e.spentFor ? `• <b>${e.spentFor}</b>` : ''}</div></div>
+          </div>
+          <div class="text-right"><div class="text-xs font-black text-amber-500">₹${e.amount.toLocaleString('en-IN')}</div><button onclick="deleteRecord('expenses','${e.id}')" class="text-[10px] opacity-60 hover:text-rose-500">Del</button></div>
+        </div>
+      `).join('');
+
+      // Bills
       const filteredBills = (state.bills || []).filter(b => b.site === activeSite && b.month === activeMonth);
       const totalBills = filteredBills.reduce((acc, b) => acc + b.amount, 0);
       document.getElementById('summaryBillsTotal').innerText = `₹${totalBills.toLocaleString('en-IN')}`;
-
-      document.getElementById('billList').innerHTML = filteredBills.length === 0
-        ? `<div class="text-center py-8 text-xs text-zinc-500">No company bills recorded for ${activeMonth}.</div>`
-        : filteredBills.map(b => {
-          const isPending = (b.status || '').toLowerCase().includes('pending');
-          return `
-            <div class="ios-glass p-3.5 rounded-2xl flex items-center justify-between shadow-sm">
-              <div class="flex items-center gap-2.5">
-                ${getFileBadgeHTML(b.attachment)}
-                <div>
-                  <h4 class="font-bold text-xs">${b.title}</h4>
-                  <div class="text-[10px] text-zinc-400 mt-0.5">
-                    <span>Issued: <b>${b.billDate || b.createdAt}</b></span>
-                    ${b.receivedDate ? ` • <span class="text-emerald-500">Received: <b>${b.receivedDate}</b></span>` : ''}
-                  </div>
-                  <div class="flex items-center gap-1.5 mt-1">
-                    <span class="text-[9px] px-2 py-0.5 rounded-full font-bold ${isPending ? 'bg-amber-500/10 text-amber-500 border border-amber-500/30' : 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/30'}">
-                      ${isPending ? 'Pending (बाकी)' : 'Received (प्राप्त)'}
-                    </span>
-                    <button onclick="toggleBillStatus('${b.id}')" class="text-[9px] px-2 py-0.5 rounded-lg bg-black/10 dark:bg-white/10 hover:bg-amber-500 hover:text-zinc-950 font-bold transition-all">
-                      ${isPending ? 'Mark Received / मिला' : 'Mark Pending'}
-                    </button>
-                  </div>
+      document.getElementById('billList').innerHTML = filteredBills.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No company bills recorded for ${activeMonth}.</div>` : filteredBills.map(b => {
+        const isPending = (b.status || '').toLowerCase().includes('pending');
+        return `
+          <div class="ios-glass p-4 rounded-2xl flex items-center justify-between shadow-sm">
+            <div class="flex items-center gap-3">
+              ${getFileBadgeHTML(b.attachment)}
+              <div>
+                <h4 class="font-bold text-xs">${b.title}</h4>
+                <div class="text-[10px] opacity-80 mt-0.5 space-y-0.5">
+                  <div>📅 Bill Added: <b>${b.billDate || b.createdAt}</b></div>
+                  ${b.receivedDate ? `<div class="text-emerald-500">✅ Received: <b>${b.receivedDate}</b></div>` : `<div class="text-amber-500">⏳ Awaiting Payment</div>`}
+                </div>
+                <div class="flex items-center gap-1.5 mt-1.5">
+                  <span class="text-[9px] px-2 py-0.5 rounded-full font-bold ${isPending ? 'bg-amber-500/15 text-amber-500 border border-amber-500/30' : 'bg-emerald-500/15 text-emerald-500 border border-emerald-500/30'}">
+                    ${isPending ? 'Pending (बाकी)' : 'Received (प्राप्त)'}
+                  </span>
+                  <button onclick="toggleBillStatus('${b.id}')" class="text-[9px] px-2 py-0.5 rounded-lg bg-amber-500 text-zinc-950 font-black shadow">
+                    ${isPending ? '✓ Mark Received Date' : '↺ Mark Pending'}
+                  </button>
                 </div>
               </div>
-              <div class="text-right">
-                <div class="text-xs font-black ${isPending ? 'text-amber-500' : 'text-emerald-500'}">₹${b.amount.toLocaleString('en-IN')}</div>
-                <button onclick="deleteRecord('bills','${b.id}')" class="text-[10px] text-zinc-400 hover:text-rose-500">Del</button>
-              </div>
             </div>
-          `;
-        }).join('');
+            <div class="text-right">
+              <div class="text-sm font-black ${isPending ? 'text-amber-500' : 'text-emerald-500'}">₹${b.amount.toLocaleString('en-IN')}</div>
+              <button onclick="deleteRecord('bills','${b.id}')" class="text-[10px] opacity-60 hover:text-rose-500 mt-1">Del</button>
+            </div>
+          </div>
+        `;
+      }).join('');
 
-      // Monthly Ledger Content
+      // Monthly Ledger & Export
       document.getElementById('monthlyLedgerContent').innerHTML = `
-        <div class="ios-glass p-4 rounded-2xl space-y-3 shadow-sm">
-          <div class="flex justify-between items-center text-xs pb-2 border-b border-zinc-200 dark:border-white/10">
-            <span class="text-zinc-500">Active Site / Month:</span>
-            <span class="font-bold">${activeSite} (${activeMonth})</span>
+        <div class="ios-glass p-4 rounded-2xl space-y-3.5 shadow-sm">
+          <div class="flex justify-between items-center text-xs pb-2 border-b border-zinc-300 dark:border-white/10">
+            <span class="opacity-75">Active Site / Month:</span><span class="font-bold">${activeSite} (${activeMonth})</span>
           </div>
           <div class="grid grid-cols-3 gap-2 text-center text-xs">
-            <div class="bg-black/5 dark:bg-black/20 p-2 rounded-xl">
-              <div class="text-zinc-500 text-[10px]">Labour Net</div>
-              <div class="font-bold text-rose-500 mt-0.5">₹${totalLabourDue}</div>
-            </div>
-            <div class="bg-black/5 dark:bg-black/20 p-2 rounded-xl">
-              <div class="text-zinc-500 text-[10px]">Expenses</div>
-              <div class="font-bold text-amber-500 mt-0.5">₹${totalExpenses}</div>
-            </div>
-            <div class="bg-black/5 dark:bg-black/20 p-2 rounded-xl">
-              <div class="text-zinc-500 text-[10px]">Bills</div>
-              <div class="font-bold text-emerald-500 mt-0.5">₹${totalBills}</div>
-            </div>
+            <div class="bg-black/5 dark:bg-black/25 p-2.5 rounded-xl"><div class="opacity-70 text-[10px]">Labour Net</div><div class="font-black text-rose-500 mt-0.5">₹${totalLabourDue.toLocaleString('en-IN')}</div></div>
+            <div class="bg-black/5 dark:bg-black/25 p-2.5 rounded-xl"><div class="opacity-70 text-[10px]">Expenses</div><div class="font-black text-amber-500 mt-0.5">₹${totalExpenses.toLocaleString('en-IN')}</div></div>
+            <div class="bg-black/5 dark:bg-black/25 p-2.5 rounded-xl"><div class="opacity-70 text-[10px]">Bills</div><div class="font-black text-emerald-500 mt-0.5">₹${totalBills.toLocaleString('en-IN')}</div></div>
           </div>
-          <div class="pt-2 text-xs text-zinc-500 space-y-1">
-            <div>• Registered Labours: <b>${filteredLabours.length}</b></div>
-            <div>• Site Expense Records: <b>${filteredExpenses.length}</b></div>
-            <div>• Company Bills: <b>${filteredBills.length}</b></div>
+          <div class="grid grid-cols-2 gap-2 pt-2 border-t border-zinc-300 dark:border-white/10">
+            <button onclick="exportMonthlyExcelCSV()" class="py-2.5 rounded-xl bg-emerald-500 text-zinc-950 font-black text-xs shadow flex items-center justify-center gap-1.5">📊 Export Excel</button>
+            <button onclick="printMonthlyPDFReport()" class="py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-black text-xs shadow flex items-center justify-center gap-1.5">📄 Save / Print PDF</button>
           </div>
         </div>
       `;
     };
 
     window.previewUniversalFile = (inpId, lblId) => {
-      const file = document.getElementById(inpId).files[0];
-      if (file) document.getElementById(lblId).innerText = `📄 ${file.name}`;
+      const f = document.getElementById(inpId).files[0];
+      if (f) document.getElementById(lblId).innerText = `📄 ${f.name}`;
     };
 
     window.changeLanguage = (lang) => {
@@ -1903,8 +1868,8 @@
       localStorage.setItem('thekedaar_lang', lang);
       const dict = i18n[lang] || i18n.hi;
       document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (dict[key]) el.innerText = dict[key];
+        const k = el.getAttribute('data-i18n');
+        if (dict[k]) el.innerText = dict[k];
       });
       closeSettingsModal();
     };
@@ -1916,38 +1881,13 @@
       const expenses = document.getElementById('summaryExpensesTotal').innerText;
       const bills = document.getElementById('summaryBillsTotal').innerText;
       const workerCount = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth).length;
-
       const spokenMonth = getSpokenMonthName(activeMonth, window.currentLang || 'hi');
-      let msg = "";
-      let langCode = `${window.currentLang || 'hi'}-IN`;
 
-      if (window.currentLang === 'kn') {
-        msg = `ನಮಸ್ಕಾರ ಗುತ್ತಿಗೆದಾರರೇ. ${activeSite} ಸೈಟ್‌ಗೆ ${spokenMonth} ತಿಂಗಳ ಲೆಕ್ಕ: ಒಟ್ಟು ${workerCount} ಕಾರ್ಮಿಕರು ಕೆಲಸ ಮಾಡುತ್ತಿದ್ದಾರೆ. ಒಟ್ಟು ಬಾಕಿ ಕೂಲಿ ${labourDue} ರೂಪಾಯಿ. ಸೈಟ್ ಖರ್ಚುಗಳು ${expenses} ರೂಪಾಯಿ. ಮತ್ತು ಕಂಪನಿ ಬಿಲ್ ಮೊತ್ತ ${bills} ರೂಪಾಯಿ.`;
-      } else if (window.currentLang === 'mr') {
-        msg = `नमस्कार ठेकेदारजी. साईट ${activeSite} साठी ${spokenMonth} चा हिशोब: एकूण ${workerCount} कामगार आहेत. बाकी मजुरी ${labourDue} आहे. रिक्षा व इतर खर्च ${expenses} रुपये आहेत. आणि कंपनीचे एकूण बिल ${bills} आहे.`;
-      } else if (window.currentLang === 'gu') {
-        msg = `નમસ્તે કોન્ટ્રાક્ટર. સાઇટ ${activeSite} માટે ${spokenMonth} નો હિસાબ: કુલ ${workerCount} મજૂરો છે. બાકી મજૂરી ${labourDue} છે. રિક્ષા અને અન્ય ખર્ચ ${expenses} છે. અને કંપનીનું બિલ ${bills} છે.`;
-      } else if (window.currentLang === 'ta') {
-        msg = `வணக்கம் ஒப்பந்ததாரரே. தளம் ${activeSite} க்கான ${spokenMonth} மாத கணக்கு: மொத்தம் ${workerCount} தொழிலாளர்கள் உள்ளனர். மொத்த பாக்கி கூலி ${labourDue}. தள செலவுகள் ${expenses}. மற்றும் நிறுவன பில் ${bills}.`;
-      } else if (window.currentLang === 'te') {
-        msg = `నమస్కారం కాంట్రాక్టర్ గారు. ${activeSite} సైట్‌కు ${spokenMonth} లెక్కలు: మొత్తం ${workerCount} మంది కార్మికులు ఉన్నారు. నికర కూలీ బకాయి ${labourDue}. సైట్ ఖర్చులు ${expenses}. మరియు కంపెనీ బిల్లు ${bills}.`;
-      } else if (window.currentLang === 'bn') {
-        msg = `নমস্কার ঠিকাদার মহাশয়। সাইট ${activeSite} এর ${spokenMonth} মাসের হিসাব: মোট ${workerCount} জন শ্রমিক আছেন। মোট মজুরি বকেয়া ${labourDue} টাকা। অন্যান্য খরচ ${expenses} টাকা। এবং কোম্পানির বিল ${bills} টাকা।`;
-      } else if (window.currentLang === 'ml') {
-        msg = `നമസ്കാരം കരാറുകാരേ. ${activeSite} സൈറ്റിന്റെ ${spokenMonth} കണക്ക്: ആകെ ${workerCount} തൊഴിലാളികളുണ്ട്. കൂലി ബാക്കി ${labourDue} രൂപ. സൈറ്റ് ചെലവ് ${expenses} രൂപ. കമ്പനി ബിൽ ${bills} രൂപ.`;
-      } else if (window.currentLang === 'pa') {
-        msg = `ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਠੇਕੇਦਾਰ ਜੀ। ਸਾਈਟ ${activeSite} ਦਾ ${spokenMonth} ਦਾ ਹਿਸਾਬ: ਕੁੱਲ ${workerCount} ਮਜ਼ਦੂਰ ਹਨ। ਕੁੱਲ ਬਕਾਇਆ ਮਜ਼ਦੂਰੀ ${labourDue} ਹੈ। ਖਰਚੇ ${expenses} ਰੁਪਏ ਹਨ ਅਤੇ ਕੰਪਨੀ ਦਾ ਬਿੱਲ ${bills} ਹੈ।`;
-      } else if (window.currentLang === 'en') {
-        msg = `Hello Contractor. Report for site ${activeSite} for ${spokenMonth}: There are ${workerCount} active workers. Net labour payable is ${labourDue}. Total transport and site expenses are ${expenses}. Total company bills are ${bills}.`;
-      } else {
-        msg = `नमस्ते ठेकेदार जी। साइट ${activeSite} का ${spokenMonth} का हिसाब: कुल ${workerCount} मजदूर काम कर रहे हैं। कुल बाकी मजदूरी ${labourDue} है। रिक्शा व अन्य खर्चे ${expenses} रुपये हैं। और कंपनी से कुल बिल ${bills} का है।`;
-      }
-
+      const msg = `नमस्ते ठेकेदार जी। साइट ${activeSite} का ${spokenMonth} का हिसाब: कुल ${workerCount} मजदूर काम कर रहे हैं। कुल बाकी मजदूरी ${labourDue} है। रिक्शा व अन्य खर्चे ${expenses} रुपये हैं। और कंपनी से कुल बिल ${bills} का है।`;
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(msg);
-        utter.lang = langCode;
-        utter.rate = 0.95;
+        utter.lang = `${window.currentLang || 'hi'}-IN`;
         window.speechSynthesis.speak(utter);
       }
     };
@@ -1958,40 +1898,23 @@
     window.connectCloud = async (isSignUp) => {
       const email = document.getElementById('authEmail').value.trim();
       const pass = document.getElementById('authPass').value.trim();
-      if (!email || !pass) return alert("Please enter both email and password.");
-
+      if (!email || !pass) return alert("Please enter email & password.");
       try {
-        if (isSignUp) {
-          await createUserWithEmailAndPassword(auth, email, pass);
-          alert("Account registered successfully!");
-        } else {
-          await signInWithEmailAndPassword(auth, email, pass);
-        }
+        if (isSignUp) await createUserWithEmailAndPassword(auth, email, pass);
+        else await signInWithEmailAndPassword(auth, email, pass);
         closeAuthModal();
-      } catch (err) {
-        alert("Error: " + err.message);
-      }
+      } catch (err) { alert("Error: " + err.message); }
     };
 
     window.handleForgotPassword = async () => {
       const email = document.getElementById('authEmail').value.trim();
-      if (!email) return alert("Please enter your email address first.");
-      try {
-        await sendPasswordResetEmail(auth, email);
-        alert("Password reset email sent! Check your inbox.");
-      } catch (err) {
-        alert("Error: " + err.message);
-      }
+      if (!email) return alert("Enter email first.");
+      try { await sendPasswordResetEmail(auth, email); alert("Reset email sent!"); } catch (e) { alert(e.message); }
     };
 
     window.logoutAccount = () => {
-      if (confirm("Log out of your account?")) {
-        signOut(auth).then(() => {
-          currentUser = null;
-          loadLocalState();
-          closeProfileModal();
-          location.reload();
-        });
+      if (confirm("Log out of Cloud?")) {
+        signOut(auth).then(() => { currentUser = null; loadLocalState(); closeProfileModal(); location.reload(); });
       }
     };
 
@@ -2000,21 +1923,15 @@
         currentUser = user;
         loadLocalState();
         updateSyncStatusUI();
-
-        onSnapshot(doc(db, "users", user.uid), (docSnap) => {
-          if (docSnap.exists()) {
-            state = docSnap.data();
+        onSnapshot(doc(db, "users", `${user.uid}_${getActiveAccountId()}`), (snap) => {
+          if (snap.exists() && !state.pendingSync) {
+            state = snap.data();
             localStorage.setItem(getStorageKey(), JSON.stringify(state));
             renderAll();
-          } else {
-            persistState();
-          }
+          } else { persistState(); }
         });
       } else {
-        currentUser = null;
-        loadLocalState();
-        updateSyncStatusUI();
-        renderAll();
+        currentUser = null; loadLocalState(); updateSyncStatusUI(); renderAll();
       }
     });
 
