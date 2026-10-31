@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
   
-  <link rel="icon" type="image/png" href="./logo.png?v=4">
-  <link rel="apple-touch-icon" href="./logo.png?v=4">
-  <link rel="manifest" href="manifest.json?v=4">
+  <link rel="icon" type="image/png" href="./logo.png?v=5">
+  <link rel="apple-touch-icon" href="./logo.png?v=5">
+  <link rel="manifest" href="manifest.json?v=5">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#000000">
@@ -18,13 +18,14 @@
       darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: { sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'Inter', 'sans-serif'] }
+          fontFamily: { sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'SF Pro Display', 'Inter', 'sans-serif'] }
         }
       }
     };
   </script>
 
   <style>
+    /* Adaptive iOS Frosted Glass Themes */
     html.theme-amoled {
       --bg-main: #000000;
       --card-bg: rgba(18, 20, 24, 0.65);
@@ -32,7 +33,11 @@
       --card-specular: rgba(255, 255, 255, 0.05);
       --text-main: #f8fafc;
       --text-sub: #94a3b8;
-      --nav-bg: rgba(10, 10, 10, 0.85);
+      --nav-pill-bg: rgba(22, 22, 24, 0.72);
+      --nav-pill-border: rgba(255, 255, 255, 0.18);
+      --nav-active-bubble: rgba(255, 255, 255, 0.14);
+      --nav-icon-inactive: #94a3b8;
+      --nav-icon-active: #ffffff;
       --input-bg: rgba(255, 255, 255, 0.08);
       --input-border: rgba(255, 255, 255, 0.16);
       --input-text: #ffffff;
@@ -45,7 +50,11 @@
       --card-specular: rgba(255, 255, 255, 0.06);
       --text-main: #f1f5f9;
       --text-sub: #94a3b8;
-      --nav-bg: rgba(15, 23, 42, 0.88);
+      --nav-pill-bg: rgba(18, 26, 42, 0.78);
+      --nav-pill-border: rgba(255, 255, 255, 0.15);
+      --nav-active-bubble: rgba(255, 255, 255, 0.16);
+      --nav-icon-inactive: #94a3b8;
+      --nav-icon-active: #ffffff;
       --input-bg: rgba(255, 255, 255, 0.08);
       --input-border: rgba(255, 255, 255, 0.18);
       --input-text: #ffffff;
@@ -58,7 +67,11 @@
       --card-specular: rgba(255, 255, 255, 1);
       --text-main: #0f172a;
       --text-sub: #475569;
-      --nav-bg: rgba(255, 255, 255, 0.95);
+      --nav-pill-bg: rgba(255, 255, 255, 0.88);
+      --nav-pill-border: rgba(0, 0, 0, 0.12);
+      --nav-active-bubble: rgba(0, 0, 0, 0.08);
+      --nav-icon-inactive: #64748b;
+      --nav-icon-active: #0f172a;
       --input-bg: #e2e8f0;
       --input-border: #94a3b8;
       --input-text: #0f172a;
@@ -81,17 +94,28 @@
     }
 
     .ios-header {
-      background: var(--nav-bg);
+      background: var(--card-bg);
       backdrop-filter: blur(32px) saturate(200%);
       -webkit-backdrop-filter: blur(32px) saturate(200%);
       border-bottom: 1px solid var(--card-border);
     }
 
-    .ios-instagram-nav {
-      background: var(--nav-bg);
-      backdrop-filter: blur(36px) saturate(210%);
-      -webkit-backdrop-filter: blur(36px) saturate(210%);
-      border-top: 1px solid var(--card-border);
+    /* Floating iOS Instagram Pill Navigation Bar */
+    .ios-instagram-floating-pill {
+      background: var(--nav-pill-bg);
+      backdrop-filter: blur(30px) saturate(190%);
+      -webkit-backdrop-filter: blur(30px) saturate(190%);
+      border: 1px solid var(--nav-pill-border);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.42), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    }
+
+    .nav-tab-item {
+      color: var(--nav-icon-inactive);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-tab-item.active {
+      color: var(--nav-icon-active);
+      background-color: var(--nav-active-bubble);
     }
 
     .app-input {
@@ -112,11 +136,27 @@
       margin: 0 1.5px;
     }
 
+    /* Graphical Splash Animations */
+    .spin-slow {
+      animation: spin 14s linear infinite;
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    .splash-glow {
+      animation: ambientGlow 2.5s ease-in-out infinite alternate;
+    }
+    @keyframes ambientGlow {
+      0% { box-shadow: 0 0 25px rgba(245, 158, 11, 0.25); transform: scale(0.97); }
+      100% { box-shadow: 0 0 65px rgba(245, 158, 11, 0.65); transform: scale(1.02); }
+    }
+
     .letter-anim {
       display: inline-block;
       opacity: 0;
-      transform: translateY(20px) scale(0.8);
-      animation: popIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      transform: translateY(22px) scale(0.75);
+      animation: popIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     @keyframes popIn {
       to { opacity: 1; transform: translateY(0) scale(1); }
@@ -126,20 +166,34 @@
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
-<body class="min-h-screen pb-28 select-none no-scrollbar">
+<body class="min-h-screen pb-32 select-none no-scrollbar">
 
-  <!-- 1. SPLASH SCREEN -->
-  <div id="splashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black transition-opacity duration-500">
+  <!-- 1. MODERN GRAPHICAL ANIMATED SPLASH SCREEN -->
+  <div id="splashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black transition-opacity duration-700">
     <div class="relative z-10 flex flex-col items-center">
-      <img src="./logo.png" alt="ठेकेDAAR" class="w-24 h-24 rounded-full border-2 border-amber-500 shadow-2xl object-cover mb-4 animate-pulse" />
+      <!-- Animated Emblem with Rotating Industrial Ring -->
+      <div class="relative flex items-center justify-center mb-6">
+        <div class="absolute w-36 h-36 rounded-full border-2 border-dashed border-amber-500/40 spin-slow"></div>
+        <div class="w-28 h-28 rounded-full border-2 border-amber-500 splash-glow overflow-hidden bg-black flex items-center justify-center shadow-2xl relative z-10">
+          <img src="./logo.png" alt="ठेकेDAAR" class="w-full h-full object-cover" />
+        </div>
+      </div>
+
+      <!-- Animated Typography -->
       <div id="thekedaarLetters" class="text-3xl font-black text-white tracking-widest flex items-center"></div>
-      <p class="text-amber-500 text-[10px] font-bold uppercase tracking-widest mt-2 opacity-80">Workforce & Site System</p>
+      <div class="flex items-center gap-2 mt-2.5 opacity-80">
+        <span class="w-5 h-px bg-amber-500"></span>
+        <p class="text-amber-500 text-[10px] font-bold uppercase tracking-widest">Workforce & Site System</p>
+        <span class="w-5 h-px bg-amber-500"></span>
+      </div>
     </div>
   </div>
 
   <!-- 2. TOP HEADER -->
   <header class="sticky top-0 z-30 px-4 pt-4 pb-2.5 ios-header">
     <div class="max-w-md mx-auto flex items-center justify-between">
+      
+      <!-- Left: User Profile Avatar Badge -->
       <div class="flex items-center gap-3">
         <button onclick="openSettingsModal()" class="relative group active:scale-95 transition-transform" title="Account & Settings">
           <div id="userAvatarBadge" class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 font-black text-base flex items-center justify-center shadow-lg border border-white/20 overflow-hidden">
@@ -154,9 +208,31 @@
         </div>
       </div>
 
-      <button onclick="navigateTo('viewBills')" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center text-lg active:scale-90 transition-transform shadow-sm" title="Company Bills">
-        🧾
-      </button>
+      <!-- Right: Action Buttons Group (Developer Badge + Bills Button) -->
+      <div class="flex items-center gap-2">
+        <!-- Expandable Developer Instagram Button -->
+        <div class="relative flex items-center">
+          <button onclick="toggleDeveloperBadge()" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center text-base active:scale-90 transition-transform shadow-sm" title="Developer Info">
+            👨‍💻
+          </button>
+          
+          <!-- Slide-out Instagram Pill Container -->
+          <div id="developerPill" class="hidden absolute right-12 top-0 h-10 pl-2.5 pr-3 rounded-2xl ios-glass items-center gap-2 whitespace-nowrap shadow-xl z-20 border border-amber-500/30">
+            <a href="https://www.instagram.com/raahul.108?dlrf=dzg5ODNueHcwbmxh" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                📸
+              </span>
+              <span class="text-xs font-bold text-zinc-100 hover:text-amber-400">@raahul.108</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Bills Icon -->
+        <button onclick="navigateTo('viewBills')" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center text-lg active:scale-90 transition-transform shadow-sm" title="Company Bills">
+          🧾
+        </button>
+      </div>
+
     </div>
   </header>
 
@@ -225,7 +301,7 @@
       <div id="homeRecentLabour"></div>
     </section>
 
-    <!-- VIEW 2: LABOUR REGISTER & ACTIONS -->
+    <!-- VIEW 2: LABOUR REGISTER -->
     <section id="viewLabours" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black" data-i18n="tabLabour">👷‍♂️ Labour Register</h2>
@@ -244,7 +320,7 @@
       <div id="labourList" class="space-y-2.5"></div>
     </section>
 
-    <!-- VIEW 3: MONTHLY ARCHIVE / LEDGER -->
+    <!-- VIEW 3: MONTHLY ARCHIVE -->
     <section id="viewMonthly" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black" data-i18n="tabMonthly">📅 Monthly Ledger & Archive</h2>
@@ -273,16 +349,19 @@
 
   </main>
 
-  <!-- 5. iOS INSTAGRAM BOTTOM NAVIGATION BAR -->
-  <nav class="fixed bottom-0 inset-x-0 z-40 ios-instagram-nav pb-safe pt-2">
-    <div class="max-w-md mx-auto px-6 pb-2 flex items-center justify-between">
-      <button onclick="navigateTo('viewHome')" id="nav-viewHome" class="flex flex-col items-center justify-center w-12 py-1 text-amber-500 active:scale-90 transition-transform">
+  <!-- 5. FLOATING iOS INSTAGRAM PILL NAVIGATION BAR -->
+  <div class="fixed bottom-4 inset-x-0 z-40 flex justify-center pointer-events-none px-4">
+    <nav class="ios-instagram-floating-pill pointer-events-auto rounded-full py-1.5 px-2 flex items-center justify-between gap-1 w-full max-w-[370px]">
+      
+      <!-- Home (Feed style with active background pill bubble) -->
+      <button onclick="navigateTo('viewHome')" id="nav-viewHome" class="nav-tab-item active flex items-center justify-center w-14 h-11 rounded-full active:scale-90" title="Home">
         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 2.1l9 8.1c.4.3.6.8.6 1.3v8.5c0 1.1-.9 2-2 2h-4.5c-.8 0-1.5-.7-1.5-1.5V15c0-.6-.4-1-1-1s-1 .4-1 1v5.5c0 .8-.7 1.5-1.5 1.5H5.4c-1.1 0-2-.9-2-2v-8.5c0-.5.2-1 .6-1.3l9-8.1c.6-.6 1.6-.6 2.2 0z"/>
         </svg>
       </button>
 
-      <button onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="flex flex-col items-center justify-center w-12 py-1 text-zinc-400 active:scale-90 transition-transform">
+      <!-- Labours (People / Direct style) -->
+      <button onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="nav-tab-item flex items-center justify-center w-14 h-11 rounded-full active:scale-90" title="Labours">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
           <circle cx="9" cy="7" r="4"></circle>
@@ -291,20 +370,23 @@
         </svg>
       </button>
 
-      <button onclick="openFormModal('labour')" class="flex items-center justify-center w-12 py-1 active:scale-90 transition-transform" title="New Entry">
+      <!-- Create / Post (+) -->
+      <button onclick="openFormModal('labour')" class="flex items-center justify-center w-12 h-11 active:scale-90 transition-transform" title="New Entry">
         <div class="w-7 h-7 rounded-lg border-2 border-amber-500 flex items-center justify-center text-amber-500 font-bold text-lg leading-none">
           +
         </div>
       </button>
 
-      <button onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="flex flex-col items-center justify-center w-12 py-1 text-zinc-400 active:scale-90 transition-transform">
+      <!-- Expenses (Reels / Activity style) -->
+      <button onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="nav-tab-item flex items-center justify-center w-14 h-11 rounded-full active:scale-90" title="Expenses">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
           <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
         </svg>
       </button>
 
-      <button onclick="navigateTo('viewMonthly')" id="nav-viewMonthly" class="flex flex-col items-center justify-center w-12 py-1 text-zinc-400 active:scale-90 transition-transform">
+      <!-- Monthly Calendar -->
+      <button onclick="navigateTo('viewMonthly')" id="nav-viewMonthly" class="nav-tab-item flex items-center justify-center w-14 h-11 rounded-full active:scale-90" title="Monthly Archive">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
           <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
           <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -312,10 +394,46 @@
           <line x1="3" y1="10" x2="21" y2="10"></line>
         </svg>
       </button>
-    </div>
-  </nav>
 
-  <!-- 6. MODAL: MULTI-SELECT CARRY FORWARD LABOURS -->
+    </nav>
+  </div>
+
+  <!-- 6. LIVE IMAGE CROPPER MODAL (TOUCH / DRAG / ZOOM) -->
+  <div id="cropperModal" class="fixed inset-0 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl flex flex-col items-center">
+      <div class="w-full flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2">
+        <h3 class="font-black text-sm">Crop Image / फोटो क्रॉप करें</h3>
+        <button onclick="closeCropperModal()" class="text-zinc-400 hover:text-white text-lg">✕</button>
+      </div>
+
+      <!-- Canvas Cropping Viewport -->
+      <div class="relative w-64 h-64 rounded-2xl overflow-hidden bg-black/60 border border-white/20 touch-none flex items-center justify-center">
+        <canvas id="cropCanvas" width="256" height="256" class="cursor-grab active:cursor-grabbing"></canvas>
+        <!-- Circular Overlay Guide -->
+        <div class="absolute inset-0 pointer-events-none rounded-full border-2 border-amber-500/80 shadow-[0_0_0_9999px_rgba(0,0,0,0.55)]"></div>
+      </div>
+
+      <!-- Zoom Slider -->
+      <div class="w-full space-y-1">
+        <div class="flex justify-between text-[10px] text-zinc-400 font-bold uppercase">
+          <span>Zoom</span>
+          <span id="zoomValueText">1.0x</span>
+        </div>
+        <input type="range" id="cropZoomSlider" min="0.5" max="3" step="0.05" value="1" oninput="handleZoomChange(this.value)" class="w-full accent-amber-500 cursor-pointer" />
+      </div>
+
+      <div class="w-full flex gap-2 pt-1">
+        <button onclick="closeCropperModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">
+          Cancel
+        </button>
+        <button onclick="saveCroppedImageResult()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-black text-xs shadow active:scale-95 transition-transform">
+          Apply & Save
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. MULTI-SELECT CARRY FORWARD LABOURS MODAL -->
   <div id="carryModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2 shrink-0">
@@ -335,10 +453,8 @@
         </button>
       </div>
 
-      <!-- Scrollable Checkbox List -->
       <div id="carryWorkersList" class="flex-1 overflow-y-auto space-y-2 pr-1"></div>
 
-      <!-- Action Buttons -->
       <div class="pt-2 border-t border-zinc-200 dark:border-white/10 shrink-0 flex gap-2">
         <button onclick="closeCarrySelectModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">
           Cancel
@@ -350,7 +466,7 @@
     </div>
   </div>
 
-  <!-- 7. DATE-WISE HAJRI BOOK MODAL -->
+  <!-- 8. DATE-WISE HAJRI BOOK MODAL -->
   <div id="hajriBookModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-lg w-full p-5 space-y-4 shadow-2xl max-h-[92vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2 shrink-0">
@@ -379,7 +495,7 @@
     </div>
   </div>
 
-  <!-- 8. SETTINGS MODAL -->
+  <!-- 9. SETTINGS MODAL -->
   <div id="settingsModal" class="fixed inset-0 bg-black/60 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-3">
@@ -387,22 +503,30 @@
         <button onclick="closeSettingsModal()" class="text-zinc-400 hover:text-zinc-600 dark:hover:text-white text-lg">✕</button>
       </div>
 
+      <!-- User Profile Photo with Direct Camera / Gallery Selection & Crop -->
       <div class="space-y-2">
         <label class="text-xs font-bold text-zinc-500 uppercase">Your Profile Photo / प्रोफाइल फोटो</label>
         <div class="flex items-center gap-3">
           <div id="settingsAvatarPreview" class="w-14 h-14 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 font-black text-xl flex items-center justify-center shadow border-2 border-white/20 overflow-hidden shrink-0">
             <span>ठे</span>
           </div>
-          <div class="flex-1 space-y-1">
-            <label class="px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-500 border border-amber-500/30 text-xs font-bold rounded-xl cursor-pointer block text-center">
-              <span>📷 Change Photo</span>
-              <input type="file" id="userProfileInput" accept="image/*" class="hidden" onchange="updateUserProfilePhoto(this)" />
-            </label>
-            <p class="text-[10px] text-zinc-500">Appears on your home dashboard</p>
+          <div class="flex-1 space-y-1.5">
+            <div class="grid grid-cols-2 gap-1.5">
+              <label class="px-2 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-500 border border-amber-500/30 text-[10px] font-bold rounded-xl cursor-pointer text-center block">
+                <span>📸 Camera</span>
+                <input type="file" accept="image/*" capture="user" class="hidden" onchange="initiateCropFromFile(this, 'userProfile')" />
+              </label>
+              <label class="px-2 py-1.5 bg-black/10 dark:bg-white/10 hover:bg-white/20 text-[10px] font-bold rounded-xl cursor-pointer text-center block">
+                <span>📁 Gallery</span>
+                <input type="file" accept="image/*" class="hidden" onchange="initiateCropFromFile(this, 'userProfile')" />
+              </label>
+            </div>
+            <p class="text-[9px] text-zinc-500">Includes touch zoom & crop</p>
           </div>
         </div>
       </div>
 
+      <!-- Themes -->
       <div class="space-y-1.5">
         <label class="text-xs font-bold text-zinc-500 uppercase">App Theme / थीम</label>
         <div class="grid grid-cols-3 gap-2">
@@ -412,6 +536,7 @@
         </div>
       </div>
 
+      <!-- 10 Languages -->
       <div class="space-y-1.5">
         <label class="text-xs font-bold text-zinc-500 uppercase">Language / भाषा (10 Languages)</label>
         <select id="settingsLang" onchange="changeLanguage(this.value)" class="app-input w-full rounded-xl p-2.5 text-xs font-bold focus:outline-none">
@@ -428,6 +553,7 @@
         </select>
       </div>
 
+      <!-- Account Management -->
       <div class="space-y-2 pt-2 border-t border-zinc-200 dark:border-white/10">
         <div id="accountStatusText" class="text-xs text-zinc-500">Currently in Local Mode</div>
         <button onclick="closeSettingsModal(); openAuthModal();" class="w-full py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-bold text-xs flex items-center justify-center gap-1.5 shadow">
@@ -440,7 +566,7 @@
     </div>
   </div>
 
-  <!-- 9. INPUT FORMS MODAL -->
+  <!-- 10. INPUT FORMS MODAL -->
   <div id="formModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2">
@@ -448,7 +574,7 @@
         <button onclick="closeFormModal()" class="text-zinc-400 hover:text-zinc-600 dark:hover:text-white text-lg">✕</button>
       </div>
 
-      <!-- Add Labour Form (Daily Wage Rate instead of Monthly Salary) -->
+      <!-- Add Labour Form -->
       <form id="labourForm" onsubmit="saveLabour(event)" class="space-y-3 hidden">
         <div>
           <input type="text" id="lName" list="knownLaboursList" onchange="autoFillKnownLabour(this.value)" required placeholder="Labour Name / नाम (e.g. Ramesh)" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
@@ -475,10 +601,23 @@
           </div>
         </div>
         
-        <label class="flex items-center justify-center border-2 border-dashed border-zinc-300 dark:border-white/20 rounded-xl px-3 py-3 text-xs cursor-pointer hover:bg-black/5 dark:hover:bg-white/5">
-          <span id="lPhotoLabel">📷 Upload Worker Photo</span>
-          <input type="file" id="lPhoto" accept="image/*" class="hidden" onchange="previewFileName('lPhoto','lPhotoLabel')" />
-        </label>
+        <!-- Dual Option: Camera or File Upload with Cropper -->
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between text-[10px] text-zinc-500 font-bold uppercase">
+            <span>Worker Photo / मजदूर फोटो:</span>
+            <span id="lPhotoStatus" class="text-amber-500">None</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center justify-center gap-1.5 border border-dashed border-amber-500/40 rounded-xl p-2.5 text-xs font-bold text-amber-500 cursor-pointer bg-amber-500/5 hover:bg-amber-500/10 active:scale-95">
+              <span>📸 Camera</span>
+              <input type="file" accept="image/*" capture="environment" class="hidden" onchange="initiateCropFromFile(this, 'labourPhoto')" />
+            </label>
+            <label class="flex items-center justify-center gap-1.5 border border-dashed border-zinc-300 dark:border-white/20 rounded-xl p-2.5 text-xs font-bold text-zinc-400 cursor-pointer bg-black/5 dark:bg-white/5 hover:bg-white/10 active:scale-95">
+              <span>📁 Gallery</span>
+              <input type="file" accept="image/*" class="hidden" onchange="initiateCropFromFile(this, 'labourPhoto')" />
+            </label>
+          </div>
+        </div>
         
         <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm shadow">Save Labour / सेव करें</button>
       </form>
@@ -523,7 +662,7 @@
     </div>
   </div>
 
-  <!-- 10. ADVANCE MODAL -->
+  <!-- 11. ADVANCE MODAL -->
   <div id="advanceModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center border-b border-zinc-200 dark:border-white/10 pb-2">
@@ -560,7 +699,7 @@
     </div>
   </div>
 
-  <!-- 11. AUTH MODAL -->
+  <!-- 12. AUTH MODAL -->
   <div id="authModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center">
@@ -616,6 +755,11 @@
       dailyHajriRecords: {},
       masterLabourDirectory: []
     };
+
+    let tempPendingLabourPhoto = null;
+    let currentCropperTarget = null; // 'userProfile' | 'labourPhoto'
+    let cropImg = new Image();
+    let cropState = { scale: 1, x: 0, y: 0, isDragging: false, startX: 0, startY: 0 };
 
     const i18n = {
       hi: { labourDue: "कुल मजदूर बकाया", expenses: "खर्चे व किराया", bills: "कंपनी बिल", tabLabour: "👷‍♂️ मजदूर व हाजिरी", tabMonthly: "📅 मासिक बही-खाता", tabExpenses: "🛺 खर्चे व किराया", tabBills: "🧾 कंपनी बिल", audioSummaryTitle: "Site Audio Summary / बोलकर हिसाब सुनें", audioSummarySub: "एक टैप में पूरे साइट का हिसाब सुनें", listenBtn: "LISTEN / सुनें", liveSnapshot: "LIVE WORKFORCE SNAPSHOT" },
@@ -684,8 +828,8 @@
       setTimeout(() => {
         const splash = document.getElementById('splashScreen');
         splash.style.opacity = '0';
-        setTimeout(() => splash.style.display = 'none', 500);
-      }, 2100);
+        setTimeout(() => splash.style.display = 'none', 700);
+      }, 2300);
     }
 
     async function persistState() {
@@ -717,41 +861,117 @@
       });
     }
 
-    function compressImage(file) {
-      return new Promise((resolve) => {
-        if (!file) return resolve(null);
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const img = new Image();
-          img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const maxDim = 320;
-            let w = img.width, h = img.height;
-            if (w > h && w > maxDim) { h *= maxDim / w; w = maxDim; }
-            else if (h > maxDim) { w *= maxDim / h; h = maxDim; }
-            canvas.width = w; canvas.height = h;
-            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-            resolve(canvas.toDataURL('image/jpeg', 0.65));
-          };
-          img.src = e.target.result;
+    // Toggle Developer Instagram Pill
+    window.toggleDeveloperBadge = () => {
+      const pill = document.getElementById('developerPill');
+      pill.classList.toggle('hidden');
+      pill.classList.toggle('flex');
+    };
+
+    // --- CROPPER ENGINE (TOUCH / DRAG / ZOOM) ---
+    window.initiateCropFromFile = (input, targetType) => {
+      const file = input.files[0];
+      if (!file) return;
+
+      currentCropperTarget = targetType;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        cropImg.onload = () => {
+          cropState.scale = 1;
+          cropState.x = 0;
+          cropState.y = 0;
+          document.getElementById('cropZoomSlider').value = 1;
+          document.getElementById('zoomValueText').innerText = '1.0x';
+          document.getElementById('cropperModal').classList.replace('hidden', 'flex');
+          drawCropCanvas();
         };
-        reader.readAsDataURL(file);
-      });
+        cropImg.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+      input.value = ''; // Reset input
+    };
+
+    window.closeCropperModal = () => {
+      document.getElementById('cropperModal').classList.replace('flex', 'hidden');
+    };
+
+    window.handleZoomChange = (val) => {
+      cropState.scale = parseFloat(val);
+      document.getElementById('zoomValueText').innerText = `${cropState.scale.toFixed(1)}x`;
+      drawCropCanvas();
+    };
+
+    function drawCropCanvas() {
+      const canvas = document.getElementById('cropCanvas');
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (!cropImg.src) return;
+
+      const baseScale = Math.max(canvas.width / cropImg.width, canvas.height / cropImg.height);
+      const curScale = baseScale * cropState.scale;
+      const drawW = cropImg.width * curScale;
+      const drawH = cropImg.height * curScale;
+
+      const drawX = (canvas.width - drawW) / 2 + cropState.x;
+      const drawY = (canvas.height - drawH) / 2 + cropState.y;
+
+      ctx.drawImage(cropImg, drawX, drawY, drawW, drawH);
     }
 
+    const canvas = document.getElementById('cropCanvas');
+    const startDrag = (clientX, clientY) => {
+      cropState.isDragging = true;
+      cropState.startX = clientX - cropState.x;
+      cropState.startY = clientY - cropState.y;
+    };
+    const moveDrag = (clientX, clientY) => {
+      if (!cropState.isDragging) return;
+      cropState.x = clientX - cropState.startX;
+      cropState.y = clientY - cropState.startY;
+      drawCropCanvas();
+    };
+    const endDrag = () => { cropState.isDragging = false; };
+
+    canvas.addEventListener('mousedown', e => startDrag(e.clientX, e.clientY));
+    window.addEventListener('mousemove', e => moveDrag(e.clientX, e.clientY));
+    window.addEventListener('mouseup', endDrag);
+
+    canvas.addEventListener('touchstart', e => {
+      if (e.touches.length === 1) startDrag(e.touches[0].clientX, e.touches[0].clientY);
+    });
+    canvas.addEventListener('touchmove', e => {
+      if (e.touches.length === 1) {
+        moveDrag(e.touches[0].clientX, e.touches[0].clientY);
+        e.preventDefault();
+      }
+    }, { passive: false });
+    canvas.addEventListener('touchend', endDrag);
+
+    window.saveCroppedImageResult = () => {
+      const canvas = document.getElementById('cropCanvas');
+      const croppedDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+
+      if (currentCropperTarget === 'userProfile') {
+        state.userProfilePhoto = croppedDataUrl;
+        persistState();
+        alert("Profile photo updated & cropped successfully!");
+      } else if (currentCropperTarget === 'labourPhoto') {
+        tempPendingLabourPhoto = croppedDataUrl;
+        document.getElementById('lPhotoStatus').innerText = '✅ Cropped Ready';
+      }
+      closeCropperModal();
+    };
+
+    // Navigation Switcher (iOS Instagram Floating Pill Tabs)
     window.navigateTo = (viewId) => {
       ['viewHome', 'viewLabours', 'viewMonthly', 'viewExpenses', 'viewBills'].forEach(v => {
         const el = document.getElementById(v);
         if (el) el.classList.toggle('hidden', v !== viewId);
         const navBtn = document.getElementById(`nav-${v}`);
         if (navBtn) {
-          if (v === viewId) {
-            navBtn.classList.remove('text-zinc-400');
-            navBtn.classList.add('text-amber-500');
-          } else {
-            navBtn.classList.remove('text-amber-500');
-            navBtn.classList.add('text-zinc-400');
-          }
+          if (v === viewId) navBtn.classList.add('active');
+          else navBtn.classList.remove('active');
         }
       });
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -767,6 +987,8 @@
       if (type === 'labour') {
         document.getElementById('labourForm').classList.remove('hidden');
         document.getElementById('formModalTitle').innerText = "Add New Labour / नया मजदूर जोड़ें";
+        tempPendingLabourPhoto = null;
+        document.getElementById('lPhotoStatus').innerText = 'None';
         populateLabourAutocomplete();
       } else if (type === 'expense') {
         document.getElementById('expenseForm').classList.remove('hidden');
@@ -778,15 +1000,6 @@
     };
     window.closeFormModal = () => document.getElementById('formModal').classList.replace('flex', 'hidden');
 
-    window.updateUserProfilePhoto = async (input) => {
-      const file = input.files[0];
-      if (!file) return;
-      const photoData = await compressImage(file);
-      state.userProfilePhoto = photoData;
-      persistState();
-      alert("Profile photo updated successfully!");
-    };
-
     window.toggleBillStatus = (billId) => {
       const bill = (state.bills || []).find(b => b.id === billId);
       if (!bill) return;
@@ -794,13 +1007,12 @@
       persistState();
     };
 
-    // --- INTERACTIVE CARRY FORWARD WORKERS MODAL ---
+    // Carry Forward Multi-select Modal
     window.openCarrySelectModal = () => {
       const currentSite = document.getElementById('siteSelect').value;
       const currentMonth = document.getElementById('monthSelect').value;
       const container = document.getElementById('carryWorkersList');
 
-      // Find all unique workers on this site who are NOT already in the active month
       const currentMonthWorkers = (state.labours || []).filter(l => l.site === currentSite && l.month === currentMonth);
       const currentMonthNames = new Set(currentMonthWorkers.map(w => w.name.trim().toLowerCase()));
 
@@ -831,7 +1043,7 @@
               : `<div class="w-9 h-9 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0">👷</div>`}
             <div class="truncate">
               <div class="font-bold text-xs truncate">${w.name}</div>
-              <div class="text-[10px] text-zinc-400">${w.category} • ₹${w.dailyRate || w.salary || 500}/day</div>
+              <div class="text-[10px] text-zinc-400">${w.category} • ₹${w.dailyRate || 500}/day</div>
             </div>
           </div>
         </label>
@@ -848,7 +1060,7 @@
       document.getElementById('carrySelectCount').innerText = `Selected: ${selected}`;
     };
 
-    window.toggleSelectAllCarry = (btn) => {
+    window.toggleSelectAllCarry = () => {
       const checkboxes = document.querySelectorAll('.carry-worker-cb');
       const allChecked = Array.from(checkboxes).every(cb => cb.checked);
       checkboxes.forEach(cb => cb.checked = !allChecked);
@@ -875,7 +1087,7 @@
             month: currentMonth,
             name: sourceWorker.name,
             category: sourceWorker.category,
-            dailyRate: sourceWorker.dailyRate || sourceWorker.salary || 500,
+            dailyRate: sourceWorker.dailyRate || 500,
             advance: 0,
             advanceLog: [],
             presentDays: 0,
@@ -892,7 +1104,7 @@
       navigateTo('viewLabours');
     };
 
-    // --- DAILY HAJRI BOOK ---
+    // Daily Hajri Book
     window.openHajriBookModal = () => {
       document.getElementById('hajriBookModal').classList.replace('hidden', 'flex');
       renderDailyHajriSheet();
@@ -992,10 +1204,11 @@
       const found = (state.masterLabourDirectory || []).find(w => w.name.toLowerCase() === name.trim().toLowerCase());
       if (found) {
         document.getElementById('lCategory').value = found.category || 'Mason (मिस्त्री)';
-        document.getElementById('lDailyRate').value = found.dailyRate || found.salary || '';
+        document.getElementById('lDailyRate').value = found.dailyRate || '';
         document.getElementById('lAdvance').value = 0;
         if (found.photo) {
-          document.getElementById('lPhotoLabel').innerText = '✅ Saved Photo Ready';
+          tempPendingLabourPhoto = found.photo;
+          document.getElementById('lPhotoStatus').innerText = '✅ Saved Photo Ready';
         }
       }
     };
@@ -1010,7 +1223,6 @@
       }
     };
 
-    // Save Labour with Daily Wage Rate
     window.saveLabour = async (e) => {
       e.preventDefault();
       const site = document.getElementById('siteSelect').value;
@@ -1019,9 +1231,8 @@
       const category = document.getElementById('lCategory').value;
       const dailyRate = Number(document.getElementById('lDailyRate').value) || 0;
       const initialAdvance = Number(document.getElementById('lAdvance').value) || 0;
-      const photoFile = document.getElementById('lPhoto').files[0];
       
-      let photo = await compressImage(photoFile);
+      let photo = tempPendingLabourPhoto;
       if (!photo) {
         const existing = (state.masterLabourDirectory || []).find(w => w.name.toLowerCase() === name.toLowerCase());
         if (existing) photo = existing.photo;
@@ -1039,7 +1250,7 @@
       state.labours.unshift({
         id: Date.now().toString(),
         site, month, name, category,
-        dailyRate: dailyRate,
+        dailyRate,
         advance: initialAdvance,
         advanceLog,
         presentDays: 0,
@@ -1055,18 +1266,18 @@
         state.masterLabourDirectory.push({ name, category, dailyRate, photo });
       }
 
+      tempPendingLabourPhoto = null;
       e.target.reset();
-      document.getElementById('lPhotoLabel').innerText = '📷 Upload Worker Photo';
+      document.getElementById('lPhotoStatus').innerText = 'None';
       closeFormModal();
       persistState();
       navigateTo('viewLabours');
     };
 
-    // Update Worker Daily Rate Anytime
     window.editLabourSalary = (id) => {
       const l = state.labours.find(x => x.id === id);
       if (!l) return;
-      const currentRate = l.dailyRate || l.salary || 500;
+      const currentRate = l.dailyRate || 500;
       const newRate = prompt(`Update daily attendance rate (₹/day) for ${l.name}:`, currentRate);
       if (newRate !== null && !isNaN(newRate) && Number(newRate) > 0) {
         l.dailyRate = Number(newRate);
@@ -1220,7 +1431,7 @@
       return `${langMap[mIdx]} ${year}`;
     }
 
-    // Master Render Method: Uses Daily Wage Rate
+    // Master Render Method
     window.renderAll = () => {
       const siteSelect = document.getElementById('siteSelect');
       const currentSite = siteSelect.value || state.sites[0];
@@ -1256,12 +1467,12 @@
       const filteredLabours = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth);
       let totalLabourDue = 0;
 
-      // Render Labour Register (Attendance × Daily Rate)
+      // Render Labour Cards
       document.getElementById('labourList').innerHTML = filteredLabours.length === 0
         ? `<div class="text-center py-8 text-xs text-zinc-500">No labour records found for ${activeMonth}. Tap "Carry" or "+ Worker".</div>`
         : filteredLabours.map(l => {
           const effectiveDays = (l.presentDays || 0) + ((l.halfDays || 0) * 0.5);
-          const rate = l.dailyRate || l.salary || 500;
+          const rate = l.dailyRate || 500;
           const earned = Math.round(rate * effectiveDays);
           const net = earned - (l.advance || 0);
           totalLabourDue += net;
@@ -1310,7 +1521,7 @@
 
       document.getElementById('summaryLabourDue').innerText = `₹${totalLabourDue.toLocaleString('en-IN')}`;
 
-      // Render Home Snapshot
+      // Render Home Recent Workforce
       if (filteredLabours.length === 0) {
         document.getElementById('homeRecentLabour').innerHTML = `
           <div class="ios-glass rounded-2xl p-5 text-center">
@@ -1324,7 +1535,7 @@
       } else {
         document.getElementById('homeRecentLabour').innerHTML = filteredLabours.slice(0, 4).map(l => {
           const effectiveDays = (l.presentDays || 0) + ((l.halfDays || 0) * 0.5);
-          const rate = l.dailyRate || l.salary || 500;
+          const rate = l.dailyRate || 500;
           const earned = Math.round(rate * effectiveDays);
           const net = earned - (l.advance || 0);
           return `
@@ -1399,7 +1610,7 @@
           `;
         }).join('');
 
-      // Render Monthly Ledger Content
+      // Monthly Ledger Content
       document.getElementById('monthlyLedgerContent').innerHTML = `
         <div class="ios-glass p-4 rounded-2xl space-y-3 shadow-sm">
           <div class="flex justify-between items-center text-xs pb-2 border-b border-zinc-200 dark:border-white/10">
