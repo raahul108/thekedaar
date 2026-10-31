@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
   
-  <link rel="icon" type="image/png" href="./logo.png?v=11">
-  <link rel="apple-touch-icon" href="./logo.png?v=11">
-  <link rel="manifest" href="manifest.json?v=11">
+  <link rel="icon" type="image/png" href="./logo.png?v=13">
+  <link rel="apple-touch-icon" href="./logo.png?v=13">
+  <link rel="manifest" href="manifest.json?v=13">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#000000">
@@ -27,12 +27,12 @@
   <style>
     html.theme-amoled {
       --bg-main: #000000;
-      --card-bg: rgba(18, 20, 24, 0.82);
+      --card-bg: rgba(18, 20, 24, 0.84);
       --card-border: rgba(255, 255, 255, 0.16);
       --card-specular: rgba(255, 255, 255, 0.08);
       --text-main: #ffffff;
       --text-sub: #a1a1aa;
-      --nav-pill-bg: rgba(22, 22, 24, 0.88);
+      --nav-pill-bg: rgba(22, 22, 24, 0.90);
       --nav-pill-border: rgba(255, 255, 255, 0.22);
       --nav-active-bubble: rgba(255, 255, 255, 0.18);
       --nav-icon-inactive: #94a3b8;
@@ -44,12 +44,12 @@
     }
     html.theme-dark {
       --bg-main: #0b111e;
-      --card-bg: rgba(22, 32, 50, 0.85);
+      --card-bg: rgba(22, 32, 50, 0.86);
       --card-border: rgba(255, 255, 255, 0.18);
       --card-specular: rgba(255, 255, 255, 0.08);
       --text-main: #f8fafc;
       --text-sub: #cbd5e1;
-      --nav-pill-bg: rgba(18, 26, 42, 0.90);
+      --nav-pill-bg: rgba(18, 26, 42, 0.92);
       --nav-pill-border: rgba(255, 255, 255, 0.24);
       --nav-active-bubble: rgba(255, 255, 255, 0.18);
       --nav-icon-inactive: #94a3b8;
@@ -66,7 +66,7 @@
       --card-specular: #ffffff;
       --text-main: #09090b;
       --text-sub: #3f3f46;
-      --nav-pill-bg: rgba(255, 255, 255, 0.95);
+      --nav-pill-bg: rgba(255, 255, 255, 0.96);
       --nav-pill-border: #94a3b8;
       --nav-active-bubble: #e2e8f0;
       --nav-icon-inactive: #64748b;
@@ -141,14 +141,18 @@
 
   <!-- 2. STRICT ONLINE-ONLY CONNECTION BLOCKER OVERLAY -->
   <div id="offlineBlockerModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl hidden flex-col items-center justify-center p-6 text-center">
-    <div class="w-16 h-16 rounded-3xl bg-rose-500/20 text-rose-500 flex items-center justify-center text-3xl mb-4 animate-bounce">📡</div>
+    <div class="w-16 h-16 rounded-3xl bg-rose-500/20 text-rose-500 flex items-center justify-center mb-4 animate-bounce">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 2.829a4.978 4.978 0 01-1.414-2.83m-1.414 5.658a9 9 0 01-2.167-9.238m7.824 2.167a1 1 0 111.414 1.414m-1.414-1.414L3 3m8.293 8.293l1.414 1.414" />
+      </svg>
+    </div>
     <h2 class="text-lg font-black text-white">Internet Connection Required</h2>
     <p class="text-xs text-zinc-400 max-w-xs mt-1 leading-relaxed">
       ठेकेDAAR is configured for strict Online Cloud Mode only. Please turn on Mobile Data or Wi-Fi to continue.
     </p>
   </div>
 
-  <!-- 3. TOP HEADER (MONTHLY LEDGER & SETTINGS IN TOP RIGHT) -->
+  <!-- 3. TOP HEADER (SVG ICONS ONLY) -->
   <header class="sticky top-0 z-30 px-4 pt-4 pb-2.5 ios-header">
     <div class="max-w-md mx-auto flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -164,17 +168,25 @@
             <h1 class="text-base font-black tracking-tight leading-none">ठेकेDAAR</h1>
             <span id="activeNicknameBadge" class="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-500/15 text-amber-500 font-bold border border-amber-500/30">Main</span>
           </div>
-          <span id="syncStatus" class="text-[10px] text-emerald-500 font-bold">● Online Cloud Active</span>
+          <span id="syncStatus" class="text-[10px] text-emerald-500 font-bold block mt-0.5">Online Cloud Active</span>
         </div>
       </div>
 
-      <!-- Top Right Corner: Monthly Ledger Icon & Settings Button -->
+      <!-- Top Right Corner: Monthly Ledger SVG Icon & Settings SVG Icon -->
       <div class="flex items-center gap-2">
-        <button onclick="openMonthlyLedgerModal()" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center text-lg active:scale-90 transition-transform shadow-sm" title="Monthly Ledger">
-          📅
+        <button onclick="openMonthlyLedgerModal()" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center active:scale-90 transition-transform shadow-sm text-amber-500" title="Monthly Ledger">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
         </button>
-        <button onclick="openSettingsModal()" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center text-lg active:scale-90 transition-transform shadow-sm" title="Settings">
-          ⚙️
+        <button onclick="openSettingsModal()" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center active:scale-90 transition-transform shadow-sm" title="Settings">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
         </button>
       </div>
     </div>
@@ -182,13 +194,23 @@
 
   <!-- 4. MAIN SITE & MONTH CONTROLLER -->
   <div class="max-w-md mx-auto px-4 pt-3">
-    <div class="ios-glass rounded-2xl p-2.5 flex items-center justify-between gap-2 shadow-sm">
+    <div class="ios-glass rounded-2xl p-2.5 flex items-center justify-between gap-1.5 shadow-sm">
       <div class="flex items-center gap-1.5 flex-1 min-w-0">
-        <span class="text-sm">📍</span>
+        <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
         <select id="siteSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold focus:outline-none w-full truncate"></select>
       </div>
       <button onclick="addNewSite()" class="px-2.5 py-1 bg-amber-500/15 hover:bg-amber-500/25 text-amber-500 font-bold text-xs rounded-xl transition-all shrink-0">
         + SITE
+      </button>
+      <!-- Delete Site SVG Button: Visible ONLY to Main Contractor -->
+      <button id="deleteSiteBtn" onclick="deleteCurrentSite()" class="p-1.5 bg-rose-500/15 hover:bg-rose-500/25 text-rose-500 rounded-xl transition-all shrink-0" title="Delete Active Site (Main Contractor Only)">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
       </button>
       <div class="h-4 w-px bg-zinc-300 dark:bg-white/10"></div>
       <input type="month" id="monthSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold focus:outline-none cursor-pointer" />
@@ -209,7 +231,7 @@
         <span id="summaryExpensesTotal" class="text-base font-black text-amber-500 mt-0.5">₹0</span>
       </div>
       <div onclick="navigateTo('viewBills')" class="rounded-2xl p-3 border border-emerald-500/30 bg-emerald-500/10 ios-glass text-center flex flex-col justify-center cursor-pointer active:scale-95 transition-transform">
-        <span class="text-[9px] font-bold tracking-wider uppercase text-emerald-500" data-i18n="bills">BILLS ↗</span>
+        <span class="text-[9px] font-bold tracking-wider uppercase text-emerald-500" data-i18n="bills">BILLS</span>
         <span id="summaryBillsTotal" class="text-base font-black text-emerald-500 mt-0.5">₹0</span>
       </div>
     </div>
@@ -224,7 +246,11 @@
         <span class="waveform-bar h-2"></span><span class="waveform-bar h-4"></span><span class="waveform-bar h-5"></span><span class="waveform-bar h-3"></span><span class="waveform-bar h-5"></span><span class="waveform-bar h-2"></span>
       </div>
       <button onclick="playVoiceSummary()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-zinc-950 font-black text-xs flex items-center gap-2 mx-auto active:scale-95 transition-all shadow-md">
-        <span>🔊</span> <span data-i18n="listenBtn">LISTEN / सुनें</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+        <span data-i18n="listenBtn">LISTEN / सुनें</span>
       </button>
     </div>
 
@@ -232,7 +258,7 @@
     <section id="viewHome" class="space-y-3">
       <div class="flex items-center justify-between pt-1">
         <h2 class="text-[11px] font-bold uppercase tracking-wider opacity-70" data-i18n="liveSnapshot">LIVE WORKFORCE SNAPSHOT</h2>
-        <button onclick="navigateTo('viewLabours')" class="text-[11px] font-bold text-amber-500 hover:underline">View All →</button>
+        <button onclick="navigateTo('viewLabours')" class="text-[11px] font-bold text-amber-500 hover:underline">View All</button>
       </div>
       <div id="homeRecentLabour" class="space-y-3.5"></div>
     </section>
@@ -240,13 +266,14 @@
     <!-- VIEW 2: LABOUR REGISTER -->
     <section id="viewLabours" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
-        <h2 class="text-sm font-black" data-i18n="tabLabour">👷‍♂️ Labour Register</h2>
+        <h2 class="text-sm font-black" data-i18n="tabLabour">Labour Register</h2>
         <div class="flex items-center gap-1.5">
-          <button onclick="openHajriBookModal()" class="px-2.5 py-1.5 bg-amber-500/20 border border-amber-500/40 text-amber-500 font-bold text-xs rounded-xl active:scale-95 transition-transform">
-            📖 Hajri Book
+          <button onclick="openHajriBookModal()" class="px-2.5 py-1.5 bg-amber-500/20 border border-amber-500/40 text-amber-500 font-bold text-xs rounded-xl active:scale-95 transition-transform flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <span>Hajri Book</span>
           </button>
           <button onclick="openCarrySelectModal()" class="px-2.5 py-1.5 ios-glass text-amber-500 font-bold text-xs rounded-xl active:scale-95 transition-transform">
-            ⚡ Carry
+            Carry
           </button>
           <button onclick="openFormModal('labour')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs rounded-xl shadow">
             + Worker
@@ -259,7 +286,7 @@
     <!-- VIEW 3: SITE EXPENSES -->
     <section id="viewExpenses" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
-        <h2 class="text-sm font-black" data-i18n="tabExpenses">🛺 Site Expenses & Rent</h2>
+        <h2 class="text-sm font-black" data-i18n="tabExpenses">Site Expenses & Rent</h2>
         <button onclick="openFormModal('expense')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Expense</button>
       </div>
       <div id="expenseList" class="space-y-3.5"></div>
@@ -268,7 +295,7 @@
     <!-- VIEW 4: COMPANY BILLS -->
     <section id="viewBills" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
-        <h2 class="text-sm font-black" data-i18n="tabBills">🧾 Company Work Bills</h2>
+        <h2 class="text-sm font-black" data-i18n="tabBills">Company Work Bills</h2>
         <button onclick="openFormModal('bill')" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Bill</button>
       </div>
       <div id="billList" class="space-y-3.5"></div>
@@ -316,15 +343,27 @@
     </nav>
   </div>
 
-  <!-- 7. PROFILE, MULTI-ACCOUNT & MAIN CONTRACTOR PASSWORD MODAL -->
+  <!-- 7. PROFILE, LOGGED-IN EMAIL DISPLAY & MAIN CONTRACTOR SECURITY MODAL -->
   <div id="profileModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-3">
-        <h3 class="font-black text-base flex items-center gap-2">👤 Profile & Master Security</h3>
+        <h3 class="font-black text-base flex items-center gap-2">
+          <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span>Profile & Access Control</span>
+        </h3>
         <button onclick="closeProfileModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
 
-      <!-- Profile Photo Upload with Camera & Cropper -->
+      <!-- Logged-in Cloud Email Status Box -->
+      <div class="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between">
+        <div class="min-w-0">
+          <span class="text-[9px] font-bold uppercase text-emerald-500 block">Logged-In Cloud Email ID</span>
+          <span id="loggedInEmailDisplay" class="text-xs font-black truncate block mt-0.5">Not signed in to Cloud</span>
+        </div>
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
+      </div>
+
+      <!-- Profile Photo Upload with Camera & Gallery -->
       <div class="flex items-center gap-3 bg-black/5 dark:bg-black/25 p-3 rounded-2xl border border-zinc-300 dark:border-white/10">
         <div id="profileAvatarPreview" class="w-14 h-14 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 font-black text-xl flex items-center justify-center shadow border-2 border-white/20 overflow-hidden shrink-0">
           <span>ठे</span>
@@ -332,74 +371,85 @@
         <div class="flex-1 space-y-1.5">
           <span class="text-xs font-bold block" id="currentProfileNameText">Main Contractor</span>
           <div class="flex gap-1.5">
-            <label class="px-2.5 py-1 bg-amber-500/15 hover:bg-amber-500/25 text-amber-500 border border-amber-500/30 text-[10px] font-bold rounded-lg cursor-pointer">
-              <span>📸 Camera</span>
+            <label class="px-2.5 py-1 bg-amber-500/15 hover:bg-amber-500/25 text-amber-500 border border-amber-500/30 text-[10px] font-bold rounded-lg cursor-pointer flex items-center gap-1">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+              <span>Camera</span>
               <input type="file" accept="image/*" capture="user" class="hidden" onchange="initiateCropFromFile(this, 'userProfile')" />
             </label>
-            <label class="px-2.5 py-1 bg-black/10 dark:bg-white/10 text-[10px] font-bold rounded-lg cursor-pointer">
-              <span>📁 Gallery</span>
+            <label class="px-2.5 py-1 bg-black/10 dark:bg-white/10 text-[10px] font-bold rounded-lg cursor-pointer flex items-center gap-1">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+              <span>Gallery</span>
               <input type="file" accept="image/*" class="hidden" onchange="initiateCropFromFile(this, 'userProfile')" />
             </label>
           </div>
         </div>
       </div>
 
-      <!-- Set Main Contractor Password Box (Visible when Main Contractor is active) -->
+      <!-- Set Main Contractor Password Box (Visible ONLY when Main Contractor is active) -->
       <div id="masterPasswordSettingBox" class="bg-amber-500/10 border border-amber-500/30 p-3 rounded-2xl space-y-2">
-        <label class="text-[10px] font-bold text-amber-500 uppercase block">🔒 Set Main Contractor Password</label>
+        <label class="text-[10px] font-bold text-amber-500 uppercase flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span>Set Main Contractor Password</span>
+        </label>
         <div class="flex gap-1.5">
-          <input type="password" id="newMasterPinInput" placeholder="Enter new password/PIN" class="app-input flex-1 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none" />
-          <button type="button" onclick="startVoiceInputForField('newMasterPinInput')" class="px-2 py-1.5 bg-amber-500/20 text-amber-500 rounded-xl text-xs">🎤</button>
+          <input type="password" id="newMasterPinInput" placeholder="New password/PIN" class="app-input flex-1 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none" />
           <button type="button" onclick="saveNewMasterPin()" class="px-3 py-1.5 bg-amber-500 text-zinc-950 font-black text-xs rounded-xl shadow">Save</button>
         </div>
-        <p class="text-[9px] opacity-70">Supervisors will need this password to switch into Main Contractor account.</p>
+        <p class="text-[9px] opacity-70">Required when switching from a Supervisor account back to Main Contractor.</p>
       </div>
 
-      <!-- Multiple Account IDs List -->
+      <!-- Multiple Account IDs List (Main Contractor can delete Supervisor accounts) -->
       <div class="space-y-2">
         <div class="flex justify-between items-center">
-          <label class="text-[10px] font-bold opacity-70 uppercase">Account IDs (Main & Supervisors)</label>
-          <button onclick="openAddAccountPrompt()" class="text-amber-500 text-xs font-bold hover:underline">+ Add Supervisor ID</button>
+          <label class="text-[10px] font-bold opacity-70 uppercase">Account Profiles</label>
+          <button onclick="openAddAccountPrompt()" class="text-amber-500 text-xs font-bold hover:underline">+ Add Supervisor</button>
         </div>
         <div id="accountIdsList" class="space-y-1.5 max-h-44 overflow-y-auto"></div>
       </div>
 
       <div class="pt-2 border-t border-zinc-300 dark:border-white/10 space-y-2">
         <button onclick="closeProfileModal(); openAuthModal();" class="w-full py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-bold text-xs flex items-center justify-center gap-1.5 shadow">
-          <span>☁️</span> Cloud Account Login / Sync
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
+          <span>Cloud Account Login / Change Email</span>
         </button>
         <button onclick="logoutAccount()" id="profileLogoutBtn" class="w-full py-2 rounded-xl bg-rose-500/15 text-rose-500 font-bold text-xs hidden">
-          Log Out
+          Log Out of Cloud Email
         </button>
       </div>
     </div>
   </div>
 
-  <!-- 8. SETTINGS MODAL (LANGUAGES ACCORDION, THEMES, DEVELOPER SOCIAL, SHARE APP) -->
+  <!-- 8. SETTINGS MODAL (SVG ICONS ONLY) -->
   <div id="settingsModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-3">
-        <h3 class="font-black text-base flex items-center gap-2" data-i18n="settingsHeader">⚙️ App Settings</h3>
+        <h3 class="font-black text-base flex items-center gap-2">
+          <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <span data-i18n="settingsHeader">App Settings</span>
+        </h3>
         <button onclick="closeSettingsModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
 
       <!-- Expandable 10 Indian Regional Languages Accordion -->
       <div class="rounded-2xl border border-zinc-300 dark:border-white/10 overflow-hidden bg-black/5 dark:bg-black/20">
         <button onclick="toggleLanguageAccordion()" class="w-full p-3.5 flex justify-between items-center text-xs font-bold">
-          <span class="flex items-center gap-2">🌐 <span data-i18n="changeLangLabel">Change Language / भाषा बदलें</span></span>
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span data-i18n="changeLangLabel">Change Language / भाषा बदलें</span>
+          </span>
           <span id="langChevron" class="text-amber-500 font-black">▼</span>
         </button>
         <div id="langAccordionBody" class="hidden p-2.5 pt-1 grid grid-cols-2 gap-1.5 border-t border-zinc-300 dark:border-white/10">
-          <button onclick="changeLanguage('hi')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 हिंदी (Hindi)</button>
-          <button onclick="changeLanguage('en')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇬🇧 English</button>
-          <button onclick="changeLanguage('kn')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 ಕನ್ನಡ (Kannada)</button>
-          <button onclick="changeLanguage('mr')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 मराठी (Marathi)</button>
-          <button onclick="changeLanguage('gu')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 ગુજરાતી (Gujarati)</button>
-          <button onclick="changeLanguage('ta')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 தமிழ் (Tamil)</button>
-          <button onclick="changeLanguage('te')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 తెలుగు (Telugu)</button>
-          <button onclick="changeLanguage('bn')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 বাংলা (Bengali)</button>
-          <button onclick="changeLanguage('ml')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 മലയാളം (Malayalam)</button>
-          <button onclick="changeLanguage('pa')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">🇮🇳 ਪੰਜਾਬੀ (Punjabi)</button>
+          <button onclick="changeLanguage('hi')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">हिंदी (Hindi)</button>
+          <button onclick="changeLanguage('en')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">English</button>
+          <button onclick="changeLanguage('kn')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">ಕನ್ನಡ (Kannada)</button>
+          <button onclick="changeLanguage('mr')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">मराठी (Marathi)</button>
+          <button onclick="changeLanguage('gu')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">ગુજરાતી (Gujarati)</button>
+          <button onclick="changeLanguage('ta')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">தமிழ் (Tamil)</button>
+          <button onclick="changeLanguage('te')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">తెలుగు (Telugu)</button>
+          <button onclick="changeLanguage('bn')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">বাংলা (Bengali)</button>
+          <button onclick="changeLanguage('ml')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">മലയാളം (Malayalam)</button>
+          <button onclick="changeLanguage('pa')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">ਪੰਜਾਬੀ (Punjabi)</button>
         </div>
       </div>
 
@@ -413,37 +463,41 @@
         </div>
       </div>
 
-      <!-- Developer Instagram Social Profile -->
+      <!-- Developer Instagram Social Profile (SVG Icon) -->
       <div class="space-y-1.5">
         <label class="text-[10px] font-bold opacity-70 uppercase">Developer Social Media</label>
         <a href="https://www.instagram.com/raahul.108?dlrf=dzg5ODNueHcwbmxh" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-amber-500/15 via-rose-500/15 to-purple-500/15 border border-amber-500/40 hover:border-amber-500 transition-all shadow-sm">
           <div class="flex items-center gap-3">
-            <span class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 flex items-center justify-center text-white text-base shadow">📸</span>
+            <span class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 flex items-center justify-center text-white shadow">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </span>
             <div>
               <div class="text-xs font-black leading-tight">@raahul.108</div>
               <div class="text-[10px] opacity-75">Official Developer Instagram</div>
             </div>
           </div>
-          <span class="text-xs text-amber-500 font-black">Open ↗</span>
+          <span class="text-xs text-amber-500 font-black">Open</span>
         </a>
       </div>
 
       <!-- Share App Option -->
       <button onclick="shareApplication()" class="w-full py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-xs flex items-center justify-center gap-2 shadow-md active:scale-95 transition-transform">
-        <span>📲</span> <span data-i18n="shareAppBtn">Share App / ऐप शेयर करें</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+        <span data-i18n="shareAppBtn">Share App / ऐप शेयर करें</span>
       </button>
     </div>
   </div>
 
-  <!-- 9. MONTHLY LEDGER MODAL (WORKERS, EXPENSES & BILL PHOTOS, NO EXPORT) -->
+  <!-- 9. MONTHLY LEDGER MODAL -->
   <div id="monthlyLedgerModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-lg w-full p-5 space-y-4 shadow-2xl max-h-[92vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2 shrink-0">
-        <div>
-          <h3 class="font-black text-base flex items-center gap-1.5">
-            <span>📅</span> Monthly Ledger / मासिक बही-खाता
-          </h3>
-          <p class="text-[10px] opacity-70">Complete attendance, site expenses & bill photos</p>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <div>
+            <h3 class="font-black text-base">Monthly Ledger / मासिक बही-खाता</h3>
+            <p class="text-[10px] opacity-70">Complete attendance, site expenses & bill photos</p>
+          </div>
         </div>
         <button onclick="closeMonthlyLedgerModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
@@ -500,7 +554,7 @@
     <div class="ios-glass rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2 shrink-0">
         <div>
-          <h3 class="font-black text-sm">⚡ Select Workers for Next Month</h3>
+          <h3 class="font-black text-sm">Select Workers for Next Month</h3>
           <p class="text-[10px] opacity-70">Choose workers to carry forward</p>
         </div>
         <button onclick="closeCarrySelectModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
@@ -522,21 +576,21 @@
     <div class="ios-glass rounded-3xl max-w-lg w-full p-5 space-y-4 shadow-2xl max-h-[92vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2 shrink-0">
         <div>
-          <h3 class="font-black text-sm">📖 Daily Hajri Book / हाजिरी रजिस्टर</h3>
+          <h3 class="font-black text-sm">Daily Hajri Book / हाजिरी रजिस्टर</h3>
           <p class="text-[10px] opacity-70">Tap P (Present), H (Half), or A (Absent)</p>
         </div>
         <button onclick="closeHajriBookModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
 
       <div class="flex items-center justify-between gap-2 bg-black/5 dark:bg-black/30 p-2 rounded-2xl border border-zinc-300 dark:border-white/10 shrink-0">
-        <button onclick="shiftHajriDate(-1)" class="px-3 py-1.5 rounded-xl ios-glass text-xs font-bold active:scale-90">◀ Prev</button>
+        <button onclick="shiftHajriDate(-1)" class="px-3 py-1.5 rounded-xl ios-glass text-xs font-bold active:scale-90">Prev</button>
         <input type="date" id="hajriDateInput" onchange="renderDailyHajriSheet()" class="app-input flex-1 rounded-xl px-2.5 py-1.5 text-xs font-bold text-center focus:outline-none" />
-        <button onclick="shiftHajriDate(1)" class="px-3 py-1.5 rounded-xl ios-glass text-xs font-bold active:scale-90">Next ▶</button>
+        <button onclick="shiftHajriDate(1)" class="px-3 py-1.5 rounded-xl ios-glass text-xs font-bold active:scale-90">Next</button>
       </div>
 
       <div class="flex items-center justify-between text-xs px-1 shrink-0">
         <span class="text-[11px] opacity-75 font-bold" id="hajriDaySummary">Present: 0 | Half: 0 | Absent: 0</span>
-        <button onclick="markAllWorkersToday('P')" class="text-[11px] text-emerald-500 font-bold hover:underline">✓ Mark All Present</button>
+        <button onclick="markAllWorkersToday('P')" class="text-[11px] text-emerald-500 font-bold hover:underline">Mark All Present</button>
       </div>
 
       <div id="hajriWorkersContainer" class="flex-1 overflow-y-auto space-y-2.5 pr-1"></div>
@@ -547,7 +601,7 @@
     </div>
   </div>
 
-  <!-- 14. INPUT FORMS MODAL (WITH VOICE TYPING EVERYWHERE) -->
+  <!-- 14. INPUT FORMS MODAL (SVG MICROPHONE ICONS ON ALL INPUTS) -->
   <div id="formModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2">
@@ -555,13 +609,15 @@
         <button onclick="closeFormModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
 
-      <!-- Add Labour Form (Contact Number Instead of Photo, Voice Mics on Inputs) -->
+      <!-- Add Labour Form -->
       <form id="labourForm" onsubmit="saveLabour(event)" class="space-y-3 hidden">
         <div>
           <label class="text-[10px] font-bold opacity-75 uppercase">Labour Name / मजदूर का नाम</label>
           <div class="flex items-center gap-1.5 mt-0.5">
             <input type="text" id="lName" list="knownLaboursList" onchange="autoFillKnownLabour(this.value)" required placeholder="e.g. Ramesh" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
-            <button type="button" onclick="startVoiceInputForField('lName')" class="px-3 py-2.5 bg-amber-500/15 text-amber-500 rounded-xl font-bold text-sm">🎤</button>
+            <button type="button" onclick="startVoiceInputForField('lName')" class="p-2.5 bg-amber-500/15 text-amber-500 rounded-xl" title="Voice Type">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+            </button>
           </div>
           <datalist id="knownLaboursList"></datalist>
         </div>
@@ -579,14 +635,18 @@
             <label class="text-[10px] font-bold opacity-75 uppercase">Daily Wage (₹)</label>
             <div class="flex items-center gap-1 mt-0.5">
               <input type="number" id="lDailyRate" required min="1" placeholder="₹/day" class="app-input w-full rounded-xl px-2.5 py-2 text-sm focus:outline-none" />
-              <button type="button" onclick="startVoiceInputForField('lDailyRate', true)" class="px-2 py-2 bg-amber-500/15 text-amber-500 rounded-xl text-xs">🎤</button>
+              <button type="button" onclick="startVoiceInputForField('lDailyRate', true)" class="p-2 bg-amber-500/15 text-amber-500 rounded-xl">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+              </button>
             </div>
           </div>
           <div>
             <label class="text-[10px] font-bold opacity-75 uppercase">Advance (₹)</label>
             <div class="flex items-center gap-1 mt-0.5">
               <input type="number" id="lAdvance" required min="0" value="0" placeholder="₹ Adv" class="app-input w-full rounded-xl px-2.5 py-2 text-sm focus:outline-none" />
-              <button type="button" onclick="startVoiceInputForField('lAdvance', true)" class="px-2 py-2 bg-amber-500/15 text-amber-500 rounded-xl text-xs">🎤</button>
+              <button type="button" onclick="startVoiceInputForField('lAdvance', true)" class="p-2 bg-amber-500/15 text-amber-500 rounded-xl">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+              </button>
             </div>
           </div>
         </div>
@@ -595,18 +655,22 @@
           <label class="text-[10px] font-bold opacity-75 uppercase">Contact Number / मोबाइल नंबर</label>
           <div class="flex items-center gap-1.5 mt-0.5">
             <input type="tel" id="lPhone" placeholder="e.g. 9876543210" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
-            <button type="button" onclick="startVoiceInputForField('lPhone', true)" class="px-3 py-2.5 bg-amber-500/15 text-amber-500 rounded-xl font-bold text-sm">🎤</button>
+            <button type="button" onclick="startVoiceInputForField('lPhone', true)" class="p-2.5 bg-amber-500/15 text-amber-500 rounded-xl">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+            </button>
           </div>
         </div>
         
         <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black py-3 rounded-xl text-sm shadow">Save Labour / सेव करें</button>
       </form>
 
-      <!-- Add Expense Form (Voice Typing on All Fields) -->
+      <!-- Add Expense Form -->
       <form id="expenseForm" onsubmit="saveExpense(event)" class="space-y-3 hidden">
         <div class="flex items-center gap-1.5">
           <input type="text" id="eTitle" required placeholder="Expense Description (e.g. ऑटो किराया)" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
-          <button type="button" onclick="startVoiceExpenseInput()" class="px-3 py-2.5 bg-amber-500/15 text-amber-500 rounded-xl text-sm">🎤</button>
+          <button type="button" onclick="startVoiceExpenseInput()" class="p-2.5 bg-amber-500/15 text-amber-500 rounded-xl">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+          </button>
         </div>
         <select id="eCategory" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none">
           <option value="Rickshaw / Rent (किराया)">Rickshaw / Transport (किराया)</option>
@@ -618,15 +682,20 @@
         <div class="grid grid-cols-2 gap-2">
           <div class="flex items-center gap-1">
             <input type="number" id="eAmount" required min="0" placeholder="Amount ₹" class="app-input w-full rounded-xl px-2.5 py-2 text-sm focus:outline-none" />
-            <button type="button" onclick="startVoiceInputForField('eAmount', true)" class="px-2 py-2 bg-amber-500/15 text-amber-500 rounded-xl text-xs">🎤</button>
+            <button type="button" onclick="startVoiceInputForField('eAmount', true)" class="p-2 bg-amber-500/15 text-amber-500 rounded-xl">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+            </button>
           </div>
           <div class="flex items-center gap-1">
             <input type="text" id="eSpentFor" placeholder="Paid For" class="app-input w-full rounded-xl px-2.5 py-2 text-sm focus:outline-none" />
-            <button type="button" onclick="startVoiceInputForField('eSpentFor')" class="px-2 py-2 bg-amber-500/15 text-amber-500 rounded-xl text-xs">🎤</button>
+            <button type="button" onclick="startVoiceInputForField('eSpentFor')" class="p-2 bg-amber-500/15 text-amber-500 rounded-xl">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+            </button>
           </div>
         </div>
-        <label class="flex items-center justify-center border-2 border-dashed border-zinc-400 dark:border-white/20 rounded-xl px-3 py-3 text-xs font-bold cursor-pointer hover:bg-black/5 dark:hover:bg-white/5">
-          <span id="eFileLabel">📎 Upload Slip / Bill (PDF, Word, Excel, Image)</span>
+        <label class="flex items-center justify-center gap-2 border-2 border-dashed border-zinc-400 dark:border-white/20 rounded-xl px-3 py-3 text-xs font-bold cursor-pointer hover:bg-black/5 dark:hover:bg-white/5">
+          <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+          <span id="eFileLabel">Upload Slip / Bill (PDF, Word, Excel, Image)</span>
           <input type="file" id="eFile" accept=".pdf,.doc,.docx,.xls,.xlsx,image/*" class="hidden" onchange="previewUniversalFile('eFile','eFileLabel')" />
         </label>
         <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black py-3 rounded-xl text-sm shadow">Save Expense</button>
@@ -636,7 +705,9 @@
       <form id="billForm" onsubmit="saveBill(event)" class="space-y-3 hidden">
         <div class="flex items-center gap-1.5">
           <input type="text" id="bTitle" required placeholder="Company / Work Name" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
-          <button type="button" onclick="startVoiceInputForField('bTitle')" class="px-3 py-2.5 bg-amber-500/15 text-amber-500 rounded-xl text-sm">🎤</button>
+          <button type="button" onclick="startVoiceInputForField('bTitle')" class="p-2.5 bg-amber-500/15 text-amber-500 rounded-xl">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+          </button>
         </div>
         <div class="grid grid-cols-2 gap-2">
           <div>
@@ -647,7 +718,9 @@
             <label class="text-[10px] uppercase font-bold opacity-75">Amount ₹</label>
             <div class="flex items-center gap-1 mt-0.5">
               <input type="number" id="bAmount" required min="0" placeholder="Amount" class="app-input w-full rounded-xl px-2.5 py-2 text-sm focus:outline-none" />
-              <button type="button" onclick="startVoiceInputForField('bAmount', true)" class="px-2 py-2 bg-amber-500/15 text-amber-500 rounded-xl text-xs">🎤</button>
+              <button type="button" onclick="startVoiceInputForField('bAmount', true)" class="p-2 bg-amber-500/15 text-amber-500 rounded-xl">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+              </button>
             </div>
           </div>
         </div>
@@ -664,8 +737,9 @@
             <input type="date" id="bReceivedDateInput" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-0.5" />
           </div>
         </div>
-        <label class="flex items-center justify-center border-2 border-dashed border-zinc-400 dark:border-white/20 rounded-xl px-3 py-3 text-xs font-bold cursor-pointer hover:bg-black/5 dark:hover:bg-white/5">
-          <span id="bFileLabel">📄 Upload Company Bill (Word, Excel, PDF, Image)</span>
+        <label class="flex items-center justify-center gap-2 border-2 border-dashed border-zinc-400 dark:border-white/20 rounded-xl px-3 py-3 text-xs font-bold cursor-pointer hover:bg-black/5 dark:hover:bg-white/5">
+          <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          <span id="bFileLabel">Upload Company Bill (Word, Excel, PDF, Image)</span>
           <input type="file" id="bFile" accept=".pdf,.doc,.docx,.xls,.xlsx,image/*" class="hidden" onchange="previewUniversalFile('bFile','bFileLabel')" />
         </label>
         <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-black py-3 rounded-xl text-sm shadow">Save Company Bill</button>
@@ -691,7 +765,9 @@
             <label class="text-[10px] uppercase font-bold opacity-75">Amount ₹</label>
             <div class="flex items-center gap-1 mt-1">
               <input type="number" id="advAmount" required min="1" placeholder="₹" class="app-input w-full rounded-xl px-2.5 py-2 text-sm focus:outline-none" />
-              <button type="button" onclick="startVoiceInputForField('advAmount', true)" class="px-2 py-2 bg-amber-500/15 text-amber-500 rounded-xl text-xs">🎤</button>
+              <button type="button" onclick="startVoiceInputForField('advAmount', true)" class="p-2 bg-amber-500/15 text-amber-500 rounded-xl">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+              </button>
             </div>
           </div>
           <div>
@@ -703,16 +779,18 @@
           <div>
             <label class="text-[10px] uppercase font-bold opacity-75">Mode</label>
             <select id="advMode" class="app-input w-full rounded-xl px-2.5 py-2 text-xs font-bold focus:outline-none mt-1">
-              <option value="💵 Cash">💵 Cash</option>
-              <option value="📱 UPI">📱 UPI / GPay</option>
-              <option value="🏦 Bank">🏦 Bank</option>
+              <option value="Cash">Cash (नकद)</option>
+              <option value="UPI">UPI / GPay</option>
+              <option value="Bank">Bank</option>
             </select>
           </div>
           <div>
             <label class="text-[10px] uppercase font-bold opacity-75">Note</label>
             <div class="flex items-center gap-1 mt-1">
               <input type="text" id="advNote" placeholder="राशन" class="app-input w-full rounded-xl px-2.5 py-2 text-xs focus:outline-none" />
-              <button type="button" onclick="startVoiceInputForField('advNote')" class="px-2 py-2 bg-amber-500/15 text-amber-500 rounded-xl text-xs">🎤</button>
+              <button type="button" onclick="startVoiceInputForField('advNote')" class="p-2 bg-amber-500/15 text-amber-500 rounded-xl">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+              </button>
             </div>
           </div>
         </div>
@@ -729,7 +807,7 @@
   <div id="authModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center">
-        <h3 class="font-extrabold text-base">☁️ Online Cloud Login</h3>
+        <h3 class="font-extrabold text-base">Online Cloud Login</h3>
         <button onclick="closeAuthModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
       </div>
       <p class="text-xs opacity-75">Sign in to sync your construction data online.</p>
@@ -747,17 +825,37 @@
     </div>
   </div>
 
-  <!-- 17. MODERN VOICE ASSISTANT MODAL -->
+  <!-- 17. MODERN 10-LANGUAGE VOICE ASSISTANT MODAL (SVG MIC ICON) -->
   <div id="voiceAssistantModal" class="fixed inset-0 bg-black/80 backdrop-blur-xl hidden items-center justify-center p-4 z-50 transition-opacity">
     <div class="ios-glass rounded-3xl max-w-xs w-full p-6 text-center space-y-4 shadow-2xl border border-amber-500/30 relative overflow-hidden">
       <div class="relative w-20 h-20 mx-auto flex items-center justify-center">
         <div id="voicePulseRing" class="absolute inset-0 rounded-full bg-amber-500/25 animate-ping hidden"></div>
-        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 flex items-center justify-center text-3xl shadow-lg relative z-10">🎙️</div>
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 flex items-center justify-center shadow-lg relative z-10">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+        </div>
       </div>
+
       <div class="space-y-1">
         <h3 id="voiceModalTitle" class="font-black text-base">Voice Typing</h3>
-        <p id="voiceModalSub" class="text-xs opacity-75">Speak clearly into your microphone...</p>
+        <p id="voiceModalSub" class="text-xs opacity-75">Speak clearly in your chosen language</p>
       </div>
+
+      <!-- Multi-Language Voice Selector inside Voice Modal -->
+      <div>
+        <select id="voiceLangSelector" onchange="changeVoiceRecognitionLanguage(this.value)" class="app-input w-full rounded-xl px-2.5 py-1.5 text-xs font-bold text-center focus:outline-none">
+          <option value="hi-IN">हिंदी (Hindi)</option>
+          <option value="en-IN">English (India)</option>
+          <option value="kn-IN">ಕನ್ನಡ (Kannada)</option>
+          <option value="mr-IN">मराठी (Marathi)</option>
+          <option value="gu-IN">ગુજરાતી (Gujarati)</option>
+          <option value="ta-IN">தமிழ் (Tamil)</option>
+          <option value="te-IN">తెలుగు (Telugu)</option>
+          <option value="bn-IN">বাংলা (Bengali)</option>
+          <option value="ml-IN">മലയാളം (Malayalam)</option>
+          <option value="pa-IN">ਪੰਜਾਬੀ (Punjabi)</option>
+        </select>
+      </div>
+
       <div id="voiceLiveWave" class="hidden items-center justify-center gap-1 h-8 py-1">
         <span class="w-1.5 h-3 bg-amber-500 rounded-full animate-bounce"></span>
         <span class="w-1.5 h-6 bg-amber-400 rounded-full animate-bounce" style="animation-delay:0.1s"></span>
@@ -771,13 +869,15 @@
     </div>
   </div>
 
-  <!-- 18. UNIVERSAL MODERN INPUT DIALOG (WITH VOICE MIC) -->
+  <!-- 18. UNIVERSAL MODERN INPUT DIALOG (WITH SVG MIC) -->
   <div id="customDialogModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-xs w-full p-5 space-y-4 shadow-2xl border border-white/15">
       <h3 id="customDialogTitle" class="font-black text-sm">Enter Details</h3>
       <div class="flex items-center gap-1.5">
         <input id="customDialogInput" type="text" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm font-bold focus:outline-none" />
-        <button type="button" onclick="startVoiceInputForField('customDialogInput')" class="px-3 py-2.5 bg-amber-500/15 text-amber-500 rounded-xl text-sm">🎤</button>
+        <button type="button" onclick="startVoiceInputForField('customDialogInput')" class="p-2.5 bg-amber-500/15 text-amber-500 rounded-xl">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+        </button>
       </div>
       <div class="flex gap-2">
         <button type="button" onclick="closeCustomDialog()" class="flex-1 py-2 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Cancel</button>
@@ -789,7 +889,9 @@
   <!-- 19. PIN LOCK MODAL FOR MAIN CONTRACTOR ACCOUNT -->
   <div id="pinLockModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-xs w-full p-6 text-center space-y-4 shadow-2xl border border-amber-500/40">
-      <div class="w-14 h-14 rounded-2xl bg-amber-500/20 text-amber-500 flex items-center justify-center text-2xl mx-auto">🔒</div>
+      <div class="w-14 h-14 rounded-2xl bg-amber-500/20 text-amber-500 flex items-center justify-center mx-auto">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      </div>
       <div>
         <h3 class="font-black text-base">Main Contractor Password</h3>
         <p class="text-[11px] opacity-70">Enter Main Contractor password to unlock master account</p>
@@ -845,22 +947,34 @@
     let cropImg = new Image();
     let cropState = { scale: 1, x: 0, y: 0 };
 
-    // 10 Indian Regional Languages Dictionary
+    // Map 10 App Languages to BCP-47 Speech Recognition Locale Codes
+    const speechLocaleMap = {
+      hi: 'hi-IN',
+      en: 'en-IN',
+      kn: 'kn-IN',
+      mr: 'mr-IN',
+      gu: 'gu-IN',
+      ta: 'ta-IN',
+      te: 'te-IN',
+      bn: 'bn-IN',
+      ml: 'ml-IN',
+      pa: 'pa-IN'
+    };
+
     const i18n = {
-      hi: { labourDue: "कुल मजदूर बकाया", expenses: "खर्चे व किराया", bills: "कंपनी बिल ↗", tabLabour: "👷‍♂️ मजदूर व हाजिरी", tabExpenses: "🛺 खर्चे व किराया", tabBills: "🧾 कंपनी बिल", audioSummaryTitle: "बोलकर हिसाब सुनें (Audio Summary)", audioSummarySub: "एक टैप में पूरे साइट का हिसाब सुनें", listenBtn: "LISTEN / सुनें", liveSnapshot: "LIVE WORKFORCE SNAPSHOT", settingsHeader: "⚙️ ऐप सेटिंग्स", changeLangLabel: "भाषा बदलें (Change Language)", themeLabel: "ऐप थीम चुनें", shareAppBtn: "ऐप शेयर करें (Share App)" },
-      en: { labourDue: "Labour Due", expenses: "Expenses", bills: "Bills ↗", tabLabour: "👷‍♂️ Labours & Attendance", tabExpenses: "🛺 Expenses & Rent", tabBills: "🧾 Company Bills", audioSummaryTitle: "Site Audio Summary", audioSummarySub: "Listen to whole site summary in one tap", listenBtn: "LISTEN", liveSnapshot: "LIVE WORKFORCE SNAPSHOT", settingsHeader: "⚙️ App Settings", changeLangLabel: "Change Language", themeLabel: "Select App Theme", shareAppBtn: "Share App with Contractors" },
-      kn: { labourDue: "ಕಾರ್ಮಿಕರ ಬಾಕಿ ಹಣ", expenses: "ಸೈಟ್ ಖರ್ಚುಗಳು", bills: "ಕಂಪನಿ ಬಿಲ್‌ಗಳು ↗", tabLabour: "👷‍♂️ ಕಾರ್ಮಿಕರು & ಹಾಜರಾತಿ", tabExpenses: "🛺 ಖರ್ಚು & ಬಾಡಿಗೆ", tabBills: "🧾 ಕಂಪನಿ ಬಿಲ್", audioSummaryTitle: "ಸೈಟ್ ಆಡಿಯೋ ಸಾರಾಂಶ", audioSummarySub: "ಒಂದೇ ಕ್ಲಿಕ್‌ನಲ್ಲಿ ಲೆಕ್ಕ ಕೇಳಿ", listenBtn: "ಕೇಳಿ (LISTEN)", liveSnapshot: "ಕಾರ್ಮಿಕರ ಸ್ಥಿತಿ", settingsHeader: "⚙️ ಸೆಟ್ಟಿಂಗ್‌ಗಳು", changeLangLabel: "ಭಾಷೆ ಬದಲಿಸಿ", themeLabel: "ಥೀಮ್ ಆಯ್ಕೆಮಾಡಿ", shareAppBtn: "ಆಪ್ ಹಂಚಿಕೊಳ್ಳಿ" },
-      mr: { labourDue: "एकूण मजुरी बाकी", expenses: "भाडे व खर्च", bills: "कंपनी बिल ↗", tabLabour: "👷‍♂️ कामगार व हजेरी", tabExpenses: "🛺 खर्च व रिक्षा भाडे", tabBills: "🧾 कंपनी बिल", audioSummaryTitle: "साइट ऑडिओ हिशोब", audioSummarySub: "एका टॅपमध्ये संपूर्ण हिशोब ऐका", listenBtn: "ऐका (LISTEN)", liveSnapshot: "कामगार सद्यस्थिती", settingsHeader: "⚙️ सेटिंग्ज", changeLangLabel: "भाषा बदला", themeLabel: "थीम निवडा", shareAppBtn: "ॲप शेअर करा" },
-      gu: { labourDue: "બાકી મજૂરી", expenses: "ભાડું અને ખર્ચ", bills: "કંપની બિલ ↗", tabLabour: "👷‍♂️ મજૂર અને હાજરી", tabExpenses: "🛺 ખર્ચ અને રિક્ષા ભાડું", tabBills: "🧾 કંપની બિલ", audioSummaryTitle: "સાઇટ ઓડિયો હિસાબ", audioSummarySub: "એક ટૅપમાં સમગ્ર સાઇટનો હિસાબ સાંભળો", listenBtn: "સાંભળો", liveSnapshot: "લાઇવ વર્કફોર્સ સ્નેપશોટ", settingsHeader: "⚙️ સેટિંગ્સ", changeLangLabel: "ભાષા બદલો", themeLabel: "થીમ પસંદ કરો", shareAppBtn: "એપ શેર કરો" },
-      ta: { labourDue: "கூலி பாக்கி", expenses: "செலவுகள்", bills: "பில்கள் ↗", tabLabour: "👷‍♂️ தொழிலாளர்கள் & வருகை", tabExpenses: "🛺 செலவுகள் & வாடகை", tabBills: "🧾 நிறுவன பில்கள்", audioSummaryTitle: "தள ஆடியோ சுருக்கம்", audioSummarySub: "ஒரே தட்டலில் கணக்கைக் கேளுங்கள்", listenBtn: "கேளுங்கள்", liveSnapshot: "தொழிலாளர் நிலவரம்", settingsHeader: "⚙️ அமைப்புகள்", changeLangLabel: "மொழியை மாற்றவும்", themeLabel: "தீம் தேர்வு", shareAppBtn: "செயலியை பகிரவும்" },
-      te: { labourDue: "కూలీ బకాయి", expenses: "ఖర్చులు", bills: "బిల్లులు ↗", tabLabour: "👷‍♂️ కార్మికులు & హాజరు", tabExpenses: "🛺 ఖర్చులు & రవాణా", tabBills: "🧾 కంపెనీ బిల్లులు", audioSummaryTitle: "సైట్ ఆడియో సారాంశం", audioSummarySub: "ఒకే ట్యాప్‌లో సైట్ లెక్క వినండి", listenBtn: "వినండి", liveSnapshot: "కార్మికుల సమాచారం", settingsHeader: "⚙️ సెట్టింగులు", changeLangLabel: "భాషను మార్చండి", themeLabel: "థీమ్ ఎంచుకోండి", shareAppBtn: "యాప్ షేర్ చేయండి" },
-      bn: { labourDue: "বকেয়া মজুরি", expenses: "সাইটের খরচ", bills: "কোম্পানির বিল ↗", tabLabour: "👷‍♂️ শ্রমিক ও হাজিরা", tabExpenses: "🛺 খরচ ও ভাড়া", tabBills: "🧾 কোম্পানির বিল", audioSummaryTitle: "সাইট অডিও হিসাব", audioSummarySub: "এক ক্লিকেই সব হিসাব শুনুন", listenBtn: "শুনুন", liveSnapshot: "শ্রমিক স্ন্যাপশট", settingsHeader: "⚙️ সেটিংস", changeLangLabel: "ভাষা পরিবর্তন করুন", themeLabel: "থিম নির্বাচন করুন", shareAppBtn: "অ্যাপ শেয়ার করুন" },
-      ml: { labourDue: "കൂലി ബാക്കി", expenses: "ചെലവുകൾ", bills: "ബില്ലുകൾ ↗", tabLabour: "👷‍♂️ തൊഴിലാളികളും ഹാജരും", tabExpenses: "🛺 ചെലവുകളും വാടകയും", tabBills: "🧾 കമ്പനി ബില്ലുകൾ", audioSummaryTitle: "സൈറ്റ് ഓഡിയോ വിവരണം", audioSummarySub: "ഒറ്റ ടാപ്പിൽ കണക്ക് കേൾക്കുക", listenBtn: "കേൾക്കുക", liveSnapshot: "തൊഴിലാളി നിലവാരം", settingsHeader: "⚙️ ക്രമീകരണങ്ങൾ", changeLangLabel: "ഭാഷ മാറ്റുക", themeLabel: "തീം തിരഞ്ഞെടുക്കുക", shareAppBtn: "ആപ്പ് ഷെയർ ചെയ്യുക" },
-      pa: { labourDue: "ਬਕਾਇਆ ਮਜ਼ਦੂਰੀ", expenses: "ਖਰਚੇ ਅਤੇ ਕਿਰਾਇਆ", bills: "ਕੰਪਨੀ ਦੇ ਬਿੱਲ ↗", tabLabour: "👷‍♂️ ਮਜ਼ਦੂਰ ਅਤੇ ਹਾਜ਼ਰੀ", tabExpenses: "🛺 ਖਰਚਾ ਅਤੇ ਕਿਰਾਇਆ", tabBills: "🧾 ਕੰਪਨੀ ਬਿੱਲ", audioSummaryTitle: "ਸਾਈਟ ਆਡੀਓ ਰਿਪੋਰਟ", audioSummarySub: "ਇੱਕ ਟੈਪ ਵਿੱਚ ਪੂਰਾ ਹਿਸਾਬ ਸੁਣੋ", listenBtn: "ਸੁਣੋ", liveSnapshot: "ਲਾਈਵ ਕਾਰਜਬਲ", settingsHeader: "⚙️ ਸੈਟਿੰਗਾਂ", changeLangLabel: "ਭਾਸ਼ਾ ਬਦਲੋ", themeLabel: "ਥੀਮ ਚੁਣੋ", shareAppBtn: "ਐਪ ਸ਼ੇਅਰ ਕਰੋ" }
+      hi: { labourDue: "कुल मजदूर बकाया", expenses: "खर्चे व किराया", bills: "कंपनी बिल", tabLabour: "मजदूर व हाजिरी", tabExpenses: "खर्चे व किराया", tabBills: "कंपनी बिल", audioSummaryTitle: "बोलकर हिसाब सुनें (Audio Summary)", audioSummarySub: "एक टैप में पूरे साइट का हिसाब सुनें", listenBtn: "LISTEN / सुनें", liveSnapshot: "LIVE WORKFORCE SNAPSHOT", settingsHeader: "ऐप सेटिंग्स", changeLangLabel: "भाषा बदलें (Change Language)", themeLabel: "ऐप थीम चुनें", shareAppBtn: "ऐप शेयर करें (Share App)" },
+      en: { labourDue: "Labour Due", expenses: "Expenses", bills: "Bills", tabLabour: "Labours & Attendance", tabExpenses: "Expenses & Rent", tabBills: "Company Bills", audioSummaryTitle: "Site Audio Summary", audioSummarySub: "Listen to whole site summary in one tap", listenBtn: "LISTEN", liveSnapshot: "LIVE WORKFORCE SNAPSHOT", settingsHeader: "App Settings", changeLangLabel: "Change Language", themeLabel: "Select App Theme", shareAppBtn: "Share App with Contractors" },
+      kn: { labourDue: "ಕಾರ್ಮಿಕರ ಬಾಕಿ ಹಣ", expenses: "ಸೈಟ್ ಖರ್ಚುಗಳು", bills: "ಕಂಪನಿ ಬಿಲ್‌ಗಳು", tabLabour: "ಕಾರ್ಮಿಕರು & ಹಾಜರಾತಿ", tabExpenses: "ಖರ್ಚು & ಬಾಡಿಗೆ", tabBills: "ಕಂಪನಿ ಬಿಲ್", audioSummaryTitle: "ಸೈಟ್ ಆಡಿಯೋ ಸಾರಾಂಶ", audioSummarySub: "ಒಂದೇ ಕ್ಲಿಕ್‌ನಲ್ಲಿ ಲೆಕ್ಕ ಕೇಳಿ", listenBtn: "ಕೇಳಿ (LISTEN)", liveSnapshot: "ಕಾರ್ಮಿಕರ ಸ್ಥಿತಿ", settingsHeader: "ಸೆಟ್ಟಿಂಗ್‌ಗಳು", changeLangLabel: "ಭಾಷೆ ಬದಲಿಸಿ", themeLabel: "ಥೀಮ್ ಆಯ್ಕೆಮಾಡಿ", shareAppBtn: "ಆಪ್ ಹಂಚಿಕೊಳ್ಳಿ" },
+      mr: { labourDue: "एकूण मजुरी बाकी", expenses: "भाडे व खर्च", bills: "कंपनी बिल", tabLabour: "कामगार व हजेरी", tabExpenses: "खर्च व रिक्षा भाडे", tabBills: "कंपनी बिल", audioSummaryTitle: "साइट ऑडिओ हिशोब", audioSummarySub: "एका टॅपमध्ये संपूर्ण हिशोब ऐका", listenBtn: "ऐका (LISTEN)", liveSnapshot: "कामगार सद्यस्थिती", settingsHeader: "सेटिंग्ज", changeLangLabel: "भाषा बदला", themeLabel: "थीम निवडा", shareAppBtn: "ॲप शेअर करा" },
+      gu: { labourDue: "બાકી મજૂરી", expenses: "ભાડું અને ખર્ચ", bills: "કંપની બિલ", tabLabour: "મજૂર અને હાજરી", tabExpenses: "ખર્ચ અને રિક્ષા ભાડું", tabBills: "કંપની બિલ", audioSummaryTitle: "સાઇટ ઓડિયો હિસાબ", audioSummarySub: "એક ટૅપમાં સમગ્ર સાઇટનો હિસાબ સાંભળો", listenBtn: "સાંભળો", liveSnapshot: "લાઇવ વર્કફોર્સ સ્નેપશોટ", settingsHeader: "સેટિંગ્સ", changeLangLabel: "ભાષા બદલો", themeLabel: "થીમ પસંદ કરો", shareAppBtn: "એપ શેર કરો" },
+      ta: { labourDue: "கூலி பாக்கி", expenses: "செலவுகள்", bills: "பில்கள்", tabLabour: "தொழிலாளர்கள் & வருகை", tabExpenses: "செலவுகள் & வாடகை", tabBills: "நிறுவன பில்கள்", audioSummaryTitle: "தள ஆடியோ சுருக்கம்", audioSummarySub: "ஒரே தட்டலில் கணக்கைக் கேளுங்கள்", listenBtn: "கேளுங்கள்", liveSnapshot: "தொழிலாளர் நிலவரம்", settingsHeader: "அமைப்புகள்", changeLangLabel: "மொழியை மாற்றவும்", themeLabel: "தீம் தேர்வு", shareAppBtn: "செயலியை பகிரவும்" },
+      te: { labourDue: "కూలీ బకాయి", expenses: "ఖర్చులు", bills: "బిల్లులు", tabLabour: "కార్మికులు & హాజరు", tabExpenses: "ఖర్చులు & రవాణా", tabBills: "కంపెనీ బిల్లులు", audioSummaryTitle: "సైట్ ఆడియో సారాంశం", audioSummarySub: "ఒకే ట్యాప్‌లో సైట్ లెక్క వినండి", listenBtn: "వినండి", liveSnapshot: "కార్మికుల సమాచారం", settingsHeader: "సెట్టింగులు", changeLangLabel: "భాషను మార్చండి", themeLabel: "థీమ్ ఎంచుకోండి", shareAppBtn: "యాప్ షేర్ చేయండి" },
+      bn: { labourDue: "বকেয়া মজুরি", expenses: "সাইটের খরচ", bills: "কোম্পানির বিল", tabLabour: "শ্রমিক ও হাজিরা", tabExpenses: "খরচ ও ভাড়া", tabBills: "কোম্পানির বিল", audioSummaryTitle: "সাইট অডিও হিসাব", audioSummarySub: "এক ক্লিকেই সব হিসাব শুনুন", listenBtn: "শুনুন", liveSnapshot: "শ্রমিক স্ন্যাপশট", settingsHeader: "সেটিংস", changeLangLabel: "ভাষা পরিবর্তন করুন", themeLabel: "থিম নির্বাচন করুন", shareAppBtn: "অ্যাপ শেয়ার করুন" },
+      ml: { labourDue: "കൂലി ബാക്കി", expenses: "ചെലവുകൾ", bills: "ബില്ലുകൾ", tabLabour: "തൊഴിലാളികളും ഹാജരും", tabExpenses: "ചെലവുകളും വാടകയും", tabBills: "കമ്പനി ബില്ലുകൾ", audioSummaryTitle: "സൈറ്റ് ഓഡിയോ വിവരണം", audioSummarySub: "ഒറ്റ ടാപ്പിൽ കണക്ക് കേൾക്കുക", listenBtn: "കേൾക്കുക", liveSnapshot: "തൊഴിലാളി നിലവാരം", settingsHeader: "ക്രമീകരണങ്ങൾ", changeLangLabel: "ഭാഷ മാറ്റുക", themeLabel: "തീം തിരഞ്ഞെടുക്കുക", shareAppBtn: "ആപ്പ് ഷെയർ ചെയ്യുക" },
+      pa: { labourDue: "ਬਕਾਇਆ ਮਜ਼ਦੂਰੀ", expenses: "ਖਰਚੇ ਅਤੇ ਕਿਰਾਇਆ", bills: "ਕੰਪਨੀ ਦੇ ਬਿੱਲ", tabLabour: "ਮਜ਼ਦੂਰ ਅਤੇ ਹਾਜ਼ਰੀ", tabExpenses: "ਖਰਚਾ ਅਤੇ ਕਿਰਾਇਆ", tabBills: "ਕੰਪਨੀ ਬਿੱਲ", audioSummaryTitle: "ਸਾਈਟ ਆਡੀਓ ਰਿਪੋਰਟ", audioSummarySub: "ਇੱਕ ਟੈਪ ਵਿੱਚ ਪੂਰਾ ਹਿਸਾਬ ਸੁਣੋ", listenBtn: "ਸੁਣੋ", liveSnapshot: "ਲਾਈਵ ਕਾਰਜਬਲ", settingsHeader: "ਸੈਟਿੰਗਾਂ", changeLangLabel: "ਭਾਸ਼ਾ ਬਦਲੋ", themeLabel: "ਥੀਮ ਚੁਣੋ", shareAppBtn: "ਐਪ ਸ਼ੇਅਰ ਕਰੋ" }
     };
     window.currentLang = localStorage.getItem('thekedaar_lang') || 'hi';
 
-    // Strict Online-Only Mode Check
     function enforceOnlineOnlyMode() {
       const blocker = document.getElementById('offlineBlockerModal');
       if (!navigator.onLine) {
@@ -872,30 +986,59 @@
     window.addEventListener('online', enforceOnlineOnlyMode);
     window.addEventListener('offline', enforceOnlineOnlyMode);
 
+    // Reliable Active Account & Master Role Check (Fixes Mobile Password Bug)
+    function getGlobalAccountsList() {
+      try {
+        const raw = localStorage.getItem('thekedaar_global_accounts');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            return parsed.map(a => ({ ...a, isMaster: a.id === 'acc_main' || a.isMaster === true }));
+          }
+        }
+      } catch (e) {}
+      return [
+        { id: 'acc_main', nickname: 'Main Contractor', email: 'contractor@thekedaar', active: true, isMaster: true },
+        { id: 'acc_sup', nickname: 'Site Supervisor', email: 'supervisor@thekedaar', active: false, isMaster: false }
+      ];
+    }
+
+    function getActiveAccount() {
+      const accs = getGlobalAccountsList();
+      const activeId = localStorage.getItem('thekedaar_active_acc_id') || 'acc_main';
+      const found = accs.find(a => a.id === activeId) || accs[0];
+      return { ...found, isMaster: found.id === 'acc_main' || found.isMaster === true };
+    }
+
+    function isMainContractorActive() {
+      const active = getActiveAccount();
+      return active.id === 'acc_main' || active.isMaster === true;
+    }
+
     function getActiveAccountId() {
-      const activeAcc = (state.accounts || []).find(a => a.active);
-      return activeAcc ? activeAcc.id : 'acc_main';
+      return getActiveAccount().id;
     }
 
     function getStorageKey() {
       const base = currentUser ? `thekedaar_uid_${currentUser.uid}` : 'thekedaar_online';
-      const activeId = localStorage.getItem('thekedaar_active_acc_id') || 'acc_main';
+      const activeId = getActiveAccountId();
       return `${base}_${activeId}`;
     }
 
     function loadLocalState() {
       try {
+        const globalAccs = getGlobalAccountsList();
+        const activeId = localStorage.getItem('thekedaar_active_acc_id') || 'acc_main';
+        globalAccs.forEach(a => a.active = (a.id === activeId));
+
         const saved = localStorage.getItem(getStorageKey());
         if (saved) {
           state = JSON.parse(saved);
           if (!state.masterLabourDirectory) state.masterLabourDirectory = [];
           if (!state.dailyHajriRecords) state.dailyHajriRecords = {};
-          if (!state.accounts) state.accounts = [{ id: 'acc_main', nickname: 'Main Contractor', email: 'contractor@thekedaar', active: true, isMaster: true }];
-          if (!state.masterPin) state.masterPin = '1234';
-        } else {
-          const globalAccs = JSON.parse(localStorage.getItem('thekedaar_global_accounts') || JSON.stringify(state.accounts));
-          state.accounts = globalAccs;
         }
+        state.accounts = globalAccs;
+        state.masterPin = localStorage.getItem('thekedaar_master_pin') || state.masterPin || '1234';
       } catch (e) { console.error(e); }
     }
 
@@ -934,12 +1077,16 @@
     function updateSyncStatusUI() {
       const statusEl = document.getElementById('syncStatus');
       const dotEl = document.getElementById('syncDot');
-      if (currentUser) {
-        statusEl.innerText = `🟢 Online Cloud (${currentUser.email.split('@')[0]})`;
+      const emailDisplayEl = document.getElementById('loggedInEmailDisplay');
+
+      if (currentUser && currentUser.email) {
+        statusEl.innerText = `Cloud Sync (${currentUser.email.split('@')[0]})`;
         dotEl.className = "absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-black";
+        if (emailDisplayEl) emailDisplayEl.innerText = currentUser.email;
       } else {
-        statusEl.innerText = `🟢 Online Active`;
-        dotEl.className = "absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-black";
+        statusEl.innerText = `Online Active`;
+        dotEl.className = "absolute bottom-0 right-0 w-3 h-3 rounded-full bg-amber-500 border-2 border-black";
+        if (emailDisplayEl) emailDisplayEl.innerText = "Not logged in (Tap Cloud Login below)";
       }
     }
 
@@ -968,12 +1115,29 @@
       });
     }
 
-    // --- UNIVERSAL VOICE TYPING ENGINE ---
+    // --- 10-LANGUAGE UNIVERSAL VOICE TYPING ENGINE ---
+    function syncVoiceSelectorWithAppLang() {
+      const sel = document.getElementById('voiceLangSelector');
+      if (sel) {
+        const targetLocale = localStorage.getItem('thekedaar_voice_locale') || speechLocaleMap[window.currentLang] || 'hi-IN';
+        sel.value = targetLocale;
+      }
+    }
+
+    window.changeVoiceRecognitionLanguage = (localeCode) => {
+      localStorage.setItem('thekedaar_voice_locale', localeCode);
+      if (activeRecognition) {
+        try { activeRecognition.stop(); } catch (e) {}
+        setTimeout(() => triggerNativeSpeechEngine(), 250);
+      }
+    };
+
     window.startVoiceInputForField = (fieldId, numericOnly = false) => {
       activeVoiceTargetFieldId = fieldId;
       activeVoiceNumericOnly = numericOnly;
-      document.getElementById('voiceModalTitle').innerText = "Voice Typing / बोलकर लिखें";
-      document.getElementById('voiceModalSub').innerText = "Speak clearly into your microphone...";
+      syncVoiceSelectorWithAppLang();
+      document.getElementById('voiceModalTitle').innerText = "Voice Typing";
+      document.getElementById('voiceModalSub').innerText = "Speak clearly in your selected language...";
       document.getElementById('voiceTranscriptBox').classList.add('hidden');
       document.getElementById('voiceAssistantModal').classList.replace('hidden', 'flex');
       triggerNativeSpeechEngine();
@@ -982,8 +1146,9 @@
     window.startVoiceExpenseInput = () => {
       activeVoiceTargetFieldId = null;
       activeVoiceNumericOnly = false;
+      syncVoiceSelectorWithAppLang();
       document.getElementById('voiceModalTitle').innerText = "Voice Smart Entry";
-      document.getElementById('voiceModalSub').innerText = "Speak expense & amount (e.g. \"ऑटो किराया 200\")";
+      document.getElementById('voiceModalSub').innerText = "Speak expense name & amount clearly";
       document.getElementById('voiceTranscriptBox').classList.add('hidden');
       document.getElementById('voiceAssistantModal').classList.replace('hidden', 'flex');
       triggerNativeSpeechEngine();
@@ -995,17 +1160,25 @@
         closeVoiceModal();
         return alert("Voice typing is supported in Chrome & Safari.");
       }
+      if (activeRecognition) {
+        try { activeRecognition.stop(); } catch (e) {}
+      }
+
+      const selectedLocale = document.getElementById('voiceLangSelector').value || speechLocaleMap[window.currentLang] || 'hi-IN';
       activeRecognition = new SpeechRecognition();
-      activeRecognition.lang = window.currentLang === 'en' ? 'en-IN' : 'hi-IN';
+      activeRecognition.lang = selectedLocale;
       activeRecognition.interimResults = true;
+
       activeRecognition.onstart = () => {
         document.getElementById('voiceLiveWave').classList.replace('hidden', 'flex');
         document.getElementById('voiceStartBtn').classList.add('hidden');
       };
+
       activeRecognition.onresult = (event) => {
         const t = Array.from(event.results).map(r => r[0].transcript).join('');
         const box = document.getElementById('voiceTranscriptBox');
         box.innerText = `"${t}"`; box.classList.remove('hidden');
+
         if (event.results[0].isFinal) {
           if (activeVoiceTargetFieldId) {
             const el = document.getElementById(activeVoiceTargetFieldId);
@@ -1022,13 +1195,15 @@
             const nums = t.match(/\d+/);
             if (nums) document.getElementById('eAmount').value = nums[0];
           }
-          setTimeout(() => closeVoiceModal(), 550);
+          setTimeout(() => closeVoiceModal(), 500);
         }
       };
+
       activeRecognition.onerror = () => {
         document.getElementById('voiceLiveWave').classList.replace('flex', 'hidden');
         document.getElementById('voiceStartBtn').classList.remove('hidden');
       };
+
       activeRecognition.start();
     };
 
@@ -1054,17 +1229,22 @@
 
     // Save Main Contractor Password
     window.saveNewMasterPin = () => {
+      if (!isMainContractorActive()) return alert("Only Main Contractor can change the password.");
       const pin = document.getElementById('newMasterPinInput').value.trim();
       if (!pin) return alert("Please enter a password or PIN.");
       state.masterPin = pin;
       localStorage.setItem('thekedaar_master_pin', pin);
       persistState();
       document.getElementById('newMasterPinInput').value = '';
-      alert("Main Contractor password saved!");
+      alert("Main Contractor password updated!");
     };
 
     // Modal Visibility
-    window.openProfileModal = () => { renderAccountIdsList(); document.getElementById('profileModal').classList.replace('hidden', 'flex'); };
+    window.openProfileModal = () => {
+      updateSyncStatusUI();
+      renderAccountIdsList();
+      document.getElementById('profileModal').classList.replace('hidden', 'flex');
+    };
     window.closeProfileModal = () => document.getElementById('profileModal').classList.replace('flex', 'hidden');
     window.openSettingsModal = () => document.getElementById('settingsModal').classList.replace('hidden', 'flex');
     window.closeSettingsModal = () => document.getElementById('settingsModal').classList.replace('flex', 'hidden');
@@ -1076,7 +1256,7 @@
       chev.innerText = body.classList.contains('hidden') ? '▼' : '▲';
     };
 
-    // Monthly Ledger Modal (Detailed Attendance, Expenses & Bill Photos)
+    // Monthly Ledger Modal
     window.openMonthlyLedgerModal = () => {
       renderMonthlyLedgerModalBody();
       document.getElementById('monthlyLedgerModal').classList.replace('hidden', 'flex');
@@ -1100,7 +1280,7 @@
       document.getElementById('monthlyLedgerModalBody').innerHTML = `
         <div class="space-y-4">
           <div class="ios-glass p-3 rounded-2xl flex justify-between items-center text-xs">
-            <span>📍 <b>${activeSite}</b></span><span>📅 <b>${activeMonth}</b></span>
+            <span>Site: <b>${activeSite}</b></span><span>Month: <b>${activeMonth}</b></span>
           </div>
 
           <div class="grid grid-cols-3 gap-2 text-center text-xs">
@@ -1111,7 +1291,7 @@
 
           <!-- 1. Workers Attendance Section -->
           <div class="space-y-2">
-            <h4 class="font-black text-xs text-amber-500 uppercase tracking-wider">👷 1. Labour Attendance (${workers.length})</h4>
+            <h4 class="font-black text-xs text-amber-500 uppercase tracking-wider">1. Labour Attendance (${workers.length})</h4>
             ${workers.length === 0 ? '<p class="text-xs opacity-60">No workers recorded.</p>' : workers.map(w => {
               const net = Math.round((w.dailyRate || 500) * ((w.presentDays || 0) + ((w.halfDays || 0) * 0.5))) - (w.advance || 0);
               return `
@@ -1128,7 +1308,7 @@
 
           <!-- 2. Site Expenses Section -->
           <div class="space-y-2">
-            <h4 class="font-black text-xs text-amber-500 uppercase tracking-wider">🛺 2. Site Expenses (${expenses.length})</h4>
+            <h4 class="font-black text-xs text-amber-500 uppercase tracking-wider">2. Site Expenses (${expenses.length})</h4>
             ${expenses.length === 0 ? '<p class="text-xs opacity-60">No expenses recorded.</p>' : expenses.map(e => `
               <div class="bg-black/5 dark:bg-black/20 p-2.5 rounded-2xl flex items-center justify-between text-xs border border-zinc-300 dark:border-white/10">
                 <div class="flex items-center gap-2.5">
@@ -1145,7 +1325,7 @@
 
           <!-- 3. Company Bills & Bill Photos Section -->
           <div class="space-y-2">
-            <h4 class="font-black text-xs text-emerald-500 uppercase tracking-wider">🧾 3. Company Bills & Photos (${bills.length})</h4>
+            <h4 class="font-black text-xs text-emerald-500 uppercase tracking-wider">3. Company Bills & Photos (${bills.length})</h4>
             ${bills.length === 0 ? '<p class="text-xs opacity-60">No bills recorded.</p>' : bills.map(b => `
               <div class="bg-black/5 dark:bg-black/20 p-3 rounded-2xl space-y-2 text-xs border border-zinc-300 dark:border-white/10">
                 <div class="flex items-center justify-between">
@@ -1171,7 +1351,7 @@
     window.openLabourAttendanceHistory = (workerId) => {
       const l = (state.labours || []).find(x => x.id === workerId);
       if (!l) return;
-      document.getElementById('labourHistoryTitle').innerText = `👷 ${l.name} (${l.month})`;
+      document.getElementById('labourHistoryTitle').innerText = `${l.name} (${l.month})`;
       
       const records = state.dailyHajriRecords || {};
       let logsHtml = '';
@@ -1183,7 +1363,7 @@
             const label = st === 'P' ? 'Present (हाजिर)' : st === 'H' ? 'Half Day (हाफ)' : 'Absent (गैरहाजिर)';
             logsHtml += `
               <div class="flex justify-between items-center p-2.5 rounded-xl bg-black/5 dark:bg-black/25 border border-zinc-300 dark:border-white/10">
-                <span class="font-bold">📅 ${dateKey}</span>
+                <span class="font-bold">${dateKey}</span>
                 <span class="px-2.5 py-0.5 rounded-lg font-black border ${badgeColor}">${label}</span>
               </div>
             `;
@@ -1194,37 +1374,62 @@
       document.getElementById('labourHistoryContent').innerHTML = logsHtml || `
         <div class="text-center py-6 opacity-70 space-y-2">
           <div>Total Summary: <b>${l.presentDays || 0} Present</b>, <b>${l.halfDays || 0} Half Days</b></div>
-          <div class="text-[11px]">Use "📖 Hajri Book" to record date-by-date attendance.</div>
+          <div class="text-[11px]">Use "Hajri Book" to record date-by-date attendance.</div>
         </div>
       `;
       document.getElementById('labourHistoryModal').classList.replace('hidden', 'flex');
     };
     window.closeLabourHistoryModal = () => document.getElementById('labourHistoryModal').classList.replace('flex', 'hidden');
 
-    // Multi-Account & Main Contractor Password Lock
+    // --- MULTI-ACCOUNT SWITCHING, PIN LOCK & SUPERVISOR DELETION ---
     window.openAddAccountPrompt = () => {
       openCustomDialog({
-        title: "🏷️ Add Supervisor Nickname",
-        placeholder: "e.g. Site Supervisor Rahul",
+        title: "Add Supervisor Nickname",
+        placeholder: "e.g. Supervisor 1",
         onConfirm: (nickname) => {
           if (!nickname) return;
+          const accs = getGlobalAccountsList();
           const newId = 'acc_' + Date.now();
-          state.accounts.push({ id: newId, nickname, email: `${nickname.toLowerCase().replace(/\s+/g,'')}@thekedaar`, active: false, isMaster: false });
-          persistState(); renderAccountIdsList();
+          accs.push({ id: newId, nickname, email: `${nickname.toLowerCase().replace(/\s+/g,'')}@thekedaar`, active: false, isMaster: false });
+          state.accounts = accs;
+          localStorage.setItem('thekedaar_global_accounts', JSON.stringify(accs));
+          persistState();
+          renderAccountIdsList();
         }
       });
     };
 
+    window.deleteSupervisorAccount = (accId) => {
+      if (!isMainContractorActive()) {
+        return alert("Access Denied! Only Main Contractor can delete supervisor accounts.");
+      }
+      if (accId === 'acc_main') {
+        return alert("Cannot delete the Main Contractor account.");
+      }
+      if (!confirm("Delete this Supervisor account permanently?")) return;
+
+      let accs = getGlobalAccountsList().filter(a => a.id !== accId);
+      state.accounts = accs;
+      localStorage.setItem('thekedaar_global_accounts', JSON.stringify(accs));
+      persistState();
+      renderAccountIdsList();
+    };
+
     window.switchActiveAccount = (accId) => {
-      const currentActive = (state.accounts || []).find(a => a.active);
-      const targetAcc = (state.accounts || []).find(a => a.id === accId);
+      const currentActive = getActiveAccount();
+      const accs = getGlobalAccountsList();
+      const targetAcc = accs.find(a => a.id === accId);
       if (!targetAcc) return;
 
-      // Main Contractor can access anyone's account freely; Supervisor needs password to access Main Contractor
-      if (targetAcc.isMaster && (!currentActive || !currentActive.isMaster)) {
+      const isTargetMaster = targetAcc.id === 'acc_main' || targetAcc.isMaster === true;
+      const isCurrentMaster = currentActive.id === 'acc_main' || currentActive.isMaster === true;
+
+      // Always require Master Password when switching from a Supervisor into Main Contractor on Mobile & Desktop
+      if (isTargetMaster && !isCurrentMaster) {
         pendingSwitchAccId = accId;
+        document.getElementById('masterPinInput').value = '';
         document.getElementById('pinLockModal').classList.replace('hidden', 'flex');
-        setTimeout(() => document.getElementById('masterPinInput').focus(), 80);
+        setTimeout(() => document.getElementById('masterPinInput').focus(), 100);
       } else {
         executeAccountSwitch(accId);
       }
@@ -1249,32 +1454,46 @@
     };
 
     function executeAccountSwitch(accId) {
-      state.accounts.forEach(a => a.active = (a.id === accId));
+      const accs = getGlobalAccountsList();
+      accs.forEach(a => a.active = (a.id === accId));
       localStorage.setItem('thekedaar_active_acc_id', accId);
-      localStorage.setItem('thekedaar_global_accounts', JSON.stringify(state.accounts));
+      localStorage.setItem('thekedaar_global_accounts', JSON.stringify(accs));
       loadLocalState();
-      state.accounts = JSON.parse(localStorage.getItem('thekedaar_global_accounts'));
       renderAll();
       renderAccountIdsList();
     }
 
     function renderAccountIdsList() {
       const container = document.getElementById('accountIdsList');
-      const activeAcc = (state.accounts || []).find(a => a.active) || state.accounts[0];
+      const accs = getGlobalAccountsList();
+      const activeAcc = getActiveAccount();
+      const masterActive = isMainContractorActive();
       
-      // Only show "Set Main Contractor Password" box if Main Contractor is currently logged in
       const passBox = document.getElementById('masterPasswordSettingBox');
-      if (passBox) passBox.classList.toggle('hidden', !activeAcc.isMaster);
+      if (passBox) passBox.classList.toggle('hidden', !masterActive);
 
-      container.innerHTML = state.accounts.map(acc => `
-        <div class="flex items-center justify-between p-2.5 rounded-xl ${acc.active ? 'bg-amber-500/15 border border-amber-500/40' : 'bg-black/5 dark:bg-black/20'}">
-          <div class="truncate">
-            <span class="text-xs font-bold block ${acc.active ? 'text-amber-500' : ''}">${acc.isMaster ? '👑 ' : '👤 '}${acc.nickname}</span>
-            <span class="text-[10px] opacity-65">${acc.isMaster ? 'Protected Master Account' : 'Supervisor Account'}</span>
+      container.innerHTML = accs.map(acc => {
+        const isCurrent = acc.id === activeAcc.id;
+        const isMasterAcc = acc.id === 'acc_main' || acc.isMaster === true;
+        return `
+          <div class="flex items-center justify-between p-2.5 rounded-xl ${isCurrent ? 'bg-amber-500/15 border border-amber-500/40' : 'bg-black/5 dark:bg-black/20'}">
+            <div class="truncate">
+              <span class="text-xs font-bold block ${isCurrent ? 'text-amber-500' : ''}">${acc.nickname}</span>
+              <span class="text-[10px] opacity-65">${isMasterAcc ? 'Main Contractor (Admin)' : 'Supervisor (Add & Attendance Only)'}</span>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              ${isCurrent 
+                ? `<span class="text-[10px] text-emerald-500 font-bold px-2 py-0.5 rounded-full bg-emerald-500/15">Active</span>` 
+                : `<button onclick="switchActiveAccount('${acc.id}')" class="text-[10px] px-2.5 py-1 rounded-lg bg-amber-500 text-zinc-950 font-black shadow">Switch</button>`}
+              ${masterActive && !isMasterAcc ? `
+                <button onclick="deleteSupervisorAccount('${acc.id}')" class="p-1.5 rounded-lg bg-rose-500/15 text-rose-500 hover:bg-rose-500/25" title="Delete Supervisor Account">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                </button>
+              ` : ''}
+            </div>
           </div>
-          ${acc.active ? `<span class="text-[10px] text-emerald-500 font-bold px-2 py-0.5 rounded-full bg-emerald-500/15">Active</span>` : `<button onclick="switchActiveAccount('${acc.id}')" class="text-[10px] px-2.5 py-1 rounded-lg bg-amber-500 text-zinc-950 font-black shadow">Switch</button>`}
-        </div>
-      `).join('');
+        `;
+      }).join('');
       document.getElementById('activeNicknameBadge').innerText = activeAcc.nickname || 'Main';
       document.getElementById('currentProfileNameText').innerText = activeAcc.nickname || 'Main';
     }
@@ -1295,7 +1514,7 @@
       const eff = (l.presentDays || 0) + ((l.halfDays || 0) * 0.5);
       const earned = Math.round(rate * eff);
       const net = earned - (l.advance || 0);
-      const msg = `*ठेकेDAAR - मजदूर हिसाब*\n👷 नाम: *${l.name}*\n• दर: ₹${rate}/दिन\n• हाजिरी: ${l.presentDays || 0}P, ${l.halfDays || 0}H\n• एडवांस: ₹${l.advance || 0}\n*💰 शुद्ध बाकी: ₹${net}*`;
+      const msg = `*ठेकेDAAR - मजदूर हिसाब*\nनाम: *${l.name}*\n• दर: ₹${rate}/दिन\n• हाजिरी: ${l.presentDays || 0}P, ${l.halfDays || 0}H\n• एडवांस: ₹${l.advance || 0}\n*शुद्ध बाकी: ₹${net}*`;
       window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
     };
 
@@ -1389,11 +1608,14 @@
     };
 
     window.toggleBillStatus = (billId) => {
+      if (!isMainContractorActive()) {
+        return alert("Access Denied! Only Main Contractor can change bill payment status.");
+      }
       const bill = (state.bills || []).find(b => b.id === billId);
       if (!bill) return;
       if (bill.status === 'Pending') {
         openCustomDialog({
-          title: "✅ Payment Received Date",
+          title: "Payment Received Date",
           inputType: "date",
           defaultValue: new Date().toISOString().split('T')[0],
           onConfirm: (dt) => { bill.status = 'Received'; bill.receivedDate = dt || new Date().toISOString().split('T')[0]; persistState(); }
@@ -1423,7 +1645,9 @@
         <label class="flex items-center justify-between p-2.5 rounded-2xl bg-black/5 dark:bg-black/30 border border-zinc-300 dark:border-white/10 cursor-pointer">
           <div class="flex items-center gap-2.5 min-w-0">
             <input type="checkbox" value="${idx}" class="carry-worker-cb w-4 h-4 accent-amber-500 rounded" onchange="updateCarryCount()" checked />
-            <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0">👷</div>
+            <div class="w-9 h-9 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
             <div class="truncate"><div class="font-bold text-xs truncate">${w.name}</div><div class="text-[10px] opacity-70">${w.category} • ₹${w.dailyRate || 500}/day</div></div>
           </div>
         </label>
@@ -1515,7 +1739,9 @@
         return `
           <div class="bg-black/5 dark:bg-black/30 p-3 rounded-2xl border border-zinc-300 dark:border-white/10 flex items-center justify-between">
             <div class="flex items-center gap-3 min-w-0">
-              <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0">👷</div>
+              <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              </div>
               <div class="truncate">
                 <div class="font-bold text-xs truncate">${w.name}</div>
                 <div class="text-[10px] opacity-70">${w.category} • ₹${w.dailyRate || 500}/day</div>
@@ -1569,10 +1795,30 @@
 
     window.addNewSite = () => {
       openCustomDialog({
-        title: "🏗️ Add New Site",
+        title: "Add New Site",
         placeholder: "e.g. Commercial Plaza",
         onConfirm: (name) => { if (name) { state.sites.push(name); persistState(); document.getElementById('siteSelect').value = name; renderAll(); } }
       });
+    };
+
+    // Delete Current Site (STRICTLY MAIN CONTRACTOR ONLY)
+    window.deleteCurrentSite = () => {
+      if (!isMainContractorActive()) {
+        return alert("Access Denied! Only the Main Contractor can delete a site.");
+      }
+      if ((state.sites || []).length <= 1) {
+        return alert("Cannot delete! You must keep at least one active site.");
+      }
+      const siteToDelete = document.getElementById('siteSelect').value;
+      if (!confirm(`Delete site "${siteToDelete}" and all its records permanently?`)) return;
+
+      state.sites = state.sites.filter(s => s !== siteToDelete);
+      state.labours = (state.labours || []).filter(l => l.site !== siteToDelete);
+      state.expenses = (state.expenses || []).filter(e => e.site !== siteToDelete);
+      state.bills = (state.bills || []).filter(b => b.site !== siteToDelete);
+
+      document.getElementById('siteSelect').value = state.sites[0];
+      persistState();
     };
 
     window.saveLabour = async (e) => {
@@ -1587,7 +1833,7 @@
 
       state.labours.unshift({
         id: Date.now().toString(), site, month, name, category, dailyRate, phone, advance: initialAdvance,
-        advanceLog: initialAdvance > 0 ? [{ date: new Date().toLocaleDateString('hi-IN'), amount: initialAdvance, mode: '💵 Cash', note: 'Initial' }] : [],
+        advanceLog: initialAdvance > 0 ? [{ date: new Date().toLocaleDateString('hi-IN'), amount: initialAdvance, mode: 'Cash', note: 'Initial' }] : [],
         presentDays: 0, halfDays: 0
       });
 
@@ -1599,10 +1845,14 @@
       e.target.reset(); closeFormModal(); persistState(); navigateTo('viewLabours');
     };
 
+    // Edit Salary Rate (STRICTLY MAIN CONTRACTOR ONLY)
     window.editLabourSalary = (id) => {
+      if (!isMainContractorActive()) {
+        return alert("Access Denied! Only Main Contractor can edit daily wage rates.");
+      }
       const l = state.labours.find(x => x.id === id);
       if (!l) return;
-      openCustomDialog({ title: `💰 Daily Rate - ${l.name}`, inputType: "number", defaultValue: l.dailyRate || 500, onConfirm: (v) => { if(v){ l.dailyRate = Number(v); persistState(); } } });
+      openCustomDialog({ title: `Daily Rate - ${l.name}`, inputType: "number", defaultValue: l.dailyRate || 500, onConfirm: (v) => { if(v){ l.dailyRate = Number(v); persistState(); } } });
     };
 
     window.openAdvanceModal = (id) => {
@@ -1678,28 +1928,34 @@
       e.target.reset(); closeFormModal(); persistState(); navigateTo('viewBills');
     };
 
+    // Delete Record (STRICTLY MAIN CONTRACTOR ONLY - SUPERVISORS CANNOT DELETE ANYTHING)
     window.deleteRecord = (type, id) => {
-      if (!confirm("Are you sure?")) return;
+      if (!isMainContractorActive()) {
+        return alert("Access Denied! Only the Main Contractor can delete records.");
+      }
+      if (!confirm("Are you sure you want to delete this record?")) return;
       state[type] = state[type].filter(item => item.id !== id);
       persistState();
     };
 
     function getFileBadgeHTML(att) {
-      if (!att) return `<div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-500 flex items-center justify-center font-bold text-sm shrink-0">📄</div>`;
+      const docSvg = `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>`;
+      if (!att) return `<div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-500 flex items-center justify-center shrink-0">${docSvg}</div>`;
       if (['jpg','jpeg','png','webp','gif'].includes(att.ext)) {
         return `<a href="${att.dataUrl}" target="_blank" download="${att.name}"><img src="${att.dataUrl}" class="w-10 h-10 rounded-xl object-cover border border-amber-500 shrink-0" /></a>`;
       }
-      return `<a href="${att.dataUrl}" download="${att.name}" target="_blank" class="px-2.5 py-1.5 rounded-xl bg-amber-500/20 text-amber-500 text-[10px] font-black border border-amber-500/40 shrink-0">📎 DOC</a>`;
+      return `<a href="${att.dataUrl}" download="${att.name}" target="_blank" class="px-2.5 py-1.5 rounded-xl bg-amber-500/20 text-amber-500 text-[10px] font-black border border-amber-500/40 shrink-0 flex items-center gap-1">${docSvg}<span>DOC</span></a>`;
     }
 
-    // Master Render Engine
+    // Master Render Engine (Enforces Role-Based Button Visibility)
     window.renderAll = () => {
       const siteSelect = document.getElementById('siteSelect');
-      const currentSite = siteSelect.value || state.sites[0];
+      const currentSite = siteSelect.value && state.sites.includes(siteSelect.value) ? siteSelect.value : state.sites[0];
       siteSelect.innerHTML = state.sites.map(s => `<option value="${s}" ${s === currentSite ? 'selected' : ''}>${s}</option>`).join('');
 
       const activeSite = siteSelect.value;
       const activeMonth = document.getElementById('monthSelect').value;
+      const masterActive = isMainContractorActive();
 
       const userBadge = document.getElementById('userAvatarBadge');
       const profileAvatar = document.getElementById('profileAvatarPreview');
@@ -1712,14 +1968,25 @@
         profileAvatar.innerHTML = `<span>ठे</span>`;
       }
 
-      document.getElementById('activeNicknameBadge').innerText = (state.accounts.find(a => a.active) || {}).nickname || 'Main';
+      const activeAcc = getActiveAccount();
+      document.getElementById('activeNicknameBadge').innerText = activeAcc.nickname || 'Main';
       document.getElementById('profileLogoutBtn').classList.toggle('hidden', !currentUser);
+
+      // Hide Delete Site Button for Supervisors
+      const delSiteBtn = document.getElementById('deleteSiteBtn');
+      if (delSiteBtn) {
+        delSiteBtn.classList.toggle('hidden', !masterActive);
+      }
+
       updateSyncStatusUI();
 
       const filteredLabours = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth);
       let totalLabourDue = 0;
 
-      // Render Spaced Labour Cards (Click Name Box for Attendance History, Phone Call Button)
+      const workerSvg = `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`;
+      const trashSvg = `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>`;
+
+      // Render Spaced Labour Cards (Delete & Rate Edit hidden for Supervisors)
       document.getElementById('labourList').innerHTML = filteredLabours.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No labour records found for ${activeMonth}.</div>` : filteredLabours.map(l => {
         const rate = l.dailyRate || 500;
         const earned = Math.round(rate * ((l.presentDays || 0) + ((l.halfDays || 0) * 0.5)));
@@ -1730,27 +1997,29 @@
           <div class="ios-glass p-4 rounded-3xl space-y-3 shadow-md">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-3">
-                <div onclick="openLabourAttendanceHistory('${l.id}')" class="w-12 h-12 rounded-full bg-amber-500/15 text-amber-500 flex items-center justify-center font-bold text-base shrink-0 cursor-pointer">👷</div>
+                <div onclick="openLabourAttendanceHistory('${l.id}')" class="w-12 h-12 rounded-full bg-amber-500/15 text-amber-500 flex items-center justify-center shrink-0 cursor-pointer">
+                  ${workerSvg}
+                </div>
                 <div>
                   <button onclick="openLabourAttendanceHistory('${l.id}')" class="font-bold text-sm leading-tight text-left hover:text-amber-500 underline decoration-amber-500/50">
-                    ${l.name} 📅
+                    ${l.name}
                   </button>
                   <div class="flex items-center gap-1.5 mt-0.5">
                     <span class="text-[10px] px-2 py-0.5 rounded-full bg-black/10 dark:bg-white/10 opacity-75">${l.category}</span>
-                    ${l.phone ? `<a href="tel:${l.phone}" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-500 font-bold">📞 ${l.phone}</a>` : ''}
+                    ${l.phone ? `<a href="tel:${l.phone}" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-500 font-bold flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><span>${l.phone}</span></a>` : ''}
                   </div>
                   <div class="text-[11px] opacity-80 mt-1 flex items-center gap-1.5 flex-wrap">
                     <span>Rate: <b>₹${rate}/day</b></span>
-                    <button onclick="editLabourSalary('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-500 font-bold">Edit</button>
+                    ${masterActive ? `<button onclick="editLabourSalary('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-500 font-bold">Edit</button>` : ''}
                     <span>| Adv: <b class="text-rose-500">₹${l.advance || 0}</b></span>
                     <button onclick="openAdvanceModal('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-500 font-bold">+ Adv</button>
                   </div>
                 </div>
               </div>
-              <div class="text-right">
+              <div class="text-right flex flex-col items-end">
                 <div class="text-[10px] uppercase opacity-65 font-bold">Net Due</div>
                 <div class="text-base font-black ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net.toLocaleString('en-IN')}</div>
-                <button onclick="deleteRecord('labours','${l.id}')" class="text-[10px] opacity-60 hover:text-rose-500 mt-1">Del</button>
+                ${masterActive ? `<button onclick="deleteRecord('labours','${l.id}')" class="p-1 text-rose-500 opacity-75 hover:opacity-100 mt-1" title="Delete Labour">${trashSvg}</button>` : ''}
               </div>
             </div>
 
@@ -1759,7 +2028,7 @@
                 <span class="font-semibold opacity-75">Present:</span> <b class="text-emerald-500">${l.presentDays || 0}P</b>
                 <span class="mx-1 opacity-40">|</span>
                 <span class="font-semibold opacity-75">Half:</span> <b class="text-amber-500">${l.halfDays || 0}H</b>
-                <span class="text-[10px] text-amber-500 ml-1 underline">(View Dates)</span>
+                <span class="text-[10px] text-amber-500 ml-1 underline">(History)</span>
               </div>
               <div class="flex items-center gap-1">
                 <button onclick="updateAttendance('${l.id}','decPresent')" class="w-7 h-7 rounded-lg bg-black/10 dark:bg-white/10 font-black">-P</button>
@@ -1770,7 +2039,8 @@
 
             <div class="flex items-center justify-end pt-0.5 text-xs">
               <button onclick="shareWorkerSlipWhatsApp('${l.id}')" class="px-3 py-1 rounded-xl bg-emerald-500/15 text-emerald-500 font-bold text-[10px] flex items-center gap-1 border border-emerald-500/30">
-                <span>💬</span> WhatsApp Slip
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span>WhatsApp Slip</span>
               </button>
             </div>
           </div>
@@ -1779,7 +2049,7 @@
 
       document.getElementById('summaryLabourDue').innerText = `₹${totalLabourDue.toLocaleString('en-IN')}`;
 
-      // Home Snapshot Spacing (Click Worker Card to Open Day-Wise Attendance History)
+      // Home Snapshot Spacing
       document.getElementById('homeRecentLabour').innerHTML = filteredLabours.length === 0 ? `
         <div class="ios-glass rounded-2xl p-6 text-center">
           <p class="text-xs opacity-70 mb-3">No workers added yet.</p>
@@ -1790,9 +2060,9 @@
         return `
           <div onclick="openLabourAttendanceHistory('${l.id}')" class="ios-glass p-4 rounded-2xl flex items-center justify-between text-xs shadow-md cursor-pointer active:scale-98 transition-transform">
             <div class="flex items-center gap-3">
-              <div class="w-11 h-11 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold">👷</div>
+              <div class="w-11 h-11 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center">${workerSvg}</div>
               <div>
-                <div class="font-bold text-sm underline decoration-amber-500/40">${l.name} 📅</div>
+                <div class="font-bold text-sm underline decoration-amber-500/40">${l.name}</div>
                 <div class="text-[11px] opacity-75">${l.category} • ₹${l.dailyRate || 500}/day (${l.presentDays || 0}P, ${l.halfDays || 0}H)</div>
               </div>
             </div>
@@ -1801,17 +2071,20 @@
         `;
       }).join('');
 
-      // Expenses
+      // Expenses (Delete button hidden for Supervisors)
       const filteredExpenses = (state.expenses || []).filter(e => e.site === activeSite && e.month === activeMonth);
       document.getElementById('summaryExpensesTotal').innerText = `₹${filteredExpenses.reduce((a, b) => a + b.amount, 0).toLocaleString('en-IN')}`;
       document.getElementById('expenseList').innerHTML = filteredExpenses.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No expenses recorded.</div>` : filteredExpenses.map(e => `
         <div class="ios-glass p-3.5 rounded-2xl flex items-center justify-between shadow-sm">
           <div class="flex items-center gap-2.5">${getFileBadgeHTML(e.attachment)}<div><h4 class="font-bold text-xs">${e.title}</h4><div class="text-[10px] opacity-75">${e.category}</div></div></div>
-          <div class="text-right"><div class="text-xs font-black text-amber-500">₹${e.amount.toLocaleString('en-IN')}</div><button onclick="deleteRecord('expenses','${e.id}')" class="text-[10px] opacity-60">Del</button></div>
+          <div class="text-right flex flex-col items-end">
+            <div class="text-xs font-black text-amber-500">₹${e.amount.toLocaleString('en-IN')}</div>
+            ${masterActive ? `<button onclick="deleteRecord('expenses','${e.id}')" class="p-1 text-rose-500 opacity-75 hover:opacity-100 mt-0.5">${trashSvg}</button>` : ''}
+          </div>
         </div>
       `).join('');
 
-      // Bills
+      // Bills (Delete and Status Toggle hidden for Supervisors)
       const filteredBills = (state.bills || []).filter(b => b.site === activeSite && b.month === activeMonth);
       document.getElementById('summaryBillsTotal').innerText = `₹${filteredBills.reduce((a, b) => a + b.amount, 0).toLocaleString('en-IN')}`;
       document.getElementById('billList').innerHTML = filteredBills.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No bills recorded.</div>` : filteredBills.map(b => {
@@ -1822,14 +2095,17 @@
               ${getFileBadgeHTML(b.attachment)}
               <div>
                 <h4 class="font-bold text-xs">${b.title}</h4>
-                <div class="text-[10px] opacity-80 mt-0.5">📅 Added: ${b.billDate} | ${b.receivedDate ? `✅ Rec: ${b.receivedDate}` : '⏳ Pending'}</div>
+                <div class="text-[10px] opacity-80 mt-0.5">Added: ${b.billDate} | ${b.receivedDate ? `Rec: ${b.receivedDate}` : 'Pending'}</div>
                 <div class="flex items-center gap-1.5 mt-1">
                   <span class="text-[9px] px-2 py-0.5 rounded-full font-bold ${isPending ? 'bg-amber-500/15 text-amber-500' : 'bg-emerald-500/15 text-emerald-500'}">${b.status}</span>
-                  <button onclick="toggleBillStatus('${b.id}')" class="text-[9px] px-2 py-0.5 rounded-lg bg-amber-500 text-zinc-950 font-black">Toggle Status</button>
+                  ${masterActive ? `<button onclick="toggleBillStatus('${b.id}')" class="text-[9px] px-2 py-0.5 rounded-lg bg-amber-500 text-zinc-950 font-black">Toggle Status</button>` : ''}
                 </div>
               </div>
             </div>
-            <div class="text-right"><div class="text-sm font-black ${isPending ? 'text-amber-500' : 'text-emerald-500'}">₹${b.amount.toLocaleString('en-IN')}</div><button onclick="deleteRecord('bills','${b.id}')" class="text-[10px] opacity-60 mt-1">Del</button></div>
+            <div class="text-right flex flex-col items-end">
+              <div class="text-sm font-black ${isPending ? 'text-amber-500' : 'text-emerald-500'}">₹${b.amount.toLocaleString('en-IN')}</div>
+              ${masterActive ? `<button onclick="deleteRecord('bills','${b.id}')" class="p-1 text-rose-500 opacity-75 hover:opacity-100 mt-1">${trashSvg}</button>` : ''}
+            </div>
           </div>
         `;
       }).join('');
@@ -1837,12 +2113,13 @@
 
     window.previewUniversalFile = (inpId, lblId) => {
       const f = document.getElementById(inpId).files[0];
-      if (f) document.getElementById(lblId).innerText = `📄 ${f.name}`;
+      if (f) document.getElementById(lblId).innerText = f.name;
     };
 
     window.changeLanguage = (lang) => {
       window.currentLang = lang;
       localStorage.setItem('thekedaar_lang', lang);
+      localStorage.setItem('thekedaar_voice_locale', speechLocaleMap[lang] || 'hi-IN');
       const dict = i18n[lang] || i18n.hi;
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const k = el.getAttribute('data-i18n');
@@ -1860,7 +2137,7 @@
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(msg);
-        utter.lang = `${window.currentLang || 'hi'}-IN`;
+        utter.lang = speechLocaleMap[window.currentLang] || 'hi-IN';
         window.speechSynthesis.speak(utter);
       }
     };
@@ -1886,7 +2163,7 @@
     };
 
     window.logoutAccount = () => {
-      if (confirm("Log out?")) {
+      if (confirm("Log out of Cloud Email?")) {
         signOut(auth).then(() => { currentUser = null; loadLocalState(); closeProfileModal(); location.reload(); });
       }
     };
@@ -1895,8 +2172,12 @@
       if (user) {
         currentUser = user; loadLocalState(); updateSyncStatusUI();
         onSnapshot(doc(db, "users", `${user.uid}_${getActiveAccountId()}`), (snap) => {
-          if (snap.exists()) { state = snap.data(); localStorage.setItem(getStorageKey(), JSON.stringify(state)); renderAll(); }
-          else { persistState(); }
+          if (snap.exists()) {
+            const cloudData = snap.data();
+            state = { ...cloudData, accounts: getGlobalAccountsList() };
+            localStorage.setItem(getStorageKey(), JSON.stringify(state));
+            renderAll();
+          } else { persistState(); }
         });
       } else { currentUser = null; loadLocalState(); updateSyncStatusUI(); renderAll(); }
     });
