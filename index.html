@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
   
-  <link rel="icon" type="image/png" href="./logo.png?v=15">
-  <link rel="apple-touch-icon" href="./logo.png?v=15">
-  <link rel="manifest" href="manifest.json?v=15">
+  <link rel="icon" type="image/png" href="./logo.png?v=16">
+  <link rel="apple-touch-icon" href="./logo.png?v=16">
+  <link rel="manifest" href="manifest.json?v=16">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#000000">
@@ -26,6 +26,7 @@
 
   <style>
     html.theme-amoled {
+      color-scheme: dark;
       --bg-main: #000000;
       --card-bg: rgba(18, 20, 24, 0.84);
       --card-border: rgba(255, 255, 255, 0.16);
@@ -41,8 +42,10 @@
       --input-border: rgba(255, 255, 255, 0.28);
       --input-text: #ffffff;
       --placeholder-color: #94a3b8;
+      --calendar-filter: invert(1) brightness(1.8);
     }
     html.theme-dark {
+      color-scheme: dark;
       --bg-main: #0b111e;
       --card-bg: rgba(22, 32, 50, 0.86);
       --card-border: rgba(255, 255, 255, 0.18);
@@ -58,8 +61,10 @@
       --input-border: rgba(255, 255, 255, 0.25);
       --input-text: #ffffff;
       --placeholder-color: #94a3b8;
+      --calendar-filter: invert(1) brightness(1.8);
     }
     html.theme-light {
+      color-scheme: light;
       --bg-main: #f1f5f9;
       --card-bg: #ffffff;
       --card-border: #cbd5e1;
@@ -75,9 +80,19 @@
       --input-border: #64748b;
       --input-text: #09090b;
       --placeholder-color: #475569;
+      --calendar-filter: invert(0);
     }
 
     body { background-color: var(--bg-main); color: var(--text-main); -webkit-font-smoothing: antialiased; }
+    
+    /* Ensure native calendar/date/month picker icons are clearly visible in every theme */
+    input[type="date"]::-webkit-calendar-picker-indicator,
+    input[type="month"]::-webkit-calendar-picker-indicator {
+      filter: var(--calendar-filter);
+      cursor: pointer;
+      opacity: 0.9;
+    }
+
     .ios-glass {
       background: var(--card-bg);
       backdrop-filter: blur(28px) saturate(190%);
@@ -189,7 +204,7 @@
             <line x1="3" y1="10" x2="21" y2="10"></line>
           </svg>
         </button>
-        <button onclick="openSettingsModal()" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center active:scale-90 transition-transform shadow-sm" title="Settings">
+        <button onclick="openSettingsModal()" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center active:scale-90 transition-transform shadow-sm" style="color: var(--text-main);" title="Settings">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="3"></circle>
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
@@ -199,7 +214,7 @@
     </div>
   </header>
 
-  <!-- 4. MAIN SITE & MONTH CONTROLLER -->
+  <!-- 4. MAIN SITE & MONTH CONTROLLER (ADAPTIVE CALENDAR ICON) -->
   <div class="max-w-md mx-auto px-4 pt-3">
     <div class="ios-glass rounded-2xl p-2.5 flex items-center justify-between gap-1.5 shadow-sm">
       <div class="flex items-center gap-1.5 flex-1 min-w-0">
@@ -207,7 +222,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
           <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
         </svg>
-        <select id="siteSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold focus:outline-none w-full truncate"></select>
+        <select id="siteSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold focus:outline-none w-full truncate" style="color: var(--text-main);"></select>
       </div>
       <button onclick="addNewSite()" class="px-2.5 py-1 bg-amber-500/15 hover:bg-amber-500/25 text-amber-500 font-bold text-xs rounded-xl transition-all shrink-0">
         + SITE
@@ -220,7 +235,15 @@
         </svg>
       </button>
       <div class="h-4 w-px bg-zinc-300 dark:bg-white/10"></div>
-      <input type="month" id="monthSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold focus:outline-none cursor-pointer" />
+      <div class="flex items-center gap-1 shrink-0">
+        <svg class="w-4 h-4 text-amber-500 shrink-0 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        <input type="month" id="monthSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold focus:outline-none cursor-pointer" style="color: var(--text-main);" />
+      </div>
     </div>
   </div>
 
@@ -426,7 +449,7 @@
     </div>
   </div>
 
-  <!-- 8. SETTINGS MODAL (SVG ICONS ONLY) -->
+  <!-- 8. SETTINGS MODAL (WITH INTERACTIVE USER GUIDE OPTION INSIDE) -->
   <div id="settingsModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-3">
@@ -487,10 +510,10 @@
         </a>
       </div>
 
-      <!-- Watch Interactive App Guide Button Inside Settings -->
-      <button onclick="closeSettingsModal(); openAppVideoGuide();" class="w-full py-2.5 rounded-2xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-500 border border-amber-500/30 font-black text-xs flex items-center justify-center gap-2 transition-all">
+      <!-- Watch Interactive App Guide Option Inside Settings -->
+      <button onclick="closeSettingsModal(); openAppVideoGuide();" class="w-full py-3 rounded-2xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-500 border border-amber-500/30 font-black text-xs flex items-center justify-center gap-2 transition-all">
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        <span>Watch Interactive User Guide / ऐप गाइड देखें</span>
+        <span data-i18n="userGuideBtn">User Guide / ऐप कैसे चलाएं</span>
       </button>
 
       <!-- Share App Option -->
@@ -958,12 +981,7 @@
     </div>
   </div>
 
-  <!-- 21. FLOATING INTERACTIVE USER GUIDE BUTTON & AUTO-PLAYING VIDEO PLAYER MODAL -->
-  <button onclick="openAppVideoGuide()" class="fixed bottom-20 right-4 z-40 px-3.5 py-2 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-zinc-950 font-black text-xs shadow-2xl flex items-center gap-1.5 border border-white/20 active:scale-90 transition-transform" title="Watch Interactive User Guide">
-    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-    <span>User Guide</span>
-  </button>
-
+  <!-- 21. INTERACTIVE USER GUIDE MODAL (ACCESSIBLE FROM SETTINGS) -->
   <div id="videoGuideModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-4">
     <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl border border-amber-500/40 relative overflow-hidden">
       <!-- Top Story-Style Progress Bars -->
@@ -1050,16 +1068,16 @@
     };
 
     const i18n = {
-      hi: { labourDue: "कुल मजदूर बकाया", expenses: "खर्चे व किराया", bills: "कंपनी बिल", tabLabour: "मजदूर व हाजिरी", tabExpenses: "खर्चे व किराया", tabBills: "कंपनी बिल", audioSummaryTitle: "बोलकर हिसाब सुनें (Audio Summary)", audioSummarySub: "एक टैप में पूरे साइट का हिसाब सुनें", listenBtn: "LISTEN / सुनें", liveSnapshot: "LIVE WORKFORCE SNAPSHOT", settingsHeader: "ऐप सेटिंग्स", changeLangLabel: "भाषा बदलें (Change Language)", themeLabel: "ऐप थीम चुनें", shareAppBtn: "ऐप शेयर करें (Share App)" },
-      en: { labourDue: "Labour Due", expenses: "Expenses", bills: "Bills", tabLabour: "Labours & Attendance", tabExpenses: "Expenses & Rent", tabBills: "Company Bills", audioSummaryTitle: "Site Audio Summary", audioSummarySub: "Listen to whole site summary in one tap", listenBtn: "LISTEN", liveSnapshot: "LIVE WORKFORCE SNAPSHOT", settingsHeader: "App Settings", changeLangLabel: "Change Language", themeLabel: "Select App Theme", shareAppBtn: "Share App with Contractors" },
-      kn: { labourDue: "ಕಾರ್ಮಿಕರ ಬಾಕಿ ಹಣ", expenses: "ಸೈಟ್ ಖರ್ಚುಗಳು", bills: "ಕಂಪನಿ ಬಿಲ್‌ಗಳು", tabLabour: "ಕಾರ್ಮಿಕರು & ಹಾಜರಾತಿ", tabExpenses: "ಖರ್ಚು & ಬಾಡಿಗೆ", tabBills: "ಕಂಪನಿ ಬಿಲ್", audioSummaryTitle: "ಸೈಟ್ ಆಡಿಯೋ ಸಾರಾಂಶ", audioSummarySub: "ಒಂದೇ ಕ್ಲಿಕ್‌ನಲ್ಲಿ ಲೆಕ್ಕ ಕೇಳಿ", listenBtn: "ಕೇಳಿ (LISTEN)", liveSnapshot: "ಕಾರ್ಮಿಕರ ಸ್ಥಿತಿ", settingsHeader: "ಸೆಟ್ಟಿಂಗ್‌ಗಳು", changeLangLabel: "ಭಾಷೆ ಬದಲಿಸಿ", themeLabel: "ಥೀಮ್ ಆಯ್ಕೆಮಾಡಿ", shareAppBtn: "ಆಪ್ ಹಂಚಿಕೊಳ್ಳಿ" },
-      mr: { labourDue: "एकूण मजुरी बाकी", expenses: "भाडे व खर्च", bills: "कंपनी बिल", tabLabour: "कामगार व हजेरी", tabExpenses: "खर्च व रिक्षा भाडे", tabBills: "कंपनी बिल", audioSummaryTitle: "साइट ऑडिओ हिशोब", audioSummarySub: "एका टॅपमध्ये संपूर्ण हिशोब ऐका", listenBtn: "ऐका (LISTEN)", liveSnapshot: "कामगार सद्यस्थिती", settingsHeader: "सेटिंग्ज", changeLangLabel: "भाषा बदला", themeLabel: "थीम निवडा", shareAppBtn: "ॲप शेअर करा" },
-      gu: { labourDue: "બાકી મજૂરી", expenses: "ભાડું અને ખર્ચ", bills: "કંપની બિલ", tabLabour: "મજૂર અને હાજરી", tabExpenses: "ખર્ચ અને રિક્ષા ભાડું", tabBills: "કંપની બિલ", audioSummaryTitle: "સાઇટ ઓડિયો હિસાબ", audioSummarySub: "એક ટૅપમાં સમગ્ર સાઇટનો હિસાબ સાંભળો", listenBtn: "સાંભળો", liveSnapshot: "લાઇવ વર્કફોર્સ સ્નેપશોટ", settingsHeader: "સેટિંગ્સ", changeLangLabel: "ભાષા બદલો", themeLabel: "થીમ પસંદ કરો", shareAppBtn: "એપ શેર કરો" },
-      ta: { labourDue: "கூலி பாக்கி", expenses: "செலவுகள்", bills: "பில்கள்", tabLabour: "தொழிலாளர்கள் & வருகை", tabExpenses: "செலவுகள் & வாடகை", tabBills: "நிறுவன பில்கள்", audioSummaryTitle: "தள ஆடியோ சுருக்கம்", audioSummarySub: "ஒரே தட்டலில் கணக்கைக் கேளுங்கள்", listenBtn: "கேளுங்கள்", liveSnapshot: "தொழிலாளர் நிலவரம்", settingsHeader: "அமைப்புகள்", changeLangLabel: "மொழியை மாற்றவும்", themeLabel: "தீம் தேர்வு", shareAppBtn: "செயலியை பகிரவும்" },
-      te: { labourDue: "కూలీ బకాయి", expenses: "ఖర్చులు", bills: "బిల్లులు", tabLabour: "కార్మికులు & హాజరు", tabExpenses: "ఖర్చులు & రవాణా", tabBills: "కంపెనీ బిల్లులు", audioSummaryTitle: "సైట్ ఆడియో సారాంశం", audioSummarySub: "ఒకే ట్యాప్‌లో సైట్ లెక్క వినండి", listenBtn: "వినండి", liveSnapshot: "కార్మికుల సమాచారం", settingsHeader: "సెట్టింగులు", changeLangLabel: "భాషను మార్చండి", themeLabel: "థీమ్ ఎంచుకోండి", shareAppBtn: "యాప్ షేర్ చేయండి" },
-      bn: { labourDue: "বকেয়া মজুরি", expenses: "সাইটের খরচ", bills: "কোম্পানির বিল", tabLabour: "শ্রমিক ও হাজিরা", tabExpenses: "খরচ ও ভাড়া", tabBills: "কোম্পানির বিল", audioSummaryTitle: "সাইট অডিও হিসাব", audioSummarySub: "এক ক্লিকেই সব হিসাব শুনুন", listenBtn: "শুনুন", liveSnapshot: "শ্রমিক স্ন্যাপশট", settingsHeader: "সেটিংস", changeLangLabel: "ভাষা পরিবর্তন করুন", themeLabel: "থিম নির্বাচন করুন", shareAppBtn: "অ্যাপ শেয়ার করুন" },
-      ml: { labourDue: "കൂലി ബാക്കി", expenses: "ചെലവുകൾ", bills: "ബില്ലുകൾ", tabLabour: "തൊഴിലാളികളും ഹാജരും", tabExpenses: "ചെലവുകളും വാടകയും", tabBills: "കമ്പനി ബില്ലുകൾ", audioSummaryTitle: "സൈറ്റ് ഓഡിയോ വിവരണം", audioSummarySub: "ഒറ്റ ടാപ്പിൽ കണക്ക് കേൾക്കുക", listenBtn: "കേൾക്കുക", liveSnapshot: "തൊഴിലാളി നിലവാരം", settingsHeader: "ക്രമീകരണങ്ങൾ", changeLangLabel: "ഭാഷ മാറ്റുക", themeLabel: "തീം തിരഞ്ഞെടുക്കുക", shareAppBtn: "ആപ്പ് ഷെയർ ചെയ്യുക" },
-      pa: { labourDue: "ਬਕਾਇਆ ਮਜ਼ਦੂਰੀ", expenses: "ਖਰਚੇ ਅਤੇ ਕਿਰਾਇਆ", bills: "ਕੰਪਨੀ ਦੇ ਬਿੱਲ", tabLabour: "ਮਜ਼ਦੂਰ ਅਤੇ ਹਾਜ਼ਰੀ", tabExpenses: "ਖਰਚਾ ਅਤੇ ਕਿਰਾਇਆ", tabBills: "🧾 ਕੰਪਨੀ ਬਿੱਲ", audioSummaryTitle: "ਸਾਈਟ ਆਡੀਓ ਰਿਪੋਰਟ", audioSummarySub: "ਇੱਕ ਟੈਪ ਵਿੱਚ ਪੂਰਾ ਹਿਸਾਬ ਸੁਣੋ", listenBtn: "ਸੁਣੋ", liveSnapshot: "ਲਾਈਵ ਕਾਰਜਬਲ", settingsHeader: "ਸੈਟਿੰਗਾਂ", changeLangLabel: "ਭਾਸ਼ਾ ਬਦਲੋ", themeLabel: "ਥੀਮ ਚੁਣੋ", shareAppBtn: "ਐਪ ਸ਼ੇਅਰ ਕਰੋ" }
+      hi: { labourDue: "कुल मजदूर बकाया", expenses: "खर्चे व किराया", bills: "कंपनी बिल", tabLabour: "मजदूर व हाजिरी", tabExpenses: "खर्चे व किराया", tabBills: "कंपनी बिल", audioSummaryTitle: "बोलकर हिसाब सुनें (Audio Summary)", audioSummarySub: "एक टैप में पूरे साइट का हिसाब सुनें", listenBtn: "LISTEN / सुनें", liveSnapshot: "LIVE WORKFORCE SNAPSHOT", settingsHeader: "ऐप सेटिंग्स", changeLangLabel: "भाषा बदलें (Change Language)", themeLabel: "ऐप थीम चुनें", userGuideBtn: "ऐप गाइड देखें (User Guide)", shareAppBtn: "ऐप शेयर करें (Share App)" },
+      en: { labourDue: "Labour Due", expenses: "Expenses", bills: "Bills", tabLabour: "Labours & Attendance", tabExpenses: "Expenses & Rent", tabBills: "Company Bills", audioSummaryTitle: "Site Audio Summary", audioSummarySub: "Listen to whole site summary in one tap", listenBtn: "LISTEN", liveSnapshot: "LIVE WORKFORCE SNAPSHOT", settingsHeader: "App Settings", changeLangLabel: "Change Language", themeLabel: "Select App Theme", userGuideBtn: "Watch Interactive User Guide", shareAppBtn: "Share App with Contractors" },
+      kn: { labourDue: "ಕಾರ್ಮಿಕರ ಬಾಕಿ ಹಣ", expenses: "ಸೈಟ್ ಖರ್ಚುಗಳು", bills: "ಕಂಪನಿ ಬಿಲ್‌ಗಳು", tabLabour: "ಕಾರ್ಮಿಕರು & ಹಾಜರಾತಿ", tabExpenses: "ಖರ್ಚು & ಬಾಡಿಗೆ", tabBills: "ಕಂಪನಿ ಬಿಲ್", audioSummaryTitle: "ಸೈಟ್ ಆಡಿಯೋ ಸಾರಾಂಶ", audioSummarySub: "ಒಂದೇ ಕ್ಲಿಕ್‌ನಲ್ಲಿ ಲೆಕ್ಕ ಕೇಳಿ", listenBtn: "ಕೇಳಿ (LISTEN)", liveSnapshot: "ಕಾರ್ಮಿಕರ ಸ್ಥಿತಿ", settingsHeader: "ಸೆಟ್ಟಿಂಗ್‌ಗಳು", changeLangLabel: "ಭಾಷೆ ಬದಲಿಸಿ", themeLabel: "ಥೀಮ್ ಆಯ್ಕೆಮಾಡಿ", userGuideBtn: "ಬಳಕೆದಾರರ ಕೈಪಿಡಿ (User Guide)", shareAppBtn: "ಆಪ್ ಹಂಚಿಕೊಳ್ಳಿ" },
+      mr: { labourDue: "एकूण मजुरी बाकी", expenses: "भाडे व खर्च", bills: "कंपनी बिल", tabLabour: "कामगार व हजेरी", tabExpenses: "खर्च व रिक्षा भाडे", tabBills: "कंपनी बिल", audioSummaryTitle: "साइट ऑडिओ हिशोब", audioSummarySub: "एका टॅपमध्ये संपूर्ण हिशोब ऐका", listenBtn: "ऐका (LISTEN)", liveSnapshot: "कामगार सद्यस्थिती", settingsHeader: "सेटिंग्ज", changeLangLabel: "भाषा बदला", themeLabel: "थीम निवडा", userGuideBtn: "युजर गाईड पहा (User Guide)", shareAppBtn: "ॲप शेअर करा" },
+      gu: { labourDue: "બાકી મજૂરી", expenses: "ભાડું અને ખર્ચ", bills: "કંપની બિલ", tabLabour: "મજૂર અને હાજરી", tabExpenses: "ખર્ચ અને રિક્ષા ભાડું", tabBills: "કંપની બિલ", audioSummaryTitle: "સાઇટ ઓડિયો હિસાબ", audioSummarySub: "એક ટૅપમાં સમગ્ર સાઇટનો હિસાબ સાંભળો", listenBtn: "સાંભળો", liveSnapshot: "લાઇવ વર્કફોર્સ સ્નેપશોટ", settingsHeader: "સેટિંગ્સ", changeLangLabel: "ભાષા બદલો", themeLabel: "થીમ પસંદ કરો", userGuideBtn: "યુઝર ગાઈડ જુઓ", shareAppBtn: "એપ શેર કરો" },
+      ta: { labourDue: "கூலி பாக்கி", expenses: "செலவுகள்", bills: "பில்கள்", tabLabour: "தொழிலாளர்கள் & வருகை", tabExpenses: "செலவுகள் & வாடகை", tabBills: "நிறுவன பில்கள்", audioSummaryTitle: "தள ஆடியோ சுருக்கம்", audioSummarySub: "ஒரே தட்டலில் கணக்கைக் கேளுங்கள்", listenBtn: "கேளுங்கள்", liveSnapshot: "தொழிலாளர் நிலவரம்", settingsHeader: "அமைப்புகள்", changeLangLabel: "மொழியை மாற்றவும்", themeLabel: "தீம் தேர்வு", userGuideBtn: "பயனர் வழிகாட்டி", shareAppBtn: "செயலியை பகிரவும்" },
+      te: { labourDue: "కూలీ బకాయి", expenses: "ఖర్చులు", bills: "బిల్లులు", tabLabour: "కార్మికులు & హాజరు", tabExpenses: "ఖర్చులు & రవాణా", tabBills: "కంపెనీ బిల్లులు", audioSummaryTitle: "సైట్ ఆడియో సారాంశం", audioSummarySub: "ఒకే ట్యాప్‌లో సైట్ లెక్క వినండి", listenBtn: "వినండి", liveSnapshot: "కార్మికుల సమాచారం", settingsHeader: "సెట్టింగులు", changeLangLabel: "భాషను మార్చండి", themeLabel: "థీమ్ ఎంచుకోండి", userGuideBtn: "వినియోగదారు గైడ్", shareAppBtn: "యాప్ షేర్ చేయండి" },
+      bn: { labourDue: "বকেয়া মজুরি", expenses: "সাইটের খরচ", bills: "কোম্পানির বিল", tabLabour: "শ্রমিক ও হাজিরা", tabExpenses: "খরচ ও ভাড়া", tabBills: "কোম্পানির বিল", audioSummaryTitle: "সাইট অডিও হিসাব", audioSummarySub: "এক ক্লিকেই সব হিসাব শুনুন", listenBtn: "শুনুন", liveSnapshot: "শ্রমিক স্ন্যাপশট", settingsHeader: "সেটিংস", changeLangLabel: "ভাষা পরিবর্তন করুন", themeLabel: "থিম নির্বাচন করুন", userGuideBtn: "ব্যবহারকারী গাইড", shareAppBtn: "অ্যাপ শেয়ার করুন" },
+      ml: { labourDue: "കൂലി ബാക്കി", expenses: "ചെലവുകൾ", bills: "ബില്ലുകൾ", tabLabour: "തൊഴിലാളികളും ഹാജരും", tabExpenses: "ചെലവുകളും വാടകയും", tabBills: "കമ്പനി ബില്ലുകൾ", audioSummaryTitle: "സൈറ്റ് ഓഡിയോ വിവരണം", audioSummarySub: "ഒറ്റ ടാപ്പിൽ കണക്ക് കേൾക്കുക", listenBtn: "കേൾക്കുക", liveSnapshot: "തൊഴിലാളി നിലവാരം", settingsHeader: "ക്രമീകരണങ്ങൾ", changeLangLabel: "ഭാഷ മാറ്റുക", themeLabel: "തീം തിരഞ്ഞെടുക്കുക", userGuideBtn: "ഉപയോക്തൃ ഗൈഡ്", shareAppBtn: "ആപ്പ് ഷെയർ ചെയ്യുക" },
+      pa: { labourDue: "ਬਕਾਇਆ ਮਜ਼ਦੂਰੀ", expenses: "ਖਰਚੇ ਅਤੇ ਕਿਰਾਇਆ", bills: "ਕੰਪਨੀ ਦੇ ਬਿੱਲ", tabLabour: "ਮਜ਼ਦੂਰ ਅਤੇ ਹਾਜ਼ਰੀ", tabExpenses: "ਖਰਚਾ ਅਤੇ ਕਿਰਾਇਆ", tabBills: "ਕੰਪਨੀ ਬਿੱਲ", audioSummaryTitle: "ਸਾਈਟ ਆਡੀਓ ਰਿਪੋਰਟ", audioSummarySub: "ਇੱਕ ਟੈਪ ਵਿੱਚ ਪੂਰਾ ਹਿਸਾਬ ਸੁਣੋ", listenBtn: "ਸੁਣੋ", liveSnapshot: "ਲਾਈਵ ਕਾਰਜਬਲ", settingsHeader: "ਸੈਟਿੰਗਾਂ", changeLangLabel: "ਭਾਸ਼ਾ ਬਦਲੋ", themeLabel: "ਥੀਮ ਚੁਣੋ", userGuideBtn: "ਯੂਜ਼ਰ ਗਾਈਡ", shareAppBtn: "ਐਪ ਸ਼ੇਅਰ ਕਰੋ" }
     };
     window.currentLang = localStorage.getItem('thekedaar_lang') || 'hi';
 
@@ -2274,19 +2292,73 @@
       closeSettingsModal();
     };
 
+    // --- MULTI-LANGUAGE AUDIO SUMMARY ENGINE (SPEAKS IN ALL 10 SELECTED LANGUAGES) ---
+    function getSpokenMonthName(monthStr, lang) {
+      const parts = (monthStr || '').split('-');
+      if (parts.length < 2) return monthStr;
+      const year = parts[0];
+      const mIdx = Math.max(0, Math.min(11, parseInt(parts[1], 10) - 1));
+
+      const months = {
+        hi: ['जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर'],
+        en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        kn: ['ಜನವರಿ', 'ಫೆಬ್ರವರಿ', 'ಮಾರ್ಚ್', 'ಏಪ್ರಿಲ್', 'ಮೇ', 'ಜೂನ್', 'ಜುಲೈ', 'ಆಗಸ್ಟ್', 'ಸೆಪ್ಟೆಂಬರ್', 'ಅಕ್ಟೋಬರ್', 'ನವೆಂಬರ್', 'ಡಿಸೆಂಬರ್'],
+        mr: ['जानेवारी', 'फेब्रुवारी', 'मार्च', 'एप्रिल', 'मे', 'जून', 'जुलै', 'ऑगस्ट', 'सप्टेंबर', 'ऑक्टोबर', 'नोव्हेंबर', 'डिसेंबर'],
+        gu: ['જાન્યુઆરી', 'ફેબ્રુઆરી', 'માર્ચ', 'એપ્રિલ', 'મે', 'જૂન', 'જુલાઈ', 'ઓગસ્ટ', 'સપ્ટેમ્બર', 'ઓક્ટોબર', 'નવેમ્બર', 'ડિસેમ્બર'],
+        ta: ['ஜனவரி', 'பிப்ரவரி', 'மார்ச்', 'ஏப்ரல்', 'மே', 'ஜூன்', 'ஜூலை', 'ஆகஸ்ட்', 'செப்டம்பர்', 'அக்டோபர்', 'நவம்பர்', 'டிசம்பர்'],
+        te: ['జనవరి', 'ఫిబ్రవరి', 'మార్చి', 'ఏప్రిల్', 'మే', 'జూన్', 'జూలై', 'ఆగస్టు', 'సెప్టెంబర్', 'అక్టోబర్', 'నవంబర్', 'డిసెంబర్'],
+        bn: ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'],
+        ml: ['ജനുവരി', 'ഫെബ്രുവരി', 'മാർച്ച്', 'ഏപ്രിൽ', 'മേയ്', 'ജൂൺ', 'ജൂലൈ', 'ഓഗസ്റ്റ്', 'സെപ്റ്റംബർ', 'ഒക്ടോബർ', 'നവംബർ', 'ഡിസംബർ'],
+        pa: ['ਜਨਵਰੀ', 'ਫ਼ਰਵਰੀ', 'ਮਾਰਚ', 'ਅਪ੍ਰੈਲ', 'ਮਈ', 'ਜੂਨ', 'ਜੁਲਾਈ', 'ਅਗਸਤ', 'ਸਤੰਬਰ', 'ਅਕਤੂਬਰ', 'ਨਵੰਬਰ', 'ਦਸੰਬਰ']
+      };
+      const list = months[lang] || months.hi;
+      return `${list[mIdx]} ${year}`;
+    }
+
     window.playVoiceSummary = () => {
+      const lang = window.currentLang || localStorage.getItem('thekedaar_lang') || 'hi';
       const activeSite = document.getElementById('siteSelect').value;
-      const labourDue = document.getElementById('summaryLabourDue').innerText;
-      const expenses = document.getElementById('summaryExpensesTotal').innerText;
-      const bills = document.getElementById('summaryBillsTotal').innerText;
-      const msg = `नमस्ते ठेकेदार जी। साइट ${activeSite} का हिसाब: कुल बाकी मजदूरी ${labourDue} है। कुल खर्चे ${expenses} हैं। और कंपनी बिल ${bills} है।`;
+      const activeMonth = document.getElementById('monthSelect').value;
+      const labourDue = document.getElementById('summaryLabourDue').innerText.replace('₹', '').trim();
+      const expenses = document.getElementById('summaryExpensesTotal').innerText.replace('₹', '').trim();
+      const bills = document.getElementById('summaryBillsTotal').innerText.replace('₹', '').trim();
+      const workerCount = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth).length;
+      const spokenMonth = getSpokenMonthName(activeMonth, lang);
+
+      const scripts = {
+        hi: `नमस्ते ठेकेदार जी। साइट ${activeSite} का ${spokenMonth} का हिसाब: कुल ${workerCount} मजदूर काम कर रहे हैं। कुल बाकी मजदूरी ${labourDue} रुपये है। कुल खर्चे ${expenses} रुपये हैं। और कंपनी बिल ${bills} रुपये है।`,
+        en: `Hello Contractor. Summary for site ${activeSite} for ${spokenMonth}: Total ${workerCount} active workers. Net labour payable is ${labourDue} rupees. Site expenses are ${expenses} rupees. And company bills total ${bills} rupees.`,
+        kn: `ನಮಸ್ಕಾರ ಗುತ್ತಿಗೆದಾರರೇ. ${activeSite} ಸೈಟ್‌ನ ${spokenMonth} ತಿಂಗಳ ಲೆಕ್ಕ: ಒಟ್ಟು ${workerCount} ಕಾರ್ಮಿಕರು ಕೆಲಸ ಮಾಡುತ್ತಿದ್ದಾರೆ. ಒಟ್ಟು ಬಾಕಿ ಕೂಲಿ ${labourDue} ರೂಪಾಯಿ. ಸೈಟ್ ಖರ್ಚುಗಳು ${expenses} ರೂಪಾಯಿ. ಮತ್ತು ಕಂಪನಿ ಬಿಲ್ ಮೊತ್ತ ${bills} ರೂಪಾಯಿ.`,
+        mr: `नमस्कार ठेकेदार जी. साईट ${activeSite} साठी ${spokenMonth} चा हिशोब: एकूण ${workerCount} कामगार काम करत आहेत. एकूण बाकी मजुरी ${labourDue} रुपये आहे. साईट खर्च ${expenses} रुपये आहे. आणि कंपनीचे बिल ${bills} रुपये आहे.`,
+        gu: `નમસ્તે કોન્ટ્રાક્ટર જી. સાઇટ ${activeSite} માટે ${spokenMonth} નો હિસાબ: કુલ ${workerCount} મજૂરો કામ કરી રહ્યા છે. કુલ બાકી મજૂરી ${labourDue} રૂપિયા છે. સાઇટનો ખર્ચ ${expenses} રૂપિયા છે. અને કંપનીનું બિલ ${bills} રૂપિયા છે.`,
+        ta: `வணக்கம் ஒப்பந்ததாரரே. தளம் ${activeSite}, ${spokenMonth} மாத கணக்கு: மொத்தம் ${workerCount} தொழிலாளர்கள் உள்ளனர். மொத்த கூலி பாக்கி ${labourDue} ரூபாய். தள செலவுகள் ${expenses} ரூபாய். மற்றும் நிறுவன பில் ${bills} ரூபாய்.`,
+        te: `నమస్కారం కాంట్రాక్టర్ గారు. ${activeSite} సైట్ యొక్క ${spokenMonth} లెక్కలు: మొత్తం ${workerCount} మంది కార్మికులు ఉన్నారు. మొత్తం కూలీ బకాయి ${labourDue} రూపాయలు. సైట్ ఖర్చులు ${expenses} రూపాయలు. మరియు కంపెనీ బిల్లు ${bills} రూపాయలు.`,
+        bn: `নমস্কার ঠিকাদার মহাশয়। সাইট ${activeSite} এর ${spokenMonth} মাসের হিসাব: মোট ${workerCount} জন শ্রমিক কাজ করছেন। মোট বকেয়া মজুরি ${labourDue} টাকা। সাইটের খরচ ${expenses} টাকা। এবং কোম্পানির বিল ${bills} টাকা।`,
+        ml: `നമസ്കാരം കരാറുകാരേ. ${activeSite} സൈറ്റിന്റെ ${spokenMonth} മാസത്തെ കണക്ക്: ആകെ ${workerCount} തൊഴിലാളികളുണ്ട്. കൂലി ബാക്കി ${labourDue} രൂപ. സൈറ്റ് ചെലവുകൾ ${expenses} രൂപ. കമ്പനി ബിൽ ${bills} രൂപ.`,
+        pa: `ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਠੇਕੇਦਾਰ ਜੀ। ਸਾਈਟ ${activeSite} ਦਾ ${spokenMonth} ਦਾ ਹਿਸਾਬ: ਕੁੱਲ ${workerCount} ਮਜ਼ਦੂਰ ਕੰਮ ਕਰ ਰਹੇ ਹਨ। ਕੁੱਲ ਬਕਾਇਆ ਮਜ਼ਦੂਰੀ ${labourDue} ਰੁਪਏ ਹੈ। ਸਾਈਟ ਦੇ ਖਰਚੇ ${expenses} ਰੁਪਏ ਹਨ। ਅਤੇ ਕੰਪਨੀ ਦਾ ਬਿੱਲ ${bills} ਰੁਪਏ ਹੈ।`
+      };
+
+      const targetLocale = speechLocaleMap[lang] || 'hi-IN';
+      const msg = scripts[lang] || scripts.hi;
+
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(msg);
-        utter.lang = speechLocaleMap[window.currentLang] || 'hi-IN';
+        utter.lang = targetLocale;
+        utter.rate = 0.95;
+
+        const voices = window.speechSynthesis.getVoices();
+        const matchedVoice = voices.find(v => v.lang.toLowerCase() === targetLocale.toLowerCase()) ||
+                             voices.find(v => v.lang.toLowerCase().startsWith(lang.toLowerCase()));
+        if (matchedVoice) utter.voice = matchedVoice;
+
         window.speechSynthesis.speak(utter);
       }
     };
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+    }
 
     window.openAuthModal = () => document.getElementById('authModal').classList.replace('hidden', 'flex');
     window.closeAuthModal = () => document.getElementById('authModal').classList.replace('flex', 'hidden');
@@ -2318,7 +2390,7 @@
       });
     };
 
-    // --- INTERACTIVE AUTO-PLAYING VIDEO USER GUIDE ENGINE ---
+    // --- INTERACTIVE USER GUIDE ENGINE (OPENED FROM SETTINGS) ---
     const appGuideSlides = [
       {
         title: "1. How to Install App (PWA)",
@@ -2446,7 +2518,7 @@
       }
     }
 
-    // Real-Time Unified Cloud Sync + Automatic Migration of Legacy PC/Mobile Documents
+    // Real-Time Unified Cloud Sync + Automatic Migration
     onAuthStateChanged(auth, async (user) => {
       if (unsubscribeSnapshot) { unsubscribeSnapshot(); unsubscribeSnapshot = null; }
       if (user) {
