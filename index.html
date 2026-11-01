@@ -117,6 +117,22 @@
     @keyframes popIn { to { opacity: 1; transform: translateY(0) scale(1); } }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  
+    body{background-image:radial-gradient(60% 40% at 8% -5%,rgba(245,158,11,.18),transparent 60%),radial-gradient(50% 35% at 100% 0%,rgba(244,63,94,.10),transparent 60%);background-attachment:fixed}
+    .ios-glass{border-radius:1.25rem}
+    main .ios-glass{transition:transform .2s ease,box-shadow .2s ease}
+    main .ios-glass:active{transform:scale(.99)}
+    #labourList>.ios-glass{border-left:3px solid #f59e0b}
+    .ios-header{border-radius:0 0 1.5rem 1.5rem}
+    header h1{background:linear-gradient(90deg,#fff,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent}
+    html.theme-light header h1{background:linear-gradient(90deg,#09090b,#d97706);-webkit-background-clip:text;background-clip:text}
+    .app-input{border-radius:.9rem !important;transition:box-shadow .2s,border-color .2s}
+    .app-input:focus{border-color:#f59e0b !important;box-shadow:0 0 0 3px rgba(245,158,11,.25)}
+    button{-webkit-tap-highlight-color:transparent}
+    .nav-tab-item.active{box-shadow:0 0 0 1px rgba(245,158,11,.4),0 6px 18px rgba(245,158,11,.2)}
+    .fixed.inset-0>.ios-glass{animation:sheetUp .3s cubic-bezier(.16,1,.3,1)}
+    @keyframes sheetUp{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
+    ::-webkit-scrollbar{width:0;height:0}
   </style>
 </head>
 <body class="min-h-screen pb-32 select-none no-scrollbar">
@@ -638,6 +654,9 @@
           <option value="Carpenter (बढ़ई)">Carpenter (बढ़ई)</option>
           <option value="Electrician (इलेक्ट्रीशियन)">Electrician (इलेक्ट्रीशियन)</option>
           <option value="Plumber (प्लम्बर)">Plumber (प्लम्बर)</option>
+          <option value="Painter (पेंटर)">Painter (पेंटर)</option>
+          <option value="Welder (वेल्डर)">Welder (वेल्डर)</option>
+          <option value="Other (अन्य)">Other (अन्य)</option>
         </select>
         
         <div class="grid grid-cols-2 gap-2">
@@ -1358,14 +1377,21 @@
 
     // Monthly Ledger Modal
     window.openMonthlyLedgerModal = () => {
+      window._ledgerMonth = document.getElementById('monthSelect').value;
       renderMonthlyLedgerModalBody();
       document.getElementById('monthlyLedgerModal').classList.replace('hidden', 'flex');
+    };
+    window.setLedgerMonth = (v) => { if (v) { window._ledgerMonth = v; renderMonthlyLedgerModalBody(); } };
+    window.shiftLedgerMonth = (d) => {
+      const [y, m] = (window._ledgerMonth || document.getElementById('monthSelect').value).split('-').map(Number);
+      const dt = new Date(y, m - 1 + d, 1);
+      setLedgerMonth(`${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}`);
     };
     window.closeMonthlyLedgerModal = () => document.getElementById('monthlyLedgerModal').classList.replace('flex', 'hidden');
 
     function renderMonthlyLedgerModalBody() {
       const activeSite = document.getElementById('siteSelect').value;
-      const activeMonth = document.getElementById('monthSelect').value;
+      const activeMonth = window._ledgerMonth || document.getElementById('monthSelect').value;
       const workers = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth);
       const expenses = (state.expenses || []).filter(e => e.site === activeSite && e.month === activeMonth);
       const bills = (state.bills || []).filter(b => b.site === activeSite && b.month === activeMonth);
@@ -1379,9 +1405,7 @@
 
       document.getElementById('monthlyLedgerModalBody').innerHTML = `
         <div class="space-y-4">
-          <div class="ios-glass p-3 rounded-2xl flex justify-between items-center text-xs">
-            <span>Site: <b>${esc(activeSite)}</b></span><span>Month: <b>${activeMonth}</b></span>
-          </div>
+          <div class="ios-glass p-3 rounded-2xl space-y-2 text-xs"><div>Site: <b>${esc(activeSite)}</b></div><div class="flex items-center gap-2"><button onclick="shiftLedgerMonth(-1)" class="px-3.5 py-1.5 rounded-xl ios-glass font-black text-sm active:scale-90">‹</button><input type="month" value="${activeMonth}" onchange="setLedgerMonth(this.value)" class="app-input flex-1 rounded-xl px-2 py-1.5 text-xs font-bold text-center focus:outline-none" /><button onclick="shiftLedgerMonth(1)" class="px-3.5 py-1.5 rounded-xl ios-glass font-black text-sm active:scale-90">›</button></div></div>
 
           <div class="grid grid-cols-3 gap-2 text-center text-xs">
             <div class="bg-black/5 dark:bg-black/25 p-2.5 rounded-xl"><div class="opacity-70 text-[9px]">Labour Net</div><div class="font-black text-rose-500">₹${totalLabourNet}</div></div>
@@ -1727,6 +1751,8 @@
     };
 
     window.openFormModal = (type) => {
+      window._editLabourId = null;
+      const sb = document.querySelector('#labourForm button[type=submit]'); if (sb) sb.innerText = 'Save Labour / सेव करें';
       document.getElementById('formModal').classList.replace('hidden', 'flex');
       ['labourForm', 'expenseForm', 'billForm'].forEach(f => document.getElementById(f).classList.add('hidden'));
       if (type === 'labour') {
@@ -1741,7 +1767,7 @@
         document.getElementById('formModalTitle').innerText = "Add Company Bill / कंपनी बिल";
       }
     };
-    window.closeFormModal = () => document.getElementById('formModal').classList.replace('flex', 'hidden');
+    window.closeFormModal = () => { window._editLabourId = null; document.getElementById('formModal').classList.replace('flex', 'hidden'); };
 
     window.toggleBillReceivedDateField = (val) => {
       document.getElementById('bReceivedDateWrapper').classList.toggle('hidden', val !== 'Received');
@@ -1966,6 +1992,22 @@
 
     window.saveLabour = async (e) => {
       e.preventDefault();
+      if (window._editLabourId) {
+        if (!isMainContractorActive()) return alert("Access Denied! Only Main Contractor can edit worker details.");
+        const w = state.labours.find(x => x.id === window._editLabourId);
+        if (w) {
+          const oldName = w.name;
+          const nm = document.getElementById('lName').value.trim();
+          const adv = Number(document.getElementById('lAdvance').value) || 0;
+          if (adv !== (w.advance || 0)) (w.advanceLog = w.advanceLog || []).unshift({ date: new Date().toLocaleDateString('hi-IN'), amount: adv - (w.advance || 0), mode: 'Edit', note: 'Edited by contractor' });
+          Object.assign(w, { name: nm, category: document.getElementById('lCategory').value, dailyRate: Number(document.getElementById('lDailyRate').value) || 0, phone: document.getElementById('lPhone').value.trim(), advance: adv });
+          if (!state.masterLabourDirectory) state.masterLabourDirectory = [];
+          const di = state.masterLabourDirectory.findIndex(x => x.name.toLowerCase() === oldName.toLowerCase());
+          const entry = { name: nm, category: w.category, dailyRate: w.dailyRate, phone: w.phone };
+          if (di >= 0) state.masterLabourDirectory[di] = entry; else state.masterLabourDirectory.push(entry);
+        }
+        window._editLabourId = null; e.target.reset(); closeFormModal(); persistState(); return;
+      }
       const site = document.getElementById('siteSelect').value;
       const month = document.getElementById('monthSelect').value;
       const name = document.getElementById('lName').value.trim();
@@ -1996,6 +2038,22 @@
       const l = state.labours.find(x => x.id === id);
       if (!l) return;
       openCustomDialog({ title: `Daily Rate - ${l.name}`, inputType: "number", defaultValue: l.dailyRate || 500, onConfirm: (v) => { if(v){ l.dailyRate = Number(v); persistState(); } } });
+    };
+
+    window.editLabourFull = (id) => {
+      if (!isMainContractorActive()) return alert("Access Denied! Only Main Contractor can edit worker details.");
+      const l = state.labours.find(x => x.id === id); if (!l) return;
+      openFormModal('labour');
+      window._editLabourId = id;
+      document.getElementById('formModalTitle').innerText = "Edit Labour / मजदूर की जानकारी बदलें";
+      const cat = document.getElementById('lCategory');
+      if (![...cat.options].some(o => o.value === l.category)) cat.add(new Option(l.category, l.category));
+      document.getElementById('lName').value = l.name;
+      cat.value = l.category;
+      document.getElementById('lDailyRate').value = l.dailyRate || '';
+      document.getElementById('lAdvance').value = l.advance || 0;
+      document.getElementById('lPhone').value = l.phone || '';
+      document.querySelector('#labourForm button[type=submit]').innerText = 'Update Labour / अपडेट करें';
     };
 
     window.openAdvanceModal = (id) => {
@@ -2141,6 +2199,7 @@
       const filteredLabours = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth);
       let totalLabourDue = 0;
 
+      const editSvg = `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>`;
       const workerSvg = `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`;
       const trashSvg = `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>`;
 
@@ -2178,7 +2237,7 @@
               <div class="text-right flex flex-col items-end">
                 <div class="text-[10px] uppercase opacity-65 font-bold">${l.settled ? 'PAID ✓ ' + (l.paidDate || '') : 'Net Due'}</div>
                 <div class="text-base font-black ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net.toLocaleString('en-IN')}</div>
-                ${masterActive ? `<button type="button" onclick="deleteRecord('labours','${l.id}')" class="p-1.5 text-rose-500 opacity-80 hover:opacity-100 mt-1" title="Delete Labour">${trashSvg}</button>` : ''}
+                ${masterActive ? `<div class="flex items-center gap-0.5 mt-1"><button type="button" onclick="editLabourFull('${l.id}')" class="p-1.5 text-amber-500 opacity-90 hover:opacity-100" title="Edit Labour">${editSvg}</button><button type="button" onclick="deleteRecord('labours','${l.id}')" class="p-1.5 text-rose-500 opacity-80 hover:opacity-100 mt-1" title="Delete Labour">${trashSvg}</button></div>` : ''}
               </div>
             </div>
 
