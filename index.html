@@ -2,12 +2,12 @@
 <html lang="en" class="theme-amoled">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
   
-  <link rel="icon" type="image/png" href="./logo.png?v=14">
-  <link rel="apple-touch-icon" href="./logo.png?v=14">
-  <link rel="manifest" href="manifest.json?v=14">
+  <link rel="icon" type="image/png" href="./logo.png?v=15">
+  <link rel="apple-touch-icon" href="./logo.png?v=15">
+  <link rel="manifest" href="manifest.json?v=15">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#000000">
@@ -117,24 +117,6 @@
     @keyframes popIn { to { opacity: 1; transform: translateY(0) scale(1); } }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  
-    body{background-image:radial-gradient(60% 40% at 8% -5%,rgba(245,158,11,.18),transparent 60%),radial-gradient(50% 35% at 100% 0%,rgba(244,63,94,.10),transparent 60%);background-attachment:fixed}
-    .ios-glass{border-radius:1.25rem}
-    main .ios-glass{transition:transform .2s ease,box-shadow .2s ease}
-    main .ios-glass:active{transform:scale(.99)}
-    #labourList>.ios-glass{border-left:3px solid #f59e0b}
-    .ios-header{border-radius:0 0 1.5rem 1.5rem}
-    header h1{background:linear-gradient(90deg,#fff,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent}
-    html.theme-light header h1{background:linear-gradient(90deg,#09090b,#d97706);-webkit-background-clip:text;background-clip:text}
-    .app-input{border-radius:.9rem !important;transition:box-shadow .2s,border-color .2s}
-    .app-input:focus{border-color:#f59e0b !important;box-shadow:0 0 0 3px rgba(245,158,11,.25)}
-    button{-webkit-tap-highlight-color:transparent}
-    .nav-tab-item.active{box-shadow:0 0 0 1px rgba(245,158,11,.4),0 6px 18px rgba(245,158,11,.2)}
-    .fixed.inset-0>.ios-glass{animation:sheetUp .3s cubic-bezier(.16,1,.3,1)}
-    @keyframes sheetUp{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
-    ::-webkit-scrollbar{width:0;height:0}
-      #labourList>.ios-glass .w-9 svg{width:1rem;height:1rem}
-    #labourList>.ios-glass button.w-7{width:1.5rem;height:1.5rem;font-size:10px}
   </style>
 </head>
 <body class="min-h-screen pb-32 select-none no-scrollbar">
@@ -305,7 +287,6 @@
           </button>
         </div>
       </div>
-      <div class="flex gap-2"><input type="search" placeholder="Search / खोजें" oninput="setFilter('lab',this.value)" class="app-input flex-1 min-w-0 rounded-xl px-3 py-2 text-xs focus:outline-none" /><select onchange="setFilter('labS',this.value)" class="app-input rounded-xl px-2 py-2 text-xs font-bold focus:outline-none"><option value="all">All</option><option value="due">Due</option><option value="paid">Paid</option></select></div>
       <div id="labourList" class="space-y-3.5"></div>
     </section>
 
@@ -315,7 +296,6 @@
         <h2 class="text-sm font-black" data-i18n="tabExpenses">Site Expenses & Rent</h2>
         <button onclick="openFormModal('expense')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Expense</button>
       </div>
-      <div class="flex gap-2"><input type="search" placeholder="Search / खोजें" oninput="setFilter('exp',this.value)" class="app-input flex-1 min-w-0 rounded-xl px-3 py-2 text-xs focus:outline-none" /><select onchange="setFilter('expC',this.value)" class="app-input rounded-xl px-2 py-2 text-xs font-bold focus:outline-none"><option value="all">All</option><option value="Rickshaw / Rent (किराया)">Transport</option><option value="Tea / Food (नाश्ता)">Tea & Food</option><option value="Material (सामान)">Material</option><option value="Medical (दवा)">Medical</option><option value="Other (अन्य)">Other</option></select></div>
       <div id="expenseList" class="space-y-3.5"></div>
     </section>
 
@@ -325,7 +305,6 @@
         <h2 class="text-sm font-black" data-i18n="tabBills">Company Work Bills</h2>
         <button onclick="openFormModal('bill')" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Bill</button>
       </div>
-      <div class="flex gap-2"><input type="search" placeholder="Search / खोजें" oninput="setFilter('bill',this.value)" class="app-input flex-1 min-w-0 rounded-xl px-3 py-2 text-xs focus:outline-none" /><select onchange="setFilter('billS',this.value)" class="app-input rounded-xl px-2 py-2 text-xs font-bold focus:outline-none"><option value="all">All</option><option value="Pending">Pending</option><option value="Received">Received</option></select></div>
       <div id="billList" class="space-y-3.5"></div>
     </section>
 
@@ -508,6 +487,12 @@
         </a>
       </div>
 
+      <!-- Watch Interactive App Guide Button Inside Settings -->
+      <button onclick="closeSettingsModal(); openAppVideoGuide();" class="w-full py-2.5 rounded-2xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-500 border border-amber-500/30 font-black text-xs flex items-center justify-center gap-2 transition-all">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <span>Watch Interactive User Guide / ऐप गाइड देखें</span>
+      </button>
+
       <!-- Share App Option -->
       <button onclick="shareApplication()" class="w-full py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-xs flex items-center justify-center gap-2 shadow-md active:scale-95 transition-transform">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
@@ -656,9 +641,6 @@
           <option value="Carpenter (बढ़ई)">Carpenter (बढ़ई)</option>
           <option value="Electrician (इलेक्ट्रीशियन)">Electrician (इलेक्ट्रीशियन)</option>
           <option value="Plumber (प्लम्बर)">Plumber (प्लम्बर)</option>
-          <option value="Painter (पेंटर)">Painter (पेंटर)</option>
-          <option value="Welder (वेल्डर)">Welder (वेल्डर)</option>
-          <option value="Other (अन्य)">Other (अन्य)</option>
         </select>
         
         <div class="grid grid-cols-2 gap-2">
@@ -961,7 +943,7 @@
     </div>
   </div>
 
-  <!-- 20. TOUCH-SAFE CONFIRM DELETE MODAL (FIXES MOBILE CONFIRM BLOCKING) -->
+  <!-- 20. TOUCH-SAFE CONFIRM DELETE MODAL -->
   <div id="confirmDeleteModal" class="fixed inset-0 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-xs w-full p-5 text-center space-y-4 shadow-2xl border border-rose-500/40">
       <div class="w-12 h-12 rounded-2xl bg-rose-500/20 text-rose-500 flex items-center justify-center mx-auto">
@@ -976,11 +958,51 @@
     </div>
   </div>
 
+  <!-- 21. FLOATING INTERACTIVE USER GUIDE BUTTON & AUTO-PLAYING VIDEO PLAYER MODAL -->
+  <button onclick="openAppVideoGuide()" class="fixed bottom-20 right-4 z-40 px-3.5 py-2 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-zinc-950 font-black text-xs shadow-2xl flex items-center gap-1.5 border border-white/20 active:scale-90 transition-transform" title="Watch Interactive User Guide">
+    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    <span>User Guide</span>
+  </button>
+
+  <div id="videoGuideModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-4">
+    <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl border border-amber-500/40 relative overflow-hidden">
+      <!-- Top Story-Style Progress Bars -->
+      <div id="guideProgressBars" class="grid grid-cols-7 gap-1 w-full"></div>
+
+      <div class="flex justify-between items-center">
+        <span id="guideStepBadge" class="text-[10px] px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-500 font-black uppercase">Step 1 of 7</span>
+        <button onclick="closeAppVideoGuide()" class="opacity-70 hover:opacity-100 text-xs font-bold">✕ Close</button>
+      </div>
+
+      <!-- Animated Visual Stage -->
+      <div class="h-44 rounded-2xl bg-black/50 border border-white/10 flex flex-col items-center justify-center p-4 text-center relative overflow-hidden">
+        <div id="guideVisualIcon" class="w-16 h-16 rounded-2xl bg-amber-500/20 text-amber-500 flex items-center justify-center mb-3 shadow-lg transition-all duration-500"></div>
+        <h3 id="guideSlideTitle" class="font-black text-base text-white">Welcome to ठेकेDAAR</h3>
+        <p id="guideSlideSubtitle" class="text-[11px] text-amber-400 font-bold mt-1"></p>
+      </div>
+
+      <!-- Narration Script Box -->
+      <div class="p-3 rounded-2xl bg-black/25 border border-white/10 min-h-[76px] flex items-center justify-center text-center">
+        <p id="guideSlideDesc" class="text-xs leading-relaxed opacity-90"></p>
+      </div>
+
+      <!-- Video Guide Player Controls -->
+      <div class="flex items-center justify-between gap-2 pt-1">
+        <button onclick="prevGuideSlide()" class="px-3 py-2 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Prev</button>
+        <button onclick="toggleGuideAutoPlay()" id="guidePlayPauseBtn" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-black text-xs shadow flex items-center justify-center gap-1.5">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <span>Auto-Play Guide</span>
+        </button>
+        <button onclick="nextGuideSlide()" class="px-3 py-2 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Next</button>
+      </div>
+    </div>
+  </div>
+
   <!-- FIREBASE & CORE ENGINE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { getFirestore, initializeFirestore, persistentLocalCache, persistentMultipleTabManager, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCsabUW5vFiXGxsUu4FvdKkc5cxxsCt8jA",
@@ -993,12 +1015,11 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    let db; try { db = initializeFirestore(app, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }) }); } catch (e) { db = getFirestore(app); }
+    const db = getFirestore(app);
 
     let currentUser = null;
     let unsubscribeSnapshot = null;
 
-    // Unified Master State (Synced across PC & Mobile under a single Firestore Document per User UID)
     let state = {
       userProfilePhoto: null,
       masterPin: '1234',
@@ -1012,19 +1033,8 @@
       bills: [],
       dailyHajriRecords: {},
       masterLabourDirectory: [],
-      deletedIds: [],
       updatedAt: 0
     };
-
-
-    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-    const localISO = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-    const F = { lab: '', labS: 'all', exp: '', expC: 'all', bill: '', billS: 'all' };
-    const qm = (v, ...f) => !v || f.some(x => String(x || '').toLowerCase().includes(v.toLowerCase()));
-    const matchLabour = l => qm(F.lab, l.name, l.category, l.phone) && (F.labS === 'all' || (F.labS === 'paid') === !!l.settled);
-    const matchExpense = e => qm(F.exp, e.title, e.spentFor) && (F.expC === 'all' || e.category === F.expC);
-    const matchBill = b => qm(F.bill, b.title) && (F.billS === 'all' || (b.status || '') === F.billS);
-    window.setFilter = (k, v) => { F[k] = v; renderAll(); };
 
     let activeRecognition = null;
     let pendingSwitchAccId = null;
@@ -1049,7 +1059,7 @@
       te: { labourDue: "కూలీ బకాయి", expenses: "ఖర్చులు", bills: "బిల్లులు", tabLabour: "కార్మికులు & హాజరు", tabExpenses: "ఖర్చులు & రవాణా", tabBills: "కంపెనీ బిల్లులు", audioSummaryTitle: "సైట్ ఆడియో సారాంశం", audioSummarySub: "ఒకే ట్యాప్‌లో సైట్ లెక్క వినండి", listenBtn: "వినండి", liveSnapshot: "కార్మికుల సమాచారం", settingsHeader: "సెట్టింగులు", changeLangLabel: "భాషను మార్చండి", themeLabel: "థీమ్ ఎంచుకోండి", shareAppBtn: "యాప్ షేర్ చేయండి" },
       bn: { labourDue: "বকেয়া মজুরি", expenses: "সাইটের খরচ", bills: "কোম্পানির বিল", tabLabour: "শ্রমিক ও হাজিরা", tabExpenses: "খরচ ও ভাড়া", tabBills: "কোম্পানির বিল", audioSummaryTitle: "সাইট অডিও হিসাব", audioSummarySub: "এক ক্লিকেই সব হিসাব শুনুন", listenBtn: "শুনুন", liveSnapshot: "শ্রমিক স্ন্যাপশট", settingsHeader: "সেটিংস", changeLangLabel: "ভাষা পরিবর্তন করুন", themeLabel: "থিম নির্বাচন করুন", shareAppBtn: "অ্যাপ শেয়ার করুন" },
       ml: { labourDue: "കൂലി ബാക്കി", expenses: "ചെലവുകൾ", bills: "ബില്ലുകൾ", tabLabour: "തൊഴിലാളികളും ഹാജരും", tabExpenses: "ചെലവുകളും വാടകയും", tabBills: "കമ്പനി ബില്ലുകൾ", audioSummaryTitle: "സൈറ്റ് ഓഡിയോ വിവരണം", audioSummarySub: "ഒറ്റ ടാപ്പിൽ കണക്ക് കേൾക്കുക", listenBtn: "കേൾക്കുക", liveSnapshot: "തൊഴിലാളി നിലവാരം", settingsHeader: "ക്രമീകരണങ്ങൾ", changeLangLabel: "ഭാഷ മാറ്റുക", themeLabel: "തീം തിരഞ്ഞെടുക്കുക", shareAppBtn: "ആപ്പ് ഷെയർ ചെയ്യുക" },
-      pa: { labourDue: "ਬਕਾਇਆ ਮਜ਼ਦੂਰੀ", expenses: "ਖਰਚੇ ਅਤੇ ਕਿਰਾਇਆ", bills: "ਕੰਪਨੀ ਦੇ ਬਿੱਲ", tabLabour: "ਮਜ਼ਦੂਰ ਅਤੇ ਹਾਜ਼ਰੀ", tabExpenses: "ਖਰਚਾ ਅਤੇ ਕਿਰਾਇਆ", tabBills: "ਕੰਪਨੀ ਬਿੱਲ", audioSummaryTitle: "ਸਾਈਟ ਆਡੀਓ ਰਿਪੋਰਟ", audioSummarySub: "ਇੱਕ ਟੈਪ ਵਿੱਚ ਪੂਰਾ ਹਿਸਾਬ ਸੁਣੋ", listenBtn: "ਸੁਣੋ", liveSnapshot: "ਲਾਈਵ ਕਾਰਜਬਲ", settingsHeader: "ਸੈਟਿੰਗਾਂ", changeLangLabel: "ਭਾਸ਼ਾ ਬਦਲੋ", themeLabel: "ਥੀਮ ਚੁਣੋ", shareAppBtn: "ਐਪ ਸ਼ੇਅਰ ਕਰੋ" }
+      pa: { labourDue: "ਬਕਾਇਆ ਮਜ਼ਦੂਰੀ", expenses: "ਖਰਚੇ ਅਤੇ ਕਿਰਾਇਆ", bills: "ਕੰਪਨੀ ਦੇ ਬਿੱਲ", tabLabour: "ਮਜ਼ਦੂਰ ਅਤੇ ਹਾਜ਼ਰੀ", tabExpenses: "ਖਰਚਾ ਅਤੇ ਕਿਰਾਇਆ", tabBills: "🧾 ਕੰਪਨੀ ਬਿੱਲ", audioSummaryTitle: "ਸਾਈਟ ਆਡੀਓ ਰਿਪੋਰਟ", audioSummarySub: "ਇੱਕ ਟੈਪ ਵਿੱਚ ਪੂਰਾ ਹਿਸਾਬ ਸੁਣੋ", listenBtn: "ਸੁਣੋ", liveSnapshot: "ਲਾਈਵ ਕਾਰਜਬਲ", settingsHeader: "ਸੈਟਿੰਗਾਂ", changeLangLabel: "ਭਾਸ਼ਾ ਬਦਲੋ", themeLabel: "ਥੀਮ ਚੁਣੋ", shareAppBtn: "ਐਪ ਸ਼ੇਅਰ ਕਰੋ" }
     };
     window.currentLang = localStorage.getItem('thekedaar_lang') || 'hi';
 
@@ -1061,7 +1071,6 @@
     window.addEventListener('online', enforceOnlineOnlyMode);
     window.addEventListener('offline', enforceOnlineOnlyMode);
 
-    // Unified Account Helpers (Fixes Mobile & PC Sync + Sub-User Deletion)
     function normalizeAccounts(accArray) {
       if (!Array.isArray(accArray) || accArray.length === 0) {
         return [
@@ -1103,7 +1112,6 @@
       state.bills = Array.isArray(raw.bills) ? raw.bills : [];
       state.dailyHajriRecords = raw.dailyHajriRecords || {};
       state.masterLabourDirectory = Array.isArray(raw.masterLabourDirectory) ? raw.masterLabourDirectory : [];
-      state.deletedIds = Array.isArray(raw.deletedIds) ? raw.deletedIds : (state.deletedIds || []);
       state.updatedAt = raw.updatedAt || Date.now();
     }
 
@@ -1114,9 +1122,7 @@
       } catch (e) { console.error(e); }
     }
 
-    // Touch-safe Custom Delete Confirmation Modal (Replaces blocked mobile confirm())
-    window.openConfirmDelete = ({ title, subtitle, onConfirm, confirmText = 'Delete' }) => {
-      document.getElementById('confirmDeleteActionBtn').innerText = confirmText;
+    window.openConfirmDelete = ({ title, subtitle, onConfirm }) => {
       document.getElementById('confirmDeleteTitle').innerText = title || 'Confirm Delete';
       document.getElementById('confirmDeleteSub').innerText = subtitle || 'Are you sure you want to permanently delete this item?';
       const modal = document.getElementById('confirmDeleteModal');
@@ -1130,10 +1136,10 @@
 
     const now = new Date();
     document.getElementById('monthSelect').value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
-    document.getElementById('advDate').value = localISO(now);
-    document.getElementById('bDate').value = localISO(now);
-    document.getElementById('bReceivedDateInput').value = localISO(now);
-    document.getElementById('hajriDateInput').value = localISO(now);
+    document.getElementById('advDate').value = now.toISOString().split('T')[0];
+    document.getElementById('bDate').value = now.toISOString().split('T')[0];
+    document.getElementById('bReceivedDateInput').value = now.toISOString().split('T')[0];
+    document.getElementById('hajriDateInput').value = now.toISOString().split('T')[0];
 
     window.setAppTheme = (themeName) => {
       document.documentElement.className = themeName;
@@ -1176,7 +1182,6 @@
       }
     }
 
-    // Unified Cloud Push (Pushes PC & Mobile Data + Master PIN + Accounts to single User UID doc)
     async function persistState() {
       if (!navigator.onLine) {
         enforceOnlineOnlyMode();
@@ -1198,7 +1203,6 @@
       }
     }
 
-    // Manual Cloud Pull Button (Top Right Refresh Icon)
     window.forceCloudPull = async () => {
       if (!currentUser) return openAuthModal();
       try {
@@ -1217,25 +1221,8 @@
     function processUniversalFile(file) {
       return new Promise((resolve) => {
         if (!file) return resolve(null);
-        const ext = file.name.split('.').pop().toLowerCase();
         const reader = new FileReader();
-        reader.onload = (e) => {
-          if (!file.type.startsWith('image/')) {
-            if (file.size > 350 * 1024) { alert('File too large (max 350 KB for PDF/Word/Excel). Use an image or a smaller file.'); return resolve(null); }
-            return resolve({ name: file.name, ext, dataUrl: e.target.result });
-          }
-          const img = new Image();
-          img.onload = () => {
-            const k = Math.min(1, 1280 / Math.max(img.width, img.height));
-            const c = document.createElement('canvas');
-            c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
-            const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height);
-            x.drawImage(img, 0, 0, c.width, c.height);
-            resolve({ name: file.name.replace(/\.[^.]+$/, '') + '.jpg', ext: 'jpg', dataUrl: c.toDataURL('image/jpeg', 0.7) });
-          };
-          img.onerror = () => resolve({ name: file.name, ext, dataUrl: e.target.result });
-          img.src = e.target.result;
-        };
+        reader.onload = (e) => resolve({ name: file.name, ext: file.name.split('.').pop().toLowerCase(), dataUrl: e.target.result });
         reader.readAsDataURL(file);
       });
     }
@@ -1349,7 +1336,7 @@
     };
     window.closeCustomDialog = () => document.getElementById('customDialogModal').classList.replace('flex', 'hidden');
 
-    // Save Main Contractor Password (Synced to Cloud so Mobile & PC match immediately)
+    // Save Main Contractor Password
     window.saveNewMasterPin = async () => {
       if (!isMainContractorActive()) return alert("Only Main Contractor can change the password.");
       const pin = document.getElementById('newMasterPinInput').value.trim();
@@ -1379,35 +1366,30 @@
 
     // Monthly Ledger Modal
     window.openMonthlyLedgerModal = () => {
-      window._ledgerMonth = document.getElementById('monthSelect').value;
       renderMonthlyLedgerModalBody();
       document.getElementById('monthlyLedgerModal').classList.replace('hidden', 'flex');
-    };
-    window.setLedgerMonth = (v) => { if (v) { window._ledgerMonth = v; renderMonthlyLedgerModalBody(); } };
-    window.shiftLedgerMonth = (d) => {
-      const [y, m] = (window._ledgerMonth || document.getElementById('monthSelect').value).split('-').map(Number);
-      const dt = new Date(y, m - 1 + d, 1);
-      setLedgerMonth(`${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}`);
     };
     window.closeMonthlyLedgerModal = () => document.getElementById('monthlyLedgerModal').classList.replace('flex', 'hidden');
 
     function renderMonthlyLedgerModalBody() {
       const activeSite = document.getElementById('siteSelect').value;
-      const activeMonth = window._ledgerMonth || document.getElementById('monthSelect').value;
+      const activeMonth = document.getElementById('monthSelect').value;
       const workers = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth);
       const expenses = (state.expenses || []).filter(e => e.site === activeSite && e.month === activeMonth);
       const bills = (state.bills || []).filter(b => b.site === activeSite && b.month === activeMonth);
 
       let totalLabourNet = 0;
       workers.forEach(w => {
-        if (!w.settled) totalLabourNet += Math.round((w.dailyRate || 500) * ((w.presentDays || 0) + ((w.halfDays || 0) * 0.5))) - (w.advance || 0);
+        totalLabourNet += Math.round((w.dailyRate || 500) * ((w.presentDays || 0) + ((w.halfDays || 0) * 0.5))) - (w.advance || 0);
       });
       const totalExp = expenses.reduce((a, b) => a + b.amount, 0);
       const totalBills = bills.reduce((a, b) => a + b.amount, 0);
 
       document.getElementById('monthlyLedgerModalBody').innerHTML = `
         <div class="space-y-4">
-          <div class="ios-glass p-3 rounded-2xl space-y-2 text-xs"><div>Site: <b>${esc(activeSite)}</b></div><div class="flex items-center gap-2"><button onclick="shiftLedgerMonth(-1)" class="px-3.5 py-1.5 rounded-xl ios-glass font-black text-sm active:scale-90">‹</button><input type="month" value="${activeMonth}" onchange="setLedgerMonth(this.value)" class="app-input flex-1 rounded-xl px-2 py-1.5 text-xs font-bold text-center focus:outline-none" /><button onclick="shiftLedgerMonth(1)" class="px-3.5 py-1.5 rounded-xl ios-glass font-black text-sm active:scale-90">›</button></div></div>
+          <div class="ios-glass p-3 rounded-2xl flex justify-between items-center text-xs">
+            <span>Site: <b>${activeSite}</b></span><span>Month: <b>${activeMonth}</b></span>
+          </div>
 
           <div class="grid grid-cols-3 gap-2 text-center text-xs">
             <div class="bg-black/5 dark:bg-black/25 p-2.5 rounded-xl"><div class="opacity-70 text-[9px]">Labour Net</div><div class="font-black text-rose-500">₹${totalLabourNet}</div></div>
@@ -1422,7 +1404,7 @@
               return `
                 <div onclick="openLabourAttendanceHistory('${w.id}')" class="bg-black/5 dark:bg-black/20 p-2.5 rounded-2xl flex items-center justify-between text-xs border border-zinc-300 dark:border-white/10 cursor-pointer">
                   <div>
-                    <div class="font-bold underline decoration-amber-500/50">${esc(w.name)} (${esc(w.category)})</div>
+                    <div class="font-bold underline decoration-amber-500/50">${w.name} (${w.category})</div>
                     <div class="text-[10px] opacity-75">Present: <b>${w.presentDays || 0}P</b> | Half: <b>${w.halfDays || 0}H</b> | Adv: ₹${w.advance || 0}</div>
                   </div>
                   <div class="font-black ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net}</div>
@@ -1438,8 +1420,8 @@
                 <div class="flex items-center gap-2.5">
                   ${getFileBadgeHTML(e.attachment)}
                   <div>
-                    <div class="font-bold">${esc(e.title)}</div>
-                    <div class="text-[10px] opacity-75">${esc(e.category)} ${e.spentFor ? `• ${esc(e.spentFor)}` : ''}</div>
+                    <div class="font-bold">${e.title}</div>
+                    <div class="text-[10px] opacity-75">${e.category} ${e.spentFor ? `• ${e.spentFor}` : ''}</div>
                   </div>
                 </div>
                 <div class="font-black text-amber-500">₹${e.amount}</div>
@@ -1453,13 +1435,13 @@
               <div class="bg-black/5 dark:bg-black/20 p-3 rounded-2xl space-y-2 text-xs border border-zinc-300 dark:border-white/10">
                 <div class="flex items-center justify-between">
                   <div>
-                    <div class="font-bold">${esc(b.title)}</div>
+                    <div class="font-bold">${b.title}</div>
                     <div class="text-[10px] opacity-75">Added: ${b.billDate} ${b.receivedDate ? `• Rec: ${b.receivedDate}` : ''}</div>
                   </div>
                   <div class="font-black text-emerald-500">₹${b.amount} (${b.status})</div>
                 </div>
                 ${b.attachment && ['jpg','jpeg','png','webp','gif'].includes(b.attachment.ext) ? `
-                  <a href="${b.attachment.dataUrl}" target="_blank" download="${esc(b.attachment.name)}" class="block">
+                  <a href="${b.attachment.dataUrl}" target="_blank" download="${b.attachment.name}" class="block">
                     <img src="${b.attachment.dataUrl}" class="w-full max-h-44 object-cover rounded-xl border border-amber-500/40 mt-1" />
                   </a>
                 ` : b.attachment ? `<div>${getFileBadgeHTML(b.attachment)}</div>` : ''}
@@ -1520,7 +1502,6 @@
       });
     };
 
-    // Touch-safe Delete Supervisor Account (Works reliably on Mobile & PC)
     window.deleteSupervisorAccount = (accId) => {
       if (!isMainContractorActive()) {
         return alert("Access Denied! Only Main Contractor can delete supervisor accounts.");
@@ -1580,7 +1561,6 @@
       document.getElementById('pinEntryView').classList.remove('hidden');
     };
 
-    // Verify Master PIN (Checks unified cloud-synced state.masterPin)
     window.verifyMasterPin = () => {
       const enteredPin = String(document.getElementById('masterPinInput').value || '').trim();
       const currentMasterPin = String(state.masterPin || '1234').trim();
@@ -1594,7 +1574,6 @@
       }
     };
 
-    // Reset Main Contractor Password using Firebase Cloud Account Password
     window.executeMasterPinResetWithAccountPassword = async () => {
       if (!currentUser || !currentUser.email) {
         return alert("Please sign in to your Cloud Email account first to verify your account password.");
@@ -1644,7 +1623,7 @@
         return `
           <div class="flex items-center justify-between p-2.5 rounded-xl ${isCurrent ? 'bg-amber-500/15 border border-amber-500/40' : 'bg-black/5 dark:bg-black/20'}">
             <div class="truncate">
-              <span class="text-xs font-bold block ${isCurrent ? 'text-amber-500' : ''}">${esc(acc.nickname)}</span>
+              <span class="text-xs font-bold block ${isCurrent ? 'text-amber-500' : ''}">${acc.nickname}</span>
               <span class="text-[10px] opacity-65">${isMasterAcc ? 'Main Contractor (Admin)' : 'Supervisor (Add & Attendance Only)'}</span>
             </div>
             <div class="flex items-center gap-1.5 shrink-0">
@@ -1753,8 +1732,6 @@
     };
 
     window.openFormModal = (type) => {
-      window._editLabourId = null;
-      const sb = document.querySelector('#labourForm button[type=submit]'); if (sb) sb.innerText = 'Save Labour / सेव करें';
       document.getElementById('formModal').classList.replace('hidden', 'flex');
       ['labourForm', 'expenseForm', 'billForm'].forEach(f => document.getElementById(f).classList.add('hidden'));
       if (type === 'labour') {
@@ -1769,7 +1746,7 @@
         document.getElementById('formModalTitle').innerText = "Add Company Bill / कंपनी बिल";
       }
     };
-    window.closeFormModal = () => { window._editLabourId = null; document.getElementById('formModal').classList.replace('flex', 'hidden'); };
+    window.closeFormModal = () => document.getElementById('formModal').classList.replace('flex', 'hidden');
 
     window.toggleBillReceivedDateField = (val) => {
       document.getElementById('bReceivedDateWrapper').classList.toggle('hidden', val !== 'Received');
@@ -1785,8 +1762,8 @@
         openCustomDialog({
           title: "Payment Received Date",
           inputType: "date",
-          defaultValue: localISO(),
-          onConfirm: (dt) => { bill.status = 'Received'; bill.receivedDate = dt || localISO(); persistState(); }
+          defaultValue: new Date().toISOString().split('T')[0],
+          onConfirm: (dt) => { bill.status = 'Received'; bill.receivedDate = dt || new Date().toISOString().split('T')[0]; persistState(); }
         });
       } else {
         bill.status = 'Pending'; bill.receivedDate = null; persistState();
@@ -1800,7 +1777,7 @@
       const curNames = new Set((state.labours || []).filter(l => l.site === currentSite && l.month === currentMonth).map(w => w.name.trim().toLowerCase()));
       const map = new Map();
       (state.labours || []).forEach(l => { if (!curNames.has(l.name.trim().toLowerCase())) map.set(l.name.trim().toLowerCase(), l); });
-      
+      (state.masterLabourDirectory || []).forEach(w => { if (!curNames.has(w.name.trim().toLowerCase()) && !map.has(w.name.trim().toLowerCase())) map.set(w.name.trim().toLowerCase(), w); });
       const candidates = Array.from(map.values());
 
       if (candidates.length === 0) {
@@ -1816,7 +1793,7 @@
             <div class="w-9 h-9 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
             </div>
-            <div class="truncate"><div class="font-bold text-xs truncate">${esc(w.name)}</div><div class="text-[10px] opacity-70">${esc(w.category)} • ₹${w.dailyRate || 500}/day</div></div>
+            <div class="truncate"><div class="font-bold text-xs truncate">${w.name}</div><div class="text-[10px] opacity-70">${w.category} • ₹${w.dailyRate || 500}/day</div></div>
           </div>
         </label>
       `).join('');
@@ -1895,7 +1872,7 @@
       const dayRec = state.dailyHajriRecords[selDate];
 
       if (siteWorkers.length === 0) {
-        container.innerHTML = `<div class="text-center py-8 text-xs opacity-70">No workers found in ${esc(activeSite)}.</div>`;
+        container.innerHTML = `<div class="text-center py-8 text-xs opacity-70">No workers found in ${activeSite}.</div>`;
         document.getElementById('hajriDaySummary').innerText = `Present: 0 | Half: 0 | Absent: 0`;
         return;
       }
@@ -1911,8 +1888,8 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
               </div>
               <div class="truncate">
-                <div class="font-bold text-xs truncate">${esc(w.name)}</div>
-                <div class="text-[10px] opacity-70">${esc(w.category)} • ₹${w.dailyRate || 500}/day</div>
+                <div class="font-bold text-xs truncate">${w.name}</div>
+                <div class="text-[10px] opacity-70">${w.category} • ₹${w.dailyRate || 500}/day</div>
               </div>
             </div>
             <div class="flex items-center gap-1.5 shrink-0">
@@ -1948,7 +1925,7 @@
     }
 
     function populateLabourAutocomplete() {
-      document.getElementById('knownLaboursList').innerHTML = (state.masterLabourDirectory || []).map(w => `<option value="${esc(w.name)}">`).join('');
+      document.getElementById('knownLaboursList').innerHTML = (state.masterLabourDirectory || []).map(w => `<option value="${w.name}">`).join('');
     }
 
     window.autoFillKnownLabour = (name) => {
@@ -1969,7 +1946,6 @@
       });
     };
 
-    // Delete Current Site (STRICTLY MAIN CONTRACTOR ONLY)
     window.deleteCurrentSite = () => {
       if (!isMainContractorActive()) {
         return alert("Access Denied! Only the Main Contractor can delete a site.");
@@ -1986,7 +1962,6 @@
           state.labours = (state.labours || []).filter(l => l.site !== siteToDelete);
           state.expenses = (state.expenses || []).filter(e => e.site !== siteToDelete);
           state.bills = (state.bills || []).filter(b => b.site !== siteToDelete);
-          state.masterLabourDirectory = (state.masterLabourDirectory || []).filter(w => state.labours.some(l => l.name.trim().toLowerCase() === w.name.trim().toLowerCase()));
           document.getElementById('siteSelect').value = state.sites[0];
           persistState();
         }
@@ -1995,22 +1970,6 @@
 
     window.saveLabour = async (e) => {
       e.preventDefault();
-      if (window._editLabourId) {
-        if (!isMainContractorActive()) return alert("Access Denied! Only Main Contractor can edit worker details.");
-        const w = state.labours.find(x => x.id === window._editLabourId);
-        if (w) {
-          const oldName = w.name;
-          const nm = document.getElementById('lName').value.trim();
-          const adv = Number(document.getElementById('lAdvance').value) || 0;
-          if (adv !== (w.advance || 0)) (w.advanceLog = w.advanceLog || []).unshift({ date: new Date().toLocaleDateString('hi-IN'), amount: adv - (w.advance || 0), mode: 'Edit', note: 'Edited by contractor' });
-          Object.assign(w, { name: nm, category: document.getElementById('lCategory').value, dailyRate: Number(document.getElementById('lDailyRate').value) || 0, phone: document.getElementById('lPhone').value.trim(), advance: adv });
-          if (!state.masterLabourDirectory) state.masterLabourDirectory = [];
-          const di = state.masterLabourDirectory.findIndex(x => x.name.toLowerCase() === oldName.toLowerCase());
-          const entry = { name: nm, category: w.category, dailyRate: w.dailyRate, phone: w.phone };
-          if (di >= 0) state.masterLabourDirectory[di] = entry; else state.masterLabourDirectory.push(entry);
-        }
-        window._editLabourId = null; e.target.reset(); closeFormModal(); persistState(); return;
-      }
       const site = document.getElementById('siteSelect').value;
       const month = document.getElementById('monthSelect').value;
       const name = document.getElementById('lName').value.trim();
@@ -2033,7 +1992,6 @@
       e.target.reset(); closeFormModal(); persistState(); navigateTo('viewLabours');
     };
 
-    // Edit Salary Rate (STRICTLY MAIN CONTRACTOR ONLY)
     window.editLabourSalary = (id) => {
       if (!isMainContractorActive()) {
         return alert("Access Denied! Only Main Contractor can edit daily wage rates.");
@@ -2041,22 +1999,6 @@
       const l = state.labours.find(x => x.id === id);
       if (!l) return;
       openCustomDialog({ title: `Daily Rate - ${l.name}`, inputType: "number", defaultValue: l.dailyRate || 500, onConfirm: (v) => { if(v){ l.dailyRate = Number(v); persistState(); } } });
-    };
-
-    window.editLabourFull = (id) => {
-      if (!isMainContractorActive()) return alert("Access Denied! Only Main Contractor can edit worker details.");
-      const l = state.labours.find(x => x.id === id); if (!l) return;
-      openFormModal('labour');
-      window._editLabourId = id;
-      document.getElementById('formModalTitle').innerText = "Edit Labour / मजदूर की जानकारी बदलें";
-      const cat = document.getElementById('lCategory');
-      if (![...cat.options].some(o => o.value === l.category)) cat.add(new Option(l.category, l.category));
-      document.getElementById('lName').value = l.name;
-      cat.value = l.category;
-      document.getElementById('lDailyRate').value = l.dailyRate || '';
-      document.getElementById('lAdvance').value = l.advance || 0;
-      document.getElementById('lPhone').value = l.phone || '';
-      document.querySelector('#labourForm button[type=submit]').innerText = 'Update Labour / अपडेट करें';
     };
 
     window.openAdvanceModal = (id) => {
@@ -2087,17 +2029,6 @@
       l.advance = (l.advance || 0) + amt;
       l.advanceLog.unshift({ date: new Date().toLocaleDateString('hi-IN'), amount: amt, mode: document.getElementById('advMode').value, note: document.getElementById('advNote').value.trim() || 'Advance' });
       closeAdvanceModal(); persistState();
-    };
-
-
-    window.toggleSettle = (id) => {
-      if (!isMainContractorActive()) return alert("Access Denied! Only Main Contractor can settle salary.");
-      const l = state.labours.find(x => x.id === id); if (!l) return;
-      if (l.settled) {
-        return openConfirmDelete({ title: "Undo Payment?", subtitle: `Mark ${l.name} as unpaid again?`, confirmText: 'Undo', onConfirm: () => { l.settled = false; l.paidDate = null; l.paidAmount = 0; persistState(); } });
-      }
-      const net = Math.round((l.dailyRate || 500) * ((l.presentDays || 0) + ((l.halfDays || 0) * 0.5))) - (l.advance || 0);
-      openCustomDialog({ title: `Paid ₹${net} to ${l.name} - Date`, inputType: 'date', defaultValue: localISO(), onConfirm: (dt) => { l.settled = true; l.paidAmount = net; l.paidDate = dt || localISO(); persistState(); } });
     };
 
     window.updateAttendance = (id, type) => {
@@ -2132,7 +2063,7 @@
       const title = document.getElementById('bTitle').value.trim();
       const amount = Number(document.getElementById('bAmount').value) || 0;
       const status = document.getElementById('bStatus').value;
-      const billDate = document.getElementById('bDate').value || localISO();
+      const billDate = document.getElementById('bDate').value || new Date().toISOString().split('T')[0];
       const attachment = await processUniversalFile(document.getElementById('bFile').files[0]);
 
       state.bills.unshift({
@@ -2143,7 +2074,6 @@
       e.target.reset(); closeFormModal(); persistState(); navigateTo('viewBills');
     };
 
-    // Delete Record (STRICTLY MAIN CONTRACTOR ONLY - Touch-safe Modal)
     window.deleteRecord = (type, id) => {
       if (!isMainContractorActive()) {
         return alert("Access Denied! Only the Main Contractor can delete records.");
@@ -2152,10 +2082,7 @@
         title: "Delete Record?",
         subtitle: "Are you sure you want to permanently delete this entry?",
         onConfirm: () => {
-          const gone = type === 'labours' ? (state.labours || []).find(x => x.id === id) : null;
-          (state.deletedIds = state.deletedIds || []).push(id);
           state[type] = (state[type] || []).filter(item => item.id !== id);
-          if (gone) { const g = gone.name.trim().toLowerCase(); if (!(state.labours || []).some(x => x.name.trim().toLowerCase() === g)) state.masterLabourDirectory = (state.masterLabourDirectory || []).filter(w => w.name.trim().toLowerCase() !== g); }
           persistState();
         }
       });
@@ -2165,9 +2092,9 @@
       const docSvg = `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>`;
       if (!att) return `<div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-500 flex items-center justify-center shrink-0">${docSvg}</div>`;
       if (['jpg','jpeg','png','webp','gif'].includes(att.ext)) {
-        return `<a href="${att.dataUrl}" target="_blank" download="${esc(att.name)}"><img src="${att.dataUrl}" class="w-10 h-10 rounded-xl object-cover border border-amber-500 shrink-0" /></a>`;
+        return `<a href="${att.dataUrl}" target="_blank" download="${att.name}"><img src="${att.dataUrl}" class="w-10 h-10 rounded-xl object-cover border border-amber-500 shrink-0" /></a>`;
       }
-      return `<a href="${att.dataUrl}" download="${esc(att.name)}" target="_blank" class="px-2.5 py-1.5 rounded-xl bg-amber-500/20 text-amber-500 text-[10px] font-black border border-amber-500/40 shrink-0 flex items-center gap-1">${docSvg}<span>DOC</span></a>`;
+      return `<a href="${att.dataUrl}" download="${att.name}" target="_blank" class="px-2.5 py-1.5 rounded-xl bg-amber-500/20 text-amber-500 text-[10px] font-black border border-amber-500/40 shrink-0 flex items-center gap-1">${docSvg}<span>DOC</span></a>`;
     }
 
     // Master Render Engine
@@ -2175,7 +2102,7 @@
       const siteSelect = document.getElementById('siteSelect');
       if (!state.sites || state.sites.length === 0) state.sites = ['Main Site A - मुख्य साइट'];
       const currentSite = siteSelect.value && state.sites.includes(siteSelect.value) ? siteSelect.value : state.sites[0];
-      siteSelect.innerHTML = state.sites.map(s => `<option value="${esc(s)}" ${s === currentSite ? 'selected' : ''}>${esc(s)}</option>`).join('');
+      siteSelect.innerHTML = state.sites.map(s => `<option value="${s}" ${s === currentSite ? 'selected' : ''}>${s}</option>`).join('');
 
       const activeSite = siteSelect.value;
       const activeMonth = document.getElementById('monthSelect').value;
@@ -2204,34 +2131,31 @@
       const filteredLabours = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth);
       let totalLabourDue = 0;
 
-      const editSvg = `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>`;
       const workerSvg = `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`;
       const trashSvg = `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>`;
 
-      filteredLabours.forEach(l => { if (!l.settled) totalLabourDue += Math.round((l.dailyRate || 500) * ((l.presentDays || 0) + ((l.halfDays || 0) * 0.5))) - (l.advance || 0); });
-      const shownLabours = filteredLabours.filter(matchLabour);
-      document.getElementById('labourList').innerHTML = shownLabours.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No labour records found for ${activeMonth}.</div>` : shownLabours.map(l => {
+      document.getElementById('labourList').innerHTML = filteredLabours.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No labour records found for ${activeMonth}.</div>` : filteredLabours.map(l => {
         const rate = l.dailyRate || 500;
         const earned = Math.round(rate * ((l.presentDays || 0) + ((l.halfDays || 0) * 0.5)));
         const net = earned - (l.advance || 0);
-        
+        totalLabourDue += net;
 
         return `
-          <div class="ios-glass p-2.5 rounded-2xl space-y-1.5 shadow-sm">
+          <div class="ios-glass p-4 rounded-3xl space-y-3 shadow-md">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-3">
-                <div onclick="openLabourAttendanceHistory('${l.id}')" class="w-9 h-9 rounded-full bg-amber-500/15 text-amber-500 flex items-center justify-center shrink-0 cursor-pointer">
+                <div onclick="openLabourAttendanceHistory('${l.id}')" class="w-12 h-12 rounded-full bg-amber-500/15 text-amber-500 flex items-center justify-center shrink-0 cursor-pointer">
                   ${workerSvg}
                 </div>
                 <div>
                   <button onclick="openLabourAttendanceHistory('${l.id}')" class="font-bold text-sm leading-tight text-left hover:text-amber-500 underline decoration-amber-500/50">
-                    ${esc(l.name)}
+                    ${l.name}
                   </button>
                   <div class="flex items-center gap-1.5 mt-0.5">
-                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-black/10 dark:bg-white/10 opacity-75">${esc(l.category)}</span>
-                    ${l.phone ? `<a href="tel:${esc(l.phone)}" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-500 font-bold flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><span>${esc(l.phone)}</span></a>` : ''}
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-black/10 dark:bg-white/10 opacity-75">${l.category}</span>
+                    ${l.phone ? `<a href="tel:${l.phone}" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-500 font-bold flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><span>${l.phone}</span></a>` : ''}
                   </div>
-                  <div class="text-[11px] opacity-80 mt-0.5 flex items-center gap-1 flex-wrap">
+                  <div class="text-[11px] opacity-80 mt-1 flex items-center gap-1.5 flex-wrap">
                     <span>Rate: <b>₹${rate}/day</b></span>
                     ${masterActive ? `<button onclick="editLabourSalary('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-500 font-bold">Edit</button>` : ''}
                     <span>| Adv: <b class="text-rose-500">₹${l.advance || 0}</b></span>
@@ -2240,13 +2164,13 @@
                 </div>
               </div>
               <div class="text-right flex flex-col items-end">
-                <div class="text-[10px] uppercase opacity-65 font-bold">${l.settled ? 'PAID ✓ ' + (l.paidDate || '') : 'Net Due'}</div>
-                <div class="text-sm font-black ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net.toLocaleString('en-IN')}</div>
-                ${masterActive ? `<div class="flex items-center gap-0.5 mt-1"><button type="button" onclick="editLabourFull('${l.id}')" class="p-1.5 text-amber-500 opacity-90 hover:opacity-100" title="Edit Labour">${editSvg}</button><button type="button" onclick="deleteRecord('labours','${l.id}')" class="p-1.5 text-rose-500 opacity-80 hover:opacity-100 mt-1" title="Delete Labour">${trashSvg}</button></div>` : ''}
+                <div class="text-[10px] uppercase opacity-65 font-bold">Net Due</div>
+                <div class="text-base font-black ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net.toLocaleString('en-IN')}</div>
+                ${masterActive ? `<button type="button" onclick="deleteRecord('labours','${l.id}')" class="p-1.5 text-rose-500 opacity-80 hover:opacity-100 mt-1" title="Delete Labour">${trashSvg}</button>` : ''}
               </div>
             </div>
 
-            <div class="bg-black/5 dark:bg-black/25 p-1.5 rounded-xl flex items-center justify-between text-[11px] border border-zinc-300 dark:border-white/10">
+            <div class="bg-black/5 dark:bg-black/25 p-2.5 rounded-2xl flex items-center justify-between text-xs border border-zinc-300 dark:border-white/10">
               <div onclick="openLabourAttendanceHistory('${l.id}')" class="cursor-pointer">
                 <span class="font-semibold opacity-75">Present:</span> <b class="text-emerald-500">${l.presentDays || 0}P</b>
                 <span class="mx-1 opacity-40">|</span>
@@ -2256,13 +2180,11 @@
               <div class="flex items-center gap-1">
                 <button onclick="updateAttendance('${l.id}','decPresent')" class="w-7 h-7 rounded-lg bg-black/10 dark:bg-white/10 font-black">-P</button>
                 <button onclick="updateAttendance('${l.id}','incPresent')" class="w-7 h-7 rounded-lg bg-emerald-500 text-zinc-950 font-black">+P</button>
-                <button onclick="updateAttendance('${l.id}','decHalf')" class="px-2 h-7 rounded-lg bg-black/10 dark:bg-white/10 font-black">-H</button>
                 <button onclick="updateAttendance('${l.id}','incHalf')" class="px-2 h-7 rounded-lg bg-amber-500 text-zinc-950 font-black">+H</button>
               </div>
             </div>
 
-            <div class="flex items-center justify-between pt-0.5 text-xs">
-              ${masterActive ? `<button onclick="toggleSettle('${l.id}')" class="px-3 py-1 rounded-xl font-bold text-[10px] border ${l.settled ? 'bg-black/10 dark:bg-white/10 border-zinc-400/40' : 'bg-amber-500 text-zinc-950 border-amber-500'}">${l.settled ? 'Undo Paid' : 'Mark Paid / भुगतान'}</button>` : '<span></span>'}
+            <div class="flex items-center justify-end pt-0.5 text-xs">
               <button onclick="shareWorkerSlipWhatsApp('${l.id}')" class="px-3 py-1 rounded-xl bg-emerald-500/15 text-emerald-500 font-bold text-[10px] flex items-center gap-1 border border-emerald-500/30">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                 <span>WhatsApp Slip</span>
@@ -2286,8 +2208,8 @@
             <div class="flex items-center gap-3">
               <div class="w-11 h-11 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center">${workerSvg}</div>
               <div>
-                <div class="font-bold text-sm underline decoration-amber-500/40">${esc(l.name)}</div>
-                <div class="text-[11px] opacity-75">${esc(l.category)} • ₹${l.dailyRate || 500}/day (${l.presentDays || 0}P, ${l.halfDays || 0}H)</div>
+                <div class="font-bold text-sm underline decoration-amber-500/40">${l.name}</div>
+                <div class="text-[11px] opacity-75">${l.category} • ₹${l.dailyRate || 500}/day (${l.presentDays || 0}P, ${l.halfDays || 0}H)</div>
               </div>
             </div>
             <div class="font-black text-sm ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net.toLocaleString('en-IN')}</div>
@@ -2298,10 +2220,9 @@
       // Expenses
       const filteredExpenses = (state.expenses || []).filter(e => e.site === activeSite && e.month === activeMonth);
       document.getElementById('summaryExpensesTotal').innerText = `₹${filteredExpenses.reduce((a, b) => a + b.amount, 0).toLocaleString('en-IN')}`;
-      const shownExpenses = filteredExpenses.filter(matchExpense);
-      document.getElementById('expenseList').innerHTML = shownExpenses.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No expenses recorded.</div>` : shownExpenses.map(e => `
+      document.getElementById('expenseList').innerHTML = filteredExpenses.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No expenses recorded.</div>` : filteredExpenses.map(e => `
         <div class="ios-glass p-3.5 rounded-2xl flex items-center justify-between shadow-sm">
-          <div class="flex items-center gap-2.5">${getFileBadgeHTML(e.attachment)}<div><h4 class="font-bold text-xs">${esc(e.title)}</h4><div class="text-[10px] opacity-75">${esc(e.category)}</div></div></div>
+          <div class="flex items-center gap-2.5">${getFileBadgeHTML(e.attachment)}<div><h4 class="font-bold text-xs">${e.title}</h4><div class="text-[10px] opacity-75">${e.category}</div></div></div>
           <div class="text-right flex flex-col items-end">
             <div class="text-xs font-black text-amber-500">₹${e.amount.toLocaleString('en-IN')}</div>
             ${masterActive ? `<button type="button" onclick="deleteRecord('expenses','${e.id}')" class="p-1.5 text-rose-500 opacity-80 hover:opacity-100 mt-0.5">${trashSvg}</button>` : ''}
@@ -2312,15 +2233,14 @@
       // Bills
       const filteredBills = (state.bills || []).filter(b => b.site === activeSite && b.month === activeMonth);
       document.getElementById('summaryBillsTotal').innerText = `₹${filteredBills.reduce((a, b) => a + b.amount, 0).toLocaleString('en-IN')}`;
-      const shownBills = filteredBills.filter(matchBill);
-      document.getElementById('billList').innerHTML = shownBills.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No bills recorded.</div>` : shownBills.map(b => {
+      document.getElementById('billList').innerHTML = filteredBills.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No bills recorded.</div>` : filteredBills.map(b => {
         const isPending = (b.status || '').toLowerCase().includes('pending');
         return `
           <div class="ios-glass p-4 rounded-2xl flex items-center justify-between shadow-sm">
             <div class="flex items-center gap-3">
               ${getFileBadgeHTML(b.attachment)}
               <div>
-                <h4 class="font-bold text-xs">${esc(b.title)}</h4>
+                <h4 class="font-bold text-xs">${b.title}</h4>
                 <div class="text-[10px] opacity-80 mt-0.5">Added: ${b.billDate} | ${b.receivedDate ? `Rec: ${b.receivedDate}` : 'Pending'}</div>
                 <div class="flex items-center gap-1.5 mt-1">
                   <span class="text-[9px] px-2 py-0.5 rounded-full font-bold ${isPending ? 'bg-amber-500/15 text-amber-500' : 'bg-emerald-500/15 text-emerald-500'}">${b.status}</span>
@@ -2398,6 +2318,134 @@
       });
     };
 
+    // --- INTERACTIVE AUTO-PLAYING VIDEO USER GUIDE ENGINE ---
+    const appGuideSlides = [
+      {
+        title: "1. How to Install App (PWA)",
+        sub: "Add to Home Screen on Android & iPhone",
+        desc: "Open raahul108.github.io/thekedaar in Chrome or Safari. Tap the browser menu (3 dots or Share) and select 'Add to Home Screen' or 'Install App' to use it like a native app.",
+        voiceHi: "ठेकेदार ऐप को अपने फोन में इंस्टॉल करने के लिए ब्राउज़र मेनू खोलें और Add to Home Screen पर टैप करें।",
+        svg: `<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>`
+      },
+      {
+        title: "2. Cloud Login & Role Security",
+        sub: "Main Contractor vs. Supervisor Access",
+        desc: "Tap the top-left Profile icon to sign in with your Cloud Email for real-time PC & Mobile sync. Main Contractors can set a Master PIN and create Supervisor IDs that cannot delete any data.",
+        voiceHi: "प्रोफाइल आइकन पर क्लिक करके क्लाउड ईमेल से लॉग इन करें। मेन ठेकेदार अपना पासवर्ड सेट कर सकता है और सुपरवाइजर अकाउंट बना सकता है।",
+        svg: `<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>`
+      },
+      {
+        title: "3. Multi-Site & Month Control",
+        sub: "Manage Unlimited Construction Sites",
+        desc: "Use the top bar to switch sites, add new project sites (+ SITE), or pick any month. Only the Main Contractor has permission to delete a site.",
+        voiceHi: "ऊपर दिए गए बार से अपनी कंस्ट्रक्शन साइट चुनें या नई साइट जोड़ें। साइट डिलीट करने का अधिकार सिर्फ मेन ठेकेदार के पास है।",
+        svg: `<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>`
+      },
+      {
+        title: "4. Add Workers & 10-Language Voice",
+        sub: "Speak or Type in Your Regional Language",
+        desc: "Tap '+' in the bottom bar to register workers with their Daily Wage, Advance, and Phone Number. Tap the Mic icon on any box to speak in 10 Indian languages.",
+        voiceHi: "नया मजदूर जोड़ने के लिए प्लस बटन दबाएं। आप दस भारतीय भाषाओं में बोलकर या टाइप करके मजदूर का नाम, दिहाड़ी और मोबाइल नंबर लिख सकते हैं।",
+        svg: `<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>`
+      },
+      {
+        title: "5. Daily Hajri Book & History",
+        sub: "Tap Worker Name for Date-Wise Log",
+        desc: "Use 'Hajri Book' to mark daily Present (P), Half (H), or Absent (A). Tap on any worker's name to view their full month's date-by-date attendance log and send WhatsApp slips.",
+        voiceHi: "हाजिरी बुक से रोज़ाना प्रेजेंट या हाफ डे लगाएं। मजदूर के नाम पर टैप करके पूरे महीने का रिकॉर्ड देखें और व्हाट्सएप पर हिसाब पर्ची भेजें।",
+        svg: `<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>`
+      },
+      {
+        title: "6. Site Expenses & Company Bills",
+        sub: "Track Bill Added Date & Received Date",
+        desc: "Record transport, tea, and material expenses with receipt files. In Company Bills, log the Bill Date, attach bill photos, and mark the exact Payment Received Date.",
+        voiceHi: "साइट के खर्चे और कंपनी के बिल फोटो के साथ सेव करें, और बिल का पैसा मिलने की तारीख भी दर्ज करें।",
+        svg: `<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>`
+      },
+      {
+        title: "7. Monthly Ledger & Audio Report",
+        sub: "Top-Right Calendar & Settings",
+        desc: "Tap the top-right Calendar icon to inspect full monthly attendance, expenses, and bill photos in one place. Use Settings to switch Themes, Languages, or share the app.",
+        voiceHi: "ऊपर दिए गए कैलेंडर आइकन से पूरे महीने का बही-खाता और बिलों की फोटो एक साथ देखें।",
+        svg: `<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>`
+      }
+    ];
+
+    let curGuideIdx = 0;
+    let guideAutoPlaying = false;
+
+    window.openAppVideoGuide = () => {
+      curGuideIdx = 0;
+      document.getElementById('videoGuideModal').classList.replace('hidden', 'flex');
+      renderGuideSlide(true);
+    };
+
+    window.closeAppVideoGuide = () => {
+      stopGuideAutoPlay();
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      document.getElementById('videoGuideModal').classList.replace('flex', 'hidden');
+    };
+
+    function renderGuideSlide(speakNow = false) {
+      const s = appGuideSlides[curGuideIdx];
+      document.getElementById('guideStepBadge').innerText = `Step ${curGuideIdx + 1} of ${appGuideSlides.length}`;
+      document.getElementById('guideVisualIcon').innerHTML = s.svg;
+      document.getElementById('guideSlideTitle').innerText = s.title;
+      document.getElementById('guideSlideSubtitle').innerText = s.sub;
+      document.getElementById('guideSlideDesc').innerText = s.desc;
+
+      const bars = document.getElementById('guideProgressBars');
+      bars.innerHTML = appGuideSlides.map((_, i) => `
+        <div class="h-1 rounded-full ${i <= curGuideIdx ? 'bg-amber-500' : 'bg-white/20'} transition-all"></div>
+      `).join('');
+
+      if (speakNow && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(s.voiceHi);
+        u.lang = 'hi-IN';
+        u.rate = 0.95;
+        u.onend = () => {
+          if (guideAutoPlaying) {
+            if (curGuideIdx < appGuideSlides.length - 1) {
+              curGuideIdx++;
+              renderGuideSlide(true);
+            } else {
+              stopGuideAutoPlay();
+            }
+          }
+        };
+        window.speechSynthesis.speak(u);
+      }
+    }
+
+    window.nextGuideSlide = () => {
+      curGuideIdx = (curGuideIdx + 1) % appGuideSlides.length;
+      renderGuideSlide(true);
+    };
+
+    window.prevGuideSlide = () => {
+      curGuideIdx = (curGuideIdx - 1 + appGuideSlides.length) % appGuideSlides.length;
+      renderGuideSlide(true);
+    };
+
+    window.toggleGuideAutoPlay = () => {
+      if (guideAutoPlaying) {
+        stopGuideAutoPlay();
+      } else {
+        guideAutoPlaying = true;
+        document.getElementById('guidePlayPauseBtn').innerHTML = `<span>Playing Guide... (Tap to Pause)</span>`;
+        renderGuideSlide(true);
+      }
+    };
+
+    function stopGuideAutoPlay() {
+      guideAutoPlaying = false;
+      const btn = document.getElementById('guidePlayPauseBtn');
+      if (btn) {
+        btn.innerHTML = `<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><span>Auto-Play Guide</span>`;
+      }
+    }
+
     // Real-Time Unified Cloud Sync + Automatic Migration of Legacy PC/Mobile Documents
     onAuthStateChanged(auth, async (user) => {
       if (unsubscribeSnapshot) { unsubscribeSnapshot(); unsubscribeSnapshot = null; }
@@ -2436,9 +2484,6 @@
           if (legacySnap.exists()) mergeFromDoc(legacySnap.data());
           if (masterSnap.exists()) mergeFromDoc(masterSnap.data());
 
-          const dead = new Set([...(state.deletedIds || []), ...(masterSnap.exists() ? masterSnap.data().deletedIds || [] : []), ...(legacySnap.exists() ? legacySnap.data().deletedIds || [] : [])]);
-          state.deletedIds = [...dead];
-          mergedLabours = mergedLabours.filter(x => !dead.has(x.id)); mergedExpenses = mergedExpenses.filter(x => !dead.has(x.id)); mergedBills = mergedBills.filter(x => !dead.has(x.id));
           state.sites = Array.from(mergedSites);
           state.labours = mergedLabours;
           state.expenses = mergedExpenses;
@@ -2450,7 +2495,6 @@
           await persistState();
         } catch (err) { console.error("Initial Merge Error:", err); }
 
-        // Live Real-time Listener on unified document (PC <-> Mobile instant sync)
         unsubscribeSnapshot = onSnapshot(masterDocRef, (snap) => {
           if (snap.exists()) {
             sanitizeStateData(snap.data());
@@ -2472,7 +2516,6 @@
     runSplashAnimation();
     renderAll();
     changeLanguage(window.currentLang);
-    if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(() => {});
   </script>
 </body>
 </html>
