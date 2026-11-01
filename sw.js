@@ -1,4 +1,4 @@
-const C = 'thekedaar-v15';
+const C = 'thekedaar-v16';
 
 self.addEventListener('install', e => {
   e.waitUntil(
