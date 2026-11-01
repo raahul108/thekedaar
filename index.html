@@ -133,6 +133,8 @@
     .fixed.inset-0>.ios-glass{animation:sheetUp .3s cubic-bezier(.16,1,.3,1)}
     @keyframes sheetUp{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
     ::-webkit-scrollbar{width:0;height:0}
+      #labourList>.ios-glass .w-9 svg{width:1rem;height:1rem}
+    #labourList>.ios-glass button.w-7{width:1.5rem;height:1.5rem;font-size:10px}
   </style>
 </head>
 <body class="min-h-screen pb-32 select-none no-scrollbar">
@@ -1798,7 +1800,7 @@
       const curNames = new Set((state.labours || []).filter(l => l.site === currentSite && l.month === currentMonth).map(w => w.name.trim().toLowerCase()));
       const map = new Map();
       (state.labours || []).forEach(l => { if (!curNames.has(l.name.trim().toLowerCase())) map.set(l.name.trim().toLowerCase(), l); });
-      (state.masterLabourDirectory || []).forEach(w => { if (!curNames.has(w.name.trim().toLowerCase()) && !map.has(w.name.trim().toLowerCase())) map.set(w.name.trim().toLowerCase(), w); });
+      
       const candidates = Array.from(map.values());
 
       if (candidates.length === 0) {
@@ -1984,6 +1986,7 @@
           state.labours = (state.labours || []).filter(l => l.site !== siteToDelete);
           state.expenses = (state.expenses || []).filter(e => e.site !== siteToDelete);
           state.bills = (state.bills || []).filter(b => b.site !== siteToDelete);
+          state.masterLabourDirectory = (state.masterLabourDirectory || []).filter(w => state.labours.some(l => l.name.trim().toLowerCase() === w.name.trim().toLowerCase()));
           document.getElementById('siteSelect').value = state.sites[0];
           persistState();
         }
@@ -2149,8 +2152,10 @@
         title: "Delete Record?",
         subtitle: "Are you sure you want to permanently delete this entry?",
         onConfirm: () => {
+          const gone = type === 'labours' ? (state.labours || []).find(x => x.id === id) : null;
           (state.deletedIds = state.deletedIds || []).push(id);
           state[type] = (state[type] || []).filter(item => item.id !== id);
+          if (gone) { const g = gone.name.trim().toLowerCase(); if (!(state.labours || []).some(x => x.name.trim().toLowerCase() === g)) state.masterLabourDirectory = (state.masterLabourDirectory || []).filter(w => w.name.trim().toLowerCase() !== g); }
           persistState();
         }
       });
@@ -2212,10 +2217,10 @@
         
 
         return `
-          <div class="ios-glass p-4 rounded-3xl space-y-3 shadow-md">
+          <div class="ios-glass p-2.5 rounded-2xl space-y-1.5 shadow-sm">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-3">
-                <div onclick="openLabourAttendanceHistory('${l.id}')" class="w-12 h-12 rounded-full bg-amber-500/15 text-amber-500 flex items-center justify-center shrink-0 cursor-pointer">
+                <div onclick="openLabourAttendanceHistory('${l.id}')" class="w-9 h-9 rounded-full bg-amber-500/15 text-amber-500 flex items-center justify-center shrink-0 cursor-pointer">
                   ${workerSvg}
                 </div>
                 <div>
@@ -2226,7 +2231,7 @@
                     <span class="text-[10px] px-2 py-0.5 rounded-full bg-black/10 dark:bg-white/10 opacity-75">${esc(l.category)}</span>
                     ${l.phone ? `<a href="tel:${esc(l.phone)}" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-500 font-bold flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><span>${esc(l.phone)}</span></a>` : ''}
                   </div>
-                  <div class="text-[11px] opacity-80 mt-1 flex items-center gap-1.5 flex-wrap">
+                  <div class="text-[11px] opacity-80 mt-0.5 flex items-center gap-1 flex-wrap">
                     <span>Rate: <b>₹${rate}/day</b></span>
                     ${masterActive ? `<button onclick="editLabourSalary('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-500 font-bold">Edit</button>` : ''}
                     <span>| Adv: <b class="text-rose-500">₹${l.advance || 0}</b></span>
@@ -2236,12 +2241,12 @@
               </div>
               <div class="text-right flex flex-col items-end">
                 <div class="text-[10px] uppercase opacity-65 font-bold">${l.settled ? 'PAID ✓ ' + (l.paidDate || '') : 'Net Due'}</div>
-                <div class="text-base font-black ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net.toLocaleString('en-IN')}</div>
+                <div class="text-sm font-black ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net.toLocaleString('en-IN')}</div>
                 ${masterActive ? `<div class="flex items-center gap-0.5 mt-1"><button type="button" onclick="editLabourFull('${l.id}')" class="p-1.5 text-amber-500 opacity-90 hover:opacity-100" title="Edit Labour">${editSvg}</button><button type="button" onclick="deleteRecord('labours','${l.id}')" class="p-1.5 text-rose-500 opacity-80 hover:opacity-100 mt-1" title="Delete Labour">${trashSvg}</button></div>` : ''}
               </div>
             </div>
 
-            <div class="bg-black/5 dark:bg-black/25 p-2.5 rounded-2xl flex items-center justify-between text-xs border border-zinc-300 dark:border-white/10">
+            <div class="bg-black/5 dark:bg-black/25 p-1.5 rounded-xl flex items-center justify-between text-[11px] border border-zinc-300 dark:border-white/10">
               <div onclick="openLabourAttendanceHistory('${l.id}')" class="cursor-pointer">
                 <span class="font-semibold opacity-75">Present:</span> <b class="text-emerald-500">${l.presentDays || 0}P</b>
                 <span class="mx-1 opacity-40">|</span>
