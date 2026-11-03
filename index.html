@@ -1,0 +1,2522 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-amoled">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
+  
+  <link rel="icon" type="image/png" href="./logo.png?v=14">
+  <link rel="apple-touch-icon" href="./logo.png?v=14">
+  <link rel="manifest" href="manifest.json?v=14">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#000000">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Text', 'SF Pro Display', 'Inter', 'sans-serif'] }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    html.theme-amoled {
+      --bg-main: #000000;
+      --card-bg: rgba(18, 20, 24, 0.84);
+      --card-border: rgba(255, 255, 255, 0.16);
+      --card-specular: rgba(255, 255, 255, 0.08);
+      --text-main: #ffffff;
+      --text-sub: #a1a1aa;
+      --nav-pill-bg: rgba(22, 22, 24, 0.90);
+      --nav-pill-border: rgba(255, 255, 255, 0.22);
+      --nav-active-bubble: rgba(255, 255, 255, 0.18);
+      --nav-icon-inactive: #94a3b8;
+      --nav-icon-active: #ffffff;
+      --input-bg: rgba(255, 255, 255, 0.12);
+      --input-border: rgba(255, 255, 255, 0.28);
+      --input-text: #ffffff;
+      --placeholder-color: #94a3b8;
+    }
+    html.theme-dark {
+      --bg-main: #0b111e;
+      --card-bg: rgba(22, 32, 50, 0.86);
+      --card-border: rgba(255, 255, 255, 0.18);
+      --card-specular: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-sub: #cbd5e1;
+      --nav-pill-bg: rgba(18, 26, 42, 0.92);
+      --nav-pill-border: rgba(255, 255, 255, 0.24);
+      --nav-active-bubble: rgba(255, 255, 255, 0.18);
+      --nav-icon-inactive: #94a3b8;
+      --nav-icon-active: #ffffff;
+      --input-bg: rgba(255, 255, 255, 0.10);
+      --input-border: rgba(255, 255, 255, 0.25);
+      --input-text: #ffffff;
+      --placeholder-color: #94a3b8;
+    }
+    html.theme-light {
+      --bg-main: #f1f5f9;
+      --card-bg: #ffffff;
+      --card-border: #cbd5e1;
+      --card-specular: #ffffff;
+      --text-main: #09090b;
+      --text-sub: #3f3f46;
+      --nav-pill-bg: rgba(255, 255, 255, 0.96);
+      --nav-pill-border: #94a3b8;
+      --nav-active-bubble: #e2e8f0;
+      --nav-icon-inactive: #64748b;
+      --nav-icon-active: #09090b;
+      --input-bg: #f8fafc;
+      --input-border: #64748b;
+      --input-text: #09090b;
+      --placeholder-color: #475569;
+    }
+
+    body { background-color: var(--bg-main); color: var(--text-main); -webkit-font-smoothing: antialiased; }
+    .ios-glass {
+      background: var(--card-bg);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.22), inset 0 1px 1px 0 var(--card-specular);
+    }
+    .ios-header {
+      background: var(--card-bg);
+      backdrop-filter: blur(32px) saturate(200%);
+      -webkit-backdrop-filter: blur(32px) saturate(200%);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .ios-instagram-floating-pill {
+      background: var(--nav-pill-bg);
+      backdrop-filter: blur(30px) saturate(190%);
+      -webkit-backdrop-filter: blur(30px) saturate(190%);
+      border: 1px solid var(--nav-pill-border);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.38), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+    .nav-tab-item { color: var(--nav-icon-inactive); transition: all 0.25s ease; }
+    .nav-tab-item.active { color: var(--nav-icon-active); background-color: var(--nav-active-bubble); }
+    .app-input { background-color: var(--input-bg) !important; color: var(--input-text) !important; border: 1.5px solid var(--input-border) !important; }
+    .app-input::placeholder { color: var(--placeholder-color) !important; opacity: 1 !important; }
+    .waveform-bar { display: inline-block; width: 3px; background: rgba(245, 158, 11, 0.65); border-radius: 9999px; margin: 0 1.5px; }
+    .spin-slow { animation: spin 14s linear infinite; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    .splash-glow { animation: ambientGlow 2.5s ease-in-out infinite alternate; }
+    @keyframes ambientGlow {
+      0% { box-shadow: 0 0 25px rgba(245, 158, 11, 0.3); transform: scale(0.97); }
+      100% { box-shadow: 0 0 65px rgba(245, 158, 11, 0.7); transform: scale(1.02); }
+    }
+    .letter-anim {
+      display: inline-block; opacity: 0; transform: translateY(22px) scale(0.75);
+      animation: popIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes popIn { to { opacity: 1; transform: translateY(0) scale(1); } }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  
+    body{background-image:radial-gradient(60% 40% at 8% -5%,rgba(245,158,11,.18),transparent 60%),radial-gradient(50% 35% at 100% 0%,rgba(244,63,94,.10),transparent 60%);background-attachment:fixed}
+    .ios-glass{border-radius:1.25rem}
+    main .ios-glass{transition:transform .2s ease,box-shadow .2s ease}
+    main .ios-glass:active{transform:scale(.99)}
+    #labourList>.ios-glass{border-left:3px solid #f59e0b}
+    .ios-header{border-radius:0 0 1.5rem 1.5rem}
+    header h1{background:linear-gradient(90deg,#fff,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent}
+    html.theme-light header h1{background:linear-gradient(90deg,#09090b,#d97706);-webkit-background-clip:text;background-clip:text}
+    .app-input{border-radius:.9rem !important;transition:box-shadow .2s,border-color .2s}
+    .app-input:focus{border-color:#f59e0b !important;box-shadow:0 0 0 3px rgba(245,158,11,.25)}
+    button{-webkit-tap-highlight-color:transparent}
+    .nav-tab-item.active{box-shadow:0 0 0 1px rgba(245,158,11,.4),0 6px 18px rgba(245,158,11,.2)}
+    .fixed.inset-0>.ios-glass{animation:sheetUp .3s cubic-bezier(.16,1,.3,1)}
+    @keyframes sheetUp{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
+    ::-webkit-scrollbar{width:0;height:0}
+      #labourList>.ios-glass .w-9 svg{width:1rem;height:1rem}
+    #labourList>.ios-glass button.w-7{width:1.5rem;height:1.5rem;font-size:10px}
+      html.theme-amoled,html.theme-dark{color-scheme:dark}
+    html.theme-light{color-scheme:light}
+    input::-webkit-calendar-picker-indicator{opacity:1;cursor:pointer}
+  </style>
+</head>
+<body class="min-h-screen pb-32 select-none no-scrollbar">
+
+  <!-- 1. ANIMATED SPLASH SCREEN -->
+  <div id="splashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black transition-opacity duration-700">
+    <div class="relative z-10 flex flex-col items-center">
+      <div class="relative flex items-center justify-center mb-6">
+        <div class="absolute w-36 h-36 rounded-full border-2 border-dashed border-amber-500/40 spin-slow"></div>
+        <div class="w-28 h-28 rounded-full border-2 border-amber-500 splash-glow overflow-hidden bg-black flex items-center justify-center shadow-2xl relative z-10">
+          <img src="./logo.png" alt="ठेकेDAAR" class="w-full h-full object-cover" onerror="this.style.display='none'" />
+        </div>
+      </div>
+      <div id="thekedaarLetters" class="text-3xl font-black text-white tracking-widest flex items-center"></div>
+      <div class="flex items-center gap-2 mt-2.5 opacity-80">
+        <span class="w-5 h-px bg-amber-500"></span>
+        <p class="text-amber-500 text-[10px] font-bold uppercase tracking-widest">Online Workforce System</p>
+        <span class="w-5 h-px bg-amber-500"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. STRICT ONLINE-ONLY CONNECTION BLOCKER OVERLAY -->
+  <div id="offlineBlockerModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl hidden flex-col items-center justify-center p-6 text-center">
+    <div class="w-16 h-16 rounded-3xl bg-rose-500/20 text-rose-500 flex items-center justify-center mb-4 animate-bounce">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 2.829a4.978 4.978 0 01-1.414-2.83m-1.414 5.658a9 9 0 01-2.167-9.238m7.824 2.167a1 1 0 111.414 1.414m-1.414-1.414L3 3m8.293 8.293l1.414 1.414" />
+      </svg>
+    </div>
+    <h2 class="text-lg font-black text-white">Internet Connection Required</h2>
+    <p class="text-xs text-zinc-400 max-w-xs mt-1 leading-relaxed">
+      ठेकेDAAR is configured for strict Online Cloud Mode only. Please turn on Mobile Data or Wi-Fi to continue.
+    </p>
+  </div>
+
+  <!-- 3. TOP HEADER (SVG ICONS ONLY) -->
+  <header class="sticky top-0 z-30 px-4 pt-4 pb-2.5 ios-header">
+    <div class="max-w-md mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <button onclick="openProfileModal()" class="relative group active:scale-95 transition-transform" title="Profile & Accounts">
+          <div id="userAvatarBadge" class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 font-black text-base flex items-center justify-center shadow-lg border border-white/20 overflow-hidden">
+            <span>ठे</span>
+          </div>
+          <span id="syncDot" class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-black"></span>
+        </button>
+
+        <div>
+          <div class="flex items-center gap-1.5">
+            <h1 class="text-base font-black tracking-tight leading-none">ठेकेDAAR</h1>
+            <span id="activeNicknameBadge" class="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-500/15 text-amber-500 font-bold border border-amber-500/30">Main</span>
+          </div>
+          <span id="syncStatus" class="text-[10px] text-emerald-500 font-bold block mt-0.5">Online Cloud Active</span>
+        </div>
+      </div>
+
+      <!-- Top Right Corner: Force Cloud Sync, Monthly Ledger & Settings SVG Icons -->
+      <div class="flex items-center gap-2">
+        <button onclick="forceCloudPull()" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center active:scale-90 transition-transform shadow-sm text-emerald-500" title="Refresh Cloud Data">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+        </button>
+        <button onclick="openMonthlyLedgerModal()" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center active:scale-90 transition-transform shadow-sm text-amber-500" title="Monthly Ledger">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+        </button>
+        <button onclick="openSettingsModal()" class="w-10 h-10 rounded-2xl ios-glass flex items-center justify-center active:scale-90 transition-transform shadow-sm" title="Settings">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 4. MAIN SITE & MONTH CONTROLLER -->
+  <div class="max-w-md mx-auto px-4 pt-3">
+    <div class="ios-glass rounded-2xl p-2.5 flex items-center justify-between gap-1.5 shadow-sm">
+      <div class="flex items-center gap-1.5 flex-1 min-w-0">
+        <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        <select id="siteSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold focus:outline-none w-full truncate"></select>
+      </div>
+      <button onclick="addNewSite()" class="px-2.5 py-1 bg-amber-500/15 hover:bg-amber-500/25 text-amber-500 font-bold text-xs rounded-xl transition-all shrink-0">
+        + SITE
+      </button>
+      <!-- Delete Site SVG Button: Visible ONLY to Main Contractor -->
+      <button id="deleteSiteBtn" onclick="deleteCurrentSite()" class="p-1.5 bg-rose-500/15 hover:bg-rose-500/25 text-rose-500 rounded-xl transition-all shrink-0" title="Delete Active Site (Main Contractor Only)">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+      </button>
+      <div class="h-4 w-px bg-zinc-300 dark:bg-white/10"></div>
+      <input type="hidden" id="monthSelect" />
+      <button type="button" onclick="openMonthPicker('main')" class="flex items-center gap-1.5 text-xs font-bold active:scale-95 transition-transform shrink-0"><span id="monthLabel"></span><svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></button>
+    </div>
+  </div>
+
+  <!-- 5. MAIN APP BODY -->
+  <main class="max-w-md mx-auto p-4 space-y-4">
+
+    <!-- SUMMARY CHIPS -->
+    <div class="grid grid-cols-3 gap-2.5">
+      <div class="rounded-2xl p-3 border border-rose-500/30 bg-rose-500/10 ios-glass text-center flex flex-col justify-center">
+        <span class="text-[9px] font-bold tracking-wider uppercase text-rose-500" data-i18n="labourDue">LABOUR DUE</span>
+        <span id="summaryLabourDue" class="text-base font-black text-rose-500 mt-0.5">₹0</span>
+      </div>
+      <div class="rounded-2xl p-3 border border-amber-500/30 bg-amber-500/10 ios-glass text-center flex flex-col justify-center">
+        <span class="text-[9px] font-bold tracking-wider uppercase text-amber-500" data-i18n="expenses">EXPENSES</span>
+        <span id="summaryExpensesTotal" class="text-base font-black text-amber-500 mt-0.5">₹0</span>
+      </div>
+      <div onclick="navigateTo('viewBills')" class="rounded-2xl p-3 border border-emerald-500/30 bg-emerald-500/10 ios-glass text-center flex flex-col justify-center cursor-pointer active:scale-95 transition-transform">
+        <span class="text-[9px] font-bold tracking-wider uppercase text-emerald-500" data-i18n="bills">BILLS</span>
+        <span id="summaryBillsTotal" class="text-base font-black text-emerald-500 mt-0.5">₹0</span>
+      </div>
+    </div>
+
+    <!-- AUDIO SUMMARY CARD -->
+    <div class="ios-glass rounded-3xl p-4 text-center shadow-lg relative overflow-hidden">
+      <h3 class="text-xs font-extrabold flex items-center justify-center gap-1.5" data-i18n="audioSummaryTitle">
+        Site Audio Summary / बोलकर हिसाब सुनें
+      </h3>
+      <p class="text-[10px] opacity-75 mt-0.5" data-i18n="audioSummarySub">Listen to whole site summary in one tap</p>
+      <div class="flex items-center justify-center my-2 h-5 opacity-80">
+        <span class="waveform-bar h-2"></span><span class="waveform-bar h-4"></span><span class="waveform-bar h-5"></span><span class="waveform-bar h-3"></span><span class="waveform-bar h-5"></span><span class="waveform-bar h-2"></span>
+      </div>
+      <button onclick="playVoiceSummary()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-zinc-950 font-black text-xs flex items-center gap-2 mx-auto active:scale-95 transition-all shadow-md">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+        <span data-i18n="listenBtn">LISTEN / सुनें</span>
+      </button>
+    </div>
+
+    <!-- VIEW 1: HOME SNAPSHOT -->
+    <section id="viewHome" class="space-y-3">
+      <div class="flex items-center justify-between pt-1">
+        <h2 class="text-[11px] font-bold uppercase tracking-wider opacity-70" data-i18n="liveSnapshot">LIVE WORKFORCE SNAPSHOT</h2>
+        <button onclick="navigateTo('viewLabours')" class="text-[11px] font-bold text-amber-500 hover:underline">View All</button>
+      </div>
+      <div id="homeRecentLabour" class="space-y-3.5"></div>
+    </section>
+
+    <!-- VIEW 2: LABOUR REGISTER -->
+    <section id="viewLabours" class="space-y-3 hidden">
+      <div class="flex items-center justify-between">
+        <h2 class="text-sm font-black" data-i18n="tabLabour">Labour Register</h2>
+        <div class="flex items-center gap-1.5">
+          <button onclick="openHajriBookModal()" class="px-2.5 py-1.5 bg-amber-500/20 border border-amber-500/40 text-amber-500 font-bold text-xs rounded-xl active:scale-95 transition-transform flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <span>Hajri Book</span>
+          </button>
+          <button onclick="openCarrySelectModal()" class="px-2.5 py-1.5 ios-glass text-amber-500 font-bold text-xs rounded-xl active:scale-95 transition-transform"><span class="flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"></path><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><path d="M7 23l-4-4 4-4"></path><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>Carry</span></button>
+          <button onclick="openFormModal('labour')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs rounded-xl shadow">
+            + Worker
+          </button>
+        </div>
+      </div>
+      <div class="flex gap-2"><input type="search" placeholder="Search / खोजें" oninput="setFilter('lab',this.value)" class="app-input flex-1 min-w-0 rounded-xl px-3 py-2 text-xs focus:outline-none" /><select onchange="setFilter('labS',this.value)" class="app-input rounded-xl px-2 py-2 text-xs font-bold focus:outline-none"><option value="all">All</option><option value="due">Due</option><option value="paid">Paid</option></select></div>
+      <div id="labourList" class="space-y-3.5"></div>
+    </section>
+
+    <!-- VIEW 3: SITE EXPENSES -->
+    <section id="viewExpenses" class="space-y-3 hidden">
+      <div class="flex items-center justify-between">
+        <h2 class="text-sm font-black" data-i18n="tabExpenses">Site Expenses & Rent</h2>
+        <button onclick="openFormModal('expense')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Expense</button>
+      </div>
+      <div class="flex gap-2"><input type="search" placeholder="Search / खोजें" oninput="setFilter('exp',this.value)" class="app-input flex-1 min-w-0 rounded-xl px-3 py-2 text-xs focus:outline-none" /><select onchange="setFilter('expC',this.value)" class="app-input rounded-xl px-2 py-2 text-xs font-bold focus:outline-none"><option value="all">All</option><option value="Rickshaw / Rent (किराया)">Transport</option><option value="Tea / Food (नाश्ता)">Tea & Food</option><option value="Material (सामान)">Material</option><option value="Medical (दवा)">Medical</option><option value="Other (अन्य)">Other</option></select></div>
+      <div id="expenseList" class="space-y-3.5"></div>
+    </section>
+
+    <!-- VIEW 4: COMPANY BILLS -->
+    <section id="viewBills" class="space-y-3 hidden">
+      <div class="flex items-center justify-between">
+        <h2 class="text-sm font-black" data-i18n="tabBills">Company Work Bills</h2>
+        <button onclick="openFormModal('bill')" class="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-xs rounded-xl shadow">+ Add Bill</button>
+      </div>
+      <div class="flex gap-2"><input type="search" placeholder="Search / खोजें" oninput="setFilter('bill',this.value)" class="app-input flex-1 min-w-0 rounded-xl px-3 py-2 text-xs focus:outline-none" /><select onchange="setFilter('billS',this.value)" class="app-input rounded-xl px-2 py-2 text-xs font-bold focus:outline-none"><option value="all">All</option><option value="Pending">Pending</option><option value="Received">Received</option></select></div>
+      <div id="billList" class="space-y-3.5"></div>
+    </section>
+
+  </main>
+
+  <!-- 6. FLOATING NAVIGATION BAR -->
+  <div class="fixed bottom-4 inset-x-0 z-40 flex justify-center pointer-events-none px-3">
+    <nav class="ios-instagram-floating-pill pointer-events-auto rounded-full py-1.5 px-3 flex items-center justify-around gap-2 w-full max-w-[350px]">
+      <button onclick="navigateTo('viewHome')" id="nav-viewHome" class="nav-tab-item active flex items-center justify-center w-14 h-11 rounded-full active:scale-90" title="Home">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2.1l9 8.1c.4.3.6.8.6 1.3v8.5c0 1.1-.9 2-2 2h-4.5c-.8 0-1.5-.7-1.5-1.5V15c0-.6-.4-1-1-1s-1 .4-1 1v5.5c0 .8-.7 1.5-1.5 1.5H5.4c-1.1 0-2-.9-2-2v-8.5c0-.5.2-1 .6-1.3l9-8.1c.6-.6 1.6-.6 2.2 0z"/>
+        </svg>
+      </button>
+
+      <button onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="nav-tab-item flex items-center justify-center w-14 h-11 rounded-full active:scale-90" title="Labours">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      </button>
+
+      <button onclick="openFormModal('labour')" class="flex items-center justify-center w-12 h-11 active:scale-90 transition-transform" title="Add Worker">
+        <div class="w-7 h-7 rounded-lg border-2 border-amber-500 flex items-center justify-center text-amber-500 font-bold text-lg leading-none">+</div>
+      </button>
+
+      <button onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="nav-tab-item flex items-center justify-center w-14 h-11 rounded-full active:scale-90" title="Expenses">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+        </svg>
+      </button>
+
+      <button onclick="navigateTo('viewBills')" id="nav-viewBills" class="nav-tab-item flex items-center justify-center w-14 h-11 rounded-full active:scale-90" title="Company Bills">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+        </svg>
+      </button>
+    </nav>
+  </div>
+
+  <!-- 7. PROFILE, LOGGED-IN EMAIL DISPLAY & MAIN CONTRACTOR SECURITY MODAL -->
+  <div id="profileModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
+    <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-3">
+        <h3 class="font-black text-base flex items-center gap-2">
+          <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span>Profile & Access Control</span>
+        </h3>
+        <button onclick="closeProfileModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
+      </div>
+
+      <!-- Logged-in Cloud Email Status Box -->
+      <div class="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between">
+        <div class="min-w-0">
+          <span class="text-[9px] font-bold uppercase text-emerald-500 block">Logged-In Cloud Email ID</span>
+          <span id="loggedInEmailDisplay" class="text-xs font-black truncate block mt-0.5">Not signed in to Cloud</span>
+        </div>
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
+      </div>
+
+      <!-- Profile Photo Upload with Camera & Gallery -->
+      <div class="flex items-center gap-3 bg-black/5 dark:bg-black/25 p-3 rounded-2xl border border-zinc-300 dark:border-white/10">
+        <div id="profileAvatarPreview" class="w-14 h-14 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 font-black text-xl flex items-center justify-center shadow border-2 border-white/20 overflow-hidden shrink-0">
+          <span>ठे</span>
+        </div>
+        <div class="flex-1 space-y-1.5">
+          <span class="text-xs font-bold block" id="currentProfileNameText">Main Contractor</span>
+          <div class="flex gap-1.5">
+            <label class="px-2.5 py-1 bg-amber-500/15 hover:bg-amber-500/25 text-amber-500 border border-amber-500/30 text-[10px] font-bold rounded-lg cursor-pointer flex items-center gap-1">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+              <span>Camera</span>
+              <input type="file" accept="image/*" capture="user" class="hidden" onchange="initiateCropFromFile(this, 'userProfile')" />
+            </label>
+            <label class="px-2.5 py-1 bg-black/10 dark:bg-white/10 text-[10px] font-bold rounded-lg cursor-pointer flex items-center gap-1">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+              <span>Gallery</span>
+              <input type="file" accept="image/*" class="hidden" onchange="initiateCropFromFile(this, 'userProfile')" />
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Set Main Contractor Password Box (Visible ONLY when Main Contractor is active) -->
+      <div id="masterPasswordSettingBox" class="bg-amber-500/10 border border-amber-500/30 p-3 rounded-2xl space-y-2">
+        <label class="text-[10px] font-bold text-amber-500 uppercase flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span>Set Main Contractor Password (Synced)</span>
+        </label>
+        <div class="flex gap-1.5">
+          <input type="password" id="newMasterPinInput" placeholder="New password/PIN" class="app-input flex-1 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none" />
+          <button type="button" onclick="saveNewMasterPin()" class="px-3 py-1.5 bg-amber-500 text-zinc-950 font-black text-xs rounded-xl shadow">Save</button>
+        </div>
+        <p class="text-[9px] opacity-70">Synced across PC & Mobile. Required to switch from Supervisor back to Main Contractor.</p>
+      </div>
+
+      <!-- Multiple Account IDs List (Main Contractor can delete Supervisor accounts) -->
+      <div class="space-y-2">
+        <div class="flex justify-between items-center">
+          <label class="text-[10px] font-bold opacity-70 uppercase">Account Profiles</label>
+          <button onclick="openAddAccountPrompt()" class="text-amber-500 text-xs font-bold hover:underline">+ Add Supervisor</button>
+        </div>
+        <div id="accountIdsList" class="space-y-1.5 max-h-44 overflow-y-auto"></div>
+      </div>
+
+      <div class="pt-2 border-t border-zinc-300 dark:border-white/10 space-y-2">
+        <button onclick="closeProfileModal(); openAuthModal();" class="w-full py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-bold text-xs flex items-center justify-center gap-1.5 shadow">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
+          <span>Cloud Account Login / Change Email</span>
+        </button>
+        <button onclick="logoutAccount()" id="profileLogoutBtn" class="w-full py-2 rounded-xl bg-rose-500/15 text-rose-500 font-bold text-xs hidden">
+          Log Out of Cloud Email
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. SETTINGS MODAL (SVG ICONS ONLY) -->
+  <div id="settingsModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
+    <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-3">
+        <h3 class="font-black text-base flex items-center gap-2">
+          <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <span data-i18n="settingsHeader">App Settings</span>
+        </h3>
+        <button onclick="closeSettingsModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
+      </div>
+
+      <!-- Expandable 10 Indian Regional Languages Accordion -->
+      <div class="rounded-2xl border border-zinc-300 dark:border-white/10 overflow-hidden bg-black/5 dark:bg-black/20">
+        <button onclick="toggleLanguageAccordion()" class="w-full p-3.5 flex justify-between items-center text-xs font-bold">
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span data-i18n="changeLangLabel">Change Language / भाषा बदलें</span>
+          </span>
+          <span id="langChevron" class="text-amber-500 font-black">▼</span>
+        </button>
+        <div id="langAccordionBody" class="hidden p-2.5 pt-1 grid grid-cols-2 gap-1.5 border-t border-zinc-300 dark:border-white/10">
+          <button onclick="changeLanguage('hi')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">हिंदी (Hindi)</button>
+          <button onclick="changeLanguage('en')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">English</button>
+          <button onclick="changeLanguage('kn')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">ಕನ್ನಡ (Kannada)</button>
+          <button onclick="changeLanguage('mr')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">मराठी (Marathi)</button>
+          <button onclick="changeLanguage('gu')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">ગુજરાતી (Gujarati)</button>
+          <button onclick="changeLanguage('ta')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">தமிழ் (Tamil)</button>
+          <button onclick="changeLanguage('te')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">తెలుగు (Telugu)</button>
+          <button onclick="changeLanguage('bn')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">বাংলা (Bengali)</button>
+          <button onclick="changeLanguage('ml')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">മലയാളം (Malayalam)</button>
+          <button onclick="changeLanguage('pa')" class="p-2 text-left text-xs font-bold rounded-xl hover:bg-amber-500/20">ਪੰਜਾਬੀ (Punjabi)</button>
+        </div>
+      </div>
+
+      <!-- Theme Switcher -->
+      <div class="space-y-1.5">
+        <label class="text-[10px] font-bold opacity-70 uppercase" data-i18n="themeLabel">App Theme / थीम</label>
+        <div class="grid grid-cols-3 gap-2">
+          <button onclick="setAppTheme('theme-amoled')" class="py-2.5 rounded-xl text-xs font-bold border border-white/20 bg-black text-white hover:border-amber-500">AMOLED</button>
+          <button onclick="setAppTheme('theme-dark')" class="py-2.5 rounded-xl text-xs font-bold border border-white/20 bg-slate-800 text-white hover:border-amber-500">Dark</button>
+          <button onclick="setAppTheme('theme-light')" class="py-2.5 rounded-xl text-xs font-bold border border-zinc-400 bg-white text-zinc-900 hover:border-amber-500 shadow-sm">Light</button>
+        </div>
+      </div>
+
+      <!-- Developer Instagram Social Profile (SVG Icon) -->
+      <div class="space-y-1.5">
+        <label class="text-[10px] font-bold opacity-70 uppercase">Developer Social Media</label>
+        <a href="https://www.instagram.com/raahulsj.108?obrf=MTUydjlrbjhwOThocg==" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-amber-500/15 via-rose-500/15 to-purple-500/15 border border-amber-500/40 hover:border-amber-500 transition-all shadow-sm">
+          <div class="flex items-center gap-3">
+            <span class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 flex items-center justify-center text-white shadow">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </span>
+            <div>
+              <div class="text-xs font-black leading-tight">@raahulsj.108</div>
+              <div class="text-[10px] opacity-75">Official Developer Instagram</div>
+            </div>
+          </div>
+          <span class="text-xs text-amber-500 font-black">Open</span>
+        </a>
+      </div>
+
+      <!-- Share App Option -->
+      <button onclick="shareApplication()" class="w-full py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-xs flex items-center justify-center gap-2 shadow-md active:scale-95 transition-transform">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+        <span data-i18n="shareAppBtn">Share App / ऐप शेयर करें</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 9. MONTHLY LEDGER MODAL -->
+  <div id="monthlyLedgerModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-lg w-full p-5 space-y-4 shadow-2xl max-h-[92vh] flex flex-col">
+      <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2 shrink-0">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <div>
+            <h3 class="font-black text-base">Monthly Ledger / मासिक बही-खाता</h3>
+            <p class="text-[10px] opacity-70">Complete attendance, site expenses & bill photos</p>
+          </div>
+        </div>
+        <button onclick="closeMonthlyLedgerModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
+      </div>
+
+      <div id="monthlyLedgerModalBody" class="flex-1 overflow-y-auto space-y-4 pr-1"></div>
+
+      <div class="pt-2 border-t border-zinc-300 dark:border-white/10 shrink-0">
+        <button onclick="closeMonthlyLedgerModal()" class="w-full py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-black text-xs shadow">
+          Close Ledger / बंद करें
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. LABOUR DAY-WISE ATTENDANCE HISTORY MODAL -->
+  <div id="labourHistoryModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl max-h-[85vh] flex flex-col">
+      <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2 shrink-0">
+        <div>
+          <h3 id="labourHistoryTitle" class="font-black text-sm">Worker Attendance Log</h3>
+          <p class="text-[10px] opacity-70">Date-wise Present (P), Half (H) & Absent (A) record</p>
+        </div>
+        <button onclick="closeLabourHistoryModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
+      </div>
+      <div id="labourHistoryContent" class="flex-1 overflow-y-auto space-y-2 pr-1 text-xs"></div>
+      <button onclick="closeLabourHistoryModal()" class="w-full py-2 rounded-xl bg-amber-500 text-zinc-950 font-black text-xs">Done</button>
+    </div>
+  </div>
+
+  <!-- 11. PROFILE PHOTO CROPPER MODAL -->
+  <div id="cropperModal" class="fixed inset-0 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl flex flex-col items-center">
+      <div class="w-full flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2">
+        <h3 class="font-black text-sm">Crop Profile Photo</h3>
+        <button onclick="closeCropperModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
+      </div>
+      <div class="relative w-64 h-64 rounded-2xl overflow-hidden bg-black border border-white/20 touch-none flex items-center justify-center">
+        <canvas id="cropCanvas" width="256" height="256" class="cursor-grab active:cursor-grabbing"></canvas>
+        <div class="absolute inset-0 pointer-events-none rounded-full border-2 border-amber-500/80 shadow-[0_0_0_9999px_rgba(0,0,0,0.55)]"></div>
+      </div>
+      <div class="w-full space-y-1">
+        <div class="flex justify-between text-[10px] opacity-75 font-bold uppercase"><span>Zoom</span><span id="zoomValueText">1.0x</span></div>
+        <input type="range" id="cropZoomSlider" min="0.5" max="3" step="0.05" value="1" oninput="handleZoomChange(this.value)" class="w-full accent-amber-500 cursor-pointer" />
+      </div>
+      <div class="w-full flex gap-2 pt-1">
+        <button type="button" onclick="closeCropperModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Cancel</button>
+        <button type="button" onclick="saveCroppedImageResult()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-black text-xs shadow">Save Photo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12. MULTI-SELECT CARRY FORWARD MODAL -->
+  <div id="carryModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90vh] flex flex-col">
+      <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2 shrink-0">
+        <div>
+          <h3 class="font-black text-sm">Select Workers for Next Month</h3>
+          <p class="text-[10px] opacity-70">Choose workers to carry forward</p>
+        </div>
+        <button onclick="closeCarrySelectModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
+      </div>
+      <div class="flex justify-between items-center text-xs shrink-0 pt-1">
+        <span class="opacity-75 font-bold" id="carrySelectCount">Selected: 0</span>
+        <button onclick="toggleSelectAllCarry()" class="text-amber-500 font-bold text-xs hover:underline">Select All</button>
+      </div>
+      <div id="carryWorkersList" class="flex-1 overflow-y-auto space-y-2 pr-1"></div>
+      <div class="pt-2 border-t border-zinc-300 dark:border-white/10 shrink-0 flex gap-2">
+        <button onclick="closeCarrySelectModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Cancel</button>
+        <button onclick="executeCarryForwardSelected()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 text-xs font-black shadow">Carry Selected</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 13. DATE-WISE HAJRI BOOK MODAL -->
+  <div id="hajriBookModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-lg w-full p-5 space-y-4 shadow-2xl max-h-[92vh] flex flex-col">
+      <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2 shrink-0">
+        <div>
+          <h3 class="font-black text-sm">Daily Hajri Book / हाजिरी रजिस्टर</h3>
+          <p class="text-[10px] opacity-70">Tap P (Present), H (Half), or A (Absent)</p>
+        </div>
+        <button onclick="closeHajriBookModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
+      </div>
+
+      <div class="flex items-center justify-between gap-2 bg-black/5 dark:bg-black/30 p-2 rounded-2xl border border-zinc-300 dark:border-white/10 shrink-0">
+        <button onclick="shiftHajriDate(-1)" class="px-3 py-1.5 rounded-xl ios-glass text-xs font-bold active:scale-90">Prev</button>
+        <input type="date" id="hajriDateInput" onchange="renderDailyHajriSheet()" class="app-input flex-1 rounded-xl px-2.5 py-1.5 text-xs font-bold text-center focus:outline-none" />
+        <button onclick="shiftHajriDate(1)" class="px-3 py-1.5 rounded-xl ios-glass text-xs font-bold active:scale-90">Next</button>
+      </div>
+
+      <div class="flex items-center justify-between text-xs px-1 shrink-0">
+        <span class="text-[11px] opacity-75 font-bold" id="hajriDaySummary">Present: 0 | Half: 0 | Absent: 0</span>
+        <button onclick="markAllWorkersToday('P')" class="text-[11px] text-emerald-500 font-bold hover:underline">Mark All Present</button>
+      </div>
+
+      <div id="hajriWorkersContainer" class="flex-1 overflow-y-auto space-y-2.5 pr-1"></div>
+
+      <div class="pt-2 border-t border-zinc-300 dark:border-white/10 shrink-0 flex justify-end">
+        <button onclick="closeHajriBookModal()" class="w-full py-2.5 bg-amber-500 text-zinc-950 font-black text-xs rounded-xl shadow">Save & Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14. INPUT FORMS MODAL (SVG MICROPHONE ICONS ON ALL INPUTS) -->
+  <div id="formModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
+    <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2">
+        <h3 id="formModalTitle" class="font-bold text-base">Add Entry</h3>
+        <button onclick="closeFormModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
+      </div>
+
+      <!-- Add Labour Form -->
+      <form id="labourForm" onsubmit="saveLabour(event)" class="space-y-3 hidden">
+        <div>
+          <label class="text-[10px] font-bold opacity-75 uppercase">Labour Name / मजदूर का नाम</label>
+          <div class="flex items-center gap-1.5 mt-0.5">
+            <input type="text" id="lName" autocomplete="off" autocorrect="off" autocapitalize="words" spellcheck="false" onchange="autoFillKnownLabour(this.value)" required placeholder="e.g. Ramesh" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
+            <button type="button" onclick="startVoiceInputForField('lName')" class="p-2.5 bg-amber-500/15 text-amber-500 rounded-xl" title="Voice Type">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+            </button>
+          </div>
+          <datalist id="knownLaboursList"></datalist>
+        </div>
+
+        <select id="lCategory" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none">
+          <option value="Mason (मिस्त्री)">Mason (मिस्त्री)</option>
+          <option value="Helper (हेल्पर)">Helper (हेल्पर)</option>
+          <option value="Carpenter (बढ़ई)">Carpenter (बढ़ई)</option>
+          <option value="Electrician (इलेक्ट्रीशियन)">Electrician (इलेक्ट्रीशियन)</option>
+          <option value="Plumber (प्लम्बर)">Plumber (प्लम्बर)</option>
+          <option value="Painter (पेंटर)">Painter (पेंटर)</option>
+          <option value="Welder (वेल्डर)">Welder (वेल्डर)</option>
+          <option value="Other (अन्य)">Other (अन्य)</option>
+        </select>
+        
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-[10px] font-bold opacity-75 uppercase">Daily Wage (₹)</label>
+            <div class="flex items-center gap-1 mt-0.5">
+              <input type="number" id="lDailyRate" required min="1" placeholder="₹/day" class="app-input w-full rounded-xl px-2.5 py-2 text-sm focus:outline-none" />
+              <button type="button" onclick="startVoiceInputForField('lDailyRate', true)" class="p-2 bg-amber-500/15 text-amber-500 rounded-xl">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+              </button>
+            </div>
+          </div>
+          <div>
+            <label class="text-[10px] font-bold opacity-75 uppercase">Advance (₹)</label>
+            <div class="flex items-center gap-1 mt-0.5">
+              <input type="number" id="lAdvance" required min="0" value="0" placeholder="₹ Adv" class="app-input w-full rounded-xl px-2.5 py-2 text-sm focus:outline-none" />
+              <button type="button" onclick="startVoiceInputForField('lAdvance', true)" class="p-2 bg-amber-500/15 text-amber-500 rounded-xl">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-[10px] font-bold opacity-75 uppercase">Contact Number / मोबाइल नंबर</label>
+          <div class="flex items-center gap-1.5 mt-0.5">
+            <input type="tel" id="lPhone" placeholder="e.g. 9876543210" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
+            <button type="button" onclick="startVoiceInputForField('lPhone', true)" class="p-2.5 bg-amber-500/15 text-amber-500 rounded-xl">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+            </button>
+          </div>
+        </div>
+        
+        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black py-3 rounded-xl text-sm shadow">Save Labour / सेव करें</button>
+      </form>
+
+      <!-- Add Expense Form -->
+      <form id="expenseForm" onsubmit="saveExpense(event)" class="space-y-3 hidden">
+        <div class="flex items-center gap-1.5">
+          <input type="text" id="eTitle" required placeholder="Expense Description (e.g. ऑटो किराया)" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
+          <button type="button" onclick="startVoiceExpenseInput()" class="p-2.5 bg-amber-500/15 text-amber-500 rounded-xl">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+          </button>
+        </div>
+        <select id="eCategory" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none">
+          <option value="Rickshaw / Rent (किराया)">Rickshaw / Transport (किराया)</option>
+          <option value="Tea / Food (नाश्ता)">Tea & Food (चाय नाश्ता)</option>
+          <option value="Material (सामान)">Material / Tools (सामान)</option>
+          <option value="Medical (दवा)">Medical / Emergency</option>
+          <option value="Other (अन्य)">Other</option>
+        </select>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="flex items-center gap-1">
+            <input type="number" id="eAmount" required min="0" placeholder="Amount ₹" class="app-input w-full rounded-xl px-2.5 py-2 text-sm focus:outline-none" />
+            <button type="button" onclick="startVoiceInputForField('eAmount', true)" class="p-2 bg-amber-500/15 text-amber-500 rounded-xl">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+            </button>
+          </div>
+          <div class="flex items-center gap-1">
+            <input type="text" id="eSpentFor" placeholder="Paid For" class="app-input w-full rounded-xl px-2.5 py-2 text-sm focus:outline-none" />
+            <button type="button" onclick="startVoiceInputForField('eSpentFor')" class="p-2 bg-amber-500/15 text-amber-500 rounded-xl">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+            </button>
+          </div>
+        </div>
+        <label class="flex items-center justify-center gap-2 border-2 border-dashed border-zinc-400 dark:border-white/20 rounded-xl px-3 py-3 text-xs font-bold cursor-pointer hover:bg-black/5 dark:hover:bg-white/5">
+          <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+          <span id="eFileLabel">Upload Slip / Bill (PDF, Word, Excel, Image)</span>
+          <input type="file" id="eFile" accept=".pdf,.doc,.docx,.xls,.xlsx,image/*" class="hidden" onchange="previewUniversalFile('eFile','eFileLabel')" />
+        </label>
+        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black py-3 rounded-xl text-sm shadow">Save Expense</button>
+      </form>
+
+      <!-- Add Bill Form -->
+      <form id="billForm" onsubmit="saveBill(event)" class="space-y-3 hidden">
+        <div class="flex items-center gap-1.5">
+          <input type="text" id="bTitle" required placeholder="Company / Work Name" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
+          <button type="button" onclick="startVoiceInputForField('bTitle')" class="p-2.5 bg-amber-500/15 text-amber-500 rounded-xl">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+          </button>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-[10px] uppercase font-bold opacity-75">Bill Date</label>
+            <input type="date" id="bDate" required class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-0.5" />
+          </div>
+          <div>
+            <label class="text-[10px] uppercase font-bold opacity-75">Amount ₹</label>
+            <div class="flex items-center gap-1 mt-0.5">
+              <input type="number" id="bAmount" required min="0" placeholder="Amount" class="app-input w-full rounded-xl px-2.5 py-2 text-sm focus:outline-none" />
+              <button type="button" onclick="startVoiceInputForField('bAmount', true)" class="p-2 bg-amber-500/15 text-amber-500 rounded-xl">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-[10px] uppercase font-bold opacity-75">Status</label>
+            <select id="bStatus" onchange="toggleBillReceivedDateField(this.value)" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-0.5">
+              <option value="Pending">Pending (बाकी)</option>
+              <option value="Received">Received (प्राप्त)</option>
+            </select>
+          </div>
+          <div id="bReceivedDateWrapper" class="hidden">
+            <label class="text-[10px] uppercase font-bold text-emerald-500">Received Date</label>
+            <input type="date" id="bReceivedDateInput" class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-0.5" />
+          </div>
+        </div>
+        <label class="flex items-center justify-center gap-2 border-2 border-dashed border-zinc-400 dark:border-white/20 rounded-xl px-3 py-3 text-xs font-bold cursor-pointer hover:bg-black/5 dark:hover:bg-white/5">
+          <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          <span id="bFileLabel">Upload Company Bill (Word, Excel, PDF, Image)</span>
+          <input type="file" id="bFile" accept=".pdf,.doc,.docx,.xls,.xlsx,image/*" class="hidden" onchange="previewUniversalFile('bFile','bFileLabel')" />
+        </label>
+        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-black py-3 rounded-xl text-sm shadow">Save Company Bill</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 15. ADVANCE MODAL -->
+  <div id="advanceModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-zinc-300 dark:border-white/10 pb-2">
+        <div>
+          <h3 class="font-black text-sm" id="advWorkerName">Add Worker Advance</h3>
+          <span class="text-[10px] opacity-75">नया एडवांस, तारीख व माध्यम</span>
+        </div>
+        <button onclick="closeAdvanceModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
+      </div>
+
+      <form onsubmit="submitExtraAdvance(event)" class="space-y-3">
+        <input type="hidden" id="advLabourId" />
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-[10px] uppercase font-bold opacity-75">Amount ₹</label>
+            <div class="flex items-center gap-1 mt-1">
+              <input type="number" id="advAmount" required min="1" placeholder="₹" class="app-input w-full rounded-xl px-2.5 py-2 text-sm focus:outline-none" />
+              <button type="button" onclick="startVoiceInputForField('advAmount', true)" class="p-2 bg-amber-500/15 text-amber-500 rounded-xl">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+              </button>
+            </div>
+          </div>
+          <div>
+            <label class="text-[10px] uppercase font-bold opacity-75">Date</label>
+            <input type="date" id="advDate" required class="app-input w-full rounded-xl px-3 py-2 text-sm focus:outline-none mt-1" />
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-[10px] uppercase font-bold opacity-75">Mode</label>
+            <select id="advMode" class="app-input w-full rounded-xl px-2.5 py-2 text-xs font-bold focus:outline-none mt-1">
+              <option value="Cash">Cash (नकद)</option>
+              <option value="UPI">UPI / GPay</option>
+              <option value="Bank">Bank</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[10px] uppercase font-bold opacity-75">Note</label>
+            <div class="flex items-center gap-1 mt-1">
+              <input type="text" id="advNote" placeholder="राशन" class="app-input w-full rounded-xl px-2.5 py-2 text-xs focus:outline-none" />
+              <button type="button" onclick="startVoiceInputForField('advNote')" class="p-2 bg-amber-500/15 text-amber-500 rounded-xl">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black py-2.5 rounded-xl text-xs shadow">+ Add Advance</button>
+      </form>
+      <div class="pt-2 border-t border-zinc-300 dark:border-white/10">
+        <span class="text-[10px] font-bold opacity-75 uppercase">Payment History:</span>
+        <div id="advHistoryList" class="mt-1.5 max-h-36 overflow-y-auto space-y-1.5 text-xs"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 16. AUTH MODAL -->
+  <div id="authModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center">
+        <h3 class="font-extrabold text-base">Online Cloud Login</h3>
+        <button onclick="closeAuthModal()" class="opacity-70 hover:opacity-100 text-lg font-bold">✕</button>
+      </div>
+      <p class="text-xs opacity-75">Sign in with the same email on PC and Mobile to sync all data in real time.</p>
+      <div class="space-y-3">
+        <input type="email" id="authEmail" placeholder="Email Address" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
+        <input type="password" id="authPass" placeholder="Password (6+ chars)" class="app-input w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none" />
+      </div>
+      <div class="flex justify-end">
+        <button onclick="handleForgotPassword()" class="text-xs text-amber-500 font-semibold hover:underline">Forgot Cloud Password?</button>
+      </div>
+      <div class="flex gap-2 pt-2">
+        <button onclick="connectCloud(false)" class="flex-1 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold py-2.5 rounded-xl text-sm shadow">Login</button>
+        <button onclick="connectCloud(true)" class="flex-1 bg-black/10 dark:bg-white/10 font-bold py-2.5 rounded-xl text-sm">Register</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 17. MODERN 10-LANGUAGE VOICE ASSISTANT MODAL (SVG MIC ICON) -->
+  <div id="voiceAssistantModal" class="fixed inset-0 bg-black/80 backdrop-blur-xl hidden items-center justify-center p-4 z-50 transition-opacity">
+    <div class="ios-glass rounded-3xl max-w-xs w-full p-6 text-center space-y-4 shadow-2xl border border-amber-500/30 relative overflow-hidden">
+      <div class="relative w-20 h-20 mx-auto flex items-center justify-center">
+        <div id="voicePulseRing" class="absolute inset-0 rounded-full bg-amber-500/25 animate-ping hidden"></div>
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 flex items-center justify-center shadow-lg relative z-10">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+        </div>
+      </div>
+
+      <div class="space-y-1">
+        <h3 id="voiceModalTitle" class="font-black text-base">Voice Typing</h3>
+        <p id="voiceModalSub" class="text-xs opacity-75">Speak clearly in your chosen language</p>
+      </div>
+
+      <div>
+        <select id="voiceLangSelector" onchange="changeVoiceRecognitionLanguage(this.value)" class="app-input w-full rounded-xl px-2.5 py-1.5 text-xs font-bold text-center focus:outline-none">
+          <option value="hi-IN">हिंदी (Hindi)</option>
+          <option value="en-IN">English (India)</option>
+          <option value="kn-IN">ಕನ್ನಡ (Kannada)</option>
+          <option value="mr-IN">मराठी (Marathi)</option>
+          <option value="gu-IN">ગુજરાતી (Gujarati)</option>
+          <option value="ta-IN">தமிழ் (Tamil)</option>
+          <option value="te-IN">తెలుగు (Telugu)</option>
+          <option value="bn-IN">বাংলা (Bengali)</option>
+          <option value="ml-IN">മലയാളം (Malayalam)</option>
+          <option value="pa-IN">ਪੰਜਾਬੀ (Punjabi)</option>
+        </select>
+      </div>
+
+      <div id="voiceLiveWave" class="hidden items-center justify-center gap-1 h-8 py-1">
+        <span class="w-1.5 h-3 bg-amber-500 rounded-full animate-bounce"></span>
+        <span class="w-1.5 h-6 bg-amber-400 rounded-full animate-bounce" style="animation-delay:0.1s"></span>
+        <span class="w-1.5 h-8 bg-amber-500 rounded-full animate-bounce" style="animation-delay:0.2s"></span>
+      </div>
+      <div id="voiceTranscriptBox" class="hidden p-2.5 rounded-xl bg-black/20 border border-white/10 text-xs font-bold text-emerald-400"></div>
+      <div class="flex gap-2 pt-2">
+        <button type="button" onclick="closeVoiceModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Cancel</button>
+        <button type="button" id="voiceStartBtn" onclick="triggerNativeSpeechEngine()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 text-xs font-black shadow-lg">Speak Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 18. UNIVERSAL MODERN INPUT DIALOG (WITH SVG MIC) -->
+  <div id="customDialogModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-xs w-full p-5 space-y-4 shadow-2xl border border-white/15">
+      <h3 id="customDialogTitle" class="font-black text-sm">Enter Details</h3>
+      <div class="flex items-center gap-1.5">
+        <input id="customDialogInput" type="text" autocomplete="off" autocorrect="off" spellcheck="false" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm font-bold focus:outline-none" />
+        <button type="button" onclick="startVoiceInputForField('customDialogInput')" class="p-2.5 bg-amber-500/15 text-amber-500 rounded-xl">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path></svg>
+        </button>
+      </div>
+      <div class="flex gap-2">
+        <button type="button" onclick="closeCustomDialog()" class="flex-1 py-2 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Cancel</button>
+        <button type="button" id="customDialogConfirmBtn" class="flex-1 py-2 rounded-xl bg-amber-500 text-zinc-950 text-xs font-black shadow">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 19. PIN LOCK & RESET VIA ACCOUNT PASSWORD MODAL -->
+  <div id="pinLockModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-xs w-full p-6 text-center space-y-4 shadow-2xl border border-amber-500/40">
+      <div class="w-14 h-14 rounded-2xl bg-amber-500/20 text-amber-500 flex items-center justify-center mx-auto">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      </div>
+
+      <!-- Standard PIN Entry View -->
+      <div id="pinEntryView" class="space-y-4">
+        <div>
+          <h3 class="font-black text-base">Main Contractor Password</h3>
+          <p class="text-[11px] opacity-70">Enter Main Contractor password to unlock master account</p>
+        </div>
+        <input type="password" id="masterPinInput" placeholder="Enter Password / PIN" class="app-input w-full rounded-xl px-3 py-3 text-center text-base font-black tracking-widest focus:outline-none" />
+        <div class="flex gap-2">
+          <button type="button" onclick="closePinLockModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Cancel</button>
+          <button type="button" onclick="verifyMasterPin()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 text-xs font-black shadow">Unlock</button>
+        </div>
+        <button type="button" onclick="showResetPinView()" class="text-[11px] text-amber-500 font-bold hover:underline block w-full pt-1">
+          Forgot PIN? Reset using Cloud Account Password
+        </button>
+      </div>
+
+      <!-- Reset PIN using Cloud Account Password View -->
+      <div id="pinResetView" class="space-y-3 hidden text-left">
+        <div class="text-center">
+          <h3 class="font-black text-sm text-amber-500">Reset Main Contractor PIN</h3>
+          <p class="text-[10px] opacity-75">Verify your Cloud Account login password to set a new Main Contractor PIN</p>
+        </div>
+        <div>
+          <label class="text-[10px] font-bold opacity-75 uppercase">Cloud Account Password</label>
+          <input type="password" id="resetCloudAccountPass" placeholder="Your Cloud login password" class="app-input w-full rounded-xl px-3 py-2 text-xs font-bold focus:outline-none mt-0.5" />
+        </div>
+        <div>
+          <label class="text-[10px] font-bold opacity-75 uppercase">New Main Contractor PIN</label>
+          <input type="password" id="resetNewMasterPin" placeholder="Enter new PIN (e.g. 5678)" class="app-input w-full rounded-xl px-3 py-2 text-xs font-bold focus:outline-none mt-0.5" />
+        </div>
+        <div class="flex gap-2 pt-1">
+          <button type="button" onclick="hideResetPinView()" class="flex-1 py-2 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Back</button>
+          <button type="button" id="confirmPinResetBtn" onclick="executeMasterPinResetWithAccountPassword()" class="flex-1 py-2 rounded-xl bg-emerald-500 text-zinc-950 text-xs font-black shadow">Verify & Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 20. TOUCH-SAFE CONFIRM DELETE MODAL (FIXES MOBILE CONFIRM BLOCKING) -->
+  <div id="confirmDeleteModal" class="fixed inset-0 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-xs w-full p-5 text-center space-y-4 shadow-2xl border border-rose-500/40">
+      <div class="w-12 h-12 rounded-2xl bg-rose-500/20 text-rose-500 flex items-center justify-center mx-auto">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+      </div>
+      <h3 id="confirmDeleteTitle" class="font-black text-sm">Confirm Delete</h3>
+      <p id="confirmDeleteSub" class="text-xs opacity-75">Are you sure you want to permanently delete this item?</p>
+      <div class="flex gap-2">
+        <button type="button" onclick="closeConfirmDeleteModal()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Cancel</button>
+        <button type="button" id="confirmDeleteActionBtn" class="flex-1 py-2.5 rounded-xl bg-rose-500 text-white text-xs font-black shadow">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MONTH PICKER -->
+  <div id="monthPickerModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+    <div class="ios-glass rounded-3xl max-w-xs w-full p-5 space-y-4 shadow-2xl border border-amber-500/30">
+      <div class="flex items-center justify-between">
+        <button onclick="mpShiftYear(-1)" class="w-10 h-10 rounded-2xl ios-glass font-black text-lg active:scale-90">‹</button>
+        <div class="text-center"><div class="text-[10px] uppercase tracking-widest text-amber-500 font-bold">Select Month / महीना चुनें</div><div id="mpYear" class="text-2xl font-black"></div></div>
+        <button onclick="mpShiftYear(1)" class="w-10 h-10 rounded-2xl ios-glass font-black text-lg active:scale-90">›</button>
+      </div>
+      <div id="mpGrid" class="grid grid-cols-3 gap-2"></div>
+      <div class="flex gap-2">
+        <button onclick="mpThisMonth()" class="flex-1 py-2.5 rounded-xl bg-amber-500/15 text-amber-500 border border-amber-500/30 text-xs font-bold">This Month</button>
+        <button onclick="closeMonthPicker()" class="flex-1 py-2.5 rounded-xl bg-black/10 dark:bg-white/10 text-xs font-bold">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIREBASE & CORE ENGINE -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, initializeFirestore, persistentLocalCache, persistentMultipleTabManager, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCsabUW5vFiXGxsUu4FvdKkc5cxxsCt8jA",
+      authDomain: "thekedaar-62310.firebaseapp.com",
+      projectId: "thekedaar-62310",
+      storageBucket: "thekedaar-62310.firebasestorage.app",
+      messagingSenderId: "82301078747",
+      appId: "1:82301078747:web:fabfa5473a793061b1d0fe"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    let db; try { db = initializeFirestore(app, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }) }); } catch (e) { db = getFirestore(app); }
+
+    let currentUser = null;
+    let unsubscribeSnapshot = null;
+
+    // Unified Master State (Synced across PC & Mobile under a single Firestore Document per User UID)
+    let state = {
+      userProfilePhoto: null,
+      masterPin: '1234',
+      accounts: [
+        { id: 'acc_main', nickname: 'Main Contractor', email: 'contractor@thekedaar', isMaster: true },
+        { id: 'acc_sup', nickname: 'Site Supervisor', email: 'supervisor@thekedaar', isMaster: false }
+      ],
+      sites: ['Main Site A - मुख्य साइट'],
+      labours: [],
+      expenses: [],
+      bills: [],
+      dailyHajriRecords: {},
+      masterLabourDirectory: [],
+      deletedIds: [],
+      updatedAt: 0
+    };
+
+
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const localISO = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    const F = { lab: '', labS: 'all', exp: '', expC: 'all', bill: '', billS: 'all' };
+    const qm = (v, ...f) => !v || f.some(x => String(x || '').toLowerCase().includes(v.toLowerCase()));
+    const matchLabour = l => qm(F.lab, l.name, l.category, l.phone) && (F.labS === 'all' || (F.labS === 'paid') === !!l.settled);
+    const matchExpense = e => qm(F.exp, e.title, e.spentFor) && (F.expC === 'all' || e.category === F.expC);
+    const matchBill = b => qm(F.bill, b.title) && (F.billS === 'all' || (b.status || '') === F.billS);
+    window.setFilter = (k, v) => { F[k] = v; renderAll(); };
+    const MONTHS_FULL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const MONTHS_SHORT = MONTHS_FULL.map(m => m.slice(0, 3));
+    const fmtMonth = v => { const [y, m] = String(v || '').split('-'); return MONTHS_FULL[(m | 0) - 1] ? `${MONTHS_FULL[(m | 0) - 1]} ${y}` : ''; };
+    const mp = { target: 'main', year: 2026, sel: '' };
+    function mpRender() {
+      document.getElementById('mpYear').innerText = mp.year;
+      const cur = localISO().slice(0, 7);
+      document.getElementById('mpGrid').innerHTML = MONTHS_SHORT.map((n, i) => {
+        const val = `${mp.year}-${String(i + 1).padStart(2, '0')}`;
+        const cls = val === mp.sel ? 'bg-amber-500 text-zinc-950 shadow-lg scale-105' : val === cur ? 'border border-amber-500/60 text-amber-500 bg-amber-500/10' : 'bg-black/10 dark:bg-white/10';
+        return `<button onclick="mpPick('${val}')" class="py-3 rounded-2xl text-sm font-black transition-all active:scale-90 ${cls}">${n}</button>`;
+      }).join('');
+    }
+    window.openMonthPicker = (t) => {
+      mp.target = t; mp.sel = (t === 'ledger' ? window._ledgerMonth : '') || document.getElementById('monthSelect').value;
+      mp.year = Number(mp.sel.split('-')[0]) || new Date().getFullYear(); mpRender();
+      document.getElementById('monthPickerModal').classList.replace('hidden', 'flex');
+    };
+    window.closeMonthPicker = () => document.getElementById('monthPickerModal').classList.replace('flex', 'hidden');
+    window.mpShiftYear = (d) => { mp.year += d; mpRender(); };
+    window.mpPick = (v) => { closeMonthPicker(); if (mp.target === 'ledger') setLedgerMonth(v); else { document.getElementById('monthSelect').value = v; renderAll(); } };
+    window.mpThisMonth = () => mpPick(localISO().slice(0, 7));
+
+
+    let activeRecognition = null;
+    let pendingSwitchAccId = null;
+    let activeVoiceTargetFieldId = null;
+    let activeVoiceNumericOnly = false;
+    let currentCropperTarget = null;
+    let cropImg = new Image();
+    let cropState = { scale: 1, x: 0, y: 0 };
+
+    const speechLocaleMap = {
+      hi: 'hi-IN', en: 'en-IN', kn: 'kn-IN', mr: 'mr-IN', gu: 'gu-IN',
+      ta: 'ta-IN', te: 'te-IN', bn: 'bn-IN', ml: 'ml-IN', pa: 'pa-IN'
+    };
+
+    const i18n = {
+      hi: { labourDue: "कुल मजदूर बकाया", expenses: "खर्चे व किराया", bills: "कंपनी बिल", tabLabour: "मजदूर व हाजिरी", tabExpenses: "खर्चे व किराया", tabBills: "कंपनी बिल", audioSummaryTitle: "बोलकर हिसाब सुनें (Audio Summary)", audioSummarySub: "एक टैप में पूरे साइट का हिसाब सुनें", listenBtn: "LISTEN / सुनें", liveSnapshot: "LIVE WORKFORCE SNAPSHOT", settingsHeader: "ऐप सेटिंग्स", changeLangLabel: "भाषा बदलें (Change Language)", themeLabel: "ऐप थीम चुनें", shareAppBtn: "ऐप शेयर करें (Share App)" },
+      en: { labourDue: "Labour Due", expenses: "Expenses", bills: "Bills", tabLabour: "Labours & Attendance", tabExpenses: "Expenses & Rent", tabBills: "Company Bills", audioSummaryTitle: "Site Audio Summary", audioSummarySub: "Listen to whole site summary in one tap", listenBtn: "LISTEN", liveSnapshot: "LIVE WORKFORCE SNAPSHOT", settingsHeader: "App Settings", changeLangLabel: "Change Language", themeLabel: "Select App Theme", shareAppBtn: "Share App with Contractors" },
+      kn: { labourDue: "ಕಾರ್ಮಿಕರ ಬಾಕಿ ಹಣ", expenses: "ಸೈಟ್ ಖರ್ಚುಗಳು", bills: "ಕಂಪನಿ ಬಿಲ್‌ಗಳು", tabLabour: "ಕಾರ್ಮಿಕರು & ಹಾಜರಾತಿ", tabExpenses: "ಖರ್ಚು & ಬಾಡಿಗೆ", tabBills: "ಕಂಪನಿ ಬಿಲ್", audioSummaryTitle: "ಸೈಟ್ ಆಡಿಯೋ ಸಾರಾಂಶ", audioSummarySub: "ಒಂದೇ ಕ್ಲಿಕ್‌ನಲ್ಲಿ ಲೆಕ್ಕ ಕೇಳಿ", listenBtn: "ಕೇಳಿ (LISTEN)", liveSnapshot: "ಕಾರ್ಮಿಕರ ಸ್ಥಿತಿ", settingsHeader: "ಸೆಟ್ಟಿಂಗ್‌ಗಳು", changeLangLabel: "ಭಾಷೆ ಬದಲಿಸಿ", themeLabel: "ಥೀಮ್ ಆಯ್ಕೆಮಾಡಿ", shareAppBtn: "ಆಪ್ ಹಂಚಿಕೊಳ್ಳಿ" },
+      mr: { labourDue: "एकूण मजुरी बाकी", expenses: "भाडे व खर्च", bills: "कंपनी बिल", tabLabour: "कामगार व हजेरी", tabExpenses: "खर्च व रिक्षा भाडे", tabBills: "कंपनी बिल", audioSummaryTitle: "साइट ऑडिओ हिशोब", audioSummarySub: "एका टॅपमध्ये संपूर्ण हिशोब ऐका", listenBtn: "ऐका (LISTEN)", liveSnapshot: "कामगार सद्यस्थिती", settingsHeader: "सेटिंग्ज", changeLangLabel: "भाषा बदला", themeLabel: "थीम निवडा", shareAppBtn: "ॲप शेअर करा" },
+      gu: { labourDue: "બાકી મજૂરી", expenses: "ભાડું અને ખર્ચ", bills: "કંપની બિલ", tabLabour: "મજૂર અને હાજરી", tabExpenses: "ખર્ચ અને રિક્ષા ભાડું", tabBills: "કંપની બિલ", audioSummaryTitle: "સાઇટ ઓડિયો હિસાબ", audioSummarySub: "એક ટૅપમાં સમગ્ર સાઇટનો હિસાબ સાંભળો", listenBtn: "સાંભળો", liveSnapshot: "લાઇવ વર્કફોર્સ સ્નેપશોટ", settingsHeader: "સેટિંગ્સ", changeLangLabel: "ભાષા બદલો", themeLabel: "થીમ પસંદ કરો", shareAppBtn: "એપ શેર કરો" },
+      ta: { labourDue: "கூலி பாக்கி", expenses: "செலவுகள்", bills: "பில்கள்", tabLabour: "தொழிலாளர்கள் & வருகை", tabExpenses: "செலவுகள் & வாடகை", tabBills: "நிறுவன பில்கள்", audioSummaryTitle: "தள ஆடியோ சுருக்கம்", audioSummarySub: "ஒரே தட்டலில் கணக்கைக் கேளுங்கள்", listenBtn: "கேளுங்கள்", liveSnapshot: "தொழிலாளர் நிலவரம்", settingsHeader: "அமைப்புகள்", changeLangLabel: "மொழியை மாற்றவும்", themeLabel: "தீம் தேர்வு", shareAppBtn: "செயலியை பகிரவும்" },
+      te: { labourDue: "కూలీ బకాయి", expenses: "ఖర్చులు", bills: "బిల్లులు", tabLabour: "కార్మికులు & హాజరు", tabExpenses: "ఖర్చులు & రవాణా", tabBills: "కంపెనీ బిల్లులు", audioSummaryTitle: "సైట్ ఆడియో సారాంశం", audioSummarySub: "ఒకే ట్యాప్‌లో సైట్ లెక్క వినండి", listenBtn: "వినండి", liveSnapshot: "కార్మికుల సమాచారం", settingsHeader: "సెట్టింగులు", changeLangLabel: "భాషను మార్చండి", themeLabel: "థీమ్ ఎంచుకోండి", shareAppBtn: "యాప్ షేర్ చేయండి" },
+      bn: { labourDue: "বকেয়া মজুরি", expenses: "সাইটের খরচ", bills: "কোম্পানির বিল", tabLabour: "শ্রমিক ও হাজিরা", tabExpenses: "খরচ ও ভাড়া", tabBills: "কোম্পানির বিল", audioSummaryTitle: "সাইট অডিও হিসাব", audioSummarySub: "এক ক্লিকেই সব হিসাব শুনুন", listenBtn: "শুনুন", liveSnapshot: "শ্রমিক স্ন্যাপশট", settingsHeader: "সেটিংস", changeLangLabel: "ভাষা পরিবর্তন করুন", themeLabel: "থিম নির্বাচন করুন", shareAppBtn: "অ্যাপ শেয়ার করুন" },
+      ml: { labourDue: "കൂലി ബാക്കി", expenses: "ചെലവുകൾ", bills: "ബില്ലുകൾ", tabLabour: "തൊഴിലാളികളും ഹാജരും", tabExpenses: "ചെലവുകളും വാടകയും", tabBills: "കമ്പനി ബില്ലുകൾ", audioSummaryTitle: "സൈറ്റ് ഓഡിയോ വിവരണം", audioSummarySub: "ഒറ്റ ടാപ്പിൽ കണക്ക് കേൾക്കുക", listenBtn: "കേൾക്കുക", liveSnapshot: "തൊഴിലാളി നിലവാരം", settingsHeader: "ക്രമീകരണങ്ങൾ", changeLangLabel: "ഭാഷ മാറ്റുക", themeLabel: "തീം തിരഞ്ഞെടുക്കുക", shareAppBtn: "ആപ്പ് ഷെയർ ചെയ്യുക" },
+      pa: { labourDue: "ਬਕਾਇਆ ਮਜ਼ਦੂਰੀ", expenses: "ਖਰਚੇ ਅਤੇ ਕਿਰਾਇਆ", bills: "ਕੰਪਨੀ ਦੇ ਬਿੱਲ", tabLabour: "ਮਜ਼ਦੂਰ ਅਤੇ ਹਾਜ਼ਰੀ", tabExpenses: "ਖਰਚਾ ਅਤੇ ਕਿਰਾਇਆ", tabBills: "ਕੰਪਨੀ ਬਿੱਲ", audioSummaryTitle: "ਸਾਈਟ ਆਡੀਓ ਰਿਪੋਰਟ", audioSummarySub: "ਇੱਕ ਟੈਪ ਵਿੱਚ ਪੂਰਾ ਹਿਸਾਬ ਸੁਣੋ", listenBtn: "ਸੁਣੋ", liveSnapshot: "ਲਾਈਵ ਕਾਰਜਬਲ", settingsHeader: "ਸੈਟਿੰਗਾਂ", changeLangLabel: "ਭਾਸ਼ਾ ਬਦਲੋ", themeLabel: "ਥੀਮ ਚੁਣੋ", shareAppBtn: "ਐਪ ਸ਼ੇਅਰ ਕਰੋ" }
+    };
+    window.currentLang = localStorage.getItem('thekedaar_lang') || 'hi';
+
+    function enforceOnlineOnlyMode() {
+      const blocker = document.getElementById('offlineBlockerModal');
+      if (!navigator.onLine) blocker.classList.replace('hidden', 'flex');
+      else blocker.classList.replace('flex', 'hidden');
+    }
+    window.addEventListener('online', enforceOnlineOnlyMode);
+    window.addEventListener('offline', enforceOnlineOnlyMode);
+
+    // Unified Account Helpers (Fixes Mobile & PC Sync + Sub-User Deletion)
+    function normalizeAccounts(accArray) {
+      if (!Array.isArray(accArray) || accArray.length === 0) {
+        return [
+          { id: 'acc_main', nickname: 'Main Contractor', email: 'contractor@thekedaar', isMaster: true },
+          { id: 'acc_sup', nickname: 'Site Supervisor', email: 'supervisor@thekedaar', isMaster: false }
+        ];
+      }
+      const hasMain = accArray.some(a => a.id === 'acc_main' || a.isMaster === true);
+      if (!hasMain) {
+        accArray.unshift({ id: 'acc_main', nickname: 'Main Contractor', email: 'contractor@thekedaar', isMaster: true });
+      }
+      return accArray.map(a => ({ ...a, isMaster: a.id === 'acc_main' || a.isMaster === true }));
+    }
+
+    function getActiveAccount() {
+      state.accounts = normalizeAccounts(state.accounts);
+      const activeId = localStorage.getItem('thekedaar_active_acc_id') || 'acc_main';
+      const found = state.accounts.find(a => a.id === activeId) || state.accounts[0];
+      return { ...found, isMaster: found.id === 'acc_main' || found.isMaster === true };
+    }
+
+    function isMainContractorActive() {
+      const active = getActiveAccount();
+      return active.id === 'acc_main' || active.isMaster === true;
+    }
+
+    function getStorageKey() {
+      return currentUser ? `thekedaar_unified_${currentUser.uid}` : 'thekedaar_unified_guest';
+    }
+
+    function sanitizeStateData(raw) {
+      if (!raw || typeof raw !== 'object') return;
+      state.userProfilePhoto = raw.userProfilePhoto || state.userProfilePhoto || null;
+      state.masterPin = String(raw.masterPin || state.masterPin || '1234').trim();
+      state.accounts = normalizeAccounts(raw.accounts || state.accounts);
+      state.sites = Array.isArray(raw.sites) && raw.sites.length > 0 ? raw.sites : ['Main Site A - मुख्य साइट'];
+      state.labours = Array.isArray(raw.labours) ? raw.labours : [];
+      state.expenses = Array.isArray(raw.expenses) ? raw.expenses : [];
+      state.bills = Array.isArray(raw.bills) ? raw.bills : [];
+      state.dailyHajriRecords = raw.dailyHajriRecords || {};
+      state.masterLabourDirectory = Array.isArray(raw.masterLabourDirectory) ? raw.masterLabourDirectory : [];
+      state.deletedIds = Array.isArray(raw.deletedIds) ? raw.deletedIds : (state.deletedIds || []);
+      state.updatedAt = raw.updatedAt || Date.now();
+    }
+
+    function loadLocalState() {
+      try {
+        const saved = localStorage.getItem(getStorageKey());
+        if (saved) sanitizeStateData(JSON.parse(saved));
+      } catch (e) { console.error(e); }
+    }
+
+    // Touch-safe Custom Delete Confirmation Modal (Replaces blocked mobile confirm())
+    window.openConfirmDelete = ({ title, subtitle, onConfirm, confirmText = 'Delete' }) => {
+      document.getElementById('confirmDeleteActionBtn').innerText = confirmText;
+      document.getElementById('confirmDeleteTitle').innerText = title || 'Confirm Delete';
+      document.getElementById('confirmDeleteSub').innerText = subtitle || 'Are you sure you want to permanently delete this item?';
+      const modal = document.getElementById('confirmDeleteModal');
+      modal.classList.replace('hidden', 'flex');
+      document.getElementById('confirmDeleteActionBtn').onclick = () => {
+        modal.classList.replace('flex', 'hidden');
+        if (onConfirm) onConfirm();
+      };
+    };
+    window.closeConfirmDeleteModal = () => document.getElementById('confirmDeleteModal').classList.replace('flex', 'hidden');
+
+    const now = new Date();
+    document.getElementById('monthSelect').value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+    document.getElementById('advDate').value = localISO(now);
+    document.getElementById('bDate').value = localISO(now);
+    document.getElementById('bReceivedDateInput').value = localISO(now);
+    document.getElementById('hajriDateInput').value = localISO(now);
+
+    window.setAppTheme = (themeName) => {
+      document.documentElement.className = themeName;
+      localStorage.setItem('thekedaar_theme', themeName);
+    };
+    window.setAppTheme(localStorage.getItem('thekedaar_theme') || 'theme-amoled');
+
+    function runSplashAnimation() {
+      const brandWord = "THEKEDAAR";
+      const container = document.getElementById('thekedaarLetters');
+      if (container) {
+        container.innerHTML = "";
+        brandWord.split('').forEach((letter, index) => {
+          const span = document.createElement('span');
+          span.innerText = letter; span.className = "letter-anim";
+          span.style.animationDelay = `${index * 0.10}s`;
+          if (letter === 'K' || letter === 'D') span.style.color = "#f59e0b";
+          container.appendChild(span);
+        });
+      }
+      setTimeout(() => {
+        const splash = document.getElementById('splashScreen');
+        if (splash) { splash.style.opacity = '0'; setTimeout(() => splash.style.display = 'none', 650); }
+      }, 1800);
+    }
+
+    function updateSyncStatusUI() {
+      const statusEl = document.getElementById('syncStatus');
+      const dotEl = document.getElementById('syncDot');
+      const emailDisplayEl = document.getElementById('loggedInEmailDisplay');
+
+      if (currentUser && currentUser.email) {
+        statusEl.innerText = `Cloud Synced (${currentUser.email.split('@')[0]})`;
+        dotEl.className = "absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-black";
+        if (emailDisplayEl) emailDisplayEl.innerText = currentUser.email;
+      } else {
+        statusEl.innerText = `Online (Tap Profile to Login Cloud)`;
+        dotEl.className = "absolute bottom-0 right-0 w-3 h-3 rounded-full bg-amber-500 border-2 border-black";
+        if (emailDisplayEl) emailDisplayEl.innerText = "Not signed in (Tap Cloud Login below)";
+      }
+    }
+
+    // Unified Cloud Push (Pushes PC & Mobile Data + Master PIN + Accounts to single User UID doc)
+    async function persistState() {
+      if (!navigator.onLine) {
+        enforceOnlineOnlyMode();
+        return;
+      }
+      state.updatedAt = Date.now();
+      localStorage.setItem(getStorageKey(), JSON.stringify(state));
+      renderAll();
+
+      if (db && currentUser) {
+        try {
+          const statusEl = document.getElementById('syncStatus');
+          if (statusEl) statusEl.innerText = "Syncing to Cloud...";
+          await setDoc(doc(db, "users", currentUser.uid), JSON.parse(JSON.stringify(state)), { merge: true });
+          updateSyncStatusUI();
+        } catch (e) {
+          console.error("Cloud Sync Error:", e);
+        }
+      }
+    }
+
+    // Manual Cloud Pull Button (Top Right Refresh Icon)
+    window.forceCloudPull = async () => {
+      if (!currentUser) return openAuthModal();
+      try {
+        const statusEl = document.getElementById('syncStatus');
+        statusEl.innerText = "Refreshing Cloud Data...";
+        const mainSnap = await getDoc(doc(db, "users", currentUser.uid));
+        if (mainSnap.exists()) {
+          sanitizeStateData(mainSnap.data());
+          localStorage.setItem(getStorageKey(), JSON.stringify(state));
+          renderAll();
+        }
+        updateSyncStatusUI();
+      } catch (e) { console.error(e); }
+    };
+
+    function processUniversalFile(file) {
+      return new Promise((resolve) => {
+        if (!file) return resolve(null);
+        const ext = file.name.split('.').pop().toLowerCase();
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          if (!file.type.startsWith('image/')) {
+            if (file.size > 350 * 1024) { alert('File too large (max 350 KB for PDF/Word/Excel). Use an image or a smaller file.'); return resolve(null); }
+            return resolve({ name: file.name, ext, dataUrl: e.target.result });
+          }
+          const img = new Image();
+          img.onload = () => {
+            const k = Math.min(1, 1280 / Math.max(img.width, img.height));
+            const c = document.createElement('canvas');
+            c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+            const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height);
+            x.drawImage(img, 0, 0, c.width, c.height);
+            resolve({ name: file.name.replace(/\.[^.]+$/, '') + '.jpg', ext: 'jpg', dataUrl: c.toDataURL('image/jpeg', 0.7) });
+          };
+          img.onerror = () => resolve({ name: file.name, ext, dataUrl: e.target.result });
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // --- 10-LANGUAGE UNIVERSAL VOICE TYPING ENGINE ---
+    function syncVoiceSelectorWithAppLang() {
+      const sel = document.getElementById('voiceLangSelector');
+      if (sel) {
+        sel.value = localStorage.getItem('thekedaar_voice_locale') || speechLocaleMap[window.currentLang] || 'hi-IN';
+      }
+    }
+
+    window.changeVoiceRecognitionLanguage = (localeCode) => {
+      localStorage.setItem('thekedaar_voice_locale', localeCode);
+      if (activeRecognition) {
+        try { activeRecognition.stop(); } catch (e) {}
+        setTimeout(() => triggerNativeSpeechEngine(), 250);
+      }
+    };
+
+    window.startVoiceInputForField = (fieldId, numericOnly = false) => {
+      activeVoiceTargetFieldId = fieldId;
+      activeVoiceNumericOnly = numericOnly;
+      syncVoiceSelectorWithAppLang();
+      document.getElementById('voiceModalTitle').innerText = "Voice Typing";
+      document.getElementById('voiceModalSub').innerText = "Speak clearly in your selected language...";
+      document.getElementById('voiceTranscriptBox').classList.add('hidden');
+      document.getElementById('voiceAssistantModal').classList.replace('hidden', 'flex');
+      triggerNativeSpeechEngine();
+    };
+
+    window.startVoiceExpenseInput = () => {
+      activeVoiceTargetFieldId = null;
+      activeVoiceNumericOnly = false;
+      syncVoiceSelectorWithAppLang();
+      document.getElementById('voiceModalTitle').innerText = "Voice Smart Entry";
+      document.getElementById('voiceModalSub').innerText = "Speak expense name & amount clearly";
+      document.getElementById('voiceTranscriptBox').classList.add('hidden');
+      document.getElementById('voiceAssistantModal').classList.replace('hidden', 'flex');
+      triggerNativeSpeechEngine();
+    };
+
+    window.triggerNativeSpeechEngine = () => {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        closeVoiceModal();
+        return alert("Voice typing is supported in Chrome & Safari.");
+      }
+      if (activeRecognition) { try { activeRecognition.stop(); } catch (e) {} }
+
+      const selectedLocale = document.getElementById('voiceLangSelector').value || speechLocaleMap[window.currentLang] || 'hi-IN';
+      activeRecognition = new SpeechRecognition();
+      activeRecognition.lang = selectedLocale;
+      activeRecognition.interimResults = true;
+
+      activeRecognition.onstart = () => {
+        document.getElementById('voiceLiveWave').classList.replace('hidden', 'flex');
+        document.getElementById('voiceStartBtn').classList.add('hidden');
+      };
+
+      activeRecognition.onresult = (event) => {
+        const t = Array.from(event.results).map(r => r[0].transcript).join('');
+        const box = document.getElementById('voiceTranscriptBox');
+        box.innerText = `"${t}"`; box.classList.remove('hidden');
+
+        if (event.results[0].isFinal) {
+          if (activeVoiceTargetFieldId) {
+            const el = document.getElementById(activeVoiceTargetFieldId);
+            if (el) {
+              if (activeVoiceNumericOnly) {
+                const nums = t.replace(/\s+/g, '').match(/\d+/);
+                if (nums) el.value = nums[0];
+              } else {
+                el.value = t;
+              }
+            }
+          } else {
+            document.getElementById('eTitle').value = t;
+            const nums = t.match(/\d+/);
+            if (nums) document.getElementById('eAmount').value = nums[0];
+          }
+          setTimeout(() => closeVoiceModal(), 500);
+        }
+      };
+
+      activeRecognition.onerror = () => {
+        document.getElementById('voiceLiveWave').classList.replace('flex', 'hidden');
+        document.getElementById('voiceStartBtn').classList.remove('hidden');
+      };
+
+      activeRecognition.start();
+    };
+
+    window.closeVoiceModal = () => {
+      if (activeRecognition) { try { activeRecognition.stop(); } catch (e) {} }
+      document.getElementById('voiceAssistantModal').classList.replace('flex', 'hidden');
+    };
+
+    window.openCustomDialog = ({ title, defaultValue = '', inputType = 'text', placeholder = '', onConfirm }) => {
+      const modal = document.getElementById('customDialogModal');
+      document.getElementById('customDialogTitle').innerText = title;
+      const inp = document.getElementById('customDialogInput');
+      inp.type = inputType; inp.value = defaultValue; inp.placeholder = placeholder;
+      modal.classList.replace('hidden', 'flex');
+      setTimeout(() => inp.focus(), 80);
+      document.getElementById('customDialogConfirmBtn').onclick = () => {
+        const val = inp.value.trim();
+        modal.classList.replace('flex', 'hidden');
+        if (onConfirm) onConfirm(val);
+      };
+    };
+    window.closeCustomDialog = () => document.getElementById('customDialogModal').classList.replace('flex', 'hidden');
+
+    // Save Main Contractor Password (Synced to Cloud so Mobile & PC match immediately)
+    window.saveNewMasterPin = async () => {
+      if (!isMainContractorActive()) return alert("Only Main Contractor can change the password.");
+      const pin = document.getElementById('newMasterPinInput').value.trim();
+      if (!pin) return alert("Please enter a password or PIN.");
+      state.masterPin = pin;
+      document.getElementById('newMasterPinInput').value = '';
+      await persistState();
+      alert("Main Contractor password saved and synced to Cloud!");
+    };
+
+    // Modal Visibility
+    window.openProfileModal = () => {
+      updateSyncStatusUI();
+      renderAccountIdsList();
+      document.getElementById('profileModal').classList.replace('hidden', 'flex');
+    };
+    window.closeProfileModal = () => document.getElementById('profileModal').classList.replace('flex', 'hidden');
+    window.openSettingsModal = () => document.getElementById('settingsModal').classList.replace('hidden', 'flex');
+    window.closeSettingsModal = () => document.getElementById('settingsModal').classList.replace('flex', 'hidden');
+
+    window.toggleLanguageAccordion = () => {
+      const body = document.getElementById('langAccordionBody');
+      const chev = document.getElementById('langChevron');
+      body.classList.toggle('hidden');
+      chev.innerText = body.classList.contains('hidden') ? '▼' : '▲';
+    };
+
+    // Monthly Ledger Modal
+    window.openMonthlyLedgerModal = () => {
+      window._ledgerMonth = document.getElementById('monthSelect').value;
+      renderMonthlyLedgerModalBody();
+      document.getElementById('monthlyLedgerModal').classList.replace('hidden', 'flex');
+    };
+    window.setLedgerMonth = (v) => { if (v) { window._ledgerMonth = v; renderMonthlyLedgerModalBody(); } };
+    window.shiftLedgerMonth = (d) => {
+      const [y, m] = (window._ledgerMonth || document.getElementById('monthSelect').value).split('-').map(Number);
+      const dt = new Date(y, m - 1 + d, 1);
+      setLedgerMonth(`${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}`);
+    };
+    window.closeMonthlyLedgerModal = () => document.getElementById('monthlyLedgerModal').classList.replace('flex', 'hidden');
+
+    function renderMonthlyLedgerModalBody() {
+      const activeSite = document.getElementById('siteSelect').value;
+      const activeMonth = window._ledgerMonth || document.getElementById('monthSelect').value;
+      const workers = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth);
+      const expenses = (state.expenses || []).filter(e => e.site === activeSite && e.month === activeMonth);
+      const bills = (state.bills || []).filter(b => b.site === activeSite && b.month === activeMonth);
+
+      let totalLabourNet = 0;
+      workers.forEach(w => {
+        if (!w.settled) totalLabourNet += Math.round((w.dailyRate || 500) * ((w.presentDays || 0) + ((w.halfDays || 0) * 0.5))) - (w.advance || 0);
+      });
+      const totalExp = expenses.reduce((a, b) => a + b.amount, 0);
+      const totalBills = bills.reduce((a, b) => a + b.amount, 0);
+
+      document.getElementById('monthlyLedgerModalBody').innerHTML = `
+        <div class="space-y-4">
+          <div class="ios-glass p-3 rounded-2xl space-y-2 text-xs"><div>Site: <b>${esc(activeSite)}</b></div><div class="flex items-center gap-2"><button onclick="shiftLedgerMonth(-1)" class="px-3.5 py-1.5 rounded-xl ios-glass font-black text-sm active:scale-90">‹</button><button type="button" onclick="openMonthPicker('ledger')" class="app-input flex-1 rounded-xl px-2 py-1.5 text-xs font-bold flex items-center justify-center gap-1.5"><svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>${fmtMonth(activeMonth)}</button><button onclick="shiftLedgerMonth(1)" class="px-3.5 py-1.5 rounded-xl ios-glass font-black text-sm active:scale-90">›</button></div></div>
+
+          <div class="grid grid-cols-3 gap-2 text-center text-xs">
+            <div class="bg-black/5 dark:bg-black/25 p-2.5 rounded-xl"><div class="opacity-70 text-[9px]">Labour Net</div><div class="font-black text-rose-500">₹${totalLabourNet}</div></div>
+            <div class="bg-black/5 dark:bg-black/25 p-2.5 rounded-xl"><div class="opacity-70 text-[9px]">Expenses</div><div class="font-black text-amber-500">₹${totalExp}</div></div>
+            <div class="bg-black/5 dark:bg-black/25 p-2.5 rounded-xl"><div class="opacity-70 text-[9px]">Bills</div><div class="font-black text-emerald-500">₹${totalBills}</div></div>
+          </div>
+
+          <div class="space-y-2">
+            <h4 class="font-black text-xs text-amber-500 uppercase tracking-wider">1. Labour Attendance (${workers.length})</h4>
+            ${workers.length === 0 ? '<p class="text-xs opacity-60">No workers recorded.</p>' : workers.map(w => {
+              const net = Math.round((w.dailyRate || 500) * ((w.presentDays || 0) + ((w.halfDays || 0) * 0.5))) - (w.advance || 0);
+              return `
+                <div onclick="openLabourAttendanceHistory('${w.id}')" class="bg-black/5 dark:bg-black/20 p-2.5 rounded-2xl flex items-center justify-between text-xs border border-zinc-300 dark:border-white/10 cursor-pointer">
+                  <div>
+                    <div class="font-bold underline decoration-amber-500/50">${esc(w.name)} (${esc(w.category)})</div>
+                    <div class="text-[10px] opacity-75">Present: <b>${w.presentDays || 0}P</b> | Half: <b>${w.halfDays || 0}H</b> | Adv: ₹${w.advance || 0}</div>
+                  </div>
+                  <div class="font-black ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net}</div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+
+          <div class="space-y-2">
+            <h4 class="font-black text-xs text-amber-500 uppercase tracking-wider">2. Site Expenses (${expenses.length})</h4>
+            ${expenses.length === 0 ? '<p class="text-xs opacity-60">No expenses recorded.</p>' : expenses.map(e => `
+              <div class="bg-black/5 dark:bg-black/20 p-2.5 rounded-2xl flex items-center justify-between text-xs border border-zinc-300 dark:border-white/10">
+                <div class="flex items-center gap-2.5">
+                  ${getFileBadgeHTML(e.attachment)}
+                  <div>
+                    <div class="font-bold">${esc(e.title)}</div>
+                    <div class="text-[10px] opacity-75">${esc(e.category)} ${e.spentFor ? `• ${esc(e.spentFor)}` : ''}</div>
+                  </div>
+                </div>
+                <div class="font-black text-amber-500">₹${e.amount}</div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="space-y-2">
+            <h4 class="font-black text-xs text-emerald-500 uppercase tracking-wider">3. Company Bills & Photos (${bills.length})</h4>
+            ${bills.length === 0 ? '<p class="text-xs opacity-60">No bills recorded.</p>' : bills.map(b => `
+              <div class="bg-black/5 dark:bg-black/20 p-3 rounded-2xl space-y-2 text-xs border border-zinc-300 dark:border-white/10">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <div class="font-bold">${esc(b.title)}</div>
+                    <div class="text-[10px] opacity-75">Added: ${b.billDate} ${b.receivedDate ? `• Rec: ${b.receivedDate}` : ''}</div>
+                  </div>
+                  <div class="font-black text-emerald-500">₹${b.amount} (${b.status})</div>
+                </div>
+                ${b.attachment && ['jpg','jpeg','png','webp','gif'].includes(b.attachment.ext) ? `
+                  <a href="${b.attachment.dataUrl}" target="_blank" download="${esc(b.attachment.name)}" class="block">
+                    <img src="${b.attachment.dataUrl}" class="w-full max-h-44 object-cover rounded-xl border border-amber-500/40 mt-1" />
+                  </a>
+                ` : b.attachment ? `<div>${getFileBadgeHTML(b.attachment)}</div>` : ''}
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // Labour Day-Wise Attendance History Modal
+    window.openLabourAttendanceHistory = (workerId) => {
+      const l = (state.labours || []).find(x => x.id === workerId);
+      if (!l) return;
+      document.getElementById('labourHistoryTitle').innerText = `${l.name} (${l.month})`;
+      
+      const records = state.dailyHajriRecords || {};
+      let logsHtml = '';
+      Object.keys(records).sort().forEach(dateKey => {
+        if (dateKey.startsWith(l.month)) {
+          const st = records[dateKey][workerId];
+          if (st) {
+            const badgeColor = st === 'P' ? 'bg-emerald-500/20 text-emerald-500 border-emerald-500/30' : st === 'H' ? 'bg-amber-500/20 text-amber-500 border-amber-500/30' : 'bg-rose-500/20 text-rose-500 border-rose-500/30';
+            const label = st === 'P' ? 'Present (हाजिर)' : st === 'H' ? 'Half Day (हाफ)' : 'Absent (गैरहाजिर)';
+            logsHtml += `
+              <div class="flex justify-between items-center p-2.5 rounded-xl bg-black/5 dark:bg-black/25 border border-zinc-300 dark:border-white/10">
+                <span class="font-bold">${dateKey}</span>
+                <span class="px-2.5 py-0.5 rounded-lg font-black border ${badgeColor}">${label}</span>
+              </div>
+            `;
+          }
+        }
+      });
+
+      document.getElementById('labourHistoryContent').innerHTML = logsHtml || `
+        <div class="text-center py-6 opacity-70 space-y-2">
+          <div>Total Summary: <b>${l.presentDays || 0} Present</b>, <b>${l.halfDays || 0} Half Days</b></div>
+          <div class="text-[11px]">Use "Hajri Book" to record date-by-date attendance.</div>
+        </div>
+      `;
+      document.getElementById('labourHistoryModal').classList.replace('hidden', 'flex');
+    };
+    window.closeLabourHistoryModal = () => document.getElementById('labourHistoryModal').classList.replace('flex', 'hidden');
+
+    // --- MULTI-ACCOUNT SWITCHING, PIN RESET VIA CLOUD PASSWORD & MOBILE SUB-USER DELETION ---
+    window.openAddAccountPrompt = () => {
+      openCustomDialog({
+        title: "Add Supervisor Nickname",
+        placeholder: "e.g. Supervisor 1",
+        onConfirm: async (nickname) => {
+          if (!nickname) return;
+          const newId = 'acc_' + Date.now();
+          state.accounts = normalizeAccounts(state.accounts);
+          state.accounts.push({ id: newId, nickname, email: `${nickname.toLowerCase().replace(/\s+/g,'')}@thekedaar`, isMaster: false });
+          await persistState();
+          renderAccountIdsList();
+        }
+      });
+    };
+
+    // Touch-safe Delete Supervisor Account (Works reliably on Mobile & PC)
+    window.deleteSupervisorAccount = (accId) => {
+      if (!isMainContractorActive()) {
+        return alert("Access Denied! Only Main Contractor can delete supervisor accounts.");
+      }
+      if (accId === 'acc_main') {
+        return alert("Cannot delete the Main Contractor account.");
+      }
+      const target = (state.accounts || []).find(a => a.id === accId);
+      openConfirmDelete({
+        title: "Delete Supervisor Account?",
+        subtitle: `Permanently remove "${target ? target.nickname : 'Supervisor'}"?`,
+        onConfirm: async () => {
+          state.accounts = normalizeAccounts(state.accounts).filter(a => a.id !== accId);
+          if (localStorage.getItem('thekedaar_active_acc_id') === accId) {
+            localStorage.setItem('thekedaar_active_acc_id', 'acc_main');
+          }
+          await persistState();
+          renderAccountIdsList();
+        }
+      });
+    };
+
+    window.switchActiveAccount = (accId) => {
+      const currentActive = getActiveAccount();
+      const targetAcc = normalizeAccounts(state.accounts).find(a => a.id === accId);
+      if (!targetAcc) return;
+
+      const isTargetMaster = targetAcc.id === 'acc_main' || targetAcc.isMaster === true;
+      const isCurrentMaster = currentActive.id === 'acc_main' || currentActive.isMaster === true;
+
+      if (isTargetMaster && !isCurrentMaster) {
+        pendingSwitchAccId = accId;
+        hideResetPinView();
+        document.getElementById('masterPinInput').value = '';
+        document.getElementById('pinLockModal').classList.replace('hidden', 'flex');
+        setTimeout(() => document.getElementById('masterPinInput').focus(), 100);
+      } else {
+        executeAccountSwitch(accId);
+      }
+    };
+
+    window.closePinLockModal = () => {
+      document.getElementById('pinLockModal').classList.replace('flex', 'hidden');
+      document.getElementById('masterPinInput').value = '';
+      pendingSwitchAccId = null;
+    };
+
+    window.showResetPinView = () => {
+      document.getElementById('pinEntryView').classList.add('hidden');
+      document.getElementById('pinResetView').classList.remove('hidden');
+      document.getElementById('resetCloudAccountPass').value = '';
+      document.getElementById('resetNewMasterPin').value = '';
+    };
+
+    window.hideResetPinView = () => {
+      document.getElementById('pinResetView').classList.add('hidden');
+      document.getElementById('pinEntryView').classList.remove('hidden');
+    };
+
+    // Verify Master PIN (Checks unified cloud-synced state.masterPin)
+    window.verifyMasterPin = () => {
+      const enteredPin = String(document.getElementById('masterPinInput').value || '').trim();
+      const currentMasterPin = String(state.masterPin || '1234').trim();
+
+      if (enteredPin === currentMasterPin) {
+        const idToSwitch = pendingSwitchAccId || 'acc_main';
+        closePinLockModal();
+        executeAccountSwitch(idToSwitch);
+      } else {
+        alert("Incorrect Main Contractor Password! If you forgot it, tap 'Forgot PIN? Reset using Cloud Account Password' below.");
+      }
+    };
+
+    // Reset Main Contractor Password using Firebase Cloud Account Password
+    window.executeMasterPinResetWithAccountPassword = async () => {
+      if (!currentUser || !currentUser.email) {
+        return alert("Please sign in to your Cloud Email account first to verify your account password.");
+      }
+      const cloudPass = document.getElementById('resetCloudAccountPass').value.trim();
+      const newPin = document.getElementById('resetNewMasterPin').value.trim();
+
+      if (!cloudPass || !newPin) {
+        return alert("Please enter both your Cloud Account Password and your new Main Contractor PIN.");
+      }
+
+      const btn = document.getElementById('confirmPinResetBtn');
+      btn.innerText = "Verifying...";
+      try {
+        await signInWithEmailAndPassword(auth, currentUser.email, cloudPass);
+        state.masterPin = newPin;
+        await persistState();
+        btn.innerText = "Verify & Reset";
+        const idToSwitch = pendingSwitchAccId || 'acc_main';
+        closePinLockModal();
+        executeAccountSwitch(idToSwitch);
+        alert("Main Contractor PIN reset and synced across all devices!");
+      } catch (err) {
+        btn.innerText = "Verify & Reset";
+        alert("Invalid Cloud Account Password! Please enter the correct password for " + currentUser.email);
+      }
+    };
+
+    function executeAccountSwitch(accId) {
+      localStorage.setItem('thekedaar_active_acc_id', accId);
+      renderAll();
+      renderAccountIdsList();
+    }
+
+    function renderAccountIdsList() {
+      const container = document.getElementById('accountIdsList');
+      const accs = normalizeAccounts(state.accounts);
+      const activeAcc = getActiveAccount();
+      const masterActive = isMainContractorActive();
+      
+      const passBox = document.getElementById('masterPasswordSettingBox');
+      if (passBox) passBox.classList.toggle('hidden', !masterActive);
+
+      container.innerHTML = accs.map(acc => {
+        const isCurrent = acc.id === activeAcc.id;
+        const isMasterAcc = acc.id === 'acc_main' || acc.isMaster === true;
+        return `
+          <div class="flex items-center justify-between p-2.5 rounded-xl ${isCurrent ? 'bg-amber-500/15 border border-amber-500/40' : 'bg-black/5 dark:bg-black/20'}">
+            <div class="truncate">
+              <span class="text-xs font-bold block ${isCurrent ? 'text-amber-500' : ''}">${esc(acc.nickname)}</span>
+              <span class="text-[10px] opacity-65">${isMasterAcc ? 'Main Contractor (Admin)' : 'Supervisor (Add & Attendance Only)'}</span>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              ${isCurrent 
+                ? `<span class="text-[10px] text-emerald-500 font-bold px-2 py-0.5 rounded-full bg-emerald-500/15">Active</span>` 
+                : `<button type="button" onclick="switchActiveAccount('${acc.id}')" class="text-[10px] px-2.5 py-1 rounded-lg bg-amber-500 text-zinc-950 font-black shadow">Switch</button>`}
+              ${masterActive && !isMasterAcc ? `
+                <button type="button" onclick="deleteSupervisorAccount('${acc.id}')" class="p-1.5 rounded-lg bg-rose-500/15 text-rose-500 hover:bg-rose-500/25 active:scale-90" title="Delete Supervisor Account">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                </button>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+      document.getElementById('activeNicknameBadge').innerText = activeAcc.nickname || 'Main';
+      document.getElementById('currentProfileNameText').innerText = activeAcc.nickname || 'Main';
+    }
+
+    window.shareApplication = async () => {
+      if (navigator.share) {
+        try { await navigator.share({ title: 'ठेकेDAAR', text: 'Manage construction workforce & bills online:', url: window.location.href }); } catch (e) {}
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert('App link copied!');
+      }
+    };
+
+    window.shareWorkerSlipWhatsApp = (workerId) => {
+      const l = state.labours.find(x => x.id === workerId);
+      if (!l) return;
+      const rate = l.dailyRate || 500;
+      const eff = (l.presentDays || 0) + ((l.halfDays || 0) * 0.5);
+      const earned = Math.round(rate * eff);
+      const net = earned - (l.advance || 0);
+      const msg = `*ठेकेDAAR - मजदूर हिसाब*\nनाम: *${l.name}*\n• दर: ₹${rate}/दिन\n• हाजिरी: ${l.presentDays || 0}P, ${l.halfDays || 0}H\n• एडवांस: ₹${l.advance || 0}\n*शुद्ध बाकी: ₹${net}*`;
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+    };
+
+    // Safe Profile Photo Cropper Engine
+    window.initiateCropFromFile = (input, targetType) => {
+      const file = input.files && input.files[0];
+      if (!file) return;
+      currentCropperTarget = targetType;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        cropImg = new Image();
+        cropImg.onload = () => {
+          cropState.scale = 1; cropState.x = 0; cropState.y = 0;
+          document.getElementById('cropZoomSlider').value = 1;
+          document.getElementById('cropperModal').classList.replace('hidden', 'flex');
+          drawCropCanvas();
+        };
+        cropImg.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+      input.value = '';
+    };
+
+    window.closeCropperModal = () => document.getElementById('cropperModal').classList.replace('flex', 'hidden');
+    window.handleZoomChange = (val) => {
+      cropState.scale = parseFloat(val);
+      document.getElementById('zoomValueText').innerText = `${cropState.scale.toFixed(1)}x`;
+      drawCropCanvas();
+    };
+
+    function drawCropCanvas() {
+      const canvas = document.getElementById('cropCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (!cropImg.src) return;
+      const baseScale = Math.max(canvas.width / cropImg.width, canvas.height / cropImg.height);
+      const curScale = baseScale * cropState.scale;
+      ctx.drawImage(cropImg, (canvas.width - cropImg.width * curScale) / 2 + cropState.x, (canvas.height - cropImg.height * curScale) / 2 + cropState.y, cropImg.width * curScale, cropImg.height * curScale);
+    }
+
+    const cropCanvasEl = document.getElementById('cropCanvas');
+    if (cropCanvasEl) {
+      let isDragging = false, startX = 0, startY = 0;
+      cropCanvasEl.addEventListener('mousedown', e => { isDragging = true; startX = e.clientX - cropState.x; startY = e.clientY - cropState.y; });
+      window.addEventListener('mousemove', e => { if (isDragging) { cropState.x = e.clientX - startX; cropState.y = e.clientY - startY; drawCropCanvas(); } });
+      window.addEventListener('mouseup', () => { isDragging = false; });
+      cropCanvasEl.addEventListener('touchstart', e => { if (e.touches.length === 1) { isDragging = true; startX = e.touches[0].clientX - cropState.x; startY = e.touches[0].clientY - cropState.y; } });
+      cropCanvasEl.addEventListener('touchmove', e => { if (isDragging && e.touches.length === 1) { cropState.x = e.touches[0].clientX - startX; cropState.y = e.touches[0].clientY - startY; drawCropCanvas(); e.preventDefault(); } }, { passive: false });
+      cropCanvasEl.addEventListener('touchend', () => { isDragging = false; });
+    }
+
+    window.saveCroppedImageResult = () => {
+      const canvas = document.getElementById('cropCanvas');
+      if (canvas && currentCropperTarget === 'userProfile') {
+        state.userProfilePhoto = canvas.toDataURL('image/jpeg', 0.85);
+        persistState();
+      }
+      closeCropperModal();
+    };
+
+    window.navigateTo = (viewId) => {
+      ['viewHome', 'viewLabours', 'viewExpenses', 'viewBills'].forEach(v => {
+        const el = document.getElementById(v);
+        if (el) el.classList.toggle('hidden', v !== viewId);
+        const btn = document.getElementById(`nav-${v}`);
+        if (btn) btn.classList.toggle('active', v === viewId);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.openFormModal = (type) => {
+      window._editLabourId = null;
+      const sb = document.querySelector('#labourForm button[type=submit]'); if (sb) sb.innerText = 'Save Labour / सेव करें';
+      document.getElementById('formModal').classList.replace('hidden', 'flex');
+      ['labourForm', 'expenseForm', 'billForm'].forEach(f => document.getElementById(f).classList.add('hidden'));
+      if (type === 'labour') {
+        document.getElementById('labourForm').classList.remove('hidden');
+        document.getElementById('formModalTitle').innerText = "Add New Labour / नया मजदूर जोड़ें";
+        populateLabourAutocomplete();
+      } else if (type === 'expense') {
+        document.getElementById('expenseForm').classList.remove('hidden');
+        document.getElementById('formModalTitle').innerText = "Add Site Expense / खर्च दर्ज करें";
+      } else {
+        document.getElementById('billForm').classList.remove('hidden');
+        document.getElementById('formModalTitle').innerText = "Add Company Bill / कंपनी बिल";
+      }
+    };
+    window.closeFormModal = () => { window._editLabourId = null; document.getElementById('formModal').classList.replace('flex', 'hidden'); };
+
+    window.toggleBillReceivedDateField = (val) => {
+      document.getElementById('bReceivedDateWrapper').classList.toggle('hidden', val !== 'Received');
+    };
+
+    window.toggleBillStatus = (billId) => {
+      if (!isMainContractorActive()) {
+        return alert("Access Denied! Only Main Contractor can change bill payment status.");
+      }
+      const bill = (state.bills || []).find(b => b.id === billId);
+      if (!bill) return;
+      if (bill.status === 'Pending') {
+        openCustomDialog({
+          title: "Payment Received Date",
+          inputType: "date",
+          defaultValue: localISO(),
+          onConfirm: (dt) => { bill.status = 'Received'; bill.receivedDate = dt || localISO(); persistState(); }
+        });
+      } else {
+        bill.status = 'Pending'; bill.receivedDate = null; persistState();
+      }
+    };
+
+    window.openCarrySelectModal = () => {
+      const currentSite = document.getElementById('siteSelect').value;
+      const currentMonth = document.getElementById('monthSelect').value;
+      const container = document.getElementById('carryWorkersList');
+      const curNames = new Set((state.labours || []).filter(l => l.site === currentSite && l.month === currentMonth).map(w => w.name.trim().toLowerCase()));
+      const map = new Map();
+      const [py, pm] = currentMonth.split('-').map(Number); const pd = new Date(py, pm - 2, 1); const prevMonth = `${pd.getFullYear()}-${String(pd.getMonth() + 1).padStart(2, '0')}`;
+      (state.labours || []).filter(l => l.month === prevMonth).forEach(l => { if (!curNames.has(l.name.trim().toLowerCase())) map.set(l.name.trim().toLowerCase(), l); });
+      
+      const candidates = Array.from(map.values());
+
+      if (candidates.length === 0) {
+        container.innerHTML = `<div class="text-center py-8 text-xs opacity-70">No workers from last month to carry.</div>`;
+        document.getElementById('carrySelectCount').innerText = `Selected: 0`;
+        document.getElementById('carryModal').classList.replace('hidden', 'flex');
+        return;
+      }
+      container.innerHTML = candidates.map((w, idx) => `
+        <label class="flex items-center justify-between p-2.5 rounded-2xl bg-black/5 dark:bg-black/30 border border-zinc-300 dark:border-white/10 cursor-pointer">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <input type="checkbox" value="${idx}" class="carry-worker-cb w-4 h-4 accent-amber-500 rounded" onchange="updateCarryCount()" checked />
+            <div class="w-9 h-9 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+            <div class="truncate"><div class="font-bold text-xs truncate">${esc(w.name)}</div><div class="text-[10px] opacity-70">${esc(w.category)} • ₹${w.dailyRate || 500}/day</div></div>
+          </div>
+        </label>
+      `).join('');
+      window._carryCandidates = candidates;
+      updateCarryCount();
+      document.getElementById('carryModal').classList.replace('hidden', 'flex');
+    };
+
+    window.closeCarrySelectModal = () => document.getElementById('carryModal').classList.replace('flex', 'hidden');
+    window.updateCarryCount = () => { document.getElementById('carrySelectCount').innerText = `Selected: ${document.querySelectorAll('.carry-worker-cb:checked').length}`; };
+    window.toggleSelectAllCarry = () => {
+      const cbs = document.querySelectorAll('.carry-worker-cb');
+      const all = Array.from(cbs).every(c => c.checked);
+      cbs.forEach(c => c.checked = !all);
+      updateCarryCount();
+    };
+
+    window.executeCarryForwardSelected = () => {
+      const currentSite = document.getElementById('siteSelect').value;
+      const currentMonth = document.getElementById('monthSelect').value;
+      document.querySelectorAll('.carry-worker-cb:checked').forEach(cb => {
+        const src = (window._carryCandidates || [])[Number(cb.value)];
+        if (src) {
+          state.labours.unshift({
+            id: Date.now().toString() + Math.random().toString().slice(2, 6),
+            site: currentSite, month: currentMonth, name: src.name, category: src.category,
+            dailyRate: src.dailyRate || 500, phone: src.phone || '', advance: 0, advanceLog: [], presentDays: 0, halfDays: 0
+          });
+        }
+      });
+      closeCarrySelectModal(); persistState(); navigateTo('viewLabours');
+    };
+
+    // Hajri Book Engine
+    window.openHajriBookModal = () => {
+      const activeMonth = document.getElementById('monthSelect').value;
+      if (!document.getElementById('hajriDateInput').value.startsWith(activeMonth)) {
+        document.getElementById('hajriDateInput').value = `${activeMonth}-01`;
+      }
+      document.getElementById('hajriBookModal').classList.replace('hidden', 'flex');
+      renderDailyHajriSheet();
+    };
+    window.closeHajriBookModal = () => document.getElementById('hajriBookModal').classList.replace('flex', 'hidden');
+
+    window.shiftHajriDate = (days) => {
+      const inp = document.getElementById('hajriDateInput');
+      const d = new Date(inp.value || new Date());
+      d.setDate(d.getDate() + days);
+      inp.value = d.toISOString().split('T')[0];
+      document.getElementById('monthSelect').value = inp.value.slice(0, 7);
+      renderAll(); renderDailyHajriSheet();
+    };
+
+    window.markAllWorkersToday = (status) => {
+      const selDate = document.getElementById('hajriDateInput').value;
+      const activeSite = document.getElementById('siteSelect').value;
+      const monthPrefix = selDate.slice(0, 7);
+      if (!state.dailyHajriRecords) state.dailyHajriRecords = {};
+      if (!state.dailyHajriRecords[selDate]) state.dailyHajriRecords[selDate] = {};
+      (state.labours || []).filter(l => l.site === activeSite && l.month === monthPrefix).forEach(w => {
+        state.dailyHajriRecords[selDate][w.id] = status;
+        recalculateMonthlyAttendanceFromHajri(w.id, monthPrefix);
+      });
+      persistState(); renderDailyHajriSheet();
+    };
+
+    window.renderDailyHajriSheet = () => {
+      const selDate = document.getElementById('hajriDateInput').value;
+      const activeSite = document.getElementById('siteSelect').value;
+      const monthPrefix = selDate.slice(0, 7);
+      const siteWorkers = (state.labours || []).filter(l => l.site === activeSite && l.month === monthPrefix);
+      const container = document.getElementById('hajriWorkersContainer');
+
+      if (!state.dailyHajriRecords) state.dailyHajriRecords = {};
+      if (!state.dailyHajriRecords[selDate]) state.dailyHajriRecords[selDate] = {};
+      const dayRec = state.dailyHajriRecords[selDate];
+
+      if (siteWorkers.length === 0) {
+        container.innerHTML = `<div class="text-center py-8 text-xs opacity-70">No workers found in ${esc(activeSite)}.</div>`;
+        document.getElementById('hajriDaySummary').innerText = `Present: 0 | Half: 0 | Absent: 0`;
+        return;
+      }
+
+      let p = 0, h = 0, a = 0;
+      container.innerHTML = siteWorkers.map(w => {
+        const st = dayRec[w.id] || 'NONE';
+        if (st === 'P') p++; else if (st === 'H') h++; else if (st === 'A') a++;
+        return `
+          <div class="bg-black/5 dark:bg-black/30 p-3 rounded-2xl border border-zinc-300 dark:border-white/10 flex items-center justify-between">
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              </div>
+              <div class="truncate">
+                <div class="font-bold text-xs truncate">${esc(w.name)}</div>
+                <div class="text-[10px] opacity-70">${esc(w.category)} • ₹${w.dailyRate || 500}/day</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button onclick="setDailyWorkerStatus('${selDate}', '${w.id}', 'P')" class="w-9 h-9 rounded-xl text-xs font-black transition-all ${st === 'P' ? 'bg-emerald-500 text-zinc-950 shadow-md scale-105' : 'bg-black/10 dark:bg-white/10 opacity-70'}">P</button>
+              <button onclick="setDailyWorkerStatus('${selDate}', '${w.id}', 'H')" class="w-9 h-9 rounded-xl text-xs font-black transition-all ${st === 'H' ? 'bg-amber-500 text-zinc-950 shadow-md scale-105' : 'bg-black/10 dark:bg-white/10 opacity-70'}">H</button>
+              <button onclick="setDailyWorkerStatus('${selDate}', '${w.id}', 'A')" class="w-9 h-9 rounded-xl text-xs font-black transition-all ${st === 'A' ? 'bg-rose-500 text-white shadow-md scale-105' : 'bg-black/10 dark:bg-white/10 opacity-70'}">A</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+      document.getElementById('hajriDaySummary').innerText = `Present: ${p} | Half: ${h} | Absent: ${a}`;
+    };
+
+    window.setDailyWorkerStatus = (dateStr, workerId, status) => {
+      if (!state.dailyHajriRecords) state.dailyHajriRecords = {};
+      if (!state.dailyHajriRecords[dateStr]) state.dailyHajriRecords[dateStr] = {};
+      state.dailyHajriRecords[dateStr][workerId] = status;
+      recalculateMonthlyAttendanceFromHajri(workerId, dateStr.slice(0, 7));
+      persistState(); renderDailyHajriSheet();
+    };
+
+    function recalculateMonthlyAttendanceFromHajri(workerId, monthPrefix) {
+      const worker = (state.labours || []).find(l => l.id === workerId && l.month === monthPrefix);
+      if (!worker) return;
+      let tp = 0, th = 0;
+      Object.keys(state.dailyHajriRecords || {}).forEach(k => {
+        if (k.startsWith(monthPrefix)) {
+          const s = state.dailyHajriRecords[k][workerId];
+          if (s === 'P') tp++; else if (s === 'H') th++;
+        }
+      });
+      worker.presentDays = tp; worker.halfDays = th;
+    }
+
+    function populateLabourAutocomplete() {
+      document.getElementById('knownLaboursList').innerHTML = (state.masterLabourDirectory || []).map(w => `<option value="${esc(w.name)}">`).join('');
+    }
+
+    window.autoFillKnownLabour = (name) => {
+      const found = (state.masterLabourDirectory || []).find(w => w.name.toLowerCase() === name.trim().toLowerCase());
+      if (found) {
+        document.getElementById('lCategory').value = found.category || 'Mason (मिस्त्री)';
+        document.getElementById('lDailyRate').value = found.dailyRate || '';
+        document.getElementById('lPhone').value = found.phone || '';
+        document.getElementById('lAdvance').value = 0;
+      }
+    };
+
+    window.addNewSite = () => {
+      openCustomDialog({
+        title: "Add New Site",
+        placeholder: "e.g. Commercial Plaza",
+        onConfirm: (name) => { if (name) { state.sites.push(name); persistState(); document.getElementById('siteSelect').value = name; renderAll(); } }
+      });
+    };
+
+    // Delete Current Site (STRICTLY MAIN CONTRACTOR ONLY)
+    window.deleteCurrentSite = () => {
+      if (!isMainContractorActive()) {
+        return alert("Access Denied! Only the Main Contractor can delete a site.");
+      }
+      if ((state.sites || []).length <= 1) {
+        return alert("Cannot delete! You must keep at least one active site.");
+      }
+      const siteToDelete = document.getElementById('siteSelect').value;
+      openConfirmDelete({
+        title: "Delete Construction Site?",
+        subtitle: `Permanently delete "${siteToDelete}" and all its records?`,
+        onConfirm: () => {
+          state.sites = state.sites.filter(s => s !== siteToDelete);
+          state.labours = (state.labours || []).filter(l => l.site !== siteToDelete);
+          state.expenses = (state.expenses || []).filter(e => e.site !== siteToDelete);
+          state.bills = (state.bills || []).filter(b => b.site !== siteToDelete);
+          state.masterLabourDirectory = (state.masterLabourDirectory || []).filter(w => state.labours.some(l => l.name.trim().toLowerCase() === w.name.trim().toLowerCase()));
+          document.getElementById('siteSelect').value = state.sites[0];
+          persistState();
+        }
+      });
+    };
+
+    window.saveLabour = async (e) => {
+      e.preventDefault();
+      if (window._editLabourId) {
+        if (!isMainContractorActive()) return alert("Access Denied! Only Main Contractor can edit worker details.");
+        const w = state.labours.find(x => x.id === window._editLabourId);
+        if (w) {
+          const oldName = w.name;
+          const nm = document.getElementById('lName').value.trim();
+          const adv = Number(document.getElementById('lAdvance').value) || 0;
+          if (adv !== (w.advance || 0)) (w.advanceLog = w.advanceLog || []).unshift({ date: new Date().toLocaleDateString('hi-IN'), amount: adv - (w.advance || 0), mode: 'Edit', note: 'Edited by contractor' });
+          Object.assign(w, { name: nm, category: document.getElementById('lCategory').value, dailyRate: Number(document.getElementById('lDailyRate').value) || 0, phone: document.getElementById('lPhone').value.trim(), advance: adv });
+          if (!state.masterLabourDirectory) state.masterLabourDirectory = [];
+          const di = state.masterLabourDirectory.findIndex(x => x.name.toLowerCase() === oldName.toLowerCase());
+          const entry = { name: nm, category: w.category, dailyRate: w.dailyRate, phone: w.phone };
+          if (di >= 0) state.masterLabourDirectory[di] = entry; else state.masterLabourDirectory.push(entry);
+        }
+        window._editLabourId = null; e.target.reset(); closeFormModal(); persistState(); return;
+      }
+      const site = document.getElementById('siteSelect').value;
+      const month = document.getElementById('monthSelect').value;
+      const name = document.getElementById('lName').value.trim();
+      const category = document.getElementById('lCategory').value;
+      const dailyRate = Number(document.getElementById('lDailyRate').value) || 0;
+      const initialAdvance = Number(document.getElementById('lAdvance').value) || 0;
+      const phone = document.getElementById('lPhone').value.trim();
+
+      state.labours.unshift({
+        id: Date.now().toString(), site, month, name, category, dailyRate, phone, advance: initialAdvance,
+        advanceLog: initialAdvance > 0 ? [{ date: new Date().toLocaleDateString('hi-IN'), amount: initialAdvance, mode: 'Cash', note: 'Initial' }] : [],
+        presentDays: 0, halfDays: 0
+      });
+
+      if (!state.masterLabourDirectory) state.masterLabourDirectory = [];
+      const idx = state.masterLabourDirectory.findIndex(w => w.name.toLowerCase() === name.toLowerCase());
+      if (idx >= 0) state.masterLabourDirectory[idx] = { name, category, dailyRate, phone };
+      else state.masterLabourDirectory.push({ name, category, dailyRate, phone });
+
+      e.target.reset(); closeFormModal(); persistState(); navigateTo('viewLabours');
+    };
+
+    // Edit Salary Rate (STRICTLY MAIN CONTRACTOR ONLY)
+    window.editLabourSalary = (id) => {
+      if (!isMainContractorActive()) {
+        return alert("Access Denied! Only Main Contractor can edit daily wage rates.");
+      }
+      const l = state.labours.find(x => x.id === id);
+      if (!l) return;
+      openCustomDialog({ title: `Daily Rate - ${l.name}`, inputType: "number", defaultValue: l.dailyRate || 500, onConfirm: (v) => { if(v){ l.dailyRate = Number(v); persistState(); } } });
+    };
+
+    window.editLabourFull = (id) => {
+      if (!isMainContractorActive()) return alert("Access Denied! Only Main Contractor can edit worker details.");
+      const l = state.labours.find(x => x.id === id); if (!l) return;
+      openFormModal('labour');
+      window._editLabourId = id;
+      document.getElementById('formModalTitle').innerText = "Edit Labour / मजदूर की जानकारी बदलें";
+      const cat = document.getElementById('lCategory');
+      if (![...cat.options].some(o => o.value === l.category)) cat.add(new Option(l.category, l.category));
+      document.getElementById('lName').value = l.name;
+      cat.value = l.category;
+      document.getElementById('lDailyRate').value = l.dailyRate || '';
+      document.getElementById('lAdvance').value = l.advance || 0;
+      document.getElementById('lPhone').value = l.phone || '';
+      document.querySelector('#labourForm button[type=submit]').innerText = 'Update Labour / अपडेट करें';
+    };
+
+    window.openAdvanceModal = (id) => {
+      const l = state.labours.find(x => x.id === id);
+      if (!l) return;
+      document.getElementById('advLabourId').value = id;
+      document.getElementById('advWorkerName').innerText = `Advance: ${l.name} (Total: ₹${l.advance || 0})`;
+      document.getElementById('advAmount').value = ''; document.getElementById('advNote').value = '';
+      const list = document.getElementById('advHistoryList');
+      const hist = l.advanceLog || [];
+      list.innerHTML = hist.length === 0 ? `<div class="opacity-60 italic">No installments.</div>` : hist.map(h => `
+        <div class="flex justify-between items-center py-1 border-b border-zinc-300 dark:border-white/10 text-xs">
+          <div><span class="font-bold text-amber-500">₹${h.amount}</span><span class="opacity-75 ml-1">(${h.note || ''})</span></div>
+          <span class="opacity-70">${h.date}</span>
+        </div>
+      `).join('');
+      document.getElementById('advanceModal').classList.replace('hidden', 'flex');
+    };
+    window.closeAdvanceModal = () => document.getElementById('advanceModal').classList.replace('flex', 'hidden');
+
+    window.submitExtraAdvance = (e) => {
+      e.preventDefault();
+      const id = document.getElementById('advLabourId').value;
+      const amt = Number(document.getElementById('advAmount').value) || 0;
+      const l = state.labours.find(x => x.id === id);
+      if (!l) return;
+      if (!l.advanceLog) l.advanceLog = [];
+      l.advance = (l.advance || 0) + amt;
+      l.advanceLog.unshift({ date: new Date().toLocaleDateString('hi-IN'), amount: amt, mode: document.getElementById('advMode').value, note: document.getElementById('advNote').value.trim() || 'Advance' });
+      closeAdvanceModal(); persistState();
+    };
+
+
+    window.toggleSettle = (id) => {
+      if (!isMainContractorActive()) return alert("Access Denied! Only Main Contractor can settle salary.");
+      const l = state.labours.find(x => x.id === id); if (!l) return;
+      if (l.settled) {
+        return openConfirmDelete({ title: "Undo Payment?", subtitle: `Mark ${l.name} as unpaid again?`, confirmText: 'Undo', onConfirm: () => { l.settled = false; l.paidDate = null; l.paidAmount = 0; persistState(); } });
+      }
+      const net = Math.round((l.dailyRate || 500) * ((l.presentDays || 0) + ((l.halfDays || 0) * 0.5))) - (l.advance || 0);
+      openCustomDialog({ title: `Paid ₹${net} to ${l.name} - Date`, inputType: 'date', defaultValue: localISO(), onConfirm: (dt) => { l.settled = true; l.paidAmount = net; l.paidDate = dt || localISO(); persistState(); } });
+    };
+
+    window.updateAttendance = (id, type) => {
+      const l = state.labours.find(x => x.id === id);
+      if (!l) return;
+      if (type === 'incPresent') l.presentDays = (l.presentDays || 0) + 1;
+      if (type === 'decPresent' && (l.presentDays || 0) > 0) l.presentDays -= 1;
+      if (type === 'incHalf') l.halfDays = (l.halfDays || 0) + 1;
+      if (type === 'decHalf' && (l.halfDays || 0) > 0) l.halfDays -= 1;
+      persistState();
+    };
+
+    window.saveExpense = async (e) => {
+      e.preventDefault();
+      const site = document.getElementById('siteSelect').value;
+      const month = document.getElementById('monthSelect').value;
+      const title = document.getElementById('eTitle').value.trim();
+      const category = document.getElementById('eCategory').value;
+      const amount = Number(document.getElementById('eAmount').value) || 0;
+      const spentFor = document.getElementById('eSpentFor').value.trim();
+      const attachment = await processUniversalFile(document.getElementById('eFile').files[0]);
+
+      if (!state.expenses) state.expenses = [];
+      state.expenses.unshift({ id: Date.now().toString(), site, month, title, category, amount, spentFor, attachment, date: new Date().toLocaleDateString('hi-IN') });
+      e.target.reset(); closeFormModal(); persistState(); navigateTo('viewExpenses');
+    };
+
+    window.saveBill = async (e) => {
+      e.preventDefault();
+      const site = document.getElementById('siteSelect').value;
+      const month = document.getElementById('monthSelect').value;
+      const title = document.getElementById('bTitle').value.trim();
+      const amount = Number(document.getElementById('bAmount').value) || 0;
+      const status = document.getElementById('bStatus').value;
+      const billDate = document.getElementById('bDate').value || localISO();
+      const attachment = await processUniversalFile(document.getElementById('bFile').files[0]);
+
+      state.bills.unshift({
+        id: Date.now().toString(), site, month, title, amount, status, billDate,
+        receivedDate: status === 'Received' ? (document.getElementById('bReceivedDateInput').value || billDate) : null,
+        attachment, createdAt: new Date().toLocaleDateString('hi-IN')
+      });
+      e.target.reset(); closeFormModal(); persistState(); navigateTo('viewBills');
+    };
+
+    // Delete Record (STRICTLY MAIN CONTRACTOR ONLY - Touch-safe Modal)
+    window.deleteRecord = (type, id) => {
+      if (!isMainContractorActive()) {
+        return alert("Access Denied! Only the Main Contractor can delete records.");
+      }
+      openConfirmDelete({
+        title: "Delete Record?",
+        subtitle: "Are you sure you want to permanently delete this entry?",
+        onConfirm: () => {
+          const gone = type === 'labours' ? (state.labours || []).find(x => x.id === id) : null;
+          (state.deletedIds = state.deletedIds || []).push(id);
+          state[type] = (state[type] || []).filter(item => item.id !== id);
+          if (gone) { const g = gone.name.trim().toLowerCase(); if (!(state.labours || []).some(x => x.name.trim().toLowerCase() === g)) state.masterLabourDirectory = (state.masterLabourDirectory || []).filter(w => w.name.trim().toLowerCase() !== g); }
+          persistState();
+        }
+      });
+    };
+
+    function getFileBadgeHTML(att) {
+      const docSvg = `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>`;
+      if (!att) return `<div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-500 flex items-center justify-center shrink-0">${docSvg}</div>`;
+      if (['jpg','jpeg','png','webp','gif'].includes(att.ext)) {
+        return `<a href="${att.dataUrl}" target="_blank" download="${esc(att.name)}"><img src="${att.dataUrl}" class="w-10 h-10 rounded-xl object-cover border border-amber-500 shrink-0" /></a>`;
+      }
+      return `<a href="${att.dataUrl}" download="${esc(att.name)}" target="_blank" class="px-2.5 py-1.5 rounded-xl bg-amber-500/20 text-amber-500 text-[10px] font-black border border-amber-500/40 shrink-0 flex items-center gap-1">${docSvg}<span>DOC</span></a>`;
+    }
+
+    // Master Render Engine
+    window.renderAll = () => {
+      const siteSelect = document.getElementById('siteSelect');
+      if (!state.sites || state.sites.length === 0) state.sites = ['Main Site A - मुख्य साइट'];
+      const currentSite = siteSelect.value && state.sites.includes(siteSelect.value) ? siteSelect.value : state.sites[0];
+      siteSelect.innerHTML = state.sites.map(s => `<option value="${esc(s)}" ${s === currentSite ? 'selected' : ''}>${esc(s)}</option>`).join('');
+
+      const activeSite = siteSelect.value;
+      const activeMonth = document.getElementById('monthSelect').value;
+      const masterActive = isMainContractorActive();
+
+      const userBadge = document.getElementById('userAvatarBadge');
+      const profileAvatar = document.getElementById('profileAvatarPreview');
+
+      if (state.userProfilePhoto) {
+        userBadge.innerHTML = `<img src="${state.userProfilePhoto}" class="w-full h-full object-cover" />`;
+        profileAvatar.innerHTML = `<img src="${state.userProfilePhoto}" class="w-full h-full object-cover" />`;
+      } else {
+        userBadge.innerHTML = `<span>ठे</span>`;
+        profileAvatar.innerHTML = `<span>ठे</span>`;
+      }
+
+      const activeAcc = getActiveAccount();
+      document.getElementById('activeNicknameBadge').innerText = activeAcc.nickname || 'Main';
+      document.getElementById('profileLogoutBtn').classList.toggle('hidden', !currentUser);
+
+      const delSiteBtn = document.getElementById('deleteSiteBtn');
+      if (delSiteBtn) delSiteBtn.classList.toggle('hidden', !masterActive);
+
+      updateSyncStatusUI();
+
+      const ml = document.getElementById('monthLabel'); if (ml) ml.innerText = fmtMonth(activeMonth);
+      const filteredLabours = (state.labours || []).filter(l => l.site === activeSite && l.month === activeMonth);
+      let totalLabourDue = 0;
+
+      const editSvg = `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>`;
+      const workerSvg = `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`;
+      const trashSvg = `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>`;
+
+      filteredLabours.forEach(l => { if (!l.settled) totalLabourDue += Math.round((l.dailyRate || 500) * ((l.presentDays || 0) + ((l.halfDays || 0) * 0.5))) - (l.advance || 0); });
+      const shownLabours = filteredLabours.filter(matchLabour);
+      document.getElementById('labourList').innerHTML = shownLabours.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No labour records found for ${activeMonth}.</div>` : shownLabours.map(l => {
+        const rate = l.dailyRate || 500;
+        const earned = Math.round(rate * ((l.presentDays || 0) + ((l.halfDays || 0) * 0.5)));
+        const net = earned - (l.advance || 0);
+        
+
+        return `
+          <div class="ios-glass p-2.5 rounded-2xl space-y-1.5 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div onclick="openLabourAttendanceHistory('${l.id}')" class="w-9 h-9 rounded-full bg-amber-500/15 text-amber-500 flex items-center justify-center shrink-0 cursor-pointer">
+                  ${workerSvg}
+                </div>
+                <div>
+                  <button onclick="openLabourAttendanceHistory('${l.id}')" class="font-bold text-sm leading-tight text-left hover:text-amber-500 underline decoration-amber-500/50">
+                    ${esc(l.name)}
+                  </button>
+                  <div class="flex items-center gap-1.5 mt-0.5">
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-black/10 dark:bg-white/10 opacity-75">${esc(l.category)}</span>
+                    ${l.phone ? `<a href="tel:${esc(l.phone)}" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-500 font-bold flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><span>${esc(l.phone)}</span></a>` : ''}
+                  </div>
+                  <div class="text-[11px] opacity-80 mt-0.5 flex items-center gap-1 flex-wrap">
+                    <span>Rate: <b>₹${rate}/day</b></span>
+                    ${masterActive ? `<button onclick="editLabourSalary('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-500 font-bold">Edit</button>` : ''}
+                    <span>| Adv: <b class="text-rose-500">₹${l.advance || 0}</b></span>
+                    <button onclick="openAdvanceModal('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-500 font-bold">+ Adv</button>
+                  </div>
+                </div>
+              </div>
+              <div class="text-right flex flex-col items-end">
+                <div class="text-[10px] uppercase opacity-65 font-bold">${l.settled ? 'PAID ✓ ' + (l.paidDate || '') : 'Net Due'}</div>
+                <div class="text-sm font-black ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net.toLocaleString('en-IN')}</div>
+                ${masterActive ? `<div class="flex items-center gap-0.5 mt-1"><button type="button" onclick="editLabourFull('${l.id}')" class="p-1.5 text-amber-500 opacity-90 hover:opacity-100" title="Edit Labour">${editSvg}</button><button type="button" onclick="deleteRecord('labours','${l.id}')" class="p-1.5 text-rose-500 opacity-80 hover:opacity-100 mt-1" title="Delete Labour">${trashSvg}</button></div>` : ''}
+              </div>
+            </div>
+
+            <div class="bg-black/5 dark:bg-black/25 p-1.5 rounded-xl flex items-center justify-between text-[11px] border border-zinc-300 dark:border-white/10">
+              <div onclick="openLabourAttendanceHistory('${l.id}')" class="cursor-pointer">
+                <span class="font-semibold opacity-75">Present:</span> <b class="text-emerald-500">${l.presentDays || 0}P</b>
+                <span class="mx-1 opacity-40">|</span>
+                <span class="font-semibold opacity-75">Half:</span> <b class="text-amber-500">${l.halfDays || 0}H</b>
+                <span class="text-[10px] text-amber-500 ml-1 underline">(History)</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <button onclick="updateAttendance('${l.id}','decPresent')" class="w-7 h-7 rounded-lg bg-black/10 dark:bg-white/10 font-black">-P</button>
+                <button onclick="updateAttendance('${l.id}','incPresent')" class="w-7 h-7 rounded-lg bg-emerald-500 text-zinc-950 font-black">+P</button>
+                <button onclick="updateAttendance('${l.id}','decHalf')" class="px-2 h-7 rounded-lg bg-black/10 dark:bg-white/10 font-black">-H</button>
+                <button onclick="updateAttendance('${l.id}','incHalf')" class="px-2 h-7 rounded-lg bg-amber-500 text-zinc-950 font-black">+H</button>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-0.5 text-xs">
+              ${masterActive ? `<button onclick="toggleSettle('${l.id}')" class="px-3 py-1 rounded-xl font-bold text-[10px] border ${l.settled ? 'bg-black/10 dark:bg-white/10 border-zinc-400/40' : 'bg-amber-500 text-zinc-950 border-amber-500'}">${l.settled ? 'Undo Paid' : 'Mark Paid / भुगतान'}</button>` : '<span></span>'}
+              <button onclick="shareWorkerSlipWhatsApp('${l.id}')" class="px-3 py-1 rounded-xl bg-emerald-500/15 text-emerald-500 font-bold text-[10px] flex items-center gap-1 border border-emerald-500/30">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span>WhatsApp Slip</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('summaryLabourDue').innerText = `₹${totalLabourDue.toLocaleString('en-IN')}`;
+
+      document.getElementById('homeRecentLabour').innerHTML = filteredLabours.length === 0 ? `
+        <div class="ios-glass rounded-2xl p-6 text-center">
+          <p class="text-xs opacity-70 mb-3">No workers added yet.</p>
+          <button onclick="openFormModal('labour')" class="px-4 py-2 bg-amber-500 text-zinc-950 font-black text-xs rounded-xl shadow">+ ADD WORKER</button>
+        </div>
+      ` : filteredLabours.slice(0, 5).map(l => {
+        const net = Math.round((l.dailyRate || 500) * ((l.presentDays || 0) + ((l.halfDays || 0) * 0.5))) - (l.advance || 0);
+        return `
+          <div onclick="openLabourAttendanceHistory('${l.id}')" class="ios-glass p-4 rounded-2xl flex items-center justify-between text-xs shadow-md cursor-pointer active:scale-98 transition-transform">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center">${workerSvg}</div>
+              <div>
+                <div class="font-bold text-sm underline decoration-amber-500/40">${esc(l.name)}</div>
+                <div class="text-[11px] opacity-75">${esc(l.category)} • ₹${l.dailyRate || 500}/day (${l.presentDays || 0}P, ${l.halfDays || 0}H)</div>
+              </div>
+            </div>
+            <div class="font-black text-sm ${net >= 0 ? 'text-emerald-500' : 'text-rose-500'}">₹${net.toLocaleString('en-IN')}</div>
+          </div>
+        `;
+      }).join('');
+
+      // Expenses
+      const filteredExpenses = (state.expenses || []).filter(e => e.site === activeSite && e.month === activeMonth);
+      document.getElementById('summaryExpensesTotal').innerText = `₹${filteredExpenses.reduce((a, b) => a + b.amount, 0).toLocaleString('en-IN')}`;
+      const shownExpenses = filteredExpenses.filter(matchExpense);
+      document.getElementById('expenseList').innerHTML = shownExpenses.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No expenses recorded.</div>` : shownExpenses.map(e => `
+        <div class="ios-glass p-3.5 rounded-2xl flex items-center justify-between shadow-sm">
+          <div class="flex items-center gap-2.5">${getFileBadgeHTML(e.attachment)}<div><h4 class="font-bold text-xs">${esc(e.title)}</h4><div class="text-[10px] opacity-75">${esc(e.category)}</div></div></div>
+          <div class="text-right flex flex-col items-end">
+            <div class="text-xs font-black text-amber-500">₹${e.amount.toLocaleString('en-IN')}</div>
+            ${masterActive ? `<button type="button" onclick="deleteRecord('expenses','${e.id}')" class="p-1.5 text-rose-500 opacity-80 hover:opacity-100 mt-0.5">${trashSvg}</button>` : ''}
+          </div>
+        </div>
+      `).join('');
+
+      // Bills
+      const filteredBills = (state.bills || []).filter(b => b.site === activeSite && b.month === activeMonth);
+      document.getElementById('summaryBillsTotal').innerText = `₹${filteredBills.reduce((a, b) => a + b.amount, 0).toLocaleString('en-IN')}`;
+      const shownBills = filteredBills.filter(matchBill);
+      document.getElementById('billList').innerHTML = shownBills.length === 0 ? `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-70">No bills recorded.</div>` : shownBills.map(b => {
+        const isPending = (b.status || '').toLowerCase().includes('pending');
+        return `
+          <div class="ios-glass p-4 rounded-2xl flex items-center justify-between shadow-sm">
+            <div class="flex items-center gap-3">
+              ${getFileBadgeHTML(b.attachment)}
+              <div>
+                <h4 class="font-bold text-xs">${esc(b.title)}</h4>
+                <div class="text-[10px] opacity-80 mt-0.5">Added: ${b.billDate} | ${b.receivedDate ? `Rec: ${b.receivedDate}` : 'Pending'}</div>
+                <div class="flex items-center gap-1.5 mt-1">
+                  <span class="text-[9px] px-2 py-0.5 rounded-full font-bold ${isPending ? 'bg-amber-500/15 text-amber-500' : 'bg-emerald-500/15 text-emerald-500'}">${b.status}</span>
+                  ${masterActive ? `<button onclick="toggleBillStatus('${b.id}')" class="text-[9px] px-2 py-0.5 rounded-lg bg-amber-500 text-zinc-950 font-black">Toggle Status</button>` : ''}
+                </div>
+              </div>
+            </div>
+            <div class="text-right flex flex-col items-end">
+              <div class="text-sm font-black ${isPending ? 'text-amber-500' : 'text-emerald-500'}">₹${b.amount.toLocaleString('en-IN')}</div>
+              ${masterActive ? `<button type="button" onclick="deleteRecord('bills','${b.id}')" class="p-1.5 text-rose-500 opacity-80 hover:opacity-100 mt-1">${trashSvg}</button>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    };
+
+    window.previewUniversalFile = (inpId, lblId) => {
+      const f = document.getElementById(inpId).files[0];
+      if (f) document.getElementById(lblId).innerText = f.name;
+    };
+
+    window.changeLanguage = (lang) => {
+      window.currentLang = lang;
+      localStorage.setItem('thekedaar_lang', lang);
+      localStorage.setItem('thekedaar_voice_locale', speechLocaleMap[lang] || 'hi-IN');
+      const dict = i18n[lang] || i18n.hi;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const k = el.getAttribute('data-i18n');
+        if (dict[k]) el.innerText = dict[k];
+      });
+      closeSettingsModal();
+    };
+
+    window.playVoiceSummary = () => {
+      const activeSite = document.getElementById('siteSelect').value;
+      const labourDue = document.getElementById('summaryLabourDue').innerText;
+      const expenses = document.getElementById('summaryExpensesTotal').innerText;
+      const bills = document.getElementById('summaryBillsTotal').innerText;
+      const msg = `नमस्ते ठेकेदार जी। साइट ${activeSite} का हिसाब: कुल बाकी मजदूरी ${labourDue} है। कुल खर्चे ${expenses} हैं। और कंपनी बिल ${bills} है।`;
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(msg);
+        utter.lang = speechLocaleMap[window.currentLang] || 'hi-IN';
+        window.speechSynthesis.speak(utter);
+      }
+    };
+
+    window.openAuthModal = () => document.getElementById('authModal').classList.replace('hidden', 'flex');
+    window.closeAuthModal = () => document.getElementById('authModal').classList.replace('flex', 'hidden');
+
+    window.connectCloud = async (isSignUp) => {
+      const email = document.getElementById('authEmail').value.trim();
+      const pass = document.getElementById('authPass').value.trim();
+      if (!email || !pass) return alert("Enter email & password.");
+      try {
+        if (isSignUp) await createUserWithEmailAndPassword(auth, email, pass);
+        else await signInWithEmailAndPassword(auth, email, pass);
+        closeAuthModal();
+      } catch (err) { alert("Error: " + err.message); }
+    };
+
+    window.handleForgotPassword = async () => {
+      const email = document.getElementById('authEmail').value.trim();
+      if (!email) return alert("Enter email first.");
+      try { await sendPasswordResetEmail(auth, email); alert("Reset email sent!"); } catch (e) { alert(e.message); }
+    };
+
+    window.logoutAccount = () => {
+      openConfirmDelete({
+        title: "Log Out of Cloud?",
+        subtitle: "You can sign back in anytime to sync your data.",
+        onConfirm: () => {
+          signOut(auth).then(() => { currentUser = null; closeProfileModal(); location.reload(); });
+        }
+      });
+    };
+
+    // Real-Time Unified Cloud Sync + Automatic Migration of Legacy PC/Mobile Documents
+    onAuthStateChanged(auth, async (user) => {
+      if (unsubscribeSnapshot) { unsubscribeSnapshot(); unsubscribeSnapshot = null; }
+      if (user) {
+        currentUser = user;
+        loadLocalState();
+        updateSyncStatusUI();
+
+        const masterDocRef = doc(db, "users", user.uid);
+        const legacyMainDocRef = doc(db, "users", `${user.uid}_acc_main`);
+
+        try {
+          const [masterSnap, legacySnap] = await Promise.all([getDoc(masterDocRef), getDoc(legacyMainDocRef)]);
+          let mergedSites = new Set(state.sites || []);
+          let mergedLabours = [...(state.labours || [])];
+          let mergedExpenses = [...(state.expenses || [])];
+          let mergedBills = [...(state.bills || [])];
+          let mergedHajri = { ...(state.dailyHajriRecords || {}) };
+          let mergedPin = state.masterPin || '1234';
+          let mergedAccounts = normalizeAccounts(state.accounts);
+
+          const mergeFromDoc = (docData) => {
+            if (!docData) return;
+            if (docData.masterPin && docData.masterPin !== '1234') mergedPin = String(docData.masterPin).trim();
+            if (Array.isArray(docData.accounts)) mergedAccounts = normalizeAccounts(docData.accounts);
+            (docData.sites || []).forEach(s => mergedSites.add(s));
+            const existingLIds = new Set(mergedLabours.map(x => x.id));
+            (docData.labours || []).forEach(l => { if (!existingLIds.has(l.id)) mergedLabours.push(l); });
+            const existingEIds = new Set(mergedExpenses.map(x => x.id));
+            (docData.expenses || []).forEach(e => { if (!existingEIds.has(e.id)) mergedExpenses.push(e); });
+            const existingBIds = new Set(mergedBills.map(x => x.id));
+            (docData.bills || []).forEach(b => { if (!existingBIds.has(b.id)) mergedBills.push(b); });
+            Object.assign(mergedHajri, docData.dailyHajriRecords || {});
+          };
+
+          if (legacySnap.exists()) mergeFromDoc(legacySnap.data());
+          if (masterSnap.exists()) mergeFromDoc(masterSnap.data());
+
+          const dead = new Set([...(state.deletedIds || []), ...(masterSnap.exists() ? masterSnap.data().deletedIds || [] : []), ...(legacySnap.exists() ? legacySnap.data().deletedIds || [] : [])]);
+          state.deletedIds = [...dead];
+          mergedLabours = mergedLabours.filter(x => !dead.has(x.id)); mergedExpenses = mergedExpenses.filter(x => !dead.has(x.id)); mergedBills = mergedBills.filter(x => !dead.has(x.id));
+          state.sites = Array.from(mergedSites);
+          state.labours = mergedLabours;
+          state.expenses = mergedExpenses;
+          state.bills = mergedBills;
+          state.dailyHajriRecords = mergedHajri;
+          state.masterPin = mergedPin;
+          state.accounts = mergedAccounts;
+
+          await persistState();
+        } catch (err) { console.error("Initial Merge Error:", err); }
+
+        // Live Real-time Listener on unified document (PC <-> Mobile instant sync)
+        unsubscribeSnapshot = onSnapshot(masterDocRef, (snap) => {
+          if (snap.exists()) {
+            sanitizeStateData(snap.data());
+            localStorage.setItem(getStorageKey(), JSON.stringify(state));
+            renderAll();
+            renderAccountIdsList();
+          }
+        });
+      } else {
+        currentUser = null;
+        loadLocalState();
+        updateSyncStatusUI();
+        renderAll();
+      }
+    });
+
+
+    enforceOnlineOnlyMode();
+    loadLocalState();
+    runSplashAnimation();
+    renderAll();
+    changeLanguage(window.currentLang);
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(() => {});
+  </script>
+</body>
+</html>
