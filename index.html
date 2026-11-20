@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
-  <link rel="icon" type="image/png" href="./logo.png?v=22">
-  <link rel="apple-touch-icon" href="./logo.png?v=22">
-  <link rel="manifest" href="manifest.json?v=22">
+  <link rel="icon" type="image/png" href="./logo.png?v=23">
+  <link rel="apple-touch-icon" href="./logo.png?v=23">
+  <link rel="manifest" href="manifest.json?v=23">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#000000">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -71,7 +71,6 @@
 </head>
 <body class="min-h-screen pb-32 select-none no-scrollbar">
 
-  <!-- OFFLINE BLOCKER -->
   <div id="offlineModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl hidden flex-col items-center justify-center p-6 text-center">
     <div class="w-16 h-16 rounded-3xl bg-rose-500/20 text-rose-500 flex items-center justify-center mb-4 animate-bounce">
       <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18.364 5.636a9 9 0 010 12.728M3 3l18 18"/></svg>
@@ -80,7 +79,6 @@
     <p class="text-xs text-zinc-400 max-w-xs mt-1" data-i18n="offlineDesc"></p>
   </div>
 
-  <!-- HEADER -->
   <header class="sticky top-0 z-30 px-4 pt-3.5 pb-2.5 ios-glass border-x-0 border-t-0">
     <div class="max-w-md mx-auto flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -112,7 +110,6 @@
     </div>
   </header>
 
-  <!-- SITE & MONTH BAR -->
   <div class="max-w-md mx-auto px-4 pt-3">
     <div class="ios-glass rounded-2xl p-2 flex items-center justify-between gap-1.5">
       <div class="flex items-center gap-1.5 flex-1 min-w-0">
@@ -130,7 +127,6 @@
     </div>
   </div>
 
-  <!-- MAIN BODY -->
   <main class="max-w-md mx-auto p-4 space-y-4">
     <div class="grid grid-cols-3 gap-2.5">
       <div class="rounded-2xl p-3 border border-rose-500/30 bg-rose-500/10 ios-glass text-center card-hover">
@@ -156,7 +152,6 @@
       </button>
     </div>
 
-    <!-- VIEW 1: HOME -->
     <section id="viewHome" class="space-y-3">
       <div class="flex items-center justify-between">
         <h2 class="text-[11px] font-bold uppercase tracking-wider opacity-70" data-i18n="liveSnapshot"></h2>
@@ -165,7 +160,6 @@
       <div id="homeRecentLabour" class="space-y-3"></div>
     </section>
 
-    <!-- VIEW 2: LABOURS -->
     <section id="viewLabours" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black" data-i18n="tabLabour"></h2>
@@ -198,7 +192,6 @@
       <div id="labourList" class="space-y-3"></div>
     </section>
 
-    <!-- VIEW 3: EXPENSES -->
     <section id="viewExpenses" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black" data-i18n="tabExpenses"></h2>
@@ -207,7 +200,6 @@
       <div id="expenseList" class="space-y-3"></div>
     </section>
 
-    <!-- VIEW 4: BILLS -->
     <section id="viewBills" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black" data-i18n="tabBills"></h2>
@@ -217,7 +209,6 @@
     </section>
   </main>
 
-  <!-- FLOATING NAV + LOCAL THEKEDAAR AI ORB -->
   <div class="fixed bottom-4 inset-x-0 z-40 flex justify-center items-center gap-2.5 pointer-events-none px-3">
     <nav class="ios-nav pointer-events-auto rounded-full py-1.5 px-2.5 flex items-center justify-around gap-1 flex-1 max-w-[300px]">
       <button type="button" onclick="navigateTo('viewHome')" id="nav-viewHome" class="nav-btn active w-11 h-11 rounded-full flex items-center justify-center"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.1l9 8.1c.4.3.6.8.6 1.3v8.5c0 1.1-.9 2-2 2h-4.5c-.8 0-1.5-.7-1.5-1.5V15c0-.6-.4-1-1-1s-1 .4-1 1v5.5c0 .8-.7 1.5-1.5 1.5H5.4c-1.1 0-2-.9-2-2v-8.5c0-.5.2-1 .6-1.3l9-8.1z"/></svg></button>
@@ -231,7 +222,6 @@
     </button>
   </div>
 
-  <!-- MONTH PICKER MODAL -->
   <div id="monthPickerModal" class="fixed inset-0 bg-black/80 backdrop-blur-xl hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-xs w-full p-5 space-y-4">
       <div class="flex justify-between items-center border-b border-white/10 pb-2">
@@ -248,7 +238,6 @@
     </div>
   </div>
 
-  <!-- PROFILE MODAL -->
   <div id="profileModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-white/10 pb-3">
@@ -280,7 +269,6 @@
     </div>
   </div>
 
-  <!-- SETTINGS MODAL -->
   <div id="settingsModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-white/10 pb-3">
@@ -321,7 +309,6 @@
     </div>
   </div>
 
-  <!-- MONTHLY LEDGER MODAL -->
   <div id="monthlyLedgerModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center p-3 z-50">
     <div class="ios-glass rounded-3xl max-w-lg w-full p-5 space-y-4 max-h-[90vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-white/10 pb-2 shrink-0">
@@ -332,7 +319,6 @@
     </div>
   </div>
 
-  <!-- LABOUR HISTORY MODAL -->
   <div id="labourHistoryModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-3 max-h-[85vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-white/10 pb-2">
@@ -343,7 +329,6 @@
     </div>
   </div>
 
-  <!-- CARRY FORWARD MODAL -->
   <div id="carryModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-3 z-50">
     <div class="ios-glass rounded-3xl max-w-md w-full p-5 space-y-3 max-h-[88vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-white/10 pb-2">
@@ -355,7 +340,6 @@
     </div>
   </div>
 
-  <!-- HAJRI BOOK MODAL -->
   <div id="hajriBookModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-3 z-50">
     <div class="ios-glass rounded-3xl max-w-lg w-full p-5 space-y-3 max-h-[90vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-white/10 pb-2">
@@ -375,7 +359,6 @@
     </div>
   </div>
 
-  <!-- INPUT FORMS MODAL -->
   <div id="formModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-white/10 pb-2">
@@ -511,7 +494,6 @@
     </div>
   </div>
 
-  <!-- ADVANCE MODAL -->
   <div id="advanceModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-3">
       <div class="flex justify-between items-center border-b border-white/10 pb-2">
@@ -523,7 +505,10 @@
         <div class="grid grid-cols-2 gap-2">
           <div>
             <label class="text-[10px] font-bold opacity-75 uppercase" data-i18n="amountLabel"></label>
-            <input type="number" inputmode="numeric" id="advAmount" oninput="updateLiveINR('advAmount','advAmtPrev')" required min="1" class="app-input w-full rounded-xl px-2.5 py-2 text-sm mt-0.5" />
+            <div class="flex items-center gap-1 mt-0.5">
+              <input type="number" inputmode="numeric" id="advAmount" oninput="updateLiveINR('advAmount','advAmtPrev')" required min="1" class="app-input w-full rounded-xl px-2.5 py-2 text-sm" />
+              <button type="button" onclick="startVoiceInputForField('advAmount', true)" class="p-2 bg-amber-500/15 text-amber-500 rounded-xl"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></button>
+            </div>
             <span id="advAmtPrev" class="text-[10px] font-black text-amber-500 block mt-0.5">₹0</span>
           </div>
           <div>
@@ -537,14 +522,16 @@
     </div>
   </div>
 
-  <!-- AUTH MODAL -->
   <div id="authModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-sm w-full p-6 space-y-4">
       <div class="flex justify-between items-center">
         <h3 class="font-black text-base" data-i18n="authTitle"></h3>
         <button type="button" onclick="closeModal('authModal')" class="text-lg font-bold opacity-70">✕</button>
       </div>
-      <input type="email" id="authEmail" data-i18n-placeholder="emailPh" class="app-input w-full rounded-xl px-3 py-2.5 text-sm" />
+      <div class="flex items-center gap-1.5">
+        <input type="email" id="authEmail" data-i18n-placeholder="emailPh" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm" />
+        <button type="button" onclick="startVoiceInputForField('authEmail')" class="p-2.5 bg-amber-500/15 text-amber-500 rounded-xl"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></button>
+      </div>
       <input type="password" id="authPass" data-i18n-placeholder="passPh" class="app-input w-full rounded-xl px-3 py-2.5 text-sm" />
       <div class="flex gap-2">
         <button type="button" onclick="connectCloud(false)" class="flex-1 bg-amber-500 text-zinc-950 font-black py-2.5 rounded-xl text-sm" data-i18n="loginBtn"></button>
@@ -553,7 +540,6 @@
     </div>
   </div>
 
-  <!-- VOICE MODAL -->
   <div id="voiceModal" class="fixed inset-0 bg-black/80 backdrop-blur-xl hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-xs w-full p-6 text-center space-y-4 border border-amber-500/30">
       <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 flex items-center justify-center shadow-lg">
@@ -571,7 +557,6 @@
     </div>
   </div>
 
-  <!-- CUSTOM DIALOG -->
   <div id="customDialogModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-xs w-full p-5 space-y-4">
       <h3 id="customDialogTitle" class="font-black text-sm"></h3>
@@ -586,11 +571,13 @@
     </div>
   </div>
 
-  <!-- PIN LOCK MODAL -->
   <div id="pinLockModal" class="fixed inset-0 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-xs w-full p-6 text-center space-y-4 border border-amber-500/40">
       <h3 class="font-black text-base" data-i18n="pinModalTitle"></h3>
-      <input type="password" id="masterPinInput" data-i18n-placeholder="enterPinPh" class="app-input w-full rounded-xl px-3 py-3 text-center text-base font-black tracking-widest" />
+      <div class="flex items-center gap-1.5">
+        <input type="password" id="masterPinInput" data-i18n-placeholder="enterPinPh" class="app-input flex-1 rounded-xl px-3 py-3 text-center text-base font-black tracking-widest" />
+        <button type="button" onclick="startVoiceInputForField('masterPinInput', true)" class="p-3 bg-amber-500/15 text-amber-500 rounded-xl"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></button>
+      </div>
       <div class="flex gap-2">
         <button type="button" onclick="closeModal('pinLockModal')" class="flex-1 py-2.5 rounded-xl bg-white/10 text-xs font-bold" data-i18n="cancelBtn"></button>
         <button type="button" onclick="verifyMasterPin()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 text-xs font-black" data-i18n="unlockBtn"></button>
@@ -598,7 +585,6 @@
     </div>
   </div>
 
-  <!-- CONFIRM DELETE MODAL -->
   <div id="confirmDeleteModal" class="fixed inset-0 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-xs w-full p-5 text-center space-y-4 border border-rose-500/40">
       <h3 id="confirmDeleteTitle" class="font-black text-sm"></h3>
@@ -610,7 +596,6 @@
     </div>
   </div>
 
-  <!-- LOCAL THEKEDAAR AI MODAL -->
   <div id="thekedaarAIModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-xl hidden items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-3 border border-purple-500/40 flex flex-col max-h-[85vh]">
       <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
@@ -648,8 +633,8 @@
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    window.addEventListener('error', (ev) => { console.warn('App guard caught error:', ev.message); });
-    window.addEventListener('unhandledrejection', (ev) => { console.warn('App guard caught rejection:', ev.reason); });
+    window.addEventListener('error', (ev) => { console.warn('App guard:', ev.message); });
+    window.addEventListener('unhandledrejection', (ev) => { console.warn('Promise guard:', ev.reason); });
 
     const firebaseConfig = {
       apiKey: "AIzaSyCsabUW5vFiXGxsUu4FvdKkc5cxxsCt8jA",
@@ -680,6 +665,30 @@
       hi: 'hi-IN', hinglish: 'hi-IN', en: 'en-IN', mr: 'mr-IN',
       kn: 'kn-IN', gu: 'gu-IN', ta: 'ta-IN', te: 'te-IN',
       pa: 'pa-IN', bho: 'hi-IN', mwr: 'hi-IN'
+    };
+
+    const monthsByLang = {
+      en: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+      kn: ['ಜನವರಿ','ಫೆಬ್ರವರಿ','ಮಾರ್ಚ್','ಏಪ್ರಿಲ್','ಮೇ','ಜೂನ್','ಜುಲೈ','ಆಗಸ್ಟ್','ಸೆಪ್ಟೆಂಬರ್','ಅಕ್ಟೋಬರ್','ನವೆಂಬರ್','ಡಿಸೆಂಬರ್'],
+      gu: ['જાન્યુઆરી','ફેબ્રુઆરી','માર્ચ','એપ્રિલ','મે','જૂન','જુલાઈ','ઓગસ્ટ','સપ્ટેમ્બર','ઓક્ટોબર','નવેમ્બર','ડિસેમ્બર'],
+      ta: ['ஜனவரி','பிப்ரவரி','மார்ச்','ஏப்ரல்','மே','ஜூன்','ஜூலை','ஆகஸ்ட்','செப்டம்பர்','அக்டோபர்','நவம்பர்','டிசம்பர்'],
+      te: ['జనవరి','ఫిబ్రవరి','మార్చి','ఏప్రిల్','మే','జూన్','జూలై','ఆగస్టు','సెప్టెంబర్','అక్టోబర్','నవంబర్','డిసెంబర్'],
+      pa: ['ਜਨਵਰੀ','ਫ਼ਰਵਰੀ','ਮਾਰਚ','ਅਪ੍ਰੈਲ','ਮਈ','ਜੂਨ','ਜੁਲਾਈ','ਅਗਸਤ','ਸਤੰਬਰ','ਅਕਤੂਬਰ','ਨਵੰਬਰ','ਦਸੰਬਰ'],
+      hi: ['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर']
+    };
+
+    const summaryTemplates = {
+      hi: ({ s, mName, count, due, exp, bill, profit }) => `साइट ${s} का ${mName} का हिसाब। कुल ${count} मजदूर। मजदूर बकाया ${due}। कुल खर्चे ${exp}। कंपनी बिल ${bill}। अनुमानित मुनाफा ${profit}।`,
+      hinglish: ({ s, mName, count, due, exp, bill, profit }) => `${s} site ka ${mName} hisab. Total ${count} workers. Labour due ${due}. Expenses ${exp}. Bills ${bill}. Profit ${profit}.`,
+      en: ({ s, mName, count, due, exp, bill, profit }) => `Site ${s} summary for ${mName}. ${count} workers. Labour due ${due}. Expenses ${exp}. Company bills ${bill}. Estimated profit ${profit}.`,
+      mr: ({ s, mName, count, due, exp, bill, profit }) => `साइट ${s} चा ${mName} हिशोब. एकूण ${count} कामगार. मजुरी बाकी ${due}. खर्च ${exp}. बिल ${bill}. नफा ${profit}.`,
+      kn: ({ s, mName, count, due, exp, bill, profit }) => `${s} ಸೈಟ್‌ನ ${mName} ಲೆಕ್ಕ. ಒಟ್ಟು ${count} ಕಾರ್ಮಿಕರು. ಕೂಲಿ ಬಾಕಿ ${due}. ಖರ್ಚು ${exp}. ಬಿಲ್ ${bill}. ಲಾಭ ${profit}.`,
+      gu: ({ s, mName, count, due, exp, bill, profit }) => `સાઇટ ${s} નો ${mName} હિસાબ. કુલ ${count} મજૂર. મજૂરી બાકી ${due}. ખર્ચ ${exp}. બિલ ${bill}. નફો ${profit}.`,
+      ta: ({ s, mName, count, due, exp, bill, profit }) => `தளம் ${s} இன் ${mName} கணக்கு. ${count} பணியாளர்கள். கூலி பாக்கி ${due}. செலவு ${exp}. பில் ${bill}. லாபம் ${profit}.`,
+      te: ({ s, mName, count, due, exp, bill, profit }) => `${s} సైట్ ${mName} లెక్కలు. ${count} కార్మికులు. కూలీ బాకీ ${due}. ఖర్చు ${exp}. బిల్లు ${bill}. లాభం ${profit}.`,
+      pa: ({ s, mName, count, due, exp, bill, profit }) => `ਸਾਈਟ ${s} ਦਾ ${mName} ਹਿਸਾਬ। ਕੁੱਲ ${count} ਮਜ਼ਦੂਰ। ਮਜ਼ਦੂਰੀ ਬਾਕੀ ${due}। ਖਰਚੇ ${exp}। ਬਿੱਲ ${bill}। ਮੁਨਾਫ਼ਾ ${profit}।`,
+      bho: ({ s, mName, count, due, exp, bill, profit }) => `साइट ${s} के ${mName} हिसाब। कुल ${count} मजदूर। बाकी ${due}। खरचा ${exp}। बिल ${bill}। मुनाफा ${profit}।`,
+      mwr: ({ s, mName, count, due, exp, bill, profit }) => `साइट ${s} रो ${mName} हिसाब। कुल ${count} मजदूर। बाकी ${due}। खरचा ${exp}। बिल ${bill}। मुनाफो ${profit}।`
     };
 
     const fmtINR = (v) => '₹' + Math.round(Number(v) || 0).toLocaleString('en-IN');
@@ -720,10 +729,14 @@
         editLbl: "बदलें", settleLbl: "चुकता", slipLbl: "व्हाट्सएप पर्ची", noWorkers: "कोई मजदूर नहीं है।",
         noExpenses: "कोई खर्च दर्ज नहीं है।", noBills: "कोई बिल दर्ज नहीं है।", activeLbl: "सक्रिय",
         switchLbl: "बदलें", profitLbl: "अनुमानित मुनाफा",
-        aiWelcome: "नमस्ते! मैं <b>THEKEDAAR AI</b> हूँ। बोलें या लिखें: <i>\"Add worker Raju 600\"</i>, <i>\"Mark all present\"</i> या <i>\"Site profit report\"</i>।",
+        aiWelcome: "नमस्ते! मैं <b>THEKEDAAR AI</b> हूँ। मजदूर, हाजिरी, एडवांस, खर्च, बिल, साइट, पिन या ऐप गाइड से जुड़े सवाल या कमांड पूछें।",
         aiMarkedAll: (n) => `<b>${n}</b> मजदूरों की हाजिरी (+1P) लगा दी गई।`,
         aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/दिन) जोड़ दिया गया।`,
-        aiHelp: "मजदूर जोड़ने के लिए <b>+ मजदूर</b>, हाजिरी के लिए <b>हाजिरी बुक</b> और पिछले महीने के मजदूरों के लिए <b>कैरी</b> बटन दबाएं।"
+        aiAddedExpense: (title, amt) => `खर्च <b>${title}</b> (${fmtINR(amt)}) जोड़ दिया गया।`,
+        aiAddedBill: (title, amt) => `बिल <b>${title}</b> (${fmtINR(amt)}) जोड़ दिया गया।`,
+        aiAddedAdv: (name, amt) => `<b>${name}</b> को ${fmtINR(amt)} एडवांस जोड़ दिया गया।`,
+        aiAddedSite: (s) => `साइट <b>${s}</b> जोड़ दी गई।`,
+        aiHelp: "आप पूछ सकते हैं: <i>\"Add worker Raju 600\"</i>, <i>\"Mark all present\"</i>, <i>\"Add expense Auto 200\"</i>, <i>\"Add bill 15000 Slab\"</i>, <i>\"Add site Lodha\"</i> या <i>\"Site profit report\"</i>।"
       },
       hinglish: {
         offlineTitle: "Internet Connection Chahiye", offlineDesc: "Mobile data ya Wi-Fi on karein.",
@@ -760,10 +773,14 @@
         editLbl: "Edit", settleLbl: "Settle", slipLbl: "WhatsApp Slip", noWorkers: "Koi worker nahi hai.",
         noExpenses: "Koi kharcha nahi hai.", noBills: "Koi bill nahi hai.", activeLbl: "Active",
         switchLbl: "Switch", profitLbl: "Estimated Profit",
-        aiWelcome: "Namaste! Main <b>THEKEDAAR AI</b> hoon. Bolein ya likhein: <i>\"Add worker Raju 600\"</i>, <i>\"Mark all present\"</i> ya <i>\"Site profit report\"</i>.",
+        aiWelcome: "Namaste! Main <b>THEKEDAAR AI</b> hoon. Labour, hajri, advance, kharcha, bill, site ya app ka koi bhi doubt poochhein ya command dein.",
         aiMarkedAll: (n) => `<b>${n}</b> workers ki hajri (+1P) lag gayi.`,
         aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/din) add ho gaya.`,
-        aiHelp: "Worker add karne ke liye <b>+ Worker</b>, hajri ke liye <b>Hajri Book</b> aur pichle mahine ke workers ke liye <b>Carry</b> dabayein."
+        aiAddedExpense: (title, amt) => `Kharcha <b>${title}</b> (${fmtINR(amt)}) add ho gaya.`,
+        aiAddedBill: (title, amt) => `Bill <b>${title}</b> (${fmtINR(amt)}) add ho gaya.`,
+        aiAddedAdv: (name, amt) => `<b>${name}</b> ko ${fmtINR(amt)} advance add ho gaya.`,
+        aiAddedSite: (s) => `Site <b>${s}</b> add ho gayi.`,
+        aiHelp: "Try karein: <i>\"Add worker Raju 600\"</i>, <i>\"Mark all present\"</i>, <i>\"Add expense Auto 200\"</i>, <i>\"Add bill 15000 Slab\"</i>, <i>\"Add site Lodha\"</i> ya <i>\"Site profit report\"</i>."
       },
       en: {
         offlineTitle: "Internet Connection Required", offlineDesc: "Please turn on Mobile Data or Wi-Fi.",
@@ -795,15 +812,19 @@
         cancelBtn: "Cancel", speakNowBtn: "Speak Now", pinModalTitle: "Main Contractor PIN",
         enterPinPh: "Enter PIN", unlockBtn: "Unlock", deleteBtn: "Delete", aiSubtitle: "Local App Assistant",
         aiChipPresent: "Mark All Present", aiChipProfit: "Profit & Summary", aiChipHelp: "App Help",
-        aiInputPh: "Type a command or tap mic...", sendBtn: "Send",
+        aiInputPh: "Type a command or question...", sendBtn: "Send",
         rateLbl: "Rate", advLbl: "Adv", netDueLbl: "Net Due", presentLbl: "Present", halfLbl: "Half",
         editLbl: "Edit", settleLbl: "Settle", slipLbl: "WhatsApp Slip", noWorkers: "No workers found.",
         noExpenses: "No expenses recorded.", noBills: "No bills recorded.", activeLbl: "Active",
         switchLbl: "Switch", profitLbl: "Estimated Profit",
-        aiWelcome: "Hello! I am <b>THEKEDAAR AI</b>. Try: <i>\"Add worker Raju 600\"</i>, <i>\"Mark all present\"</i>, or <i>\"Site profit report\"</i>.",
+        aiWelcome: "Hello! I am <b>THEKEDAAR AI</b>. Ask any app question or give commands for workers, attendance, advances, expenses, bills, or sites.",
         aiMarkedAll: (n) => `Marked +1P for <b>${n}</b> workers.`,
         aiAddedWorker: (name, rate) => `Added <b>${name}</b> (${fmtINR(rate)}/day).`,
-        aiHelp: "Tap <b>+ Worker</b> to add labour, <b>Hajri Book</b> for daily attendance, and <b>Carry</b> for last month's workers."
+        aiAddedExpense: (title, amt) => `Added expense <b>${title}</b> (${fmtINR(amt)}).`,
+        aiAddedBill: (title, amt) => `Added bill <b>${title}</b> (${fmtINR(amt)}).`,
+        aiAddedAdv: (name, amt) => `Added ${fmtINR(amt)} advance to <b>${name}</b>.`,
+        aiAddedSite: (s) => `Added site <b>${s}</b>.`,
+        aiHelp: "Try: <i>\"Add worker Raju 600\"</i>, <i>\"Mark all present\"</i>, <i>\"Add expense Auto 200\"</i>, <i>\"Add bill 15000 Slab\"</i>, <i>\"Add site Lodha\"</i>, or <i>\"Site profit report\"</i>."
       },
       mr: {
         offlineTitle: "इंटरनेट आवश्यक आहे", offlineDesc: "कृपया मोबाइल डेटा किंवा वाय-फाय सुरू करा.",
@@ -840,10 +861,14 @@
         editLbl: "बदला", settleLbl: "पूर्ण", slipLbl: "व्हॉट्सअॅप स्लिप", noWorkers: "कामगार नाहीत.",
         noExpenses: "खर्च नाही.", noBills: "बिल नाही.", activeLbl: "सक्रिय",
         switchLbl: "बदला", profitLbl: "अंदाजित नफा",
-        aiWelcome: "नमस्कार! मी <b>THEKEDAAR AI</b> आहे. <i>\"Add worker Raju 600\"</i> किंवा <i>\"Mark all present\"</i> लिहा.",
+        aiWelcome: "नमस्कार! मी <b>THEKEDAAR AI</b> आहे. कामगार, हजेरी, खर्च, बिल किंवा साइटबद्दल विचारा.",
         aiMarkedAll: (n) => `<b>${n}</b> कामगारांची हजेरी (+1P) लावली.`,
         aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/दिवस) जोडले.`,
-        aiHelp: "नवीन कामगारासाठी <b>+ कामगार</b> आणि हजेरीसाठी <b>हजेरी बुक</b> वापरा."
+        aiAddedExpense: (title, amt) => `खर्च <b>${title}</b> (${fmtINR(amt)}) जोडला.`,
+        aiAddedBill: (title, amt) => `बिल <b>${title}</b> (${fmtINR(amt)}) जोडले.`,
+        aiAddedAdv: (name, amt) => `<b>${name}</b> ला ${fmtINR(amt)} अॅडव्हान्स जोडला.`,
+        aiAddedSite: (s) => `साइट <b>${s}</b> जोडली.`,
+        aiHelp: "नवीन कामगारासाठी <b>+ कामगार</b>, हजेरीसाठी <b>हजेरी बुक</b> आणि मागील महिन्यासाठी <b>कॅरी</b> वापरा."
       },
       kn: {
         offlineTitle: "ಇಂಟರ್ನೆಟ್ ಅಗತ್ಯವಿದೆ", offlineDesc: "ದಯವಿಟ್ಟು ಡೇಟಾ ಅಥವಾ ವೈ-ಫೈ ಆನ್ ಮಾಡಿ.",
@@ -882,6 +907,10 @@
         switchLbl: "ಬದಲಿಸಿ", profitLbl: "ಅಂದಾಜು ಲಾಭ",
         aiWelcome: "ನಮಸ್ಕಾರ! ನಾನು <b>THEKEDAAR AI</b>.", aiMarkedAll: (n) => `<b>${n}</b> ಕಾರ್ಮಿಕರಿಗೆ ಹಾಜರಿ (+1P).`,
         aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/ದಿನ) ಸೇರಿಸಲಾಗಿದೆ.`,
+        aiAddedExpense: (title, amt) => `ಖರ್ಚು <b>${title}</b> (${fmtINR(amt)}) ಸೇರಿಸಲಾಗಿದೆ.`,
+        aiAddedBill: (title, amt) => `ಬಿಲ್ <b>${title}</b> (${fmtINR(amt)}) ಸೇರಿಸಲಾಗಿದೆ.`,
+        aiAddedAdv: (name, amt) => `<b>${name}</b> ಗೆ ${fmtINR(amt)} ಮುಂಗಡ ಸೇರಿಸಲಾಗಿದೆ.`,
+        aiAddedSite: (s) => `ಸೈಟ್ <b>${s}</b> ಸೇರಿಸಲಾಗಿದೆ.`,
         aiHelp: "ಕಾರ್ಮಿಕರನ್ನು ಸೇರಿಸಲು <b>+ ಕಾರ್ಮಿಕ</b> ಬಳಸಿ."
       },
       gu: {
@@ -921,6 +950,10 @@
         switchLbl: "બદલો", profitLbl: "અંદાજિત નફો",
         aiWelcome: "નમસ્તે! હું <b>THEKEDAAR AI</b> છું.", aiMarkedAll: (n) => `<b>${n}</b> મજૂરોની હાજરી (+1P).`,
         aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/દિવસ) ઉમેરાયા.`,
+        aiAddedExpense: (title, amt) => `ખર્ચ <b>${title}</b> (${fmtINR(amt)}) ઉમેરાયો.`,
+        aiAddedBill: (title, amt) => `બિલ <b>${title}</b> (${fmtINR(amt)}) ઉમેરાયું.`,
+        aiAddedAdv: (name, amt) => `<b>${name}</b> ને ${fmtINR(amt)} એડવાન્સ ઉમેર્યો.`,
+        aiAddedSite: (s) => `સાઇટ <b>${s}</b> ઉમેરાઈ.`,
         aiHelp: "મજૂર ઉમેરવા <b>+ મજૂર</b> દબાવો."
       },
       ta: {
@@ -960,6 +993,10 @@
         switchLbl: "மாற்று", profitLbl: "மதிப்பிடப்பட்ட லாபம்",
         aiWelcome: "வணக்கம்! நான் <b>THEKEDAAR AI</b>.", aiMarkedAll: (n) => `<b>${n}</b> பணியாளர்களுக்கு வருகை (+1P).`,
         aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/நாள்) சேர்க்கப்பட்டது.`,
+        aiAddedExpense: (title, amt) => `செலவு <b>${title}</b> (${fmtINR(amt)}) சேர்க்கப்பட்டது.`,
+        aiAddedBill: (title, amt) => `பில் <b>${title}</b> (${fmtINR(amt)}) சேர்க்கப்பட்டது.`,
+        aiAddedAdv: (name, amt) => `<b>${name}</b> க்கு ${fmtINR(amt)} முன்பணம் சேர்க்கப்பட்டது.`,
+        aiAddedSite: (s) => `தளம் <b>${s}</b> சேர்க்கப்பட்டது.`,
         aiHelp: "புதிய பணியாளருக்கு <b>+ பணியாளர்</b> பொத்தானை அழுத்தவும்."
       },
       te: {
@@ -999,6 +1036,10 @@
         switchLbl: "మార్చు", profitLbl: "అంచనా లాభం",
         aiWelcome: "నమస్కారం! నేను <b>THEKEDAAR AI</b>.", aiMarkedAll: (n) => `<b>${n}</b> కార్మికులకు హాజరు (+1P).`,
         aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/రోజు) చేర్చబడింది.`,
+        aiAddedExpense: (title, amt) => `ఖర్చు <b>${title}</b> (${fmtINR(amt)}) చేర్చబడింది.`,
+        aiAddedBill: (title, amt) => `బిల్లు <b>${title}</b> (${fmtINR(amt)}) చేర్చబడింది.`,
+        aiAddedAdv: (name, amt) => `<b>${name}</b> కి ${fmtINR(amt)} అడ్వాన్స్ చేర్చబడింది.`,
+        aiAddedSite: (s) => `సైట్ <b>${s}</b> చేర్చబడింది.`,
         aiHelp: "కార్మికుడిని చేర్చడానికి <b>+ కార్మికుడు</b> నొక్కండి."
       },
       pa: {
@@ -1038,6 +1079,10 @@
         switchLbl: "ਬਦਲੋ", profitLbl: "ਅੰਦਾਜ਼ਨ ਮੁਨਾਫ਼ਾ",
         aiWelcome: "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ! ਮੈਂ <b>THEKEDAAR AI</b> ਹਾਂ।", aiMarkedAll: (n) => `<b>${n}</b> ਮਜ਼ਦੂਰਾਂ ਦੀ ਹਾਜ਼ਰੀ (+1P)।`,
         aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/ਦਿਨ) ਜੋੜਿਆ ਗਿਆ।`,
+        aiAddedExpense: (title, amt) => `ਖਰਚਾ <b>${title}</b> (${fmtINR(amt)}) ਜੋੜਿਆ ਗਿਆ।`,
+        aiAddedBill: (title, amt) => `ਬਿੱਲ <b>${title}</b> (${fmtINR(amt)}) ਜੋੜਿਆ ਗਿਆ।`,
+        aiAddedAdv: (name, amt) => `<b>${name}</b> ਨੂੰ ${fmtINR(amt)} ਐਡਵਾਂਸ ਜੋੜਿਆ ਗਿਆ।`,
+        aiAddedSite: (s) => `ਸਾਈਟ <b>${s}</b> ਜੋੜੀ ਗਈ।`,
         aiHelp: "ਨਵਾਂ ਮਜ਼ਦੂਰ ਜੋੜਨ ਲਈ <b>+ ਮਜ਼ਦੂਰ</b> ਦਬਾਓ।"
       },
       bho: {
@@ -1077,6 +1122,10 @@
         switchLbl: "बदलीं", profitLbl: "अनुमानित मुनाफा",
         aiWelcome: "प्रणाम! हम <b>THEKEDAAR AI</b> बानी।", aiMarkedAll: (n) => `<b>${n}</b> मजदूरन के हाजिरी (+1P) लाग गइल।`,
         aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/दिन) जुड़ गइल।`,
+        aiAddedExpense: (title, amt) => `खरचा <b>${title}</b> (${fmtINR(amt)}) जुड़ गइल।`,
+        aiAddedBill: (title, amt) => `बिल <b>${title}</b> (${fmtINR(amt)}) जुड़ गइल।`,
+        aiAddedAdv: (name, amt) => `<b>${name}</b> के ${fmtINR(amt)} एडवांस जुड़ गइल।`,
+        aiAddedSite: (s) => `साइट <b>${s}</b> जुड़ गइल।`,
         aiHelp: "नया मजदूर जोड़े खातिर <b>+ मजदूर</b> दबाईं।"
       },
       mwr: {
@@ -1116,6 +1165,10 @@
         switchLbl: "बदलो", profitLbl: "अनुमानित मुनाफो",
         aiWelcome: "खम्मा घणी! मैं <b>THEKEDAAR AI</b> हूं।", aiMarkedAll: (n) => `<b>${n}</b> मजदूरां री हाजिरी (+1P) लाग गी।`,
         aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/दिन) जोड़ दिया गया।`,
+        aiAddedExpense: (title, amt) => `खरचा <b>${title}</b> (${fmtINR(amt)}) जुड़ गयो।`,
+        aiAddedBill: (title, amt) => `बिल <b>${title}</b> (${fmtINR(amt)}) जुड़ गयो।`,
+        aiAddedAdv: (name, amt) => `<b>${name}</b> ने ${fmtINR(amt)} एडवांस जुड़ गयो।`,
+        aiAddedSite: (s) => `साइट <b>${s}</b> जुड़ गी।`,
         aiHelp: "नवो मजदूर जोड़ण खातर <b>+ मजदूर</b> दबाओ।"
       }
     };
@@ -1149,7 +1202,7 @@
     }
     const isMaster = () => getActiveAcc().id === 'acc_main' || Boolean(getActiveAcc().isMaster);
     const getStamp = () => `${getActiveAcc().displayNickname} • ${new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}`;
-    const getStoreKey = () => currentUser ? `thekedaar_v22_${currentUser.uid}` : 'thekedaar_v22_guest';
+    const getStoreKey = () => currentUser ? `thekedaar_v23_${currentUser.uid}` : 'thekedaar_v23_guest';
 
     function checkOnline() {
       const m = byId('offlineModal');
@@ -1202,13 +1255,12 @@
     window.setAppTheme = (th) => { document.documentElement.className = th; try { localStorage.setItem('thekedaar_theme', th); } catch (e) {} };
     try { setAppTheme(localStorage.getItem('thekedaar_theme') || 'theme-amoled'); } catch (e) {}
 
-    const monthsHi = ['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'];
-    const monthsEn = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     const now = new Date(); let pickYear = now.getFullYear();
     const fmtMonth = (ym) => {
       const parts = (ym || '2026-11').split('-');
       const mIdx = Math.max(0, Math.min(11, (parseInt(parts[1], 10) || 11) - 1));
-      return `${(window.currentLang === 'en' ? monthsEn : monthsHi)[mIdx]} ${parts[0] || pickYear}`;
+      const names = monthsByLang[window.currentLang] || monthsByLang.hi;
+      return `${names[mIdx]} ${parts[0] || pickYear}`;
     };
     if (byId('monthSelect')) byId('monthSelect').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
     const isoToday = now.toISOString().split('T')[0];
@@ -1221,10 +1273,11 @@
     function renderMonthGrid() {
       if (byId('pickerYearDisplay')) byId('pickerYearDisplay').innerText = pickYear;
       const cur = byId('monthSelect')?.value || '';
+      const labels = monthsByLang[window.currentLang] || monthsByLang.hi;
       if (byId('pickerMonthsGrid')) {
-        byId('pickerMonthsGrid').innerHTML = monthsEn.map((m, i) => {
+        byId('pickerMonthsGrid').innerHTML = labels.map((lbl, i) => {
           const val = `${pickYear}-${String(i+1).padStart(2,'0')}`;
-          return `<button type="button" onclick="pickMonth('${val}')" class="py-2.5 rounded-xl text-xs font-black ${val===cur ? 'bg-amber-500 text-zinc-950' : 'bg-white/10'}">${window.currentLang==='en'?m:monthsHi[i].slice(0,4)}</button>`;
+          return `<button type="button" onclick="pickMonth('${val}')" class="py-2.5 rounded-xl text-xs font-black ${val===cur ? 'bg-amber-500 text-zinc-950' : 'bg-white/10'}">${lbl.slice(0,4)}</button>`;
         }).join('');
       }
     }
@@ -1541,16 +1594,36 @@
     };
 
     window.playVoiceSummary = () => {
-      const s = byId('siteSelect')?.value || '';
-      const due = byId('summaryLabourDue')?.innerText || '₹0', exp = byId('summaryExpensesTotal')?.innerText || '₹0', bill = byId('summaryBillsTotal')?.innerText || '₹0';
-      const msg = window.currentLang === 'en'
-        ? `Site ${s} summary. Labour due ${due}. Expenses ${exp}. Company bills ${bill}.`
-        : `साइट ${s} का हिसाब। मजदूर बकाया ${due}। कुल खर्चे ${exp}। कंपनी बिल ${bill}।`;
+      const lang = window.currentLang || 'hi';
+      const s = byId('siteSelect')?.value || state.sites[0] || '';
+      const m = byId('monthSelect')?.value || '2026-11';
+      const ws = (state.labours || []).filter(l => l.site === s && l.month === m);
+      const wages = ws.reduce((a, w) => a + Math.round((w.dailyRate||0) * ((w.presentDays||0) + (w.halfDays||0) * 0.5)), 0);
+      const expNum = (state.expenses || []).filter(e => e.site === s && e.month === m).reduce((a, b) => a + (b.amount||0), 0);
+      const billNum = (state.bills || []).filter(b => b.site === s && b.month === m).reduce((a, b) => a + (b.amount||0), 0);
+      const due = byId('summaryLabourDue')?.innerText || '₹0';
+      const exp = byId('summaryExpensesTotal')?.innerText || '₹0';
+      const bill = byId('summaryBillsTotal')?.innerText || '₹0';
+      const profit = fmtINR(billNum - (wages + expNum));
+      const tpl = summaryTemplates[lang] || summaryTemplates.hi;
+      const msg = tpl({ s, mName: fmtMonth(m), count: ws.length, due, exp, bill, profit });
+
       if ('speechSynthesis' in window) {
         try {
           window.speechSynthesis.cancel();
           const u = new SpeechSynthesisUtterance(msg);
-          u.lang = speechLocaleMap[window.currentLang] || 'hi-IN';
+          const targetLocale = speechLocaleMap[lang] || 'hi-IN';
+          u.lang = targetLocale;
+          const voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+          const baseCode = targetLocale.split('-')[0].toLowerCase();
+          const matched = voices.find(v => (v.lang || '').toLowerCase() === targetLocale.toLowerCase())
+            || voices.find(v => (v.lang || '').toLowerCase().startsWith(baseCode))
+            || voices.find(v => (v.lang || '').toLowerCase().startsWith('hi'))
+            || voices.find(v => (v.lang || '').toLowerCase().startsWith('en'));
+          if (matched) {
+            u.voice = matched;
+            u.lang = matched.lang;
+          }
           window.speechSynthesis.speak(u);
         } catch (e) {}
       }
@@ -1569,22 +1642,62 @@
       d.innerHTML = html; box.appendChild(d); box.scrollTop = box.scrollHeight;
     }
     window.handleAIFormSubmit = (e) => { e.preventDefault(); const i = byId('aiCommandInput'); if (i && i.value.trim()) { runAICommand(i.value.trim()); i.value = ''; } };
+
     window.runAICommand = (q) => {
       if (!q) return;
       addAIMsg('user', q);
-      const l = q.toLowerCase(), site = byId('siteSelect')?.value || state.sites[0], m = byId('monthSelect')?.value || '2026-11';
+      const l = q.toLowerCase();
+      const site = byId('siteSelect')?.value || state.sites[0];
+      const m = byId('monthSelect')?.value || '2026-11';
       let ans = '';
-      if (l.includes('mark all present') || l.includes('all present') || l.includes('सबकी हाजिरी') || l.includes('sabki hajri') || l.includes('हजर')) {
+
+      if (/(add|new|create|बनाओ|जोड़ो|जोड़ो|नया)\s*(site|साइट|साईट)\s*(.+)/i.test(q)) {
+        const match = q.match(/(?:add|new|create|बनाओ|जोड़ो|जोड़ो|नया)\s*(?:site|साइट|साईट)\s*(.+)/i);
+        const sName = (match?.[1] || '').trim();
+        if (sName) {
+          if (!state.sites.includes(sName)) state.sites.push(sName);
+          if (byId('siteSelect')) byId('siteSelect').value = sName;
+          persist();
+          ans = t('aiAddedSite', sName);
+        }
+      } else if (/(mark\s*all\s*present|all\s*present|सबकी\s*हाजिरी|sabki\s*hajri|सगळा.*हाजिर|அனைவரும்\s*வருகை|అందరూ\s*హాజరు|ਸਭ.*ਹਾਜ਼ਰ)/i.test(q)) {
         const ws = state.labours.filter(x => x.site === site && x.month === m);
-        ws.forEach(w => { w.presentDays = (w.presentDays || 0) + 1; w.lastUpdatedBy = getStamp(); }); persist();
+        ws.forEach(w => { w.presentDays = (w.presentDays || 0) + 1; w.lastUpdatedBy = getStamp(); });
+        persist();
         ans = t('aiMarkedAll', ws.length);
-      } else if (/(add|new)\s+(worker|labour)|मजदूर\s+जोड़ो|worker\s+add/i.test(q)) {
+      } else if (/(advance|एडवांस|एडवांस्|अॅडव्हान्स|मुಂಗಡ|முன்பணம்|అడ్వాన్స్|ਐਡਵਾਂਸ)/i.test(q) && /\d+/.test(q)) {
+        const num = Number((q.match(/\d+/) || [0])[0]);
+        const ws = state.labours.filter(x => x.site === site && x.month === m);
+        const target = ws.find(w => l.includes((w.name || '').toLowerCase())) || ws[0];
+        if (target && num > 0) {
+          target.advance = (target.advance || 0) + num;
+          (target.advanceLog = target.advanceLog || []).unshift({ amount: num, date: isoToday });
+          target.lastUpdatedBy = getStamp();
+          persist();
+          ans = t('aiAddedAdv', target.name, num);
+        }
+      } else if (/(add|new|जोड़ो|जोड़ो|खर्च|खरचा|expense|kharcha|செலவு|ఖర్చు|ਖਰਚਾ)/i.test(q) && /\d+/.test(q) && !/(worker|labour|मजदूर|कामगार|कार्मिक|મજૂર|பணியாளர்|కార్మికుడు|மਜ਼ਦੂਰ)/i.test(q)) {
+        const num = Number((q.match(/\d+/) || [0])[0]);
+        const title = q.replace(/(add|new|expense|kharcha|खर्च|खरचा|जोड़ो|जोड़ो|செலவு|ఖర్చు|ਖਰਚਾ|\d+)/gi, '').trim() || t('expenses');
+        state.expenses.unshift({ id: Date.now().toString(), site, month: m, title, amount: num, spentFor: '', addedBy: getStamp() });
+        persist();
+        ans = t('aiAddedExpense', title, num);
+      } else if (/(bill|बिल|बिल्|பில்|బిల్లు|ਬਿੱਲ)/i.test(q) && /\d+/.test(q)) {
+        const num = Number((q.match(/\d+/) || [0])[0]);
+        const title = q.replace(/(add|new|bill|बिल|बिल्|जोड़ो|जोड़ो|பில்|బిల్లు|ਬਿੱਲ|\d+)/gi, '').trim() || t('bills');
+        state.bills.unshift({ id: Date.now().toString(), site, month: m, title, amount: num, billDate: isoToday, status: 'Pending', addedBy: getStamp() });
+        persist();
+        ans = t('aiAddedBill', title, num);
+      } else if (/(add|new|जोड़ो|जोड़ो|मजदूर|worker|labour|कामगार|कार्मिक|મજૂર|பணியாளர்|కార్మికుడు|மਜ਼ਦੂਰ)/i.test(q)) {
         const num = q.match(/\d+/), rate = num ? Number(num[0]) : 500;
-        const name = q.replace(/(add|new|worker|labour|मजदूर|जोड़ो|\d+)/gi, '').trim() || t('tradeMason');
+        const name = q.replace(/(add|new|worker|labour|मजदूर|कामगार|कार्मिक|મજૂર|பணியாளர்|కార్మికుడు|மਜ਼ਦੂਰ|जोड़ो|जोड़ो|\d+)/gi, '').trim() || t('tradeMason');
         state.labours.unshift({ id: Date.now().toString(), site, month: m, name, category: 'Mason', dailyRate: rate, advance: 0, phone: '', presentDays: 0, halfDays: 0, advanceLog: [], lastUpdatedBy: getStamp() });
-        persist(); ans = t('aiAddedWorker', name, rate);
-      } else if (l.includes('profit') || l.includes('summary') || l.includes('हिसाब') || l.includes('मुनाफा') || l.includes('hisab')) {
+        persist();
+        ans = t('aiAddedWorker', name, rate);
+      } else if (/(profit|summary|हिसाब|मुनाफा|hisab|बाकी|due|खर्च|bill|नफा|ಲಾಭ|ನಫಾ|லாபம்|లాభం|ਮੁਨਾਫ਼ਾ)/i.test(q)) {
         ans = `${t('labourDue')}: <b>${byId('summaryLabourDue')?.innerText || '₹0'}</b> | ${t('expenses')}: <b>${byId('summaryExpensesTotal')?.innerText || '₹0'}</b> | ${t('bills')}: <b>${byId('summaryBillsTotal')?.innerText || '₹0'}</b>`;
+      } else if (/(pin|password|पिन|पासवर्ड|supervisor|सुपरवाइजर|carry|कैरी|hajri|हाजिरी|ledger|खाता|pdf|csv|whatsapp|व्हाट्सएप|sync|सिंक)/i.test(q)) {
+        ans = `${t('aiHelp')}<br/>• ${t('setMasterPinLabel')} / ${t('addSupervisorBtn')}: ${t('profileAccessTitle')}<br/>• ${t('monthlyLedgerTitle')}: 📅`;
       } else {
         ans = t('aiHelp');
       }
