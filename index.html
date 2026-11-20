@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
-  <link rel="icon" type="image/png" href="./logo.png?v=20">
-  <link rel="apple-touch-icon" href="./logo.png?v=20">
-  <link rel="manifest" href="manifest.json?v=20">
+  <link rel="icon" type="image/png" href="./logo.png?v=22">
+  <link rel="apple-touch-icon" href="./logo.png?v=22">
+  <link rel="manifest" href="manifest.json?v=22">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#000000">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -84,7 +84,7 @@
   <header class="sticky top-0 z-30 px-4 pt-3.5 pb-2.5 ios-glass border-x-0 border-t-0">
     <div class="max-w-md mx-auto flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <button onclick="openProfileModal()" class="relative active:scale-95 transition-transform">
+        <button type="button" onclick="openProfileModal()" class="relative active:scale-95 transition-transform">
           <div id="userAvatarBadge" class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 font-black flex items-center justify-center shadow-lg overflow-hidden">ठे</div>
           <span id="syncDot" class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-black"></span>
         </button>
@@ -98,13 +98,14 @@
       </div>
 
       <div class="flex items-center gap-1.5">
-        <button onclick="forceCloudPull()" class="w-9 h-9 rounded-xl ios-glass flex items-center justify-center text-emerald-500 active:scale-90" title="Sync">
+        <button type="button" onclick="toggleQuickLang()" id="quickLangBtn" class="px-2.5 h-9 rounded-xl ios-glass text-[11px] font-black text-amber-500 active:scale-90">EN</button>
+        <button type="button" onclick="forceCloudPull()" class="w-9 h-9 rounded-xl ios-glass flex items-center justify-center text-emerald-500 active:scale-90" title="Sync">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
         </button>
-        <button onclick="openMonthlyLedgerModal()" class="w-9 h-9 rounded-xl ios-glass flex items-center justify-center text-amber-500 active:scale-90" title="Ledger">
+        <button type="button" onclick="openMonthlyLedgerModal()" class="w-9 h-9 rounded-xl ios-glass flex items-center justify-center text-amber-500 active:scale-90" title="Ledger">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         </button>
-        <button onclick="openSettingsModal()" class="w-9 h-9 rounded-xl ios-glass flex items-center justify-center active:scale-90" title="Settings">
+        <button type="button" onclick="openSettingsModal()" class="w-9 h-9 rounded-xl ios-glass flex items-center justify-center active:scale-90" title="Settings">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         </button>
       </div>
@@ -118,12 +119,12 @@
         <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
         <select id="siteSelect" onchange="renderAll()" class="bg-transparent text-xs font-bold focus:outline-none w-full truncate"></select>
       </div>
-      <button onclick="addNewSite()" class="px-2 py-1 bg-amber-500/15 text-amber-500 font-bold text-[11px] rounded-xl shrink-0 active:scale-95" data-i18n="addSiteBtn"></button>
-      <button id="deleteSiteBtn" onclick="deleteCurrentSite()" class="p-1.5 bg-rose-500/15 text-rose-500 rounded-xl shrink-0 active:scale-95">
+      <button type="button" onclick="addNewSite()" class="px-2 py-1 bg-amber-500/15 text-amber-500 font-bold text-[11px] rounded-xl shrink-0 active:scale-95" data-i18n="addSiteBtn"></button>
+      <button type="button" id="deleteSiteBtn" onclick="deleteCurrentSite()" class="p-1.5 bg-rose-500/15 text-rose-500 rounded-xl shrink-0 active:scale-95">
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
       </button>
       <input type="hidden" id="monthSelect" value="2026-11" />
-      <button onclick="openMonthPickerModal()" class="flex items-center gap-1 px-2 py-1 rounded-xl bg-amber-500/10 border border-amber-500/30 shrink-0 active:scale-95">
+      <button type="button" onclick="openMonthPickerModal()" class="flex items-center gap-1 px-2 py-1 rounded-xl bg-amber-500/10 border border-amber-500/30 shrink-0 active:scale-95">
         <span id="monthDisplayLabel" class="text-[11px] font-black"></span>
       </button>
     </div>
@@ -149,7 +150,7 @@
     <div class="ios-glass rounded-3xl p-4 text-center relative overflow-hidden">
       <h3 class="text-xs font-black" data-i18n="audioSummaryTitle"></h3>
       <p class="text-[10px] opacity-70 mt-0.5" data-i18n="audioSummarySub"></p>
-      <button onclick="playVoiceSummary()" class="mt-3 px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-zinc-950 font-black text-xs inline-flex items-center gap-2 active:scale-95 shadow-md">
+      <button type="button" onclick="playVoiceSummary()" class="mt-3 px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-zinc-950 font-black text-xs inline-flex items-center gap-2 active:scale-95 shadow-md">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
         <span data-i18n="listenBtn"></span>
       </button>
@@ -159,7 +160,7 @@
     <section id="viewHome" class="space-y-3">
       <div class="flex items-center justify-between">
         <h2 class="text-[11px] font-bold uppercase tracking-wider opacity-70" data-i18n="liveSnapshot"></h2>
-        <button onclick="navigateTo('viewLabours')" class="text-[11px] font-bold text-amber-500" data-i18n="viewAllBtn"></button>
+        <button type="button" onclick="navigateTo('viewLabours')" class="text-[11px] font-bold text-amber-500" data-i18n="viewAllBtn"></button>
       </div>
       <div id="homeRecentLabour" class="space-y-3"></div>
     </section>
@@ -169,12 +170,12 @@
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black" data-i18n="tabLabour"></h2>
         <div class="flex items-center gap-1.5">
-          <button onclick="openHajriBookModal()" class="px-2.5 py-1.5 bg-amber-500/20 border border-amber-500/40 text-amber-500 font-bold text-xs rounded-xl active:scale-95" data-i18n="hajriBookBtn"></button>
-          <button onclick="openCarrySelectModal()" class="px-2.5 py-1.5 ios-glass text-amber-500 font-bold text-xs rounded-xl active:scale-95 flex items-center gap-1">
+          <button type="button" onclick="openHajriBookModal()" class="px-2.5 py-1.5 bg-amber-500/20 border border-amber-500/40 text-amber-500 font-bold text-xs rounded-xl active:scale-95" data-i18n="hajriBookBtn"></button>
+          <button type="button" onclick="openCarrySelectModal()" class="px-2.5 py-1.5 ios-glass text-amber-500 font-bold text-xs rounded-xl active:scale-95 flex items-center gap-1">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><polyline points="15 14 20 9 15 4"/><path d="M4 20v-7a4 4 0 0 1 4-4h12"/></svg>
             <span data-i18n="carryBtn"></span>
           </button>
-          <button onclick="openFormModal('labour')" class="px-3 py-1.5 bg-amber-500 text-zinc-950 font-black text-xs rounded-xl shadow active:scale-95" data-i18n="addWorkerBtn"></button>
+          <button type="button" onclick="openFormModal('labour')" class="px-3 py-1.5 bg-amber-500 text-zinc-950 font-black text-xs rounded-xl shadow active:scale-95" data-i18n="addWorkerBtn"></button>
         </div>
       </div>
 
@@ -201,7 +202,7 @@
     <section id="viewExpenses" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black" data-i18n="tabExpenses"></h2>
-        <button onclick="openFormModal('expense')" class="px-3 py-1.5 bg-amber-500 text-zinc-950 font-black text-xs rounded-xl shadow active:scale-95" data-i18n="addExpenseBtn"></button>
+        <button type="button" onclick="openFormModal('expense')" class="px-3 py-1.5 bg-amber-500 text-zinc-950 font-black text-xs rounded-xl shadow active:scale-95" data-i18n="addExpenseBtn"></button>
       </div>
       <div id="expenseList" class="space-y-3"></div>
     </section>
@@ -210,7 +211,7 @@
     <section id="viewBills" class="space-y-3 hidden">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black" data-i18n="tabBills"></h2>
-        <button onclick="openFormModal('bill')" class="px-3 py-1.5 bg-emerald-500 text-zinc-950 font-black text-xs rounded-xl shadow active:scale-95" data-i18n="addBillBtn"></button>
+        <button type="button" onclick="openFormModal('bill')" class="px-3 py-1.5 bg-emerald-500 text-zinc-950 font-black text-xs rounded-xl shadow active:scale-95" data-i18n="addBillBtn"></button>
       </div>
       <div id="billList" class="space-y-3"></div>
     </section>
@@ -219,13 +220,13 @@
   <!-- FLOATING NAV + LOCAL THEKEDAAR AI ORB -->
   <div class="fixed bottom-4 inset-x-0 z-40 flex justify-center items-center gap-2.5 pointer-events-none px-3">
     <nav class="ios-nav pointer-events-auto rounded-full py-1.5 px-2.5 flex items-center justify-around gap-1 flex-1 max-w-[300px]">
-      <button onclick="navigateTo('viewHome')" id="nav-viewHome" class="nav-btn active w-11 h-11 rounded-full flex items-center justify-center"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.1l9 8.1c.4.3.6.8.6 1.3v8.5c0 1.1-.9 2-2 2h-4.5c-.8 0-1.5-.7-1.5-1.5V15c0-.6-.4-1-1-1s-1 .4-1 1v5.5c0 .8-.7 1.5-1.5 1.5H5.4c-1.1 0-2-.9-2-2v-8.5c0-.5.2-1 .6-1.3l9-8.1z"/></svg></button>
-      <button onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="nav-btn w-11 h-11 rounded-full flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></button>
-      <button onclick="openFormModal('labour')" class="w-10 h-11 flex items-center justify-center active:scale-90"><div class="w-7 h-7 rounded-lg border-2 border-amber-500 flex items-center justify-center text-amber-500 font-black text-lg leading-none">+</div></button>
-      <button onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="nav-btn w-11 h-11 rounded-full flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></button>
-      <button onclick="navigateTo('viewBills')" id="nav-viewBills" class="nav-btn w-11 h-11 rounded-full flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></button>
+      <button type="button" onclick="navigateTo('viewHome')" id="nav-viewHome" class="nav-btn active w-11 h-11 rounded-full flex items-center justify-center"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.1l9 8.1c.4.3.6.8.6 1.3v8.5c0 1.1-.9 2-2 2h-4.5c-.8 0-1.5-.7-1.5-1.5V15c0-.6-.4-1-1-1s-1 .4-1 1v5.5c0 .8-.7 1.5-1.5 1.5H5.4c-1.1 0-2-.9-2-2v-8.5c0-.5.2-1 .6-1.3l9-8.1z"/></svg></button>
+      <button type="button" onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="nav-btn w-11 h-11 rounded-full flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></button>
+      <button type="button" onclick="openFormModal('labour')" class="w-10 h-11 flex items-center justify-center active:scale-90"><div class="w-7 h-7 rounded-lg border-2 border-amber-500 flex items-center justify-center text-amber-500 font-black text-lg leading-none">+</div></button>
+      <button type="button" onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="nav-btn w-11 h-11 rounded-full flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></button>
+      <button type="button" onclick="navigateTo('viewBills')" id="nav-viewBills" class="nav-btn w-11 h-11 rounded-full flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></button>
     </nav>
-    <button onclick="openThekedaarAIModal()" class="ai-orb pointer-events-auto w-14 h-14 rounded-full flex items-center justify-center text-white active:scale-90 transition-transform shrink-0" title="THEKEDAAR AI">
+    <button type="button" onclick="openThekedaarAIModal()" class="ai-orb pointer-events-auto w-14 h-14 rounded-full flex items-center justify-center text-white active:scale-90 transition-transform shrink-0" title="THEKEDAAR AI">
       <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg>
     </button>
   </div>
@@ -235,15 +236,15 @@
     <div class="ios-glass rounded-3xl max-w-xs w-full p-5 space-y-4">
       <div class="flex justify-between items-center border-b border-white/10 pb-2">
         <h3 class="font-black text-sm" data-i18n="selectMonthYear"></h3>
-        <button onclick="closeModal('monthPickerModal')" class="text-sm font-bold opacity-70">✕</button>
+        <button type="button" onclick="closeModal('monthPickerModal')" class="text-sm font-bold opacity-70">✕</button>
       </div>
       <div class="flex items-center justify-between bg-black/10 dark:bg-white/5 p-2 rounded-2xl">
-        <button onclick="changePickerYear(-1)" class="w-9 h-9 rounded-xl ios-glass font-black">‹</button>
+        <button type="button" onclick="changePickerYear(-1)" class="w-9 h-9 rounded-xl ios-glass font-black">‹</button>
         <span id="pickerYearDisplay" class="text-base font-black text-amber-500">2026</span>
-        <button onclick="changePickerYear(1)" class="w-9 h-9 rounded-xl ios-glass font-black">›</button>
+        <button type="button" onclick="changePickerYear(1)" class="w-9 h-9 rounded-xl ios-glass font-black">›</button>
       </div>
       <div id="pickerMonthsGrid" class="grid grid-cols-3 gap-2"></div>
-      <button onclick="selectCurrentMonthNow()" class="w-full py-2.5 rounded-xl bg-amber-500/15 text-amber-500 border border-amber-500/30 text-xs font-black" data-i18n="currentMonthBtn"></button>
+      <button type="button" onclick="selectCurrentMonthNow()" class="w-full py-2.5 rounded-xl bg-amber-500/15 text-amber-500 border border-amber-500/30 text-xs font-black" data-i18n="currentMonthBtn"></button>
     </div>
   </div>
 
@@ -252,7 +253,7 @@
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-white/10 pb-3">
         <h3 class="font-black text-base" data-i18n="profileAccessTitle"></h3>
-        <button onclick="closeModal('profileModal')" class="text-lg font-bold opacity-70">✕</button>
+        <button type="button" onclick="closeModal('profileModal')" class="text-lg font-bold opacity-70">✕</button>
       </div>
       <div class="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30">
         <span class="text-[9px] font-bold uppercase text-emerald-500 block" data-i18n="loggedEmailLabel"></span>
@@ -262,52 +263,52 @@
         <label class="text-[10px] font-bold text-amber-500 uppercase block" data-i18n="setMasterPinLabel"></label>
         <div class="flex gap-1.5">
           <input type="password" id="newMasterPinInput" data-i18n-placeholder="newPinPh" class="app-input flex-1 rounded-xl px-2.5 py-1.5 text-xs font-bold focus:outline-none" />
-          <button onclick="saveNewMasterPin()" class="px-3 py-1.5 bg-amber-500 text-zinc-950 font-black text-xs rounded-xl" data-i18n="saveBtn"></button>
+          <button type="button" onclick="saveNewMasterPin()" class="px-3 py-1.5 bg-amber-500 text-zinc-950 font-black text-xs rounded-xl" data-i18n="saveBtn"></button>
         </div>
       </div>
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <label class="text-[10px] font-bold opacity-70 uppercase" data-i18n="accountProfilesLabel"></label>
-          <button onclick="openAddAccountPrompt()" class="text-amber-500 text-xs font-bold" data-i18n="addSupervisorBtn"></button>
+          <button type="button" onclick="openAddAccountPrompt()" class="text-amber-500 text-xs font-bold" data-i18n="addSupervisorBtn"></button>
         </div>
         <div id="accountIdsList" class="space-y-1.5 max-h-44 overflow-y-auto"></div>
       </div>
       <div class="pt-2 border-t border-white/10 space-y-2">
-        <button onclick="closeModal('profileModal'); openModal('authModal');" class="w-full py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-black text-xs" data-i18n="cloudLoginBtn"></button>
-        <button onclick="logoutAccount()" id="profileLogoutBtn" class="w-full py-2 rounded-xl bg-rose-500/15 text-rose-500 font-bold text-xs hidden" data-i18n="logoutBtn"></button>
+        <button type="button" onclick="closeModal('profileModal'); openModal('authModal');" class="w-full py-2.5 rounded-xl bg-amber-500 text-zinc-950 font-black text-xs" data-i18n="cloudLoginBtn"></button>
+        <button type="button" onclick="logoutAccount()" id="profileLogoutBtn" class="w-full py-2 rounded-xl bg-rose-500/15 text-rose-500 font-bold text-xs hidden" data-i18n="logoutBtn"></button>
       </div>
     </div>
   </div>
 
-  <!-- SETTINGS MODAL (11 INDIAN LANGUAGES + HINGLISH + BHOJPURI + MARWARI) -->
+  <!-- SETTINGS MODAL -->
   <div id="settingsModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-white/10 pb-3">
         <h3 class="font-black text-base" data-i18n="settingsHeader"></h3>
-        <button onclick="closeModal('settingsModal')" class="text-lg font-bold opacity-70">✕</button>
+        <button type="button" onclick="closeModal('settingsModal')" class="text-lg font-bold opacity-70">✕</button>
       </div>
       <div class="space-y-1.5">
         <label class="text-[10px] font-bold opacity-70 uppercase" data-i18n="changeLangLabel"></label>
         <div class="grid grid-cols-2 gap-1.5 max-h-52 overflow-y-auto pr-1">
-          <button onclick="changeLanguage('hi')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="hi">हिंदी (Hindi)</button>
-          <button onclick="changeLanguage('hinglish')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="hinglish">Hinglish (हिं+En)</button>
-          <button onclick="changeLanguage('en')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="en">English</button>
-          <button onclick="changeLanguage('mr')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="mr">मराठी (Marathi)</button>
-          <button onclick="changeLanguage('kn')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="kn">ಕನ್ನಡ (Kannada)</button>
-          <button onclick="changeLanguage('gu')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="gu">ગુજરાતી (Gujarati)</button>
-          <button onclick="changeLanguage('ta')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="ta">தமிழ் (Tamil)</button>
-          <button onclick="changeLanguage('te')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="te">తెలుగు (Telugu)</button>
-          <button onclick="changeLanguage('pa')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="pa">ਪੰਜਾਬੀ (Punjabi)</button>
-          <button onclick="changeLanguage('bho')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="bho">भोजपुरी (Bhojpuri)</button>
-          <button onclick="changeLanguage('mwr')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15 col-span-2" data-lang="mwr">मारवाड़ी (Marwari)</button>
+          <button type="button" onclick="changeLanguage('hi')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="hi">हिंदी (Hindi)</button>
+          <button type="button" onclick="changeLanguage('hinglish')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="hinglish">Hinglish (हिं+En)</button>
+          <button type="button" onclick="changeLanguage('en')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="en">English</button>
+          <button type="button" onclick="changeLanguage('mr')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="mr">मराठी (Marathi)</button>
+          <button type="button" onclick="changeLanguage('kn')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="kn">ಕನ್ನಡ (Kannada)</button>
+          <button type="button" onclick="changeLanguage('gu')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="gu">ગુજરાતી (Gujarati)</button>
+          <button type="button" onclick="changeLanguage('ta')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="ta">தமிழ் (Tamil)</button>
+          <button type="button" onclick="changeLanguage('te')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="te">తెలుగు (Telugu)</button>
+          <button type="button" onclick="changeLanguage('pa')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="pa">ਪੰਜਾਬੀ (Punjabi)</button>
+          <button type="button" onclick="changeLanguage('bho')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15" data-lang="bho">भोजपुरी (Bhojpuri)</button>
+          <button type="button" onclick="changeLanguage('mwr')" class="lang-opt p-2 text-left rounded-xl text-xs font-black border border-white/15 col-span-2" data-lang="mwr">मारवाड़ी (Marwari)</button>
         </div>
       </div>
       <div class="space-y-1.5">
         <label class="text-[10px] font-bold opacity-70 uppercase" data-i18n="themeLabel"></label>
         <div class="grid grid-cols-3 gap-2">
-          <button onclick="setAppTheme('theme-amoled')" class="py-2 rounded-xl text-xs font-bold border border-white/20 bg-black text-white">AMOLED</button>
-          <button onclick="setAppTheme('theme-dark')" class="py-2 rounded-xl text-xs font-bold border border-white/20 bg-slate-800 text-white">Dark</button>
-          <button onclick="setAppTheme('theme-light')" class="py-2 rounded-xl text-xs font-bold border border-zinc-400 bg-white text-zinc-900">Light</button>
+          <button type="button" onclick="setAppTheme('theme-amoled')" class="py-2 rounded-xl text-xs font-bold border border-white/20 bg-black text-white">AMOLED</button>
+          <button type="button" onclick="setAppTheme('theme-dark')" class="py-2 rounded-xl text-xs font-bold border border-white/20 bg-slate-800 text-white">Dark</button>
+          <button type="button" onclick="setAppTheme('theme-light')" class="py-2 rounded-xl text-xs font-bold border border-zinc-400 bg-white text-zinc-900">Light</button>
         </div>
       </div>
       <a href="https://www.instagram.com/raahulsj.108?obrf=MTUydjlrbjhwOThocg==" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 rounded-2xl bg-gradient-to-r from-amber-500/15 via-rose-500/15 to-purple-500/15 border border-amber-500/40">
@@ -325,7 +326,7 @@
     <div class="ios-glass rounded-3xl max-w-lg w-full p-5 space-y-4 max-h-[90vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-white/10 pb-2 shrink-0">
         <h3 class="font-black text-base" data-i18n="monthlyLedgerTitle"></h3>
-        <button onclick="closeModal('monthlyLedgerModal')" class="text-lg font-bold opacity-70">✕</button>
+        <button type="button" onclick="closeModal('monthlyLedgerModal')" class="text-lg font-bold opacity-70">✕</button>
       </div>
       <div id="monthlyLedgerModalBody" class="flex-1 overflow-y-auto space-y-4 pr-1"></div>
     </div>
@@ -336,7 +337,7 @@
     <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-3 max-h-[85vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-white/10 pb-2">
         <h3 id="labourHistoryTitle" class="font-black text-sm"></h3>
-        <button onclick="closeModal('labourHistoryModal')" class="text-lg font-bold opacity-70">✕</button>
+        <button type="button" onclick="closeModal('labourHistoryModal')" class="text-lg font-bold opacity-70">✕</button>
       </div>
       <div id="labourHistoryContent" class="flex-1 overflow-y-auto space-y-2 text-xs"></div>
     </div>
@@ -347,10 +348,10 @@
     <div class="ios-glass rounded-3xl max-w-md w-full p-5 space-y-3 max-h-[88vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-white/10 pb-2">
         <h3 class="font-black text-sm" data-i18n="carryTitle"></h3>
-        <button onclick="closeModal('carryModal')" class="text-lg font-bold opacity-70">✕</button>
+        <button type="button" onclick="closeModal('carryModal')" class="text-lg font-bold opacity-70">✕</button>
       </div>
       <div id="carryWorkersList" class="flex-1 overflow-y-auto space-y-2"></div>
-      <button onclick="executeCarryForwardSelected()" class="w-full py-2.5 rounded-xl bg-amber-500 text-zinc-950 text-xs font-black" data-i18n="carryConfirmBtn"></button>
+      <button type="button" onclick="executeCarryForwardSelected()" class="w-full py-2.5 rounded-xl bg-amber-500 text-zinc-950 text-xs font-black" data-i18n="carryConfirmBtn"></button>
     </div>
   </div>
 
@@ -359,16 +360,16 @@
     <div class="ios-glass rounded-3xl max-w-lg w-full p-5 space-y-3 max-h-[90vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-white/10 pb-2">
         <h3 class="font-black text-sm" data-i18n="hajriBookTitle"></h3>
-        <button onclick="closeModal('hajriBookModal')" class="text-lg font-bold opacity-70">✕</button>
+        <button type="button" onclick="closeModal('hajriBookModal')" class="text-lg font-bold opacity-70">✕</button>
       </div>
       <div class="flex items-center gap-2">
-        <button onclick="shiftHajriDate(-1)" class="px-3 py-1.5 rounded-xl ios-glass text-xs font-bold" data-i18n="prevBtn"></button>
+        <button type="button" onclick="shiftHajriDate(-1)" class="px-3 py-1.5 rounded-xl ios-glass text-xs font-bold" data-i18n="prevBtn"></button>
         <input type="date" id="hajriDateInput" onchange="renderDailyHajriSheet()" class="app-input flex-1 rounded-xl px-2 py-1.5 text-xs font-bold text-center" />
-        <button onclick="shiftHajriDate(1)" class="px-3 py-1.5 rounded-xl ios-glass text-xs font-bold" data-i18n="nextBtn"></button>
+        <button type="button" onclick="shiftHajriDate(1)" class="px-3 py-1.5 rounded-xl ios-glass text-xs font-bold" data-i18n="nextBtn"></button>
       </div>
       <div class="flex justify-between text-xs">
         <span id="hajriDaySummary" class="opacity-75 font-bold"></span>
-        <button onclick="markAllWorkersToday('P')" class="text-emerald-500 font-bold" data-i18n="markAllPresentBtn"></button>
+        <button type="button" onclick="markAllWorkersToday('P')" class="text-emerald-500 font-bold" data-i18n="markAllPresentBtn"></button>
       </div>
       <div id="hajriWorkersContainer" class="flex-1 overflow-y-auto space-y-2"></div>
     </div>
@@ -379,7 +380,7 @@
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-white/10 pb-2">
         <h3 id="formModalTitle" class="font-black text-base"></h3>
-        <button onclick="closeModal('formModal')" class="text-lg font-bold opacity-70">✕</button>
+        <button type="button" onclick="closeModal('formModal')" class="text-lg font-bold opacity-70">✕</button>
       </div>
 
       <form id="labourForm" onsubmit="saveLabour(event)" class="space-y-3 hidden">
@@ -515,7 +516,7 @@
     <div class="ios-glass rounded-3xl max-w-sm w-full p-5 space-y-3">
       <div class="flex justify-between items-center border-b border-white/10 pb-2">
         <h3 id="advWorkerName" class="font-black text-sm"></h3>
-        <button onclick="closeModal('advanceModal')" class="text-lg font-bold opacity-70">✕</button>
+        <button type="button" onclick="closeModal('advanceModal')" class="text-lg font-bold opacity-70">✕</button>
       </div>
       <form onsubmit="submitExtraAdvance(event)" class="space-y-3">
         <input type="hidden" id="advLabourId" />
@@ -541,26 +542,26 @@
     <div class="ios-glass rounded-3xl max-w-sm w-full p-6 space-y-4">
       <div class="flex justify-between items-center">
         <h3 class="font-black text-base" data-i18n="authTitle"></h3>
-        <button onclick="closeModal('authModal')" class="text-lg font-bold opacity-70">✕</button>
+        <button type="button" onclick="closeModal('authModal')" class="text-lg font-bold opacity-70">✕</button>
       </div>
       <input type="email" id="authEmail" data-i18n-placeholder="emailPh" class="app-input w-full rounded-xl px-3 py-2.5 text-sm" />
       <input type="password" id="authPass" data-i18n-placeholder="passPh" class="app-input w-full rounded-xl px-3 py-2.5 text-sm" />
       <div class="flex gap-2">
-        <button onclick="connectCloud(false)" class="flex-1 bg-amber-500 text-zinc-950 font-black py-2.5 rounded-xl text-sm" data-i18n="loginBtn"></button>
-        <button onclick="connectCloud(true)" class="flex-1 bg-white/10 font-bold py-2.5 rounded-xl text-sm" data-i18n="registerBtn"></button>
+        <button type="button" onclick="connectCloud(false)" class="flex-1 bg-amber-500 text-zinc-950 font-black py-2.5 rounded-xl text-sm" data-i18n="loginBtn"></button>
+        <button type="button" onclick="connectCloud(true)" class="flex-1 bg-white/10 font-bold py-2.5 rounded-xl text-sm" data-i18n="registerBtn"></button>
       </div>
     </div>
   </div>
 
-  <!-- VOICE MODAL (WITH EXPLICIT SPEAK BUTTON & LIVE STATUS) -->
+  <!-- VOICE MODAL -->
   <div id="voiceModal" class="fixed inset-0 bg-black/80 backdrop-blur-xl hidden items-center justify-center p-4 z-50">
     <div class="ios-glass rounded-3xl max-w-xs w-full p-6 text-center space-y-4 border border-amber-500/30">
-      <div id="voiceOrbBadge" class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 flex items-center justify-center shadow-lg transition-transform">
+      <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-amber-600 to-amber-400 text-zinc-950 flex items-center justify-center shadow-lg">
         <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
       </div>
       <div>
         <h3 class="font-black text-base" data-i18n="voiceTypingTitle"></h3>
-        <p id="voiceStatusLine" class="text-[11px] text-amber-400 font-bold mt-1" data-i18n="voiceListeningLbl"></p>
+        <p id="voiceStatusLine" class="text-[11px] text-amber-400 font-bold mt-1"></p>
       </div>
       <div id="voiceTranscriptBox" class="hidden p-2.5 rounded-xl bg-black/30 text-xs font-bold text-emerald-400"></div>
       <div class="flex gap-2">
@@ -591,8 +592,8 @@
       <h3 class="font-black text-base" data-i18n="pinModalTitle"></h3>
       <input type="password" id="masterPinInput" data-i18n-placeholder="enterPinPh" class="app-input w-full rounded-xl px-3 py-3 text-center text-base font-black tracking-widest" />
       <div class="flex gap-2">
-        <button onclick="closeModal('pinLockModal')" class="flex-1 py-2.5 rounded-xl bg-white/10 text-xs font-bold" data-i18n="cancelBtn"></button>
-        <button onclick="verifyMasterPin()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 text-xs font-black" data-i18n="unlockBtn"></button>
+        <button type="button" onclick="closeModal('pinLockModal')" class="flex-1 py-2.5 rounded-xl bg-white/10 text-xs font-bold" data-i18n="cancelBtn"></button>
+        <button type="button" onclick="verifyMasterPin()" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-zinc-950 text-xs font-black" data-i18n="unlockBtn"></button>
       </div>
     </div>
   </div>
@@ -603,13 +604,13 @@
       <h3 id="confirmDeleteTitle" class="font-black text-sm"></h3>
       <p id="confirmDeleteSub" class="text-xs opacity-75"></p>
       <div class="flex gap-2">
-        <button onclick="closeModal('confirmDeleteModal')" class="flex-1 py-2.5 rounded-xl bg-white/10 text-xs font-bold" data-i18n="cancelBtn"></button>
-        <button id="confirmDeleteActionBtn" class="flex-1 py-2.5 rounded-xl bg-rose-500 text-white text-xs font-black" data-i18n="deleteBtn"></button>
+        <button type="button" onclick="closeModal('confirmDeleteModal')" class="flex-1 py-2.5 rounded-xl bg-white/10 text-xs font-bold" data-i18n="cancelBtn"></button>
+        <button type="button" id="confirmDeleteActionBtn" class="flex-1 py-2.5 rounded-xl bg-rose-500 text-white text-xs font-black" data-i18n="deleteBtn"></button>
       </div>
     </div>
   </div>
 
-  <!-- LOCAL THEKEDAAR AI MODAL (DEDICATED SPEAK BUTTON & SELECTED LANGUAGE) -->
+  <!-- LOCAL THEKEDAAR AI MODAL -->
   <div id="thekedaarAIModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-xl hidden items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-3 border border-purple-500/40 flex flex-col max-h-[85vh]">
       <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
@@ -620,12 +621,12 @@
             <p class="text-[10px] opacity-70" data-i18n="aiSubtitle"></p>
           </div>
         </div>
-        <button onclick="closeModal('thekedaarAIModal')" class="text-base font-bold opacity-70">✕</button>
+        <button type="button" onclick="closeModal('thekedaarAIModal')" class="text-base font-bold opacity-70">✕</button>
       </div>
       <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1">
-        <button onclick="runAICommand('Mark all present')" class="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-bold shrink-0" data-i18n="aiChipPresent"></button>
-        <button onclick="runAICommand('Site profit report')" class="px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-400 text-[10px] font-bold shrink-0" data-i18n="aiChipProfit"></button>
-        <button onclick="runAICommand('How to use app')" class="px-2.5 py-1 rounded-full bg-blue-500/15 text-blue-400 text-[10px] font-bold shrink-0" data-i18n="aiChipHelp"></button>
+        <button type="button" onclick="runAICommand('Mark all present')" class="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-bold shrink-0" data-i18n="aiChipPresent"></button>
+        <button type="button" onclick="runAICommand('Site profit report')" class="px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-400 text-[10px] font-bold shrink-0" data-i18n="aiChipProfit"></button>
+        <button type="button" onclick="runAICommand('How to use app')" class="px-2.5 py-1 rounded-full bg-blue-500/15 text-blue-400 text-[10px] font-bold shrink-0" data-i18n="aiChipHelp"></button>
       </div>
       <div id="aiChatMessages" class="flex-1 overflow-y-auto space-y-2 text-xs min-h-[200px] max-h-[320px]"></div>
       <div id="aiLiveMicBar" class="hidden items-center justify-between px-3 py-1.5 rounded-xl bg-purple-500/15 border border-purple-500/30 text-[11px] font-bold text-purple-300">
@@ -647,6 +648,9 @@
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+    window.addEventListener('error', (ev) => { console.warn('App guard caught error:', ev.message); });
+    window.addEventListener('unhandledrejection', (ev) => { console.warn('App guard caught rejection:', ev.reason); });
+
     const firebaseConfig = {
       apiKey: "AIzaSyCsabUW5vFiXGxsUu4FvdKkc5cxxsCt8jA",
       authDomain: "thekedaar-62310.firebaseapp.com",
@@ -666,8 +670,8 @@
     let state = {
       masterPin: '1234',
       accounts: [
-        { id: 'acc_main', nickname: 'Main', isMaster: true },
-        { id: 'acc_sup', nickname: 'Supervisor', isMaster: false }
+        { id: 'acc_main', isMaster: true },
+        { id: 'acc_sup', isMaster: false }
       ],
       sites: ['Site A'], labours: [], expenses: [], bills: [], dailyHajriRecords: {}, updatedAt: 0
     };
@@ -678,7 +682,9 @@
       pa: 'pa-IN', bho: 'hi-IN', mwr: 'hi-IN'
     };
 
-    const dict = {
+    const fmtINR = (v) => '₹' + Math.round(Number(v) || 0).toLocaleString('en-IN');
+
+    const baseStrings = {
       hi: {
         offlineTitle: "इंटरनेट कनेक्शन आवश्यक है", offlineDesc: "कृपया मोबाइल डेटा या वाई-फाई चालू करें।",
         mainRole: "मेन ठेकेदार", supRole: "सुपरवाइजर", onlineLbl: "ऑनलाइन", cloudLbl: "क्लाउड",
@@ -821,7 +827,7 @@
         dailyWageLabel: "रोजचा दर (₹)", advanceLabel: "अॅडव्हान्स (₹)", phoneLabel: "मोबाइल नंबर", saveLabourBtn: "कामगार सेव्ह करा",
         workDescLabel: "कामाचा तपशील", workDescPh: "उदा. रिक्षा भाडे", amountLabel: "रक्कम (₹)",
         paidForLabel: "कोणासाठी", paidForPh: "नाव", uploadSlipLabel: "पावती / फोटो अपलोड करा", saveExpenseBtn: "खर्च सेव्ह करा",
-        billNameLabel: "कंपनी / कामाचे नाव", billNamePh: "उदा. स्लॅब बिल", billDateLabel: "बिल तारीख",
+        billNameLabel: "कंपनी / कामाचे नाव", billNamePh: "उदा. स्लैब बिल", billDateLabel: "बिल तारीख",
         uploadBillLabel: "बिल फोटो अपलोड करा", saveBillBtn: "बिल सेव्ह करा",
         dateLabel: "तारीख", addAdvBtn: "+ अॅडव्हान्स", authTitle: "क्लाउड लॉग-इन",
         emailPh: "ईमेल", passPh: "पासवर्ड", loginBtn: "लॉग-इन", registerBtn: "नोंदणी",
@@ -1081,7 +1087,7 @@
         listenBtn: "सुणो", liveSnapshot: "मजदूर स्थिति", viewAllBtn: "सगळा देखो",
         tabLabour: "मजदूर अर हाजिरी", hajriBookBtn: "हाजिरी बुक", carryBtn: "कैरी", addWorkerBtn: "+ मजदूर",
         searchWorkerPh: "नाम या फोन खोजो...", filterAll: "सगळा",
-        tradeMason: "मिस्त्री", tradeHelper: "हेल्पर", tradeCarpenter: "बढ़ई", tradeElectrician: "इलेक्ट्रिशियन", tradePlumber: "प्लम्बर",
+        tradeMason: "मिस्त्री", tradeHelper: "हेल्पर", tradeCarpenter: "बढ़ई", tradeElectrician: "इलेक्ट्रीशियन", tradePlumber: "प्लम्बर",
         tabExpenses: "खरचा अर भाड़ो", addExpenseBtn: "+ खरचा", tabBills: "कंपनी बिल", addBillBtn: "+ बिल",
         selectMonthYear: "महीनो अर साल चुणो", currentMonthBtn: "चालू महीनो",
         profileAccessTitle: "प्रोफाइल", loggedEmailLabel: "लॉग-इन ईमेल", notLoggedLbl: "लॉग-इन कोनी",
@@ -1114,55 +1120,68 @@
       }
     };
 
-    window.currentLang = localStorage.getItem('thekedaar_lang') || 'hi';
-    const t = (k) => (dict[window.currentLang] || dict.hi)[k] ?? (dict.hi[k] ?? k);
-    const fmtINR = (v) => '₹' + Math.round(Number(v) || 0).toLocaleString('en-IN');
+    window.currentLang = 'hi';
+    try { window.currentLang = localStorage.getItem('thekedaar_lang') || 'hi'; } catch (e) {}
 
-    window.openModal = (id) => document.getElementById(id).classList.replace('hidden', 'flex');
-    window.closeModal = (id) => document.getElementById(id).classList.replace('flex', 'hidden');
-    window.updateLiveINR = (inId, outId) => { document.getElementById(outId).innerText = fmtINR(document.getElementById(inId).value); };
+    const t = (k, ...args) => {
+      const pack = baseStrings[window.currentLang] || baseStrings.hi;
+      const val = pack[k] ?? baseStrings.hi[k] ?? k;
+      return typeof val === 'function' ? val(...args) : val;
+    };
+
+    const byId = (id) => document.getElementById(id);
+    window.openModal = (id) => { const el = byId(id); if (el) el.classList.replace('hidden', 'flex'); };
+    window.closeModal = (id) => { const el = byId(id); if (el) el.classList.replace('flex', 'hidden'); };
+    window.updateLiveINR = (inId, outId) => { const i = byId(inId), o = byId(outId); if (i && o) o.innerText = fmtINR(i.value); };
 
     window.selectTradeButton = (btn) => {
-      document.getElementById('lCategory').value = btn.getAttribute('data-trade');
+      const cat = byId('lCategory');
+      if (cat && btn) cat.value = btn.getAttribute('data-trade') || 'Mason';
       document.querySelectorAll('.trade-card').forEach(c => c.classList.toggle('active', c === btn));
     };
 
     function getActiveAcc() {
-      const id = localStorage.getItem('thekedaar_active_acc_id') || 'acc_main';
-      const acc = state.accounts.find(a => a.id === id) || state.accounts[0];
+      const accs = Array.isArray(state.accounts) && state.accounts.length ? state.accounts : [{ id: 'acc_main', isMaster: true }];
+      let id = 'acc_main';
+      try { id = localStorage.getItem('thekedaar_active_acc_id') || 'acc_main'; } catch (e) {}
+      const acc = accs.find(a => a.id === id) || accs[0];
       return { ...acc, displayNickname: acc.customNickname || (acc.isMaster ? t('mainRole') : t('supRole')) };
     }
-    const isMaster = () => getActiveAcc().id === 'acc_main' || getActiveAcc().isMaster;
+    const isMaster = () => getActiveAcc().id === 'acc_main' || Boolean(getActiveAcc().isMaster);
     const getStamp = () => `${getActiveAcc().displayNickname} • ${new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}`;
-    const getStoreKey = () => currentUser ? `thekedaar_v20_${currentUser.uid}` : 'thekedaar_v20_guest';
+    const getStoreKey = () => currentUser ? `thekedaar_v22_${currentUser.uid}` : 'thekedaar_v22_guest';
 
     function checkOnline() {
-      document.getElementById('offlineModal').classList.toggle('hidden', navigator.onLine);
-      document.getElementById('offlineModal').classList.toggle('flex', !navigator.onLine);
+      const m = byId('offlineModal');
+      if (!m) return;
+      m.classList.toggle('hidden', navigator.onLine);
+      m.classList.toggle('flex', !navigator.onLine);
     }
     window.addEventListener('online', checkOnline); window.addEventListener('offline', checkOnline);
 
     async function persist() {
-      if (!navigator.onLine) return checkOnline();
+      if (!navigator.onLine) { checkOnline(); return; }
       state.updatedAt = Date.now();
-      localStorage.setItem(getStoreKey(), JSON.stringify(state));
+      try { localStorage.setItem(getStoreKey(), JSON.stringify(state)); } catch (e) {}
       renderAll();
-      if (currentUser) {
+      if (currentUser && db) {
         try { await setDoc(doc(db, "users", currentUser.uid), JSON.parse(JSON.stringify(state)), { merge: true }); } catch (e) {}
       }
     }
 
     window.forceCloudPull = async () => {
-      if (!currentUser) return openModal('authModal');
-      const snap = await getDoc(doc(db, "users", currentUser.uid));
-      if (snap.exists()) { Object.assign(state, snap.data()); localStorage.setItem(getStoreKey(), JSON.stringify(state)); renderAll(); }
+      if (!currentUser) { openModal('authModal'); return; }
+      try {
+        const snap = await getDoc(doc(db, "users", currentUser.uid));
+        if (snap.exists()) { Object.assign(state, snap.data()); renderAll(); }
+      } catch (e) {}
     };
 
     window.changeLanguage = (lang) => {
-      window.currentLang = dict[lang] ? lang : 'hi';
-      localStorage.setItem('thekedaar_lang', window.currentLang);
+      window.currentLang = baseStrings[lang] ? lang : 'hi';
+      try { localStorage.setItem('thekedaar_lang', window.currentLang); } catch (e) {}
       document.documentElement.lang = window.currentLang;
-      document.getElementById('quickLangBtn').innerText = window.currentLang.toUpperCase();
+      if (byId('quickLangBtn')) byId('quickLangBtn').innerText = window.currentLang.toUpperCase();
       document.querySelectorAll('.lang-opt').forEach(b => b.classList.toggle('border-amber-500', b.getAttribute('data-lang') === window.currentLang));
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const val = t(el.getAttribute('data-i18n'));
@@ -1176,36 +1195,47 @@
       renderAll();
     };
     window.toggleQuickLang = () => {
-      const order = Object.keys(dict);
+      const order = Object.keys(baseStrings);
       changeLanguage(order[(order.indexOf(window.currentLang) + 1) % order.length]);
     };
 
-    window.setAppTheme = (th) => { document.documentElement.className = th; localStorage.setItem('thekedaar_theme', th); };
-    setAppTheme(localStorage.getItem('thekedaar_theme') || 'theme-amoled');
+    window.setAppTheme = (th) => { document.documentElement.className = th; try { localStorage.setItem('thekedaar_theme', th); } catch (e) {} };
+    try { setAppTheme(localStorage.getItem('thekedaar_theme') || 'theme-amoled'); } catch (e) {}
 
     const monthsHi = ['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'];
     const monthsEn = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     const now = new Date(); let pickYear = now.getFullYear();
-    const fmtMonth = (ym) => { const [y, m] = ym.split('-'); return `${(window.currentLang === 'en' ? monthsEn : monthsHi)[parseInt(m)-1]} ${y}`; };
-    document.getElementById('monthSelect').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
-    document.getElementById('advDate').value = document.getElementById('bDate').value = document.getElementById('hajriDateInput').value = now.toISOString().split('T')[0];
+    const fmtMonth = (ym) => {
+      const parts = (ym || '2026-11').split('-');
+      const mIdx = Math.max(0, Math.min(11, (parseInt(parts[1], 10) || 11) - 1));
+      return `${(window.currentLang === 'en' ? monthsEn : monthsHi)[mIdx]} ${parts[0] || pickYear}`;
+    };
+    if (byId('monthSelect')) byId('monthSelect').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+    const isoToday = now.toISOString().split('T')[0];
+    if (byId('advDate')) byId('advDate').value = isoToday;
+    if (byId('bDate')) byId('bDate').value = isoToday;
+    if (byId('hajriDateInput')) byId('hajriDateInput').value = isoToday;
 
-    window.openMonthPickerModal = () => { pickYear = parseInt(document.getElementById('monthSelect').value.split('-')[0]); renderMonthGrid(); openModal('monthPickerModal'); };
+    window.openMonthPickerModal = () => { pickYear = parseInt((byId('monthSelect')?.value || '2026-11').split('-')[0], 10) || 2026; renderMonthGrid(); openModal('monthPickerModal'); };
     window.changePickerYear = (d) => { pickYear += d; renderMonthGrid(); };
     function renderMonthGrid() {
-      document.getElementById('pickerYearDisplay').innerText = pickYear;
-      const cur = document.getElementById('monthSelect').value;
-      document.getElementById('pickerMonthsGrid').innerHTML = monthsEn.map((m, i) => {
-        const val = `${pickYear}-${String(i+1).padStart(2,'0')}`;
-        return `<button onclick="pickMonth('${val}')" class="py-2.5 rounded-xl text-xs font-black ${val===cur ? 'bg-amber-500 text-zinc-950' : 'bg-white/10'}">${window.currentLang==='en'?m:monthsHi[i].slice(0,4)}</button>`;
-      }).join('');
+      if (byId('pickerYearDisplay')) byId('pickerYearDisplay').innerText = pickYear;
+      const cur = byId('monthSelect')?.value || '';
+      if (byId('pickerMonthsGrid')) {
+        byId('pickerMonthsGrid').innerHTML = monthsEn.map((m, i) => {
+          const val = `${pickYear}-${String(i+1).padStart(2,'0')}`;
+          return `<button type="button" onclick="pickMonth('${val}')" class="py-2.5 rounded-xl text-xs font-black ${val===cur ? 'bg-amber-500 text-zinc-950' : 'bg-white/10'}">${window.currentLang==='en'?m:monthsHi[i].slice(0,4)}</button>`;
+        }).join('');
+      }
     }
-    window.pickMonth = (v) => { document.getElementById('monthSelect').value = v; closeModal('monthPickerModal'); renderAll(); };
+    window.pickMonth = (v) => { if (byId('monthSelect')) byId('monthSelect').value = v; closeModal('monthPickerModal'); renderAll(); };
     window.selectCurrentMonthNow = () => pickMonth(`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`);
 
-    // --- VOICE ENGINE FOR ALL FIELDS & THEKEDAAR AI ---
     function stopRec() {
-      if (activeRecognition) { try { activeRecognition.onresult = activeRecognition.onerror = activeRecognition.onend = null; activeRecognition.stop(); } catch (e) {} activeRecognition = null; }
+      if (activeRecognition) {
+        try { activeRecognition.onresult = activeRecognition.onerror = activeRecognition.onend = null; activeRecognition.stop(); } catch (e) {}
+        activeRecognition = null;
+      }
     }
 
     function runSpeechCapture(onFinalResult, onStateChange) {
@@ -1220,12 +1250,13 @@
 
       rec.onstart = () => { if (onStateChange) onStateChange('listening'); };
       rec.onresult = (e) => {
-        const txt = Array.from(e.results).map(r => r[0].transcript).join('').trim();
+        if (!e || !e.results || !e.results.length) return;
+        const txt = Array.from(e.results).map(r => (r[0] && r[0].transcript) || '').join('').trim();
         if (onStateChange) onStateChange('transcript', txt);
         if (e.results[e.results.length - 1].isFinal && txt) {
           stopRec();
           if (onStateChange) onStateChange('idle');
-          onFinalResult(txt);
+          if (typeof onFinalResult === 'function') onFinalResult(txt);
         }
       };
       rec.onerror = () => { if (onStateChange) onStateChange('error'); };
@@ -1236,8 +1267,8 @@
 
     window.startVoiceInputForField = (fieldId, numOnly = false) => {
       activeVoiceFieldId = fieldId; activeVoiceNumeric = numOnly;
-      document.getElementById('voiceTranscriptBox').classList.add('hidden');
-      document.getElementById('voiceStatusLine').innerText = t('voiceListeningLbl');
+      if (byId('voiceTranscriptBox')) byId('voiceTranscriptBox').classList.add('hidden');
+      if (byId('voiceStatusLine')) byId('voiceStatusLine').innerText = t('voiceListeningLbl');
       openModal('voiceModal');
       triggerNativeSpeechEngine();
     };
@@ -1245,7 +1276,7 @@
     window.triggerNativeSpeechEngine = () => {
       runSpeechCapture(
         (txt) => {
-          const el = document.getElementById(activeVoiceFieldId);
+          const el = byId(activeVoiceFieldId);
           if (el) {
             el.value = activeVoiceNumeric ? txt.replace(/[^0-9]/g, '') : txt;
             el.dispatchEvent(new Event('input', { bubbles: true }));
@@ -1253,28 +1284,26 @@
           setTimeout(closeVoiceModal, 300);
         },
         (phase, txt) => {
-          const box = document.getElementById('voiceTranscriptBox');
-          const status = document.getElementById('voiceStatusLine');
-          if (phase === 'transcript' && txt) { box.innerText = `"${txt}"`; box.classList.remove('hidden'); }
-          if (phase === 'error') status.innerText = t('speakNowBtn');
+          const box = byId('voiceTranscriptBox'), status = byId('voiceStatusLine');
+          if (phase === 'transcript' && txt && box) { box.innerText = `"${txt}"`; box.classList.remove('hidden'); }
+          if (phase === 'error' && status) status.innerText = t('speakNowBtn');
         }
       );
     };
 
     window.triggerAICommandVoice = () => {
-      const bar = document.getElementById('aiLiveMicBar');
-      const st = document.getElementById('aiMicStatusText');
-      bar.classList.remove('hidden'); bar.classList.add('flex');
-      st.innerText = t('voiceListeningLbl');
+      const bar = byId('aiLiveMicBar'), st = byId('aiMicStatusText');
+      if (bar) { bar.classList.remove('hidden'); bar.classList.add('flex'); }
+      if (st) st.innerText = t('voiceListeningLbl');
       runSpeechCapture(
         (txt) => {
-          bar.classList.add('hidden'); bar.classList.remove('flex');
-          document.getElementById('aiCommandInput').value = txt;
+          if (bar) { bar.classList.add('hidden'); bar.classList.remove('flex'); }
+          if (byId('aiCommandInput')) byId('aiCommandInput').value = txt;
           runAICommand(txt);
         },
         (phase, txt) => {
-          if (phase === 'transcript' && txt) st.innerText = `"${txt}"`;
-          if (phase === 'error') st.innerText = t('speakNowBtn');
+          if (phase === 'transcript' && txt && st) st.innerText = `"${txt}"`;
+          if (phase === 'error' && st) st.innerText = t('speakNowBtn');
         }
       );
     };
@@ -1282,29 +1311,32 @@
     window.closeVoiceModal = () => { stopRec(); closeModal('voiceModal'); };
 
     window.openCustomDialog = ({ title, defaultValue = '', inputType = 'text', onConfirm }) => {
-      document.getElementById('customDialogTitle').innerText = title;
-      const inp = document.getElementById('customDialogInput');
-      inp.type = inputType; inp.inputMode = inputType === 'number' ? 'numeric' : 'text'; inp.value = defaultValue;
-      openModal('customDialogModal'); setTimeout(() => inp.focus(), 60);
-      document.getElementById('customDialogConfirmBtn').onclick = () => { closeModal('customDialogModal'); if (onConfirm) onConfirm(inp.value.trim()); };
+      if (byId('customDialogTitle')) byId('customDialogTitle').innerText = title;
+      const inp = byId('customDialogInput');
+      if (inp) { inp.type = inputType; inp.inputMode = inputType === 'number' ? 'numeric' : 'text'; inp.value = defaultValue; }
+      openModal('customDialogModal');
+      setTimeout(() => inp && inp.focus(), 60);
+      const btn = byId('customDialogConfirmBtn');
+      if (btn) btn.onclick = () => { closeModal('customDialogModal'); if (typeof onConfirm === 'function') onConfirm((inp?.value || '').trim()); };
     };
     window.openConfirm = (title, sub, onConfirm) => {
-      document.getElementById('confirmDeleteTitle').innerText = title;
-      document.getElementById('confirmDeleteSub').innerText = sub;
+      if (byId('confirmDeleteTitle')) byId('confirmDeleteTitle').innerText = title;
+      if (byId('confirmDeleteSub')) byId('confirmDeleteSub').innerText = sub;
       openModal('confirmDeleteModal');
-      document.getElementById('confirmDeleteActionBtn').onclick = () => { closeModal('confirmDeleteModal'); onConfirm(); };
+      const btn = byId('confirmDeleteActionBtn');
+      if (btn) btn.onclick = () => { closeModal('confirmDeleteModal'); if (typeof onConfirm === 'function') onConfirm(); };
     };
     window.navigateTo = (vId) => {
       ['viewHome','viewLabours','viewExpenses','viewBills'].forEach(id => {
-        document.getElementById(id).classList.toggle('hidden', id !== vId);
-        document.getElementById(`nav-${id}`).classList.toggle('active', id === vId);
+        if (byId(id)) byId(id).classList.toggle('hidden', id !== vId);
+        if (byId(`nav-${id}`)) byId(`nav-${id}`).classList.toggle('active', id === vId);
       });
     };
     window.openFormModal = (type) => {
       openModal('formModal');
-      ['labourForm','expenseForm','billForm'].forEach(f => document.getElementById(f).classList.add('hidden'));
-      document.getElementById(`${type}Form`).classList.remove('hidden');
-      document.getElementById('formModalTitle').innerText = type === 'labour' ? t('addWorkerBtn') : type === 'expense' ? t('addExpenseBtn') : t('addBillBtn');
+      ['labourForm','expenseForm','billForm'].forEach(f => { if (byId(f)) byId(f).classList.add('hidden'); });
+      if (byId(`${type}Form`)) byId(`${type}Form`).classList.remove('hidden');
+      if (byId('formModalTitle')) byId('formModalTitle').innerText = type === 'labour' ? t('addWorkerBtn') : type === 'expense' ? t('addExpenseBtn') : t('addBillBtn');
     };
     window.setLabourCategoryFilter = (cat) => {
       activeCategoryFilter = cat;
@@ -1318,8 +1350,8 @@
     window.openProfileModal = () => { renderAccounts(); openModal('profileModal'); };
     window.openSettingsModal = () => openModal('settingsModal');
     window.saveNewMasterPin = () => {
-      const p = document.getElementById('newMasterPinInput').value.trim();
-      if (p) { state.masterPin = p; document.getElementById('newMasterPinInput').value = ''; persist(); alert(t('saveBtn')); }
+      const p = (byId('newMasterPinInput')?.value || '').trim();
+      if (p) { state.masterPin = p; byId('newMasterPinInput').value = ''; persist(); alert(t('saveBtn')); }
     };
     window.openAddAccountPrompt = () => openCustomDialog({
       title: t('addSupervisorBtn'),
@@ -1327,34 +1359,39 @@
     });
     window.switchAcc = (id) => {
       const target = state.accounts.find(a => a.id === id);
-      if (target && target.isMaster && !isMaster()) { pendingSwitchAccId = id; document.getElementById('masterPinInput').value = ''; openModal('pinLockModal'); }
-      else { localStorage.setItem('thekedaar_active_acc_id', id); renderAll(); renderAccounts(); }
+      if (target && target.isMaster && !isMaster()) { pendingSwitchAccId = id; if (byId('masterPinInput')) byId('masterPinInput').value = ''; openModal('pinLockModal'); }
+      else { try { localStorage.setItem('thekedaar_active_acc_id', id); } catch (e) {} renderAll(); renderAccounts(); }
     };
     window.verifyMasterPin = () => {
-      if (document.getElementById('masterPinInput').value.trim() === String(state.masterPin || '1234')) {
-        closeModal('pinLockModal'); localStorage.setItem('thekedaar_active_acc_id', pendingSwitchAccId || 'acc_main'); renderAll(); renderAccounts();
+      if ((byId('masterPinInput')?.value || '').trim() === String(state.masterPin || '1234')) {
+        closeModal('pinLockModal');
+        try { localStorage.setItem('thekedaar_active_acc_id', pendingSwitchAccId || 'acc_main'); } catch (e) {}
+        renderAll(); renderAccounts();
       } else alert(t('pinModalTitle'));
     };
     window.delSup = (id) => openConfirm(t('deleteBtn'), '', () => { state.accounts = state.accounts.filter(a => a.id !== id); persist(); renderAccounts(); });
     function renderAccounts() {
       const cur = getActiveAcc();
-      document.getElementById('masterPasswordSettingBox').classList.toggle('hidden', !isMaster());
-      document.getElementById('accountIdsList').innerHTML = state.accounts.map(a => {
-        const label = a.customNickname || (a.isMaster ? t('mainRole') : t('supRole'));
-        return `
-          <div class="flex items-center justify-between p-2.5 rounded-xl ${a.id===cur.id?'bg-amber-500/15 border border-amber-500/40':'bg-white/5'}">
-            <span class="text-xs font-bold">${label}</span>
-            <div class="flex gap-1.5">
-              ${a.id===cur.id ? `<span class="text-[10px] text-emerald-500 font-bold">${t('activeLbl')}</span>` : `<button onclick="switchAcc('${a.id}')" class="px-2 py-1 rounded-lg bg-amber-500 text-zinc-950 text-[10px] font-black">${t('switchLbl')}</button>`}
-              ${isMaster() && !a.isMaster ? `<button onclick="delSup('${a.id}')" class="px-2 py-1 rounded-lg bg-rose-500/20 text-rose-500 text-[10px] font-bold">${t('deleteBtn')}</button>` : ''}
-            </div>
-          </div>`;
-      }).join('');
+      if (byId('masterPasswordSettingBox')) byId('masterPasswordSettingBox').classList.toggle('hidden', !isMaster());
+      if (byId('accountIdsList')) {
+        byId('accountIdsList').innerHTML = state.accounts.map(a => {
+          const label = a.customNickname || (a.isMaster ? t('mainRole') : t('supRole'));
+          return `
+            <div class="flex items-center justify-between p-2.5 rounded-xl ${a.id===cur.id?'bg-amber-500/15 border border-amber-500/40':'bg-white/5'}">
+              <span class="text-xs font-bold">${label}</span>
+              <div class="flex gap-1.5">
+                ${a.id===cur.id ? `<span class="text-[10px] text-emerald-500 font-bold">${t('activeLbl')}</span>` : `<button type="button" onclick="switchAcc('${a.id}')" class="px-2 py-1 rounded-lg bg-amber-500 text-zinc-950 text-[10px] font-black">${t('switchLbl')}</button>`}
+                ${isMaster() && !a.isMaster ? `<button type="button" onclick="delSup('${a.id}')" class="px-2 py-1 rounded-lg bg-rose-500/20 text-rose-500 text-[10px] font-bold">${t('deleteBtn')}</button>` : ''}
+              </div>
+            </div>`;
+        }).join('');
+      }
     }
-    window.addNewSite = () => openCustomDialog({ title: t('addSiteBtn'), onConfirm: (n) => { if (n) { state.sites.push(n); persist(); document.getElementById('siteSelect').value = n; renderAll(); } } });
+    window.addNewSite = () => openCustomDialog({ title: t('addSiteBtn'), onConfirm: (n) => { if (n) { state.sites.push(n); persist(); if (byId('siteSelect')) byId('siteSelect').value = n; renderAll(); } } });
     window.deleteCurrentSite = () => {
       if (!isMaster() || state.sites.length <= 1) return;
-      const s = document.getElementById('siteSelect').value;
+      const s = byId('siteSelect')?.value;
+      if (!s) return;
       openConfirm(t('deleteBtn'), s, () => {
         state.sites = state.sites.filter(x => x !== s);
         state.labours = state.labours.filter(x => x.site !== s);
@@ -1365,37 +1402,37 @@
     };
 
     const readFile = (f) => new Promise(res => { if (!f) return res(null); const r = new FileReader(); r.onload = e => res({ name: f.name, dataUrl: e.target.result }); r.readAsDataURL(f); });
-    window.previewFile = (i, l) => { const f = document.getElementById(i).files[0]; if (f) document.getElementById(l).innerText = f.name; };
+    window.previewFile = (i, l) => { const f = byId(i)?.files?.[0]; if (f && byId(l)) byId(l).innerText = f.name; };
 
     window.saveLabour = (e) => {
       e.preventDefault();
       state.labours.unshift({
-        id: Date.now().toString(), site: document.getElementById('siteSelect').value, month: document.getElementById('monthSelect').value,
-        name: document.getElementById('lName').value.trim(), category: document.getElementById('lCategory').value,
-        dailyRate: Number(document.getElementById('lDailyRate').value) || 500, advance: Number(document.getElementById('lAdvance').value) || 0,
-        phone: document.getElementById('lPhone').value.trim(), presentDays: 0, halfDays: 0, advanceLog: [], lastUpdatedBy: getStamp()
+        id: Date.now().toString(), site: byId('siteSelect').value, month: byId('monthSelect').value,
+        name: (byId('lName')?.value || '').trim(), category: byId('lCategory')?.value || 'Mason',
+        dailyRate: Number(byId('lDailyRate')?.value) || 500, advance: Number(byId('lAdvance')?.value) || 0,
+        phone: (byId('lPhone')?.value || '').trim(), presentDays: 0, halfDays: 0, advanceLog: [], lastUpdatedBy: getStamp()
       });
       e.target.reset(); closeModal('formModal'); persist(); navigateTo('viewLabours');
     };
     window.saveExpense = async (e) => {
       e.preventDefault();
       state.expenses.unshift({
-        id: Date.now().toString(), site: document.getElementById('siteSelect').value, month: document.getElementById('monthSelect').value,
-        title: document.getElementById('eTitle').value.trim(), amount: Number(document.getElementById('eAmount').value) || 0,
-        spentFor: document.getElementById('eSpentFor').value.trim(), attachment: await readFile(document.getElementById('eFile').files[0]), addedBy: getStamp()
+        id: Date.now().toString(), site: byId('siteSelect').value, month: byId('monthSelect').value,
+        title: (byId('eTitle')?.value || '').trim(), amount: Number(byId('eAmount')?.value) || 0,
+        spentFor: (byId('eSpentFor')?.value || '').trim(), attachment: await readFile(byId('eFile')?.files?.[0]), addedBy: getStamp()
       });
       e.target.reset(); closeModal('formModal'); persist(); navigateTo('viewExpenses');
     };
     window.saveBill = async (e) => {
       e.preventDefault();
       state.bills.unshift({
-        id: Date.now().toString(), site: document.getElementById('siteSelect').value, month: document.getElementById('monthSelect').value,
-        title: document.getElementById('bTitle').value.trim(), amount: Number(document.getElementById('bAmount').value) || 0,
-        billDate: document.getElementById('bDate').value, status: 'Pending', attachment: await readFile(document.getElementById('bFile').files[0]), addedBy: getStamp()
+        id: Date.now().toString(), site: byId('siteSelect').value, month: byId('monthSelect').value,
+        title: (byId('bTitle')?.value || '').trim(), amount: Number(byId('bAmount')?.value) || 0,
+        billDate: byId('bDate')?.value || isoToday, status: 'Pending', attachment: await readFile(byId('bFile')?.files?.[0]), addedBy: getStamp()
       });
       e.target.reset(); closeModal('formModal'); persist(); navigateTo('viewBills');
     };
-    window.deleteRecord = (type, id) => { if (isMaster()) openConfirm(t('deleteBtn'), '', () => { state[type] = state[type].filter(x => x.id !== id); persist(); }); };
+    window.deleteRecord = (type, id) => { if (isMaster()) openConfirm(t('deleteBtn'), '', () => { state[type] = (state[type] || []).filter(x => x.id !== id); persist(); }); };
     window.updateAtt = (id, kind) => {
       const l = state.labours.find(x => x.id === id); if (!l) return;
       if (kind === '+P') l.presentDays++; if (kind === '-P' && l.presentDays > 0) l.presentDays--; if (kind === '+H') l.halfDays++;
@@ -1404,20 +1441,21 @@
     window.editRate = (id) => { const l = state.labours.find(x => x.id === id); if (l && isMaster()) openCustomDialog({ title: t('dailyWageLabel'), inputType: 'number', defaultValue: l.dailyRate, onConfirm: v => { if (v) { l.dailyRate = Number(v); persist(); } } }); };
     window.openAdv = (id) => {
       const l = state.labours.find(x => x.id === id); if (!l) return;
-      document.getElementById('advLabourId').value = id; document.getElementById('advWorkerName').innerText = `${l.name} (${fmtINR(l.advance)})`;
-      document.getElementById('advHistoryList').innerHTML = (l.advanceLog || []).map(h => `<div class="flex justify-between py-1 border-b border-white/10"><span>${fmtINR(h.amount)}</span><span class="opacity-60">${h.date}</span></div>`).join('');
+      if (byId('advLabourId')) byId('advLabourId').value = id;
+      if (byId('advWorkerName')) byId('advWorkerName').innerText = `${l.name} (${fmtINR(l.advance)})`;
+      if (byId('advHistoryList')) byId('advHistoryList').innerHTML = (l.advanceLog || []).map(h => `<div class="flex justify-between py-1 border-b border-white/10"><span>${fmtINR(h.amount)}</span><span class="opacity-60">${h.date}</span></div>`).join('');
       openModal('advanceModal');
     };
     window.submitExtraAdvance = (e) => {
       e.preventDefault();
-      const l = state.labours.find(x => x.id === document.getElementById('advLabourId').value);
-      const amt = Number(document.getElementById('advAmount').value) || 0;
-      if (l && amt > 0) { l.advance += amt; (l.advanceLog = l.advanceLog || []).unshift({ amount: amt, date: document.getElementById('advDate').value }); l.lastUpdatedBy = getStamp(); closeModal('advanceModal'); persist(); }
+      const l = state.labours.find(x => x.id === byId('advLabourId')?.value);
+      const amt = Number(byId('advAmount')?.value) || 0;
+      if (l && amt > 0) { l.advance += amt; (l.advanceLog = l.advanceLog || []).unshift({ amount: amt, date: byId('advDate')?.value || isoToday }); l.lastUpdatedBy = getStamp(); closeModal('advanceModal'); persist(); }
     };
     window.settlePay = (id) => {
       const l = state.labours.find(x => x.id === id); if (!l || !isMaster()) return;
       const net = Math.round(l.dailyRate * (l.presentDays + l.halfDays * 0.5)) - l.advance;
-      if (net > 0) openConfirm(t('settleLbl'), `${l.name}: ${fmtINR(net)}`, () => { l.advance += net; (l.advanceLog = l.advanceLog || []).unshift({ amount: net, date: now.toISOString().split('T')[0] }); persist(); });
+      if (net > 0) openConfirm(t('settleLbl'), `${l.name}: ${fmtINR(net)}`, () => { l.advance += net; (l.advanceLog = l.advanceLog || []).unshift({ amount: net, date: isoToday }); persist(); });
     };
     window.waSlip = (id) => {
       const l = state.labours.find(x => x.id === id); if (!l) return;
@@ -1426,37 +1464,41 @@
     };
 
     window.openCarrySelectModal = () => {
-      const site = document.getElementById('siteSelect').value, curM = document.getElementById('monthSelect').value;
+      const site = byId('siteSelect')?.value, curM = byId('monthSelect')?.value || '2026-11';
       let [y, m] = curM.split('-').map(Number); m--; if (m < 1) { m = 12; y--; }
       const prevM = `${y}-${String(m).padStart(2,'0')}`;
       const curNames = new Set(state.labours.filter(l => l.site === site && l.month === curM).map(l => l.name.toLowerCase()));
       const cands = state.labours.filter(l => l.site === site && l.month === prevM && !curNames.has(l.name.toLowerCase()));
       window._carry = cands;
-      document.getElementById('carryWorkersList').innerHTML = cands.length ? cands.map((w, i) => `<label class="flex items-center gap-2 p-2.5 rounded-xl bg-white/5 text-xs"><input type="checkbox" value="${i}" class="carry-cb accent-amber-500" checked/><b>${w.name}</b> (${fmtINR(w.dailyRate)})</label>`).join('') : `<div class="text-center py-6 text-xs opacity-60">${t('noWorkers')}</div>`;
+      if (byId('carryWorkersList')) {
+        byId('carryWorkersList').innerHTML = cands.length ? cands.map((w, i) => `<label class="flex items-center gap-2 p-2.5 rounded-xl bg-white/5 text-xs"><input type="checkbox" value="${i}" class="carry-cb accent-amber-500" checked/><b>${w.name}</b> (${fmtINR(w.dailyRate)})</label>`).join('') : `<div class="text-center py-6 text-xs opacity-60">${t('noWorkers')}</div>`;
+      }
       openModal('carryModal');
     };
     window.executeCarryForwardSelected = () => {
-      const site = document.getElementById('siteSelect').value, curM = document.getElementById('monthSelect').value;
+      const site = byId('siteSelect')?.value, curM = byId('monthSelect')?.value || '2026-11';
       document.querySelectorAll('.carry-cb:checked').forEach(cb => {
-        const w = window._carry[cb.value];
+        const w = (window._carry || [])[cb.value];
         if (w) state.labours.unshift({ ...w, id: Date.now().toString() + Math.random().toString().slice(2,5), month: curM, advance: 0, advanceLog: [], presentDays: 0, halfDays: 0, lastUpdatedBy: getStamp() });
       });
       closeModal('carryModal'); persist();
     };
 
     window.openHajriBookModal = () => { renderDailyHajriSheet(); openModal('hajriBookModal'); };
-    window.shiftHajriDate = (d) => { const i = document.getElementById('hajriDateInput'); const dt = new Date(i.value); dt.setDate(dt.getDate()+d); i.value = dt.toISOString().split('T')[0]; renderDailyHajriSheet(); };
+    window.shiftHajriDate = (d) => { const i = byId('hajriDateInput'); if (!i) return; const dt = new Date(i.value || isoToday); dt.setDate(dt.getDate()+d); i.value = dt.toISOString().split('T')[0]; renderDailyHajriSheet(); };
     window.renderDailyHajriSheet = () => {
-      const dt = document.getElementById('hajriDateInput').value, site = document.getElementById('siteSelect').value, m = dt.slice(0,7);
+      const dt = byId('hajriDateInput')?.value || isoToday, site = byId('siteSelect')?.value, m = dt.slice(0,7);
       const ws = state.labours.filter(l => l.site === site && l.month === m);
       const rec = (state.dailyHajriRecords[dt] = state.dailyHajriRecords[dt] || {});
-      document.getElementById('hajriWorkersContainer').innerHTML = ws.map(w => `
-        <div class="flex items-center justify-between p-2.5 rounded-xl bg-white/5 text-xs">
-          <b>${w.name}</b>
-          <div class="flex gap-1">
-            ${['P','H','A'].map(s => `<button onclick="setHajri('${dt}','${w.id}','${s}')" class="w-8 h-8 rounded-lg font-black ${rec[w.id]===s ? (s==='P'?'bg-emerald-500 text-black':s==='H'?'bg-amber-500 text-black':'bg-rose-500 text-white') : 'bg-white/10'}">${s}</button>`).join('')}
-          </div>
-        </div>`).join('');
+      if (byId('hajriWorkersContainer')) {
+        byId('hajriWorkersContainer').innerHTML = ws.map(w => `
+          <div class="flex items-center justify-between p-2.5 rounded-xl bg-white/5 text-xs">
+            <b>${w.name}</b>
+            <div class="flex gap-1">
+              ${['P','H','A'].map(s => `<button type="button" onclick="setHajri('${dt}','${w.id}','${s}')" class="w-8 h-8 rounded-lg font-black ${rec[w.id]===s ? (s==='P'?'bg-emerald-500 text-black':s==='H'?'bg-amber-500 text-black':'bg-rose-500 text-white') : 'bg-white/10'}">${s}</button>`).join('')}
+            </div>
+          </div>`).join('');
+      }
     };
     window.setHajri = (dt, id, s) => {
       (state.dailyHajriRecords[dt] = state.dailyHajriRecords[dt] || {})[id] = s;
@@ -1469,75 +1511,80 @@
       persist(); renderDailyHajriSheet();
     };
     window.markAllWorkersToday = (s) => {
-      const dt = document.getElementById('hajriDateInput').value, site = document.getElementById('siteSelect').value;
+      const dt = byId('hajriDateInput')?.value || isoToday, site = byId('siteSelect')?.value;
       state.labours.filter(l => l.site === site && l.month === dt.slice(0,7)).forEach(w => setHajri(dt, w.id, s));
     };
     window.openHist = (id) => {
       const l = state.labours.find(x => x.id === id); if (!l) return;
-      document.getElementById('labourHistoryTitle').innerText = l.name;
+      if (byId('labourHistoryTitle')) byId('labourHistoryTitle').innerText = l.name;
       const rows = Object.keys(state.dailyHajriRecords).sort().filter(k => k.startsWith(l.month) && state.dailyHajriRecords[k][id]).map(k => `<div class="flex justify-between p-2 rounded-xl bg-white/5"><span>${k}</span><b>${state.dailyHajriRecords[k][id]}</b></div>`).join('');
-      document.getElementById('labourHistoryContent').innerHTML = rows || `<div class="text-center py-4 opacity-60">${l.presentDays}P / ${l.halfDays}H</div>`;
+      if (byId('labourHistoryContent')) byId('labourHistoryContent').innerHTML = rows || `<div class="text-center py-4 opacity-60">${l.presentDays}P / ${l.halfDays}H</div>`;
       openModal('labourHistoryModal');
     };
 
     window.openMonthlyLedgerModal = () => {
-      const site = document.getElementById('siteSelect').value, m = document.getElementById('monthSelect').value;
+      const site = byId('siteSelect')?.value, m = byId('monthSelect')?.value || '2026-11';
       const ws = state.labours.filter(l => l.site === site && l.month === m);
       const ex = state.expenses.filter(e => e.site === site && e.month === m);
       const bs = state.bills.filter(b => b.site === site && b.month === m);
       const wages = ws.reduce((a, w) => a + Math.round(w.dailyRate * (w.presentDays + w.halfDays * 0.5)), 0);
       const expT = ex.reduce((a, e) => a + e.amount, 0), billT = bs.reduce((a, b) => a + b.amount, 0);
       const profit = billT - (wages + expT);
-      document.getElementById('monthlyLedgerModalBody').innerHTML = `
-        <div class="p-3.5 rounded-2xl ${profit>=0?'bg-emerald-500/15 border-emerald-500/30':'bg-rose-500/15 border-rose-500/30'} border flex justify-between items-center text-xs">
-          <span class="font-bold">${t('profitLbl')}</span><b class="text-base">${fmtINR(profit)}</b>
-        </div>
-        ${bs.map(b => `<div class="p-3 rounded-2xl bg-white/5 text-xs space-y-2"><div class="flex justify-between"><b>${b.title}</b><b class="text-emerald-500">${fmtINR(b.amount)}</b></div>${b.attachment?.dataUrl?.startsWith('data:image') ? `<img src="${b.attachment.dataUrl}" class="w-full max-h-40 object-cover rounded-xl"/>` : ''}</div>`).join('')}`;
+      if (byId('monthlyLedgerModalBody')) {
+        byId('monthlyLedgerModalBody').innerHTML = `
+          <div class="p-3.5 rounded-2xl ${profit>=0?'bg-emerald-500/15 border-emerald-500/30':'bg-rose-500/15 border-rose-500/30'} border flex justify-between items-center text-xs">
+            <span class="font-bold">${t('profitLbl')}</span><b class="text-base">${fmtINR(profit)}</b>
+          </div>
+          ${bs.map(b => `<div class="p-3 rounded-2xl bg-white/5 text-xs space-y-2"><div class="flex justify-between"><b>${b.title}</b><b class="text-emerald-500">${fmtINR(b.amount)}</b></div>${b.attachment?.dataUrl?.startsWith('data:image') ? `<img src="${b.attachment.dataUrl}" class="w-full max-h-40 object-cover rounded-xl"/>` : ''}</div>`).join('')}`;
+      }
       openModal('monthlyLedgerModal');
     };
 
     window.playVoiceSummary = () => {
-      const s = document.getElementById('siteSelect').value;
-      const due = document.getElementById('summaryLabourDue').innerText, exp = document.getElementById('summaryExpensesTotal').innerText, bill = document.getElementById('summaryBillsTotal').innerText;
+      const s = byId('siteSelect')?.value || '';
+      const due = byId('summaryLabourDue')?.innerText || '₹0', exp = byId('summaryExpensesTotal')?.innerText || '₹0', bill = byId('summaryBillsTotal')?.innerText || '₹0';
       const msg = window.currentLang === 'en'
         ? `Site ${s} summary. Labour due ${due}. Expenses ${exp}. Company bills ${bill}.`
         : `साइट ${s} का हिसाब। मजदूर बकाया ${due}। कुल खर्चे ${exp}। कंपनी बिल ${bill}।`;
       if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const u = new SpeechSynthesisUtterance(msg);
-        u.lang = speechLocaleMap[window.currentLang] || 'hi-IN';
-        window.speechSynthesis.speak(u);
+        try {
+          window.speechSynthesis.cancel();
+          const u = new SpeechSynthesisUtterance(msg);
+          u.lang = speechLocaleMap[window.currentLang] || 'hi-IN';
+          window.speechSynthesis.speak(u);
+        } catch (e) {}
       }
     };
 
-    // --- 100% LOCAL THEKEDAAR AI IN SELECTED LANGUAGE ---
     window.openThekedaarAIModal = () => {
       openModal('thekedaarAIModal');
-      const box = document.getElementById('aiChatMessages');
-      if (!box.innerHTML.trim()) addAIMsg('ai', t('aiWelcome'));
+      const box = byId('aiChatMessages');
+      if (box && !box.innerHTML.trim()) addAIMsg('ai', t('aiWelcome'));
     };
     function addAIMsg(who, html) {
-      const box = document.getElementById('aiChatMessages');
+      const box = byId('aiChatMessages');
+      if (!box) return;
       const d = document.createElement('div');
       d.className = who === 'user' ? 'ml-auto max-w-[82%] p-2.5 rounded-2xl bg-amber-500 text-zinc-950 font-bold' : 'mr-auto max-w-[88%] p-2.5 rounded-2xl bg-white/10 border border-purple-500/30';
       d.innerHTML = html; box.appendChild(d); box.scrollTop = box.scrollHeight;
     }
-    window.handleAIFormSubmit = (e) => { e.preventDefault(); const i = document.getElementById('aiCommandInput'); if (i.value.trim()) { runAICommand(i.value.trim()); i.value = ''; } };
+    window.handleAIFormSubmit = (e) => { e.preventDefault(); const i = byId('aiCommandInput'); if (i && i.value.trim()) { runAICommand(i.value.trim()); i.value = ''; } };
     window.runAICommand = (q) => {
+      if (!q) return;
       addAIMsg('user', q);
-      const l = q.toLowerCase(), site = document.getElementById('siteSelect').value, m = document.getElementById('monthSelect').value;
+      const l = q.toLowerCase(), site = byId('siteSelect')?.value || state.sites[0], m = byId('monthSelect')?.value || '2026-11';
       let ans = '';
-      if (l.includes('mark all present') || l.includes('all present') || l.includes('सबकी हाजिरी')) {
+      if (l.includes('mark all present') || l.includes('all present') || l.includes('सबकी हाजिरी') || l.includes('sabki hajri') || l.includes('हजर')) {
         const ws = state.labours.filter(x => x.site === site && x.month === m);
-        ws.forEach(w => { w.presentDays++; w.lastUpdatedBy = getStamp(); }); persist();
-        ans = t('aiMarkedAll')(ws.length);
-      } else if (/(add|new)\s+(worker|labour)|मजदूर\s+जोड़ो/i.test(q)) {
+        ws.forEach(w => { w.presentDays = (w.presentDays || 0) + 1; w.lastUpdatedBy = getStamp(); }); persist();
+        ans = t('aiMarkedAll', ws.length);
+      } else if (/(add|new)\s+(worker|labour)|मजदूर\s+जोड़ो|worker\s+add/i.test(q)) {
         const num = q.match(/\d+/), rate = num ? Number(num[0]) : 500;
         const name = q.replace(/(add|new|worker|labour|मजदूर|जोड़ो|\d+)/gi, '').trim() || t('tradeMason');
         state.labours.unshift({ id: Date.now().toString(), site, month: m, name, category: 'Mason', dailyRate: rate, advance: 0, phone: '', presentDays: 0, halfDays: 0, advanceLog: [], lastUpdatedBy: getStamp() });
-        persist(); ans = t('aiAddedWorker')(name, rate);
-      } else if (l.includes('profit') || l.includes('summary') || l.includes('हिसाब') || l.includes('मुनाफा')) {
-        ans = `${t('labourDue')}: <b>${document.getElementById('summaryLabourDue').innerText}</b> | ${t('expenses')}: <b>${document.getElementById('summaryExpensesTotal').innerText}</b> | ${t('bills')}: <b>${document.getElementById('summaryBillsTotal').innerText}</b>`;
+        persist(); ans = t('aiAddedWorker', name, rate);
+      } else if (l.includes('profit') || l.includes('summary') || l.includes('हिसाब') || l.includes('मुनाफा') || l.includes('hisab')) {
+        ans = `${t('labourDue')}: <b>${byId('summaryLabourDue')?.innerText || '₹0'}</b> | ${t('expenses')}: <b>${byId('summaryExpensesTotal')?.innerText || '₹0'}</b> | ${t('bills')}: <b>${byId('summaryBillsTotal')?.innerText || '₹0'}</b>`;
       } else {
         ans = t('aiHelp');
       }
@@ -1545,82 +1592,92 @@
     };
 
     window.renderAll = () => {
-      const sel = document.getElementById('siteSelect');
+      const sel = byId('siteSelect');
+      if (!sel) return;
+      if (!Array.isArray(state.sites) || !state.sites.length) state.sites = ['Site A'];
       const curS = sel.value && state.sites.includes(sel.value) ? sel.value : state.sites[0];
       sel.innerHTML = state.sites.map(s => `<option value="${s}" ${s===curS?'selected':''}>${s}</option>`).join('');
-      const site = sel.value, m = document.getElementById('monthSelect').value, master = isMaster();
-      document.getElementById('monthDisplayLabel').innerText = fmtMonth(m);
-      document.getElementById('activeNicknameBadge').innerText = getActiveAcc().displayNickname;
-      document.getElementById('deleteSiteBtn').classList.toggle('hidden', !master);
-      document.getElementById('loggedInEmailDisplay').innerText = currentUser?.email || t('notLoggedLbl');
-      document.getElementById('profileLogoutBtn').classList.toggle('hidden', !currentUser);
-      document.getElementById('syncStatus').innerText = currentUser ? `${t('cloudLbl')} (${currentUser.email.split('@')[0]})` : t('onlineLbl');
+      const site = sel.value, m = byId('monthSelect')?.value || '2026-11', master = isMaster();
+      if (byId('monthDisplayLabel')) byId('monthDisplayLabel').innerText = fmtMonth(m);
+      if (byId('activeNicknameBadge')) byId('activeNicknameBadge').innerText = getActiveAcc().displayNickname;
+      if (byId('deleteSiteBtn')) byId('deleteSiteBtn').classList.toggle('hidden', !master);
+      if (byId('loggedInEmailDisplay')) byId('loggedInEmailDisplay').innerText = currentUser?.email || t('notLoggedLbl');
+      if (byId('profileLogoutBtn')) byId('profileLogoutBtn').classList.toggle('hidden', !currentUser);
+      if (byId('syncStatus')) byId('syncStatus').innerText = currentUser ? `${t('cloudLbl')} (${currentUser.email.split('@')[0]})` : t('onlineLbl');
 
-      const allW = state.labours.filter(l => l.site === site && l.month === m);
-      const q = (document.getElementById('labourSearchInput')?.value || '').trim().toLowerCase();
-      const visW = allW.filter(l => (!q || l.name.toLowerCase().includes(q) || (l.phone||'').includes(q)) && (activeCategoryFilter === 'ALL' || l.category.toLowerCase().includes(activeCategoryFilter.toLowerCase())));
+      const allW = (state.labours || []).filter(l => l.site === site && l.month === m);
+      const q = (byId('labourSearchInput')?.value || '').trim().toLowerCase();
+      const visW = allW.filter(l => (!q || (l.name||'').toLowerCase().includes(q) || (l.phone||'').includes(q)) && (activeCategoryFilter === 'ALL' || (l.category||'').toLowerCase().includes(activeCategoryFilter.toLowerCase())));
 
       let dueT = 0;
-      allW.forEach(w => { dueT += Math.round(w.dailyRate * (w.presentDays + w.halfDays * 0.5)) - w.advance; });
-      document.getElementById('summaryLabourDue').innerText = fmtINR(dueT);
+      allW.forEach(w => { dueT += Math.round((w.dailyRate||0) * ((w.presentDays||0) + (w.halfDays||0) * 0.5)) - (w.advance||0); });
+      if (byId('summaryLabourDue')) byId('summaryLabourDue').innerText = fmtINR(dueT);
 
-      document.getElementById('labourList').innerHTML = visW.length ? visW.map(l => {
-        const eff = l.presentDays + l.halfDays * 0.5, net = Math.round(l.dailyRate * eff) - l.advance;
-        const pct = Math.min(100, Math.round((eff / 30) * 100));
-        return `
-          <div class="ios-glass p-4 rounded-3xl space-y-2.5 card-hover">
-            <div class="flex justify-between items-start">
-              <div>
-                <button onclick="openHist('${l.id}')" class="font-black text-sm underline decoration-amber-500/50">${l.name}</button>
-                <div class="text-[10px] opacity-75 mt-0.5">${l.category} ${l.phone ? `• <a href="tel:${l.phone}" class="text-emerald-400 font-bold">${l.phone}</a>` : ''}</div>
-                <div class="text-[11px] mt-1 flex items-center gap-1.5 flex-wrap">
-                  <span>${t('rateLbl')}: <b>${fmtINR(l.dailyRate)}</b></span>
-                  ${master ? `<button onclick="editRate('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-500 font-bold">${t('editLbl')}</button>` : ''}
-                  <span>| ${t('advLbl')}: <b class="text-rose-500">${fmtINR(l.advance)}</b></span>
-                  <button onclick="openAdv('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-500 font-bold">+ ${t('advLbl')}</button>
+      if (byId('labourList')) {
+        byId('labourList').innerHTML = visW.length ? visW.map(l => {
+          const eff = (l.presentDays||0) + (l.halfDays||0) * 0.5, net = Math.round((l.dailyRate||0) * eff) - (l.advance||0);
+          const pct = Math.min(100, Math.round((eff / 30) * 100));
+          return `
+            <div class="ios-glass p-4 rounded-3xl space-y-2.5 card-hover">
+              <div class="flex justify-between items-start">
+                <div>
+                  <button type="button" onclick="openHist('${l.id}')" class="font-black text-sm underline decoration-amber-500/50">${l.name}</button>
+                  <div class="text-[10px] opacity-75 mt-0.5">${l.category} ${l.phone ? `• <a href="tel:${l.phone}" class="text-emerald-400 font-bold">${l.phone}</a>` : ''}</div>
+                  <div class="text-[11px] mt-1 flex items-center gap-1.5 flex-wrap">
+                    <span>${t('rateLbl')}: <b>${fmtINR(l.dailyRate)}</b></span>
+                    ${master ? `<button type="button" onclick="editRate('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-500 font-bold">${t('editLbl')}</button>` : ''}
+                    <span>| ${t('advLbl')}: <b class="text-rose-500">${fmtINR(l.advance)}</b></span>
+                    <button type="button" onclick="openAdv('${l.id}')" class="text-[9px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-500 font-bold">+ ${t('advLbl')}</button>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="text-[9px] uppercase opacity-65 block">${t('netDueLbl')}</span>
+                  <span class="text-base font-black ${net>=0?'text-emerald-500':'text-rose-500'}">${fmtINR(net)}</span>
+                  ${master ? `<button type="button" onclick="deleteRecord('labours','${l.id}')" class="block ml-auto text-[10px] text-rose-500 font-bold mt-1">${t('deleteBtn')}</button>` : ''}
                 </div>
               </div>
-              <div class="text-right">
-                <span class="text-[9px] uppercase opacity-65 block">${t('netDueLbl')}</span>
-                <span class="text-base font-black ${net>=0?'text-emerald-500':'text-rose-500'}">${fmtINR(net)}</span>
-                ${master ? `<button onclick="deleteRecord('labours','${l.id}')" class="block ml-auto text-[10px] text-rose-500 font-bold mt-1">${t('deleteBtn')}</button>` : ''}
+              <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden"><div class="h-full bg-gradient-to-r from-amber-500 to-emerald-500 transition-all" style="width:${pct}%"></div></div>
+              <div class="bg-black/15 p-2 rounded-2xl flex items-center justify-between text-xs">
+                <span onclick="openHist('${l.id}')" class="cursor-pointer">${t('presentLbl')}: <b class="text-emerald-500">${l.presentDays||0}P</b> | ${t('halfLbl')}: <b class="text-amber-500">${l.halfDays||0}H</b></span>
+                <div class="flex gap-1">
+                  <button type="button" onclick="updateAtt('${l.id}','-P')" class="w-7 h-7 rounded-lg bg-white/10 font-black">-P</button>
+                  <button type="button" onclick="updateAtt('${l.id}','+P')" class="w-7 h-7 rounded-lg bg-emerald-500 text-zinc-950 font-black">+P</button>
+                  <button type="button" onclick="updateAtt('${l.id}','+H')" class="px-2 h-7 rounded-lg bg-amber-500 text-zinc-950 font-black">+H</button>
+                </div>
               </div>
-            </div>
-            <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden"><div class="h-full bg-gradient-to-r from-amber-500 to-emerald-500 transition-all" style="width:${pct}%"></div></div>
-            <div class="bg-black/15 p-2 rounded-2xl flex items-center justify-between text-xs">
-              <span onclick="openHist('${l.id}')" class="cursor-pointer">${t('presentLbl')}: <b class="text-emerald-500">${l.presentDays}P</b> | ${t('halfLbl')}: <b class="text-amber-500">${l.halfDays}H</b></span>
-              <div class="flex gap-1">
-                <button onclick="updateAtt('${l.id}','-P')" class="w-7 h-7 rounded-lg bg-white/10 font-black">-P</button>
-                <button onclick="updateAtt('${l.id}','+P')" class="w-7 h-7 rounded-lg bg-emerald-500 text-zinc-950 font-black">+P</button>
-                <button onclick="updateAtt('${l.id}','+H')" class="px-2 h-7 rounded-lg bg-amber-500 text-zinc-950 font-black">+H</button>
+              <div class="flex items-center justify-between text-[10px]">
+                <span class="opacity-55 truncate">${l.lastUpdatedBy || ''}</span>
+                <div class="flex gap-1.5">
+                  ${master && net > 0 ? `<button type="button" onclick="settlePay('${l.id}')" class="px-2.5 py-1 rounded-xl bg-amber-500/15 text-amber-500 font-black">${t('settleLbl')}</button>` : ''}
+                  <button type="button" onclick="waSlip('${l.id}')" class="px-2.5 py-1 rounded-xl bg-emerald-500/15 text-emerald-500 font-bold">${t('slipLbl')}</button>
+                </div>
               </div>
-            </div>
-            <div class="flex items-center justify-between text-[10px]">
-              <span class="opacity-55 truncate">${l.lastUpdatedBy || ''}</span>
-              <div class="flex gap-1.5">
-                ${master && net > 0 ? `<button onclick="settlePay('${l.id}')" class="px-2.5 py-1 rounded-xl bg-amber-500/15 text-amber-500 font-black">${t('settleLbl')}</button>` : ''}
-                <button onclick="waSlip('${l.id}')" class="px-2.5 py-1 rounded-xl bg-emerald-500/15 text-emerald-500 font-bold">${t('slipLbl')}</button>
-              </div>
-            </div>
-          </div>`;
-      }).join('') : `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-60">${t('noWorkers')}</div>`;
+            </div>`;
+        }).join('') : `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-60">${t('noWorkers')}</div>`;
+      }
 
-      document.getElementById('homeRecentLabour').innerHTML = allW.length ? allW.slice(0,4).map(l => {
-        const net = Math.round(l.dailyRate * (l.presentDays + l.halfDays * 0.5)) - l.advance;
-        return `<div onclick="openHist('${l.id}')" class="ios-glass p-3.5 rounded-2xl flex justify-between items-center text-xs card-hover cursor-pointer"><div><b>${l.name}</b><div class="text-[10px] opacity-70">${l.category} • ${l.presentDays}P, ${l.halfDays}H</div></div><b class="text-sm ${net>=0?'text-emerald-500':'text-rose-500'}">${fmtINR(net)}</b></div>`;
-      }).join('') : `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-60">${t('noWorkers')}</div>`;
+      if (byId('homeRecentLabour')) {
+        byId('homeRecentLabour').innerHTML = allW.length ? allW.slice(0,4).map(l => {
+          const net = Math.round((l.dailyRate||0) * ((l.presentDays||0) + (l.halfDays||0) * 0.5)) - (l.advance||0);
+          return `<div onclick="openHist('${l.id}')" class="ios-glass p-3.5 rounded-2xl flex justify-between items-center text-xs card-hover cursor-pointer"><div><b>${l.name}</b><div class="text-[10px] opacity-70">${l.category} • ${l.presentDays||0}P, ${l.halfDays||0}H</div></div><b class="text-sm ${net>=0?'text-emerald-500':'text-rose-500'}">${fmtINR(net)}</b></div>`;
+        }).join('') : `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-60">${t('noWorkers')}</div>`;
+      }
 
-      const ex = state.expenses.filter(e => e.site === site && e.month === m);
-      document.getElementById('summaryExpensesTotal').innerText = fmtINR(ex.reduce((a, b) => a + b.amount, 0));
-      document.getElementById('expenseList').innerHTML = ex.length ? ex.map(e => `<div class="ios-glass p-3.5 rounded-2xl flex justify-between items-center text-xs"><div><b>${e.title}</b><div class="text-[10px] opacity-65">${e.spentFor || ''} ${e.addedBy || ''}</div></div><div class="text-right"><b class="text-amber-500 block">${fmtINR(e.amount)}</b>${master ? `<button onclick="deleteRecord('expenses','${e.id}')" class="text-[10px] text-rose-500 font-bold">${t('deleteBtn')}</button>` : ''}</div></div>`).join('') : `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-60">${t('noExpenses')}</div>`;
+      const ex = (state.expenses || []).filter(e => e.site === site && e.month === m);
+      if (byId('summaryExpensesTotal')) byId('summaryExpensesTotal').innerText = fmtINR(ex.reduce((a, b) => a + (b.amount||0), 0));
+      if (byId('expenseList')) {
+        byId('expenseList').innerHTML = ex.length ? ex.map(e => `<div class="ios-glass p-3.5 rounded-2xl flex justify-between items-center text-xs"><div><b>${e.title}</b><div class="text-[10px] opacity-65">${e.spentFor || ''} ${e.addedBy || ''}</div></div><div class="text-right"><b class="text-amber-500 block">${fmtINR(e.amount)}</b>${master ? `<button type="button" onclick="deleteRecord('expenses','${e.id}')" class="text-[10px] text-rose-500 font-bold">${t('deleteBtn')}</button>` : ''}</div></div>`).join('') : `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-60">${t('noExpenses')}</div>`;
+      }
 
-      const bs = state.bills.filter(b => b.site === site && b.month === m);
-      document.getElementById('summaryBillsTotal').innerText = fmtINR(bs.reduce((a, b) => a + b.amount, 0));
-      document.getElementById('billList').innerHTML = bs.length ? bs.map(b => `<div class="ios-glass p-3.5 rounded-2xl flex justify-between items-center text-xs"><div><b>${b.title}</b><div class="text-[10px] opacity-65">${b.billDate}</div></div><div class="text-right"><b class="text-emerald-500 block">${fmtINR(b.amount)}</b>${master ? `<button onclick="deleteRecord('bills','${b.id}')" class="text-[10px] text-rose-500 font-bold">${t('deleteBtn')}</button>` : ''}</div></div>`).join('') : `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-60">${t('noBills')}</div>`;
+      const bs = (state.bills || []).filter(b => b.site === site && b.month === m);
+      if (byId('summaryBillsTotal')) byId('summaryBillsTotal').innerText = fmtINR(bs.reduce((a, b) => a + (b.amount||0), 0));
+      if (byId('billList')) {
+        byId('billList').innerHTML = bs.length ? bs.map(b => `<div class="ios-glass p-3.5 rounded-2xl flex justify-between items-center text-xs"><div><b>${b.title}</b><div class="text-[10px] opacity-65">${b.billDate || ''}</div></div><div class="text-right"><b class="text-emerald-500 block">${fmtINR(b.amount)}</b>${master ? `<button type="button" onclick="deleteRecord('bills','${b.id}')" class="text-[10px] text-rose-500 font-bold">${t('deleteBtn')}</button>` : ''}</div></div>`).join('') : `<div class="ios-glass rounded-2xl p-6 text-center text-xs opacity-60">${t('noBills')}</div>`;
+      }
     };
 
     window.connectCloud = async (reg) => {
-      const e = document.getElementById('authEmail').value.trim(), p = document.getElementById('authPass').value.trim();
+      const e = (byId('authEmail')?.value || '').trim(), p = (byId('authPass')?.value || '').trim();
       try { if (reg) await createUserWithEmailAndPassword(auth, e, p); else await signInWithEmailAndPassword(auth, e, p); closeModal('authModal'); } catch (err) { alert(err.message); }
     };
     window.logoutAccount = () => signOut(auth).then(() => location.reload());
@@ -1628,13 +1685,12 @@
     onAuthStateChanged(auth, (user) => {
       if (unsubSnap) { unsubSnap(); unsubSnap = null; }
       currentUser = user;
-      const saved = localStorage.getItem(getStoreKey());
-      if (saved) Object.assign(state, JSON.parse(saved));
+      try { const saved = localStorage.getItem(getStoreKey()); if (saved) Object.assign(state, JSON.parse(saved)); } catch (e) {}
       if (user) {
         unsubSnap = onSnapshot(doc(db, "users", user.uid), (snap) => {
-          if (snap.exists()) { Object.assign(state, snap.data()); localStorage.setItem(getStoreKey(), JSON.stringify(state)); renderAll(); }
+          if (snap.exists()) { Object.assign(state, snap.data()); try { localStorage.setItem(getStoreKey(), JSON.stringify(state)); } catch (e) {} renderAll(); }
           else persist();
-        });
+        }, () => {});
       }
       renderAll();
     });
