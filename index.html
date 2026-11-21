@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
-  <link rel="icon" type="image/png" href="./logo.png?v=23">
-  <link rel="apple-touch-icon" href="./logo.png?v=23">
-  <link rel="manifest" href="manifest.json?v=23">
+  <link rel="icon" type="image/png" href="./logo.png?v=24">
+  <link rel="apple-touch-icon" href="./logo.png?v=24">
+  <link rel="manifest" href="manifest.json?v=24">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#000000">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -52,11 +52,6 @@
     .nav-btn.active { color: var(--text-main); background: var(--nav-active); transform: scale(1.05); }
     .app-input { background: var(--input-bg) !important; color: var(--text-main) !important; border: 1.5px solid var(--input-border) !important; }
     .app-input::placeholder { color: var(--text-sub) !important; opacity: 0.85; }
-    .ai-orb {
-      background: radial-gradient(circle at 25% 25%, #3b82f6 0%, #8b5cf6 35%, #ec4899 68%, #f97316 100%);
-      box-shadow: 0 8px 24px rgba(236, 72, 153, 0.45), inset 0 1px 2px rgba(255, 255, 255, 0.45);
-      border: 2.5px solid rgba(255, 255, 255, 0.85);
-    }
     .trade-card { transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); border: 1.5px solid var(--card-border); }
     .trade-card.active {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.22), rgba(245, 158, 11, 0.08));
@@ -96,7 +91,6 @@
       </div>
 
       <div class="flex items-center gap-1.5">
-        <button type="button" onclick="toggleQuickLang()" id="quickLangBtn" class="px-2.5 h-9 rounded-xl ios-glass text-[11px] font-black text-amber-500 active:scale-90">EN</button>
         <button type="button" onclick="forceCloudPull()" class="w-9 h-9 rounded-xl ios-glass flex items-center justify-center text-emerald-500 active:scale-90" title="Sync">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
         </button>
@@ -209,17 +203,14 @@
     </section>
   </main>
 
-  <div class="fixed bottom-4 inset-x-0 z-40 flex justify-center items-center gap-2.5 pointer-events-none px-3">
-    <nav class="ios-nav pointer-events-auto rounded-full py-1.5 px-2.5 flex items-center justify-around gap-1 flex-1 max-w-[300px]">
-      <button type="button" onclick="navigateTo('viewHome')" id="nav-viewHome" class="nav-btn active w-11 h-11 rounded-full flex items-center justify-center"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.1l9 8.1c.4.3.6.8.6 1.3v8.5c0 1.1-.9 2-2 2h-4.5c-.8 0-1.5-.7-1.5-1.5V15c0-.6-.4-1-1-1s-1 .4-1 1v5.5c0 .8-.7 1.5-1.5 1.5H5.4c-1.1 0-2-.9-2-2v-8.5c0-.5.2-1 .6-1.3l9-8.1z"/></svg></button>
-      <button type="button" onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="nav-btn w-11 h-11 rounded-full flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></button>
-      <button type="button" onclick="openFormModal('labour')" class="w-10 h-11 flex items-center justify-center active:scale-90"><div class="w-7 h-7 rounded-lg border-2 border-amber-500 flex items-center justify-center text-amber-500 font-black text-lg leading-none">+</div></button>
-      <button type="button" onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="nav-btn w-11 h-11 rounded-full flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></button>
-      <button type="button" onclick="navigateTo('viewBills')" id="nav-viewBills" class="nav-btn w-11 h-11 rounded-full flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></button>
+  <div class="fixed bottom-4 inset-x-0 z-40 flex justify-center pointer-events-none px-3">
+    <nav class="ios-nav pointer-events-auto rounded-full py-1.5 px-3 flex items-center justify-around gap-1 w-full max-w-[360px]">
+      <button type="button" onclick="navigateTo('viewHome')" id="nav-viewHome" class="nav-btn active w-12 h-11 rounded-full flex items-center justify-center"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.1l9 8.1c.4.3.6.8.6 1.3v8.5c0 1.1-.9 2-2 2h-4.5c-.8 0-1.5-.7-1.5-1.5V15c0-.6-.4-1-1-1s-1 .4-1 1v5.5c0 .8-.7 1.5-1.5 1.5H5.4c-1.1 0-2-.9-2-2v-8.5c0-.5.2-1 .6-1.3l9-8.1z"/></svg></button>
+      <button type="button" onclick="navigateTo('viewLabours')" id="nav-viewLabours" class="nav-btn w-12 h-11 rounded-full flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></button>
+      <button type="button" onclick="openFormModal('labour')" class="w-11 h-11 flex items-center justify-center active:scale-90"><div class="w-7 h-7 rounded-lg border-2 border-amber-500 flex items-center justify-center text-amber-500 font-black text-lg leading-none">+</div></button>
+      <button type="button" onclick="navigateTo('viewExpenses')" id="nav-viewExpenses" class="nav-btn w-12 h-11 rounded-full flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></button>
+      <button type="button" onclick="navigateTo('viewBills')" id="nav-viewBills" class="nav-btn w-12 h-11 rounded-full flex items-center justify-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></button>
     </nav>
-    <button type="button" onclick="openThekedaarAIModal()" class="ai-orb pointer-events-auto w-14 h-14 rounded-full flex items-center justify-center text-white active:scale-90 transition-transform shrink-0" title="THEKEDAAR AI">
-      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg>
-    </button>
   </div>
 
   <div id="monthPickerModal" class="fixed inset-0 bg-black/80 backdrop-blur-xl hidden items-center justify-center p-4 z-50">
@@ -596,38 +587,6 @@
     </div>
   </div>
 
-  <div id="thekedaarAIModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-xl hidden items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="ios-glass rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-3 border border-purple-500/40 flex flex-col max-h-[85vh]">
-      <div class="flex items-center justify-between border-b border-white/10 pb-2.5">
-        <div class="flex items-center gap-2.5">
-          <div class="ai-orb w-9 h-9 rounded-full flex items-center justify-center text-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg></div>
-          <div>
-            <h3 class="font-black text-sm bg-gradient-to-r from-blue-400 via-purple-400 to-rose-400 bg-clip-text text-transparent">THEKEDAAR AI</h3>
-            <p class="text-[10px] opacity-70" data-i18n="aiSubtitle"></p>
-          </div>
-        </div>
-        <button type="button" onclick="closeModal('thekedaarAIModal')" class="text-base font-bold opacity-70">✕</button>
-      </div>
-      <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1">
-        <button type="button" onclick="runAICommand('Mark all present')" class="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-bold shrink-0" data-i18n="aiChipPresent"></button>
-        <button type="button" onclick="runAICommand('Site profit report')" class="px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-400 text-[10px] font-bold shrink-0" data-i18n="aiChipProfit"></button>
-        <button type="button" onclick="runAICommand('How to use app')" class="px-2.5 py-1 rounded-full bg-blue-500/15 text-blue-400 text-[10px] font-bold shrink-0" data-i18n="aiChipHelp"></button>
-      </div>
-      <div id="aiChatMessages" class="flex-1 overflow-y-auto space-y-2 text-xs min-h-[200px] max-h-[320px]"></div>
-      <div id="aiLiveMicBar" class="hidden items-center justify-between px-3 py-1.5 rounded-xl bg-purple-500/15 border border-purple-500/30 text-[11px] font-bold text-purple-300">
-        <span id="aiMicStatusText"></span>
-        <button type="button" onclick="triggerAICommandVoice()" class="px-2.5 py-1 rounded-lg bg-purple-500 text-white text-[10px] font-black" data-i18n="speakNowBtn"></button>
-      </div>
-      <form onsubmit="handleAIFormSubmit(event)" class="flex items-center gap-1.5 pt-2 border-t border-white/10">
-        <input type="text" id="aiCommandInput" data-i18n-placeholder="aiInputPh" class="app-input flex-1 rounded-2xl px-3 py-2 text-xs font-bold focus:outline-none" />
-        <button type="button" onclick="triggerAICommandVoice()" class="p-2.5 rounded-2xl bg-purple-500/20 text-purple-400 border border-purple-500/30 active:scale-90" title="Speak Command">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
-        </button>
-        <button type="submit" class="px-3.5 py-2 rounded-2xl ai-orb text-white font-black text-xs" data-i18n="sendBtn"></button>
-      </form>
-    </div>
-  </div>
-
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -722,21 +681,11 @@
         emailPh: "ईमेल पता", passPh: "पासवर्ड", loginBtn: "लॉग-इन", registerBtn: "रजिस्टर",
         voiceTypingTitle: "बोलकर लिखें", voiceListeningLbl: "माइक तैयार है — बोलें या 'अभी बोलें' दबाएं",
         cancelBtn: "रद्द करें", speakNowBtn: "अभी बोलें", pinModalTitle: "मेन ठेकेदार पासवर्ड",
-        enterPinPh: "पिन डालें", unlockBtn: "अनलॉक", deleteBtn: "हटाएं", aiSubtitle: "लोकल ऐप असिस्टेंट",
-        aiChipPresent: "सभी की हाजिरी", aiChipProfit: "मुनाफा व हिसाब", aiChipHelp: "ऐप मदद",
-        aiInputPh: "कमांड या सवाल लिखें या माइक दबाएं...", sendBtn: "भेजें",
+        enterPinPh: "पिन डालें", unlockBtn: "अनलॉक", deleteBtn: "हटाएं",
         rateLbl: "दर", advLbl: "एडवांस", netDueLbl: "बाकी", presentLbl: "हाजिर", halfLbl: "हाफ",
         editLbl: "बदलें", settleLbl: "चुकता", slipLbl: "व्हाट्सएप पर्ची", noWorkers: "कोई मजदूर नहीं है।",
         noExpenses: "कोई खर्च दर्ज नहीं है।", noBills: "कोई बिल दर्ज नहीं है।", activeLbl: "सक्रिय",
-        switchLbl: "बदलें", profitLbl: "अनुमानित मुनाफा",
-        aiWelcome: "नमस्ते! मैं <b>THEKEDAAR AI</b> हूँ। मजदूर, हाजिरी, एडवांस, खर्च, बिल, साइट, पिन या ऐप गाइड से जुड़े सवाल या कमांड पूछें।",
-        aiMarkedAll: (n) => `<b>${n}</b> मजदूरों की हाजिरी (+1P) लगा दी गई।`,
-        aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/दिन) जोड़ दिया गया।`,
-        aiAddedExpense: (title, amt) => `खर्च <b>${title}</b> (${fmtINR(amt)}) जोड़ दिया गया।`,
-        aiAddedBill: (title, amt) => `बिल <b>${title}</b> (${fmtINR(amt)}) जोड़ दिया गया।`,
-        aiAddedAdv: (name, amt) => `<b>${name}</b> को ${fmtINR(amt)} एडवांस जोड़ दिया गया।`,
-        aiAddedSite: (s) => `साइट <b>${s}</b> जोड़ दी गई।`,
-        aiHelp: "आप पूछ सकते हैं: <i>\"Add worker Raju 600\"</i>, <i>\"Mark all present\"</i>, <i>\"Add expense Auto 200\"</i>, <i>\"Add bill 15000 Slab\"</i>, <i>\"Add site Lodha\"</i> या <i>\"Site profit report\"</i>।"
+        switchLbl: "बदलें", profitLbl: "अनुमानित मुनाफा"
       },
       hinglish: {
         offlineTitle: "Internet Connection Chahiye", offlineDesc: "Mobile data ya Wi-Fi on karein.",
@@ -766,21 +715,11 @@
         emailPh: "Email ID", passPh: "Password", loginBtn: "Login", registerBtn: "Register",
         voiceTypingTitle: "Bolkar Likhein", voiceListeningLbl: "Mic ready hai — bolein ya 'Abhi Bolein' dabayein",
         cancelBtn: "Cancel", speakNowBtn: "Abhi Bolein", pinModalTitle: "Main Contractor PIN",
-        enterPinPh: "PIN dalein", unlockBtn: "Unlock", deleteBtn: "Delete", aiSubtitle: "Local App Assistant",
-        aiChipPresent: "Sabki Hajri", aiChipProfit: "Profit & Hisab", aiChipHelp: "App Help",
-        aiInputPh: "Command ya doubt likhein ya mic dabayein...", sendBtn: "Bhejein",
+        enterPinPh: "PIN dalein", unlockBtn: "Unlock", deleteBtn: "Delete",
         rateLbl: "Rate", advLbl: "Adv", netDueLbl: "Baaki", presentLbl: "Present", halfLbl: "Half",
         editLbl: "Edit", settleLbl: "Settle", slipLbl: "WhatsApp Slip", noWorkers: "Koi worker nahi hai.",
         noExpenses: "Koi kharcha nahi hai.", noBills: "Koi bill nahi hai.", activeLbl: "Active",
-        switchLbl: "Switch", profitLbl: "Estimated Profit",
-        aiWelcome: "Namaste! Main <b>THEKEDAAR AI</b> hoon. Labour, hajri, advance, kharcha, bill, site ya app ka koi bhi doubt poochhein ya command dein.",
-        aiMarkedAll: (n) => `<b>${n}</b> workers ki hajri (+1P) lag gayi.`,
-        aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/din) add ho gaya.`,
-        aiAddedExpense: (title, amt) => `Kharcha <b>${title}</b> (${fmtINR(amt)}) add ho gaya.`,
-        aiAddedBill: (title, amt) => `Bill <b>${title}</b> (${fmtINR(amt)}) add ho gaya.`,
-        aiAddedAdv: (name, amt) => `<b>${name}</b> ko ${fmtINR(amt)} advance add ho gaya.`,
-        aiAddedSite: (s) => `Site <b>${s}</b> add ho gayi.`,
-        aiHelp: "Try karein: <i>\"Add worker Raju 600\"</i>, <i>\"Mark all present\"</i>, <i>\"Add expense Auto 200\"</i>, <i>\"Add bill 15000 Slab\"</i>, <i>\"Add site Lodha\"</i> ya <i>\"Site profit report\"</i>."
+        switchLbl: "Switch", profitLbl: "Estimated Profit"
       },
       en: {
         offlineTitle: "Internet Connection Required", offlineDesc: "Please turn on Mobile Data or Wi-Fi.",
@@ -810,21 +749,11 @@
         emailPh: "Email ID", passPh: "Password", loginBtn: "Login", registerBtn: "Register",
         voiceTypingTitle: "Voice Typing", voiceListeningLbl: "Mic ready — speak or tap 'Speak Now'",
         cancelBtn: "Cancel", speakNowBtn: "Speak Now", pinModalTitle: "Main Contractor PIN",
-        enterPinPh: "Enter PIN", unlockBtn: "Unlock", deleteBtn: "Delete", aiSubtitle: "Local App Assistant",
-        aiChipPresent: "Mark All Present", aiChipProfit: "Profit & Summary", aiChipHelp: "App Help",
-        aiInputPh: "Type a command or question...", sendBtn: "Send",
+        enterPinPh: "Enter PIN", unlockBtn: "Unlock", deleteBtn: "Delete",
         rateLbl: "Rate", advLbl: "Adv", netDueLbl: "Net Due", presentLbl: "Present", halfLbl: "Half",
         editLbl: "Edit", settleLbl: "Settle", slipLbl: "WhatsApp Slip", noWorkers: "No workers found.",
         noExpenses: "No expenses recorded.", noBills: "No bills recorded.", activeLbl: "Active",
-        switchLbl: "Switch", profitLbl: "Estimated Profit",
-        aiWelcome: "Hello! I am <b>THEKEDAAR AI</b>. Ask any app question or give commands for workers, attendance, advances, expenses, bills, or sites.",
-        aiMarkedAll: (n) => `Marked +1P for <b>${n}</b> workers.`,
-        aiAddedWorker: (name, rate) => `Added <b>${name}</b> (${fmtINR(rate)}/day).`,
-        aiAddedExpense: (title, amt) => `Added expense <b>${title}</b> (${fmtINR(amt)}).`,
-        aiAddedBill: (title, amt) => `Added bill <b>${title}</b> (${fmtINR(amt)}).`,
-        aiAddedAdv: (name, amt) => `Added ${fmtINR(amt)} advance to <b>${name}</b>.`,
-        aiAddedSite: (s) => `Added site <b>${s}</b>.`,
-        aiHelp: "Try: <i>\"Add worker Raju 600\"</i>, <i>\"Mark all present\"</i>, <i>\"Add expense Auto 200\"</i>, <i>\"Add bill 15000 Slab\"</i>, <i>\"Add site Lodha\"</i>, or <i>\"Site profit report\"</i>."
+        switchLbl: "Switch", profitLbl: "Estimated Profit"
       },
       mr: {
         offlineTitle: "इंटरनेट आवश्यक आहे", offlineDesc: "कृपया मोबाइल डेटा किंवा वाय-फाय सुरू करा.",
@@ -854,21 +783,11 @@
         emailPh: "ईमेल", passPh: "पासवर्ड", loginBtn: "लॉग-इन", registerBtn: "नोंदणी",
         voiceTypingTitle: "बोलून लिहा", voiceListeningLbl: "माइक तयार आहे — बोला किंवा 'आता बोला' दाबा",
         cancelBtn: "रद्द करा", speakNowBtn: "आता बोला", pinModalTitle: "मुख्य कंत्राटदार पिन",
-        enterPinPh: "पिन टाका", unlockBtn: "अनलॉक", deleteBtn: "हटवा", aiSubtitle: "लोकल अॅप सहाय्यक",
-        aiChipPresent: "सर्वांची हजेरी", aiChipProfit: "नफा व हिशोब", aiChipHelp: "मदत",
-        aiInputPh: "कमांड किंवा प्रश्न लिहा...", sendBtn: "पाठवा",
+        enterPinPh: "पिन टाका", unlockBtn: "अनलॉक", deleteBtn: "हटवा",
         rateLbl: "दर", advLbl: "अॅडव्हान्स", netDueLbl: "बाकी", presentLbl: "हजर", halfLbl: "हाफ",
         editLbl: "बदला", settleLbl: "पूर्ण", slipLbl: "व्हॉट्सअॅप स्लिप", noWorkers: "कामगार नाहीत.",
         noExpenses: "खर्च नाही.", noBills: "बिल नाही.", activeLbl: "सक्रिय",
-        switchLbl: "बदला", profitLbl: "अंदाजित नफा",
-        aiWelcome: "नमस्कार! मी <b>THEKEDAAR AI</b> आहे. कामगार, हजेरी, खर्च, बिल किंवा साइटबद्दल विचारा.",
-        aiMarkedAll: (n) => `<b>${n}</b> कामगारांची हजेरी (+1P) लावली.`,
-        aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/दिवस) जोडले.`,
-        aiAddedExpense: (title, amt) => `खर्च <b>${title}</b> (${fmtINR(amt)}) जोडला.`,
-        aiAddedBill: (title, amt) => `बिल <b>${title}</b> (${fmtINR(amt)}) जोडले.`,
-        aiAddedAdv: (name, amt) => `<b>${name}</b> ला ${fmtINR(amt)} अॅडव्हान्स जोडला.`,
-        aiAddedSite: (s) => `साइट <b>${s}</b> जोडली.`,
-        aiHelp: "नवीन कामगारासाठी <b>+ कामगार</b>, हजेरीसाठी <b>हजेरी बुक</b> आणि मागील महिन्यासाठी <b>कॅरी</b> वापरा."
+        switchLbl: "बदला", profitLbl: "अंदाजित नफा"
       },
       kn: {
         offlineTitle: "ಇಂಟರ್ನೆಟ್ ಅಗತ್ಯವಿದೆ", offlineDesc: "ದಯವಿಟ್ಟು ಡೇಟಾ ಅಥವಾ ವೈ-ಫೈ ಆನ್ ಮಾಡಿ.",
@@ -898,20 +817,11 @@
         emailPh: "ಇಮೇಲ್", passPh: "ಪಾಸ್‌ವರ್ಡ್", loginBtn: "ಲಾಗಿನ್", registerBtn: "ನೋಂದಣಿ",
         voiceTypingTitle: "ಮಾತನಾಡಿ ಬರೆಯಿರಿ", voiceListeningLbl: "ಮೈಕ್ ಸಿದ್ಧವಾಗಿದೆ — ಮಾತನಾಡಿ",
         cancelBtn: "ರದ್ದುಮಾಡಿ", speakNowBtn: "ಈಗ ಮಾತನಾಡಿ", pinModalTitle: "ಮುಖ್ಯ ಪಿನ್",
-        enterPinPh: "ಪಿನ್ ನಮೂದಿಸಿ", unlockBtn: "ಅನ್‌ಲಾಕ್", deleteBtn: "ಅಳಿಸಿ", aiSubtitle: "ಸ್ಥಳೀಯ ಸಹಾಯಕ",
-        aiChipPresent: "ಎಲ್ಲರ ಹಾಜರಿ", aiChipProfit: "ಲಾಭ & ಲೆಕ್ಕ", aiChipHelp: "ಸಹಾಯ",
-        aiInputPh: "ಆದೇಶ ಅಥವಾ ಪ್ರಶ್ನೆ ಬರೆಯಿರಿ...", sendBtn: "ಕಳುಹಿಸಿ",
+        enterPinPh: "ಪಿನ್ ನಮೂದಿಸಿ", unlockBtn: "ಅನ್‌ಲಾಕ್", deleteBtn: "ಅಳಿಸಿ",
         rateLbl: "ದರ", advLbl: "ಮುಂಗಡ", netDueLbl: "ಬಾಕಿ", presentLbl: "ಹಾಜರು", halfLbl: "ಅರ್ಧ",
         editLbl: "ಬದಲಿಸಿ", settleLbl: "ಇತ್ಯರ್ಥ", slipLbl: "ವಾಟ್ಸಾಪ್ ಸ್ಲಿಪ್", noWorkers: "ಕಾರ್ಮಿಕರಿಲ್ಲ.",
         noExpenses: "ಖರ್ಚು ಇಲ್ಲ.", noBills: "ಬಿಲ್ ಇಲ್ಲ.", activeLbl: "ಸಕ್ರಿಯ",
-        switchLbl: "ಬದಲಿಸಿ", profitLbl: "ಅಂದಾಜು ಲಾಭ",
-        aiWelcome: "ನಮಸ್ಕಾರ! ನಾನು <b>THEKEDAAR AI</b>.", aiMarkedAll: (n) => `<b>${n}</b> ಕಾರ್ಮಿಕರಿಗೆ ಹಾಜರಿ (+1P).`,
-        aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/ದಿನ) ಸೇರಿಸಲಾಗಿದೆ.`,
-        aiAddedExpense: (title, amt) => `ಖರ್ಚು <b>${title}</b> (${fmtINR(amt)}) ಸೇರಿಸಲಾಗಿದೆ.`,
-        aiAddedBill: (title, amt) => `ಬಿಲ್ <b>${title}</b> (${fmtINR(amt)}) ಸೇರಿಸಲಾಗಿದೆ.`,
-        aiAddedAdv: (name, amt) => `<b>${name}</b> ಗೆ ${fmtINR(amt)} ಮುಂಗಡ ಸೇರಿಸಲಾಗಿದೆ.`,
-        aiAddedSite: (s) => `ಸೈಟ್ <b>${s}</b> ಸೇರಿಸಲಾಗಿದೆ.`,
-        aiHelp: "ಕಾರ್ಮಿಕರನ್ನು ಸೇರಿಸಲು <b>+ ಕಾರ್ಮಿಕ</b> ಬಳಸಿ."
+        switchLbl: "ಬದಲಿಸಿ", profitLbl: "ಅಂದಾಜು ಲಾಭ"
       },
       gu: {
         offlineTitle: "ઇન્ટરનેટ જરૂરી છે", offlineDesc: "મોબાઇલ ડેટા અથવા વાઇ-ફાઇ ચાલુ કરો.",
@@ -941,20 +851,11 @@
         emailPh: "ઇમેલ", passPh: "પાસવર્ડ", loginBtn: "લોગ-ઇન", registerBtn: "નોંધણી",
         voiceTypingTitle: "બોલીને લખો", voiceListeningLbl: "માઇક તૈયાર છે — બોલો",
         cancelBtn: "રદ કરો", speakNowBtn: "હવે બોલો", pinModalTitle: "મુખ્ય પિન",
-        enterPinPh: "પિન દાખલ કરો", unlockBtn: "અનલોક", deleteBtn: "કાઢી નાખો", aiSubtitle: "લોકલ સહાયક",
-        aiChipPresent: "બધાની હાજરી", aiChipProfit: "નફો અને હિસાબ", aiChipHelp: "મદદ",
-        aiInputPh: "કમાન્ડ અથવા પ્રશ્ન લખો...", sendBtn: "મોકલો",
+        enterPinPh: "પિન દાખલ કરો", unlockBtn: "અનલોક", deleteBtn: "કાઢી નાખો",
         rateLbl: "દર", advLbl: "એડવાન્સ", netDueLbl: "બાકી", presentLbl: "હાજર", halfLbl: "હાફ",
         editLbl: "બદલો", settleLbl: "પૂર્ણ", slipLbl: "વોટ્સએપ સ્લિપ", noWorkers: "કોઈ મજૂર નથી.",
         noExpenses: "કોઈ ખર્ચ નથી.", noBills: "કોઈ બિલ નથી.", activeLbl: "સક્રિય",
-        switchLbl: "બદલો", profitLbl: "અંદાજિત નફો",
-        aiWelcome: "નમસ્તે! હું <b>THEKEDAAR AI</b> છું.", aiMarkedAll: (n) => `<b>${n}</b> મજૂરોની હાજરી (+1P).`,
-        aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/દિવસ) ઉમેરાયા.`,
-        aiAddedExpense: (title, amt) => `ખર્ચ <b>${title}</b> (${fmtINR(amt)}) ઉમેરાયો.`,
-        aiAddedBill: (title, amt) => `બિલ <b>${title}</b> (${fmtINR(amt)}) ઉમેરાયું.`,
-        aiAddedAdv: (name, amt) => `<b>${name}</b> ને ${fmtINR(amt)} એડવાન્સ ઉમેર્યો.`,
-        aiAddedSite: (s) => `સાઇટ <b>${s}</b> ઉમેરાઈ.`,
-        aiHelp: "મજૂર ઉમેરવા <b>+ મજૂર</b> દબાવો."
+        switchLbl: "બદલો", profitLbl: "અંદાજિત નફો"
       },
       ta: {
         offlineTitle: "இணையம் தேவை", offlineDesc: "மொபைல் டேட்டா அல்லது Wi-Fi இயக்கவும்.",
@@ -984,20 +885,11 @@
         emailPh: "மின்னஞ்சல்", passPh: "கடவுச்சொல்", loginBtn: "உள்நுழைவு", registerBtn: "பதிவு",
         voiceTypingTitle: "பேசி எழுதுக", voiceListeningLbl: "மைக் தயார் — பேசுங்கள்",
         cancelBtn: "ரத்து", speakNowBtn: "இப்போது பேசு", pinModalTitle: "முதன்மை PIN",
-        enterPinPh: "PIN உள்ளிடவும்", unlockBtn: "திற", deleteBtn: "நீக்கு", aiSubtitle: "உள்ளூர் உதவியாளர்",
-        aiChipPresent: "அனைவர் வருகை", aiChipProfit: "லாபம் & கணக்கு", aiChipHelp: "உதவி",
-        aiInputPh: "கட்டளை அல்லது கேள்வி...", sendBtn: "அனுப்பு",
+        enterPinPh: "PIN உள்ளிடவும்", unlockBtn: "திற", deleteBtn: "நீக்கு",
         rateLbl: "கூலி", advLbl: "முன்பணம்", netDueLbl: "பாக்கி", presentLbl: "வருகை", halfLbl: "பாதி",
         editLbl: "மாற்று", settleLbl: "முடிந்தது", slipLbl: "வாட்ஸ்அப் சீட்டு", noWorkers: "பணியாளர்கள் இல்லை.",
         noExpenses: "செலவு இல்லை.", noBills: "பில் இல்லை.", activeLbl: "செயலில்",
-        switchLbl: "மாற்று", profitLbl: "மதிப்பிடப்பட்ட லாபம்",
-        aiWelcome: "வணக்கம்! நான் <b>THEKEDAAR AI</b>.", aiMarkedAll: (n) => `<b>${n}</b> பணியாளர்களுக்கு வருகை (+1P).`,
-        aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/நாள்) சேர்க்கப்பட்டது.`,
-        aiAddedExpense: (title, amt) => `செலவு <b>${title}</b> (${fmtINR(amt)}) சேர்க்கப்பட்டது.`,
-        aiAddedBill: (title, amt) => `பில் <b>${title}</b> (${fmtINR(amt)}) சேர்க்கப்பட்டது.`,
-        aiAddedAdv: (name, amt) => `<b>${name}</b> க்கு ${fmtINR(amt)} முன்பணம் சேர்க்கப்பட்டது.`,
-        aiAddedSite: (s) => `தளம் <b>${s}</b> சேர்க்கப்பட்டது.`,
-        aiHelp: "புதிய பணியாளருக்கு <b>+ பணியாளர்</b> பொத்தானை அழுத்தவும்."
+        switchLbl: "மாற்று", profitLbl: "மதிப்பிடப்பட்ட லாபம்"
       },
       te: {
         offlineTitle: "ఇంటర్నెట్ అవసరం", offlineDesc: "మొబైల్ డేటా లేదా Wi-Fi ఆన్ చేయండి.",
@@ -1027,20 +919,11 @@
         emailPh: "ఇమెయిల్", passPh: "పాస్‌వర్డ్", loginBtn: "లాగిన్", registerBtn: "నమోదు",
         voiceTypingTitle: "మాట్లాడి రాయండి", voiceListeningLbl: "మైక్ సిద్ధంగా ఉంది — మాట్లాడండి",
         cancelBtn: "రద్దు చేయండి", speakNowBtn: "ఇప్పుడు మాట్లాడండి", pinModalTitle: "ప్రధాన PIN",
-        enterPinPh: "PIN నమోదు చేయండి", unlockBtn: "అన్‌లాక్", deleteBtn: "తొలగించు", aiSubtitle: "లోకల్ అసిస్టెంట్",
-        aiChipPresent: "అందరి హాజరు", aiChipProfit: "లాభం & లెక్క", aiChipHelp: "సహాయం",
-        aiInputPh: "కమాండ్ లేదా ప్రశ్న రాయండి...", sendBtn: "పంపండి",
+        enterPinPh: "PIN నమోదు చేయండి", unlockBtn: "అన్‌లాక్", deleteBtn: "తొలగించు",
         rateLbl: "రేటు", advLbl: "అడ్వాన్స్", netDueLbl: "బాకీ", presentLbl: "హాజరు", halfLbl: "సగం",
         editLbl: "మార్చు", settleLbl: "పూర్తి", slipLbl: "వాట్సాప్ స్లిప్", noWorkers: "కార్మికులు లేరు.",
         noExpenses: "ఖర్చులు లేవు.", noBills: "బిల్లులు లేవు.", activeLbl: "యాక్టివ్",
-        switchLbl: "మార్చు", profitLbl: "అంచనా లాభం",
-        aiWelcome: "నమస్కారం! నేను <b>THEKEDAAR AI</b>.", aiMarkedAll: (n) => `<b>${n}</b> కార్మికులకు హాజరు (+1P).`,
-        aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/రోజు) చేర్చబడింది.`,
-        aiAddedExpense: (title, amt) => `ఖర్చు <b>${title}</b> (${fmtINR(amt)}) చేర్చబడింది.`,
-        aiAddedBill: (title, amt) => `బిల్లు <b>${title}</b> (${fmtINR(amt)}) చేర్చబడింది.`,
-        aiAddedAdv: (name, amt) => `<b>${name}</b> కి ${fmtINR(amt)} అడ్వాన్స్ చేర్చబడింది.`,
-        aiAddedSite: (s) => `సైట్ <b>${s}</b> చేర్చబడింది.`,
-        aiHelp: "కార్మికుడిని చేర్చడానికి <b>+ కార్మికుడు</b> నొక్కండి."
+        switchLbl: "మార్చు", profitLbl: "అంచనా లాభం"
       },
       pa: {
         offlineTitle: "ਇੰਟਰਨੈੱਟ ਜ਼ਰੂਰੀ ਹੈ", offlineDesc: "ਮੋਬਾਈਲ ਡਾਟਾ ਜਾਂ Wi-Fi ਚਾਲੂ ਕਰੋ।",
@@ -1070,20 +953,11 @@
         emailPh: "ਈਮੇਲ", passPh: "ਪਾਸਵਰਡ", loginBtn: "ਲੌਗ-ਇਨ", registerBtn: "ਰਜਿਸਟਰ",
         voiceTypingTitle: "ਬੋਲ ਕੇ ਲਿਖੋ", voiceListeningLbl: "ਮਾਈਕ ਤਿਆਰ ਹੈ — ਬੋਲੋ",
         cancelBtn: "ਰੱਦ ਕਰੋ", speakNowBtn: "ਹੁਣ ਬੋਲੋ", pinModalTitle: "ਮੁੱਖ PIN",
-        enterPinPh: "PIN ਭਰੋ", unlockBtn: "ਅਨਲੌਕ", deleteBtn: "ਮਿਟਾਓ", aiSubtitle: "ਲੋਕਲ ਸਹਾਇਕ",
-        aiChipPresent: "ਸਭ ਦੀ ਹਾਜ਼ਰੀ", aiChipProfit: "ਮੁਨਾਫ਼ਾ ਅਤੇ ਹਿਸਾਬ", aiChipHelp: "ਮਦਦ",
-        aiInputPh: "ਕਮਾਂਡ ਜਾਂ ਸਵਾਲ ਲਿਖੋ...", sendBtn: "ਭੇਜੋ",
+        enterPinPh: "PIN ਭਰੋ", unlockBtn: "ਅਨਲੌਕ", deleteBtn: "ਮਿਟਾਓ",
         rateLbl: "ਦਰ", advLbl: "ਐਡਵਾਂਸ", netDueLbl: "ਬਾਕੀ", presentLbl: "ਹਾਜ਼ਰ", halfLbl: "ਹਾਫ਼",
         editLbl: "ਬਦਲੋ", settleLbl: "ਪੂਰਾ", slipLbl: "ਵਟਸਐਪ ਪਰਚੀ", noWorkers: "ਕੋਈ ਮਜ਼ਦੂਰ ਨਹੀਂ ਹੈ।",
         noExpenses: "ਕੋਈ ਖਰਚਾ ਨਹੀਂ ਹੈ।", noBills: "ਕੋਈ ਬਿੱਲ ਨਹੀਂ ਹੈ।", activeLbl: "ਸਰਗਰਮ",
-        switchLbl: "ਬਦਲੋ", profitLbl: "ਅੰਦਾਜ਼ਨ ਮੁਨਾਫ਼ਾ",
-        aiWelcome: "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ! ਮੈਂ <b>THEKEDAAR AI</b> ਹਾਂ।", aiMarkedAll: (n) => `<b>${n}</b> ਮਜ਼ਦੂਰਾਂ ਦੀ ਹਾਜ਼ਰੀ (+1P)।`,
-        aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/ਦਿਨ) ਜੋੜਿਆ ਗਿਆ।`,
-        aiAddedExpense: (title, amt) => `ਖਰਚਾ <b>${title}</b> (${fmtINR(amt)}) ਜੋੜਿਆ ਗਿਆ।`,
-        aiAddedBill: (title, amt) => `ਬਿੱਲ <b>${title}</b> (${fmtINR(amt)}) ਜੋੜਿਆ ਗਿਆ।`,
-        aiAddedAdv: (name, amt) => `<b>${name}</b> ਨੂੰ ${fmtINR(amt)} ਐਡਵਾਂਸ ਜੋੜਿਆ ਗਿਆ।`,
-        aiAddedSite: (s) => `ਸਾਈਟ <b>${s}</b> ਜੋੜੀ ਗਈ।`,
-        aiHelp: "ਨਵਾਂ ਮਜ਼ਦੂਰ ਜੋੜਨ ਲਈ <b>+ ਮਜ਼ਦੂਰ</b> ਦਬਾਓ।"
+        switchLbl: "ਬਦਲੋ", profitLbl: "ਅੰਦਾਜ਼ਨ ਮੁਨਾਫ਼ਾ"
       },
       bho: {
         offlineTitle: "इंटरनेट जरूरी बा", offlineDesc: "मोबाइल डेटा भा वाई-फाई चालू करीं।",
@@ -1113,20 +987,11 @@
         emailPh: "ईमेल", passPh: "पासवर्ड", loginBtn: "लॉग-इन", registerBtn: "रजिस्टर",
         voiceTypingTitle: "बोल के लिखीं", voiceListeningLbl: "माइक तइयार बा — बोलीं",
         cancelBtn: "रद करीं", speakNowBtn: "अब बोलीं", pinModalTitle: "मेन ठेकेदार पिन",
-        enterPinPh: "पिन डालीं", unlockBtn: "अनलॉक", deleteBtn: "हटाईं", aiSubtitle: "लोकल ऐप सहायक",
-        aiChipPresent: "सभके हाजिरी", aiChipProfit: "मुनाफा आ हिसाब", aiChipHelp: "मदद",
-        aiInputPh: "कमांड भा सवाल लिखीं...", sendBtn: "भेजीं",
+        enterPinPh: "पिन डालीं", unlockBtn: "अनलॉक", deleteBtn: "हटाईं",
         rateLbl: "दर", advLbl: "एडवांस", netDueLbl: "बाकी", presentLbl: "हाजिर", halfLbl: "हाफ",
         editLbl: "बदलीं", settleLbl: "चुकता", slipLbl: "व्हाट्सएप परची", noWorkers: "कवनो मजदूर नइखे।",
         noExpenses: "कवनो खरचा नइखे।", noBills: "कवनो बिल नइखे।", activeLbl: "चालू",
-        switchLbl: "बदलीं", profitLbl: "अनुमानित मुनाफा",
-        aiWelcome: "प्रणाम! हम <b>THEKEDAAR AI</b> बानी।", aiMarkedAll: (n) => `<b>${n}</b> मजदूरन के हाजिरी (+1P) लाग गइल।`,
-        aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/दिन) जुड़ गइल।`,
-        aiAddedExpense: (title, amt) => `खरचा <b>${title}</b> (${fmtINR(amt)}) जुड़ गइल।`,
-        aiAddedBill: (title, amt) => `बिल <b>${title}</b> (${fmtINR(amt)}) जुड़ गइल।`,
-        aiAddedAdv: (name, amt) => `<b>${name}</b> के ${fmtINR(amt)} एडवांस जुड़ गइल।`,
-        aiAddedSite: (s) => `साइट <b>${s}</b> जुड़ गइल।`,
-        aiHelp: "नया मजदूर जोड़े खातिर <b>+ मजदूर</b> दबाईं।"
+        switchLbl: "बदलीं", profitLbl: "अनुमानित मुनाफा"
       },
       mwr: {
         offlineTitle: "इंटरनेट जरूरी है", offlineDesc: "मोबाइल डेटा या वाई-फाई चालू करो।",
@@ -1156,20 +1021,11 @@
         emailPh: "ईमेल", passPh: "पासवर्ड", loginBtn: "लॉग-इन", registerBtn: "रजिस्टर",
         voiceTypingTitle: "बोलकर लिखो", voiceListeningLbl: "माइक त्यार है — बोलो",
         cancelBtn: "रद करो", speakNowBtn: "अबे बोलो", pinModalTitle: "मेन ठेकेदार पिन",
-        enterPinPh: "पिन डालो", unlockBtn: "अनलॉक", deleteBtn: "हटाओ", aiSubtitle: "लोकल सहायक",
-        aiChipPresent: "सगळा री हाजिरी", aiChipProfit: "मुनाफो अर हिसाब", aiChipHelp: "मदद",
-        aiInputPh: "कमांड या सवाल लिखो...", sendBtn: "भेजो",
+        enterPinPh: "पिन डालो", unlockBtn: "अनलॉक", deleteBtn: "हटाओ",
         rateLbl: "दर", advLbl: "एडवांस", netDueLbl: "बाकी", presentLbl: "हाजिर", halfLbl: "हाफ",
         editLbl: "बदलो", settleLbl: "चुकता", slipLbl: "व्हाट्सएप परची", noWorkers: "कोई मजदूर कोनी।",
         noExpenses: "कोई खरचा कोनी।", noBills: "कोई बिल कोनी।", activeLbl: "चालू",
-        switchLbl: "बदलो", profitLbl: "अनुमानित मुनाफो",
-        aiWelcome: "खम्मा घणी! मैं <b>THEKEDAAR AI</b> हूं।", aiMarkedAll: (n) => `<b>${n}</b> मजदूरां री हाजिरी (+1P) लाग गी।`,
-        aiAddedWorker: (name, rate) => `<b>${name}</b> (${fmtINR(rate)}/दिन) जोड़ दिया गया।`,
-        aiAddedExpense: (title, amt) => `खरचा <b>${title}</b> (${fmtINR(amt)}) जुड़ गयो।`,
-        aiAddedBill: (title, amt) => `बिल <b>${title}</b> (${fmtINR(amt)}) जुड़ गयो।`,
-        aiAddedAdv: (name, amt) => `<b>${name}</b> ने ${fmtINR(amt)} एडवांस जुड़ गयो।`,
-        aiAddedSite: (s) => `साइट <b>${s}</b> जुड़ गी।`,
-        aiHelp: "नवो मजदूर जोड़ण खातर <b>+ मजदूर</b> दबाओ।"
+        switchLbl: "बदलो", profitLbl: "अनुमानित मुनाफो"
       }
     };
 
@@ -1202,7 +1058,7 @@
     }
     const isMaster = () => getActiveAcc().id === 'acc_main' || Boolean(getActiveAcc().isMaster);
     const getStamp = () => `${getActiveAcc().displayNickname} • ${new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}`;
-    const getStoreKey = () => currentUser ? `thekedaar_v23_${currentUser.uid}` : 'thekedaar_v23_guest';
+    const getStoreKey = () => currentUser ? `thekedaar_v24_${currentUser.uid}` : 'thekedaar_v24_guest';
 
     function checkOnline() {
       const m = byId('offlineModal');
@@ -1234,7 +1090,6 @@
       window.currentLang = baseStrings[lang] ? lang : 'hi';
       try { localStorage.setItem('thekedaar_lang', window.currentLang); } catch (e) {}
       document.documentElement.lang = window.currentLang;
-      if (byId('quickLangBtn')) byId('quickLangBtn').innerText = window.currentLang.toUpperCase();
       document.querySelectorAll('.lang-opt').forEach(b => b.classList.toggle('border-amber-500', b.getAttribute('data-lang') === window.currentLang));
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const val = t(el.getAttribute('data-i18n'));
@@ -1246,10 +1101,6 @@
       });
       closeModal('settingsModal');
       renderAll();
-    };
-    window.toggleQuickLang = () => {
-      const order = Object.keys(baseStrings);
-      changeLanguage(order[(order.indexOf(window.currentLang) + 1) % order.length]);
     };
 
     window.setAppTheme = (th) => { document.documentElement.className = th; try { localStorage.setItem('thekedaar_theme', th); } catch (e) {} };
@@ -1340,23 +1191,6 @@
           const box = byId('voiceTranscriptBox'), status = byId('voiceStatusLine');
           if (phase === 'transcript' && txt && box) { box.innerText = `"${txt}"`; box.classList.remove('hidden'); }
           if (phase === 'error' && status) status.innerText = t('speakNowBtn');
-        }
-      );
-    };
-
-    window.triggerAICommandVoice = () => {
-      const bar = byId('aiLiveMicBar'), st = byId('aiMicStatusText');
-      if (bar) { bar.classList.remove('hidden'); bar.classList.add('flex'); }
-      if (st) st.innerText = t('voiceListeningLbl');
-      runSpeechCapture(
-        (txt) => {
-          if (bar) { bar.classList.add('hidden'); bar.classList.remove('flex'); }
-          if (byId('aiCommandInput')) byId('aiCommandInput').value = txt;
-          runAICommand(txt);
-        },
-        (phase, txt) => {
-          if (phase === 'transcript' && txt && st) st.innerText = `"${txt}"`;
-          if (phase === 'error' && st) st.innerText = t('speakNowBtn');
         }
       );
     };
@@ -1627,81 +1461,6 @@
           window.speechSynthesis.speak(u);
         } catch (e) {}
       }
-    };
-
-    window.openThekedaarAIModal = () => {
-      openModal('thekedaarAIModal');
-      const box = byId('aiChatMessages');
-      if (box && !box.innerHTML.trim()) addAIMsg('ai', t('aiWelcome'));
-    };
-    function addAIMsg(who, html) {
-      const box = byId('aiChatMessages');
-      if (!box) return;
-      const d = document.createElement('div');
-      d.className = who === 'user' ? 'ml-auto max-w-[82%] p-2.5 rounded-2xl bg-amber-500 text-zinc-950 font-bold' : 'mr-auto max-w-[88%] p-2.5 rounded-2xl bg-white/10 border border-purple-500/30';
-      d.innerHTML = html; box.appendChild(d); box.scrollTop = box.scrollHeight;
-    }
-    window.handleAIFormSubmit = (e) => { e.preventDefault(); const i = byId('aiCommandInput'); if (i && i.value.trim()) { runAICommand(i.value.trim()); i.value = ''; } };
-
-    window.runAICommand = (q) => {
-      if (!q) return;
-      addAIMsg('user', q);
-      const l = q.toLowerCase();
-      const site = byId('siteSelect')?.value || state.sites[0];
-      const m = byId('monthSelect')?.value || '2026-11';
-      let ans = '';
-
-      if (/(add|new|create|बनाओ|जोड़ो|जोड़ो|नया)\s*(site|साइट|साईट)\s*(.+)/i.test(q)) {
-        const match = q.match(/(?:add|new|create|बनाओ|जोड़ो|जोड़ो|नया)\s*(?:site|साइट|साईट)\s*(.+)/i);
-        const sName = (match?.[1] || '').trim();
-        if (sName) {
-          if (!state.sites.includes(sName)) state.sites.push(sName);
-          if (byId('siteSelect')) byId('siteSelect').value = sName;
-          persist();
-          ans = t('aiAddedSite', sName);
-        }
-      } else if (/(mark\s*all\s*present|all\s*present|सबकी\s*हाजिरी|sabki\s*hajri|सगळा.*हाजिर|அனைவரும்\s*வருகை|అందరూ\s*హాజరు|ਸਭ.*ਹਾਜ਼ਰ)/i.test(q)) {
-        const ws = state.labours.filter(x => x.site === site && x.month === m);
-        ws.forEach(w => { w.presentDays = (w.presentDays || 0) + 1; w.lastUpdatedBy = getStamp(); });
-        persist();
-        ans = t('aiMarkedAll', ws.length);
-      } else if (/(advance|एडवांस|एडवांस्|अॅडव्हान्स|मुಂಗಡ|முன்பணம்|అడ్వాన్స్|ਐਡਵਾਂਸ)/i.test(q) && /\d+/.test(q)) {
-        const num = Number((q.match(/\d+/) || [0])[0]);
-        const ws = state.labours.filter(x => x.site === site && x.month === m);
-        const target = ws.find(w => l.includes((w.name || '').toLowerCase())) || ws[0];
-        if (target && num > 0) {
-          target.advance = (target.advance || 0) + num;
-          (target.advanceLog = target.advanceLog || []).unshift({ amount: num, date: isoToday });
-          target.lastUpdatedBy = getStamp();
-          persist();
-          ans = t('aiAddedAdv', target.name, num);
-        }
-      } else if (/(add|new|जोड़ो|जोड़ो|खर्च|खरचा|expense|kharcha|செலவு|ఖర్చు|ਖਰਚਾ)/i.test(q) && /\d+/.test(q) && !/(worker|labour|मजदूर|कामगार|कार्मिक|મજૂર|பணியாளர்|కార్మికుడు|மਜ਼ਦੂਰ)/i.test(q)) {
-        const num = Number((q.match(/\d+/) || [0])[0]);
-        const title = q.replace(/(add|new|expense|kharcha|खर्च|खरचा|जोड़ो|जोड़ो|செலவு|ఖర్చు|ਖਰਚਾ|\d+)/gi, '').trim() || t('expenses');
-        state.expenses.unshift({ id: Date.now().toString(), site, month: m, title, amount: num, spentFor: '', addedBy: getStamp() });
-        persist();
-        ans = t('aiAddedExpense', title, num);
-      } else if (/(bill|बिल|बिल्|பில்|బిల్లు|ਬਿੱਲ)/i.test(q) && /\d+/.test(q)) {
-        const num = Number((q.match(/\d+/) || [0])[0]);
-        const title = q.replace(/(add|new|bill|बिल|बिल्|जोड़ो|जोड़ो|பில்|బిల్లు|ਬਿੱਲ|\d+)/gi, '').trim() || t('bills');
-        state.bills.unshift({ id: Date.now().toString(), site, month: m, title, amount: num, billDate: isoToday, status: 'Pending', addedBy: getStamp() });
-        persist();
-        ans = t('aiAddedBill', title, num);
-      } else if (/(add|new|जोड़ो|जोड़ो|मजदूर|worker|labour|कामगार|कार्मिक|મજૂર|பணியாளர்|కార్మికుడు|மਜ਼ਦੂਰ)/i.test(q)) {
-        const num = q.match(/\d+/), rate = num ? Number(num[0]) : 500;
-        const name = q.replace(/(add|new|worker|labour|मजदूर|कामगार|कार्मिक|મજૂર|பணியாளர்|కార్మికుడు|மਜ਼ਦੂਰ|जोड़ो|जोड़ो|\d+)/gi, '').trim() || t('tradeMason');
-        state.labours.unshift({ id: Date.now().toString(), site, month: m, name, category: 'Mason', dailyRate: rate, advance: 0, phone: '', presentDays: 0, halfDays: 0, advanceLog: [], lastUpdatedBy: getStamp() });
-        persist();
-        ans = t('aiAddedWorker', name, rate);
-      } else if (/(profit|summary|हिसाब|मुनाफा|hisab|बाकी|due|खर्च|bill|नफा|ಲಾಭ|ನಫಾ|லாபம்|లాభం|ਮੁਨਾਫ਼ਾ)/i.test(q)) {
-        ans = `${t('labourDue')}: <b>${byId('summaryLabourDue')?.innerText || '₹0'}</b> | ${t('expenses')}: <b>${byId('summaryExpensesTotal')?.innerText || '₹0'}</b> | ${t('bills')}: <b>${byId('summaryBillsTotal')?.innerText || '₹0'}</b>`;
-      } else if (/(pin|password|पिन|पासवर्ड|supervisor|सुपरवाइजर|carry|कैरी|hajri|हाजिरी|ledger|खाता|pdf|csv|whatsapp|व्हाट्सएप|sync|सिंक)/i.test(q)) {
-        ans = `${t('aiHelp')}<br/>• ${t('setMasterPinLabel')} / ${t('addSupervisorBtn')}: ${t('profileAccessTitle')}<br/>• ${t('monthlyLedgerTitle')}: 📅`;
-      } else {
-        ans = t('aiHelp');
-      }
-      addAIMsg('ai', ans);
     };
 
     window.renderAll = () => {
