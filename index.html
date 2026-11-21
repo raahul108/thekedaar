@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>ठेकेDAAR - निर्माण व मजदूर प्रबंधन</title>
-  <link rel="icon" type="image/png" href="./logo.png?v=27">
-  <link rel="apple-touch-icon" href="./logo.png?v=27">
-  <link rel="manifest" href="manifest.json?v=27">
+  <link rel="icon" type="image/png" href="./logo.png?v=28">
+  <link rel="apple-touch-icon" href="./logo.png?v=28">
+  <link rel="manifest" href="manifest.json?v=28">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#09090b">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -14,43 +14,43 @@
     html.theme-amoled {
       color-scheme: dark;
       --bg: #000000;
-      --surface: rgba(18, 18, 22, 0.86);
+      --surface: rgba(18, 18, 22, 0.88);
       --surface-2: rgba(255, 255, 255, 0.04);
-      --border: rgba(255, 255, 255, 0.09);
+      --border: rgba(255, 255, 255, 0.10);
       --text: #fafafa;
       --muted: #8e8e93;
       --accent: #6366f1;
       --primary-bg: #ffffff;
       --primary-fg: #09090b;
-      --nav-bg: rgba(16, 16, 20, 0.90);
+      --nav-bg: rgba(16, 16, 20, 0.92);
       --cal-filter: invert(1) brightness(1.6);
     }
     html.theme-dark {
       color-scheme: dark;
       --bg: #090b10;
-      --surface: rgba(17, 21, 32, 0.88);
+      --surface: rgba(17, 21, 32, 0.90);
       --surface-2: rgba(255, 255, 255, 0.05);
-      --border: rgba(255, 255, 255, 0.10);
+      --border: rgba(255, 255, 255, 0.11);
       --text: #f8fafc;
       --muted: #94a3b8;
       --accent: #818cf8;
       --primary-bg: #f8fafc;
       --primary-fg: #0f172a;
-      --nav-bg: rgba(15, 19, 29, 0.92);
+      --nav-bg: rgba(15, 19, 29, 0.94);
       --cal-filter: invert(1) brightness(1.6);
     }
     html.theme-light {
       color-scheme: light;
       --bg: #f4f4f5;
-      --surface: rgba(255, 255, 255, 0.94);
+      --surface: rgba(255, 255, 255, 0.95);
       --surface-2: rgba(9, 9, 11, 0.04);
-      --border: rgba(9, 9, 11, 0.10);
+      --border: rgba(9, 9, 11, 0.11);
       --text: #09090b;
       --muted: #52525b;
       --accent: #4f46e5;
       --primary-bg: #09090b;
       --primary-fg: #ffffff;
-      --nav-bg: rgba(255, 255, 255, 0.94);
+      --nav-bg: rgba(255, 255, 255, 0.95);
       --cal-filter: invert(0);
     }
 
@@ -143,7 +143,7 @@
     <div class="max-w-md mx-auto flex items-center justify-between">
       <div class="flex items-center gap-3">
         <button type="button" onclick="openProfileModal()" class="relative active:scale-95 transition-transform">
-          <div id="userAvatarBadge" class="w-9 h-9 rounded-xl btn-primary font-black text-sm flex items-center justify-center">ठे</div>
+          <div id="userAvatarBadge" class="w-9 h-9 rounded-xl btn-primary font-black text-sm flex items-center justify-center overflow-hidden">ठे</div>
           <span id="syncDot" class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-black"></span>
         </button>
         <div>
@@ -189,7 +189,7 @@
 
   <!-- MAIN BODY -->
   <main class="max-w-md mx-auto p-4 space-y-4">
-    <!-- GRAPHICAL OVERVIEW CARD (DONUT CHART + METRICS) -->
+    <!-- GRAPHICAL OVERVIEW CARD -->
     <div class="surface rounded-3xl p-4 flex items-center gap-4">
       <div class="relative w-20 h-20 shrink-0 flex items-center justify-center">
         <svg class="w-20 h-20 -rotate-90" viewBox="0 0 36 36">
@@ -200,7 +200,7 @@
         </svg>
         <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
           <span id="ringWorkerCount" class="text-sm font-black leading-none">0</span>
-          <span class="text-[8px] uppercase opacity-55 mt-0.5">Staff</span>
+          <span class="text-[8px] uppercase opacity-55 mt-0.5" data-i18n="staffLbl"></span>
         </div>
       </div>
 
@@ -220,7 +220,7 @@
       </div>
     </div>
 
-    <!-- MINIMAL AUDIO SUMMARY STRIP -->
+    <!-- AUDIO SUMMARY STRIP -->
     <div class="surface rounded-2xl px-4 py-3 flex items-center justify-between gap-3">
       <div class="min-w-0">
         <h3 class="text-xs font-bold truncate" data-i18n="audioSummaryTitle"></h3>
@@ -257,7 +257,7 @@
 
       <div class="surface p-2.5 rounded-2xl space-y-2">
         <div class="flex items-center gap-1.5">
-          <input type="text" id="labourSearchInput" oninput="renderAll()" data-i18n-placeholder="searchWorkerPh" class="app-input flex-1 rounded-xl px-3 py-1.5 text-xs font-medium" />
+          <input type="text" id="labourSearchInput" autocomplete="off" oninput="renderAll()" data-i18n-placeholder="searchWorkerPh" class="app-input flex-1 rounded-xl px-3 py-1.5 text-xs font-medium" />
           <button type="button" onclick="startVoiceInputForField('labourSearchInput')" class="p-2 btn-accent rounded-xl active:scale-90">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
           </button>
@@ -304,9 +304,9 @@
     </nav>
   </div>
 
-  <!-- MODALS -->
+  <!-- MONTH PICKER MODAL -->
   <div id="monthPickerModal" class="fixed inset-0 bg-black/75 backdrop-blur-xl hidden items-center justify-center p-4 z-50">
-    <div class="surface rounded-3xl max-w-xs w-full p-5 space-y-4">
+    <div class="surface rounded-3xl max-w-sm w-full p-5 space-y-4">
       <div class="flex justify-between items-center border-b border-current/10 pb-2">
         <h3 class="font-bold text-sm" data-i18n="selectMonthYear"></h3>
         <button type="button" onclick="closeModal('monthPickerModal')" class="text-sm opacity-60">✕</button>
@@ -321,30 +321,54 @@
     </div>
   </div>
 
+  <!-- PROFILE & ACCESS MODAL -->
   <div id="profileModal" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="surface rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-current/10 pb-3">
         <h3 class="font-bold text-sm" data-i18n="profileAccessTitle"></h3>
         <button type="button" onclick="closeModal('profileModal')" class="text-sm opacity-60">✕</button>
       </div>
+
+      <div class="p-3 rounded-2xl surface-subtle flex items-center gap-3">
+        <div id="profileAvatarPreview" class="w-14 h-14 rounded-2xl btn-primary font-black text-lg flex items-center justify-center overflow-hidden shrink-0">ठे</div>
+        <div class="flex-1 min-w-0 space-y-1.5">
+          <div id="activeProfileModalName" class="text-xs font-bold truncate"></div>
+          <div class="flex gap-1.5">
+            <label class="px-2.5 py-1.5 btn-accent text-[11px] font-semibold rounded-xl cursor-pointer inline-flex items-center gap-1">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              <span data-i18n="cameraBtn"></span>
+              <input type="file" accept="image/*" capture="user" class="hidden" onchange="openCropperForAccount(this, getActiveAcc().id)" />
+            </label>
+            <label class="px-2.5 py-1.5 surface-subtle text-[11px] font-semibold rounded-xl cursor-pointer inline-flex items-center gap-1">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span data-i18n="galleryBtn"></span>
+              <input type="file" accept="image/*" class="hidden" onchange="openCropperForAccount(this, getActiveAcc().id)" />
+            </label>
+          </div>
+        </div>
+      </div>
+
       <div class="p-3 rounded-2xl surface-subtle">
         <span class="text-[10px] font-semibold uppercase opacity-60 block" data-i18n="loggedEmailLabel"></span>
         <span id="loggedInEmailDisplay" class="text-xs font-bold truncate block mt-0.5"></span>
       </div>
+
       <div id="masterPasswordSettingBox" class="surface-subtle p-3 rounded-2xl space-y-2">
         <label class="text-[10px] font-semibold opacity-70 uppercase block" data-i18n="setMasterPinLabel"></label>
         <div class="flex gap-1.5">
-          <input type="password" id="newMasterPinInput" data-i18n-placeholder="newPinPh" class="app-input flex-1 rounded-xl px-2.5 py-1.5 text-xs font-medium" />
+          <input type="password" id="newMasterPinInput" autocomplete="off" data-i18n-placeholder="newPinPh" class="app-input flex-1 rounded-xl px-2.5 py-1.5 text-xs font-medium" />
           <button type="button" onclick="saveNewMasterPin()" class="px-3 py-1.5 btn-primary font-semibold text-xs rounded-xl" data-i18n="saveBtn"></button>
         </div>
       </div>
+
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <label class="text-[10px] font-semibold opacity-65 uppercase" data-i18n="accountProfilesLabel"></label>
           <button type="button" onclick="openAddAccountPrompt()" class="text-indigo-400 text-xs font-semibold" data-i18n="addSupervisorBtn"></button>
         </div>
-        <div id="accountIdsList" class="space-y-1.5 max-h-44 overflow-y-auto"></div>
+        <div id="accountIdsList" class="space-y-1.5 max-h-48 overflow-y-auto"></div>
       </div>
+
       <div class="pt-2 border-t border-current/10 space-y-2">
         <button type="button" onclick="closeModal('profileModal'); openModal('authModal');" class="w-full py-2.5 rounded-xl btn-primary font-semibold text-xs" data-i18n="cloudLoginBtn"></button>
         <button type="button" onclick="logoutAccount()" id="profileLogoutBtn" class="w-full py-2 rounded-xl surface-subtle text-rose-500 font-semibold text-xs hidden" data-i18n="logoutBtn"></button>
@@ -352,6 +376,29 @@
     </div>
   </div>
 
+  <!-- PHOTO CROPPER MODAL -->
+  <div id="cropperModal" class="fixed inset-0 bg-black/85 backdrop-blur-xl hidden items-center justify-center p-4 z-50">
+    <div class="surface rounded-3xl max-w-xs w-full p-5 space-y-4 flex flex-col items-center">
+      <div class="w-full flex justify-between items-center border-b border-current/10 pb-2">
+        <h3 class="font-bold text-sm" data-i18n="cropPhotoTitle"></h3>
+        <button type="button" onclick="closeModal('cropperModal')" class="text-sm opacity-60">✕</button>
+      </div>
+      <div class="relative w-60 h-60 rounded-2xl overflow-hidden bg-black border border-white/15 touch-none flex items-center justify-center">
+        <canvas id="cropCanvas" width="240" height="240" class="cursor-grab active:cursor-grabbing"></canvas>
+        <div class="absolute inset-0 pointer-events-none rounded-full border-2 border-indigo-400 shadow-[0_0_0_9999px_rgba(0,0,0,0.55)]"></div>
+      </div>
+      <div class="w-full space-y-1">
+        <div class="flex justify-between text-[10px] opacity-70 font-semibold uppercase"><span data-i18n="zoomLbl"></span><span id="zoomValTxt">1.0x</span></div>
+        <input type="range" id="cropZoomSlider" min="0.5" max="3" step="0.05" value="1" oninput="updateCropZoom(this.value)" class="w-full accent-indigo-500" />
+      </div>
+      <div class="w-full flex gap-2">
+        <button type="button" onclick="closeModal('cropperModal')" class="flex-1 py-2.5 rounded-xl surface-subtle text-xs font-semibold" data-i18n="cancelBtn"></button>
+        <button type="button" onclick="saveCroppedAccountPhoto()" class="flex-1 py-2.5 rounded-xl btn-primary text-xs font-semibold" data-i18n="savePhotoBtn"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS MODAL -->
   <div id="settingsModal" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="surface rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-current/10 pb-3">
@@ -392,6 +439,7 @@
     </div>
   </div>
 
+  <!-- MONTHLY LEDGER MODAL -->
   <div id="monthlyLedgerModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-3 z-50">
     <div class="surface rounded-3xl max-w-lg w-full p-5 space-y-4 max-h-[90vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-current/10 pb-2 shrink-0">
@@ -402,6 +450,7 @@
     </div>
   </div>
 
+  <!-- LABOUR HISTORY MODAL -->
   <div id="labourHistoryModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="surface rounded-3xl max-w-sm w-full p-5 space-y-3 max-h-[85vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-current/10 pb-2">
@@ -412,6 +461,7 @@
     </div>
   </div>
 
+  <!-- CARRY FORWARD MODAL -->
   <div id="carryModal" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden items-center justify-center p-3 z-50">
     <div class="surface rounded-3xl max-w-md w-full p-5 space-y-3 max-h-[88vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-current/10 pb-2">
@@ -423,6 +473,7 @@
     </div>
   </div>
 
+  <!-- HAJRI BOOK MODAL -->
   <div id="hajriBookModal" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden items-center justify-center p-3 z-50">
     <div class="surface rounded-3xl max-w-lg w-full p-5 space-y-3 max-h-[90vh] flex flex-col">
       <div class="flex justify-between items-center border-b border-current/10 pb-2">
@@ -442,6 +493,7 @@
     </div>
   </div>
 
+  <!-- INPUT FORMS MODAL -->
   <div id="formModal" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden items-end sm:items-center justify-center p-0 sm:p-4 z-50">
     <div class="surface rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-current/10 pb-2">
@@ -449,11 +501,11 @@
         <button type="button" onclick="closeModal('formModal')" class="text-sm opacity-60">✕</button>
       </div>
 
-      <form id="labourForm" onsubmit="saveLabour(event)" class="space-y-3 hidden">
+      <form id="labourForm" autocomplete="off" onsubmit="saveLabour(event)" class="space-y-3 hidden">
         <div>
           <label class="text-[10px] font-semibold opacity-65 uppercase" data-i18n="workerNameLabel"></label>
           <div class="flex items-center gap-1.5 mt-0.5">
-            <input type="text" id="lName" required data-i18n-placeholder="workerNamePh" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm" />
+            <input type="text" id="lName" autocomplete="off" autocorrect="off" autocapitalize="words" spellcheck="false" required data-i18n-placeholder="workerNamePh" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm" />
             <button type="button" onclick="startVoiceInputForField('lName')" class="p-2.5 btn-accent rounded-xl"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></button>
           </div>
         </div>
@@ -489,7 +541,7 @@
           <div>
             <label class="text-[10px] font-semibold opacity-65 uppercase" data-i18n="dailyWageLabel"></label>
             <div class="flex items-center gap-1 mt-0.5">
-              <input type="number" inputmode="numeric" id="lDailyRate" oninput="updateLiveINR('lDailyRate','lRatePrev')" required min="1" placeholder="500" class="app-input w-full rounded-xl px-2.5 py-2 text-sm" />
+              <input type="number" inputmode="numeric" id="lDailyRate" autocomplete="off" oninput="updateLiveINR('lDailyRate','lRatePrev')" required min="1" placeholder="500" class="app-input w-full rounded-xl px-2.5 py-2 text-sm" />
               <button type="button" onclick="startVoiceInputForField('lDailyRate', true)" class="p-2 btn-accent rounded-xl"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></button>
             </div>
             <span id="lRatePrev" class="text-[10px] font-semibold opacity-70 block mt-0.5">₹0</span>
@@ -497,7 +549,7 @@
           <div>
             <label class="text-[10px] font-semibold opacity-65 uppercase" data-i18n="advanceLabel"></label>
             <div class="flex items-center gap-1 mt-0.5">
-              <input type="number" inputmode="numeric" id="lAdvance" oninput="updateLiveINR('lAdvance','lAdvPrev')" required min="0" value="0" class="app-input w-full rounded-xl px-2.5 py-2 text-sm" />
+              <input type="number" inputmode="numeric" id="lAdvance" autocomplete="off" oninput="updateLiveINR('lAdvance','lAdvPrev')" required min="0" value="0" class="app-input w-full rounded-xl px-2.5 py-2 text-sm" />
               <button type="button" onclick="startVoiceInputForField('lAdvance', true)" class="p-2 btn-accent rounded-xl"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></button>
             </div>
             <span id="lAdvPrev" class="text-[10px] font-semibold text-rose-400 block mt-0.5">₹0</span>
@@ -507,18 +559,18 @@
         <div>
           <label class="text-[10px] font-semibold opacity-65 uppercase" data-i18n="phoneLabel"></label>
           <div class="flex items-center gap-1.5 mt-0.5">
-            <input type="tel" inputmode="numeric" id="lPhone" placeholder="9876543210" class="app-input flex-1 rounded-xl px-3 py-2 text-sm" />
+            <input type="tel" inputmode="numeric" id="lPhone" autocomplete="off" placeholder="99999 00000" class="app-input flex-1 rounded-xl px-3 py-2 text-sm" />
             <button type="button" onclick="startVoiceInputForField('lPhone', true)" class="p-2.5 btn-accent rounded-xl"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></button>
           </div>
         </div>
         <button type="submit" class="w-full btn-primary font-semibold py-3 rounded-xl text-sm" data-i18n="saveLabourBtn"></button>
       </form>
 
-      <form id="expenseForm" onsubmit="saveExpense(event)" class="space-y-3 hidden">
+      <form id="expenseForm" autocomplete="off" onsubmit="saveExpense(event)" class="space-y-3 hidden">
         <div>
           <label class="text-[10px] font-semibold opacity-65 uppercase" data-i18n="workDescLabel"></label>
           <div class="flex items-center gap-1.5 mt-0.5">
-            <input type="text" id="eTitle" required data-i18n-placeholder="workDescPh" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm" />
+            <input type="text" id="eTitle" autocomplete="off" required data-i18n-placeholder="workDescPh" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm" />
             <button type="button" onclick="startVoiceInputForField('eTitle')" class="p-2.5 btn-accent rounded-xl"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></button>
           </div>
         </div>
@@ -526,7 +578,7 @@
           <div>
             <label class="text-[10px] font-semibold opacity-65 uppercase" data-i18n="amountLabel"></label>
             <div class="flex items-center gap-1 mt-0.5">
-              <input type="number" inputmode="numeric" id="eAmount" oninput="updateLiveINR('eAmount','eAmtPrev')" required min="0" placeholder="0" class="app-input w-full rounded-xl px-2.5 py-2 text-sm" />
+              <input type="number" inputmode="numeric" id="eAmount" autocomplete="off" oninput="updateLiveINR('eAmount','eAmtPrev')" required min="0" placeholder="0" class="app-input w-full rounded-xl px-2.5 py-2 text-sm" />
               <button type="button" onclick="startVoiceInputForField('eAmount', true)" class="p-2 btn-accent rounded-xl"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></button>
             </div>
             <span id="eAmtPrev" class="text-[10px] font-semibold opacity-70 block mt-0.5">₹0</span>
@@ -534,7 +586,7 @@
           <div>
             <label class="text-[10px] font-semibold opacity-65 uppercase" data-i18n="paidForLabel"></label>
             <div class="flex items-center gap-1 mt-0.5">
-              <input type="text" id="eSpentFor" data-i18n-placeholder="paidForPh" class="app-input w-full rounded-xl px-2.5 py-2 text-sm" />
+              <input type="text" id="eSpentFor" autocomplete="off" data-i18n-placeholder="paidForPh" class="app-input w-full rounded-xl px-2.5 py-2 text-sm" />
               <button type="button" onclick="startVoiceInputForField('eSpentFor')" class="p-2 btn-accent rounded-xl"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></button>
             </div>
           </div>
@@ -546,11 +598,11 @@
         <button type="submit" class="w-full btn-primary font-semibold py-3 rounded-xl text-sm" data-i18n="saveExpenseBtn"></button>
       </form>
 
-      <form id="billForm" onsubmit="saveBill(event)" class="space-y-3 hidden">
+      <form id="billForm" autocomplete="off" onsubmit="saveBill(event)" class="space-y-3 hidden">
         <div>
           <label class="text-[10px] font-semibold opacity-65 uppercase" data-i18n="billNameLabel"></label>
           <div class="flex items-center gap-1.5 mt-0.5">
-            <input type="text" id="bTitle" required data-i18n-placeholder="billNamePh" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm" />
+            <input type="text" id="bTitle" autocomplete="off" required data-i18n-placeholder="billNamePh" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm" />
             <button type="button" onclick="startVoiceInputForField('bTitle')" class="p-2.5 btn-accent rounded-xl"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></button>
           </div>
         </div>
@@ -562,10 +614,23 @@
           <div>
             <label class="text-[10px] font-semibold opacity-65 uppercase" data-i18n="amountLabel"></label>
             <div class="flex items-center gap-1 mt-0.5">
-              <input type="number" inputmode="numeric" id="bAmount" oninput="updateLiveINR('bAmount','bAmtPrev')" required min="0" placeholder="0" class="app-input w-full rounded-xl px-2.5 py-2 text-sm" />
+              <input type="number" inputmode="numeric" id="bAmount" autocomplete="off" oninput="updateLiveINR('bAmount','bAmtPrev')" required min="0" placeholder="0" class="app-input w-full rounded-xl px-2.5 py-2 text-sm" />
               <button type="button" onclick="startVoiceInputForField('bAmount', true)" class="p-2 btn-accent rounded-xl"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></button>
             </div>
             <span id="bAmtPrev" class="text-[10px] font-semibold text-emerald-500 block mt-0.5">₹0</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-[10px] font-semibold opacity-65 uppercase" data-i18n="statusLbl"></label>
+            <select id="bStatus" onchange="byId('bRecDateWrap').classList.toggle('hidden', this.value !== 'Received')" class="app-input w-full rounded-xl px-2.5 py-2 text-xs font-semibold mt-0.5">
+              <option value="Pending" data-i18n="pendingLbl"></option>
+              <option value="Received" data-i18n="receivedLbl"></option>
+            </select>
+          </div>
+          <div id="bRecDateWrap" class="hidden">
+            <label class="text-[10px] font-semibold text-emerald-500 uppercase" data-i18n="receivedDateLbl"></label>
+            <input type="date" id="bRecDate" class="app-input w-full rounded-xl px-2.5 py-2 text-xs mt-0.5" />
           </div>
         </div>
         <label class="flex items-center justify-center gap-2 border border-dashed border-current/25 rounded-xl px-3 py-3 text-xs font-medium cursor-pointer">
@@ -577,19 +642,20 @@
     </div>
   </div>
 
+  <!-- ADVANCE MODAL -->
   <div id="advanceModal" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="surface rounded-3xl max-w-sm w-full p-5 space-y-3">
       <div class="flex justify-between items-center border-b border-current/10 pb-2">
         <h3 id="advWorkerName" class="font-bold text-sm"></h3>
         <button type="button" onclick="closeModal('advanceModal')" class="text-sm opacity-60">✕</button>
       </div>
-      <form onsubmit="submitExtraAdvance(event)" class="space-y-3">
+      <form autocomplete="off" onsubmit="submitExtraAdvance(event)" class="space-y-3">
         <input type="hidden" id="advLabourId" />
         <div class="grid grid-cols-2 gap-2">
           <div>
             <label class="text-[10px] font-semibold opacity-65 uppercase" data-i18n="amountLabel"></label>
             <div class="flex items-center gap-1 mt-0.5">
-              <input type="number" inputmode="numeric" id="advAmount" oninput="updateLiveINR('advAmount','advAmtPrev')" required min="1" class="app-input w-full rounded-xl px-2.5 py-2 text-sm" />
+              <input type="number" inputmode="numeric" id="advAmount" autocomplete="off" oninput="updateLiveINR('advAmount','advAmtPrev')" required min="1" class="app-input w-full rounded-xl px-2.5 py-2 text-sm" />
               <button type="button" onclick="startVoiceInputForField('advAmount', true)" class="p-2 btn-accent rounded-xl"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></button>
             </div>
             <span id="advAmtPrev" class="text-[10px] font-semibold opacity-70 block mt-0.5">₹0</span>
@@ -605,6 +671,7 @@
     </div>
   </div>
 
+  <!-- AUTH MODAL -->
   <div id="authModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="surface rounded-3xl max-w-sm w-full p-6 space-y-4">
       <div class="flex justify-between items-center">
@@ -612,10 +679,10 @@
         <button type="button" onclick="closeModal('authModal')" class="text-sm opacity-60">✕</button>
       </div>
       <div class="flex items-center gap-1.5">
-        <input type="email" id="authEmail" data-i18n-placeholder="emailPh" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm" />
+        <input type="email" id="authEmail" autocomplete="off" data-i18n-placeholder="emailPh" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm" />
         <button type="button" onclick="startVoiceInputForField('authEmail')" class="p-2.5 btn-accent rounded-xl"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></button>
       </div>
-      <input type="password" id="authPass" data-i18n-placeholder="passPh" class="app-input w-full rounded-xl px-3 py-2.5 text-sm" />
+      <input type="password" id="authPass" autocomplete="off" data-i18n-placeholder="passPh" class="app-input w-full rounded-xl px-3 py-2.5 text-sm" />
       <div class="flex gap-2">
         <button type="button" onclick="connectCloud(false)" class="flex-1 btn-primary font-semibold py-2.5 rounded-xl text-sm" data-i18n="loginBtn"></button>
         <button type="button" onclick="connectCloud(true)" class="flex-1 surface-subtle font-semibold py-2.5 rounded-xl text-sm" data-i18n="registerBtn"></button>
@@ -623,6 +690,7 @@
     </div>
   </div>
 
+  <!-- VOICE MODAL (DUAL LANGUAGE: SELECTED LANGUAGE + ENGLISH) -->
   <div id="voiceModal" class="fixed inset-0 bg-black/75 backdrop-blur-xl hidden items-center justify-center p-4 z-50">
     <div class="surface rounded-3xl max-w-xs w-full p-6 text-center space-y-4">
       <div class="w-14 h-14 mx-auto rounded-2xl btn-accent flex items-center justify-center">
@@ -632,6 +700,10 @@
         <h3 class="font-bold text-sm" data-i18n="voiceTypingTitle"></h3>
         <p id="voiceStatusLine" class="text-[11px] opacity-65 mt-1"></p>
       </div>
+      <div class="grid grid-cols-2 gap-1.5">
+        <button type="button" id="voiceModeSelectedBtn" onclick="setVoiceMode('selected')" class="py-1.5 rounded-xl text-[11px] font-semibold btn-primary"></button>
+        <button type="button" id="voiceModeEnglishBtn" onclick="setVoiceMode('en')" class="py-1.5 rounded-xl text-[11px] font-semibold surface-subtle">English</button>
+      </div>
       <div id="voiceTranscriptBox" class="hidden p-2.5 rounded-xl surface-subtle text-xs font-semibold"></div>
       <div class="flex gap-2">
         <button type="button" onclick="closeVoiceModal()" class="flex-1 py-2.5 rounded-xl surface-subtle text-xs font-semibold" data-i18n="cancelBtn"></button>
@@ -640,12 +712,13 @@
     </div>
   </div>
 
+  <!-- CUSTOM DIALOG -->
   <div id="customDialogModal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="surface rounded-3xl max-w-xs w-full p-5 space-y-4">
       <h3 id="customDialogTitle" class="font-bold text-sm"></h3>
       <div class="flex items-center gap-1.5">
-        <input id="customDialogInput" type="text" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm font-medium" />
-        <button type="button" onclick="startVoiceInputForField('customDialogInput', document.getElementById('customDialogInput').type === 'number')" class="p-2.5 btn-accent rounded-xl"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></button>
+        <input id="customDialogInput" type="text" autocomplete="off" class="app-input flex-1 rounded-xl px-3 py-2.5 text-sm font-medium" />
+        <button type="button" id="customDialogMicBtn" onclick="startVoiceInputForField('customDialogInput', document.getElementById('customDialogInput').type === 'number')" class="p-2.5 btn-accent rounded-xl"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></button>
       </div>
       <div class="flex gap-2">
         <button type="button" onclick="closeModal('customDialogModal')" class="flex-1 py-2 rounded-xl surface-subtle text-xs font-semibold" data-i18n="cancelBtn"></button>
@@ -654,11 +727,12 @@
     </div>
   </div>
 
+  <!-- PIN LOCK MODAL -->
   <div id="pinLockModal" class="fixed inset-0 bg-black/85 backdrop-blur-xl hidden items-center justify-center p-4 z-50">
     <div class="surface rounded-3xl max-w-xs w-full p-6 text-center space-y-4">
       <h3 class="font-bold text-sm" data-i18n="pinModalTitle"></h3>
       <div class="flex items-center gap-1.5">
-        <input type="password" id="masterPinInput" data-i18n-placeholder="enterPinPh" class="app-input flex-1 rounded-xl px-3 py-3 text-center text-sm font-bold tracking-widest" />
+        <input type="password" id="masterPinInput" autocomplete="off" data-i18n-placeholder="enterPinPh" class="app-input flex-1 rounded-xl px-3 py-3 text-center text-sm font-bold tracking-widest" />
         <button type="button" onclick="startVoiceInputForField('masterPinInput', true)" class="p-3 btn-accent rounded-xl"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></button>
       </div>
       <div class="flex gap-2">
@@ -668,6 +742,7 @@
     </div>
   </div>
 
+  <!-- CONFIRM DELETE MODAL -->
   <div id="confirmDeleteModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 z-50">
     <div class="surface rounded-3xl max-w-xs w-full p-5 text-center space-y-4">
       <h3 id="confirmDeleteTitle" class="font-bold text-sm"></h3>
@@ -698,11 +773,12 @@
     const db = getFirestore(app);
 
     let currentUser = null, unsubSnap = null, activeCategoryFilter = 'ALL';
-    let activeRecognition = null, activeVoiceFieldId = null, activeVoiceNumeric = false, pendingSwitchAccId = null;
+    let activeRecognition = null, activeVoiceFieldId = null, activeVoiceNumeric = false, voiceMode = 'selected', pendingSwitchAccId = null;
+    let cropTargetAccId = null, cropImg = new Image(), cropState = { scale: 1, x: 0, y: 0 };
 
     const getDefaultState = () => ({
       masterPin: '1234',
-      accounts: [{ id: 'acc_main', isMaster: true }, { id: 'acc_sup', isMaster: false }],
+      accounts: [{ id: 'acc_main', isMaster: true, photo: null }, { id: 'acc_sup', isMaster: false, photo: null }],
       sites: ['Site A'], labours: [], expenses: [], bills: [], dailyHajriRecords: {}, updatedAt: 0
     });
     let state = getDefaultState();
@@ -722,16 +798,23 @@
       state = f;
     }
 
+    const langNames = { hi:'हिंदी', hinglish:'Hinglish', en:'English', mr:'मराठी', kn:'ಕನ್ನಡ', gu:'ગુજરાતી', ta:'தமிழ்', te:'తెలుగు', pa:'ਪੰਜਾਬੀ', bho:'भोजपुरी', mwr:'मारवाड़ी' };
     const speechLocaleMap = { hi:'hi-IN', hinglish:'hi-IN', en:'en-IN', mr:'mr-IN', kn:'kn-IN', gu:'gu-IN', ta:'ta-IN', te:'te-IN', pa:'pa-IN', bho:'hi-IN', mwr:'hi-IN' };
+
     const monthsByLang = {
-      en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-      kn:['ಜನವರಿ','ಫೆಬ್ರವರಿ','ಮಾರ್ಚ್','ಏಪ್ರಿಲ್','ಮೇ','ಜೂನ್','ಜುಲೈ','ಆಗಸ್ಟ್','ಸೆಪ್ಟೆಂಬರ್','ಅಕ್ಟೋಬರ್','ನವೆಂಬರ್','ಡಿಸೆಂಬರ್'],
-      gu:['જાન્યુઆરી','ફેબ્રુઆરી','માર્ચ','એપ્રિલ','મે','જૂન','જુલાઈ','ઓગસ્ટ','સપ્ટેમ્બર','ઓક્ટોબર','નવેમ્બર','ડિસેમ્બર'],
-      ta:['ஜனவரி','பிப்ரவரி','மார்ச்','ஏப்ரல்','மே','ஜூன்','ஜூலை','ஆகஸ்ட்','செப்டம்பர்','அக்டோபர்','நவம்பர்','டிசம்பர்'],
-      te:['జనవరి','ఫిబ్రవరి','మార్చి','ఏప్రిల్','మే','జూన్','జూలై','ఆగస్టు','సెప్టెంబర్','అక్టోబర్','నవంబర్','డిసెంబర్'],
-      pa:['ਜਨਵਰੀ','ਫ਼ਰਵਰੀ','ਮਾਰਚ','ਅਪ੍ਰੈਲ','ਮਈ','ਜੂਨ','ਜੁਲਾਈ','ਅਗਸਤ','ਸਤੰਬਰ','ਅਕਤੂਬਰ','ਨਵੰਬਰ','ਦਸੰਬਰ'],
-      hi:['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर']
+      en: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+      hi: ['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'],
+      hinglish: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+      mr: ['जानेवारी','फेब्रुवारी','मार्च','एप्रिल','मे','जून','जुलै','ऑगस्ट','सप्टेंबर','ऑक्टोबर','नोव्हेंबर','डिसेंबर'],
+      kn: ['ಜನವರಿ','ಫೆಬ್ರವರಿ','ಮಾರ್ಚ್','ಏಪ್ರಿಲ್','ಮೇ','ಜೂನ್','ಜುಲೈ','ಆಗಸ್ಟ್','ಸೆಪ್ಟೆಂಬರ್','ಅಕ್ಟೋಬರ್','ನವೆಂಬರ್','ಡಿಸೆಂಬರ್'],
+      gu: ['જાન્યુઆરી','ફેબ્રુઆરી','માર્ચ','એપ્રિલ','મે','જૂન','જુલાઈ','ઓગસ્ટ','સપ્ટેમ્બર','ઓક્ટોબર','નવેમ્બર','ડિસેમ્બર'],
+      ta: ['ஜனவரி','பிப்ரவரி','மார்ச்','ஏப்ரல்','மே','ஜூன்','ஜூலை','ஆகஸ்ட்','செப்டம்பர்','அக்டோபர்','நவம்பர்','டிசம்பர்'],
+      te: ['జనవరి','ఫిబ్రవరి','మార్చి','ఏప్రిల్','మే','జూన్','జూలై','ఆగస్టు','సెప్టెంబర్','అక్టోబర్','నవంబర్','డిసెంబర్'],
+      pa: ['ਜਨਵਰੀ','ਫ਼ਰਵਰੀ','ਮਾਰਚ','ਅਪ੍ਰੈਲ','ਮਈ','ਜੂਨ','ਜੁਲਾਈ','ਅਗਸਤ','ਸਤੰਬਰ','ਅਕਤੂਬਰ','ਨਵੰਬਰ','ਦਸੰਬਰ'],
+      bho: ['जनवरी','फरवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'],
+      mwr: ['जनवरी','फरवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','నవంబర్','दिसंबर']
     };
+
     const summaryTemplates = {
       hi: ({s,mName,count,due,exp,bill,profit}) => `साइट ${s} का ${mName} का हिसाब। कुल ${count} मजदूर। मजदूर बकाया ${due}। कुल खर्चे ${exp}। कंपनी बिल ${bill}। अनुमानित मुनाफा ${profit}।`,
       hinglish: ({s,mName,count,due,exp,bill,profit}) => `${s} site ka ${mName} hisab. Total ${count} workers. Labour due ${due}. Expenses ${exp}. Bills ${bill}. Profit ${profit}.`,
@@ -749,17 +832,17 @@
     const fmtINR = (v) => '₹' + Math.round(Number(v) || 0).toLocaleString('en-IN');
 
     const baseStrings = {
-      hi: { offlineTitle:"इंटरनेट आवश्यक है", offlineDesc:"मोबाइल डेटा या वाई-फाई चालू करें।", mainRole:"मेन ठेकेदार", supRole:"सुपरवाइजर", onlineLbl:"ऑनलाइन", cloudLbl:"क्लाउड", addSiteBtn:"+ साइट", labourDue:"मजदूर बकाया", expenses:"खर्चे", bills:"बिल", audioSummaryTitle:"बोलकर हिसाब सुनें", audioSummarySub:"एक टैप में साइट का हिसाब सुनें", listenBtn:"सुनें", liveSnapshot:"लाइव मजदूर स्थिति", viewAllBtn:"सभी देखें", tabLabour:"मजदूर व हाजिरी", hajriBookBtn:"हाजिरी बुक", carryBtn:"कैरी", addWorkerBtn:"+ मजदूर", searchWorkerPh:"नाम या मोबाइल खोजें...", filterAll:"सभी", tradeMason:"मिस्त्री", tradeHelper:"हेल्पर", tradeCarpenter:"बढ़ई", tradeElectrician:"इलेक्ट्रीशियन", tradePlumber:"प्लम्बर", tabExpenses:"खर्चे व किराया", addExpenseBtn:"+ खर्च", tabBills:"कंपनी बिल", addBillBtn:"+ बिल", selectMonthYear:"महीना व साल", currentMonthBtn:"चालू महीना", profileAccessTitle:"प्रोफाइल व एक्सेस", loggedEmailLabel:"क्लाउड ईमेल", notLoggedLbl:"लॉग-इन नहीं है", setMasterPinLabel:"मेन पिन सेट करें", newPinPh:"नया पिन", saveBtn:"सेव", accountProfilesLabel:"अकाउंट प्रोफाइल", addSupervisorBtn:"+ सुपरवाइजर", cloudLoginBtn:"क्लाउड लॉग-इन", logoutBtn:"लॉग-आउट", settingsHeader:"ऐप सेटिंग्स", changeLangLabel:"भाषा चुनें", themeLabel:"थीम", devInstaSub:"डेवलपर इंस्टाग्राम", openBtn:"खोलें", monthlyLedgerTitle:"मासिक बही-खाता", carryTitle:"पिछले महीने के मजदूर", carryConfirmBtn:"जोड़ें", hajriBookTitle:"दैनिक हाजिरी", prevBtn:"पिछला", nextBtn:"अगला", markAllPresentBtn:"सभी हाजिर", workerNameLabel:"मजदूर का नाम", workerNamePh:"जैसे: रमेश", chooseTradeLabel:"काम चुनें", dailyWageLabel:"दिहाड़ी दर (₹)", advanceLabel:"एडवांस (₹)", phoneLabel:"मोबाइल नंबर", saveLabourBtn:"सेव करें", workDescLabel:"खर्च विवरण", workDescPh:"जैसे: ऑटो किराया", amountLabel:"राशि (₹)", paidForLabel:"किसके लिए", paidForPh:"नाम", uploadSlipLabel:"पर्ची / फोटो अपलोड", saveExpenseBtn:"खर्च सेव करें", billNameLabel:"कंपनी / काम", billNamePh:"जैसे: स्लैब बिल", billDateLabel:"तारीख", uploadBillLabel:"बिल फोटो / PDF अपलोड", saveBillBtn:"बिल सेव करें", dateLabel:"तारीख", addAdvBtn:"+ एडवांस", authTitle:"क्लाउड लॉग-इन", emailPh:"ईमेल पता", passPh:"पासवर्ड", loginBtn:"लॉग-इन", registerBtn:"रजिस्टर", voiceTypingTitle:"बोलकर लिखें", voiceListeningLbl:"माइक तैयार है — बोलें", cancelBtn:"रद्द करें", speakNowBtn:"बोलें", pinModalTitle:"मेन पिन", enterPinPh:"पिन डालें", unlockBtn:"अनलॉक", deleteBtn:"हटाएं", rateLbl:"दर", advLbl:"एडवांस", netDueLbl:"बाकी", presentLbl:"हाजिर", halfLbl:"हाफ", editLbl:"बदलें", settleLbl:"चुकता", slipLbl:"व्हाट्सएप", noWorkers:"कोई मजदूर नहीं है।", noExpenses:"कोई खर्च नहीं है।", noBills:"कोई बिल नहीं है।", activeLbl:"सक्रिय", switchLbl:"बदलें", profitLbl:"अनुमानित मुनाफा" },
-      hinglish: { offlineTitle:"Internet Chahiye", offlineDesc:"Data ya Wi-Fi on karein.", mainRole:"Main Contractor", supRole:"Supervisor", onlineLbl:"Online", cloudLbl:"Cloud", addSiteBtn:"+ SITE", labourDue:"Labour Due", expenses:"Expenses", bills:"Bills", audioSummaryTitle:"Voice Hisab Suno", audioSummarySub:"Ek tap mein site hisab suno", listenBtn:"Suno", liveSnapshot:"Live Workers", viewAllBtn:"Sab Dekho", tabLabour:"Labour & Hajri", hajriBookBtn:"Hajri", carryBtn:"Carry", addWorkerBtn:"+ Worker", searchWorkerPh:"Naam ya phone search...", filterAll:"Sab", tradeMason:"Mistri", tradeHelper:"Helper", tradeCarpenter:"Badhai", tradeElectrician:"Electrician", tradePlumber:"Plumber", tabExpenses:"Kharcha", addExpenseBtn:"+ Kharcha", tabBills:"Company Bill", addBillBtn:"+ Bill", selectMonthYear:"Month & Year", currentMonthBtn:"Current Month", profileAccessTitle:"Profile & Access", loggedEmailLabel:"Cloud Email", notLoggedLbl:"Login nahi hai", setMasterPinLabel:"Main PIN Set Karein", newPinPh:"Naya PIN", saveBtn:"Save", accountProfilesLabel:"Accounts", addSupervisorBtn:"+ Supervisor", cloudLoginBtn:"Cloud Login", logoutBtn:"Logout", settingsHeader:"Settings", changeLangLabel:"Bhasha Chunein", themeLabel:"Theme", devInstaSub:"Developer Instagram", openBtn:"Open", monthlyLedgerTitle:"Monthly Ledger", carryTitle:"Last Month Workers", carryConfirmBtn:"Add", hajriBookTitle:"Daily Hajri", prevBtn:"Pichla", nextBtn:"Agla", markAllPresentBtn:"All Present", workerNameLabel:"Worker Name", workerNamePh:"Jaise: Ramesh", chooseTradeLabel:"Kaam Chunein", dailyWageLabel:"Daily Rate (₹)", advanceLabel:"Advance (₹)", phoneLabel:"Mobile Number", saveLabourBtn:"Save Worker", workDescLabel:"Kharcha Detail", workDescPh:"Jaise: Auto kiraya", amountLabel:"Amount (₹)", paidForLabel:"Kiske Liye", paidForPh:"Naam", uploadSlipLabel:"Slip / Photo Upload", saveExpenseBtn:"Save Kharcha", billNameLabel:"Company / Kaam", billNamePh:"Jaise: Slab bill", billDateLabel:"Date", uploadBillLabel:"Bill Photo / PDF", saveBillBtn:"Save Bill", dateLabel:"Date", addAdvBtn:"+ Advance", authTitle:"Cloud Login", emailPh:"Email", passPh:"Password", loginBtn:"Login", registerBtn:"Register", voiceTypingTitle:"Bolkar Likhein", voiceListeningLbl:"Mic ready — bolein", cancelBtn:"Cancel", speakNowBtn:"Bolein", pinModalTitle:"Main PIN", enterPinPh:"PIN dalein", unlockBtn:"Unlock", deleteBtn:"Delete", rateLbl:"Rate", advLbl:"Adv", netDueLbl:"Baaki", presentLbl:"Present", halfLbl:"Half", editLbl:"Edit", settleLbl:"Settle", slipLbl:"WhatsApp", noWorkers:"Koi worker nahi.", noExpenses:"Koi kharcha nahi.", noBills:"Koi bill nahi.", activeLbl:"Active", switchLbl:"Switch", profitLbl:"Estimated Profit" },
-      en: { offlineTitle:"Internet Required", offlineDesc:"Turn on Mobile Data or Wi-Fi.", mainRole:"Main Contractor", supRole:"Supervisor", onlineLbl:"Online", cloudLbl:"Cloud", addSiteBtn:"+ Site", labourDue:"Labour Due", expenses:"Expenses", bills:"Bills", audioSummaryTitle:"Audio Summary", audioSummarySub:"Listen to site summary in one tap", listenBtn:"Listen", liveSnapshot:"Live Workforce", viewAllBtn:"View All", tabLabour:"Labour & Attendance", hajriBookBtn:"Hajri", carryBtn:"Carry", addWorkerBtn:"+ Worker", searchWorkerPh:"Search name or phone...", filterAll:"All", tradeMason:"Mason", tradeHelper:"Helper", tradeCarpenter:"Carpenter", tradeElectrician:"Electrician", tradePlumber:"Plumber", tabExpenses:"Site Expenses", addExpenseBtn:"+ Expense", tabBills:"Company Bills", addBillBtn:"+ Bill", selectMonthYear:"Month & Year", currentMonthBtn:"Current Month", profileAccessTitle:"Profile & Access", loggedEmailLabel:"Cloud Email", notLoggedLbl:"Not signed in", setMasterPinLabel:"Set Main PIN", newPinPh:"New PIN", saveBtn:"Save", accountProfilesLabel:"Accounts", addSupervisorBtn:"+ Supervisor", cloudLoginBtn:"Cloud Login", logoutBtn:"Logout", settingsHeader:"Settings", changeLangLabel:"Language", themeLabel:"Theme", devInstaSub:"Developer Instagram", openBtn:"Open", monthlyLedgerTitle:"Monthly Ledger", carryTitle:"Last Month Workers", carryConfirmBtn:"Carry Selected", hajriBookTitle:"Daily Hajri", prevBtn:"Prev", nextBtn:"Next", markAllPresentBtn:"Mark All Present", workerNameLabel:"Worker Name", workerNamePh:"e.g. Ramesh", chooseTradeLabel:"Choose Trade", dailyWageLabel:"Daily Wage (₹)", advanceLabel:"Advance (₹)", phoneLabel:"Mobile Number", saveLabourBtn:"Save Worker", workDescLabel:"Expense Description", workDescPh:"e.g. Auto rent", amountLabel:"Amount (₹)", paidForLabel:"Paid For", paidForPh:"Name", uploadSlipLabel:"Upload Slip / Photo", saveExpenseBtn:"Save Expense", billNameLabel:"Company / Work", billNamePh:"e.g. Slab bill", billDateLabel:"Date", uploadBillLabel:"Upload Bill Photo / PDF", saveBillBtn:"Save Bill", dateLabel:"Date", addAdvBtn:"+ Advance", authTitle:"Cloud Login", emailPh:"Email", passPh:"Password", loginBtn:"Login", registerBtn:"Register", voiceTypingTitle:"Voice Typing", voiceListeningLbl:"Mic ready — speak now", cancelBtn:"Cancel", speakNowBtn:"Speak", pinModalTitle:"Main PIN", enterPinPh:"Enter PIN", unlockBtn:"Unlock", deleteBtn:"Delete", rateLbl:"Rate", advLbl:"Adv", netDueLbl:"Net Due", presentLbl:"Present", halfLbl:"Half", editLbl:"Edit", settleLbl:"Settle", slipLbl:"WhatsApp", noWorkers:"No workers found.", noExpenses:"No expenses recorded.", noBills:"No bills recorded.", activeLbl:"Active", switchLbl:"Switch", profitLbl:"Estimated Profit" },
-      mr: { addSiteBtn:"+ साइट", labourDue:"मजुरी बाकी", expenses:"खर्च", bills:"बिल", listenBtn:"ऐका", tabLabour:"कामगार व हजेरी", hajriBookBtn:"हजेरी", carryBtn:"कॅरी", addWorkerBtn:"+ कामगार", tabExpenses:"खर्च", addExpenseBtn:"+ खर्च", tabBills:"कंपनी बिल", addBillBtn:"+ बिल", deleteBtn:"हटवा", saveBtn:"सेव्ह", cancelBtn:"रद्द करा", profitLbl:"अंदाजित नफा" },
-      kn: { addSiteBtn:"+ ಸೈಟ್", labourDue:"ಕೂಲಿ ಬಾಕಿ", expenses:"ಖರ್ಚು", bills:"ಬಿಲ್", listenBtn:"ಕೇಳಿ", tabLabour:"ಕಾರ್ಮಿಕರು", hajriBookBtn:"ಹಾಜರಿ", carryBtn:"ಕ್ಯಾರಿ", addWorkerBtn:"+ ಕಾರ್ಮಿಕ", tabExpenses:"ಖರ್ಚು", addExpenseBtn:"+ ಖರ್ಚು", tabBills:"ಬಿಲ್", addBillBtn:"+ ಬಿಲ್", deleteBtn:"ಅಳಿಸಿ", saveBtn:"ಉಳಿಸಿ", cancelBtn:"ರದ್ದು", profitLbl:"ಅಂದಾಜು ಲಾಭ" },
-      gu: { addSiteBtn:"+ સાઇટ", labourDue:"મજૂરી બાકી", expenses:"ખર્ચ", bills:"બિલ", listenBtn:"સાંભળો", tabLabour:"મજૂર", hajriBookBtn:"હાજરી", carryBtn:"કેરી", addWorkerBtn:"+ મજૂર", tabExpenses:"ખર્ચ", addExpenseBtn:"+ ખર્ચ", tabBills:"બિલ", addBillBtn:"+ બિલ", deleteBtn:"કાઢી નાખો", saveBtn:"સાચવો", cancelBtn:"રદ કરો", profitLbl:"અંદાજિત નફો" },
-      ta: { addSiteBtn:"+ தளம்", labourDue:"கூலி பாக்கி", expenses:"செலவு", bills:"பில்", listenBtn:"கேளுங்கள்", tabLabour:"தொழிலாளர்கள்", hajriBookBtn:"வருகை", carryBtn:"கேரி", addWorkerBtn:"+ பணியாளர்", tabExpenses:"செலவு", addExpenseBtn:"+ செலவு", tabBills:"பில்", addBillBtn:"+ பில்", deleteBtn:"நீக்கு", saveBtn:"சேமி", cancelBtn:"ரத்து", profitLbl:"லாபம்" },
-      te: { addSiteBtn:"+ సైట్", labourDue:"కూలీ బాకీ", expenses:"ఖర్చు", bills:"బిల్లు", listenBtn:"వినండి", tabLabour:"కార్మికులు", hajriBookBtn:"హాజరు", carryBtn:"క్యారీ", addWorkerBtn:"+ కార్మికుడు", tabExpenses:"ఖర్చు", addExpenseBtn:"+ ఖర్చు", tabBills:"బిల్లు", addBillBtn:"+ బిల్లు", deleteBtn:"తొలగించు", saveBtn:"సేవ్", cancelBtn:"రద్దు", profitLbl:"లాభం" },
-      pa: { addSiteBtn:"+ ਸਾਈਟ", labourDue:"ਮਜ਼ਦੂਰੀ ਬਾਕੀ", expenses:"ਖਰਚੇ", bills:"ਬਿੱਲ", listenBtn:"ਸੁਣੋ", tabLabour:"ਮਜ਼ਦੂਰ", hajriBookBtn:"ਹਾਜ਼ਰੀ", carryBtn:"ਕੈਰੀ", addWorkerBtn:"+ ਮਜ਼ਦੂਰ", tabExpenses:"ਖਰਚੇ", addExpenseBtn:"+ ਖਰਚਾ", tabBills:"ਬਿੱਲ", addBillBtn:"+ ਬਿੱਲ", deleteBtn:"ਮਿਟਾਓ", saveBtn:"ਸੇਵ", cancelBtn:"ਰੱਦ", profitLbl:"ਮੁਨਾਫ਼ਾ" },
-      bho: { addSiteBtn:"+ साइट", labourDue:"मजदूर बाकी", expenses:"खरचा", bills:"बिल", listenBtn:"सुनीं", tabLabour:"मजदूर आ हाजिरी", hajriBookBtn:"हाजिरी", carryBtn:"कैरी", addWorkerBtn:"+ मजदूर", tabExpenses:"खरचा", addExpenseBtn:"+ खरचा", tabBills:"बिल", addBillBtn:"+ बिल", deleteBtn:"हटाईं", saveBtn:"सेव", cancelBtn:"रद करीं", profitLbl:"मुनाफा" },
-      mwr: { addSiteBtn:"+ साइट", labourDue:"मजदूर बाकी", expenses:"खरचा", bills:"बिल", listenBtn:"सुणो", tabLabour:"मजदूर अर हाजिरी", hajriBookBtn:"हाजिरी", carryBtn:"कैरी", addWorkerBtn:"+ मजदूर", tabExpenses:"खरचा", addExpenseBtn:"+ खरचा", tabBills:"बिल", addBillBtn:"+ बिल", deleteBtn:"हटाओ", saveBtn:"सेव", cancelBtn:"रद करो", profitLbl:"मुनाफो" }
+      hi: { offlineTitle:"इंटरनेट आवश्यक है", offlineDesc:"मोबाइल डेटा या वाई-फाई चालू करें।", mainRole:"मेन ठेकेदार", supRole:"सुपरवाइजर", onlineLbl:"ऑनलाइन", cloudLbl:"क्लाउड", staffLbl:"मजदूर", addSiteBtn:"+ साइट", labourDue:"मजदूर बकाया", expenses:"खर्चे", bills:"बिल", audioSummaryTitle:"बोलकर हिसाब सुनें", audioSummarySub:"एक टैप में साइट का हिसाब सुनें", listenBtn:"सुनें", liveSnapshot:"लाइव मजदूर स्थिति", viewAllBtn:"सभी देखें", tabLabour:"मजदूर व हाजिरी", hajriBookBtn:"हाजिरी बुक", carryBtn:"कैरी", addWorkerBtn:"+ मजदूर", searchWorkerPh:"नाम या मोबाइल खोजें...", filterAll:"सभी", tradeMason:"मिस्त्री", tradeHelper:"हेल्पर", tradeCarpenter:"बढ़ई", tradeElectrician:"इलेक्ट्रीशियन", tradePlumber:"प्लम्बर", tabExpenses:"खर्चे व किराया", addExpenseBtn:"+ खर्च", tabBills:"कंपनी बिल", addBillBtn:"+ बिल", selectMonthYear:"महीना व साल", currentMonthBtn:"चालू महीना", profileAccessTitle:"प्रोफाइल व एक्सेस", cameraBtn:"कैमरा", galleryBtn:"फ़ाइलें", cropPhotoTitle:"फोटो क्रॉप करें", zoomLbl:"ज़ूम", savePhotoBtn:"फोटो सेव करें", loggedEmailLabel:"क्लाउड ईमेल", notLoggedLbl:"लॉग-इन नहीं है", setMasterPinLabel:"मेन पिन सेट करें", newPinPh:"नया पिन", saveBtn:"सेव", accountProfilesLabel:"अकाउंट प्रोफाइल", addSupervisorBtn:"+ सुपरवाइजर", cloudLoginBtn:"क्लाउड लॉग-इन", logoutBtn:"लॉग-आउट", settingsHeader:"ऐप सेटिंग्स", changeLangLabel:"भाषा चुनें", themeLabel:"थीम", devInstaSub:"डेवलपर इंस्टाग्राम", openBtn:"खोलें", monthlyLedgerTitle:"मासिक बही-खाता", carryTitle:"पिछले महीने के मजदूर", carryConfirmBtn:"जोड़ें", hajriBookTitle:"दैनिक हाजिरी", prevBtn:"पिछला", nextBtn:"अगला", markAllPresentBtn:"सभी हाजिर", workerNameLabel:"मजदूर का नाम", workerNamePh:"जैसे: रमेश", chooseTradeLabel:"काम चुनें", dailyWageLabel:"दिहाड़ी दर (₹)", advanceLabel:"एडवांस (₹)", phoneLabel:"मोबाइल नंबर", saveLabourBtn:"सेव करें", workDescLabel:"खर्च विवरण", workDescPh:"जैसे: ऑटो किराया", amountLabel:"राशि (₹)", paidForLabel:"किसके लिए", paidForPh:"नाम", uploadSlipLabel:"पर्ची / फोटो अपलोड", saveExpenseBtn:"खर्च सेव करें", billNameLabel:"कंपनी / काम", billNamePh:"जैसे: स्लैब बिल", billDateLabel:"बिल तारीख", statusLbl:"स्थिति", pendingLbl:"बाकी", receivedLbl:"प्राप्त", markReceivedBtn:"प्राप्त करें", editReceivedDateBtn:"तारीख बदलें", receivedDateLbl:"प्राप्त तारीख", uploadBillLabel:"बिल फोटो / PDF अपलोड", saveBillBtn:"बिल सेव करें", dateLabel:"तारीख", addAdvBtn:"+ एडवांस", authTitle:"क्लाउड लॉग-इन", emailPh:"ईमेल पता", passPh:"पासवर्ड", loginBtn:"लॉग-इन", registerBtn:"रजिस्टर", voiceTypingTitle:"बोलकर लिखें", voiceListeningLbl:"माइक तैयार है — बोलें", cancelBtn:"रद्द करें", speakNowBtn:"बोलें", pinModalTitle:"मेन पिन", enterPinPh:"पिन डालें", unlockBtn:"अनलॉक", deleteBtn:"हटाएं", rateLbl:"दर", advLbl:"एडवांस", netDueLbl:"बाकी", presentLbl:"हाजिर", halfLbl:"हाफ", editLbl:"बदलें", settleLbl:"चुकता", slipLbl:"व्हाट्सएप", noWorkers:"कोई मजदूर नहीं है।", noExpenses:"कोई खर्च नहीं है।", noBills:"कोई बिल नहीं है।", activeLbl:"सक्रिय", switchLbl:"बदलें", profitLbl:"अनुमानित मुनाफा" },
+      hinglish: { offlineTitle:"Internet Chahiye", offlineDesc:"Data ya Wi-Fi on karein.", mainRole:"Main Contractor", supRole:"Supervisor", onlineLbl:"Online", cloudLbl:"Cloud", staffLbl:"Staff", addSiteBtn:"+ SITE", labourDue:"Labour Due", expenses:"Expenses", bills:"Bills", audioSummaryTitle:"Voice Hisab Suno", audioSummarySub:"Ek tap mein site hisab suno", listenBtn:"Suno", liveSnapshot:"Live Workers", viewAllBtn:"Sab Dekho", tabLabour:"Labour & Hajri", hajriBookBtn:"Hajri", carryBtn:"Carry", addWorkerBtn:"+ Worker", searchWorkerPh:"Naam ya phone search...", filterAll:"Sab", tradeMason:"Mistri", tradeHelper:"Helper", tradeCarpenter:"Badhai", tradeElectrician:"Electrician", tradePlumber:"Plumber", tabExpenses:"Kharcha", addExpenseBtn:"+ Kharcha", tabBills:"Company Bill", addBillBtn:"+ Bill", selectMonthYear:"Month & Year", currentMonthBtn:"Current Month", profileAccessTitle:"Profile & Access", cameraBtn:"Camera", galleryBtn:"Files", cropPhotoTitle:"Photo Crop Karein", zoomLbl:"Zoom", savePhotoBtn:"Save Photo", loggedEmailLabel:"Cloud Email", notLoggedLbl:"Login nahi hai", setMasterPinLabel:"Main PIN Set Karein", newPinPh:"Naya PIN", saveBtn:"Save", accountProfilesLabel:"Accounts", addSupervisorBtn:"+ Supervisor", cloudLoginBtn:"Cloud Login", logoutBtn:"Logout", settingsHeader:"Settings", changeLangLabel:"Bhasha Chunein", themeLabel:"Theme", devInstaSub:"Developer Instagram", openBtn:"Open", monthlyLedgerTitle:"Monthly Ledger", carryTitle:"Last Month Workers", carryConfirmBtn:"Add", hajriBookTitle:"Daily Hajri", prevBtn:"Pichla", nextBtn:"Agla", markAllPresentBtn:"All Present", workerNameLabel:"Worker Name", workerNamePh:"Jaise: Ramesh", chooseTradeLabel:"Kaam Chunein", dailyWageLabel:"Daily Rate (₹)", advanceLabel:"Advance (₹)", phoneLabel:"Mobile Number", saveLabourBtn:"Save Worker", workDescLabel:"Kharcha Detail", workDescPh:"Jaise: Auto kiraya", amountLabel:"Amount (₹)", paidForLabel:"Kiske Liye", paidForPh:"Naam", uploadSlipLabel:"Slip / Photo Upload", saveExpenseBtn:"Save Kharcha", billNameLabel:"Company / Kaam", billNamePh:"Jaise: Slab bill", billDateLabel:"Bill Date", statusLbl:"Status", pendingLbl:"Pending", receivedLbl:"Received", markReceivedBtn:"Mark Received", editReceivedDateBtn:"Edit Date", receivedDateLbl:"Received Date", uploadBillLabel:"Bill Photo / PDF", saveBillBtn:"Save Bill", dateLabel:"Date", addAdvBtn:"+ Advance", authTitle:"Cloud Login", emailPh:"Email", passPh:"Password", loginBtn:"Login", registerBtn:"Register", voiceTypingTitle:"Bolkar Likhein", voiceListeningLbl:"Mic ready — bolein", cancelBtn:"Cancel", speakNowBtn:"Bolein", pinModalTitle:"Main PIN", enterPinPh:"PIN dalein", unlockBtn:"Unlock", deleteBtn:"Delete", rateLbl:"Rate", advLbl:"Adv", netDueLbl:"Baaki", presentLbl:"Present", halfLbl:"Half", editLbl:"Edit", settleLbl:"Settle", slipLbl:"WhatsApp", noWorkers:"Koi worker nahi.", noExpenses:"Koi kharcha nahi.", noBills:"Koi bill nahi.", activeLbl:"Active", switchLbl:"Switch", profitLbl:"Estimated Profit" },
+      en: { offlineTitle:"Internet Required", offlineDesc:"Turn on Mobile Data or Wi-Fi.", mainRole:"Main Contractor", supRole:"Supervisor", onlineLbl:"Online", cloudLbl:"Cloud", staffLbl:"Staff", addSiteBtn:"+ Site", labourDue:"Labour Due", expenses:"Expenses", bills:"Bills", audioSummaryTitle:"Audio Summary", audioSummarySub:"Listen to site summary in one tap", listenBtn:"Listen", liveSnapshot:"Live Workforce", viewAllBtn:"View All", tabLabour:"Labour & Attendance", hajriBookBtn:"Hajri", carryBtn:"Carry", addWorkerBtn:"+ Worker", searchWorkerPh:"Search name or phone...", filterAll:"All", tradeMason:"Mason", tradeHelper:"Helper", tradeCarpenter:"Carpenter", tradeElectrician:"Electrician", tradePlumber:"Plumber", tabExpenses:"Site Expenses", addExpenseBtn:"+ Expense", tabBills:"Company Bills", addBillBtn:"+ Bill", selectMonthYear:"Month & Year", currentMonthBtn:"Current Month", profileAccessTitle:"Profile & Access", cameraBtn:"Camera", galleryBtn:"Files", cropPhotoTitle:"Crop Profile Photo", zoomLbl:"Zoom", savePhotoBtn:"Save Photo", loggedEmailLabel:"Cloud Email", notLoggedLbl:"Not signed in", setMasterPinLabel:"Set Main PIN", newPinPh:"New PIN", saveBtn:"Save", accountProfilesLabel:"Accounts", addSupervisorBtn:"+ Supervisor", cloudLoginBtn:"Cloud Login", logoutBtn:"Logout", settingsHeader:"Settings", changeLangLabel:"Language", themeLabel:"Theme", devInstaSub:"Developer Instagram", openBtn:"Open", monthlyLedgerTitle:"Monthly Ledger", carryTitle:"Last Month Workers", carryConfirmBtn:"Carry Selected", hajriBookTitle:"Daily Hajri", prevBtn:"Prev", nextBtn:"Next", markAllPresentBtn:"Mark All Present", workerNameLabel:"Worker Name", workerNamePh:"e.g. Ramesh", chooseTradeLabel:"Choose Trade", dailyWageLabel:"Daily Wage (₹)", advanceLabel:"Advance (₹)", phoneLabel:"Mobile Number", saveLabourBtn:"Save Worker", workDescLabel:"Expense Description", workDescPh:"e.g. Auto rent", amountLabel:"Amount (₹)", paidForLabel:"Paid For", paidForPh:"Name", uploadSlipLabel:"Upload Slip / Photo", saveExpenseBtn:"Save Expense", billNameLabel:"Company / Work", billNamePh:"e.g. Slab bill", billDateLabel:"Bill Date", statusLbl:"Status", pendingLbl:"Pending", receivedLbl:"Received", markReceivedBtn:"Mark Received", editReceivedDateBtn:"Edit Date", receivedDateLbl:"Received Date", uploadBillLabel:"Upload Bill Photo / PDF", saveBillBtn:"Save Bill", dateLabel:"Date", addAdvBtn:"+ Advance", authTitle:"Cloud Login", emailPh:"Email", passPh:"Password", loginBtn:"Login", registerBtn:"Register", voiceTypingTitle:"Voice Typing", voiceListeningLbl:"Mic ready — speak now", cancelBtn:"Cancel", speakNowBtn:"Speak", pinModalTitle:"Main PIN", enterPinPh:"Enter PIN", unlockBtn:"Unlock", deleteBtn:"Delete", rateLbl:"Rate", advLbl:"Adv", netDueLbl:"Net Due", presentLbl:"Present", halfLbl:"Half", editLbl:"Edit", settleLbl:"Settle", slipLbl:"WhatsApp", noWorkers:"No workers found.", noExpenses:"No expenses recorded.", noBills:"No bills recorded.", activeLbl:"Active", switchLbl:"Switch", profitLbl:"Estimated Profit" },
+      kn: { offlineTitle:"ಇಂಟರ್ನೆಟ್ ಅಗತ್ಯವಿದೆ", offlineDesc:"ಮೊಬೈಲ್ ಡೇಟಾ ಅಥವಾ ವೈ-ಫೈ ಆನ್ ಮಾಡಿ.", mainRole:"ಮುಖ್ಯ ಗುತ್ತಿಗೆದಾರ", supRole:"ಮೇಲ್ವಿಚಾರಕ", onlineLbl:"ಆನ್‌ಲೈನ್", cloudLbl:"ಕ್ಲೌಡ್", staffLbl:"ಕಾರ್ಮಿಕರು", addSiteBtn:"+ ಸೈಟ್", labourDue:"ಕೂಲಿ ಬಾಕಿ", expenses:"ಖರ್ಚು", bills:"ಬಿಲ್", audioSummaryTitle:"ಆಡಿಯೋ ಲೆಕ್ಕ ಕೇಳಿ", audioSummarySub:"ಒಂದೇ ಟ್ಯಾಪ್‌ನಲ್ಲಿ ಸೈಟ್ ಲೆಕ್ಕ ಕೇಳಿ", listenBtn:"ಕೇಳಿ", liveSnapshot:"ಲೈವ್ ಕಾರ್ಮಿಕರ ವಿವರ", viewAllBtn:"ಎಲ್ಲಾ ನೋಡಿ", tabLabour:"ಕಾರ್ಮಿಕರು & ಹಾಜರಿ", hajriBookBtn:"ಹಾಜರಿ", carryBtn:"ಕ್ಯಾರಿ", addWorkerBtn:"+ ಕಾರ್ಮಿಕ", searchWorkerPh:"ಹೆಸರು ಅಥವಾ ಫೋನ್ ಹುಡುಕಿ...", filterAll:"ಎಲ್ಲಾ", tradeMason:"ಮೇಸ್ತ್ರಿ", tradeHelper:"ಹೆಲ್ಪರ್", tradeCarpenter:"ಬಡಗಿ", tradeElectrician:"ಎಲೆಕ್ಟ್ರಿಷಿಯನ್", tradePlumber:"ಪ್ಲಂಬರ್", tabExpenses:"ಖರ್ಚು & ಬಾಡಿಗೆ", addExpenseBtn:"+ ಖರ್ಚು", tabBills:"ಕಂಪನಿ ಬಿಲ್", addBillBtn:"+ ಬಿಲ್", selectMonthYear:"ತಿಂಗಳು ಮತ್ತು ವರ್ಷ", currentMonthBtn:"ಪ್ರಸಕ್ತ ತಿಂಗಳು", profileAccessTitle:"ಪ್ರೊಫೈಲ್ & ಪ್ರವೇಶ", cameraBtn:"ಕ್ಯಾಮೆರಾ", galleryBtn:"ಫೈಲ್‌ಗಳು", cropPhotoTitle:"ಫೋಟೋ ಕ್ರಾಪ್ ಮಾಡಿ", zoomLbl:"ಜೂಮ್", savePhotoBtn:"ಫೋಟೋ ಉಳಿಸಿ", loggedEmailLabel:"ಕ್ಲೌಡ್ ಇಮೇಲ್", notLoggedLbl:"ಲಾಗಿನ್ ಆಗಿಲ್ಲ", setMasterPinLabel:"ಮುಖ್ಯ ಪಿನ್ ಸೆಟ್ ಮಾಡಿ", newPinPh:"ಹೊಸ ಪಿನ್", saveBtn:"ಉಳಿಸಿ", accountProfilesLabel:"ಖಾತೆಗಳು", addSupervisorBtn:"+ ಮೇಲ್ವಿಚಾರಕ", cloudLoginBtn:"ಕ್ಲೌಡ್ ಲಾಗಿನ್", logoutBtn:"ಲಾಗ್‌ಔಟ್", settingsHeader:"ಸೆಟ್ಟಿಂಗ್‌ಗಳು", changeLangLabel:"ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ", themeLabel:"ಥೀಮ್", devInstaSub:"ಡೆವಲಪರ್ ಇನ್‌ಸ್ಟಾಗ್ರಾಮ್", openBtn:"ತೆರೆಯಿರಿ", monthlyLedgerTitle:"ಮಾಸಿಕ ಲೆಕ್ಕ", carryTitle:"ಕಳೆದ ತಿಂಗಳ ಕಾರ್ಮಿಕರು", carryConfirmBtn:"ಸೇರಿಸಿ", hajriBookTitle:"ದೈನಂದಿನ ಹಾಜರಿ", prevBtn:"ಹಿಂದಿನ", nextBtn:"ಮುಂದಿನ", markAllPresentBtn:"ಎಲ್ಲರೂ ಹಾಜರು", workerNameLabel:"ಕಾರ್ಮಿಕರ ಹೆಸರು", workerNamePh:"ಉದಾ. ರಮೇಶ್", chooseTradeLabel:"ಕೆಲಸ ಆಯ್ಕೆಮಾಡಿ", dailyWageLabel:"ದಿನದ ಕೂಲಿ (₹)", advanceLabel:"ಮುಂಗಡ (₹)", phoneLabel:"ಮೊಬೈಲ್ ಸಂಖ್ಯೆ", saveLabourBtn:"ಉಳಿಸಿ", workDescLabel:"ಖರ್ಚು ವಿವರ", workDescPh:"ಉದಾ. ಆಟೋ ಬಾಡಿಗೆ", amountLabel:"ಮೊತ್ತ (₹)", paidForLabel:"ಯಾರಿಗಾಗಿ", paidForPh:"ಹೆಸರು", uploadSlipLabel:"ರಸೀದಿ / ಫೋಟೋ ಅಪ್‌ಲೋಡ್", saveExpenseBtn:"ಖರ್ಚು ಉಳಿಸಿ", billNameLabel:"ಕಂಪನಿ / ಕೆಲಸ", billNamePh:"ಉದಾ. ಸ್ಲ್ಯಾಬ್ ಬಿಲ್", billDateLabel:"ಬಿಲ್ ದಿನಾಂಕ", statusLbl:"ಸ್ಥಿತಿ", pendingLbl:"ಬಾಕಿ", receivedLbl:"ಪಡೆದಿದೆ", markReceivedBtn:"ಪಡೆದಿದೆ ಎಂದು ಗುರುತಿಸಿ", editReceivedDateBtn:"ದಿನಾಂಕ ಬದಲಾಯಿಸಿ", receivedDateLbl:"ಪಡೆದ ದಿನಾಂಕ", uploadBillLabel:"ಬಿಲ್ ಫೋಟೋ / PDF", saveBillBtn:"ಬಿಲ್ ಉಳಿಸಿ", dateLabel:"ದಿನಾಂಕ", addAdvBtn:"+ ಮುಂಗಡ", authTitle:"ಕ್ಲೌಡ್ ಲಾಗಿನ್", emailPh:"ಇಮೇಲ್", passPh:"ಪಾಸ್‌ವರ್ಡ್", loginBtn:"ಲಾಗಿನ್", registerBtn:"ನೋಂದಣಿ", voiceTypingTitle:"ಮಾತನಾಡಿ ಬರೆಯಿರಿ", voiceListeningLbl:"ಮೈಕ್ ಸಿದ್ಧವಾಗಿದೆ — ಮಾತನಾಡಿ", cancelBtn:"ರದ್ದು", speakNowBtn:"ಮಾತನಾಡಿ", pinModalTitle:"ಮುಖ್ಯ ಪಿನ್", enterPinPh:"ಪಿನ್ ನಮೂದಿಸಿ", unlockBtn:"ಅನ್‌ಲಾಕ್", deleteBtn:"ಅಳಿಸಿ", rateLbl:"ದರ", advLbl:"ಮುಂಗಡ", netDueLbl:"ಬಾಕಿ", presentLbl:"ಹಾಜರು", halfLbl:"ಅರ್ಧ", editLbl:"ಬದಲಿಸಿ", settleLbl:"ಇತ್ಯರ್ಥ", slipLbl:"ವಾಟ್ಸಾಪ್", noWorkers:"ಕಾರ್ಮಿಕರಿಲ್ಲ.", noExpenses:"ಖರ್ಚು ಇಲ್ಲ.", noBills:"ಬಿಲ್ ಇಲ್ಲ.", activeLbl:"ಸಕ್ರಿಯ", switchLbl:"ಬದಲಿಸಿ", profitLbl:"ಅಂದಾಜು ಲಾಭ" },
+      mr: { offlineTitle:"इंटरनेट आवश्यक आहे", offlineDesc:"डेटा किंवा वाय-फाय सुरू करा.", mainRole:"मुख्य कंत्राटदार", supRole:"सुपरवायझर", onlineLbl:"ऑनलाइन", cloudLbl:"क्लाउड", staffLbl:"कामगार", addSiteBtn:"+ साइट", labourDue:"मजुरी बाकी", expenses:"खर्च", bills:"बिल", audioSummaryTitle:"बोलून हिशोब ऐका", audioSummarySub:"एका टॅपमध्ये साइटचा हिशोब ऐका", listenBtn:"ऐका", liveSnapshot:"कामगार स्थिती", viewAllBtn:"सर्व पहा", tabLabour:"कामगार व हजेरी", hajriBookBtn:"हजेरी", carryBtn:"कॅरी", addWorkerBtn:"+ कामगार", searchWorkerPh:"नाव किंवा फोन शोधा...", filterAll:"सर्व", tradeMason:"गवंडी", tradeHelper:"हेल्पर", tradeCarpenter:"सुतार", tradeElectrician:"इलेक्ट्रिशियन", tradePlumber:"प्लंबर", tabExpenses:"खर्च व भाडे", addExpenseBtn:"+ खर्च", tabBills:"कंपनी बिल", addBillBtn:"+ बिल", selectMonthYear:"महिना व वर्ष", currentMonthBtn:"चालू महिना", profileAccessTitle:"प्रोफाइल व प्रवेश", cameraBtn:"कॅमेरा", galleryBtn:"फाइल्स", cropPhotoTitle:"फोटो क्रॉप करा", zoomLbl:"झूम", savePhotoBtn:"फोटो सेव्ह करा", loggedEmailLabel:"क्लाउड ईमेल", notLoggedLbl:"लॉग-इन नाही", setMasterPinLabel:"मुख्य पिन सेट करा", newPinPh:"नवीन पिन", saveBtn:"सेव्ह", accountProfilesLabel:"अकाउंट्स", addSupervisorBtn:"+ सुपरवायझर", cloudLoginBtn:"क्लाउड लॉग-इन", logoutBtn:"लॉग-आउट", settingsHeader:"सेटिंग्ज", changeLangLabel:"भाषा निवडा", themeLabel:"थीम", devInstaSub:"डेवलपर इंस्टाग्राम", openBtn:"उघडा", monthlyLedgerTitle:"मासिक हिशोब", carryTitle:"मागील महिन्याचे कामगार", carryConfirmBtn:"जोडा", hajriBookTitle:"दैनिक हजेरी", prevBtn:"मागे", nextBtn:"पुढे", markAllPresentBtn:"सर्व हजर", workerNameLabel:"कामगाराचे नाव", workerNamePh:"उदा. रमेश", chooseTradeLabel:"काम निवडा", dailyWageLabel:"रोजचा दर (₹)", advanceLabel:"अॅडव्हान्स (₹)", phoneLabel:"मोबाइल नंबर", saveLabourBtn:"सेव्ह करा", workDescLabel:"खर्च तपशील", workDescPh:"उदा. रिक्षा भाडे", amountLabel:"रक्कम (₹)", paidForLabel:"कोणासाठी", paidForPh:"नाव", uploadSlipLabel:"पावती / फोटो अपलोड", saveExpenseBtn:"खर्च सेव्ह करा", billNameLabel:"कंपनी / काम", billNamePh:"उदा. स्लैब बिल", billDateLabel:"बिल तारीख", statusLbl:"स्थिती", pendingLbl:"बाकी", receivedLbl:"प्राप्त", markReceivedBtn:"प्राप्त करा", editReceivedDateBtn:"तारीख बदला", receivedDateLbl:"प्राप्त तारीख", uploadBillLabel:"बिल फोटो / PDF", saveBillBtn:"बिल सेव्ह करा", dateLabel:"तारीख", addAdvBtn:"+ अॅडव्हान्स", authTitle:"क्लाउड लॉग-इन", emailPh:"ईमेल", passPh:"पासवर्ड", loginBtn:"लॉग-इन", registerBtn:"नोंदणी", voiceTypingTitle:"बोलून लिहा", voiceListeningLbl:"माइक तयार — बोला", cancelBtn:"रद्द करा", speakNowBtn:"बोला", pinModalTitle:"मुख्य पिन", enterPinPh:"पिन टाका", unlockBtn:"अनलॉक", deleteBtn:"हटवा", rateLbl:"दर", advLbl:"अॅडव्हान्स", netDueLbl:"बाकी", presentLbl:"हजर", halfLbl:"हाफ", editLbl:"बदला", settleLbl:"पूर्ण", slipLbl:"व्हॉट्सअॅप", noWorkers:"कामगार नाहीत.", noExpenses:"खर्च नाही.", noBills:"बिल नाही.", activeLbl:"सक्रिय", switchLbl:"बदला", profitLbl:"अंदाजित नफा" },
+      gu: { offlineTitle:"ઇન્ટરનેટ જરૂરી છે", offlineDesc:"ડેટા અથવા વાઇ-ફાઇ ચાલુ કરો.", mainRole:"મુખ્ય કોન્ટ્રાક્ટર", supRole:"સુપરવાઇઝર", onlineLbl:"ઓનલાઇન", cloudLbl:"ક્લાઉડ", staffLbl:"મજૂર", addSiteBtn:"+ સાઇટ", labourDue:"મજૂરી બાકી", expenses:"ખર્ચ", bills:"બિલ", audioSummaryTitle:"ઓડિયો હિસાબ સાંભળો", audioSummarySub:"એક ટૅપમાં હિસાબ સાંભળો", listenBtn:"સાંભળો", liveSnapshot:"મજૂર સ્થિતિ", viewAllBtn:"બધું જુઓ", tabLabour:"મજૂર અને હાજરી", hajriBookBtn:"હાજરી", carryBtn:"કેરી", addWorkerBtn:"+ મજૂર", searchWorkerPh:"નામ અથવા ફોન શોધો...", filterAll:"બધા", tradeMason:"કડિયા", tradeHelper:"હેલ્પર", tradeCarpenter:"સુથાર", tradeElectrician:"ઇલેક્ટ્રિશિયન", tradePlumber:"પ્લમ્બર", tabExpenses:"ખર્ચ અને ભાડું", addExpenseBtn:"+ ખર્ચ", tabBills:"કંપની બિલ", addBillBtn:"+ બિલ", selectMonthYear:"મહિનો અને વર્ષ", currentMonthBtn:"ચાલુ મહિનો", profileAccessTitle:"પ્રોફાઇલ", cameraBtn:"કેમેરા", galleryBtn:"ફાઇલો", cropPhotoTitle:"ફોટો ક્રોપ કરો", zoomLbl:"ઝૂમ", savePhotoBtn:"ફોટો સાચવો", loggedEmailLabel:"ક્લાઉડ ઇમેલ", notLoggedLbl:"લોગ-ઇન નથી", setMasterPinLabel:"મુખ્ય પિન સેટ કરો", newPinPh:"નવો પિન", saveBtn:"સાચવો", accountProfilesLabel:"એકાઉન્ટ્સ", addSupervisorBtn:"+ સુપરવાઇઝર", cloudLoginBtn:"ક્લાઉડ લોગ-ઇન", logoutBtn:"લોગ-આઉટ", settingsHeader:"સેટિંગ્સ", changeLangLabel:"ભાષા પસંદ કરો", themeLabel:"થીમ", devInstaSub:"ડેવલપર ઇન્સ્ટાગ્રામ", openBtn:"ખોલો", monthlyLedgerTitle:"માસિક ખાતાવહી", carryTitle:"ગયા મહિનાના મજૂર", carryConfirmBtn:"ઉમેરો", hajriBookTitle:"દૈનિક હાજરી", prevBtn:"પાછળ", nextBtn:"આગળ", markAllPresentBtn:"બધા હાજર", workerNameLabel:"મજૂરનું નામ", workerNamePh:"જેમ કે: રમેશ", chooseTradeLabel:"કામ પસંદ કરો", dailyWageLabel:"દૈનિક દર (₹)", advanceLabel:"એડવાન્સ (₹)", phoneLabel:"મોબાઇલ નંબર", saveLabourBtn:"સાચવો", workDescLabel:"ખર્ચ વિગત", workDescPh:"જેમ કે: રિક્ષા ભાડું", amountLabel:"રકમ (₹)", paidForLabel:"કોના માટે", paidForPh:"નામ", uploadSlipLabel:"પહોંચ / ફોટો અપલોડ", saveExpenseBtn:"ખર્ચ સાચવો", billNameLabel:"કંપની / કામ", billNamePh:"જેમ કે: સ્લેબ બિલ", billDateLabel:"બિલ તારીખ", statusLbl:"સ્થિતિ", pendingLbl:"બાકી", receivedLbl:"મળેલ", markReceivedBtn:"મળેલ કરો", editReceivedDateBtn:"તારીખ બદલો", receivedDateLbl:"મળેલ તારીખ", uploadBillLabel:"બિલ ફોટો / PDF", saveBillBtn:"બિલ સાચવો", dateLabel:"તારીખ", addAdvBtn:"+ એડવાન્સ", authTitle:"ક્લાઉડ લોગ-ઇન", emailPh:"ઇમેલ", passPh:"પાસવર્ડ", loginBtn:"લોગ-ઇન", registerBtn:"નોંધણી", voiceTypingTitle:"બોલીને લખો", voiceListeningLbl:"માઇક તૈયાર — બોલો", cancelBtn:"રદ કરો", speakNowBtn:"બોલો", pinModalTitle:"મુખ્ય પિન", enterPinPh:"પિન દાખલ કરો", unlockBtn:"અનલોક", deleteBtn:"કાઢી નાખો", rateLbl:"દર", advLbl:"એડવાન્સ", netDueLbl:"બાકી", presentLbl:"હાજર", halfLbl:"હાફ", editLbl:"બદલો", settleLbl:"પૂર્ણ", slipLbl:"વોટ્સએપ", noWorkers:"કોઈ મજૂર નથી.", noExpenses:"કોઈ ખર્ચ નથી.", noBills:"કોઈ બિલ નથી.", activeLbl:"સક્રિય", switchLbl:"બદલો", profitLbl:"અંદાજિત નફો" },
+      ta: { offlineTitle:"இணையம் தேவை", offlineDesc:"டேட்டா அல்லது Wi-Fi இயக்கவும்.", mainRole:"முதன்மை ஒப்பந்ததாரர்", supRole:"மேற்பார்வையாளர்", onlineLbl:"ஆன்லைன்", cloudLbl:"கிளவுட்", staffLbl:"பணியாளர்", addSiteBtn:"+ தளம்", labourDue:"கூலி பாக்கி", expenses:"செலவு", bills:"பில்", audioSummaryTitle:"ஆடியோ கணக்கு", audioSummarySub:"ஒரே தட்டலில் கணக்கு கேளுங்கள்", listenBtn:"கேளுங்கள்", liveSnapshot:"தொழிலாளர் நிலை", viewAllBtn:"அனைத்தும்", tabLabour:"தொழிலாளர்கள் & வருகை", hajriBookBtn:"வருகை", carryBtn:"கேரி", addWorkerBtn:"+ பணியாளர்", searchWorkerPh:"பெயர் அல்லது எண் தேடுங்கள்...", filterAll:"அனைத்தும்", tradeMason:"கொத்தனார்", tradeHelper:"உதவியாளர்", tradeCarpenter:"தச்சர்", tradeElectrician:"எலக்ட்ரீஷியன்", tradePlumber:"பிளம்பர்", tabExpenses:"செலவு & வாடகை", addExpenseBtn:"+ செலவு", tabBills:"நிறுவன பில்", addBillBtn:"+ பில்", selectMonthYear:"மாதம் & ஆண்டு", currentMonthBtn:"நடப்பு மாதம்", profileAccessTitle:"சுயவிவரம்", cameraBtn:"கேமரா", galleryBtn:"கோப்புகள்", cropPhotoTitle:"படத்தை வெட்டுக", zoomLbl:"ஜூம்", savePhotoBtn:"படம் சேமி", loggedEmailLabel:"கிளவுட் மின்னஞ்சல்", notLoggedLbl:"உள்நுழையவில்லை", setMasterPinLabel:"முதன்மை PIN அமை", newPinPh:"புதிய PIN", saveBtn:"சேமி", accountProfilesLabel:"கணக்குகள்", addSupervisorBtn:"+ மேற்பார்வையாளர்", cloudLoginBtn:"கிளவுட் உள்நுழைவு", logoutBtn:"வெளியேறு", settingsHeader:"அமைப்புகள்", changeLangLabel:"மொழி", themeLabel:"தீம்", devInstaSub:"டெவலப்பர் இன்ஸ்டாகிராம்", openBtn:"திற", monthlyLedgerTitle:"மாதாந்திர கணக்கு", carryTitle:"கடந்த மாத பணியாளர்கள்", carryConfirmBtn:"சேர்", hajriBookTitle:"தினசரி வருகை", prevBtn:"முந்தைய", nextBtn:"அடுத்த", markAllPresentBtn:"அனைவரும் வருகை", workerNameLabel:"பணியாளர் பெயர்", workerNamePh:"எ.கா. ரமேஷ்", chooseTradeLabel:"வேலையைத் தேர்வு செய்க", dailyWageLabel:"தினசரி கூலி (₹)", advanceLabel:"முன்பணம் (₹)", phoneLabel:"மொபைல் எண்", saveLabourBtn:"சேமி", workDescLabel:"செலவு விவரம்", workDescPh:"எ.கா. ஆட்டோ வாடகை", amountLabel:"தொகை (₹)", paidForLabel:"யாருக்காக", paidForPh:"பெயர்", uploadSlipLabel:"ரசீது / படம்", saveExpenseBtn:"செலவு சேமி", billNameLabel:"நிறுவனம் / வேலை", billNamePh:"எ.கா. ஸ்லாப் பில்", billDateLabel:"பில் தேதி", statusLbl:"நிலை", pendingLbl:"பாக்கி", receivedLbl:"பெறப்பட்டது", markReceivedBtn:"பெறப்பட்டது", editReceivedDateBtn:"தேதி மாற்று", receivedDateLbl:"பெற்ற தேதி", uploadBillLabel:"பில் படம் / PDF", saveBillBtn:"பில் சேமி", dateLabel:"தேதி", addAdvBtn:"+ முன்பணம்", authTitle:"கிளவுட் உள்நுழைவு", emailPh:"மின்னஞ்சல்", passPh:"கடவுச்சொல்", loginBtn:"உள்நுழைவு", registerBtn:"பதிவு", voiceTypingTitle:"பேசி எழுதுக", voiceListeningLbl:"மைக் தயார் — பேசுங்கள்", cancelBtn:"ரத்து", speakNowBtn:"பேசு", pinModalTitle:"முதன்மை PIN", enterPinPh:"PIN உள்ளிடவும்", unlockBtn:"திற", deleteBtn:"நீக்கு", rateLbl:"கூலி", advLbl:"முன்பணம்", netDueLbl:"பாக்கி", presentLbl:"வருகை", halfLbl:"பாதி", editLbl:"மாற்று", settleLbl:"முடிந்தது", slipLbl:"வாட்ஸ்அப்", noWorkers:"பணியாளர்கள் இல்லை.", noExpenses:"செலவு இல்லை.", noBills:"பில் இல்லை.", activeLbl:"செயலில்", switchLbl:"மாற்று", profitLbl:"லாபம்" },
+      te: { offlineTitle:"ఇంటర్నెట్ అవసరం", offlineDesc:"డేటా లేదా Wi-Fi ఆన్ చేయండి.", mainRole:"ప్రధాన కాంట్రాక్టర్", supRole:"సూపర్‌వైజర్", onlineLbl:"ఆన్‌లైన్", cloudLbl:"క్లౌడ్", staffLbl:"కార్మికులు", addSiteBtn:"+ సైట్", labourDue:"కూలీ బాకీ", expenses:"ఖర్చు", bills:"బిల్లు", audioSummaryTitle:"ఆడియో లెక్క వినండి", audioSummarySub:"ఒకే ట్యాప్‌లో లెక్క వినండి", listenBtn:"వినండి", liveSnapshot:"కార్మికుల సమాచారం", viewAllBtn:"అన్నీ చూడండి", tabLabour:"కార్మికులు & హాజరు", hajriBookBtn:"హాజరు", carryBtn:"క్యారీ", addWorkerBtn:"+ కార్మికుడు", searchWorkerPh:"పేరు లేదా ఫోన్ వెతకండి...", filterAll:"అన్నీ", tradeMason:"మేస్త్రీ", tradeHelper:"హెల్పర్", tradeCarpenter:"వడ్రంగి", tradeElectrician:"ఎలక్ట్రీషియన్", tradePlumber:"ప్లంబర్", tabExpenses:"ఖర్చు & అద్దె", addExpenseBtn:"+ ఖర్చు", tabBills:"కంపెనీ బిల్లు", addBillBtn:"+ బిల్లు", selectMonthYear:"నెల & సంవత్సరం", currentMonthBtn:"ప్రస్తుత నెల", profileAccessTitle:"ప్రొఫైల్", cameraBtn:"కెమెరా", galleryBtn:"ఫైల్స్", cropPhotoTitle:"ఫోటో క్రాప్ చేయండి", zoomLbl:"జూమ్", savePhotoBtn:"ఫోటో సేవ్", loggedEmailLabel:"క్లౌడ్ ఇమెయిల్", notLoggedLbl:"లాగిన్ కాలేదు", setMasterPinLabel:"ప్రధాన PIN సెట్", newPinPh:"కొత్త PIN", saveBtn:"సేవ్", accountProfilesLabel:"ఖాతాలు", addSupervisorBtn:"+ సూపర్‌వైజర్", cloudLoginBtn:"క్లౌడ్ లాగిన్", logoutBtn:"లాగ్‌అవుట్", settingsHeader:"సెట్టింగులు", changeLangLabel:"భాష", themeLabel:"థీమ్", devInstaSub:"డెవలపర్ ఇన్‌స్టాగ్రామ్", openBtn:"తెరవండి", monthlyLedgerTitle:"నెలవారీ లెక్కలు", carryTitle:"గత నెల కార్మికులు", carryConfirmBtn:"చేర్చండి", hajriBookTitle:"రోజువారీ హాజరు", prevBtn:"మునుపటి", nextBtn:"తదుపరి", markAllPresentBtn:"అందరూ హాజరు", workerNameLabel:"కార్మికుడి పేరు", workerNamePh:"ఉదా. రమేష్", chooseTradeLabel:"పనిని ఎంచుకోండి", dailyWageLabel:"రోజువారీ కూలీ (₹)", advanceLabel:"అడ్వాన్స్ (₹)", phoneLabel:"మొబైల్ నంబర్", saveLabourBtn:"సేవ్", workDescLabel:"ఖర్చు వివరాలు", workDescPh:"ఉదా. ఆటో అద్దె", amountLabel:"మొత్తం (₹)", paidForLabel:"ఎవరి కోసం", paidForPh:"పేరు", uploadSlipLabel:"రసీదు / ఫోటో", saveExpenseBtn:"ఖర్చు సేవ్", billNameLabel:"కంపెనీ / పని", billNamePh:"ఉదా. స్లాబ్ బిల్లు", billDateLabel:"బిల్లు తేదీ", statusLbl:"స్థితి", pendingLbl:"బాకీ", receivedLbl:"అందింది", markReceivedBtn:"అందింది", editReceivedDateBtn:"తేదీ మార్చు", receivedDateLbl:"అందిన తేదీ", uploadBillLabel:"బిల్లు ఫోటో / PDF", saveBillBtn:"బిల్లు సేవ్", dateLabel:"తేదీ", addAdvBtn:"+ అడ్వాన్స్", authTitle:"క్లౌడ్ లాగిన్", emailPh:"ఇమెయిల్", passPh:"పాస్‌వర్డ్", loginBtn:"లాగిన్", registerBtn:"నమోదు", voiceTypingTitle:"మాట్లాడి రాయండి", voiceListeningLbl:"మైక్ సిద్ధం — మాట్లాడండి", cancelBtn:"రద్దు", speakNowBtn:"మాట్లాడండి", pinModalTitle:"ప్రధాన PIN", enterPinPh:"PIN నమోదు చేయండి", unlockBtn:"అన్‌లాక్", deleteBtn:"తొలగించు", rateLbl:"రేటు", advLbl:"అడ్వాన్స్", netDueLbl:"బాకీ", presentLbl:"హాజరు", halfLbl:"సగం", editLbl:"మార్చు", settleLbl:"పూర్తి", slipLbl:"వాట్సాప్", noWorkers:"కార్మికులు లేరు.", noExpenses:"ఖర్చులు లేవు.", noBills:"బిల్లులు లేవు.", activeLbl:"యాక్టివ్", switchLbl:"మార్చు", profitLbl:"లాభం" },
+      pa: { offlineTitle:"ਇੰਟਰਨੈੱਟ ਜ਼ਰੂਰੀ ਹੈ", offlineDesc:"ਡਾਟਾ ਜਾਂ Wi-Fi ਚਾਲੂ ਕਰੋ।", mainRole:"ਮੁੱਖ ਠੇਕੇਦਾਰ", supRole:"ਸੁਪਰਵਾਈਜ਼ਰ", onlineLbl:"ਆਨਲਾਈਨ", cloudLbl:"ਕਲਾਉਡ", staffLbl:"ਮਜ਼ਦੂਰ", addSiteBtn:"+ ਸਾਈਟ", labourDue:"ਮਜ਼ਦੂਰੀ ਬਾਕੀ", expenses:"ਖਰਚੇ", bills:"ਬਿੱਲ", audioSummaryTitle:"ਆਡੀਓ ਹਿਸਾਬ ਸੁਣੋ", audioSummarySub:"ਇੱਕ ਟੈਪ ਵਿੱਚ ਹਿਸਾਬ ਸੁਣੋ", listenBtn:"ਸੁਣੋ", liveSnapshot:"ਲਾਈਵ ਮਜ਼ਦੂਰ", viewAllBtn:"ਸਭ ਦੇਖੋ", tabLabour:"ਮਜ਼ਦੂਰ ਅਤੇ ਹਾਜ਼ਰੀ", hajriBookBtn:"ਹਾਜ਼ਰੀ", carryBtn:"ਕੈਰੀ", addWorkerBtn:"+ ਮਜ਼ਦੂਰ", searchWorkerPh:"ਨਾਮ ਜਾਂ ਫ਼ੋਨ ਲੱਭੋ...", filterAll:"ਸਭ", tradeMason:"ਮਿਸਤਰੀ", tradeHelper:"ਹੈਲਪਰ", tradeCarpenter:"ਤਰਖਾਣ", tradeElectrician:"ਇਲੈਕਟ੍ਰੀਸ਼ੀਅਨ", tradePlumber:"ਪਲੰਬਰ", tabExpenses:"ਖਰਚੇ ਅਤੇ ਕਿਰਾਇਆ", addExpenseBtn:"+ ਖਰਚਾ", tabBills:"ਕੰਪਨੀ ਬਿੱਲ", addBillBtn:"+ ਬਿੱਲ", selectMonthYear:"ਮਹੀਨਾ ਅਤੇ ਸਾਲ", currentMonthBtn:"ਮੌਜੂਦਾ ਮਹੀਨਾ", profileAccessTitle:"ਪ੍ਰੋਫਾਈਲ", cameraBtn:"ਕੈਮਰਾ", galleryBtn:"ਫਾਈਲਾਂ", cropPhotoTitle:"ਫ਼ੋਟੋ ਕ੍ਰੌਪ ਕਰੋ", zoomLbl:"ਜ਼ੂਮ", savePhotoBtn:"ਫ਼ੋਟੋ ਸੇਵ ਕਰੋ", loggedEmailLabel:"ਕਲਾਉਡ ਈਮੇਲ", notLoggedLbl:"ਲੌਗ-ਇਨ ਨਹੀਂ", setMasterPinLabel:"ਮੁੱਖ PIN ਸੈੱਟ ਕਰੋ", newPinPh:"ਨਵਾਂ PIN", saveBtn:"ਸੇਵ", accountProfilesLabel:"ਖਾਤੇ", addSupervisorBtn:"+ ਸੁਪਰਵਾਈਜ਼ਰ", cloudLoginBtn:"ਕਲਾਉਡ ਲੌਗ-ਇਨ", logoutBtn:"ਲੌਗ-ਆਊਟ", settingsHeader:"ਸੈਟਿੰਗਾਂ", changeLangLabel:"ਭਾਸ਼ਾ", themeLabel:"ਥੀਮ", devInstaSub:"ਡਿਵੈਲਪਰ ਇੰਸਟਾਗ੍ਰਾਮ", openBtn:"ਖੋਲ੍ਹੋ", monthlyLedgerTitle:"ਮਹੀਨਾਵਾਰ ਖਾਤਾ", carryTitle:"ਪਿਛਲੇ ਮਹੀਨੇ ਦੇ ਮਜ਼ਦੂਰ", carryConfirmBtn:"ਜੋੜੋ", hajriBookTitle:"ਰੋਜ਼ਾਨਾ ਹਾਜ਼ਰੀ", prevBtn:"ਪਿਛਲਾ", nextBtn:"ਅਗਲਾ", markAllPresentBtn:"ਸਭ ਹਾਜ਼ਰ", workerNameLabel:"ਮਜ਼ਦੂਰ ਦਾ ਨਾਮ", workerNamePh:"ਜਿਵੇਂ: ਰਮੇਸ਼", chooseTradeLabel:"ਕੰਮ ਚੁਣੋ", dailyWageLabel:"ਰੋਜ਼ਾਨਾ ਦਰ (₹)", advanceLabel:"ਐਡਵਾਂਸ (₹)", phoneLabel:"ਮੋਬਾਈਲ ਨੰਬਰ", saveLabourBtn:"ਸੇਵ ਕਰੋ", workDescLabel:"ਖਰਚੇ ਦਾ ਵੇਰਵਾ", workDescPh:"ਜਿਵੇਂ: ਆਟੋ ਕਿਰਾਇਆ", amountLabel:"ਰਕਮ (₹)", paidForLabel:"ਕਿਸ ਲਈ", paidForPh:"ਨਾਮ", uploadSlipLabel:"ਪਰਚੀ / ਫ਼ੋਟੋ", saveExpenseBtn:"ਖਰਚਾ ਸੇਵ", billNameLabel:"ਕੰਪਨੀ / ਕੰਮ", billNamePh:"ਜਿਵੇਂ: ਸਲੈਬ ਬਿੱਲ", billDateLabel:"ਬਿੱਲ ਤਾਰੀਖ", statusLbl:"ਸਥਿਤੀ", pendingLbl:"ਬਾਕੀ", receivedLbl:"ਪ੍ਰਾਪਤ", markReceivedBtn:"ਪ੍ਰਾਪਤ ਕਰੋ", editReceivedDateBtn:"ਤਾਰੀਖ ਬਦਲੋ", receivedDateLbl:"ਪ੍ਰਾਪਤ ਤਾਰੀਖ", uploadBillLabel:"ਬਿੱਲ ਫ਼ੋਟੋ / PDF", saveBillBtn:"ਬਿੱਲ ਸੇਵ", dateLabel:"ਤਾਰੀਖ", addAdvBtn:"+ ਐਡਵਾਂਸ", authTitle:"ਕਲਾਉਡ ਲੌਗ-ਇਨ", emailPh:"ਈਮੇਲ", passPh:"ਪਾਸਵਰਡ", loginBtn:"ਲੌਗ-ਇਨ", registerBtn:"ਰਜਿਸਟਰ", voiceTypingTitle:"ਬੋਲ ਕੇ ਲਿਖੋ", voiceListeningLbl:"ਮਾਈਕ ਤਿਆਰ — ਬੋਲੋ", cancelBtn:"ਰੱਦ", speakNowBtn:"ਬੋਲੋ", pinModalTitle:"ਮੁੱਖ PIN", enterPinPh:"PIN ਭਰੋ", unlockBtn:"ਅਨਲॉक", deleteBtn:"ਮਿਟਾਓ", rateLbl:"ਦਰ", advLbl:"ਐਡਵਾਂਸ", netDueLbl:"ਬਾਕੀ", presentLbl:"ਹਾਜ਼ਰ", halfLbl:"ਹਾਫ਼", editLbl:"ਬਦਲੋ", settleLbl:"ਪੂਰਾ", slipLbl:"ਵਟਸਐਪ", noWorkers:"ਕੋਈ ਮਜ਼ਦੂਰ ਨਹੀਂ।", noExpenses:"ਕੋਈ ਖਰਚਾ ਨਹੀਂ।", noBills:"ਕੋਈ ਬਿੱਲ ਨਹੀਂ।", activeLbl:"ਸਰਗਰਮ", switchLbl:"ਬਦਲੋ", profitLbl:"ਮੁਨਾਫ਼ਾ" },
+      bho: { offlineTitle:"इंटरनेट जरूरी बा", offlineDesc:"डेटा भा वाई-फाई चालू करीं।", mainRole:"मेन ठेकेदार", supRole:"सुपरवाइजर", onlineLbl:"ऑनलाइन", cloudLbl:"क्लाउड", staffLbl:"मजदूर", addSiteBtn:"+ साइट", labourDue:"मजदूर बाकी", expenses:"खरचा", bills:"बिल", audioSummaryTitle:"बोल के हिसाब सुनीं", audioSummarySub:"एक टैप में हिसाब सुनीं", listenBtn:"सुनीं", liveSnapshot:"मजदूर स्थिति", viewAllBtn:"सभ देखीं", tabLabour:"मजदूर आ हाजिरी", hajriBookBtn:"हाजिरी", carryBtn:"कैरी", addWorkerBtn:"+ मजदूर", searchWorkerPh:"नाम भा फोन खोजीं...", filterAll:"सभ", tradeMason:"मिस्त्री", tradeHelper:"हेल्पर", tradeCarpenter:"बढ़ई", tradeElectrician:"इलेक्ट्रीशियन", tradePlumber:"प्लम्बर", tabExpenses:"खरचा आ भाड़ा", addExpenseBtn:"+ खरचा", tabBills:"कंपनी बिल", addBillBtn:"+ बिल", selectMonthYear:"महीना आ साल", currentMonthBtn:"ई महीना", profileAccessTitle:"प्रोफाइल", cameraBtn:"कैमरा", galleryBtn:"फाइल", cropPhotoTitle:"फोटो क्रॉप करीं", zoomLbl:"ज़ूम", savePhotoBtn:"फोटो सेव करीं", loggedEmailLabel:"क्लाउड ईमेल", notLoggedLbl:"लॉग-इन नइखे", setMasterPinLabel:"मेन पिन सेट करीं", newPinPh:"नया पिन", saveBtn:"सेव", accountProfilesLabel:"अकाउंट", addSupervisorBtn:"+ सुपरवाइजर", cloudLoginBtn:"क्लाउड लॉग-इन", logoutBtn:"लॉग-आउट", settingsHeader:"सेटिंग्स", changeLangLabel:"भाषा चुनीं", themeLabel:"थीम", devInstaSub:"डेवलपर इंस्टाग्राम", openBtn:"खोलीं", monthlyLedgerTitle:"महीना के खाता", carryTitle:"पिछला महीना के मजदूर", carryConfirmBtn:"जोड़ीं", hajriBookTitle:"रोज के हाजिरी", prevBtn:"पिछला", nextBtn:"अगला", markAllPresentBtn:"सभ हाजिर", workerNameLabel:"मजदूर के नाम", workerNamePh:"जइसे: रमेश", chooseTradeLabel:"काम चुनीं", dailyWageLabel:"रोज के दर (₹)", advanceLabel:"एडवांस (₹)", phoneLabel:"मोबाइल नंबर", saveLabourBtn:"सेव करीं", workDescLabel:"खरचा विबरण", workDescPh:"जइसे: ऑटो भाड़ा", amountLabel:"रकम (₹)", paidForLabel:"केकरा खातिर", paidForPh:"नाम", uploadSlipLabel:"परची / फोटो", saveExpenseBtn:"खरचा सेव", billNameLabel:"कंपनी / काम", billNamePh:"जइसे: स्लैब बिल", billDateLabel:"बिल तारीख", statusLbl:"स्थिति", pendingLbl:"बाकी", receivedLbl:"मिल गइल", markReceivedBtn:"मिलल करीं", editReceivedDateBtn:"तारीख बदलीं", receivedDateLbl:"मिलल तारीख", uploadBillLabel:"बिल फोटो / PDF", saveBillBtn:"बिल सेव", dateLabel:"तारीख", addAdvBtn:"+ एडवांस", authTitle:"क्लाउड लॉग-इन", emailPh:"ईमेल", passPh:"पासवर्ड", loginBtn:"लॉग-इन", registerBtn:"रजिस्टर", voiceTypingTitle:"बोल के लिखीं", voiceListeningLbl:"माइक तइयार — बोलीं", cancelBtn:"रद करीं", speakNowBtn:"बोलीं", pinModalTitle:"मेन पिन", enterPinPh:"पिन डालीं", unlockBtn:"अनलॉक", deleteBtn:"हटाईं", rateLbl:"दर", advLbl:"एडवांस", netDueLbl:"बाकी", presentLbl:"हाजिर", halfLbl:"हाफ", editLbl:"बदलीं", settleLbl:"चुकता", slipLbl:"व्हाट्सएप", noWorkers:"कवनो मजदूर नइखे।", noExpenses:"कवनो खरचा नइखे।", noBills:"कवनो बिल नइखे।", activeLbl:"चालू", switchLbl:"बदलीं", profitLbl:"मुनाफा" },
+      mwr: { offlineTitle:"इंटरनेट जरूरी है", offlineDesc:"डेटा या वाई-फाई चालू करो।", mainRole:"मेन ठेकेदार", supRole:"सुपरवाइजर", onlineLbl:"ऑनलाइन", cloudLbl:"क्लाउड", staffLbl:"मजदूर", addSiteBtn:"+ साइट", labourDue:"मजदूर बाकी", expenses:"खरचा", bills:"बिल", audioSummaryTitle:"बोलकर हिसाब सुणो", audioSummarySub:"एक टैप में हिसाब सुणो", listenBtn:"सुणो", liveSnapshot:"मजदूर स्थिति", viewAllBtn:"सगळा देखो", tabLabour:"मजदूर अर हाजिरी", hajriBookBtn:"हाजिरी", carryBtn:"कैरी", addWorkerBtn:"+ मजदूर", searchWorkerPh:"नाम या फोन खोजो...", filterAll:"सगळा", tradeMason:"मिस्त्री", tradeHelper:"हेल्पर", tradeCarpenter:"बढ़ई", tradeElectrician:"इलेक्ट्रीशियन", tradePlumber:"प्लम्बर", tabExpenses:"खरचा अर भाड़ो", addExpenseBtn:"+ खरचा", tabBills:"कंपनी बिल", addBillBtn:"+ बिल", selectMonthYear:"महीनो अर साल", currentMonthBtn:"चालू महीनो", profileAccessTitle:"प्रोफाइल", cameraBtn:"कैमरो", galleryBtn:"फाइल", cropPhotoTitle:"फोटो क्रॉप करो", zoomLbl:"ज़ूम", savePhotoBtn:"फोटो सेव करो", loggedEmailLabel:"क्लाउड ईमेल", notLoggedLbl:"लॉग-इन कोनी", setMasterPinLabel:"मेन पिन सेट करो", newPinPh:"नवो पिन", saveBtn:"सेव", accountProfilesLabel:"अकाउंट", addSupervisorBtn:"+ सुपरवाइजर", cloudLoginBtn:"क्लाउड लॉग-इन", logoutBtn:"लॉग-आउट", settingsHeader:"सेटिंग्स", changeLangLabel:"भाषा चुणो", themeLabel:"थीम", devInstaSub:"डेवलपर इंस्टाग्राम", openBtn:"खोलो", monthlyLedgerTitle:"महीना रो हिसाब", carryTitle:"पिछला महीना रा मजदूर", carryConfirmBtn:"जोड़ो", hajriBookTitle:"रोज री हाजिरी", prevBtn:"पाछो", nextBtn:"आगे", markAllPresentBtn:"सगळा हाजिर", workerNameLabel:"मजदूर रो नाम", workerNamePh:"ज्यूं: रमेश", chooseTradeLabel:"काम चुणो", dailyWageLabel:"रोज रो दर (₹)", advanceLabel:"एडवांस (₹)", phoneLabel:"मोबाइल नंबर", saveLabourBtn:"सेव करो", workDescLabel:"खरचा रो विवरण", workDescPh:"ज्यूं: ऑटो भाड़ो", amountLabel:"रकम (₹)", paidForLabel:"किणरे वास्ते", paidForPh:"नाम", uploadSlipLabel:"परची / फोटो", saveExpenseBtn:"खरचा सेव", billNameLabel:"कंपनी / काम", billNamePh:"ज्यूं: स्लैब बिल", billDateLabel:"बिल तारीख", statusLbl:"स्थिति", pendingLbl:"बाकी", receivedLbl:"मिल गयो", markReceivedBtn:"मिल्यो करो", editReceivedDateBtn:"तारीख बदलो", receivedDateLbl:"मिल्यो तारीख", uploadBillLabel:"बिल फोटो / PDF", saveBillBtn:"बिल सेव", dateLabel:"तारीख", addAdvBtn:"+ एडवांस", authTitle:"क्लाउड लॉग-इन", emailPh:"ईमेल", passPh:"पासवर्ड", loginBtn:"लॉग-इन", registerBtn:"रजिस्टर", voiceTypingTitle:"बोलकर लिखो", voiceListeningLbl:"माइक त्यार — बोलो", cancelBtn:"रद करो", speakNowBtn:"बोलो", pinModalTitle:"मेन पिन", enterPinPh:"पिन डालो", unlockBtn:"अनलॉक", deleteBtn:"हटाओ", rateLbl:"दर", advLbl:"एडवांस", netDueLbl:"बाकी", presentLbl:"हाजिर", halfLbl:"हाफ", editLbl:"बदलो", settleLbl:"चुकता", slipLbl:"व्हाट्सएप", noWorkers:"कोई मजदूर कोनी।", noExpenses:"कोई खरचा कोनी।", noBills:"कोई बिल कोनी।", activeLbl:"चालू", switchLbl:"बदलो", profitLbl:"मुनाफो" }
     };
 
     window.currentLang = 'hi';
@@ -775,13 +858,13 @@
       document.querySelectorAll('.trade-card').forEach(c => c.classList.toggle('active', c === btn));
     };
 
-    function getActiveAcc() {
-      const accs = Array.isArray(state.accounts) && state.accounts.length ? state.accounts : [{ id: 'acc_main', isMaster: true }];
+    window.getActiveAcc = () => {
+      const accs = Array.isArray(state.accounts) && state.accounts.length ? state.accounts : [{ id: 'acc_main', isMaster: true, photo: null }];
       let id = 'acc_main';
       try { id = localStorage.getItem('thekedaar_active_acc_id') || 'acc_main'; } catch (e) {}
       const acc = accs.find(a => a.id === id) || accs[0];
       return { ...acc, displayNickname: acc.customNickname || (acc.isMaster ? t('mainRole') : t('supRole')) };
-    }
+    };
     const isMaster = () => getActiveAcc().id === 'acc_main' || Boolean(getActiveAcc().isMaster);
     const getStamp = () => `${getActiveAcc().displayNickname} • ${new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}`;
     const getStoreKey = () => currentUser ? `thekedaar_user_${currentUser.uid}` : null;
@@ -827,6 +910,7 @@
       document.querySelectorAll('.lang-opt').forEach(b => b.classList.toggle('btn-accent', b.getAttribute('data-lang') === window.currentLang));
       document.querySelectorAll('[data-i18n]').forEach(el => { el.innerText = t(el.getAttribute('data-i18n')); });
       document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.getAttribute('data-i18n-placeholder')); });
+      if (byId('voiceModeSelectedBtn')) byId('voiceModeSelectedBtn').innerText = langNames[window.currentLang] || 'Selected';
       closeModal('settingsModal');
       renderAll();
     };
@@ -842,7 +926,7 @@
     };
     const isoToday = now.toISOString().split('T')[0];
     byId('monthSelect').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
-    byId('advDate').value = byId('bDate').value = byId('hajriDateInput').value = isoToday;
+    byId('advDate').value = byId('bDate').value = byId('bRecDate').value = byId('hajriDateInput').value = isoToday;
 
     window.openMonthPickerModal = () => { pickYear = parseInt(byId('monthSelect').value.split('-')[0], 10) || 2026; renderMonthGrid(); openModal('monthPickerModal'); };
     window.changePickerYear = (d) => { pickYear += d; renderMonthGrid(); };
@@ -851,7 +935,7 @@
       const cur = byId('monthSelect').value, labels = monthsByLang[window.currentLang] || monthsByLang.hi;
       byId('pickerMonthsGrid').innerHTML = labels.map((lbl, i) => {
         const val = `${pickYear}-${String(i+1).padStart(2,'0')}`;
-        return `<button type="button" onclick="pickMonth('${val}')" class="py-2 rounded-xl text-xs font-semibold ${val===cur ? 'btn-primary' : 'surface-subtle'}">${lbl.slice(0,4)}</button>`;
+        return `<button type="button" onclick="pickMonth('${val}')" class="py-2 px-1 rounded-xl text-[11px] font-semibold truncate ${val===cur ? 'btn-primary' : 'surface-subtle'}">${lbl}</button>`;
       }).join('');
     }
     window.pickMonth = (v) => { byId('monthSelect').value = v; closeModal('monthPickerModal'); renderAll(); };
@@ -860,18 +944,26 @@
     function stopRec() {
       if (activeRecognition) { try { activeRecognition.onresult = activeRecognition.onerror = activeRecognition.onend = null; activeRecognition.stop(); } catch (e) {} activeRecognition = null; }
     }
+    window.setVoiceMode = (mode) => {
+      voiceMode = mode;
+      byId('voiceModeSelectedBtn').className = `py-1.5 rounded-xl text-[11px] font-semibold ${mode === 'selected' ? 'btn-primary' : 'surface-subtle'}`;
+      byId('voiceModeEnglishBtn').className = `py-1.5 rounded-xl text-[11px] font-semibold ${mode === 'en' ? 'btn-primary' : 'surface-subtle'}`;
+      triggerNativeSpeechEngine();
+    };
     window.startVoiceInputForField = (fieldId, numOnly = false) => {
       activeVoiceFieldId = fieldId; activeVoiceNumeric = numOnly;
       byId('voiceTranscriptBox').classList.add('hidden');
       byId('voiceStatusLine').innerText = t('voiceListeningLbl');
-      openModal('voiceModal'); triggerNativeSpeechEngine();
+      byId('voiceModeSelectedBtn').innerText = langNames[window.currentLang] || 'Selected';
+      openModal('voiceModal');
+      setVoiceMode('selected');
     };
     window.triggerNativeSpeechEngine = () => {
       const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SR) { alert("Voice input requires Chrome or Safari."); return; }
       stopRec();
       const rec = new SR();
-      rec.lang = speechLocaleMap[window.currentLang] || 'hi-IN';
+      rec.lang = voiceMode === 'en' ? 'en-IN' : (speechLocaleMap[window.currentLang] || 'hi-IN');
       rec.interimResults = true;
       activeRecognition = rec;
       rec.onresult = (e) => {
@@ -889,10 +981,53 @@
     };
     window.closeVoiceModal = () => { stopRec(); closeModal('voiceModal'); };
 
+    window.openCropperForAccount = (input, accId) => {
+      const file = input.files && input.files[0];
+      if (!file) return;
+      cropTargetAccId = accId;
+      const r = new FileReader();
+      r.onload = (e) => {
+        cropImg = new Image();
+        cropImg.onload = () => {
+          cropState = { scale: 1, x: 0, y: 0 };
+          byId('cropZoomSlider').value = 1;
+          byId('zoomValTxt').innerText = '1.0x';
+          openModal('cropperModal');
+          drawCrop();
+        };
+        cropImg.src = e.target.result;
+      };
+      r.readAsDataURL(file);
+      input.value = '';
+    };
+    window.updateCropZoom = (v) => { cropState.scale = parseFloat(v); byId('zoomValTxt').innerText = `${cropState.scale.toFixed(1)}x`; drawCrop(); };
+    function drawCrop() {
+      const c = byId('cropCanvas'), ctx = c.getContext('2d');
+      ctx.clearRect(0, 0, c.width, c.height);
+      if (!cropImg.src) return;
+      const base = Math.max(c.width / cropImg.width, c.height / cropImg.height) * cropState.scale;
+      ctx.drawImage(cropImg, (c.width - cropImg.width * base) / 2 + cropState.x, (c.height - cropImg.height * base) / 2 + cropState.y, cropImg.width * base, cropImg.height * base);
+    }
+    const cc = byId('cropCanvas');
+    let drag = false, sx = 0, sy = 0;
+    cc.addEventListener('mousedown', e => { drag = true; sx = e.clientX - cropState.x; sy = e.clientY - cropState.y; });
+    window.addEventListener('mousemove', e => { if (drag) { cropState.x = e.clientX - sx; cropState.y = e.clientY - sy; drawCrop(); } });
+    window.addEventListener('mouseup', () => { drag = false; });
+    cc.addEventListener('touchstart', e => { if (e.touches.length === 1) { drag = true; sx = e.touches[0].clientX - cropState.x; sy = e.touches[0].clientY - cropState.y; } });
+    cc.addEventListener('touchmove', e => { if (drag && e.touches.length === 1) { cropState.x = e.touches[0].clientX - sx; cropState.y = e.touches[0].clientY - sy; drawCrop(); e.preventDefault(); } }, { passive: false });
+    cc.addEventListener('touchend', () => { drag = false; });
+
+    window.saveCroppedAccountPhoto = () => {
+      const acc = state.accounts.find(a => a.id === cropTargetAccId);
+      if (acc) { acc.photo = cc.toDataURL('image/jpeg', 0.85); persist(); renderAccounts(); }
+      closeModal('cropperModal');
+    };
+
     window.openCustomDialog = ({ title, defaultValue = '', inputType = 'text', onConfirm }) => {
       byId('customDialogTitle').innerText = title;
       const inp = byId('customDialogInput');
       inp.type = inputType; inp.inputMode = inputType === 'number' ? 'numeric' : 'text'; inp.value = defaultValue;
+      byId('customDialogMicBtn').classList.toggle('hidden', inputType === 'date');
       openModal('customDialogModal'); setTimeout(() => inp.focus(), 60);
       byId('customDialogConfirmBtn').onclick = () => { closeModal('customDialogModal'); if (onConfirm) onConfirm(inp.value.trim()); };
     };
@@ -912,6 +1047,7 @@
       ['labourForm','expenseForm','billForm'].forEach(f => byId(f).classList.add('hidden'));
       byId(`${type}Form`).classList.remove('hidden');
       byId('formModalTitle').innerText = type === 'labour' ? t('addWorkerBtn') : type === 'expense' ? t('addExpenseBtn') : t('addBillBtn');
+      if (type === 'bill') { byId('bStatus').value = 'Pending'; byId('bRecDateWrap').classList.add('hidden'); }
     };
     window.setLabourCategoryFilter = (cat) => {
       activeCategoryFilter = cat;
@@ -925,7 +1061,7 @@
     window.openProfileModal = () => { renderAccounts(); openModal('profileModal'); };
     window.openSettingsModal = () => openModal('settingsModal');
     window.saveNewMasterPin = () => { const p = byId('newMasterPinInput').value.trim(); if (p) { state.masterPin = p; byId('newMasterPinInput').value = ''; persist(); alert(t('saveBtn')); } };
-    window.openAddAccountPrompt = () => openCustomDialog({ title: t('addSupervisorBtn'), onConfirm: (nick) => { if (nick) { state.accounts.push({ id: 'acc_' + Date.now(), customNickname: nick, isMaster: false }); persist(); renderAccounts(); } } });
+    window.openAddAccountPrompt = () => openCustomDialog({ title: t('addSupervisorBtn'), onConfirm: (nick) => { if (nick) { state.accounts.push({ id: 'acc_' + Date.now(), customNickname: nick, isMaster: false, photo: null }); persist(); renderAccounts(); } } });
     window.switchAcc = (id) => {
       const target = state.accounts.find(a => a.id === id);
       if (target && target.isMaster && !isMaster()) { pendingSwitchAccId = id; byId('masterPinInput').value = ''; openModal('pinLockModal'); }
@@ -939,10 +1075,13 @@
     window.delSup = (id) => openConfirm(t('deleteBtn'), '', () => { state.accounts = state.accounts.filter(a => a.id !== id); persist(); renderAccounts(); });
     function renderAccounts() {
       const cur = getActiveAcc();
+      byId('activeProfileModalName').innerText = cur.displayNickname;
+      byId('profileAvatarPreview').innerHTML = cur.photo ? `<img src="${cur.photo}" class="w-full h-full object-cover"/>` : (cur.displayNickname[0] || 'ठे');
       byId('masterPasswordSettingBox').classList.toggle('hidden', !isMaster());
       byId('accountIdsList').innerHTML = state.accounts.map(a => {
         const lbl = a.customNickname || (a.isMaster ? t('mainRole') : t('supRole'));
-        return `<div class="flex items-center justify-between p-2.5 rounded-xl ${a.id===cur.id?'btn-accent':'surface-subtle'}"><span class="text-xs font-semibold">${lbl}</span><div class="flex gap-1.5">${a.id===cur.id?`<span class="text-[10px] font-bold">${t('activeLbl')}</span>`:`<button type="button" onclick="switchAcc('${a.id}')" class="px-2 py-1 rounded-lg btn-primary text-[10px] font-semibold">${t('switchLbl')}</button>`}${isMaster()&&!a.isMaster?`<button type="button" onclick="delSup('${a.id}')" class="px-2 py-1 rounded-lg surface-subtle text-rose-500 text-[10px] font-semibold">${t('deleteBtn')}</button>`:''}</div></div>`;
+        const av = a.photo ? `<img src="${a.photo}" class="w-7 h-7 rounded-lg object-cover shrink-0"/>` : `<span class="w-7 h-7 rounded-lg btn-accent flex items-center justify-center text-[10px] font-bold shrink-0">${lbl[0]}</span>`;
+        return `<div class="flex items-center justify-between p-2.5 rounded-xl ${a.id===cur.id?'btn-accent':'surface-subtle'}"><div class="flex items-center gap-2 min-w-0">${av}<span class="text-xs font-semibold truncate">${lbl}</span></div><div class="flex gap-1 shrink-0"><label class="p-1.5 rounded-lg surface cursor-pointer" title="Photo"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><input type="file" accept="image/*" class="hidden" onchange="openCropperForAccount(this, '${a.id}')" /></label>${a.id===cur.id?`<span class="text-[10px] font-bold px-1.5 py-1">${t('activeLbl')}</span>`:`<button type="button" onclick="switchAcc('${a.id}')" class="px-2 py-1 rounded-lg btn-primary text-[10px] font-semibold">${t('switchLbl')}</button>`}${isMaster()&&!a.isMaster?`<button type="button" onclick="delSup('${a.id}')" class="px-2 py-1 rounded-lg surface text-rose-500 text-[10px] font-semibold">${t('deleteBtn')}</button>`:''}</div></div>`;
       }).join('');
     }
     window.addNewSite = () => openCustomDialog({ title: t('addSiteBtn'), onConfirm: (n) => { if (n) { state.sites.push(n); persist(); byId('siteSelect').value = n; renderAll(); } } });
@@ -973,9 +1112,31 @@
     };
     window.saveBill = async (e) => {
       e.preventDefault();
-      state.bills.unshift({ id: Date.now().toString(), site: byId('siteSelect').value, month: byId('monthSelect').value, title: byId('bTitle').value.trim(), amount: Number(byId('bAmount').value)||0, billDate: byId('bDate').value || isoToday, status: 'Pending', attachment: await readFile(byId('bFile').files[0]), addedBy: getStamp() });
+      const status = byId('bStatus').value || 'Pending';
+      state.bills.unshift({
+        id: Date.now().toString(), site: byId('siteSelect').value, month: byId('monthSelect').value,
+        title: byId('bTitle').value.trim(), amount: Number(byId('bAmount').value)||0,
+        billDate: byId('bDate').value || isoToday, status,
+        receivedDate: status === 'Received' ? (byId('bRecDate').value || isoToday) : null,
+        attachment: await readFile(byId('bFile').files[0]), addedBy: getStamp()
+      });
       e.target.reset(); closeModal('formModal'); persist(); navigateTo('viewBills');
     };
+    window.markBillReceived = (billId) => {
+      const b = state.bills.find(x => x.id === billId); if (!b) return;
+      openCustomDialog({
+        title: t('receivedDateLbl'), inputType: 'date', defaultValue: isoToday,
+        onConfirm: (dt) => { b.status = 'Received'; b.receivedDate = dt || isoToday; b.addedBy = getStamp(); persist(); }
+      });
+    };
+    window.editBillReceivedDate = (billId) => {
+      const b = state.bills.find(x => x.id === billId); if (!b) return;
+      openCustomDialog({
+        title: t('receivedDateLbl'), inputType: 'date', defaultValue: b.receivedDate || isoToday,
+        onConfirm: (dt) => { if (dt) { b.status = 'Received'; b.receivedDate = dt; b.addedBy = getStamp(); persist(); } }
+      });
+    };
+
     window.deleteRecord = (type, id) => { if (isMaster()) openConfirm(t('deleteBtn'), '', () => { state[type] = state[type].filter(x => x.id !== id); persist(); }); };
     window.updateAtt = (id, kind) => { const l = state.labours.find(x => x.id === id); if (!l) return; if (kind==='+P') l.presentDays++; if (kind==='-P' && l.presentDays>0) l.presentDays--; if (kind==='+H') l.halfDays++; l.lastUpdatedBy = getStamp(); persist(); };
     window.editRate = (id) => { const l = state.labours.find(x => x.id === id); if (l && isMaster()) openCustomDialog({ title: t('dailyWageLabel'), inputType: 'number', defaultValue: l.dailyRate, onConfirm: v => { if (v) { l.dailyRate = Number(v); persist(); } } }); };
@@ -1050,7 +1211,7 @@
       const expT = ex.reduce((a, e) => a + e.amount, 0), billT = bs.reduce((a, b) => a + b.amount, 0), profit = billT - (wages + expT);
       byId('monthlyLedgerModalBody').innerHTML = `
         <div class="p-3.5 rounded-2xl btn-accent flex justify-between items-center text-xs"><span class="font-semibold">${t('profitLbl')}</span><b class="text-sm">${fmtINR(profit)}</b></div>
-        ${bs.map(b => `<div class="p-3 rounded-2xl surface-subtle text-xs space-y-2"><div class="flex justify-between"><b>${b.title}</b><b class="text-emerald-500">${fmtINR(b.amount)}</b></div>${b.attachment?.dataUrl?.startsWith('data:image') ? `<img src="${b.attachment.dataUrl}" class="w-full max-h-40 object-cover rounded-xl"/>` : ''}</div>`).join('')}`;
+        ${bs.map(b => `<div class="p-3 rounded-2xl surface-subtle text-xs space-y-2"><div class="flex justify-between"><b>${b.title}</b><b class="text-emerald-500">${fmtINR(b.amount)}</b></div>${b.receivedDate ? `<div class="text-[10px] text-emerald-500">${t('receivedLbl')}: ${b.receivedDate}</div>` : ''}${b.attachment?.dataUrl?.startsWith('data:image') ? `<img src="${b.attachment.dataUrl}" class="w-full max-h-40 object-cover rounded-xl"/>` : ''}</div>`).join('')}`;
       openModal('monthlyLedgerModal');
     };
 
@@ -1079,9 +1240,10 @@
       if (!state.sites.length) state.sites = ['Site A'];
       const curS = sel.value && state.sites.includes(sel.value) ? sel.value : state.sites[0];
       sel.innerHTML = state.sites.map(s => `<option value="${s}" ${s===curS?'selected':''}>${s}</option>`).join('');
-      const site = sel.value, m = byId('monthSelect').value, master = isMaster();
+      const site = sel.value, m = byId('monthSelect').value, master = isMaster(), activeAcc = getActiveAcc();
       byId('monthDisplayLabel').innerText = fmtMonth(m);
-      byId('activeNicknameBadge').innerText = getActiveAcc().displayNickname;
+      byId('activeNicknameBadge').innerText = activeAcc.displayNickname;
+      byId('userAvatarBadge').innerHTML = activeAcc.photo ? `<img src="${activeAcc.photo}" class="w-full h-full object-cover"/>` : (activeAcc.displayNickname[0] || 'ठे');
       byId('deleteSiteBtn').classList.toggle('hidden', !master);
       byId('loggedInEmailDisplay').innerText = currentUser?.email || t('notLoggedLbl');
       byId('profileLogoutBtn').classList.toggle('hidden', !currentUser);
@@ -1100,7 +1262,6 @@
       byId('summaryBillsTotal').innerText = fmtINR(billT);
       byId('ringWorkerCount').innerText = allW.length;
 
-      // Update SVG Donut Chart
       const total = Math.max(1, Math.abs(dueT) + expT + billT);
       const pBill = (billT / total) * 97.4, pDue = (Math.abs(dueT) / total) * 97.4, pExp = (expT / total) * 97.4;
       byId('ringBills').setAttribute('stroke-dasharray', `${pBill} 100`);
@@ -1159,7 +1320,32 @@
 
       byId('expenseList').innerHTML = ex.length ? ex.map(e => `<div class="surface p-3.5 rounded-2xl flex justify-between items-center text-xs"><div class="flex items-center gap-2.5"><div class="w-8 h-8 rounded-xl btn-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div><b>${e.title}</b><div class="text-[10px] opacity-60">${e.spentFor||''} ${e.addedBy||''}</div></div></div><div class="text-right"><b class="block">${fmtINR(e.amount)}</b>${master?`<button type="button" onclick="deleteRecord('expenses','${e.id}')" class="text-[10px] text-rose-500/80 font-semibold">${t('deleteBtn')}</button>`:''}</div></div>`).join('') : `<div class="surface rounded-2xl p-6 text-center text-xs opacity-60">${t('noExpenses')}</div>`;
 
-      byId('billList').innerHTML = bs.length ? bs.map(b => `<div class="surface p-3.5 rounded-2xl flex justify-between items-center text-xs"><div class="flex items-center gap-2.5"><div class="w-8 h-8 rounded-xl btn-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><b>${b.title}</b><div class="text-[10px] opacity-60">${b.billDate||''}</div></div></div><div class="text-right"><b class="block text-emerald-500">${fmtINR(b.amount)}</b>${master?`<button type="button" onclick="deleteRecord('bills','${b.id}')" class="text-[10px] text-rose-500/80 font-semibold">${t('deleteBtn')}</button>`:''}</div></div>`).join('') : `<div class="surface rounded-2xl p-6 text-center text-xs opacity-60">${t('noBills')}</div>`;
+      byId('billList').innerHTML = bs.length ? bs.map(b => {
+        const isRec = b.status === 'Received';
+        return `
+          <div class="surface p-3.5 rounded-2xl space-y-2 text-xs">
+            <div class="flex justify-between items-start gap-2">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div class="w-8 h-8 rounded-xl btn-accent flex items-center justify-center shrink-0"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                <div class="min-w-0">
+                  <b class="block truncate">${b.title}</b>
+                  <div class="text-[10px] opacity-60">${b.billDate||''} ${isRec && b.receivedDate ? `• ${t('receivedLbl')}: ${b.receivedDate}` : ''}</div>
+                </div>
+              </div>
+              <div class="text-right shrink-0">
+                <b class="block text-emerald-500">${fmtINR(b.amount)}</b>
+                <span class="text-[9px] px-1.5 py-0.5 rounded font-semibold ${isRec ? 'bg-emerald-500/15 text-emerald-500' : 'bg-rose-500/15 text-rose-500'}">${isRec ? t('receivedLbl') : t('pendingLbl')}</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-1 border-t border-current/10">
+              <span class="text-[10px] opacity-50 truncate">${b.addedBy || ''}</span>
+              <div class="flex gap-1.5">
+                ${!isRec ? `<button type="button" onclick="markBillReceived('${b.id}')" class="px-2.5 py-1 rounded-lg btn-accent text-[10px] font-semibold">${t('markReceivedBtn')}</button>` : `<button type="button" onclick="editBillReceivedDate('${b.id}')" class="px-2.5 py-1 rounded-lg surface-subtle text-[10px] font-semibold">${t('editReceivedDateBtn')}</button>`}
+                ${master ? `<button type="button" onclick="deleteRecord('bills','${b.id}')" class="px-2.5 py-1 rounded-lg surface-subtle text-rose-500 text-[10px] font-semibold">${t('deleteBtn')}</button>` : ''}
+              </div>
+            </div>
+          </div>`;
+      }).join('') : `<div class="surface rounded-2xl p-6 text-center text-xs opacity-60">${t('noBills')}</div>`;
     };
 
     window.connectCloud = async (reg) => {
